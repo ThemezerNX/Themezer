@@ -1,0 +1,46 @@
+
+query me {
+    me {
+        uuid
+        username
+        email
+        joined
+        last_logged_in
+        role
+        preferences
+    }
+}
+
+query emailAvailable($email: String!) {
+    emailAvailable(email: $email)
+}
+
+mutation register($username: String!, $email: String!, $password: String!) {
+    register(username: $username, email: $email, password: $password) {
+        user {
+            uuid
+            username
+            email
+            joined
+            last_logged_in
+            role
+        }
+    }
+}
+
+mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+        user {
+            uuid
+            username
+            email
+            joined
+            last_logged_in
+            role
+        }
+    }
+}
+
+mutation logout {
+  logout
+}

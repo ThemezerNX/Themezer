@@ -1,0 +1,38 @@
+{
+	"name": "themezer",
+	"version": "1.0.0",
+	"description": "A customization site for Nintendo Switch Themes",
+	"author": "Migush",
+	"private": true,
+	"scripts": {
+		"dev": "nuxt",
+		"build": "nuxt build",
+		"start": "nuxt start",
+		"generate": "nuxt generate",
+		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+		"lint-fix": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore . --fix"
+	},
+	"dependencies": {
+		"@nuxtjs/apollo": "^4.0.0-rc19",
+		"@nuxtjs/axios": "^5.3.6",
+		"@nuxtjs/dotenv": "^1.4.0",
+		"@nuxtjs/pwa": "^3.0.0-0",
+		"dotenv": "^8.2.0",
+		"nuxt": "^2.0.0",
+		"nuxt-rfg-icon": "^0.6.4",
+		"vuelidate": "^0.7.5"
+	},
+	"devDependencies": {
+		"@nuxt/typescript-build": "^0.6.0",
+		"@nuxtjs/eslint-config-typescript": "^1.0.0",
+		"@nuxtjs/eslint-module": "^1.0.0",
+		"@nuxtjs/vuetify": "^1.0.0",
+		"@types/webpack-env": "^1.15.2",
+		"babel-eslint": "^10.0.1",
+		"eslint": "^6.1.0",
+		"eslint-config-prettier": "^6.10.0",
+		"eslint-plugin-nuxt": ">=0.4.2",
+		"eslint-plugin-prettier": "^3.1.2",
+		"prettier": "^1.19.1"
+	}
+}
