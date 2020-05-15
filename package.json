@@ -4,6 +4,7 @@
 	"description": "A customization site for Nintendo Switch Themes",
 	"author": "Migushthe2nd <Migushthe2nd@users.noreply.github.com>",
 	"private": false,
+	"license": "GPL-3.0",
 	"scripts": {
 		"dev": "nuxt",
 		"build": "nuxt build",
