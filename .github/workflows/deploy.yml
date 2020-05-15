@@ -1,14 +1,7 @@
 name: Deploy
 on:
     push:
-        branches: ['stable']
-        paths:
-            - 'public/**/*'
-            - 'src/**/*'
-            - 'package.json'
-            - '**.js'
-            - 'package.lock'
-            - '**/*.yml'
+        branches: ['master']
 jobs:
     Deploy:
         runs-on: 'ubuntu-latest'
