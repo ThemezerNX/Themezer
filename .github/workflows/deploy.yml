@@ -1,0 +1,32 @@
+name: Deploy
+on:
+    push:
+        branches: ['stable', 'master']
+        paths:
+            - 'public/**/*'
+            - 'src/**/*'
+            - 'package.json'
+            - '**.js'
+            - 'package.lock'
+            - '**/*.yml'
+jobs:
+    Deploy:
+        runs-on: 'ubuntu-latest'
+        steps:
+            - name: Extract branch name
+              shell: bash
+              run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+              id: extract_branch
+            - name: Deploying...
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSHHOST }}
+                  username: ${{ secrets.SSHUSERNAME }}
+                  password: ${{ secrets.SSHPASSWORD }}
+                  script: |
+                      cd /home/themezer/Website/${{ steps.extract_branch.outputs.branch }}
+                      git reset --hard
+                      git pull
+                      yarn
+                      yarn build
+                      pm2 reload /home/themezer/ecosystem.config.js --only Website-${{ steps.extract_branch.outputs.branch }}

@@ -5,6 +5,12 @@ export default {
 	env: {
 		APP_TITLE: 'Themezer'
 	},
+
+	server: {
+		port: process.env.PORT,
+		host: process.env.HOST
+	},
+
 	mode: 'universal',
 	/*
 	 ** Headers of the page
