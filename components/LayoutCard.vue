@@ -2,31 +2,33 @@
 	<v-hover v-if="layoutDetails" v-slot:default="{ hover }">
 		<v-card
 			:elevation="hover ? 16 : null"
-			class="mx-auto"
-			max-width="400"
+			:class="hover ? 'hover' : ''"
+			class="ma-auto card"
 			router
 			exact
-			:to="`/${$parent.menu}/${layoutDetails.title}`"
+			:to="`${$route.params.menu}/${layoutDetails.name}`"
+			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
 			<v-img
 				aspect-ratio="1.7778"
-				:src="layoutDetails.overlay"
-				:lazy-src="'/icon.png'"
+				:src="
+					`//api.themezer.ga/storage/layouts/${layoutDetails.uuid}/overlay.png`
+				"
+				:lazy-src="'/logo-256.jpg'"
 				contain
+				:style="`background-color: ${layoutDetails.color};`"
+				class="overlay_image"
 			/>
 
-			<v-card-title
-				v-if="layoutDetails.title"
-				v-text="layoutDetails.title"
-			/>
+			<v-card-title v-text="layoutDetails.name" />
 
-			<v-card-subtitle
-				v-if="layoutDetails.author"
-				class="pb-0"
-				v-text="layoutDetails.author"
-			/>
+			<v-card-subtitle>
+				{{ layoutDetails.author.name }} • v{{ layoutDetails.version }}
+			</v-card-subtitle>
 
-			<v-card-text v-if="layoutDetails.description" class="text--primary">
+			<v-divider v-if="layoutDetails.description" />
+
+			<v-card-text v-if="layoutDetails.description">
 				<div>{{ layoutDetails.description }}</div>
 			</v-card-text>
 		</v-card>
@@ -44,7 +46,25 @@ export default Vue.extend({
 		}
 	},
 	data() {
-		return {}
+		return {
+			API_ENDPOINT: process.env.API_ENDPOINT
+		}
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+.card {
+	height: 100%;
+	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
+}
+.card.hover {
+	background: lighten(#1e1e1e, 4%) !important;
+	transform: translateY(-2px);
+}
+
+.overlay_image {
+	transition: background-image 200ms;
+	background: #2d2d2d;
+}
+</style>

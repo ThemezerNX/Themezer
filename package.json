@@ -21,12 +21,13 @@
 		"@nuxt/typescript-build": "^0.6.0",
 		"@types/webpack-env": "^1.15.2",
 		"@nuxtjs/pwa": "^3.0.0-0",
-		"dotenv": "^8.2.0",
 		"nuxt": "^2.0.0",
+		"core-js": "^2.6.5",
 		"nuxt-rfg-icon": "^0.6.4",
 		"vuelidate": "^0.7.5"
 	},
 	"devDependencies": {
+		"dotenv": "^8.2.0",
 		"@nuxtjs/eslint-config-typescript": "^1.0.0",
 		"@nuxtjs/eslint-module": "^1.0.0",
 		"babel-eslint": "^10.0.1",
@@ -36,5 +37,5 @@
 		"eslint-plugin-prettier": "^3.1.2",
 		"prettier": "^1.19.1"
 	},
-	"repository": "https://github.com/Migushthe2nd/Themezer.git"
+	"repository": "https://github.com/ThemezerNX/Themezer.git"
 }

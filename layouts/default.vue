@@ -36,15 +36,21 @@
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<NuxtLink exact to="/" style="text-decoration: none; color: white;">
 				<v-toolbar-title class="d-flex">
-					<v-img class="mx-2" contain src="/icon.png" width="30" />
+					<v-img
+						class="mx-2"
+						contain
+						src="/logo-256.jpg"
+						width="30"
+						style="border-radius: 5px;"
+					/>
 					{{ title }}
 				</v-toolbar-title>
 			</NuxtLink>
 			<v-spacer />
 		</v-app-bar>
 		<v-content>
-			<!-- <v-container fluid pa-0 style="height: 100%"> -->
-			<v-container>
+			<v-container :fluid="breakpoint < 800">
+				<!-- <v-container> -->
 				<nuxt />
 			</v-container>
 		</v-content>
@@ -54,10 +60,8 @@
 	</v-app>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
 	data() {
 		return {
 			title: process.env.APP_TITLE,
@@ -66,28 +70,52 @@ export default Vue.extend({
 				{
 					icon: 'mdi-home',
 					title: 'Home Menu',
-					to: '/homemenu'
+					to: '/layouts/homemenu'
 				},
 				{
 					icon: 'mdi-lock',
 					title: 'Lockscreen',
-					to: '/lockscreen'
+					to: '/layouts/lockscreen'
 				},
 				{
 					icon: 'mdi-apps',
 					title: 'All Apps',
-					to: '/allapps'
+					to: '/layouts/allapps'
 				},
 				{
 					icon: 'mdi-account',
 					title: 'Player Select',
-					to: '/playerselect'
+					to: '/layouts/playerselect'
 				}
 			]
 		}
+	},
+	computed: {
+		// eslint-disable-next-line vue/return-in-computed-property
+		breakpoint() {
+			switch (this.$vuetify.breakpoint.name) {
+				case 'xs':
+					return 220
+				case 'sm':
+					return 400
+				case 'md':
+					return 500
+				case 'lg':
+					return 600
+				case 'xl':
+					return 800
+			}
+		}
 	}
-})
+}
 </script>
+
+<style lang="scss">
+.v-card__text,
+.v-card__title {
+	word-break: normal;
+}
+</style>
 
 <style lang="scss" scoped>
 .drawer {

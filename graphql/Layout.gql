@@ -1,0 +1,37 @@
+query layout($name: String!, $menu: String!) {
+	layout(name: $name, menu: $menu) {
+		uuid
+		details {
+			name
+			uuid
+			author {
+				name
+				discordTag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+		baselayout
+	}
+}
+
+query layoutsList($menu: String!) {
+	layoutsList(menu: $menu) {
+		uuid
+		details {
+			name
+			uuid
+			author {
+				name
+				discordTag
+			}
+			description
+			color
+			version
+		},
+		last_updated
+	}
+}
+

@@ -1,6 +1,0 @@
-
-query layout($name: String!) {
-    layout(email: $email) {
-
-    }
-}

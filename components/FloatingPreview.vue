@@ -3,7 +3,7 @@
 		<v-card
 			:elevation="hover ? 2 : null"
 			class="mx-auto"
-			max-width="400"
+			max-width="200"
 			router
 			exact
 			:to="`/${$parent.menu}/${layoutDetails.title}`"
@@ -11,7 +11,7 @@
 			<v-img
 				aspect-ratio="1.7778"
 				:src="layoutDetails.overlay"
-				:lazy-src="'/icon.png'"
+				:lazy-src="'/logo-256.jpg'"
 				contain
 			/>
 
@@ -44,7 +44,9 @@ export default Vue.extend({
 		}
 	},
 	data() {
-		return {}
+		return {
+			API_ENDPOINT: process.env.API_ENDPOINT
+		}
 	}
 })
 </script>

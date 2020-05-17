@@ -3,7 +3,8 @@ require('dotenv').config()
 
 export default {
 	env: {
-		APP_TITLE: 'Themezer'
+		APP_TITLE: 'Themezer',
+		API_ENDPOINT: process.env.API_ENDPOINT
 	},
 
 	server: {
@@ -38,7 +39,7 @@ export default {
 				content: process.env.npm_package_description || ''
 			}
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+		link: [{ rel: 'icon', type: 'image/jpeg', href: '/logo-256.jpg' }]
 	},
 	/*
 	 ** Customize the progress-bar color
@@ -66,7 +67,7 @@ export default {
 		[
 			'nuxt-rfg-icon',
 			{
-				masterPicture: 'static/icon.png'
+				masterPicture: 'static/logo-512.jpg'
 			}
 		],
 		'@nuxtjs/pwa',
@@ -94,7 +95,7 @@ export default {
 	pwa: {
 		manifest: {
 			name: 'Themezer',
-			description: process.env.npm_package_description,
+			description: process.env.npm_package_description || '',
 			lang: 'en',
 			theme_color: '#d50000',
 			background_color: '#121212'
@@ -130,6 +131,12 @@ export default {
 		 ** You can extend webpack config here
 		 */
 		extend(config, ctx) {
+			config.module.rules.push({
+				test: /\/graphql\/\.(graphql|gql)$/,
+				exclude: /(node_modules|server)/,
+				loader: 'graphql-tag/loader'
+			})
+
 			if (ctx.isDev) {
 				config.mode = 'development'
 			} else if (ctx.isClient) {
