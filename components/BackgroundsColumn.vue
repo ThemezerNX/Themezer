@@ -19,6 +19,10 @@ export default {
 		return {
 			backgrounds: [
 				{
+					name: 'None',
+					url: null
+				},
+				{
 					name: 'Breath of The Wild Forest',
 					url: '/images/backgrounds/background8.jpg'
 				},

@@ -48,8 +48,8 @@
 			</NuxtLink>
 			<v-spacer />
 		</v-app-bar>
-		<v-content>
-			<v-container :fluid="breakpoint < 800">
+		<v-content class="content">
+			<v-container :fluid="breakpoint < 800" style="height: 100%;">
 				<!-- <v-container> -->
 				<nuxt />
 			</v-container>
@@ -128,12 +128,25 @@ export default {
 		z-index: -1;
 		background-size: cover;
 		filter: blur(5px) brightness(0.4);
-		background-image: url('/images/drawer_backgrounds/animalcrossing.png');
+		// background-image: url('/images/drawer_backgrounds/animalcrossing.png');
+		// background: linear-gradient(
+		// 		to left top,
+		// 		$themezer-aqua 0%,
+		// 		$themezer-average 50%,
+		// 		$themezer-magenta 100%
+		// 	),
+		// 	linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+		// background: linear-gradient(135deg, $themezer-magenta, $themezer-aqua);
 		overflow: hidden;
 	}
 }
 
 .navbar {
 	user-select: none;
+	background: transparent;
+}
+
+.content {
+	background: linear-gradient(135deg, #b40a86, #0ab379);
 }
 </style>

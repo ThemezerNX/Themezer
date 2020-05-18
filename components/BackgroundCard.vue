@@ -2,13 +2,14 @@
 	<v-hover v-if="background" v-slot:default="{ hover }">
 		<v-card
 			:elevation="hover ? 16 : null"
-			class="mb-4 card"
+			class="my-2 card"
 			:class="hover ? 'hover' : ''"
 			router
 			exact
 			@click="setBackground()"
 		>
 			<v-img
+				v-if="background.url"
 				aspect-ratio="1.7778"
 				:src="background.url"
 				:lazy-src="'/logo-256.jpg'"

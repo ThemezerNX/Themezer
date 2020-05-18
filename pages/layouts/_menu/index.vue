@@ -13,17 +13,20 @@
 			<LayoutCard :layout-details="layout.details" />
 		</v-col>
 	</v-row>
-	<span v-else>There's nothing here :(</span>
+	<LoadingOverlay v-else-if="$apollo.loading" />
+	<span v-else="">There's nothing here :(</span>
 </template>
 
 <script>
 import Vue from 'vue'
 import LayoutQueries from '@/graphql/Layout.gql'
 import LayoutCard from '@/components/LayoutCard.vue'
+import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
 	components: {
-		LayoutCard
+		LayoutCard,
+		LoadingOverlay
 	},
 	apollo: {
 		layoutsList: {
