@@ -1,7 +1,7 @@
 <template v-slot:default="{ active, toggle }">
 	<v-card
 		:elevation="hover ? 16 : null"
-		class="card"
+		class="card mt-1"
 		:color="active ? 'primary' : ''"
 		:width="background.url ? null : 100"
 		router
