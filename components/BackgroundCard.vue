@@ -1,24 +1,36 @@
-<template>
-	<v-hover v-if="background" v-slot:default="{ hover }">
-		<v-card
-			:elevation="hover ? 16 : null"
-			class="my-2 card"
-			:class="hover ? 'hover' : ''"
-			router
-			exact
-			@click="setBackground()"
-		>
-			<v-img
-				v-if="background.url"
-				aspect-ratio="1.7778"
-				:src="background.url"
-				:lazy-src="'/logo_16-9-256.jpg'"
-				contain
-			/>
+<template v-slot:default="{ active, toggle }">
+	<v-card
+		:elevation="hover ? 16 : null"
+		class="card"
+		:color="active ? 'primary' : ''"
+		:width="background.url ? null : 100"
+		router
+		exact
+		@click="setBackground()"
+	>
+		<v-img
+			v-if="background.url"
+			aspect-ratio="1.7778"
+			:src="background.url"
+			width="300"
+			:lazy-src="'/logo_16-9-256.jpg'"
+			contain
+		/>
 
-			<v-card-title class="title py-1 px-3" v-text="background.name" />
-		</v-card>
-	</v-hover>
+		<v-card-title
+			v-if="background.url"
+			class="title py-1 px-3"
+			v-text="background.name"
+		/>
+
+		<v-row v-else class="fill-height" align="center" justify="center">
+			<v-icon
+				color="white"
+				size="48"
+				v-text="'mdi-close-circle-outline'"
+			/>
+		</v-row>
+	</v-card>
 </template>
 
 <script lang="ts">

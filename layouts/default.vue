@@ -32,7 +32,7 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-		<v-app-bar class="navbar" clipped-left fixed app>
+		<v-app-bar class="navbar" clipped-left fixed app hide-on-scroll>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<NuxtLink exact to="/" style="text-decoration: none; color: white;">
 				<v-toolbar-title class="d-flex">

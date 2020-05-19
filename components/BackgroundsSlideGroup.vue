@@ -1,11 +1,23 @@
 <template>
-	<div>
-		<BackgroundCard
-			v-for="background in backgrounds"
-			:key="background.name"
-			:background="background"
-		/>
-	</div>
+	<v-sheet>
+		<v-slide-group v-model="model" show-arrows center-active mandatory>
+			<v-slide-item
+				v-for="background in backgrounds"
+				:key="background"
+				v-slot:default="{ active, toggle }"
+			>
+				<v-hover v-if="background" v-slot:default="{ hover }">
+					<BackgroundCard
+						v-bind="{ active, toggle }"
+						class="me-3"
+						:background="background"
+						:class="hover ? 'hover' : ''"
+						@click="toggle"
+					/>
+				</v-hover>
+			</v-slide-item>
+		</v-slide-group>
+	</v-sheet>
 </template>
 
 <script>
@@ -17,6 +29,7 @@ export default {
 	},
 	data() {
 		return {
+			model: null,
 			backgrounds: [
 				{
 					name: 'None',

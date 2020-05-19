@@ -12,6 +12,7 @@ query layout($name: String!, $menu: String!) {
 			color
 			version
 		}
+		menu
 		last_updated
 		baselayout
 	}
@@ -31,6 +32,7 @@ query layoutsList($menu: String!) {
 			color
 			version
 		},
+		menu
 		last_updated
 	}
 }
