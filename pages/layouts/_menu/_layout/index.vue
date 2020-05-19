@@ -6,7 +6,7 @@
 				:src="
 					`//api.themezer.ga/storage/layouts/${layout.details.uuid}/overlay.png`
 				"
-				:lazy-src="'/logo-256.jpg'"
+				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
 				class="overlay_image"
 				:style="backgroundStyle"

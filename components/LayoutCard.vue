@@ -14,7 +14,7 @@
 				:src="
 					`//api.themezer.ga/storage/layouts/${layoutDetails.uuid}/overlay.png`
 				"
-				:lazy-src="'/logo-256.jpg'"
+				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
 				:style="`background-color: ${layoutDetails.color};`"
 				class="overlay_image"
@@ -43,11 +43,6 @@ export default Vue.extend({
 		layoutDetails: {
 			type: Object,
 			default: null
-		}
-	},
-	data() {
-		return {
-			API_ENDPOINT: process.env.API_ENDPOINT
 		}
 	}
 })

@@ -12,7 +12,7 @@
 				v-if="background.url"
 				aspect-ratio="1.7778"
 				:src="background.url"
-				:lazy-src="'/logo-256.jpg'"
+				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
 			/>
 

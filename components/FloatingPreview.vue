@@ -11,7 +11,7 @@
 			<v-img
 				aspect-ratio="1.7778"
 				:src="layoutDetails.overlay"
-				:lazy-src="'/logo-256.jpg'"
+				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
 			/>
 
@@ -41,11 +41,6 @@ export default Vue.extend({
 		layoutDetails: {
 			type: Object,
 			default: null
-		}
-	},
-	data() {
-		return {
-			API_ENDPOINT: process.env.API_ENDPOINT
 		}
 	}
 })
