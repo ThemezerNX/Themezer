@@ -92,31 +92,68 @@ export default {
 					url: null
 				},
 				{
-					name: 'Breath of The Wild Forest',
-					url: '/images/backgrounds/background8.jpg'
+					name: 'Breath of the Wild Forest',
+					url:
+						'/images/backgrounds/Games/Breath of the Wild Forest.jpg'
+				},
+				{
+					name: 'Skyrim Mountains',
+					url: '/images/backgrounds/Games/Skyrim Mountains.jpg'
 				},
 				{
 					name: "Assassin's Creed Odyssey",
-					url: '/images/backgrounds/background9.jpg'
+					url:
+						"/images/backgrounds/Games/Assassin's Creed Odyssey.jpg"
 				},
 				{
 					name: 'Far Cry 5',
-					url: '/images/backgrounds/background6.jpg'
-				},
-				{
-					name: 'Skyrim',
-					url: '/images/backgrounds/background3.jpg'
+					url: '/images/backgrounds/Games/Far Cry 5.jpg'
 				},
 				{
 					name: 'GTA V',
-					url: '/images/backgrounds/background12.jpg'
+					url: '/images/backgrounds/Games/Zelda BotW Art.jpg'
+				},
+				{
+					name: 'Animal Crossing New Horizons',
+					url:
+						'/images/backgrounds/Games/Animal Crossing New Horizons.jpg'
+				},
+				{
+					name: 'Sea',
+					url: '/images/backgrounds/Nature/Sea.jpg'
+				},
+				{
+					name: 'Spiderman Into the Spiderverse',
+					url:
+						'/images/backgrounds/Movies/Spiderman Into the Spiderverse - 2.jpg'
+				},
+				{
+					name: 'PewDiePie',
+					url: '/images/backgrounds/PewDiePie.jpg'
+				},
+				{
+					name: 'Darling in the Franxx',
+					url:
+						'/images/backgrounds/Movies/Darling in the Franxx - 1.jpg'
+				},
+				{
+					name: 'Nier Automata',
+					url: '/images/backgrounds/Games/Nier Automata - 1.jpg'
+				},
+				{
+					name: 'Persona 5 Ryuji',
+					url:
+						'/images/backgrounds/Games/Persona 5/Persona 5 Ryuji.jpg'
 				}
 			]
 		}
 	},
 	watch: {
 		activeBackground(selected) {
-			this.$store.commit('SET_BACKGROUND', this.backgrounds[selected].url)
+			this.$store.commit(
+				'SET_BACKGROUND',
+				encodeURI(this.backgrounds[selected].url)
+			)
 		}
 	}
 }

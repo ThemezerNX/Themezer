@@ -4,23 +4,28 @@
 			<div class="background" />
 			<v-list nav>
 				<!-- <v-divider /> -->
-				<v-list-item
-					v-for="(item, i) in items"
-					:key="i"
-					class="my-2"
-					:to="item.to"
-					router
-					exact
-				>
-					<v-list-item-action>
-						<v-icon>{{ item.icon }}</v-icon>
-					</v-list-item-action>
-					<v-list-item-content>
-						<v-list-item-title v-text="item.title" />
-					</v-list-item-content>
-				</v-list-item>
+				<template v-for="(item, i) in items">
+					<v-subheader v-if="item.header" :key="item.header">{{
+						item.header
+					}}</v-subheader>
+					<v-list-item
+						v-else
+						:key="i"
+						class="my-2"
+						:to="item.to"
+						router
+						exact
+					>
+						<v-list-item-action>
+							<v-icon>{{ item.icon }}</v-icon>
+						</v-list-item-action>
+						<v-list-item-content>
+							<v-list-item-title v-text="item.title" />
+						</v-list-item-content>
+					</v-list-item>
+				</template>
 				<v-divider />
-				<v-list-item to="/about" class="my-2" router exact>
+				<v-list-item :key="i" to="/about" class="my-2" router exact>
 					<v-list-item-action>
 						<v-icon>mdi-information-outline</v-icon>
 					</v-list-item-action>
@@ -70,6 +75,9 @@ export default {
 			title: process.env.APP_TITLE,
 			drawer: false,
 			items: [
+				{
+					header: 'Layouts'
+				},
 				{
 					icon: 'mdi-home',
 					title: 'Home Menu',
