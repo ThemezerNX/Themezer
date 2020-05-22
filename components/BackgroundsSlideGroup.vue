@@ -104,8 +104,8 @@ export default {
 					url: '/images/backgrounds/background6.jpg'
 				},
 				{
-					name: 'Umbreon',
-					url: '/images/backgrounds/Umbreon.jpg'
+					name: 'Skyrim',
+					url: '/images/backgrounds/background3.jpg'
 				},
 				{
 					name: 'GTA V',

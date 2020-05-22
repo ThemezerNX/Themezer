@@ -1,7 +1,7 @@
 <template>
 	<div v-if="layout && layout.details" no-gutters class="pa-2 box">
 		<v-row class="ma-0">
-			<v-col cols="12" xs="12" sm="8" md="10" class="pa-2">
+			<v-col cols="12" xs="12" sm="8" md="9" class="pa-2">
 				<v-img
 					aspect-ratio="1.7778"
 					:src="
@@ -17,7 +17,7 @@
 				cols="12"
 				xs="12"
 				sm="4"
-				md="2"
+				md="3"
 				class="pa-2"
 				style="position: relative;"
 			>
@@ -58,20 +58,21 @@
 				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
 				<v-flex class="d-flex justify-center">
-					<!-- <v-btn
+					<v-btn
+						v-if="layout.has_pieces"
 						class="mt-3 me-3"
 						color="primary"
 						to="customize"
 						append
 					>
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
-					</v-btn> -->
+					</v-btn>
 					<v-btn
 						class="mt-3 ms-3"
 						color="secondary"
 						append
 						@click.prevent="
-							downloadjson(layout.baselayout, layout.details.name)
+							downloadJson(layout.baselayout, layout.details.name)
 						"
 					>
 						Get <v-icon right>mdi-download-box-outline</v-icon>
@@ -87,7 +88,8 @@
 			</v-col>
 		</v-row>
 	</div>
-	<LoadingOverlay v-else />
+	<LoadingOverlay v-else-if="$apollo.loading" />
+	<span v-else>There's nothing here :(</span>
 </template>
 
 <script>
@@ -151,18 +153,6 @@ export default {
 				', ' +
 				DateTime.getFullYear()
 			)
-		},
-		downloadjson(string, label) {
-			const blob = new Blob([string], {
-				type: 'application/json'
-			})
-			const dlWindow = window.open()
-			const link = dlWindow.document.createElement('a')
-			link.href = URL.createObjectURL(blob)
-			link.download = label
-			link.click()
-			URL.revokeObjectURL(link.href)
-			dlWindow.close()
 		}
 	}
 }
@@ -177,8 +167,7 @@ export default {
 	border-radius: 4px;
 	// max-height: 50vh;
 }
-</style>
-<style lang="scss">
+
 .box {
 	background-color: #1e1e1e;
 	border-radius: 4px;

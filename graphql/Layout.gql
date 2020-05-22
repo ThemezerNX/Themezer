@@ -15,6 +15,7 @@ query layout($name: String!, $menu: String!) {
 		menu
 		last_updated
 		baselayout
+		has_pieces
 		pieces {
 			name
 			values {
@@ -42,6 +43,7 @@ query layoutDetails($name: String!, $menu: String!) {
 		}
 		menu
 		last_updated
+		has_pieces
 	}
 }
 

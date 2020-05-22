@@ -52,7 +52,7 @@ export default {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: [],
+	plugins: ['@/plugins/mergeJson', '@/plugins/downloadJson'],
 	/*
 	 ** Nuxt.js dev-modules
 	 */
