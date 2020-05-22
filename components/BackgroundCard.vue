@@ -1,9 +1,9 @@
-<template v-slot:default="{ active, toggle }">
+<template>
 	<v-card
-		:elevation="hover ? 16 : null"
-		class="card mt-1"
-		:color="active ? 'primary' : ''"
-		:width="background.url ? null : 100"
+		class="card"
+		:width="
+			background.url ? null : $vuetify.breakpoint.smAndDown ? 80 : 100
+		"
 		router
 		exact
 		@click="setBackground()"
@@ -12,14 +12,15 @@
 			v-if="background.url"
 			aspect-ratio="1.7778"
 			:src="background.url"
-			width="300"
+			:width="$vuetify.breakpoint.smAndDown ? 200 : 300"
 			:lazy-src="'/logo_16-9-256.jpg'"
 			contain
 		/>
 
 		<v-card-title
 			v-if="background.url"
-			class="title py-1 px-3"
+			class="py-1 px-3"
+			:class="$vuetify.breakpoint.smAndDown ? 'body-2' : 'subtitle-1'"
 			v-text="background.name"
 		/>
 
@@ -53,16 +54,11 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .card {
-	height: 100%;
 	border: rgba(255, 255, 255, 0.12) solid 1px;
 	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
 }
 .card.hover {
 	background: lighten(#1e1e1e, 4%) !important;
 	transform: translateY(-2px);
-}
-
-.title {
-	font-size: 1rem !important;
 }
 </style>

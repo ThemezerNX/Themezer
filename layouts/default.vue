@@ -49,7 +49,10 @@
 			<v-spacer />
 		</v-app-bar>
 		<v-content class="content">
-			<v-container :fluid="breakpoint < 800" style="height: 100%;">
+			<v-container
+				:fluid="$vuetify.breakpoint.smAndDown"
+				style="height: 100%;"
+			>
 				<!-- <v-container> -->
 				<nuxt />
 			</v-container>
@@ -88,23 +91,6 @@ export default {
 					to: '/layouts/playerselect'
 				}
 			]
-		}
-	},
-	computed: {
-		// eslint-disable-next-line vue/return-in-computed-property
-		breakpoint() {
-			switch (this.$vuetify.breakpoint.name) {
-				case 'xs':
-					return 220
-				case 'sm':
-					return 400
-				case 'md':
-					return 500
-				case 'lg':
-					return 600
-				case 'xl':
-					return 800
-			}
 		}
 	}
 }

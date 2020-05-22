@@ -1,7 +1,7 @@
 <template>
 	<div v-if="layout && layout.details" no-gutters class="pa-2 rowbox">
 		<v-row class="ma-0">
-			<v-col cols="12" xs="12" sm="8" md="10" class="pa-2">
+			<v-col xs="12" sm="8" md="10" class="pa-2">
 				<v-img
 					aspect-ratio="1.7778"
 					:src="
@@ -13,7 +13,7 @@
 					:style="backgroundStyle"
 				/>
 			</v-col>
-			<v-col cols="12" xs="12" sm="4" md="2" class="pa-2">
+			<v-col xs="12" sm="4" md="2" class="pa-2">
 				<v-flex xs-12 lg-8 min-height="40vh">
 					<h1>
 						{{ layout.details.name }}
@@ -54,8 +54,10 @@
 			</v-col>
 		</v-row>
 		<v-row class="ma-0">
-			<v-col :class="breakpoint < 800 ? 'px-0 py-2' : 'pa-2'">
-				<BackgroundsColumn />
+			<v-col
+				:class="$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'"
+			>
+				<BackgroundsSlideGroup />
 			</v-col>
 		</v-row>
 	</div>
@@ -64,12 +66,12 @@
 
 <script>
 import LayoutQueries from '@/graphql/Layout.gql'
-import BackgroundsColumn from '@/components/BackgroundsSlideGroup.vue'
+import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default {
 	components: {
-		BackgroundsColumn,
+		BackgroundsSlideGroup,
 		LoadingOverlay
 	},
 	apollo: {
@@ -86,21 +88,6 @@ export default {
 		}
 	},
 	computed: {
-		// eslint-disable-next-line vue/return-in-computed-property
-		breakpoint() {
-			switch (this.$vuetify.breakpoint.name) {
-				case 'xs':
-					return 220
-				case 'sm':
-					return 400
-				case 'md':
-					return 500
-				case 'lg':
-					return 600
-				case 'xl':
-					return 800
-			}
-		},
 		backgroundStyle() {
 			if (this.$store.state.background)
 				return `background-image: url(${this.$store.state.background});`
