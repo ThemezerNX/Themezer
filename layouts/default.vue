@@ -4,13 +4,13 @@
 			<div class="background" />
 			<v-list nav>
 				<!-- <v-divider /> -->
-				<template v-for="(item, i) in items">
+				<template v-for="item in items">
 					<v-subheader v-if="item.header" :key="item.header">{{
 						item.header
 					}}</v-subheader>
 					<v-list-item
 						v-else
-						:key="i"
+						:key="item.title"
 						class="my-2"
 						:to="item.to"
 						router
@@ -25,7 +25,7 @@
 					</v-list-item>
 				</template>
 				<v-divider />
-				<v-list-item :key="i" to="/about" class="my-2" router exact>
+				<v-list-item to="/about" class="my-2" router exact>
 					<v-list-item-action>
 						<v-icon>mdi-information-outline</v-icon>
 					</v-list-item-action>

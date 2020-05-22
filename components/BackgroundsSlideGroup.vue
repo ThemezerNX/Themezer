@@ -102,8 +102,7 @@ export default {
 				},
 				{
 					name: "Assassin's Creed Odyssey",
-					url:
-						"/images/backgrounds/Games/Assassin's Creed Odyssey.jpg"
+					url: '/images/backgrounds/Games/Assassins Creed Odyssey.jpg'
 				},
 				{
 					name: 'Far Cry 5',
