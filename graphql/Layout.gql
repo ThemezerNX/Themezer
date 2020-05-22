@@ -15,6 +15,33 @@ query layout($name: String!, $menu: String!) {
 		menu
 		last_updated
 		baselayout
+		pieces {
+			name
+			values {
+				value
+				image
+				json
+			}
+		}
+	}
+}
+
+query layoutDetails($name: String!, $menu: String!) {
+	layout(name: $name, menu: $menu) {
+		uuid
+		details {
+			name
+			uuid
+			author {
+				name
+				discordTag
+			}
+			description
+			color
+			version
+		}
+		menu
+		last_updated
 	}
 }
 
@@ -31,9 +58,8 @@ query layoutsList($menu: String!) {
 			description
 			color
 			version
-		},
+		}
 		menu
 		last_updated
 	}
 }
-

@@ -14,7 +14,7 @@
 		</v-col>
 	</v-row>
 	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else="">There's nothing here :(</span>
+	<span v-else>There's nothing here :(</span>
 </template>
 
 <script>

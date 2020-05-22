@@ -1,14 +1,22 @@
 <template>
-	<v-app dark>
-		<h1 v-if="error.statusCode === 404">
-			{{ pageNotFound }}
-		</h1>
-		<h1 v-else>
-			{{ otherError }}
-		</h1>
-		<a @click="$router.go(-1)">
-			Go Back
-		</a>
+	<v-app style="background: transparent;">
+		<v-container
+			:fluid="$vuetify.breakpoint.smAndDown"
+			style="height: 100%;"
+		>
+			<h2>
+				Uh oh!
+			</h2>
+			<h1 v-if="error.statusCode === 404">
+				{{ pageNotFound }}
+			</h1>
+			<h1 v-else>
+				{{ otherError }}
+			</h1>
+			<v-btn color="secondary" @click="$router.go(-1)">
+				Go Back
+			</v-btn>
+		</v-container>
 	</v-app>
 </template>
 
@@ -36,9 +44,3 @@ export default {
 	}
 }
 </script>
-
-<style scoped>
-h1 {
-	font-size: 20px;
-}
-</style>
