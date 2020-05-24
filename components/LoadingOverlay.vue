@@ -6,6 +6,12 @@
 	</v-fade-transition>
 </template>
 
+<script>
+export default {
+	name: 'LoadingOverlay'
+}
+</script>
+
 <style lang="scss" scoped>
 .holder {
 	height: 100%;

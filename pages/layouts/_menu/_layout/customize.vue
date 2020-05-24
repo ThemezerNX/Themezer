@@ -1,5 +1,11 @@
 <template>
 	<div v-if="layout && layout.has_pieces" no-gutters class="pa-2 box">
+		<h1 class="boxt_text">
+			{{ layout.details.name }}
+		</h1>
+		<div class="subtitle-1 boxt_text">
+			By {{ layout.details.author.name }}
+		</div>
 		<v-row class="ma-0">
 			<v-col
 				cols="12"
@@ -21,13 +27,6 @@
 				/>
 			</v-col>
 			<v-col cols="12" xs="12" sm="8" class="pa-2">
-				<h1>
-					{{ layout.details.name }}
-				</h1>
-				<div class="subtitle-1">
-					By {{ layout.details.author.name }}
-				</div>
-
 				<v-list
 					subheader
 					flat
@@ -252,14 +251,6 @@ export default Vue.extend({
 	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 400ms;
 	border-radius: 4px;
 	// max-height: 50vh;
-}
-
-.box {
-	background-color: #1e1e1e;
-	border-radius: 4px;
-	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-	min-height: 100%;
 }
 
 // .v-input__slot {

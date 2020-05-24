@@ -97,6 +97,14 @@ export default {
 					icon: 'mdi-account',
 					title: 'Player Select',
 					to: '/layouts/playerselect'
+				},
+				{
+					header: 'Tools'
+				},
+				{
+					icon: 'mdi-image-edit-outline',
+					title: 'Overlay Creator',
+					to: '/tools/overlaycreator'
 				}
 			]
 		}
@@ -108,6 +116,18 @@ export default {
 .v-card__text,
 .v-card__title {
 	word-break: normal;
+}
+
+.box {
+	background-color: #1e1e1e;
+	border-radius: 4px;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+	min-height: 100%;
+
+	.boxt_text {
+		margin-left: 8px;
+	}
 }
 </style>
 
