@@ -12,52 +12,12 @@
 		</h2>
 		<div class="subtitle-1 boxt_text">
 			Upload your layout here. You will get two NXThemes: one with a black
-			background and one with a white one. For each do the following:
-			install it on your Switch and take a screenshot of the corresponding
-			menu. Transfer them to your PC afterwards. Have you done that? Go to
-			step 2.
+			background and one with a white one (be sure to allow the site to
+			download multiple files). For each do the following: install it on
+			your Switch and take a screenshot of the corresponding menu.
+			Transfer them to your PC afterwards. Have you done that? Go to step
+			2.
 		</div>
-		<v-row class="ma-0">
-			<v-col cols="12" class="pa-2">
-				<v-file-input
-					label="Layout json"
-					filled
-					prepend-icon="mdi-code-json"
-					accept="application/json"
-					hide-details
-					@change="onLayoutChange"
-				/>
-			</v-col>
-			<v-flex
-				v-if="blackImg && whiteImg"
-				class="d-flex justify-center  mt-3"
-			>
-				<v-btn
-					color="primary"
-					class="mx-2"
-					append
-					:loading="loadingUploadLayout"
-					@click.prevent="upload"
-				>
-					Create <v-icon right>mdi-image-edit-outline</v-icon>
-				</v-btn>
-				<v-btn
-					v-if="resultImage"
-					class="mx-2"
-					color="secondary"
-					append
-					@click.prevent="
-						downloadFileB64(
-							resultImage.data,
-							'image/png',
-							resultImage.filename
-						)
-					"
-				>
-					Download <v-icon right>mdi-download-box-outline</v-icon>
-				</v-btn>
-			</v-flex>
-		</v-row>
 		<h2 class="boxt_text">
 			2. Upload Screenshots
 		</h2>
