@@ -151,7 +151,9 @@ export default {
 		activeBackground(selected) {
 			this.$store.commit(
 				'SET_BACKGROUND',
-				encodeURI(this.backgrounds[selected].url)
+				this.backgrounds[selected].url
+					? encodeURI(this.backgrounds[selected].url)
+					: null
 			)
 		}
 	}
