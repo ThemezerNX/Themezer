@@ -203,7 +203,7 @@ export default Vue.extend({
 			if (data && data !== 'Default') {
 				if (value.image) {
 					this.preview = encodeURI(
-						`//api.themezer.ga/storage/layouts/${this.layout.details.uuid}/pieces/${option.name}/${value.value}.jpg`
+						`//api.themezer.ga/storage/layouts/${this.layout.details.uuid}/pieces/${option.name}/${value.value}.png`
 					)
 				}
 			} else this.preview = null
