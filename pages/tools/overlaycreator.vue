@@ -14,7 +14,7 @@
 			Upload your layout here. You will get two NXThemes: one with a black
 			background and one with a white one (be sure to allow the site to
 			download multiple files). For each do the following: install it on
-			your Switch and take a screenshot of the corresponding menu.
+			your Switch and take a screenshot of the menu the layout is for.
 			Transfer them to your PC afterwards. Have you done that? Go to step
 			2.
 		</div>
