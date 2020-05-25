@@ -196,12 +196,14 @@ export default Vue.extend({
 		},
 		onScreenshotBlackChange(file) {
 			if (file) {
+				this.resultImage = null
 				this.blackImg = file
 				this.screenshotBlackUrl = URL.createObjectURL(file)
 			}
 		},
 		onScreenshotWhiteChange(file) {
 			if (file) {
+				this.resultImage = null
 				this.whiteImg = file
 				this.screenshotWhiteUrl = URL.createObjectURL(file)
 			}
@@ -209,6 +211,7 @@ export default Vue.extend({
 		uploadScreenshots() {
 			if (!(this.blackImg && this.whiteImg)) return
 
+			this.resultImage = null
 			this.loadingUploadScreenshots = true
 			this.$apollo
 				.mutate({
