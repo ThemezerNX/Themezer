@@ -108,7 +108,7 @@ export default {
 	},
 	apollo: {
 		layout: {
-			query: LayoutQueries.layoutDetails,
+			query: LayoutQueries.layout,
 			variables() {
 				return {
 					name: this.$route.params.layout,
