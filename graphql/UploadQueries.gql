@@ -2,5 +2,6 @@ mutation createOverlay($themeName: String, $blackImg: Upload!, $whiteImg: Upload
 	createOverlay(themeName: $themeName, blackImg: $blackImg, whiteImg: $whiteImg) {
         filename
 		data
+		mimetype
 	}
 }

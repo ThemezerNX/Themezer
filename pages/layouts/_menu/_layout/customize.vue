@@ -227,7 +227,7 @@ export default Vue.extend({
 				}
 			}
 
-			this.downloadJson(
+			this.downloadFile(
 				JSON.stringify(
 					this.mergeJson(
 						JSON.parse(this.layout.baselayout),
@@ -236,6 +236,7 @@ export default Vue.extend({
 					null,
 					2
 				),
+				'application/json',
 				this.layout.details.name
 			)
 		}

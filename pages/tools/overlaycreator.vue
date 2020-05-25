@@ -1,7 +1,7 @@
 <template>
 	<div no-gutters class="pa-2 box">
 		<h1 class="boxt_text">
-			Create Overlay
+			Overlay Creator
 		</h1>
 		<div class="subtitle-1 boxt_text">
 			Create a transparent overlay from two screenshots: one of the layout
@@ -22,6 +22,7 @@
 					:src="screenshotBlackUrl"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
+					alt="Screenshot with black background"
 				/>
 			</v-col>
 
@@ -36,6 +37,7 @@
 					filled
 					prepend-icon="mdi-monitor-screenshot"
 					accept="image/jpeg"
+					hide-details
 					@change="onScreenshotBlackChange"
 				/>
 			</v-col>
@@ -52,6 +54,7 @@
 					:src="screenshotWhiteUrl"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
+					alt="Screenshot with white background"
 				/>
 			</v-col>
 			<v-col
@@ -65,15 +68,53 @@
 					filled
 					prepend-icon="mdi-monitor-screenshot"
 					accept="image/jpeg"
+					hide-details
 					@change="onScreenshotWhiteChange"
 				/>
 			</v-col>
-			<v-flex v-if="blackImg && whiteImg" class="d-flex justify-center">
-				<v-btn color="secondary" append @click.prevent="upload">
-					Create <v-icon right>mdi-download-box-outline</v-icon>
+			<v-flex
+				v-if="blackImg && whiteImg"
+				class="d-flex justify-center  mt-3"
+			>
+				<v-btn
+					color="primary"
+					class="mx-2"
+					append
+					:loading="loading"
+					@click.prevent="upload"
+				>
+					Create <v-icon right>mdi-image-edit-outline</v-icon>
+				</v-btn>
+				<v-btn
+					v-if="resultImage"
+					class="mx-2"
+					color="secondary"
+					append
+					@click.prevent="
+						downloadFileB64(
+							resultImage.data,
+							'image/png',
+							resultImage.filename
+						)
+					"
+				>
+					Download <v-icon right>mdi-download-box-outline</v-icon>
 				</v-btn>
 			</v-flex>
 		</v-row>
+		<h1 v-if="resultImage" class="boxt_text">
+			Result
+		</h1>
+		<v-col v-if="resultImage" cols="12" xs="12" sm="4" class="pa-2">
+			<v-img
+				aspect-ratio="1.7778"
+				:src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
+				:lazy-src="'/logo_16-9-256.jpg'"
+				contain
+				alt="Created overlay image"
+				style="background: rgba(255, 255, 255, 0.20);"
+			/>
+		</v-col>
 	</div>
 </template>
 
@@ -87,14 +128,15 @@ export default Vue.extend({
 			blackImg: null,
 			screenshotBlackUrl: null,
 			whiteImg: null,
-			screenshotWhiteUrl: null
+			screenshotWhiteUrl: null,
+			resultImage: null,
+			loading: false
 		}
 	},
 	apollo: {},
 	methods: {
 		onScreenshotBlackChange(file) {
 			if (file) {
-				console.log(file)
 				this.blackImg = file
 				this.screenshotBlackUrl = URL.createObjectURL(file)
 			}
@@ -107,16 +149,19 @@ export default Vue.extend({
 		},
 		upload() {
 			if (!(this.blackImg && this.whiteImg)) return
-			this.$apollo.mutate({
-				mutation: UploadQueries.createOverlay,
-				variables: { blackImg: this.blackImg, whiteImg: this.whiteImg },
-				onCompleted: (data) => {
-					console.log(data)
-				},
-				onError: (data) => {
-					console.error(data)
-				}
-			})
+			this.loading = true
+			this.$apollo
+				.mutate({
+					mutation: UploadQueries.createOverlay,
+					variables: {
+						blackImg: this.blackImg,
+						whiteImg: this.whiteImg
+					}
+				})
+				.then(({ data }) => {
+					this.resultImage = data.createOverlay
+					this.loading = false
+				})
 		}
 	}
 })

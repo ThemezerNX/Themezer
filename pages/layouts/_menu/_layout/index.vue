@@ -57,10 +57,10 @@
 					{{ layout.menu }}.szs
 				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
-				<v-flex class="d-flex justify-center">
+				<v-flex class="d-flex justify-center mt-3">
 					<v-btn
 						v-if="layout.has_pieces"
-						class="mt-3 me-3"
+						class="mx-2"
 						color="primary"
 						to="customize"
 						append
@@ -68,11 +68,15 @@
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
 					</v-btn>
 					<v-btn
-						class="mt-3 ms-3"
+						class="mx-2"
 						color="secondary"
 						append
 						@click.prevent="
-							downloadJson(layout.baselayout, layout.details.name)
+							downloadFile(
+								layout.baselayout,
+								'application/json',
+								layout.details.name
+							)
 						"
 					>
 						Get <v-icon right>mdi-download-box-outline</v-icon>
