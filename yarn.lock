@@ -1498,6 +1498,10 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@tromkom/aurora-strategic-json-merge-patch@https://github.com/Migushthe2nd/aurora-strategic-json-merge-patch.git":
+  version "1.0.2"
+  resolved "https://github.com/Migushthe2nd/aurora-strategic-json-merge-patch.git#6a6dabad8be7e2e35aef89b73b8687ff4cffe239"
+
 "@types/accepts@*", "@types/accepts@^1.3.5":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
