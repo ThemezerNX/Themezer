@@ -1,7 +1,13 @@
 <template>
 	<div v-if="layout && layout.details" no-gutters class="pa-2 box">
 		<v-row class="ma-0">
-			<v-col cols="12" xs="12" sm="8" md="9" class="pa-2">
+			<v-col
+				cols="12"
+				xs="12"
+				:sm="landscape ? 8 : 12"
+				md="9"
+				class="pa-2"
+			>
 				<v-img
 					aspect-ratio="1.7778"
 					:src="
@@ -16,7 +22,7 @@
 			<v-col
 				cols="12"
 				xs="12"
-				sm="4"
+				:sm="landscape ? 4 : 12"
 				md="3"
 				class="pa-2"
 				style="position: relative;"
@@ -36,13 +42,13 @@
 					Details
 				</h3>
 				<div
-					v-if="layout.details.author.discordTag"
+					v-if="layout.details.author.discord_tag"
 					class="font-weight-light body-2"
 				>
 					<span class="font-weight-medium">
 						Author's Discord:
 					</span>
-					{{ layout.details.author.discordTag }}
+					{{ layout.details.author.discord_tag }}
 				</div>
 				<div class="font-weight-light body-2">
 					<span class="font-weight-medium">Version: </span>
@@ -110,6 +116,11 @@ export default {
 		BackgroundsSlideGroup,
 		LoadingOverlay
 	},
+	data: () => {
+		return {
+			landscape: false
+		}
+	},
 	apollo: {
 		layout: {
 			query: layout,
@@ -136,7 +147,22 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		window.addEventListener(
+			'orientationchange',
+			this.handleOrientationChange
+		)
+		this.handleOrientationChange()
+	},
 	methods: {
+		handleOrientationChange() {
+			const orientation = window.screen.orientation.type
+			if (orientation === 'portrait-primary') {
+				this.landscape = false
+			} else if (orientation === 'landscape-primary') {
+				this.landscape = true
+			}
+		},
 		niceDate(unix) {
 			const monthNames = [
 				'January',

@@ -8,16 +8,16 @@
 			following questions will guide you through the process.
 		</div>
 		<div class="subtitle-1 box_text">
-			If you downloaded a layout from this website it included a 'uuid'
-			and 'piece_uuids' entry in the .json file. You must not edit these
-			values! These are used to indicate which layout was used so that
-			when people download your theme, they also get the most up-to-date
-			version of the layout and customization options. If you downloaded
-			the layout from elsewhere and it doesn't include the two entries,
-			you should try to find the layout in
-			<a href="https://github.com/ThemezerNX/Layouts">
-				the GitHub Layouts repository.
-			</a>
+			If you downloaded a layout from this website it included a Themezer
+			'ID' key in the .json file. You must never edit these values! These
+			are used to indicate which layout was used so that when people
+			download your theme, they also get the most up-to-date version of
+			the layout and customization options. If you downloaded the layout
+			from elsewhere and it doesn't include the two entries, you should
+			try to find the layout in
+			<nuxt-link exact to="/layouts">
+				the Layouts section.
+			</nuxt-link>
 			Be really sure it is the exact same layout, or else you might lose
 			some features!
 		</div>
@@ -50,6 +50,7 @@
 				</v-radio-group>
 				<v-file-input
 					v-if="selectedType === 'single'"
+					v-model="uploadSingleOrZip"
 					:loading="loading.uploadSingleOrZip"
 					label=".NXTheme file"
 					filled
@@ -66,6 +67,7 @@
 					</div>
 					<v-file-input
 						v-if="selectedType === 'zip'"
+						v-model="uploadSingleOrZip"
 						:loading="loading.uploadSingleOrZip"
 						label=".zip file"
 						filled
@@ -86,7 +88,9 @@
 						>creation tool on this website
 					</nuxt-link>
 					or using the
-					<a href="https://github.com/exelix11/SwitchThemeInjector"
+					<a
+						href="https://github.com/exelix11/SwitchThemeInjector"
+						target="_blank"
 						>Switch Theme Injector</a
 					>. You may return after creating an NXTheme/NXThemes.
 				</div>
@@ -119,6 +123,11 @@
 								v-if="theme"
 								:key="theme.info.ThemeName"
 								class="mx-auto"
+								:class="
+									i === detectedThemes.length - 1
+										? ''
+										: 'mb-2'
+								"
 								outlined
 							>
 								<v-list-item three-line class="px-0">
@@ -165,7 +174,7 @@
 																"
 																full-width
 																height="100%"
-																label="Upload Screenshot"
+																label="Upload Screenshot (.jpg)"
 																class="screenshot_upload"
 																filled
 																color="black"
@@ -233,6 +242,52 @@
 												to the GitHub repository.
 											</v-list-item-subtitle>
 										</v-col>
+										<v-col class="pb-0">
+											<v-text-field
+												v-model="
+													detectedThemes[i]
+														.description
+												"
+												label="Theme description"
+												outlined
+												:rules="[rules.required]"
+												prepend-icon="mdi-pencil-outline"
+												@change="forceUpdate++"
+											></v-text-field>
+											<v-text-field
+												v-model="
+													detectedThemes[i].color
+												"
+												label="Theme card color on Themezer"
+												:color="detectedThemes[i].color"
+												outlined
+												:rules="[rules.hex]"
+												prepend-icon="mdi-format-color-fill"
+												@change="
+													forceUpdate++
+													detectedThemes[i].color ===
+													''
+														? (detectedThemes[
+																i
+														  ].color = null)
+														: null
+												"
+											></v-text-field>
+											<v-text-field
+												v-if="
+													selectedSubmitType ===
+														'separate'
+												"
+												v-model="
+													detectedThemes[i].version
+												"
+												label="Theme version"
+												outlined
+												:rules="[rules.required]"
+												prepend-icon="mdi-update"
+												@change="forceUpdate++"
+											></v-text-field>
+										</v-col>
 									</v-list-item-content>
 								</v-list-item>
 							</v-card>
@@ -274,6 +329,7 @@
 										type.disabled
 								"
 								:value="type.id"
+								@change="clearSwitchSubmitType()"
 							></v-radio>
 						</v-radio-group>
 						<v-text-field
@@ -317,7 +373,7 @@
 							>
 								<v-text-field
 									v-model="submitDetails.author.discord_tag"
-									label="Author Discord (e.g. Username#1234)"
+									label="Author's Discord (Username#1234)"
 									outlined
 									prepend-icon="mdi-discord"
 									:rules="[rules.discord]"
@@ -331,16 +387,18 @@
 							</v-col>
 						</v-row>
 						<v-text-field
+							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.description"
-							label="Description"
+							label="Pack Description"
 							outlined
 							:rules="[rules.required]"
 							prepend-icon="mdi-pencil-outline"
 							@change="forceUpdate++"
 						></v-text-field>
 						<v-text-field
+							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.color"
-							label="Color"
+							label="Pack card color on Themezer"
 							:color="submitDetails.color"
 							outlined
 							:rules="[rules.hex]"
@@ -353,8 +411,9 @@
 							"
 						></v-text-field>
 						<v-text-field
+							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.version"
-							label="Version"
+							label="Pack version"
 							outlined
 							:rules="[rules.required]"
 							prepend-icon="mdi-update"
@@ -363,6 +422,7 @@
 						<v-btn
 							color="secondary"
 							type="submit"
+							:loading="loading.submit"
 							:disabled="!submitValid"
 							@click.prevent="submit()"
 						>
@@ -372,15 +432,20 @@
 				</v-row>
 			</div>
 		</v-form>
-		<v-snackbar v-model="snackbar" bottom :timeout="8000" :color="'error'">
-			{{ error }}
+		<v-snackbar
+			v-model="snackbar"
+			bottom
+			:timeout="8000"
+			:color="error ? 'error' : 'green'"
+		>
+			{{ error || message }}
 		</v-snackbar>
 	</div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { uploadSingleOrZip, submitTheme } from '@/graphql/SubmitTheme.gql'
+import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
 	data() {
@@ -388,12 +453,13 @@ export default Vue.extend({
 			forceUpdate: 0,
 			snackbar: false,
 			error: null,
+			message: null,
 			QnAs: [
 				{
 					Q:
 						"I couldn't find the layout in the Layouts GitHub repository/I made the layout myself (not just edited another one)",
 					A:
-						'Ask the layout author to submit the layout to the Layouts GitHub repository/Consider uploading it to the Layouts GitHub repository.'
+						'Consider uploading it to the Layouts GitHub repository or asking the Author to do so.'
 				},
 				{
 					Q: 'My layout .json differs only by a bit',
@@ -442,6 +508,7 @@ export default Vue.extend({
 				}
 			],
 			selectedType: null,
+			uploadSingleOrZip: null,
 			loading: {
 				uploadSingleOrZip: false,
 				submit: false
@@ -478,6 +545,7 @@ export default Vue.extend({
 	},
 	methods: {
 		clearAll() {
+			this.uploadSingleOrZip = null
 			this.loading.uploadSingleOrZip = false
 			this.loading.submit = false
 			this.detectedThemes = null
@@ -494,6 +562,11 @@ export default Vue.extend({
 				description: null,
 				color: null,
 				version: null
+			}
+		},
+		clearSwitchSubmitType() {
+			for (const i in this.detectedThemes) {
+				this.detectedThemes[i].version = null
 			}
 		},
 		onFileChange(file) {
@@ -513,6 +586,7 @@ export default Vue.extend({
 						this.detectedThemes = data.uploadSingleOrZip
 					})
 					.catch((error) => {
+						console.log(error)
 						const parsedError = JSON.parse(JSON.stringify(error))
 						if (
 							parsedError.graphQLErrors &&
@@ -527,6 +601,9 @@ export default Vue.extend({
 						}
 						this.loading.uploadSingleOrZip = false
 						this.snackbar = true
+						setTimeout(() => {
+							this.error = null
+						}, 8100)
 					})
 			}
 		},
@@ -560,25 +637,40 @@ export default Vue.extend({
 						tmp: t.tmp,
 						layout_uuid: t.layout.uuid,
 						used_pieces: t.used_pieces,
-						target: t.target
+						target: t.target,
+						color: t.color
 					}
 				})
 
 				this.$apollo
 					.mutate({
-						mutation: submitTheme,
+						mutation: submitThemes,
 						variables: {
 							files: this.uploadedScreenshots,
 							themes: themeInput,
-							details: this.submitDetails
+							details: this.submitDetails,
+							type: this.selectedSubmitType
 						}
 					})
 					.then(({ data }) => {
-						this.loading.submit = false
-
-						this.detectedThemes = data.submitTheme
+						if (data.submitThemes === true) {
+							if (this.selectedSubmitType === 'pack') {
+								this.message = 'Pack submitted successfully!'
+							} else {
+								this.message = 'Themes submitted successfully!'
+							}
+							this.loading.submit = false
+							this.clearAll()
+						} else {
+							this.error = 'Unknown error'
+							setTimeout(() => {
+								this.error = null
+							}, 8100)
+						}
+						this.snackbar = true
 					})
 					.catch((error) => {
+						console.log(error)
 						const parsedError = JSON.parse(JSON.stringify(error))
 						if (
 							parsedError.graphQLErrors &&
@@ -593,6 +685,9 @@ export default Vue.extend({
 						}
 						this.loading.submit = false
 						this.snackbar = true
+						setTimeout(() => {
+							this.error = null
+						}, 8100)
 					})
 			}
 		}

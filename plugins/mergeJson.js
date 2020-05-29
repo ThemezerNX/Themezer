@@ -20,6 +20,7 @@ Vue.mixin({
 							'PropName',
 							'GroupName',
 							'name',
+							'MaterialName',
 							'unknown'
 						]
 					)
@@ -32,8 +33,6 @@ Vue.mixin({
 						aArray.shift().Anims,
 						['FileName']
 					)
-
-			console.log(original)
 
 			const ordered = {
 				PatchName: original.PatchName,

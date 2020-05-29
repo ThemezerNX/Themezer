@@ -6,7 +6,7 @@ query layout($name: String!, $target: String!) {
 			uuid
 			author {
 				name
-				discordTag
+				discord_tag
 			}
 			description
 			color
@@ -36,7 +36,7 @@ query layoutDetails($name: String!, $target: String!) {
 			uuid
 			author {
 				name
-				discordTag
+				discord_tag
 			}
 			description
 			color
@@ -56,7 +56,7 @@ query layoutsList($target: String!) {
 			uuid
 			author {
 				name
-				discordTag
+				discord_tag
 			}
 			description
 			color

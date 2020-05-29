@@ -24,7 +24,7 @@ mutation uploadSingleOrZip($file: Upload!) {
 	}
 }
 
-mutation submitThemes($files: [Upload!], $themes: [DetectedTheme!], $details: Details!) {
-	submitThemes(files: $files, themes: $themes, details: $details)
+mutation submitThemes($files: [Upload!], $themes: [DetectedThemeInput!], $details: DetailsInput!, $type: String!) {
+	submitThemes(files: $files, themes: $themes, details: $details, type: $type)
 }
 

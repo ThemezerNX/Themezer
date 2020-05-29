@@ -87,7 +87,10 @@ export default {
 		// errorHandler: '~/plugins/apollo-error-handler.js',
 		clientConfigs: {
 			default: {
-				httpEndpoint: process.env.API_ENDPOINT
+				httpEndpoint: process.env.API_ENDPOINT,
+				inMemoryCacheOptions: {
+					addTypename: false
+				}
 			}
 		}
 	},
