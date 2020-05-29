@@ -8,6 +8,7 @@
 					<v-subheader v-if="item.header" :key="item.header">{{
 						item.header
 					}}</v-subheader>
+					<v-divider v-else-if="item.divider" :key="item.divider" />
 					<v-list-item
 						v-else
 						:key="item.title"
@@ -24,17 +25,6 @@
 						</v-list-item-content>
 					</v-list-item>
 				</template>
-				<v-divider />
-				<v-list-item to="/about" class="my-2" router exact>
-					<v-list-item-action>
-						<v-icon>mdi-information-outline</v-icon>
-					</v-list-item-action>
-					<v-list-item-content>
-						<v-list-item-title>
-							About
-						</v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar class="navbar" clipped-left fixed app>
@@ -75,16 +65,54 @@ export default {
 			title: process.env.APP_TITLE,
 			drawer: false,
 			items: [
+				// {
+				// 	header: 'Themes'
+				// },
+				// {
+				// 	icon: 'mdi-home-outline',
+				// 	title: 'Home Menu',
+				// 	to: '/themes/homemenu'
+				// },
+				// {
+				// 	icon: 'mdi-lock-outline',
+				// 	title: 'Lockscreen',
+				// 	to: '/themes/lockscreen'
+				// },
+				// {
+				// 	icon: 'mdi-apps',
+				// 	title: 'All Apps',
+				// 	to: '/themes/allapps'
+				// },
+				// {
+				// 	icon: 'mdi-cog-outline',
+				// 	title: 'Settings',
+				// 	to: '/themes/settings'
+				// },
+				// {
+				// 	icon: 'mdi-account-outline',
+				// 	title: 'Player Select',
+				// 	to: '/themes/playerselect'
+				// },
+				// {
+				// 	icon: 'mdi-newspaper-variant-outline',
+				// 	title: 'News',
+				// 	to: '/themes/news'
+				// },
+				{
+					icon: 'mdi-package-variant-closed',
+					title: 'Theme Packs',
+					to: '/themes/packs'
+				},
 				{
 					header: 'Layouts'
 				},
 				{
-					icon: 'mdi-home',
+					icon: 'mdi-home-outline',
 					title: 'Home Menu',
 					to: '/layouts/homemenu'
 				},
 				{
-					icon: 'mdi-lock',
+					icon: 'mdi-lock-outline',
 					title: 'Lockscreen',
 					to: '/layouts/lockscreen'
 				},
@@ -94,9 +122,32 @@ export default {
 					to: '/layouts/allapps'
 				},
 				{
-					icon: 'mdi-account',
+					icon: 'mdi-cog-outline',
+					title: 'Settings',
+					to: '/layouts/settings'
+				},
+				{
+					icon: 'mdi-account-outline',
 					title: 'Player Select',
 					to: '/layouts/playerselect'
+				},
+				{
+					icon: 'mdi-newspaper-variant-outline',
+					title: 'News',
+					to: '/layouts/news'
+				},
+				{
+					header: 'Submit'
+				},
+				{
+					icon: 'mdi-file-image-outline',
+					title: 'Theme',
+					to: '/submit/theme'
+				},
+				{
+					icon: 'mdi-code-json',
+					title: 'Layout',
+					to: '/submit/layout'
 				},
 				{
 					header: 'Tools'
@@ -105,6 +156,14 @@ export default {
 					icon: 'mdi-image-edit-outline',
 					title: 'Overlay Creator',
 					to: '/tools/overlaycreator'
+				},
+				{
+					divider: true
+				},
+				{
+					icon: 'mdi-information-outline',
+					title: 'About',
+					to: '/about'
 				}
 			]
 		}
@@ -124,10 +183,21 @@ export default {
 	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
 		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 	min-height: 100%;
+}
 
-	.boxt_text {
-		margin-left: 8px;
-	}
+.box_fit {
+	background-color: #1e1e1e;
+	border-radius: 4px;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.box_text {
+	margin-left: 8px;
+}
+
+h2.box_text {
+	margin-top: 16px;
 }
 </style>
 

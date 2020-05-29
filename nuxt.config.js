@@ -140,7 +140,7 @@ export default {
 			if (ctx.isDev) {
 				config.mode = 'development'
 			} else if (ctx.isClient) {
-				config.optimization.splitChunks.maxSize = 400000
+				config.optimization.splitChunks.maxSize = 249856
 			}
 		}
 	}

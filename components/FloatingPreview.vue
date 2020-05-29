@@ -6,7 +6,7 @@
 			max-width="200"
 			router
 			exact
-			:to="`/${$parent.menu}/${layoutDetails.title}`"
+			:to="`/${$parent.target}/${layoutDetails.title}`"
 		>
 			<v-img
 				aspect-ratio="1.7778"

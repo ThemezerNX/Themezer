@@ -1,9 +1,9 @@
 <template>
 	<div v-if="layout && layout.has_pieces" no-gutters class="pa-2 box">
-		<h1 class="boxt_text">
+		<h1 class="box_text">
 			{{ layout.details.name }}
 		</h1>
-		<div class="subtitle-1 boxt_text">
+		<div class="subtitle-1 box_text">
 			By {{ layout.details.author.name }}
 		</div>
 		<v-row class="ma-0">
@@ -155,7 +155,7 @@
 
 <script>
 import Vue from 'vue'
-import LayoutQueries from '@/graphql/Layout.gql'
+import { layout } from '@/graphql/Layout.gql'
 // import FloatingPreview from '@/components/FloatingPreview.vue'
 
 export default Vue.extend({
@@ -172,7 +172,7 @@ export default Vue.extend({
 		backgroundStyle() {
 			if (this.$store.state.background)
 				return `background-image: url(${this.$store.state.background});`
-			else if (this.$route.params.menu === 'playerselect') {
+			else if (this.$route.params.target === 'playerselect') {
 				return `background-image: url(/images/blurredhome.jpg);`
 			} else if (this.layout.details.color) {
 				return `background: ${this.layout.details.color};`
@@ -183,11 +183,11 @@ export default Vue.extend({
 	},
 	apollo: {
 		layout: {
-			query: LayoutQueries.layout,
+			query: layout,
 			variables() {
 				return {
 					name: this.$route.params.layout,
-					menu: this.$route.params.menu
+					target: this.$route.params.target
 				}
 			},
 			prefetch: true
@@ -203,7 +203,7 @@ export default Vue.extend({
 			if (data && data !== 'Default') {
 				if (value.image) {
 					this.preview = encodeURI(
-						`//api.themezer.ga/storage/layouts/${this.layout.details.uuid}/pieces/${option.name}/${value.value}.png`
+						`//api.themezer.ga/storage/layouts/${this.layout.details.uuid}/pieces/${option.name}/${value.image}`
 					)
 				}
 			} else this.preview = null
@@ -213,9 +213,10 @@ export default Vue.extend({
 
 			for (let i = 0; i < this.data.length; i++) {
 				if (this.data[i] === true) {
-					allModifications.push(
-						JSON.parse(this.layout.pieces[i].values[0].json)
-					)
+					allModifications.push({
+						uuid: this.layout.pieces[i].values[0].uuid,
+						json: JSON.parse(this.layout.pieces[i].values[0].json)
+					})
 				} else if (
 					typeof this.data[i] === 'string' &&
 					this.data[i] !== 'Default'
@@ -223,18 +224,18 @@ export default Vue.extend({
 					const selected = this.layout.pieces[i].values.find(
 						(v) => v.value === this.data[i]
 					)
-					allModifications.push(JSON.parse(selected.json))
+					allModifications.push({
+						uuid: selected.uuid,
+						json: JSON.parse(selected.json)
+					})
 				}
 			}
 
 			this.downloadFile(
-				JSON.stringify(
-					this.mergeJson(
-						JSON.parse(this.layout.baselayout),
-						allModifications
-					),
-					null,
-					2
+				this.mergeJson(
+					this.layout.uuid,
+					JSON.parse(this.layout.baselayout),
+					allModifications
 				),
 				'application/json',
 				this.layout.details.name

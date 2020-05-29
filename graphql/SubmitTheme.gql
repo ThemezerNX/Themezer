@@ -1,0 +1,30 @@
+mutation uploadSingleOrZip($file: Upload!) {
+	uploadSingleOrZip(file: $file) {
+		info {
+			ThemeName
+			Author
+			LayoutInfo
+		}
+		tmp
+		layout {
+			uuid
+			details {
+				name
+			}
+			url
+		}
+		used_pieces {
+			name
+			value {
+				value
+				uuid
+			}
+		}
+		target
+	}
+}
+
+mutation submitThemes($files: [Upload!], $themes: [DetectedTheme!], $details: Details!) {
+	submitThemes(files: $files, themes: $themes, details: $details)
+}
+

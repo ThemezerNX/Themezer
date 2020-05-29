@@ -1,16 +1,18 @@
 <template>
 	<div no-gutters class="pa-2 box">
-		<h1 class="boxt_text">
+		<h1 class="box_text">
 			Overlay Creator
 		</h1>
-		<div class="subtitle-1 boxt_text">
-			Create a transparent overlay for your layout and customizations.
-			This is required for layouts on this website.
+		<div class="subtitle-1 box_text">
+			Create a transparent overlay for your layout and customizations. You
+			may use the tool here, or manually create an overlay if for example
+			your theme uses partially-transparent panels. Either way, an overlay
+			is required for layouts on this website.
 		</div>
-		<h2 class="boxt_text">
+		<h2 class="box_text">
 			1. Upload Layout
 		</h2>
-		<div class="subtitle-1 boxt_text">
+		<div class="subtitle-1 box_text">
 			Upload your layout here. You will get two NXThemes: one with a black
 			background and one with a white one (be sure to allow the site to
 			download multiple files). For each do the following: install it on
@@ -21,19 +23,20 @@
 		<v-row class="ma-0">
 			<v-col cols="12" class="pa-2">
 				<v-file-input
-					label="Layout json"
+					label=".json layout file"
 					filled
 					prepend-icon="mdi-code-json"
 					accept="application/json"
 					hide-details
+					:loading="loadingUploadLayout"
 					@change="onLayoutChange"
 				/>
 			</v-col>
 		</v-row>
-		<h2 class="boxt_text">
+		<h2 class="box_text">
 			2. Upload Screenshots
 		</h2>
-		<div class="subtitle-1 boxt_text">
+		<div class="subtitle-1 box_text">
 			Here you will upload the two screenshots you took at step 1. Upload
 			them to their own field below.
 		</div>
@@ -54,7 +57,6 @@
 					alt="Screenshot with black background"
 				/>
 			</v-col>
-
 			<v-col
 				cols="12"
 				xs="12"
@@ -70,6 +72,7 @@
 					@change="onScreenshotBlackChange"
 				/>
 			</v-col>
+
 			<v-col
 				v-if="screenshotWhiteUrl"
 				cols="12"
@@ -103,7 +106,7 @@
 			</v-col>
 			<v-flex
 				v-if="blackImg && whiteImg"
-				class="d-flex justify-center  mt-3"
+				class="d-flex justify-center mt-3"
 			>
 				<v-btn
 					color="primary"
@@ -131,7 +134,7 @@
 				</v-btn>
 			</v-flex>
 		</v-row>
-		<h2 v-if="resultImage" class="boxt_text">
+		<h2 v-if="resultImage" class="box_text">
 			Result
 		</h2>
 		<v-col v-if="resultImage" cols="12" xs="12" sm="4" class="pa-2">
@@ -149,7 +152,10 @@
 
 <script>
 import Vue from 'vue'
-import CreateOverlay from '@/graphql/CreateOverlay.gql'
+import {
+	createOverlaysNXTheme,
+	createOverlay
+} from '@/graphql/CreateOverlay.gql'
 
 export default Vue.extend({
 	data() {
@@ -178,7 +184,7 @@ export default Vue.extend({
 			this.loadingUploadLayout = true
 			this.$apollo
 				.mutate({
-					mutation: CreateOverlay.createOverlaysNXTheme,
+					mutation: createOverlaysNXTheme,
 					variables: {
 						layout: this.layoutJson
 					}
@@ -215,7 +221,7 @@ export default Vue.extend({
 			this.loadingUploadScreenshots = true
 			this.$apollo
 				.mutate({
-					mutation: CreateOverlay.createOverlay,
+					mutation: createOverlay,
 					variables: {
 						blackImg: this.blackImg,
 						whiteImg: this.whiteImg

@@ -54,7 +54,7 @@
 				</div>
 				<div class="font-weight-light body-2">
 					<span class="font-weight-medium">Target File: </span>
-					{{ layout.menu }}.szs
+					{{ layout.target }}.szs
 				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
 				<v-flex class="d-flex justify-center mt-3">
@@ -73,7 +73,11 @@
 						append
 						@click.prevent="
 							downloadFile(
-								layout.baselayout,
+								mergeJson(
+									layout.uuid,
+									JSON.parse(layout.baselayout),
+									[]
+								),
 								'application/json',
 								layout.details.name
 							)
@@ -93,11 +97,11 @@
 		</v-row>
 	</div>
 	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else>There's nothing here :(</span>
+	<span v-else>There's nothing here (yet) :(</span>
 </template>
 
 <script>
-import LayoutQueries from '@/graphql/Layout.gql'
+import { layout } from '@/graphql/Layout.gql'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
@@ -108,11 +112,11 @@ export default {
 	},
 	apollo: {
 		layout: {
-			query: LayoutQueries.layout,
+			query: layout,
 			variables() {
 				return {
 					name: this.$route.params.layout,
-					menu: this.$route.params.menu
+					target: this.$route.params.target
 				}
 			},
 			// fetchPolicy: 'no-cache',
@@ -123,7 +127,7 @@ export default {
 		backgroundStyle() {
 			if (this.$store.state.background)
 				return `background-image: url(${this.$store.state.background});`
-			else if (this.$route.params.menu === 'playerselect') {
+			else if (this.$route.params.target === 'playerselect') {
 				return `background-image: url(/images/blurredhome.jpg);`
 			} else if (this.layout.details.color) {
 				return `background: ${this.layout.details.color};`
@@ -149,7 +153,7 @@ export default {
 				'December'
 			]
 
-			const DateTime = new Date(parseInt(unix))
+			const DateTime = new Date(unix)
 			return (
 				monthNames[DateTime.getMonth()] +
 				' ' +

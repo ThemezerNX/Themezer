@@ -1498,6 +1498,10 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@themezernx/layout-id-parser@https://github.com/ThemezerNX/Layout-ID-Parser.git":
+  version "1.0.0"
+  resolved "https://github.com/ThemezerNX/Layout-ID-Parser.git#13386f42280d72d687acde7949496b36307a4310"
+
 "@tromkom/aurora-strategic-json-merge-patch@https://github.com/Migushthe2nd/aurora-strategic-json-merge-patch.git":
   version "1.0.2"
   resolved "https://github.com/Migushthe2nd/aurora-strategic-json-merge-patch.git#6a6dabad8be7e2e35aef89b73b8687ff4cffe239"

@@ -6,7 +6,7 @@
 			class="ma-auto card"
 			router
 			exact
-			:to="`${$route.params.menu}/${layoutDetails.name}`"
+			:to="`${$route.params.target}/${layoutDetails.name}`"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
 			<v-img

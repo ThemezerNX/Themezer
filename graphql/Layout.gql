@@ -1,5 +1,5 @@
-query layout($name: String!, $menu: String!) {
-	layout(name: $name, menu: $menu) {
+query layout($name: String!, $target: String!) {
+	layout(name: $name, target: $target) {
 		uuid
 		details {
 			name
@@ -12,7 +12,7 @@ query layout($name: String!, $menu: String!) {
 			color
 			version
 		}
-		menu
+		target
 		last_updated
 		baselayout
 		has_pieces
@@ -21,14 +21,15 @@ query layout($name: String!, $menu: String!) {
 			values {
 				value
 				image
+				uuid
 				json
 			}
 		}
 	}
 }
 
-query layoutDetails($name: String!, $menu: String!) {
-	layout(name: $name, menu: $menu) {
+query layoutDetails($name: String!, $target: String!) {
+	layout(name: $name, target: $target) {
 		uuid
 		details {
 			name
@@ -41,14 +42,14 @@ query layoutDetails($name: String!, $menu: String!) {
 			color
 			version
 		}
-		menu
+		target
 		last_updated
 		has_pieces
 	}
 }
 
-query layoutsList($menu: String!) {
-	layoutsList(menu: $menu) {
+query layoutsList($target: String!) {
+	layoutsList(target: $target) {
 		uuid
 		details {
 			name
@@ -61,7 +62,7 @@ query layoutsList($menu: String!) {
 			color
 			version
 		}
-		menu
+		target
 		last_updated
 	}
 }

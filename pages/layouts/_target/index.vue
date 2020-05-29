@@ -14,12 +14,12 @@
 		</v-col>
 	</v-row>
 	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else>There's nothing here :(</span>
+	<span v-else>There's nothing here (yet) :(</span>
 </template>
 
 <script>
 import Vue from 'vue'
-import LayoutQueries from '@/graphql/Layout.gql'
+import { layoutsList } from '@/graphql/Layout.gql'
 import LayoutCard from '@/components/LayoutCard.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
@@ -30,10 +30,10 @@ export default Vue.extend({
 	},
 	apollo: {
 		layoutsList: {
-			query: LayoutQueries.layoutsList,
+			query: layoutsList,
 			variables() {
 				return {
-					menu: this.$route.params.menu
+					target: this.$route.params.target
 				}
 			},
 			prefetch: true
