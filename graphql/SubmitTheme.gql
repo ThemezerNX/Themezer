@@ -11,6 +11,7 @@ mutation uploadSingleOrZip($file: Upload!) {
 			details {
 				name
 			}
+			has_commonlayout
 			url
 		}
 		used_pieces {

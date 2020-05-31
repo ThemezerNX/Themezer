@@ -40,7 +40,9 @@ Vue.mixin({
 				TargetName: original.TargetName,
 				ID: stringifyThemeID({
 					service: 'Themezer',
-					uuid,
+					uuid:
+						uuid +
+						(original.TargetName === 'common.szs' ? '-common' : ''),
 					piece_uuids: usedPieces
 				}),
 				Ready8X: original.Ready8X,

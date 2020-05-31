@@ -9,6 +9,33 @@
 						item.header
 					}}</v-subheader>
 					<v-divider v-else-if="item.divider" :key="item.divider" />
+					<v-list-group v-else-if="item.group" :key="item.title">
+						<template v-slot:activator>
+							<v-list-item-action>
+								<v-icon v-text="item.icon" />
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title v-text="item.title" />
+							</v-list-item-content>
+						</template>
+						<template v-for="type in item.types">
+							<v-list-item
+								:key="type"
+								router
+								:to="`/${type}/${item.target}`"
+								dense
+								class="ml-11"
+							>
+								<v-list-item-title
+									class="text-capitalize"
+									v-text="type"
+								/>
+								<v-list-item-icon>
+									<v-icon v-text="type.icon" />
+								</v-list-item-icon>
+							</v-list-item>
+						</template>
+					</v-list-group>
 					<v-list-item
 						v-else
 						:key="item.title"
@@ -18,7 +45,7 @@
 						exact
 					>
 						<v-list-item-action>
-							<v-icon>{{ item.icon }}</v-icon>
+							<v-icon v-text="item.icon" />
 						</v-list-item-action>
 						<v-list-item-content>
 							<v-list-item-title v-text="item.title" />
@@ -65,76 +92,55 @@ export default {
 			title: process.env.APP_TITLE,
 			drawer: false,
 			items: [
-				// {
-				// 	header: 'Themes'
-				// },
-				// {
-				// 	icon: 'mdi-home-outline',
-				// 	title: 'Home Menu',
-				// 	to: '/themes/homemenu'
-				// },
-				// {
-				// 	icon: 'mdi-lock-outline',
-				// 	title: 'Lockscreen',
-				// 	to: '/themes/lockscreen'
-				// },
-				// {
-				// 	icon: 'mdi-apps',
-				// 	title: 'All Apps',
-				// 	to: '/themes/allapps'
-				// },
-				// {
-				// 	icon: 'mdi-cog-outline',
-				// 	title: 'Settings',
-				// 	to: '/themes/settings'
-				// },
-				// {
-				// 	icon: 'mdi-account-outline',
-				// 	title: 'Player Select',
-				// 	to: '/themes/playerselect'
-				// },
-				// {
-				// 	icon: 'mdi-newspaper-variant-outline',
-				// 	title: 'News',
-				// 	to: '/themes/news'
-				// },
 				{
 					icon: 'mdi-package-variant-closed',
 					title: 'Theme Packs',
-					to: '/themes/packs'
+					to: '/packs'
 				},
 				{
-					header: 'Layouts'
+					header: 'Themes & Layouts'
 				},
 				{
+					group: true,
 					icon: 'mdi-home-outline',
 					title: 'Home Menu',
-					to: '/layouts/homemenu'
+					target: 'homemenu',
+					types: ['themes', 'layouts']
 				},
 				{
+					group: true,
 					icon: 'mdi-lock-outline',
 					title: 'Lockscreen',
-					to: '/layouts/lockscreen'
+					target: 'lockscreen',
+					types: ['themes', 'layouts']
 				},
 				{
+					group: true,
 					icon: 'mdi-apps',
 					title: 'All Apps',
-					to: '/layouts/allapps'
+					target: 'allapps',
+					types: ['themes', 'layouts']
 				},
 				{
+					group: true,
 					icon: 'mdi-cog-outline',
 					title: 'Settings',
-					to: '/layouts/settings'
+					target: 'settings',
+					types: ['themes', 'layouts']
 				},
 				{
+					group: true,
 					icon: 'mdi-account-outline',
 					title: 'Player Select',
-					to: '/layouts/playerselect'
+					target: 'playerselect',
+					types: ['themes', 'layouts']
 				},
 				{
+					group: true,
 					icon: 'mdi-newspaper-variant-outline',
 					title: 'News',
-					to: '/layouts/news'
+					target: 'news',
+					types: ['themes', 'layouts']
 				},
 				{
 					header: 'Submit'

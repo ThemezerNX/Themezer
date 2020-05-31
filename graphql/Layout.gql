@@ -3,7 +3,6 @@ query layout($name: String!, $target: String!) {
 		uuid
 		details {
 			name
-			uuid
 			author {
 				name
 				discord_tag
@@ -25,6 +24,7 @@ query layout($name: String!, $target: String!) {
 				json
 			}
 		}
+		commonlayout
 	}
 }
 
@@ -33,7 +33,6 @@ query layoutDetails($name: String!, $target: String!) {
 		uuid
 		details {
 			name
-			uuid
 			author {
 				name
 				discord_tag
@@ -45,6 +44,7 @@ query layoutDetails($name: String!, $target: String!) {
 		target
 		last_updated
 		has_pieces
+		commonlayout
 	}
 }
 
@@ -53,7 +53,6 @@ query layoutsList($target: String!) {
 		uuid
 		details {
 			name
-			uuid
 			author {
 				name
 				discord_tag

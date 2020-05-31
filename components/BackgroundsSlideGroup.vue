@@ -109,7 +109,7 @@ export default {
 					url: '/images/backgrounds/Games/Far Cry 5.jpg'
 				},
 				{
-					name: 'GTA V',
+					name: 'Breath of the Wild Art',
 					url: '/images/backgrounds/Games/Zelda BotW Art.jpg'
 				},
 				{

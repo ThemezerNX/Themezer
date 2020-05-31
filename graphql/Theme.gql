@@ -1,0 +1,92 @@
+query theme($name: String!, $target: String!) {
+	theme(name: $name, target: $target) {
+		uuid
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+        layout {
+            uuid
+            details {
+                name
+                author {
+                    name
+                }
+            }
+            url
+        }
+        pack {
+            uuid
+            details {
+                name
+                author {
+                    name
+                    discord_tag
+                }
+                description
+                color
+                version
+            }
+            last_updated
+        }
+		last_updated
+		pieces {
+            name
+			value {
+				value
+				uuid
+			}
+        }
+        categories
+		nsfw
+	}
+}
+
+query themeDetails($name: String!, $target: String!) {
+	themeDetails(name: $name, target: $target) {
+		uuid
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+		pieces {
+            name
+			value {
+				value
+				uuid
+			}
+        }
+        categories
+		nsfw
+	}
+}
+
+query themesList($target: String!) {
+	themesList(target: $target) {
+		uuid
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+	}
+}

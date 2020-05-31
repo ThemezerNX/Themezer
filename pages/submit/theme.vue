@@ -241,6 +241,15 @@
 												database. Consider uploading it
 												to the GitHub repository.
 											</v-list-item-subtitle>
+											<v-list-item-subtitle
+												v-if="
+													theme.layout &&
+														theme.layout
+															.has_commonlayout
+												"
+											>
+												Has a modified Common layout
+											</v-list-item-subtitle>
 										</v-col>
 										<v-col class="pb-0">
 											<v-text-field
@@ -287,6 +296,11 @@
 												prepend-icon="mdi-update"
 												@change="forceUpdate++"
 											></v-text-field>
+											<v-checkbox
+												v-model="detectedThemes[i].nsfw"
+												:label="`NSFW`"
+												class="mt-0"
+											/>
 										</v-col>
 									</v-list-item-content>
 								</v-list-item>
@@ -638,7 +652,10 @@ export default Vue.extend({
 						layout_uuid: t.layout.uuid,
 						used_pieces: t.used_pieces,
 						target: t.target,
-						color: t.color
+						color: t.color,
+						description: t.description,
+						version: t.version,
+						nsfw: t.nsfw
 					}
 				})
 
