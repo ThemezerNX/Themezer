@@ -79,11 +79,7 @@
 						append
 						@click.prevent="
 							downloadFile(
-								mergeJson(
-									layout.uuid,
-									JSON.parse(layout.baselayout),
-									[]
-								),
+								mergeJson(layout.uuid, layout.baselayout, []),
 								'application/json',
 								layout.details.name
 							)
@@ -138,7 +134,7 @@
 								downloadFile(
 									mergeJson(
 										layout.uuid,
-										JSON.parse(layout.commonlayout),
+										layout.commonlayout,
 										[]
 									),
 									'application/json',

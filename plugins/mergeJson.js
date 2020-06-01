@@ -6,14 +6,16 @@ Vue.mixin({
 	methods: {
 		mergeJson(uuid, original, array) {
 			const usedPieces = []
+			const baseJsonParsed = JSON.parse(original)
 			for (const piece in array) usedPieces.push(array[piece].uuid)
 
 			const fArray = array
-			if (original.Files)
-				while (fArray.length > 0)
-					original.Files = patch(
-						original.Files,
-						fArray.shift().Files,
+			if (baseJsonParsed.Files)
+				while (fArray.length > 0) {
+					const shifted = fArray.shift()
+					baseJsonParsed.Files = patch(
+						baseJsonParsed.Files,
+						JSON.parse(shifted.json).Files,
 						[
 							'FileName',
 							'PaneName',
@@ -24,30 +26,35 @@ Vue.mixin({
 							'unknown'
 						]
 					)
+				}
 
 			const aArray = array
-			if (original.Anims)
-				while (aArray.length > 0)
-					original.Anims = patch(
-						original.Anims,
-						aArray.shift().Anims,
+			if (baseJsonParsed.Anims)
+				while (aArray.length > 0) {
+					const shifted = aArray.shift()
+					baseJsonParsed.Anims = patch(
+						baseJsonParsed.Anims,
+						JSON.parse(shifted.json).Anims,
 						['FileName']
 					)
+				}
 
 			const ordered = {
-				PatchName: original.PatchName,
-				AuthorName: original.AuthorName,
-				TargetName: original.TargetName,
+				PatchName: baseJsonParsed.PatchName,
+				AuthorName: baseJsonParsed.AuthorName,
+				TargetName: baseJsonParsed.TargetName,
 				ID: stringifyThemeID({
 					service: 'Themezer',
 					uuid:
 						uuid +
-						(original.TargetName === 'common.szs' ? '-common' : ''),
+						(baseJsonParsed.TargetName === 'common.szs'
+							? '-common'
+							: ''),
 					piece_uuids: usedPieces
 				}),
-				Ready8X: original.Ready8X,
-				Files: original.Files,
-				Anims: original.Anims
+				Ready8X: baseJsonParsed.Ready8X,
+				Files: baseJsonParsed.Files,
+				Anims: baseJsonParsed.Anims
 			}
 
 			return JSON.stringify(ordered, null, 2)

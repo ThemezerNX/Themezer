@@ -234,7 +234,7 @@ export default Vue.extend({
 			this.downloadFile(
 				this.mergeJson(
 					this.layout.uuid,
-					JSON.parse(this.layout.baselayout),
+					this.layout.baselayout,
 					allModifications
 				),
 				'application/json',

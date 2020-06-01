@@ -18,7 +18,7 @@
 					aspect-ratio="1.7778"
 					:src="
 						preview ||
-							`//api.themezer.ga/storage/layouts/${layout.details.uuid}/overlay.png`
+							`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 					"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
@@ -203,7 +203,7 @@ export default Vue.extend({
 			if (data && data !== 'Default') {
 				if (value.image) {
 					this.preview = encodeURI(
-						`//api.themezer.ga/storage/layouts/${this.layout.details.uuid}/pieces/${option.name}/${value.image}`
+						`//api.themezer.ga/storage/layouts/${this.layout.uuid}/pieces/${option.name}/${value.image}`
 					)
 				}
 			} else this.preview = null
@@ -215,7 +215,7 @@ export default Vue.extend({
 				if (this.data[i] === true) {
 					allModifications.push({
 						uuid: this.layout.pieces[i].values[0].uuid,
-						json: JSON.parse(this.layout.pieces[i].values[0].json)
+						json: this.layout.pieces[i].values[0].json
 					})
 				} else if (
 					typeof this.data[i] === 'string' &&
@@ -226,7 +226,7 @@ export default Vue.extend({
 					)
 					allModifications.push({
 						uuid: selected.uuid,
-						json: JSON.parse(selected.json)
+						json: selected.json
 					})
 				}
 			}
@@ -234,7 +234,7 @@ export default Vue.extend({
 			this.downloadFile(
 				this.mergeJson(
 					this.layout.uuid,
-					JSON.parse(this.layout.baselayout),
+					this.layout.baselayout,
 					allModifications
 				),
 				'application/json',

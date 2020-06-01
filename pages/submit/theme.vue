@@ -459,7 +459,7 @@
 							deletable-chips
 							:rules="[rules.category_length]"
 							prepend-icon="mdi-shape-outline"
-							label="Shared categories*"
+							label="Shared categories (this will remove the current set)"
 							multiple
 						></v-combobox>
 						<!-- <v-text-field

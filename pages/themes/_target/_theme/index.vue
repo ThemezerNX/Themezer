@@ -86,7 +86,7 @@
 							downloadFile(
 								mergeJson(
 									layout.uuid,
-									JSON.parse(layout.baselayout),
+									layout.baselayout,
 									[]
 								),
 								'application/json',
