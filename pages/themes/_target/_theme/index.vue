@@ -1,5 +1,5 @@
 <template>
-	<div v-if="theme && theme.details" no-gutters class="pa-2 box">
+	<div v-if="theme && theme.details" no-gutters class="pa-2 box_fit">
 		<v-row class="ma-0">
 			<v-col
 				cols="12"

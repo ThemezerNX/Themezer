@@ -207,7 +207,10 @@
 											<h1>
 												{{ theme.info.ThemeName }}
 											</h1>
-											<div class="subtitle-1">
+											<div
+												v-if="theme.info.Author"
+												class="subtitle-1"
+											>
 												By {{ theme.info.Author }}
 											</div>
 											<v-list-item-subtitle
@@ -258,12 +261,42 @@
 													detectedThemes[i]
 														.description
 												"
-												label="Theme description*"
+												label="Theme description"
 												outlined
-												:rules="[rules.required]"
 												prepend-icon="mdi-pencil-outline"
 												@change="forceUpdate++"
 											></v-text-field>
+											<v-text-field
+												v-if="!theme.info.Author"
+												v-model="
+													detectedThemes[i].authorname
+												"
+												label="Author Name*"
+												outlined
+												:rules="[rules.required]"
+												prepend-icon="mdi-account-outline"
+												@change="forceUpdate++"
+											></v-text-field>
+											<v-combobox
+												v-model="
+													detectedThemes[i].categories
+												"
+												:items="
+													categories &&
+													categories.length > 0
+														? categories
+														: []
+												"
+												outlined
+												allow-overflow
+												chips
+												small-chips
+												deletable-chips
+												:rules="[rules.category_length]"
+												prepend-icon="mdi-shape-outline"
+												label="Categories*"
+												multiple
+											></v-combobox>
 											<!-- <v-text-field
 												v-model="
 													detectedThemes[i].color
@@ -317,12 +350,13 @@
 					</v-col>
 				</v-row>
 			</div>
-			<div
+			<!-- <div
 				v-if="
 					detectedThemes &&
 						uploadedScreenshots.length === detectedThemes.length
 				"
-			>
+			> -->
+			<div v-if="detectedThemes">
 				<h2 class="box_text">
 					3. Submission Details
 				</h2>
@@ -410,6 +444,24 @@
 							prepend-icon="mdi-pencil-outline"
 							@change="forceUpdate++"
 						></v-text-field>
+						<v-combobox
+							v-if="detectedThemes.length > 1"
+							v-model="packCategories"
+							:items="
+								categories && categories.length > 0
+									? categories
+									: []
+							"
+							outlined
+							allow-overflow
+							chips
+							small-chips
+							deletable-chips
+							:rules="[rules.category_length]"
+							prepend-icon="mdi-shape-outline"
+							label="Shared categories*"
+							multiple
+						></v-combobox>
 						<!-- <v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.color"
@@ -460,9 +512,17 @@
 
 <script>
 import Vue from 'vue'
+import { allCategories } from '@/graphql/Filtering.gql'
 import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
+	apollo: {
+		categories: {
+			query: allCategories,
+			prefetch: false,
+			skip: true
+		}
+	},
 	data() {
 		return {
 			forceUpdate: 0,
@@ -535,6 +595,10 @@ export default Vue.extend({
 			submitValid: false,
 			rules: {
 				required: (value) => !!value || 'Required',
+				category_length: (values) =>
+					!values ||
+					!values.some((v) => v.length <= 2) ||
+					'A category must be longer than 2 characters',
 				hex: (value) =>
 					!value ||
 					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
@@ -546,6 +610,7 @@ export default Vue.extend({
 						? true
 						: 'Invalid Discord Username#tag')
 			},
+			packCategories: [],
 			submitDetails: {
 				name: null,
 				author: {
@@ -556,6 +621,13 @@ export default Vue.extend({
 				color: null,
 				version: null
 			}
+		}
+	},
+	watch: {
+		packCategories() {
+			this.detectedThemes.forEach((t) => {
+				t.categories = this.packCategories
+			})
 		}
 	},
 	methods: {
@@ -599,6 +671,9 @@ export default Vue.extend({
 						this.loading.uploadSingleOrZip = false
 
 						this.detectedThemes = data.uploadSingleOrZip
+
+						this.$apollo.queries.categories.skip = false
+						this.$apollo.queries.categories.refetch()
 					})
 					.catch((error) => {
 						console.log(error)
@@ -656,6 +731,7 @@ export default Vue.extend({
 						color: t.color,
 						description: t.description,
 						version: t.version,
+						categories: t.categories,
 						nsfw: t.nsfw
 					}
 				})
@@ -732,5 +808,11 @@ export default Vue.extend({
 .screenshot_upload .v-input__append-inner,
 .screenshot_upload .v-input__prepend-outer {
 	display: none;
+}
+
+.v-autocomplete__content.v-menu__content {
+	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 </style>
