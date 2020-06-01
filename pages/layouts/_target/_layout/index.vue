@@ -211,6 +211,24 @@ export default Vue.extend({
 			commonlayoutDialog: false
 		}
 	},
+	computed: {
+		backgroundStyle() {
+			if (this.$store.state.background)
+				return `background-image: url(${this.$store.state.background});`
+			else if (this.$route.params.target === 'playerselect') {
+				return `background-image: url(/images/blurredhome.jpg);`
+			} else if (this.layout.details.color) {
+				return `background: ${this.layout.details.color};`
+			} else {
+				return `background: #e2e2e2;`
+			}
+		},
+		commonlayoutObject() {
+			if (this.layout.commonlayout) {
+				return JSON.parse(this.layout.commonlayout)
+			} else return null
+		}
+	},
 	apollo: {
 		layout: {
 			query: layout,

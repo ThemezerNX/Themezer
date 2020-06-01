@@ -174,7 +174,7 @@
 																"
 																full-width
 																height="100%"
-																label="Upload Screenshot (.jpg)"
+																label="Upload Screenshot* (.jpg)"
 																class="screenshot_upload"
 																filled
 																color="black"
@@ -217,7 +217,7 @@
 												<a
 													exact
 													:href="
-														`/layouts/${theme.layout.url}`
+														`/layouts/${theme.layout.webtarget}/${theme.layout.details.name}`
 													"
 													target="_blank"
 												>
@@ -238,8 +238,9 @@
 											</v-list-item-subtitle>
 											<v-list-item-subtitle v-else>
 												The layout was not found in the
-												database. Consider uploading it
-												to the GitHub repository.
+												database. Please read the
+												information at the top of this
+												page.
 											</v-list-item-subtitle>
 											<v-list-item-subtitle
 												v-if="
@@ -257,13 +258,13 @@
 													detectedThemes[i]
 														.description
 												"
-												label="Theme description"
+												label="Theme description*"
 												outlined
 												:rules="[rules.required]"
 												prepend-icon="mdi-pencil-outline"
 												@change="forceUpdate++"
 											></v-text-field>
-											<v-text-field
+											<!-- <v-text-field
 												v-model="
 													detectedThemes[i].color
 												"
@@ -281,7 +282,7 @@
 														  ].color = null)
 														: null
 												"
-											></v-text-field>
+											></v-text-field> -->
 											<v-text-field
 												v-if="
 													selectedSubmitType ===
@@ -290,7 +291,7 @@
 												v-model="
 													detectedThemes[i].version
 												"
-												label="Theme version"
+												label="Theme version*"
 												outlined
 												:rules="[rules.required]"
 												prepend-icon="mdi-update"
@@ -349,7 +350,7 @@
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.name"
-							label="Pack Name"
+							label="Pack Name*"
 							outlined
 							prepend-icon="mdi-pencil-outline"
 							:rules="[rules.required]"
@@ -368,7 +369,7 @@
 							>
 								<v-text-field
 									v-model="submitDetails.author.name"
-									label="Author Name"
+									label="Author Name*"
 									outlined
 									:rules="[rules.required]"
 									prepend-icon="mdi-account-outline"
@@ -403,13 +404,13 @@
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.description"
-							label="Pack Description"
+							label="Pack Description*"
 							outlined
 							:rules="[rules.required]"
 							prepend-icon="mdi-pencil-outline"
 							@change="forceUpdate++"
 						></v-text-field>
-						<v-text-field
+						<!-- <v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.color"
 							label="Pack card color on Themezer"
@@ -423,11 +424,11 @@
 									? (submitDetails.color = null)
 									: null
 							"
-						></v-text-field>
+						></v-text-field> -->
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.version"
-							label="Pack version"
+							label="Pack version*"
 							outlined
 							:rules="[rules.required]"
 							prepend-icon="mdi-update"
@@ -503,7 +504,7 @@ export default Vue.extend({
 				},
 				{
 					id: 'zip',
-					label: 'A .zip with .NXThemes (use this for packs)'
+					label: 'A .zip with .NXThemes (max 25MB)'
 				},
 				{
 					id: 'files',
@@ -649,7 +650,7 @@ export default Vue.extend({
 					return {
 						info: t.info,
 						tmp: t.tmp,
-						layout_uuid: t.layout.uuid,
+						layout_uuid: t.layout ? t.layout.uuid : null,
 						used_pieces: t.used_pieces,
 						target: t.target,
 						color: t.color,

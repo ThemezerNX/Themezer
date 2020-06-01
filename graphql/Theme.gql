@@ -19,7 +19,7 @@ query theme($name: String!, $target: String!) {
                     name
                 }
             }
-            url
+            webtarget
         }
         pack {
             uuid

@@ -58,7 +58,12 @@
 				</div>
 				<div v-if="theme.layout" class="font-weight-light body-2">
 					<span class="font-weight-medium">Layout: </span>
-					<a :href="`/layouts/${theme.layout.url}`">
+					<a
+						class="font-weight-bold"
+						:href="
+							`/layouts/${theme.layout.webtarget}/${theme.layout.details.name}`
+						"
+					>
 						{{ theme.layout.details.name }}
 					</a>
 				</div>
@@ -113,12 +118,12 @@
 							<span>What is this?</span>
 						</v-tooltip>
 					</h3>
-					<div class="font-weight-thin subtitle-1">
+					<div class="subtitle-1">
 						This Theme is part of the the following Theme Pack:
 					</div>
 					<a
 						:href="theme.pack.url"
-						class="font-weight-thin subtitle-1"
+						class="subtitle-1 font-weight-bold"
 					>
 						{{ theme.pack.details.name }}
 					</a>
@@ -160,6 +165,16 @@ export default Vue.extend({
 	data() {
 		return {
 			packDialog: false
+		}
+	},
+	computed: {
+		backgroundStyle() {
+			return ''
+			// if (this.theme.details.color) {
+			// 	return `background: ${this.theme.details.color};`
+			// } else {
+			// 	return `background: #e2e2e2;`
+			// }
 		}
 	},
 	apollo: {

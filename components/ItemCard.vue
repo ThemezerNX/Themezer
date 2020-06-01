@@ -14,7 +14,11 @@
 				:src="imgSrc"
 				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
-				:style="`background-color: ${item.details.color};`"
+				:style="
+					type === 'layouts'
+						? `background-color: ${item.details.color};`
+						: ''
+				"
 				class="overlay_image"
 			/>
 

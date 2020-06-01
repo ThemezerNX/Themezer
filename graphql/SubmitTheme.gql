@@ -12,7 +12,7 @@ mutation uploadSingleOrZip($file: Upload!) {
 				name
 			}
 			has_commonlayout
-			url
+			webtarget
 		}
 		used_pieces {
 			name
