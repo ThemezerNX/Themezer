@@ -9,35 +9,33 @@ Vue.mixin({
 			const baseJsonParsed = JSON.parse(original)
 			for (const piece in array) usedPieces.push(array[piece].uuid)
 
-			const fArray = array
-			if (baseJsonParsed.Files)
-				while (fArray.length > 0) {
-					const shifted = fArray.shift()
-					baseJsonParsed.Files = patch(
-						baseJsonParsed.Files,
-						JSON.parse(shifted.json).Files,
-						[
-							'FileName',
-							'PaneName',
-							'PropName',
-							'GroupName',
-							'name',
-							'MaterialName',
-							'unknown'
-						]
-					)
-				}
+			const fArray = [].concat(array)
+			while (fArray.length > 0) {
+				const shifted = fArray.shift()
+				baseJsonParsed.Files = patch(
+					baseJsonParsed.Files || [],
+					JSON.parse(shifted.json).Files,
+					[
+						'FileName',
+						'PaneName',
+						'PropName',
+						'GroupName',
+						'name',
+						'MaterialName',
+						'unknown'
+					]
+				)
+			}
 
-			const aArray = array
-			if (baseJsonParsed.Anims)
-				while (aArray.length > 0) {
-					const shifted = aArray.shift()
-					baseJsonParsed.Anims = patch(
-						baseJsonParsed.Anims,
-						JSON.parse(shifted.json).Anims,
-						['FileName']
-					)
-				}
+			const aArray = [].concat(array)
+			while (aArray.length > 0) {
+				const shifted = aArray.shift()
+				baseJsonParsed.Anims = patch(
+					baseJsonParsed.Anims || [],
+					JSON.parse(shifted.json).Anims,
+					['FileName']
+				)
+			}
 
 			const ordered = {
 				PatchName: baseJsonParsed.PatchName,
