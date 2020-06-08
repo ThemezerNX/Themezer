@@ -676,7 +676,8 @@ export default Vue.extend({
 						this.$apollo.queries.categories.refetch()
 					})
 					.catch((error) => {
-						console.log(error)
+						// eslint-disable-next-line no-console
+						console.error(error)
 						const parsedError = JSON.parse(JSON.stringify(error))
 						if (
 							parsedError.graphQLErrors &&
@@ -764,7 +765,8 @@ export default Vue.extend({
 						this.snackbar = true
 					})
 					.catch((error) => {
-						console.log(error)
+						// eslint-disable-next-line no-console
+						console.error(error)
 						const parsedError = JSON.parse(JSON.stringify(error))
 						if (
 							parsedError.graphQLErrors &&

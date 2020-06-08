@@ -156,12 +156,14 @@
 <script>
 import Vue from 'vue'
 import { layout } from '@/graphql/Layout.gql'
+import urlParser from '~/layouts/mixins/urlParser'
 // import FloatingPreview from '@/components/FloatingPreview.vue'
 
 export default Vue.extend({
 	components: {
 		// FloatingPreview
 	},
+	mixins: [urlParser],
 	data() {
 		return {
 			data: [],
@@ -186,8 +188,13 @@ export default Vue.extend({
 			query: layout,
 			variables() {
 				return {
-					name: this.$route.params.layout,
+					id: this.id,
 					target: this.$route.params.target
+				}
+			},
+			result({ data }) {
+				if (data && data.theme) {
+					this.updateUrlString(this.id, data.layout.details.name)
 				}
 			},
 			prefetch: true

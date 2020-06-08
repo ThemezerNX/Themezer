@@ -1,10 +1,12 @@
 import Vue from 'vue'
+import urlParser from '~/layouts/mixins/urlParser'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
 	components: {
 		LoadingOverlay
 	},
+	mixins: [urlParser],
 	data: () => {
 		return {
 			landscape: false,
@@ -27,7 +29,7 @@ export default Vue.extend({
 				this.landscape = true
 			}
 		},
-		niceDate(unix) {
+		niceDate(unix: string) {
 			const monthNames = [
 				'January',
 				'February',

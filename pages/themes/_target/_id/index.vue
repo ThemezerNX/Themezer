@@ -157,11 +157,11 @@
 
 <script>
 import Vue from 'vue'
-import js from '@/layouts/details/SharedScript.js'
+import shared from '@/layouts/details/SharedScript'
 import { theme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({
-	mixins: [js],
+	mixins: [shared],
 	data() {
 		return {
 			packDialog: false
@@ -182,8 +182,13 @@ export default Vue.extend({
 			query: theme,
 			variables() {
 				return {
-					name: this.$route.params.theme,
+					id: this.id,
 					target: this.$route.params.target
+				}
+			},
+			result({ data }) {
+				if (data && data.theme) {
+					this.updateUrlString(this.id, data.theme.details.name)
 				}
 			},
 			// fetchPolicy: 'no-cache',

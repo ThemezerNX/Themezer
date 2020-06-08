@@ -1,6 +1,7 @@
-query layout($name: String!, $target: String!) {
-	layout(name: $name, target: $target) {
+query layout($id: Int!, $target: String!) {
+	layout(id: $id, target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {
@@ -28,9 +29,10 @@ query layout($name: String!, $target: String!) {
 	}
 }
 
-query layoutDetails($name: String!, $target: String!) {
-	layout(name: $name, target: $target) {
+query layoutDetails($id: Int!, $target: String!) {
+	layout(id: $id, target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {
@@ -51,6 +53,7 @@ query layoutDetails($name: String!, $target: String!) {
 query layoutsList($target: String!) {
 	layoutsList(target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {

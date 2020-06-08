@@ -1,6 +1,7 @@
-query theme($name: String!, $target: String!) {
-	theme(name: $name, target: $target) {
+query theme($id: Int!, $target: String!) {
+	theme(id: $id, target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {
@@ -48,9 +49,10 @@ query theme($name: String!, $target: String!) {
 	}
 }
 
-query themeDetails($name: String!, $target: String!) {
-	themeDetails(name: $name, target: $target) {
+query themeDetails($id: Int!, $target: String!) {
+	themeDetails(id: $id, target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {
@@ -77,6 +79,7 @@ query themeDetails($name: String!, $target: String!) {
 query themesList($target: String!) {
 	themesList(target: $target) {
 		uuid
+		id
 		details {
 			name
 			author {

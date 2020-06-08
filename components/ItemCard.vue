@@ -6,7 +6,12 @@
 			class="ma-auto card"
 			router
 			exact
-			:to="`${$route.params.target}/${item.details.name}`"
+			:to="
+				`${$route.params.target}/${createUrlString(
+					item.id,
+					item.details.name
+				)}`
+			"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
 			<v-img
@@ -39,8 +44,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import urlParser from '@/layouts/mixins/urlParser'
 
 export default Vue.extend({
+	mixins: [urlParser],
 	props: {
 		item: {
 			type: Object,

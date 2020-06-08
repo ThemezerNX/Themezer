@@ -193,7 +193,7 @@
 
 <script>
 import Vue from 'vue'
-import js from '@/layouts/details/SharedScript.js'
+import shared from '@/layouts/details/SharedScript'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import { layout } from '@/graphql/Layout.gql'
 
@@ -201,7 +201,7 @@ export default Vue.extend({
 	components: {
 		BackgroundsSlideGroup
 	},
-	mixins: [js],
+	mixins: [shared],
 	data() {
 		return {
 			commonlayoutDialog: false
@@ -230,8 +230,13 @@ export default Vue.extend({
 			query: layout,
 			variables() {
 				return {
-					name: this.$route.params.layout,
+					id: this.id,
 					target: this.$route.params.target
+				}
+			},
+			result({ data }) {
+				if (data && data.theme) {
+					this.updateUrlString(this.id, data.layout.details.name)
 				}
 			},
 			// fetchPolicy: 'no-cache',
