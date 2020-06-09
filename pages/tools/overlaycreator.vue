@@ -232,6 +232,16 @@ export default Vue.extend({
 					this.loadingUploadScreenshots = false
 				})
 		}
+	},
+	head: {
+		title: 'Overlay Creator | Tools',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'Create a transparent overlay for your layout and customizations.'
+			}
+		]
 	}
 })
 </script>

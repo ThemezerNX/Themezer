@@ -27,3 +27,20 @@
 		</v-flex>
 	</div>
 </template>
+
+<script>
+import Vue from 'vue'
+
+export default Vue.extend({
+	head: {
+		title: 'Layout | Submit',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'You can submit layouts to the Themezer Layouts GitHub repository.'
+			}
+		]
+	}
+})
+</script>

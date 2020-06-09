@@ -155,6 +155,7 @@
 
 <script>
 import Vue from 'vue'
+import targetParser from '@/layouts/mixins/targetParser'
 import urlParser from '~/layouts/mixins/urlParser'
 import { layout } from '@/graphql/Layout.gql'
 
@@ -164,7 +165,7 @@ export default Vue.extend({
 	components: {
 		// FloatingPreview
 	},
-	mixins: [urlParser],
+	mixins: [urlParser, targetParser],
 	data() {
 		return {
 			data: [],
@@ -248,6 +249,25 @@ export default Vue.extend({
 				'application/json',
 				this.layout.details.name
 			)
+		}
+	},
+	head() {
+		return {
+			title:
+				this.theme && this.theme.details
+					? `Customize | ${this.theme.details.name} | ${this.targetName} | Themes`
+					: null,
+			meta: [
+				{
+					name: 'description',
+					content:
+						this.theme &&
+						this.theme.details &&
+						this.theme.details.description
+							? this.theme.details.description
+							: null
+				}
+			]
 		}
 	}
 })

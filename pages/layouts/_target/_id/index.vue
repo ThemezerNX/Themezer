@@ -194,6 +194,7 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
+import targetParser from '@/layouts/mixins/targetParser'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import { layout } from '@/graphql/Layout.gql'
 
@@ -201,7 +202,7 @@ export default Vue.extend({
 	components: {
 		BackgroundsSlideGroup
 	},
-	mixins: [shared],
+	mixins: [shared, targetParser],
 	data() {
 		return {
 			commonlayoutDialog: false
@@ -241,6 +242,25 @@ export default Vue.extend({
 			},
 			// fetchPolicy: 'no-cache',
 			prefetch: true
+		}
+	},
+	head() {
+		return {
+			title:
+				this.layout && this.layout.details
+					? `${this.layout.details.name} | ${this.targetName} | Layouts`
+					: null,
+			meta: [
+				{
+					name: 'description',
+					content:
+						this.layout &&
+						this.layout.details &&
+						this.layout.details.description
+							? this.layout.details.description
+							: null
+				}
+			]
 		}
 	}
 })

@@ -93,3 +93,11 @@ query themesList($target: String!) {
 		last_updated
 	}
 }
+
+mutation createNXTheme($target: String!) {
+	createNXTheme(target: $target) {
+		filename
+		data
+		mimetype
+	}
+}

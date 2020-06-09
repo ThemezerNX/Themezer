@@ -21,6 +21,7 @@
 import Vue from 'vue'
 import { layoutsList } from '@/graphql/Layout.gql'
 import ItemCard from '@/components/ItemCard.vue'
+import targetParser from '@/layouts/mixins/targetParser'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
@@ -28,6 +29,7 @@ export default Vue.extend({
 		ItemCard,
 		LoadingOverlay
 	},
+	mixins: [targetParser],
 	data() {
 		return {
 			type: 'layouts'
@@ -42,6 +44,11 @@ export default Vue.extend({
 				}
 			},
 			prefetch: true
+		}
+	},
+	head() {
+		return {
+			title: `${this.targetName} | Layouts`
 		}
 	}
 })

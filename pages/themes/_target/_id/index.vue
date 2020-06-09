@@ -68,8 +68,8 @@
 					</a>
 				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
-				<!-- <v-flex class="d-flex justify-center mt-3">
-					<v-btn
+				<v-flex class="d-flex justify-center mt-3">
+					<!-- <v-btn
 						v-if="theme.has_pieces"
 						class="mx-2"
 						color="primary"
@@ -77,26 +77,16 @@
 						append
 					>
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
-					</v-btn>
-					<v-btn
+					</v-btn> -->
+					<!-- <v-btn
 						class="mx-2"
 						color="secondary"
 						append
-						@click.prevent="
-							downloadFile(
-								mergeJson(
-									layout.uuid,
-									layout.baselayout,
-									[]
-								),
-								'application/json',
-								layout.details.name
-							)
-						"
+						@click.prevent="downloadTheme()"
 					>
 						Get <v-icon right>mdi-download-box-outline</v-icon>
-					</v-btn>
-				</v-flex> -->
+					</v-btn> -->
+				</v-flex>
 				<div v-if="theme.pack">
 					<v-divider class="my-3" />
 					<h3 style="position: relative;">
@@ -109,6 +99,7 @@
 									class="ml-1 pa-0 grey lighten-1"
 									width="14"
 									height="14"
+									:loading="loadingDownload"
 									v-on="on"
 									@click="packDialog = true"
 								>
@@ -158,13 +149,15 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import { theme } from '@/graphql/Theme.gql'
+import targetParser from '@/layouts/mixins/targetParser'
+import { theme, createNXTheme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({
-	mixins: [shared],
+	mixins: [shared, targetParser],
 	data() {
 		return {
-			packDialog: false
+			packDialog: false,
+			loadingDownload: false
 		}
 	},
 	computed: {
@@ -193,6 +186,46 @@ export default Vue.extend({
 			},
 			// fetchPolicy: 'no-cache',
 			prefetch: true
+		}
+	},
+	methods: {
+		downloadTheme() {
+			this.loadingDownload = true
+			this.$apollo
+				.mutate({
+					mutation: createNXTheme,
+					variables: {
+						uuid: this.theme.uuid
+					}
+				})
+				.then(({ data }) => {
+					this.loadingDownload = false
+
+					this.downloadFileB64(
+						data.createOverlaysNXTheme.file.data,
+						'application/nxtheme',
+						data.createOverlaysNXTheme.file.filename
+					)
+				})
+		}
+	},
+	head() {
+		return {
+			title:
+				this.theme && this.theme.details
+					? `${this.theme.details.name} | ${this.targetName} | Themes`
+					: null,
+			meta: [
+				{
+					name: 'description',
+					content:
+						this.theme &&
+						this.theme.details &&
+						this.theme.details.description
+							? this.theme.details.description
+							: null
+				}
+			]
 		}
 	}
 })

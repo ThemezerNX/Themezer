@@ -57,3 +57,19 @@
 		</v-flex>
 	</v-layout>
 </template>
+
+<script>
+import Vue from 'vue'
+
+export default Vue.extend({
+	head: {
+		title: 'Home',
+		meta: [
+			{
+				name: 'description',
+				content: 'A customization site for Nintendo Switch Themes.'
+			}
+		]
+	}
+})
+</script>

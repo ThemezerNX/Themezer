@@ -20,6 +20,7 @@
 <script>
 import Vue from 'vue'
 import { themesList } from '@/graphql/Theme.gql'
+import targetParser from '@/layouts/mixins/targetParser'
 import ItemCard from '@/components/ItemCard.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
@@ -28,6 +29,7 @@ export default Vue.extend({
 		ItemCard,
 		LoadingOverlay
 	},
+	mixins: [targetParser],
 	data() {
 		return {
 			type: 'themes'
@@ -42,6 +44,11 @@ export default Vue.extend({
 				}
 			},
 			prefetch: true
+		}
+	},
+	head() {
+		return {
+			title: `${this.targetName} | Themes`
 		}
 	}
 })

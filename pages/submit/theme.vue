@@ -787,6 +787,16 @@ export default Vue.extend({
 					})
 			}
 		}
+	},
+	head: {
+		title: 'Layout | Submit',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'You can submit themes here for listing on this website.'
+			}
+		]
 	}
 })
 </script>
