@@ -194,7 +194,7 @@ export default Vue.extend({
 					data.createOverlaysNXTheme.forEach((file) => {
 						this.downloadFileB64(
 							file.data,
-							'application/nxtheme',
+							file.mimetype,
 							file.filename
 						)
 					})
@@ -233,15 +233,33 @@ export default Vue.extend({
 				})
 		}
 	},
-	head: {
-		title: 'Overlay Creator | Tools',
-		meta: [
-			{
-				name: 'description',
-				content:
-					'Create a transparent overlay for your layout and customizations.'
-			}
-		]
+	head() {
+		const title = 'Overlay Creator | Tools'
+		const desc =
+			'Create a transparent overlay for your layout and customizations.'
+
+		return {
+			title,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
+				}
+			]
+		}
 	}
 })
 </script>

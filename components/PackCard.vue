@@ -6,26 +6,29 @@
 			class="ma-auto card"
 			router
 			exact
-			:to="
-				`${$route.params.target}/${createUrlString(
-					item.id,
-					item.details.name
-				)}`
-			"
+			:to="`/packs/${createUrlString(item.id, item.details.name)}`"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
-			<v-img
-				aspect-ratio="1.7778"
-				:src="imgSrc"
-				:lazy-src="'/logo_16-9-256.jpg'"
-				contain
-				:style="
-					type === 'layouts'
-						? `background-color: ${item.details.color};`
-						: ''
-				"
-				class="overlay_image"
-			/>
+			<v-carousel
+				continuous
+				hide-delimiter-background
+				:show-arrows="false"
+				:cycle="hover"
+				interval="2000"
+				height="auto"
+			>
+				<v-carousel-item
+					v-for="(theme, i) in item.themes"
+					:key="i"
+					height="auto"
+					aspect-ratio="1.7778"
+					:lazy-src="'/logo_16-9-256.jpg'"
+					:src="
+						`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+					"
+				>
+				</v-carousel-item>
+			</v-carousel>
 
 			<v-card-title v-text="item.details.name" />
 
@@ -53,20 +56,6 @@ export default Vue.extend({
 			type: Object,
 			required: true,
 			default: null
-		},
-		type: {
-			type: String,
-			required: true,
-			default: null
-		}
-	},
-	computed: {
-		imgSrc(): String {
-			if (this.type === 'layouts')
-				return `//api.themezer.ga/storage/layouts/${this.item.uuid}/overlay.png`
-			else if (this.type === 'themes')
-				return `//api.themezer.ga/storage/themes/${this.item.uuid}/screenshot.jpg`
-			else return ''
 		}
 	}
 })

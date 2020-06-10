@@ -7,12 +7,13 @@ mutation uploadSingleOrZip($file: Upload!) {
 		}
 		tmp
 		layout {
+			id
 			uuid
 			details {
 				name
 			}
 			has_commonlayout
-			webtarget
+			target
 		}
 		used_pieces {
 			name

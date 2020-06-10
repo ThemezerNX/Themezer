@@ -1,8 +1,8 @@
 <template>
-	<v-row v-if="layoutsList && layoutsList.length > 0">
+	<v-row v-if="packsList && packsList.length > 0">
 		<v-col
-			v-for="layout in layoutsList"
-			:key="layout.uuid"
+			v-for="pack in packsList"
+			:key="pack.uuid"
 			class=""
 			cols="12"
 			xs="12"
@@ -10,34 +10,29 @@
 			md="4"
 			xl="3"
 		>
-			<ItemCard :item="layout" :type="type" />
+			<PackCard :item="pack" />
 		</v-col>
 	</v-row>
 	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else>There are no layouts here yet :(</span>
+	<span v-else>There are no packs here yet :(</span>
 </template>
 
 <script>
 import Vue from 'vue'
-import { layoutsList } from '@/graphql/Layout.gql'
-import ItemCard from '@/components/ItemCard.vue'
+import { packsList } from '@/graphql/Pack.gql'
 import targetParser from '@/layouts/mixins/targetParser'
+import PackCard from '@/components/PackCard.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
 	components: {
-		ItemCard,
+		PackCard,
 		LoadingOverlay
 	},
 	mixins: [targetParser],
-	data() {
-		return {
-			type: 'layouts'
-		}
-	},
 	apollo: {
-		layoutsList: {
-			query: layoutsList,
+		packsList: {
+			query: packsList,
 			variables() {
 				return {
 					target: this.$route.params.target
@@ -47,8 +42,8 @@ export default Vue.extend({
 		}
 	},
 	head() {
-		const title = `${this.targetName} | Layouts`
-		const desc = 'All Layouts on Themezer'
+		const title = 'Packs'
+		const desc = 'All Packs on Themezer'
 
 		return {
 			title,

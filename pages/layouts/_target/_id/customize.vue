@@ -136,6 +136,7 @@
 					<v-btn
 						color="secondary"
 						append
+						:loading="loadingMerge"
 						@click.prevent="
 							combineLayouts(
 								layout.baselayout,
@@ -156,6 +157,7 @@
 <script>
 import Vue from 'vue'
 import { layout } from '@/graphql/Layout.gql'
+import { mergeJson } from '@/graphql/Merging.gql'
 import targetParser from '@/layouts/mixins/targetParser'
 import urlParser from '~/layouts/mixins/urlParser'
 // import FloatingPreview from '@/components/FloatingPreview.vue'
@@ -168,7 +170,8 @@ export default Vue.extend({
 	data() {
 		return {
 			data: [],
-			preview: null
+			preview: null,
+			loadingMerge: false
 		}
 	},
 	computed: {
@@ -217,14 +220,11 @@ export default Vue.extend({
 			} else this.preview = null
 		},
 		combineLayouts() {
-			const allModifications = []
+			const usedPieces = []
 
 			for (let i = 0; i < this.data.length; i++) {
 				if (this.data[i] === true) {
-					allModifications.push({
-						uuid: this.layout.pieces[i].values[0].uuid,
-						json: this.layout.pieces[i].values[0].json
-					})
+					usedPieces.push(this.layout.pieces[i].values[0].uuid)
 				} else if (
 					typeof this.data[i] === 'string' &&
 					this.data[i] !== 'Default'
@@ -232,39 +232,61 @@ export default Vue.extend({
 					const selected = this.layout.pieces[i].values.find(
 						(v) => v.value === this.data[i]
 					)
-					allModifications.push({
-						uuid: selected.uuid,
-						json: selected.json
-					})
+					usedPieces.push(selected.uuid)
 				}
 			}
 
-			this.downloadFile(
-				this.mergeJson(
-					this.layout.uuid,
-					this.layout.baselayout,
-					allModifications
-				),
-				'application/json',
-				this.layout.details.name
-			)
+			this.loadingMerge = true
+			this.$apollo
+				.mutate({
+					mutation: mergeJson,
+					variables: {
+						uuid: this.layout.uuid,
+						piece_uuids: usedPieces
+					}
+				})
+				.then(({ data }) => {
+					this.loadingMerge = false
+
+					this.downloadFile(
+						data.mergeJson,
+						'application/json',
+						this.layout.details.name
+					)
+				})
 		}
 	},
 	head() {
+		const title =
+			this.layout && this.layout.details
+				? `Customize | ${this.layout.details.name} | ${this.targetName} | Layouts`
+				: null
+		const desc =
+			this.layout &&
+			this.layout.details &&
+			this.layout.details.description
+				? this.layout.details.description
+				: null
+
 		return {
-			title:
-				this.layout && this.layout.details
-					? `Customize | ${this.layout.details.name} | ${this.targetName} | Layouts`
-					: null,
+			title,
 			meta: [
 				{
+					hid: 'description',
 					name: 'description',
-					content:
-						this.layout &&
-						this.layout.details &&
-						this.layout.details.description
-							? this.layout.details.description
-							: null
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
 				}
 			]
 		}

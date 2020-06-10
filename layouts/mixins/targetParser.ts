@@ -44,5 +44,35 @@ export default Vue.extend({
 					return null
 			}
 		}
+	},
+	methods: {
+		fileNameToWebName(s: string): string | null {
+			switch (s) {
+				case 'ResidentMenu.szs':
+				case 'ResidentMenu':
+					return 'homemenu'
+				case 'Entrance.szs':
+				case 'Entrance':
+					return 'lockscreen'
+				case 'MyPage.szs':
+				case 'MyPage':
+					return 'userpage'
+				case 'Flaunch.szs':
+				case 'Flaunch':
+					return 'allapps'
+				case 'Set.szs':
+				case 'Set':
+					return 'settings'
+				case 'Notification.szs':
+				case 'Notification':
+					return 'news'
+				case 'Psl.szs':
+				case 'Psl':
+					return 'playerselect'
+
+				default:
+					return null
+			}
+		}
 	}
 })

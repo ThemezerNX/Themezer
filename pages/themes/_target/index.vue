@@ -47,8 +47,30 @@ export default Vue.extend({
 		}
 	},
 	head() {
+		const title = `${this.targetName} | Themes`
+		const desc = 'All Themes on Themezer'
+
 		return {
-			title: `${this.targetName} | Themes`
+			title,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
+				}
+			]
 		}
 	}
 })

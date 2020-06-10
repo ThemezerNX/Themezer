@@ -34,7 +34,17 @@
 				<div class="font-weight-thin subtitle-1">
 					{{ theme.details.description }}
 				</div>
-
+				<div>
+					<v-chip
+						v-for="(category, i) in theme.categories"
+						:key="i"
+						class="ma-2"
+						pill
+						small
+					>
+						{{ category }}
+					</v-chip>
+				</div>
 				<v-divider class="my-3" />
 				<h3>
 					Details
@@ -61,11 +71,20 @@
 					<a
 						class="font-weight-bold"
 						:href="
-							`/layouts/${theme.layout.webtarget}/${theme.layout.details.name}`
+							`/layouts/${fileNameToWebName(
+								theme.layout.target
+							)}/${createUrlString(
+								theme.layout.id,
+								theme.layout.details.name
+							)}`
 						"
 					>
 						{{ theme.layout.details.name }}
 					</a>
+				</div>
+				<div class="font-weight-light body-2">
+					<span class="font-weight-medium">Downloads: </span>
+					{{ theme.dl_count }}
 				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
 				<v-flex class="d-flex justify-center mt-3">
@@ -78,14 +97,15 @@
 					>
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
 					</v-btn> -->
-					<!-- <v-btn
+					<v-btn
 						class="mx-2"
 						color="secondary"
 						append
+						:loading="loadingDownload"
 						@click.prevent="downloadTheme()"
 					>
 						Get <v-icon right>mdi-download-box-outline</v-icon>
-					</v-btn> -->
+					</v-btn>
 				</v-flex>
 				<div v-if="theme.pack">
 					<v-divider class="my-3" />
@@ -99,7 +119,6 @@
 									class="ml-1 pa-0 grey lighten-1"
 									width="14"
 									height="14"
-									:loading="loadingDownload"
 									v-on="on"
 									@click="packDialog = true"
 								>
@@ -113,7 +132,12 @@
 						This Theme is part of the the following Theme Pack:
 					</div>
 					<a
-						:href="theme.pack.url"
+						:href="
+							`/packs/${createUrlString(
+								theme.pack.id,
+								theme.pack.details.name
+							)}`
+						"
 						class="subtitle-1 font-weight-bold"
 					>
 						{{ theme.pack.details.name }}
@@ -150,10 +174,11 @@
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
 import targetParser from '@/layouts/mixins/targetParser'
-import { theme, createNXTheme } from '@/graphql/Theme.gql'
+import urlParser from '@/layouts/mixins/urlParser'
+import { theme, downloadTheme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({
-	mixins: [shared, targetParser],
+	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
 			packDialog: false,
@@ -191,39 +216,62 @@ export default Vue.extend({
 	methods: {
 		downloadTheme() {
 			this.loadingDownload = true
+			const usedPieces = []
+
+			if (this.theme.pieces) {
+				for (let i = 0; i < this.theme.pieces.length; i++) {
+					usedPieces.push(this.theme.pieces[i].value.uuid)
+				}
+			}
+
 			this.$apollo
 				.mutate({
-					mutation: createNXTheme,
+					mutation: downloadTheme,
 					variables: {
-						uuid: this.theme.uuid
+						uuid: this.theme.uuid,
+						piece_uuids: usedPieces
 					}
 				})
 				.then(({ data }) => {
 					this.loadingDownload = false
 
 					this.downloadFileB64(
-						data.createOverlaysNXTheme.file.data,
-						'application/nxtheme',
-						data.createOverlaysNXTheme.file.filename
+						data.downloadTheme.data,
+						data.downloadTheme.mimetype,
+						data.downloadTheme.filename
 					)
 				})
 		}
 	},
 	head() {
+		const title =
+			this.theme && this.theme.details
+				? `${this.theme.details.name} | ${this.targetName} | Themes`
+				: null
+		const desc =
+			this.theme && this.theme.details && this.theme.details.description
+				? this.theme.details.description
+				: null
+
 		return {
-			title:
-				this.theme && this.theme.details
-					? `${this.theme.details.name} | ${this.targetName} | Themes`
-					: null,
+			title,
 			meta: [
 				{
+					hid: 'description',
 					name: 'description',
-					content:
-						this.theme &&
-						this.theme.details &&
-						this.theme.details.description
-							? this.theme.details.description
-							: null
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
 				}
 			]
 		}

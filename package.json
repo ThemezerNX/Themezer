@@ -21,7 +21,6 @@
 		"@nuxtjs/pwa": "^3.0.0-0",
 		"@nuxtjs/vuetify": "^1.0.0",
 		"@themezernx/layout-id-parser": "https://github.com/ThemezerNX/Layout-ID-Parser.git",
-		"@tromkom/aurora-strategic-json-merge-patch": "https://github.com/Migushthe2nd/aurora-strategic-json-merge-patch.git",
 		"@types/webpack-env": "^1.15.2",
 		"array-object-merge": "^1.2.1",
 		"core-js": "^2.6.5",

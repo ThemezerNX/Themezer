@@ -17,7 +17,7 @@ export default {
 	 ** Headers of the page
 	 */
 	head: {
-		titleTemplate: '%s - ' + 'Themezer',
+		titleTemplate: '%s | Themezer',
 		title: 'Themezer',
 		meta: [
 			{ charset: 'utf-8' },
@@ -52,7 +52,10 @@ export default {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: ['@/plugins/mergeJson', '@/plugins/downloadFile'],
+	plugins: [
+		// '@/plugins/mergeJson',
+		'@/plugins/downloadFile'
+	],
 	/*
 	 ** Nuxt.js dev-modules
 	 */

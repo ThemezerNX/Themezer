@@ -220,7 +220,13 @@
 												<a
 													exact
 													:href="
-														`/layouts/${theme.layout.webtarget}/${theme.layout.details.name}`
+														`/layouts/${fileNameToWebName(
+															theme.layout.target
+														)}/${createUrlString(
+															theme.layout.id,
+															theme.layout.details
+																.name
+														)}`
 													"
 													target="_blank"
 												>
@@ -231,8 +237,14 @@
 												</a>
 											</v-list-item-subtitle>
 											<v-list-item-subtitle
-												v-if="theme.layout"
+												v-if="
+													theme.layout &&
+														theme.used_pieces &&
+														theme.used_pieces
+															.length > 0
+												"
 											>
+												Options:
 												{{
 													optionsString(
 														theme.used_pieces
@@ -513,9 +525,12 @@
 <script>
 import Vue from 'vue'
 import { allCategories } from '@/graphql/Filtering.gql'
+import targetParser from '@/layouts/mixins/targetParser'
+import urlParser from '@/layouts/mixins/urlParser'
 import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
+	mixins: [targetParser, urlParser],
 	apollo: {
 		categories: {
 			query: allCategories,
@@ -565,12 +580,12 @@ export default Vue.extend({
 				{
 					id: 'zip',
 					label: 'A .zip with .NXThemes (max 25MB)'
-				},
-				{
-					id: 'files',
-					label: 'Separate files',
-					disabled: true
 				}
+				// {
+				// 	id: 'files',
+				// 	label: 'Separate files',
+				// 	disabled: true
+				// }
 			],
 			submitTypes: [
 				{
@@ -732,6 +747,7 @@ export default Vue.extend({
 						color: t.color,
 						description: t.description,
 						version: t.version,
+						authorname: t.authorname,
 						categories: t.categories,
 						nsfw: t.nsfw
 					}
@@ -788,15 +804,32 @@ export default Vue.extend({
 			}
 		}
 	},
-	head: {
-		title: 'Layout | Submit',
-		meta: [
-			{
-				name: 'description',
-				content:
-					'You can submit themes here for listing on this website.'
-			}
-		]
+	head() {
+		const title = 'Theme | Submit'
+		const desc = 'You can submit themes here for listing on this website.'
+
+		return {
+			title,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
+				}
+			]
+		}
 	}
 })
 </script>

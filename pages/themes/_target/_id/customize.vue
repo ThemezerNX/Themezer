@@ -252,20 +252,34 @@ export default Vue.extend({
 		}
 	},
 	head() {
+		const title =
+			this.theme && this.theme.details
+				? `Customize | ${this.theme.details.name} | ${this.targetName} | Themes`
+				: null
+		const desc =
+			this.theme && this.theme.details && this.theme.details.description
+				? this.theme.details.description
+				: null
+
 		return {
-			title:
-				this.theme && this.theme.details
-					? `Customize | ${this.theme.details.name} | ${this.targetName} | Themes`
-					: null,
+			title,
 			meta: [
 				{
+					hid: 'description',
 					name: 'description',
-					content:
-						this.theme &&
-						this.theme.details &&
-						this.theme.details.description
-							? this.theme.details.description
-							: null
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
 				}
 			]
 		}

@@ -62,6 +62,10 @@
 					<span class="font-weight-medium">Target File: </span>
 					{{ layout.target }}.szs
 				</div>
+				<div class="font-weight-light body-2">
+					<span class="font-weight-medium">Downloads: </span>
+					{{ layout.dl_count }}
+				</div>
 				<!-- <div style="position: absolute; bottom: 0;"> -->
 				<v-flex class="d-flex justify-center mt-3">
 					<v-btn
@@ -70,6 +74,7 @@
 						color="primary"
 						to="customize"
 						append
+						:loading="loadingMerge"
 					>
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
 					</v-btn>
@@ -77,13 +82,8 @@
 						class="mx-2"
 						color="secondary"
 						append
-						@click.prevent="
-							downloadFile(
-								mergeJson(layout.uuid, layout.baselayout, []),
-								'application/json',
-								layout.details.name
-							)
-						"
+						:loading="loadingMerge"
+						@click.prevent="download()"
 					>
 						Get <v-icon right>mdi-download-box-outline</v-icon>
 					</v-btn>
@@ -130,17 +130,8 @@
 							class="mx-2"
 							color="secondary"
 							append
-							@click.prevent="
-								downloadFile(
-									mergeJson(
-										layout.uuid,
-										layout.commonlayout,
-										[]
-									),
-									'application/json',
-									`${layout.details.name} - Common layout`
-								)
-							"
+							:loading="loadingMergeCommon"
+							@click.prevent="downloadCommon()"
 						>
 							Get <v-icon right>mdi-download-box-outline</v-icon>
 						</v-btn>
@@ -194,6 +185,7 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
+import { mergeJson } from '@/graphql/Merging.gql'
 import targetParser from '@/layouts/mixins/targetParser'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import { layout } from '@/graphql/Layout.gql'
@@ -205,7 +197,9 @@ export default Vue.extend({
 	mixins: [shared, targetParser],
 	data() {
 		return {
-			commonlayoutDialog: false
+			commonlayoutDialog: false,
+			loadingMerge: false,
+			loadingMergeCommon: false
 		}
 	},
 	computed: {
@@ -224,6 +218,48 @@ export default Vue.extend({
 			if (this.layout.commonlayout) {
 				return JSON.parse(this.layout.commonlayout)
 			} else return null
+		}
+	},
+	methods: {
+		download() {
+			this.loadingMerge = true
+			this.$apollo
+				.mutate({
+					mutation: mergeJson,
+					variables: {
+						uuid: this.layout.uuid,
+						piece_uuids: []
+					}
+				})
+				.then(({ data }) => {
+					this.loadingMerge = false
+
+					this.downloadFile(
+						data.mergeJson,
+						'application/json',
+						this.layout.details.name
+					)
+				})
+		},
+		downloadCommon() {
+			this.loadingMergeCommon = true
+			this.$apollo
+				.mutate({
+					mutation: mergeJson,
+					variables: {
+						uuid: this.layout.uuid,
+						common: true
+					}
+				})
+				.then(({ data }) => {
+					this.loadingMergeCommon = false
+
+					this.downloadFile(
+						data.mergeJson,
+						'application/json',
+						`${this.layout.details.name} - Common layout`
+					)
+				})
 		}
 	},
 	apollo: {
@@ -245,20 +281,36 @@ export default Vue.extend({
 		}
 	},
 	head() {
+		const title =
+			this.layout && this.layout.details
+				? `${this.layout.details.name} | ${this.targetName} | Layouts`
+				: null
+		const desc =
+			this.layout &&
+			this.layout.details &&
+			this.layout.details.description
+				? this.layout.details.description
+				: null
+
 		return {
-			title:
-				this.layout && this.layout.details
-					? `${this.layout.details.name} | ${this.targetName} | Layouts`
-					: null,
+			title,
 			meta: [
 				{
+					hid: 'description',
 					name: 'description',
-					content:
-						this.layout &&
-						this.layout.details &&
-						this.layout.details.description
-							? this.layout.details.description
-							: null
+					content: desc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: title
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: desc
 				}
 			]
 		}

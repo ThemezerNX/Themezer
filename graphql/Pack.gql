@@ -1,0 +1,144 @@
+query pack($id: Int!) {
+	pack(id: $id) {
+		uuid
+		id
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+		dl_count
+		themes {
+			uuid
+			id
+			details {
+				name
+				author {
+					name
+					discord_tag
+				}
+				description
+				color
+				version
+			}
+			layout {
+				uuid
+				id
+				details {
+					name
+					author {
+						name
+					}
+				}
+			}
+			pack {
+				uuid
+				id
+				details {
+					name
+					author {
+						name
+						discord_tag
+					}
+					description
+					color
+					version
+				}
+				last_updated
+			}
+			last_updated
+			pieces {
+				name
+				value {
+					value
+					uuid
+				}
+			}
+			target
+			categories
+			nsfw
+			dl_count
+		}
+	}
+}
+
+query packDetails($id: Int!) {
+	pack(id: $id) {
+		uuid
+		id
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+		dl_count
+		themes {
+			uuid
+			id
+			details {
+				name
+				author {
+					name
+					discord_tag
+				}
+				description
+				color
+				version
+			}
+			last_updated
+			pieces {
+				name
+				value {
+					value
+					uuid
+				}
+			}
+			target
+			categories
+			nsfw
+			dl_count
+		}
+	}
+}
+
+query packsList {
+	packsList {
+		uuid
+		id
+		details {
+			name
+			author {
+				name
+				discord_tag
+			}
+			description
+			color
+			version
+		}
+		last_updated
+		dl_count
+		themes {
+			uuid
+		}
+	}
+}
+
+mutation downloadPack($uuid: GUID!) {
+	downloadPack(uuid: $uuid) {
+		filename
+		data
+		mimetype
+	}
+}

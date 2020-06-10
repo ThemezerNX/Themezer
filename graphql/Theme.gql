@@ -14,16 +14,18 @@ query theme($id: Int!, $target: String!) {
 		}
         layout {
             uuid
+			id
             details {
                 name
                 author {
                     name
                 }
             }
-            webtarget
+			target
         }
         pack {
             uuid
+			id
             details {
                 name
                 author {
@@ -44,8 +46,10 @@ query theme($id: Int!, $target: String!) {
 				uuid
 			}
         }
+		target
         categories
 		nsfw
+		dl_count
 	}
 }
 
@@ -73,6 +77,7 @@ query themeDetails($id: Int!, $target: String!) {
         }
         categories
 		nsfw
+		dl_count
 	}
 }
 
@@ -91,11 +96,12 @@ query themesList($target: String!) {
 			version
 		}
 		last_updated
+		dl_count
 	}
 }
 
-mutation createNXTheme($target: String!) {
-	createNXTheme(target: $target) {
+mutation downloadTheme($uuid: GUID!, $piece_uuids: [GUID!]) {
+	downloadTheme(uuid: $uuid, piece_uuids: $piece_uuids) {
 		filename
 		data
 		mimetype

@@ -1,5 +1,8 @@
 <template>
 	<v-sheet class="mx-auto" style="background: unset;">
+		<h2 class="px-2">
+			Try these backgrounds
+		</h2>
 		<v-slide-group
 			v-model="activeBackground"
 			:class="$vuetify.breakpoint.smAndDown ? 'smAndDown' : ''"
@@ -18,15 +21,15 @@
 							class="card"
 							:class="
 								`
-							${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
-							${
-								i === backgrounds.length - 1
-									? 'me-0'
-									: $vuetify.breakpoint.smAndDown
-									? 'me-1'
-									: 'me-2'
-							}
-							${hover ? 'hover' : ''}
+								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
+								${
+									i === backgrounds.length - 1
+										? 'me-0'
+										: $vuetify.breakpoint.smAndDown
+										? 'me-1'
+										: 'me-2'
+								}
+								${hover ? 'hover' : ''}
 							`
 							"
 							:width="
