@@ -10,6 +10,7 @@
 			>
 				<v-carousel
 					continuous
+					:hide-delimiters="$vuetify.breakpoint.smAndDown"
 					hide-delimiter-background
 					cycle
 					height="auto"

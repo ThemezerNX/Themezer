@@ -11,6 +11,7 @@
 		>
 			<v-carousel
 				continuous
+				hide-delimiters
 				hide-delimiter-background
 				:show-arrows="false"
 				:cycle="hover"
