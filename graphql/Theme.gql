@@ -89,13 +89,14 @@ query themesList($target: String!) {
 			name
 			author {
 				name
-				discord_tag
 			}
 			description
 			color
 			version
 		}
 		last_updated
+		categories
+		nsfw
 		dl_count
 	}
 }

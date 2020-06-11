@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import urlParser from '@/layouts/mixins/urlParser'
+import urlParser from '@/components/mixins/urlParser'
 
 export default Vue.extend({
 	mixins: [urlParser],

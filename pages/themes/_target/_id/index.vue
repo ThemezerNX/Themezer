@@ -173,8 +173,8 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '@/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '@/components/mixins/urlParser'
 import { theme, downloadTheme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({

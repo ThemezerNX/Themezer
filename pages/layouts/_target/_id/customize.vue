@@ -158,8 +158,8 @@
 import Vue from 'vue'
 import { layout } from '@/graphql/Layout.gql'
 import { mergeJson } from '@/graphql/Merging.gql'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '~/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '~/components/mixins/urlParser'
 // import FloatingPreview from '@/components/FloatingPreview.vue'
 
 export default Vue.extend({

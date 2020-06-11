@@ -155,8 +155,8 @@
 
 <script>
 import Vue from 'vue'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '~/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '~/components/mixins/urlParser'
 import { layout } from '@/graphql/Layout.gql'
 
 // import FloatingPreview from '@/components/FloatingPreview.vue'

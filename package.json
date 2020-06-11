@@ -26,6 +26,7 @@
 		"core-js": "^2.6.5",
 		"nuxt": "^2.0.0",
 		"nuxt-rfg-icon": "^0.6.4",
+		"vuejs-paginate": "^2.1.0",
 		"vuelidate": "^0.7.5"
 	},
 	"devDependencies": {

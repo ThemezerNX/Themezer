@@ -186,7 +186,7 @@
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
 import { mergeJson } from '@/graphql/Merging.gql'
-import targetParser from '@/layouts/mixins/targetParser'
+import targetParser from '@/components/mixins/targetParser'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import { layout } from '@/graphql/Layout.gql'
 

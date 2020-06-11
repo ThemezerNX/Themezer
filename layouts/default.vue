@@ -237,6 +237,6 @@ h2.box_text {
 }
 
 .content {
-	background: linear-gradient(135deg, #b40a86, #0ab379);
+	// background: linear-gradient(135deg, #b40a86, #0ab379);
 }
 </style>

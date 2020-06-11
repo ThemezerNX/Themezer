@@ -1,0 +1,44 @@
+a {
+	outline: 0;
+	border: none;
+}
+
+.pagination-container {
+	user-select: none;
+
+	margin-top: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.hidden {
+		display: none !important;
+	}
+
+	.button--pagination {
+		transition: 0.15s background-color ease-out;
+
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+
+		min-width: 50px;
+		min-height: 50px;
+
+		color: #fff;
+		background-color: darken($themezer-aqua, 15);
+		font-weight: 700;
+		font-size: 20px;
+
+		border-radius: 4px;
+		margin: 0 5px;
+
+		&.active {
+			background-color: darken($themezer-magenta, 4);
+		}
+
+		&:hover {
+			background-color: darken($themezer-average, 2);
+		}
+	}
+}

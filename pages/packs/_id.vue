@@ -119,8 +119,8 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '@/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '@/components/mixins/urlParser'
 import { pack, downloadPack } from '@/graphql/Pack.gql'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
 

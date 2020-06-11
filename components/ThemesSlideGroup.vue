@@ -68,8 +68,8 @@
 
 <script>
 import Vue from 'vue'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '@/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '@/components/mixins/urlParser'
 
 export default Vue.extend({
 	mixins: [targetParser, urlParser],

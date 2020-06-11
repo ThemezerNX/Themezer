@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import urlParser from '~/layouts/mixins/urlParser'
+import urlParser from '~/components/mixins/urlParser'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({

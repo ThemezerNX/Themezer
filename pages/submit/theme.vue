@@ -344,7 +344,7 @@
 											></v-text-field>
 											<v-checkbox
 												v-model="detectedThemes[i].nsfw"
-												:label="`NSFW`"
+												label="NSFW"
 												class="mt-0"
 											/>
 										</v-col>
@@ -525,8 +525,8 @@
 <script>
 import Vue from 'vue'
 import { allCategories } from '@/graphql/Filtering.gql'
-import targetParser from '@/layouts/mixins/targetParser'
-import urlParser from '@/layouts/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
+import urlParser from '@/components/mixins/urlParser'
 import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
