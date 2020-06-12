@@ -199,7 +199,7 @@ export default Vue.extend({
 	head() {
 		const title =
 			this.pack && this.pack.details
-				? `${this.pack.details.name} | ${this.targetName} | Packs`
+				? `${this.pack.details.name} | Packs`
 				: null
 		const desc =
 			this.pack && this.pack.details && this.pack.details.description

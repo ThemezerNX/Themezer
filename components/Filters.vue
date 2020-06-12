@@ -39,10 +39,7 @@
 					}"
 					:to="{
 						query: {
-							page:
-								currentSort === option.id
-									? $route.query.page
-									: undefined,
+							page: '1',
 							query: currentSearch,
 							sort: option.id,
 							order: nextSortOrder(option.id)
@@ -177,6 +174,16 @@ export default Vue.extend({
 	watch: {
 		filteredItems() {
 			this.updateParentFiltered()
+		},
+		query(n) {
+			this.$router.push({
+				query: {
+					page: '1',
+					query: n === '' ? undefined : n,
+					sort: this.$route.query.sort,
+					order: this.$route.query.order
+				}
+			})
 		}
 	},
 	mounted() {

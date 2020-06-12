@@ -107,7 +107,8 @@
 				<v-row v-else class="ma-0">
 					<v-col cols="12" class="pa-2">
 						<div class="subtitle-1 box_text">
-							You must upload a screenshot (not the background
+							You must upload a screenshot or an image created
+							using an overlay.png (NOT simply the background
 							image!) for every theme you upload. Do so by
 							clicking the placeholder image.
 						</div>
