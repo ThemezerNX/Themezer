@@ -62,19 +62,11 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	data() {
-		return {
-			metaTitle: 'Themezer Home',
-			metaDesc:
-				'A customization site for Nintendo Switch Themes and Layouts.'
-		}
-	},
 	head() {
-		const metaTitle = `${
-			this.theme.details.name
-		} | ${this.targetName()} | Themes`
-		const metaDesc = this.theme.details.description
-		const metaImg = `//api.themezer.ga/storage/themes/${this.theme.uuid}/screenshot.jpg`
+		const metaTitle = 'Themezer Home'
+		const metaDesc =
+			'A customization site for Nintendo Switch Themes and Layouts.'
+		const metaImg = null
 
 		return {
 			title: metaTitle,
