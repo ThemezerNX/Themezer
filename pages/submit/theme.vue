@@ -541,6 +541,8 @@ export default Vue.extend({
 	},
 	data() {
 		return {
+			metaTitle: 'Theme | Submit',
+			metaDesc: 'You can submit themes here for listing on this website.',
 			forceUpdate: 0,
 			snackbar: false,
 			error: null,
@@ -803,33 +805,6 @@ export default Vue.extend({
 						}, 8100)
 					})
 			}
-		}
-	},
-	head() {
-		const title = 'Theme | Submit'
-		const desc = 'You can submit themes here for listing on this website.'
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

@@ -63,6 +63,8 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
+			metaTitle: 'Packs',
+			metaDesc: 'All Packs on Themezer',
 			list: 'packsList',
 			unsupportedFilters: []
 		}
@@ -76,33 +78,6 @@ export default Vue.extend({
 				}
 			},
 			prefetch: true
-		}
-	},
-	head() {
-		const title = 'Packs'
-		const desc = 'All Packs on Themezer'
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

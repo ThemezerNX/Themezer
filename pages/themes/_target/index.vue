@@ -45,7 +45,7 @@
 	</v-row>
 </template>
 
-<script lang="js">
+<script>
 import Vue from 'vue'
 import { themesList } from '@/graphql/Theme.gql'
 import ItemCard from '@/components/ItemCard.vue'
@@ -63,6 +63,8 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
+			metaTitle: `${this.targetName} | Themes`,
+			metaDesc: 'All Themes on Themezer',
 			type: 'themes',
 			list: 'themesList',
 			unsupportedFilters: []
@@ -77,33 +79,6 @@ export default Vue.extend({
 				}
 			},
 			prefetch: true
-		}
-	},
-	head() {
-		const title = `${this.targetName} | Themes`
-		const desc = 'All Themes on Themezer'
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

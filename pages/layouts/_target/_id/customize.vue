@@ -169,6 +169,17 @@ export default Vue.extend({
 	mixins: [urlParser, targetParser],
 	data() {
 		return {
+			metaTitle:
+				this.layout && this.layout.details
+					? `${this.layout.details.name} | ${this.targetName} | Layouts`
+					: null,
+			metaDesc:
+				this.layout &&
+				this.layout.details &&
+				this.layout.details.description
+					? this.layout.details.description
+					: null,
+			metaImg: `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`,
 			data: [],
 			preview: null,
 			loadingMerge: false
@@ -197,7 +208,7 @@ export default Vue.extend({
 				}
 			},
 			result({ data }) {
-				if (data && data.theme) {
+				if (data && data.layout) {
 					this.updateUrlString(this.id, data.layout.details.name)
 				}
 			},
@@ -254,41 +265,6 @@ export default Vue.extend({
 						this.layout.details.name
 					)
 				})
-		}
-	},
-	head() {
-		const title =
-			this.layout && this.layout.details
-				? `Customize | ${this.layout.details.name} | ${this.targetName} | Layouts`
-				: null
-		const desc =
-			this.layout &&
-			this.layout.details &&
-			this.layout.details.description
-				? this.layout.details.description
-				: null
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

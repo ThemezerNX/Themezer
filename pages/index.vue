@@ -62,31 +62,10 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	head() {
-		const title = 'Home'
-		const desc = 'A customization site for Nintendo Switch Themes.'
-
+	data() {
 		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
+			metaTitle: 'Themezer Home',
+			metaDesc: 'A customization site for Nintendo Switch Themes.'
 		}
 	}
 })

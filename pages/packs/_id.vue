@@ -131,6 +131,15 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
+			metaTitle:
+				this.pack && this.pack.details
+					? `${this.pack.details.name} | Packs`
+					: null,
+			metaDesc:
+				this.pack && this.pack.details && this.pack.details.description
+					? this.pack.details.description
+					: null,
+			metaImg: `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`,
 			packDialog: false,
 			loadingDownload: false
 		}
@@ -194,39 +203,6 @@ export default Vue.extend({
 						data.downloadPack.filename
 					)
 				})
-		}
-	},
-	head() {
-		const title =
-			this.pack && this.pack.details
-				? `${this.pack.details.name} | Packs`
-				: null
-		const desc =
-			this.pack && this.pack.details && this.pack.details.description
-				? this.pack.details.description
-				: null
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

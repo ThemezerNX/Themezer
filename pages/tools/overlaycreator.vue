@@ -160,6 +160,9 @@ import {
 export default Vue.extend({
 	data() {
 		return {
+			metaTitle: 'Overlay Creator | Tools',
+			metaDesc:
+				'Create a transparent overlay for your layout and customizations.',
 			layoutJson: null,
 			loadingUploadLayout: false,
 			blackImg: null,
@@ -231,34 +234,6 @@ export default Vue.extend({
 					this.resultImage = data.createOverlay
 					this.loadingUploadScreenshots = false
 				})
-		}
-	},
-	head() {
-		const title = 'Overlay Creator | Tools'
-		const desc =
-			'Create a transparent overlay for your layout and customizations.'
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

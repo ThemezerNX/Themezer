@@ -197,6 +197,17 @@ export default Vue.extend({
 	mixins: [shared, targetParser],
 	data() {
 		return {
+			metaTitle:
+				this.layout && this.layout.details
+					? `${this.layout.details.name} | ${this.targetName} | Layouts`
+					: null,
+			metaDesc:
+				this.layout &&
+				this.layout.details &&
+				this.layout.details.description
+					? this.layout.details.description
+					: null,
+			metaImg: `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`,
 			commonlayoutDialog: false,
 			loadingMerge: false,
 			loadingMergeCommon: false
@@ -278,41 +289,6 @@ export default Vue.extend({
 			},
 			// fetchPolicy: 'no-cache',
 			prefetch: true
-		}
-	},
-	head() {
-		const title =
-			this.layout && this.layout.details
-				? `${this.layout.details.name} | ${this.targetName} | Layouts`
-				: null
-		const desc =
-			this.layout &&
-			this.layout.details &&
-			this.layout.details.description
-				? this.layout.details.description
-				: null
-
-		return {
-			title,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: desc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: title
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: desc
-				}
-			]
 		}
 	}
 })

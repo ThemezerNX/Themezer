@@ -55,10 +55,17 @@ export default {
 	plugins: [
 		// '@/plugins/mergeJson',
 		{
+			src: '@/plugins/meta',
+			mode: 'client'
+		},
+		{
 			src: '@/plugins/pagination',
 			mode: 'client'
 		},
-		'@/plugins/downloadFile'
+		{
+			src: '@/plugins/downloadFile',
+			mode: 'client'
+		}
 	],
 	/*
 	 ** Nuxt.js dev-modules
