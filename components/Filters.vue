@@ -13,7 +13,7 @@
 			<v-card-actions>
 				<v-text-field
 					v-model="query"
-					label="Query"
+					label="Search in everything"
 					dense
 					single-line
 					outlined
@@ -70,7 +70,7 @@
 			</v-card-actions>
 		</div>
 
-		<div class="group">
+		<div v-if="!unsupportedFilters.includes('nsfw')" class="group">
 			<v-card-title class="title">
 				Filters
 			</v-card-title>
@@ -92,6 +92,13 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+	props: {
+		unsupportedFilters: {
+			type: Array,
+			required: true,
+			default: null
+		}
+	},
 	data() {
 		return {
 			sortOptions: [
@@ -135,36 +142,40 @@ export default Vue.extend({
 			if (!this.filterCooldownActive) {
 				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
 				this.filterCooldownActive = true
-				;(this.$parent as any).filterLoading = true
+				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+				this.$parent.$data.filterLoading = true
 
-				items = (this.$parent as any).themesList
+				items = this.$parent.$data[this.$parent.$data.list]
 
 				if (items) {
 					items = items
 						.filter((item: any): boolean => {
-							if (this.query) {
+							if (
+								!this.unsupportedFilters.includes('search') &&
+								this.query
+							) {
 								return this.containsQuery(item)
 							} else return true
 						})
-						.filter((item: any): boolean =>
-							this.nsfw ? true : !item.nsfw
-						)
+						.filter((item: any): boolean => {
+							if (!this.unsupportedFilters.includes('nswf')) {
+								return this.nsfw ? true : !item.nsfw
+							} else return true
+						})
 						.sort((a: any, b: any) => {
 							const sortOption = this.sortOptions.find(
 								(o) => o.id === this.currentSort
 							)
-							if (sortOption)
-								return a[sortOption.key] - b[sortOption.key]
+							if (sortOption) {
+								if (this.currentSortOrder === 'asc') {
+									return a[sortOption.key] - b[sortOption.key]
+								} else if (this.currentSortOrder === 'desc') {
+									return b[sortOption.key] - a[sortOption.key]
+								}
+							}
 						})
-
-					if (this.currentSortOrder === 'desc') {
-						items = items.reverse()
-					}
 				}
-				// eslint-disable-next-line vue/no-async-in-computed-properties
-				setTimeout(() => {
-					this.filterCooldownActive = false
-				}, 200)
+				this.setTimeout()
 				;(this.$parent as any).filterLoading = false
 			}
 
@@ -176,20 +187,26 @@ export default Vue.extend({
 			this.updateParentFiltered()
 		},
 		query(n) {
+			const query = Object.assign({}, this.$route.query)
+			query.page = '1'
+			if (n === '') delete query.query
+			else query.query = n
+
 			this.$router.push({
-				query: {
-					page: '1',
-					query: n === '' ? undefined : n,
-					sort: this.$route.query.sort,
-					order: this.$route.query.order
-				}
+				query
 			})
 		}
 	},
 	mounted() {
+		this.$data.query = this.$route.query.query
 		this.updateParentFiltered()
 	},
 	methods: {
+		setTimeout() {
+			setTimeout(() => {
+				this.filterCooldownActive = false
+			}, 500)
+		},
 		containsQuery(item: any) {
 			const parsedQuery =
 				this.query.toLowerCase().match(/['"][^"]*['"]|\S+/gm) || []
@@ -198,7 +215,7 @@ export default Vue.extend({
 				item.details.description,
 				item.details.author.name,
 				item.details.author.discord_tag,
-				item.categories.join(' ')
+				Array.isArray(item.categories) ? item.categories.join(' ') : ''
 			].join(' ')
 
 			const found = parsedQuery.filter((w) =>
