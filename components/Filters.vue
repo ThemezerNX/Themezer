@@ -70,12 +70,12 @@
 			</v-card-actions>
 		</div>
 
-		<div v-if="!unsupportedFilters.includes('nsfw')" class="group">
+		<div v-if="!unsupportedFilters.includes('filters')" class="group">
 			<v-card-title class="title">
 				Filters
 			</v-card-title>
 
-			<v-card-actions>
+			<v-card-actions v-if="!unsupportedFilters.includes('nsfw')">
 				<v-checkbox
 					v-model="nsfw"
 					class="ma-0"
@@ -198,7 +198,7 @@ export default Vue.extend({
 		}
 	},
 	mounted() {
-		this.$data.query = this.$route.query.query
+		this.$data.query = this.$route.query.query || ''
 		this.updateParentFiltered()
 	},
 	methods: {
