@@ -68,6 +68,42 @@ export default Vue.extend({
 			metaDesc:
 				'A customization site for Nintendo Switch Themes and Layouts.'
 		}
+	},
+	head() {
+		const metaTitle = `${
+			this.theme.details.name
+		} | ${this.targetName()} | Themes`
+		const metaDesc = this.theme.details.description
+		const metaImg = `//api.themezer.ga/storage/themes/${this.theme.uuid}/screenshot.jpg`
+
+		return {
+			title: metaTitle,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: metaTitle
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:image',
+					name: 'og:image',
+					property: 'og:image',
+					content: metaImg
+				}
+			]
+		}
 	}
 })
 </script>

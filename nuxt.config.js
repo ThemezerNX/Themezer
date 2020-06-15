@@ -54,10 +54,10 @@ export default {
 	 */
 	plugins: [
 		// '@/plugins/mergeJson',
-		{
-			src: '@/plugins/meta',
-			mode: 'client'
-		},
+		// {
+		// 	src: '@/plugins/meta',
+		// 	mode: 'client'
+		// },
 		{
 			src: '@/plugins/pagination',
 			mode: 'client'

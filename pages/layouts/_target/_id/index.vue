@@ -197,9 +197,6 @@ export default Vue.extend({
 	mixins: [shared, targetParser],
 	data() {
 		return {
-			metaTitle: null,
-			metaDesc: null,
-			metaImg: null,
 			commonlayoutDialog: false,
 			loadingMerge: false,
 			loadingMergeCommon: false
@@ -277,18 +274,46 @@ export default Vue.extend({
 			result({ data }) {
 				if (data && data.layout) {
 					this.updateUrlString(this.id, data.layout.details.name)
-
-					this.metaTitle = `${
-						this.layout.details.name
-					} | ${this.targetName()} | Layouts`
-
-					this.metaDesc = this.layout.details.description
-
-					this.metaImg = `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`
 				}
 			},
 			// fetchPolicy: 'no-cache',
 			prefetch: true
+		}
+	},
+	head() {
+		const metaTitle = `${
+			this.layout.details.name
+		} | ${this.targetName()} | Layouts`
+		const metaDesc = this.layout.details.description
+		const metaImg = `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`
+
+		return {
+			title: metaTitle,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: metaTitle
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:image',
+					name: 'og:image',
+					property: 'og:image',
+					content: metaImg
+				}
+			]
 		}
 	}
 })

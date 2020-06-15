@@ -67,24 +67,6 @@ export default Vue.extend({
 			unsupportedFilters: []
 		}
 	},
-	computed: {
-		metaTitle() {
-			if (this.filteredItems)
-				return `${this.filteredItems.length} ${
-					this.filteredItems.length === 1 ? 'result' : 'results'
-				} | Packs`
-			else return `Packs`
-		},
-		metaDesc() {
-			if (
-				this.packsList &&
-				this.filteredItems &&
-				this.filteredItems.length !== this.packsList.length
-			)
-				return 'Filtered Packs on Themezer'
-			else return 'All Packs on Themezer'
-		}
-	},
 	apollo: {
 		packsList: {
 			query: packsList,
@@ -94,6 +76,51 @@ export default Vue.extend({
 				}
 			},
 			prefetch: true
+		}
+	},
+	head() {
+		const metaTitle = this.filteredItems
+			? `${this.filteredItems.length} ${
+					this.filteredItems.length === 1 ? 'result' : 'results'
+			  } | Packs`
+			: `Packs`
+
+		const metaDesc =
+			this.packsList &&
+			this.filteredItems &&
+			this.filteredItems.length !== this.packsList.length
+				? 'Filtered Packs on Themezer'
+				: 'All Packs on Themezer'
+
+		const metaImg = null
+
+		return {
+			title: metaTitle,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: metaTitle
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:image',
+					name: 'og:image',
+					property: 'og:image',
+					content: metaImg
+				}
+			]
 		}
 	}
 })

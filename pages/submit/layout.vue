@@ -32,11 +32,39 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	data() {
+	head() {
+		const metaTitle = 'Layout | Submit'
+		const metaDesc =
+			'You can submit layouts to the Themezer Layouts GitHub repository.'
+		const metaImg = null
+
 		return {
-			metaTitle: 'Layout | Submit',
-			metaDesc:
-				'You can submit layouts to the Themezer Layouts GitHub repository.'
+			title: metaTitle,
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: metaTitle
+				},
+				{
+					hid: 'og:description',
+					name: 'og:description',
+					property: 'og:description',
+					content: metaDesc
+				},
+				{
+					hid: 'og:image',
+					name: 'og:image',
+					property: 'og:image',
+					content: metaImg
+				}
+			]
 		}
 	}
 })
