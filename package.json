@@ -18,6 +18,7 @@
 		"@nuxtjs/apollo": "^4.0.0-rc19",
 		"@nuxtjs/axios": "^5.3.6",
 		"@nuxtjs/dotenv": "^1.4.0",
+		"@nuxtjs/gtm": "^2.3.0",
 		"@nuxtjs/pwa": "^3.0.0-0",
 		"@nuxtjs/vuetify": "^1.0.0",
 		"@themezernx/layout-id-parser": "https://github.com/ThemezerNX/Layout-ID-Parser.git",

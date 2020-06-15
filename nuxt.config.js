@@ -63,7 +63,7 @@ export default {
 	/*
 	 ** Nuxt.js dev-modules
 	 */
-	buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify'],
+	buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/gtm'],
 	/*
 	 ** Nuxt.js modules
 	 */
@@ -86,7 +86,9 @@ export default {
 	 ** See https://axios.nuxtjs.org/options
 	 */
 	axios: {},
-
+	gtm: {
+		id: 'GTM-T5ZBWPZ'
+	},
 	apollo: {
 		// // optional
 		// watchLoading: '~/plugins/apollo-watch-loading-handler.js',
