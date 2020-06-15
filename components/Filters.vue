@@ -158,8 +158,16 @@ export default Vue.extend({
 							} else return true
 						})
 						.filter((item: any): boolean => {
-							if (!this.unsupportedFilters.includes('nswf')) {
-								return this.nsfw ? true : !item.nsfw
+							if (
+								!this.unsupportedFilters.includes('filters') ||
+								!this.unsupportedFilters.includes('nsfw')
+							) {
+								return this.nsfw
+									? true
+									: !(
+											Array.isArray(item.categories) &&
+											item.categories.includes('NSFW')
+									  )
 							} else return true
 						})
 						.sort((a: any, b: any) => {

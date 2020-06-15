@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-	computed: {
+	methods: {
 		targetName(): string | null {
 			switch (this.$route.params.target) {
 				case 'homemenu':
@@ -43,9 +43,7 @@ export default Vue.extend({
 				default:
 					return null
 			}
-		}
-	},
-	methods: {
+		},
 		fileNameToWebName(s: string): string | null {
 			switch (s) {
 				case 'ResidentMenu.szs':

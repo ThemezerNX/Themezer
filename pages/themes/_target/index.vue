@@ -63,11 +63,27 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
-			metaTitle: `${this.targetName} | Themes`,
-			metaDesc: 'All Themes on Themezer',
 			type: 'themes',
 			list: 'themesList',
 			unsupportedFilters: []
+		}
+	},
+	computed: {
+		metaTitle() {
+			if (this.filteredItems)
+				return `${this.filteredItems.length} ${
+					this.filteredItems.length === 1 ? 'result' : 'results'
+				} | ${this.targetName()} | Themes`
+			else return `${this.targetName()} | Themes`
+		},
+		metaDesc() {
+			if (
+				this.themesList &&
+				this.filteredItems &&
+				this.filteredItems.length !== this.themesList.length
+			)
+				return 'Filtered Themes on Themezer'
+			else return 'All Themes on Themezer'
 		}
 	},
 	apollo: {

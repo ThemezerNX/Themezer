@@ -65,7 +65,8 @@ export default Vue.extend({
 	data() {
 		return {
 			metaTitle: 'Themezer Home',
-			metaDesc: 'A customization site for Nintendo Switch Themes.'
+			metaDesc:
+				'A customization site for Nintendo Switch Themes and Layouts.'
 		}
 	}
 })

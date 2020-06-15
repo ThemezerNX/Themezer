@@ -131,15 +131,9 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
-			metaTitle:
-				this.pack && this.pack.details
-					? `${this.pack.details.name} | Packs`
-					: null,
-			metaDesc:
-				this.pack && this.pack.details && this.pack.details.description
-					? this.pack.details.description
-					: null,
-			metaImg: `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`,
+			metaTitle: null,
+			metaDesc: null,
+			metaImg: null,
 			packDialog: false,
 			loadingDownload: false
 		}
@@ -177,6 +171,12 @@ export default Vue.extend({
 			result({ data }) {
 				if (data && data.pack) {
 					this.updateUrlString(this.id, data.pack.details.name)
+
+					this.metaTitle = `${this.pack.details.name} | Packs`
+
+					this.metaDesc = this.pack.details.description
+
+					this.metaImg = `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
 				}
 			},
 			// fetchPolicy: 'no-cache',

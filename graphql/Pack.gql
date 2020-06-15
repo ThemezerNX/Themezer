@@ -13,7 +13,7 @@ query pack($id: Int!) {
 			version
 		}
 		last_updated
-		nsfw
+		categories
 		dl_count
 		themes {
 			uuid
@@ -63,7 +63,6 @@ query pack($id: Int!) {
 			}
 			target
 			categories
-			nsfw
 			dl_count
 		}
 	}
@@ -84,7 +83,7 @@ query packDetails($id: Int!) {
 			version
 		}
 		last_updated
-		nsfw
+		categories
 		dl_count
 		themes {
 			uuid
@@ -109,7 +108,6 @@ query packDetails($id: Int!) {
 			}
 			target
 			categories
-			nsfw
 			dl_count
 		}
 	}
@@ -130,7 +128,7 @@ query packsList {
 			version
 		}
 		last_updated
-		nsfw
+		categories
 		dl_count
 		themes {
 			uuid

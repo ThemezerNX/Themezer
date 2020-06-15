@@ -63,11 +63,27 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
-			metaTitle: `${this.targetName} | Layouts`,
-			metaDesc: 'All Layouts on Themezer',
 			type: 'layouts',
 			list: 'layoutsList',
 			unsupportedFilters: ['filters']
+		}
+	},
+	computed: {
+		metaTitle() {
+			if (this.filteredItems)
+				return `${this.filteredItems.length} ${
+					this.filteredItems.length === 1 ? 'result' : 'results'
+				} | ${this.targetName()} | Layouts`
+			else return `${this.targetName()} | Layouts`
+		},
+		metaDesc() {
+			if (
+				this.layoutsList &&
+				this.filteredItems &&
+				this.filteredItems.length !== this.layoutsList.length
+			)
+				return 'Filtered Layouts on Themezer'
+			else return 'All Layouts on Themezer'
 		}
 	},
 	apollo: {

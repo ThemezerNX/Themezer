@@ -63,10 +63,26 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
-			metaTitle: 'Packs',
-			metaDesc: 'All Packs on Themezer',
 			list: 'packsList',
 			unsupportedFilters: []
+		}
+	},
+	computed: {
+		metaTitle() {
+			if (this.filteredItems)
+				return `${this.filteredItems.length} ${
+					this.filteredItems.length === 1 ? 'result' : 'results'
+				} | Packs`
+			else return `Packs`
+		},
+		metaDesc() {
+			if (
+				this.packsList &&
+				this.filteredItems &&
+				this.filteredItems.length !== this.packsList.length
+			)
+				return 'Filtered Packs on Themezer'
+			else return 'All Packs on Themezer'
 		}
 	},
 	apollo: {
