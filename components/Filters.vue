@@ -90,6 +90,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import MiniSearch from 'minisearch'
 
 export default Vue.extend({
 	props: {
@@ -138,56 +139,81 @@ export default Vue.extend({
 		},
 		filteredItems(): Array<object> {
 			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-			let items = null
-			if (!this.filterCooldownActive) {
-				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-				this.filterCooldownActive = true
-				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-				this.$parent.$data.filterLoading = true
+			let items: any = null
+			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+			this.$parent.$data.filterLoading = true
 
-				items = this.$parent.$data[this.$parent.$data.list]
+			items = this.$parent.$data[this.$parent.$data.list]
 
-				if (items) {
-					items = items
-						.filter((item: any): boolean => {
-							if (
-								!this.unsupportedFilters.includes('search') &&
-								this.query
-							) {
-								return this.containsQuery(item)
-							} else return true
-						})
-						.filter((item: any): boolean => {
-							if (
-								!this.unsupportedFilters.includes('filters') ||
-								!this.unsupportedFilters.includes('nsfw')
-							) {
-								return this.nsfw
-									? true
-									: !(
-											Array.isArray(item.categories) &&
-											item.categories.includes('NSFW')
-									  )
-							} else return true
-						})
-						.sort((a: any, b: any) => {
-							const sortOption = this.sortOptions.find(
-								(o) => o.id === this.currentSort
-							)
-							if (sortOption) {
-								if (this.currentSortOrder === 'asc') {
-									return a[sortOption.key] - b[sortOption.key]
-								} else if (this.currentSortOrder === 'desc') {
-									return b[sortOption.key] - a[sortOption.key]
-								}
-							}
-						})
+			if (items) {
+				if (this.$data.query) {
+					const miniSearch = new MiniSearch({
+						fields: [
+							'name',
+							'description',
+							'author_name',
+							'author_discord',
+							'categories'
+						],
+						storeFields: ['id'],
+						searchOptions: {
+							boost: { name: 2 },
+							fuzzy: 0.2
+						}
+					})
+					const itms = items.map((item: any) => {
+						return {
+							id: item.uuid,
+							name: item.details.name,
+							description: item.details.name,
+							author_name: item.details.author.name,
+							author_discord: item.details.author.discord_tag,
+							categories: item.categories.join('|')
+						}
+					})
+
+					miniSearch.addAll(itms)
+					const rs = miniSearch.search(this.$data.query, {
+						prefix: true
+					})
+					const resultUUIDs = rs.map((r: any) => r.id)
+
+					items = items.filter((item: any) =>
+						resultUUIDs.includes(item.uuid)
+					)
 				}
-				this.setTimeout()
-				;(this.$parent as any).filterLoading = false
-			}
 
-			return items || (this.$parent as any).filteredItems
+				items = items
+					.filter((item: any): boolean => {
+						if (
+							!this.unsupportedFilters.includes('filters') ||
+							!this.unsupportedFilters.includes('nsfw')
+						) {
+							return this.nsfw
+								? true
+								: !(
+										Array.isArray(item.categories) &&
+										item.categories.includes('NSFW')
+								  )
+						} else return true
+					})
+					.sort((a: any, b: any) => {
+						const sortOption = this.$data.sortOptions.find(
+							(o: any) => o.id === this.$data.currentSort
+						)
+						if (sortOption) {
+							if (this.currentSortOrder === 'asc') {
+								return a[sortOption.key] - b[sortOption.key]
+							} else if (this.currentSortOrder === 'desc') {
+								return b[sortOption.key] - a[sortOption.key]
+							}
+						}
+					})
+			}
+			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+			this.$parent.$data.filterLoading = false
+
+			return items || this.$parent.$data.filteredItems
 		}
 	},
 	watch: {
@@ -196,7 +222,7 @@ export default Vue.extend({
 		},
 		query(n) {
 			const query = Object.assign({}, this.$route.query)
-			query.page = '1'
+			delete query.page
 			if (n === '') delete query.query
 			else query.query = n
 
@@ -210,30 +236,8 @@ export default Vue.extend({
 		this.updateParentFiltered()
 	},
 	methods: {
-		setTimeout() {
-			setTimeout(() => {
-				this.filterCooldownActive = false
-			}, 500)
-		},
-		containsQuery(item: any) {
-			const parsedQuery =
-				this.query.toLowerCase().match(/['"][^"]*['"]|\S+/gm) || []
-			const string = [
-				item.details.name,
-				item.details.description,
-				item.details.author.name,
-				item.details.author.discord_tag,
-				Array.isArray(item.categories) ? item.categories.join(' ') : ''
-			].join(' ')
-
-			const found = parsedQuery.filter((w) =>
-				string.toLowerCase().includes(w.replace(/['"]+/g, ''))
-			)
-			if (found.length === parsedQuery.length) return true
-			else return false
-		},
 		updateParentFiltered() {
-			;(this.$parent as any).filteredItems = this.filteredItems
+			this.$parent.$data.filteredItems = this.filteredItems
 		},
 		nextSortOrder(type: string): string | null {
 			if (this.currentSort === type) {

@@ -21,7 +21,7 @@
 
 			<LoadingOverlay v-else-if="$apollo.loading || filterLoading" />
 			<span v-else-if="!layoutsList || layoutsList.length === 0"
-				>There are no themes here yet :(</span
+				>There are no layouts here yet :(</span
 			>
 			<span v-else-if="filteredItems && filteredItems.length === 0"
 				>There were no results matching your filters :(</span
