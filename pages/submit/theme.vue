@@ -275,6 +275,8 @@
 														.description
 												"
 												label="Theme description"
+												maxlength="300"
+												counter="300"
 												outlined
 												prepend-icon="mdi-pencil-outline"
 												@change="forceUpdate++"
@@ -285,6 +287,8 @@
 													detectedThemes[i].authorname
 												"
 												label="Author Name*"
+												maxlength="40"
+												counter="40"
 												outlined
 												:rules="[rules.required]"
 												prepend-icon="mdi-account-outline"
@@ -305,7 +309,10 @@
 												chips
 												small-chips
 												deletable-chips
-												:rules="[rules.category_length]"
+												:rules="[
+													rules.category_length,
+													rules.category_amount
+												]"
 												prepend-icon="mdi-shape-outline"
 												label="Categories*"
 												multiple
@@ -337,6 +344,8 @@
 												v-model="
 													detectedThemes[i].version
 												"
+												maxlength="10"
+												counter="10"
 												label="Theme version*"
 												outlined
 												:rules="[rules.required]"
@@ -397,6 +406,9 @@
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.name"
+							minlength="3"
+							maxlength="50"
+							counter="50"
 							label="Pack Name*"
 							outlined
 							prepend-icon="mdi-pencil-outline"
@@ -417,6 +429,9 @@
 								<v-text-field
 									v-model="submitDetails.author.name"
 									label="Author Name*"
+									minlength="2"
+									maxlength="40"
+									counter="40"
 									outlined
 									:rules="[rules.required]"
 									prepend-icon="mdi-account-outline"
@@ -438,6 +453,8 @@
 									label="Author's Discord (Username#1234)"
 									outlined
 									prepend-icon="mdi-discord"
+									maxlength="37"
+									counter="37"
 									:rules="[rules.discord]"
 									@change="
 										forceUpdate++
@@ -451,6 +468,8 @@
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.description"
+							maxlength="300"
+							counter="300"
 							label="Pack Description*"
 							outlined
 							:rules="[rules.required]"
@@ -470,7 +489,10 @@
 							chips
 							small-chips
 							deletable-chips
-							:rules="[rules.category_length]"
+							:rules="[
+								rules.category_length,
+								rules.category_amount
+							]"
 							prepend-icon="mdi-shape-outline"
 							label="Shared categories (this will remove the current set)"
 							multiple
@@ -494,6 +516,8 @@
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.version"
 							label="Pack version*"
+							maxlength="10"
+							counter="10"
 							outlined
 							:rules="[rules.required]"
 							prepend-icon="mdi-update"
@@ -615,6 +639,10 @@ export default Vue.extend({
 					!values ||
 					!values.some((v) => v.length <= 2) ||
 					'A category must be longer than 2 characters',
+				category_amount: (values) =>
+					!values ||
+					values.length <= 10 ||
+					'A maximum of 10 categories is allowed',
 				hex: (value) =>
 					!value ||
 					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)

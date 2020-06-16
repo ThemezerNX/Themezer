@@ -82,6 +82,17 @@
 						{{ theme.layout.details.name }}
 					</a>
 				</div>
+				<div v-if="theme.bg_type" class="font-weight-light body-2">
+					<span class="font-weight-medium">Background: </span>
+					<a
+						class="font-weight-bold"
+						:href="
+							`//api.themezer.ga/storage/themes/${theme.uuid}/image.${theme.bg_type}`
+						"
+					>
+						{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
+					</a>
+				</div>
 				<div class="font-weight-light body-2">
 					<span class="font-weight-medium">Downloads: </span>
 					{{ theme.dl_count }}
