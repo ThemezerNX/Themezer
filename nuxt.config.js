@@ -86,8 +86,15 @@ export default {
 		],
 		'@nuxtjs/pwa',
 		// Doc: https://github.com/nuxt-community/dotenv-module
-		'@nuxtjs/dotenv'
+		'@nuxtjs/dotenv',
+		'@nuxtjs/markdownit'
 	],
+	markdownit: {
+		preset: 'default',
+		linkify: true,
+		breaks: true,
+		use: ['markdown-it-div', 'markdown-it-attrs']
+	},
 	/*
 	 ** Axios module configuration
 	 ** See https://axios.nuxtjs.org/options

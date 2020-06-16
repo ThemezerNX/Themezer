@@ -33,7 +33,10 @@
 				<div class="subtitle-1">
 					By {{ layout.details.author.name }}
 				</div>
-				<div class="font-weight-thin subtitle-1">
+				<div
+					v-if="layout.details.description"
+					class="font-weight-thin subtitle-1"
+				>
 					{{ layout.details.description }}
 				</div>
 

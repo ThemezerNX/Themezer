@@ -24,7 +24,7 @@
 						? `background-color: ${item.details.color};`
 						: ''
 				"
-				class="overlay_image"
+				class="overlay-image"
 			/>
 
 			<v-card-title v-text="item.details.name" />
@@ -36,7 +36,9 @@
 			<v-divider v-if="item.details.description" />
 
 			<v-card-text v-if="item.details.description">
-				<div>{{ item.details.description }}</div>
+				<div class="description">
+					{{ item.details.description }}
+				</div>
 			</v-card-text>
 		</v-card>
 	</v-hover>
@@ -73,17 +75,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.card {
-	height: 100%;
-	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
-}
-.card.hover {
-	background: lighten(#1e1e1e, 4%) !important;
-	transform: translateY(-2px);
-}
-
-.overlay_image {
-	transition: background-image 200ms;
-	background: #2d2d2d;
-}
+@import '@/assets/card.scss';
 </style>

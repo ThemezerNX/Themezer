@@ -31,9 +31,13 @@
 					{{ theme.details.name }}
 				</h1>
 				<div class="subtitle-1">By {{ theme.details.author.name }}</div>
-				<div class="font-weight-thin subtitle-1">
+				<div
+					v-if="theme.details.description"
+					class="font-weight-thin subtitle-1"
+				>
 					{{ theme.details.description }}
 				</div>
+
 				<div>
 					<v-chip
 						v-for="(category, i) in theme.categories"

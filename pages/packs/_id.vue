@@ -40,7 +40,10 @@
 					{{ pack.details.name }}
 				</h1>
 				<div class="subtitle-1">By {{ pack.details.author.name }}</div>
-				<div class="font-weight-thin subtitle-1">
+				<div
+					v-if="pack.details.description"
+					class="font-weight-thin subtitle-1"
+				>
 					{{ pack.details.description }}
 				</div>
 

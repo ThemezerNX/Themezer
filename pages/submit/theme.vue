@@ -275,8 +275,8 @@
 														.description
 												"
 												label="Theme description"
-												maxlength="300"
-												counter="300"
+												maxlength="500"
+												counter="500"
 												outlined
 												prepend-icon="mdi-pencil-outline"
 												@change="forceUpdate++"
@@ -468,8 +468,8 @@
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.description"
-							maxlength="300"
-							counter="300"
+							maxlength="500"
+							counter="500"
 							label="Pack Description*"
 							outlined
 							:rules="[rules.required]"

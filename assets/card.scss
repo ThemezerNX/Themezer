@@ -1,0 +1,21 @@
+.card {
+	height: 100%;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
+    
+    .description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .overlay-image {
+        transition: background-image 200ms;
+        background: #2d2d2d;
+    }
+}
+.card.hover {
+	background: lighten(#1e1e1e, 4%) !important;
+	transform: translateY(-2px);
+}
