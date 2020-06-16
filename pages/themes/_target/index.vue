@@ -20,7 +20,7 @@
 			</v-row>
 
 			<LoadingOverlay v-else-if="$apollo.loading || filterLoading" />
-			<span v-else-if="!(themesList && themesList.length > 0)"
+			<span v-else-if="!themesList || themesList.length === 0"
 				>There are no themes here yet :(</span
 			>
 			<span v-else-if="filteredItems && filteredItems.length === 0"

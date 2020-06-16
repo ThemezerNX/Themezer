@@ -197,37 +197,39 @@ export default Vue.extend({
 		}
 	},
 	head() {
-		const metaTitle = `${this.pack.details.name} | Packs`
-		const metaDesc = this.pack.details.description
-		const metaImg = `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
+		if (this.pack) {
+			const metaTitle = `${this.pack.details.name} | Packs`
+			const metaDesc = this.pack.details.description
+			const metaImg = `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
 
-		return {
-			title: metaTitle,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: metaDesc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: metaTitle
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: metaDesc
-				},
-				{
-					hid: 'og:image',
-					name: 'og:image',
-					property: 'og:image',
-					content: metaImg
-				}
-			]
+			return {
+				title: metaTitle,
+				meta: [
+					{
+						hid: 'description',
+						name: 'description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:title',
+						name: 'og:title',
+						property: 'og:title',
+						content: metaTitle
+					},
+					{
+						hid: 'og:description',
+						name: 'og:description',
+						property: 'og:description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:image',
+						name: 'og:image',
+						property: 'og:image',
+						content: metaImg
+					}
+				]
+			}
 		}
 	}
 })

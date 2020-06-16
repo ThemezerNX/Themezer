@@ -281,39 +281,41 @@ export default Vue.extend({
 		}
 	},
 	head() {
-		const metaTitle = `${
-			this.layout.details.name
-		} | ${this.targetName()} | Layouts`
-		const metaDesc = this.layout.details.description
-		const metaImg = `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`
+		if (this.layout) {
+			const metaTitle = `${
+				this.layout.details.name
+			} | ${this.targetName()} | Layouts`
+			const metaDesc = this.layout.details.description
+			const metaImg = `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`
 
-		return {
-			title: metaTitle,
-			meta: [
-				{
-					hid: 'description',
-					name: 'description',
-					content: metaDesc
-				},
-				{
-					hid: 'og:title',
-					name: 'og:title',
-					property: 'og:title',
-					content: metaTitle
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: metaDesc
-				},
-				{
-					hid: 'og:image',
-					name: 'og:image',
-					property: 'og:image',
-					content: metaImg
-				}
-			]
+			return {
+				title: metaTitle,
+				meta: [
+					{
+						hid: 'description',
+						name: 'description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:title',
+						name: 'og:title',
+						property: 'og:title',
+						content: metaTitle
+					},
+					{
+						hid: 'og:description',
+						name: 'og:description',
+						property: 'og:description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:image',
+						name: 'og:image',
+						property: 'og:image',
+						content: metaImg
+					}
+				]
+			}
 		}
 	}
 })
