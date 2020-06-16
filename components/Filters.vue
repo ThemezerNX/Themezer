@@ -199,7 +199,7 @@ export default Vue.extend({
 					})
 					.sort((a: any, b: any) => {
 						const sortOption = this.$data.sortOptions.find(
-							(o: any) => o.id === this.$data.currentSort
+							(o: any) => o.id === this.currentSort
 						)
 						if (sortOption) {
 							if (this.currentSortOrder === 'asc') {
