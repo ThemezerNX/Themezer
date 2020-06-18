@@ -1,5 +1,5 @@
 <template>
-	<div v-if="layout && layout.details" no-gutters class="pa-2 box_fit">
+	<div v-if="layout && layout.details" no-gutters class="pa-2 box_fill">
 		<v-row class="ma-0">
 			<v-col
 				cols="12"
@@ -15,7 +15,7 @@
 					"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
-					class="overlay_image"
+					class="overlay-image"
 					:style="backgroundStyle"
 				/>
 			</v-col>
@@ -192,9 +192,11 @@ import { mergeJson } from '@/graphql/Merging.gql'
 import targetParser from '@/components/mixins/targetParser'
 import BackgroundsSlideGroup from '@/components/BackgroundsSlideGroup.vue'
 import { layout } from '@/graphql/Layout.gql'
+import LoadingOverlay from '@/components/LoadingOverlay'
 
 export default Vue.extend({
 	components: {
+		LoadingOverlay,
 		BackgroundsSlideGroup
 	},
 	mixins: [shared, targetParser],
@@ -323,7 +325,3 @@ export default Vue.extend({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-@import '@/layouts/details/SharedCss.scss';
-</style>

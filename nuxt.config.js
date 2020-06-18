@@ -13,9 +13,7 @@ export default {
 	},
 
 	mode: 'universal',
-	/*
-	 ** Headers of the page
-	 */
+
 	head: {
 		titleTemplate: '%s | Themezer',
 		title: 'Themezer',
@@ -27,11 +25,11 @@ export default {
 			},
 			{
 				name: 'theme-color',
-				content: '#d50000'
+				content: '#B40A86'
 			},
 			{
 				name: 'msapplication-TileColor',
-				content: '#d50000'
+				content: '#B40A86'
 			},
 			{
 				hid: 'description',
@@ -41,17 +39,9 @@ export default {
 		],
 		link: [{ rel: 'icon', type: 'image/jpeg', href: '/logo-256.jpg' }]
 	},
-	/*
-	 ** Customize the progress-bar color
-	 */
-	loading: { color: '#fff' },
-	/*
-	 ** Global CSS
-	 */
-	css: [],
-	/*
-	 ** Plugins to load before mounting the App
-	 */
+
+	loading: { color: '#B40A86' },
+
 	plugins: [
 		// '@/plugins/mergeJson',
 		// {
@@ -67,16 +57,12 @@ export default {
 			mode: 'client'
 		}
 	],
-	/*
-	 ** Nuxt.js dev-modules
-	 */
+
 	buildModules: ['@nuxt/typescript-build', '@nuxtjs/vuetify', '@nuxtjs/gtm'],
-	/*
-	 ** Nuxt.js modules
-	 */
+
 	modules: [
-		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios',
+		'@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
 		[
 			'nuxt-rfg-icon',
@@ -85,7 +71,6 @@ export default {
 			}
 		],
 		'@nuxtjs/pwa',
-		// Doc: https://github.com/nuxt-community/dotenv-module
 		'@nuxtjs/dotenv',
 		'@nuxtjs/markdownit'
 	],
@@ -95,22 +80,19 @@ export default {
 		breaks: true,
 		use: ['markdown-it-div', 'markdown-it-attrs']
 	},
-	/*
-	 ** Axios module configuration
-	 ** See https://axios.nuxtjs.org/options
-	 */
-	axios: {},
+
 	gtm: {
 		id: 'GTM-T5ZBWPZ'
 	},
+
 	apollo: {
-		// // optional
-		// watchLoading: '~/plugins/apollo-watch-loading-handler.js',
-		// // optional
 		// errorHandler: '~/plugins/apollo-error-handler.js',
 		clientConfigs: {
 			default: {
 				httpEndpoint: process.env.API_ENDPOINT,
+				httpLinkOptions: {
+					credentials: 'include'
+				},
 				inMemoryCacheOptions: {
 					addTypename: false
 				}
@@ -129,7 +111,6 @@ export default {
 	},
 
 	/*
-	 ** vuetify module configuration
 	 ** https://github.com/nuxt-community/vuetify-module
 	 */
 	vuetify: {
@@ -149,13 +130,8 @@ export default {
 			}
 		}
 	},
-	/*
-	 ** Build configuration
-	 */
+
 	build: {
-		/*
-		 ** You can extend webpack config here
-		 */
 		extend(config, ctx) {
 			config.module.rules.push({
 				test: /\/graphql\/\.(graphql|gql)$/,
@@ -167,6 +143,45 @@ export default {
 				config.mode = 'development'
 			} else if (ctx.isClient) {
 				config.optimization.splitChunks.maxSize = 249856
+			}
+		}
+	},
+	auth: {
+		cookie: {
+			prefix: 'auth.',
+			options: {
+				maxAge: 604800
+			}
+		},
+		redirect: {
+			callback: '/logged-in',
+			logout: '/logged-out'
+		},
+		strategies: {
+			social: {
+				scheme: 'oauth2',
+				clientId: '722724539028734003',
+				endpoints: {
+					// logout: 'https://discord.com/api/oauth2/token/revoke', needs POST method(?)
+					authorization: 'https://discord.com/api/oauth2/authorize',
+					token: {
+						url: 'https://discord.com/api/oauth2/token',
+						headers: {
+							'content-type': 'application/x-www-form-urlencoded'
+						}
+					},
+					userInfo: 'https://discord.com/api/users/@me'
+				},
+				scope: ['identify'],
+				token: {
+					type: 'Bearer',
+					name: 'Authorization',
+					maxAge: 60 * 60 * 24 * 7 // 7 days
+				},
+				refreshToken: {
+					property: 'refresh_token',
+					maxAge: 60 * 60 * 24 * 30
+				}
 			}
 		}
 	}

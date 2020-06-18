@@ -112,7 +112,7 @@ export default Vue.extend({
 				{
 					title: 'Updated',
 					id: 'updated',
-					key: 'last_modified',
+					key: 'last_updated',
 					icon: 'mdi-calendar-clock'
 				}
 			],
@@ -151,8 +151,8 @@ export default Vue.extend({
 						fields: [
 							'name',
 							'description',
-							'author_name',
-							'author_discord',
+							'creator_name',
+							'creator_discord',
 							'categories'
 						],
 						storeFields: ['id'],
@@ -166,8 +166,9 @@ export default Vue.extend({
 							id: item.uuid,
 							name: item.details.name,
 							description: item.details.name,
-							author_name: item.details.author.name,
-							author_discord: item.details.author.discord_tag,
+							creator_name: item.creator.discord_user.username,
+							creator_discord:
+								'#' + item.creator.discord_user.discriminator,
 							categories: item.categories.join('|')
 						}
 					})
@@ -201,11 +202,23 @@ export default Vue.extend({
 						const sortOption = this.$data.sortOptions.find(
 							(o: any) => o.id === this.currentSort
 						)
-						if (sortOption) {
+						if (sortOption.id === 'downloads') {
 							if (this.currentSortOrder === 'asc') {
 								return a[sortOption.key] - b[sortOption.key]
 							} else if (this.currentSortOrder === 'desc') {
 								return b[sortOption.key] - a[sortOption.key]
+							}
+						} else if (sortOption.id === 'updated') {
+							if (this.currentSortOrder === 'asc') {
+								return (
+									new Date(a[sortOption.key]).getTime() -
+									new Date(b[sortOption.key]).getTime()
+								)
+							} else if (this.currentSortOrder === 'desc') {
+								return (
+									new Date(b[sortOption.key]).getTime() -
+									new Date(a[sortOption.key]).getTime()
+								)
 							}
 						}
 					})

@@ -2,12 +2,15 @@ query theme($id: Int!, $target: String!) {
 	theme(id: $id, target: $target) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -26,12 +29,15 @@ query theme($id: Int!, $target: String!) {
         pack {
             uuid
 			id
+			creator {
+				id
+				discord_user {
+					username
+					avatar
+				}
+			}
             details {
                 name
-                author {
-                    name
-                    discord_tag
-                }
                 description
                 color
                 version
@@ -57,12 +63,15 @@ query themeDetails($id: Int!, $target: String!) {
 	themeDetails(id: $id, target: $target) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -85,11 +94,15 @@ query themesList($target: String!) {
 	themesList(target: $target) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-			}
 			description
 			color
 			version

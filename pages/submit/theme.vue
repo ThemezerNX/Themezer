@@ -1,5 +1,5 @@
 <template>
-	<div no-gutters class="pa-2 box">
+	<div no-gutters class="pa-2 box_fill">
 		<h1 class="box_text">
 			Theme Submissions
 		</h1>
@@ -57,7 +57,6 @@
 					prepend-icon="mdi-file-outline"
 					accept=".nxtheme"
 					hide-details
-					:rules="[rules.required]"
 					@change="onFileChange"
 				/>
 				<div v-if="selectedType === 'zip'">
@@ -71,7 +70,6 @@
 						:loading="loading.uploadSingleOrZip"
 						label=".zip file"
 						filled
-						:rules="[rules.required]"
 						prepend-icon="mdi-folder-zip-outline"
 						accept="application/zip"
 						hide-details
@@ -213,6 +211,10 @@
 												class="subtitle-1"
 											>
 												By {{ theme.info.Author }}
+												<i>
+													(this will replaced with
+													your Discord username)
+												</i>
 											</div>
 											<v-list-item-subtitle
 												v-if="theme.layout"
@@ -279,19 +281,6 @@
 												counter="500"
 												outlined
 												prepend-icon="mdi-pencil-outline"
-												@change="forceUpdate++"
-											></v-text-field>
-											<v-text-field
-												v-if="!theme.info.Author"
-												v-model="
-													detectedThemes[i].authorname
-												"
-												label="Author Name*"
-												maxlength="40"
-												counter="40"
-												outlined
-												:rules="[rules.required]"
-												prepend-icon="mdi-account-outline"
 												@change="forceUpdate++"
 											></v-text-field>
 											<v-combobox
@@ -415,56 +404,6 @@
 							:rules="[rules.required]"
 							@change="forceUpdate++"
 						></v-text-field>
-						<v-row>
-							<v-col
-								v-if="selectedSubmitType === 'pack'"
-								class="py-0"
-								cols="12"
-								xs="12"
-								sm="6"
-								md="6"
-								lg="6"
-								xl="6"
-							>
-								<v-text-field
-									v-model="submitDetails.author.name"
-									label="Author Name*"
-									minlength="2"
-									maxlength="40"
-									counter="40"
-									outlined
-									:rules="[rules.required]"
-									prepend-icon="mdi-account-outline"
-									@change="forceUpdate++"
-								></v-text-field>
-							</v-col>
-
-							<v-col
-								class="py-0"
-								cols="12"
-								xs="12"
-								:sm="selectedSubmitType === 'pack' ? 6 : 12"
-								:md="selectedSubmitType === 'pack' ? 6 : 12"
-								:lg="selectedSubmitType === 'pack' ? 6 : 12"
-								:xl="selectedSubmitType === 'pack' ? 6 : 12"
-							>
-								<v-text-field
-									v-model="submitDetails.author.discord_tag"
-									label="Author's Discord (Username#1234)"
-									outlined
-									prepend-icon="mdi-discord"
-									maxlength="37"
-									counter="37"
-									:rules="[rules.discord]"
-									@change="
-										forceUpdate++
-										submitDetails.author.discord_tag === ''
-											? (submitDetails.author.discord_tag = null)
-											: null
-									"
-								></v-text-field>
-							</v-col>
-						</v-row>
 						<v-text-field
 							v-if="selectedSubmitType === 'pack'"
 							v-model="submitDetails.description"
@@ -530,7 +469,7 @@
 							:disabled="!submitValid"
 							@click.prevent="submit()"
 						>
-							Submit
+							Submit <v-icon right>mdi-cube-send</v-icon>
 						</v-btn>
 					</v-col>
 				</v-row>
@@ -555,6 +494,10 @@ import urlParser from '@/components/mixins/urlParser'
 import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
+	middleware: ['auth'],
+	options: {
+		auth: true
+	},
 	mixins: [targetParser, urlParser],
 	apollo: {
 		categories: {
@@ -574,7 +517,7 @@ export default Vue.extend({
 					Q:
 						"I couldn't find the layout in the Layouts GitHub repository/I made the layout myself (not just edited another one)",
 					A:
-						'Consider uploading it to the Layouts GitHub repository or asking the Author to do so.'
+						'Consider uploading it to the Layouts GitHub repository or asking the original Creator to do so.'
 				},
 				{
 					Q: 'My layout .json differs only by a bit',
@@ -657,10 +600,6 @@ export default Vue.extend({
 			packCategories: [],
 			submitDetails: {
 				name: null,
-				author: {
-					name: null,
-					discord_tag: null
-				},
 				description: null,
 				color: null,
 				version: null
@@ -686,10 +625,6 @@ export default Vue.extend({
 			this.submitValid = false
 			this.submitDetails = {
 				name: null,
-				author: {
-					name: null,
-					discord_tag: null
-				},
 				description: null,
 				color: null,
 				version: null
@@ -776,7 +711,6 @@ export default Vue.extend({
 						color: t.color,
 						description: t.description,
 						version: t.version,
-						authorname: t.authorname,
 						categories: t.categories,
 						nsfw: t.nsfw
 					}

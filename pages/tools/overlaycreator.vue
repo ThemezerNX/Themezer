@@ -1,5 +1,5 @@
 <template>
-	<div no-gutters class="pa-2 box">
+	<div no-gutters class="pa-2 box_fill">
 		<h1 class="box_text">
 			Overlay Creator
 		</h1>

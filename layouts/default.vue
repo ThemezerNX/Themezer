@@ -1,9 +1,67 @@
 <template>
 	<v-app dark>
-		<v-navigation-drawer v-model="drawer" class="drawer" clipped fixed app>
+		<v-navigation-drawer
+			v-if="true"
+			v-model="drawer"
+			class="drawer"
+			clipped
+			fixed
+			app
+		>
 			<div class="background" />
 			<v-list nav>
-				<!-- <v-divider /> -->
+				<v-list-item
+					v-if="!$auth.loggedIn"
+					link
+					two-line
+					router
+					to="/login"
+					exact
+				>
+					<v-list-item-avatar>
+						<v-icon large>
+							mdi-account-circle
+						</v-icon>
+					</v-list-item-avatar>
+
+					<v-list-item-content>
+						<v-list-item-title>
+							Login / register
+						</v-list-item-title>
+					</v-list-item-content>
+					<v-icon>mdi-login</v-icon>
+				</v-list-item>
+				<v-list-group v-if="$auth.loggedIn" no-action>
+					<template v-slot:activator>
+						<v-list-item-avatar>
+							<img
+								v-if="$auth.loggedIn"
+								:src="`https://cdn.discordapp.com/${Avatar}`"
+							/>
+							<v-icon v-else large>
+								mdi-account-circle
+							</v-icon>
+						</v-list-item-avatar>
+						<v-list-item-content>
+							<v-list-item-title>
+								{{ $auth.user.username }}
+							</v-list-item-title>
+						</v-list-item-content>
+					</template>
+					<v-list-item dense router exact to="/account/profile">
+						<v-list-item-title>My Profile</v-list-item-title>
+						<v-list-item-icon>
+							<v-icon>mdi-account</v-icon>
+						</v-list-item-icon>
+					</v-list-item>
+					<v-list-item dense @click="logout()">
+						<v-list-item-title>Logout</v-list-item-title>
+						<v-list-item-icon>
+							<v-icon>mdi-logout</v-icon>
+						</v-list-item-icon>
+					</v-list-item>
+				</v-list-group>
+				<v-divider />
 				<template v-for="item in items">
 					<v-subheader v-if="item.header" :key="item.header">{{
 						item.header
@@ -79,8 +137,9 @@
 				<nuxt />
 			</v-container>
 		</v-content>
+
 		<!-- <v-footer fixed app>
-			<span>&copy; {{ new Date().getFullYear() }}</span>
+			<span>&copy; {{ new Date().getFullYear() }} Migush</span>
 		</v-footer> -->
 	</v-app>
 </template>
@@ -173,6 +232,22 @@ export default {
 				}
 			]
 		}
+	},
+	computed: {
+		Avatar() {
+			if (this.$auth.user.avatar) {
+				return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`
+			} else {
+				return `embed/avatars/${parseInt(
+					this.$auth.user.discriminator
+				) % 5}.png`
+			}
+		}
+	},
+	methods: {
+		async logout() {
+			await this.$auth.logout()
+		}
 	}
 }
 </script>
@@ -188,22 +263,28 @@ export default {
 	border-radius: 4px;
 	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
 		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-	min-height: 100%;
-}
 
-.box_fit {
-	background-color: #1e1e1e;
-	border-radius: 4px;
-	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-}
+	&_fill {
+		@extend .box;
+		min-height: 100%;
+	}
 
-.box_text {
-	margin-left: 8px;
-}
+	.overlay-image {
+		background-size: contain;
+		background-position: center;
+		// transition-duration: 200ms;
+		// transition-timing-function: ease-in-out;
+		border-radius: 4px;
+		// max-height: 70vh;
+	}
 
-h2.box_text {
-	margin-top: 16px;
+	.box_text {
+		margin-left: 8px;
+	}
+
+	h2.box_text {
+		margin-top: 16px;
+	}
 }
 </style>
 

@@ -16,7 +16,8 @@
 	"dependencies": {
 		"@nuxt/typescript-build": "^0.6.0",
 		"@nuxtjs/apollo": "^4.0.0-rc19",
-		"@nuxtjs/axios": "^5.3.6",
+		"@nuxtjs/auth-next": "^5.0.0-1592174780.948291",
+		"@nuxtjs/axios": "^5.11.0",
 		"@nuxtjs/dotenv": "^1.4.0",
 		"@nuxtjs/gtm": "^2.3.0",
 		"@nuxtjs/markdownit": "^1.2.9",
@@ -27,6 +28,7 @@
 		"array-object-merge": "^1.2.1",
 		"core-js": "^2.6.5",
 		"minisearch": "^2.3.1",
+		"nested-object-assign": "^1.0.3",
 		"nuxt": "^2.0.0",
 		"nuxt-rfg-icon": "^0.6.4",
 		"vuejs-paginate": "^2.1.0",

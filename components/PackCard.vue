@@ -34,7 +34,9 @@
 			<v-card-title v-text="item.details.name" />
 
 			<v-card-subtitle>
-				{{ item.details.author.name }} • v{{ item.details.version }}
+				{{ item.creator.discord_user.username }} • v{{
+					item.details.version
+				}}
 			</v-card-subtitle>
 
 			<v-divider v-if="item.details.description" />

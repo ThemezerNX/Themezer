@@ -1,5 +1,5 @@
 <template>
-	<div v-if="pack && pack.details" no-gutters class="pa-2 box_fit">
+	<div v-if="pack && pack.details" no-gutters class="pa-2 box">
 		<v-row class="ma-0">
 			<v-col
 				cols="12"
@@ -39,7 +39,15 @@
 				<h1>
 					{{ pack.details.name }}
 				</h1>
-				<div class="subtitle-1">By {{ pack.details.author.name }}</div>
+				<div class="subtitle-1">
+					By
+					<a
+						class="font-weight-bold"
+						:href="`/creators/${pack.creator.id}`"
+					>
+						{{ pack.creator.discord_user.username }}
+					</a>
+				</div>
 				<div
 					v-if="pack.details.description"
 					class="font-weight-thin subtitle-1"
@@ -63,15 +71,6 @@
 				<h3>
 					Details
 				</h3>
-				<div
-					v-if="pack.details.author.discord_tag"
-					class="font-weight-light body-2"
-				>
-					<span class="font-weight-medium">
-						Author's Discord:
-					</span>
-					{{ pack.details.author.discord_tag }}
-				</div>
 				<div class="font-weight-light body-2">
 					<span class="font-weight-medium">Version: </span>
 					{{ pack.details.version }}
@@ -126,10 +125,12 @@ import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import { pack, downloadPack } from '@/graphql/Pack.gql'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
+import LoadingOverlay from '@/components/LoadingOverlay'
 
 export default Vue.extend({
 	components: {
-		ThemesSlideGroup
+		ThemesSlideGroup,
+		LoadingOverlay
 	},
 	mixins: [shared, targetParser, urlParser],
 	data() {
@@ -237,7 +238,3 @@ export default Vue.extend({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-@import '@/layouts/details/SharedCss.scss';
-</style>

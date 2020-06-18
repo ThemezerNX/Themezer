@@ -1,5 +1,5 @@
 <template>
-	<div v-if="layout && layout.has_pieces" no-gutters class="pa-2 box">
+	<div v-if="layout && layout.has_pieces" no-gutters class="pa-2 box_fill">
 		<h1 class="box_text">
 			{{ layout.details.name }}
 		</h1>
@@ -22,7 +22,7 @@
 					"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
-					class="overlay_image"
+					class="overlay-image"
 					:style="backgroundStyle"
 				/>
 			</v-col>
@@ -160,11 +160,11 @@ import { layout } from '@/graphql/Layout.gql'
 import { mergeJson } from '@/graphql/Merging.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
-// import FloatingPreview from '@/components/FloatingPreview.vue'
+import LoadingOverlay from '@/components/LoadingOverlay'
 
 export default Vue.extend({
 	components: {
-		// FloatingPreview
+		LoadingOverlay
 	},
 	mixins: [urlParser, targetParser],
 	data() {
@@ -294,19 +294,3 @@ export default Vue.extend({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-.overlay_image {
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 400ms;
-	border-radius: 4px;
-	// max-height: 50vh;
-}
-
-// .v-input__slot {
-// 	align-items: center;
-// 	justify-content: center;
-// }
-</style>

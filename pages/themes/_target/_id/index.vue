@@ -1,5 +1,5 @@
 <template>
-	<div v-if="theme && theme.details" no-gutters class="pa-2 box_fit">
+	<div v-if="theme && theme.details" no-gutters class="pa-2 box">
 		<v-row class="ma-0">
 			<v-col
 				cols="12"
@@ -15,7 +15,7 @@
 					"
 					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
-					class="overlay_image"
+					class="overlay-image"
 					:style="backgroundStyle"
 				/>
 			</v-col>
@@ -30,7 +30,15 @@
 				<h1>
 					{{ theme.details.name }}
 				</h1>
-				<div class="subtitle-1">By {{ theme.details.author.name }}</div>
+				<div class="subtitle-1">
+					By
+					<a
+						class="font-weight-bold"
+						:href="`/creators/${theme.creator.id}`"
+					>
+						{{ theme.creator.discord_user.username }}
+					</a>
+				</div>
 				<div
 					v-if="theme.details.description"
 					class="font-weight-thin subtitle-1"
@@ -53,15 +61,6 @@
 				<h3>
 					Details
 				</h3>
-				<div
-					v-if="theme.details.author.discord_tag"
-					class="font-weight-light body-2"
-				>
-					<span class="font-weight-medium">
-						Author's Discord:
-					</span>
-					{{ theme.details.author.discord_tag }}
-				</div>
 				<div class="font-weight-light body-2">
 					<span class="font-weight-medium">Version: </span>
 					{{ theme.details.version }}
@@ -191,8 +190,12 @@ import shared from '@/layouts/details/SharedScript'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import { theme, downloadTheme } from '@/graphql/Theme.gql'
+import LoadingOverlay from '@/components/LoadingOverlay'
 
 export default Vue.extend({
+	components: {
+		LoadingOverlay
+	},
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
@@ -298,7 +301,3 @@ export default Vue.extend({
 	}
 })
 </script>
-
-<style lang="scss" scoped>
-@import '@/layouts/details/SharedCss.scss';
-</style>

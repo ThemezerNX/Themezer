@@ -1,5 +1,5 @@
 <template>
-	<div no-gutters class="pa-2 box_fit">
+	<div no-gutters class="pa-2 box">
 		<h1 class="box_text">
 			Layout Submissions
 		</h1>
@@ -17,7 +17,6 @@
 			<v-btn
 				color="primary"
 				class="mx-2"
-				append
 				router
 				href="https://github.com/ThemezerNX/Layouts"
 				target="_blank"

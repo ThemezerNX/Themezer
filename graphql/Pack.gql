@@ -2,12 +2,15 @@ query pack($id: Int!) {
 	pack(id: $id) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -18,12 +21,15 @@ query pack($id: Int!) {
 		themes {
 			uuid
 			id
+			creator {
+				id
+				discord_user {
+					username
+					avatar
+				}
+			}
 			details {
 				name
-				author {
-					name
-					discord_tag
-				}
 				description
 				color
 				version
@@ -37,21 +43,6 @@ query pack($id: Int!) {
 						name
 					}
 				}
-			}
-			pack {
-				uuid
-				id
-				details {
-					name
-					author {
-						name
-						discord_tag
-					}
-					description
-					color
-					version
-				}
-				last_updated
 			}
 			last_updated
 			pieces {
@@ -72,12 +63,14 @@ query packDetails($id: Int!) {
 	pack(id: $id) {
 		uuid
 		id
+		creator {
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -88,12 +81,15 @@ query packDetails($id: Int!) {
 		themes {
 			uuid
 			id
+			creator {
+				id
+				discord_user {
+					username
+					avatar
+				}
+			}
 			details {
 				name
-				author {
-					name
-					discord_tag
-				}
 				description
 				color
 				version
@@ -117,12 +113,15 @@ query packsList {
 	packsList {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
