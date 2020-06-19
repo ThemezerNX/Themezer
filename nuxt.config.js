@@ -72,8 +72,17 @@ export default {
 		],
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
-		'@nuxtjs/markdownit'
+		'@nuxtjs/markdownit',
+		'@nuxtjs/redirect-module'
 	],
+
+	redirect: [
+		{
+			from: '^.*(/)$',
+			to: (_from, req) => req.url.replace(/(\/)$/, '')
+		}
+	],
+
 	markdownit: {
 		injected: true
 	},
