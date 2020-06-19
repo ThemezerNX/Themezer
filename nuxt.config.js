@@ -64,12 +64,12 @@ export default {
 		'@nuxtjs/axios',
 		'@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
-		// [
-		// 	'nuxt-rfg-icon',
-		// 	{
-		// 		masterPicture: 'static/logo-512.jpg'
-		// 	}
-		// ],
+		[
+			'nuxt-rfg-icon',
+			{
+				masterPicture: 'static/logo-512.jpg'
+			}
+		],
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
 		'@nuxtjs/markdownit',
