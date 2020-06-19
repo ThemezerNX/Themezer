@@ -8,7 +8,14 @@
 			fixed
 			app
 		>
-			<div class="background" />
+			<div
+				class="background"
+				:style="
+					$store.state.profileColor
+						? `background-color: ${$store.state.profileColor} !important;`
+						: ''
+				"
+			/>
 			<v-list nav>
 				<v-list-item
 					v-if="!$auth.loggedIn"
@@ -36,7 +43,9 @@
 						<v-list-item-avatar>
 							<img
 								v-if="$auth.loggedIn"
-								:src="`https://cdn.discordapp.com/${Avatar}`"
+								:src="
+									`https://cdn.discordapp.com/${avatar}?size=64`
+								"
 							/>
 							<v-icon v-else large>
 								mdi-account-circle
@@ -48,7 +57,7 @@
 							</v-list-item-title>
 						</v-list-item-content>
 					</template>
-					<v-list-item dense router exact to="/account/profile">
+					<v-list-item dense router exact to="/me">
 						<v-list-item-title>My Profile</v-list-item-title>
 						<v-list-item-icon>
 							<v-icon>mdi-account</v-icon>
@@ -112,10 +121,20 @@
 				</template>
 			</v-list>
 		</v-navigation-drawer>
-		<v-app-bar class="navbar" clipped-left fixed app>
+		<v-app-bar
+			class="navbar"
+			clipped-left
+			fixed
+			app
+			:style="
+				$store.state.profileColor
+					? `background-color: ${$store.state.profileColor} !important;`
+					: ''
+			"
+		>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-			<NuxtLink exact to="/" style="text-decoration: none; color: white;">
-				<v-toolbar-title class="d-flex">
+			<NuxtLink exact to="/" class="title-link">
+				<v-toolbar-title class="d-flex title-text">
 					<v-img
 						class="mx-2"
 						contain
@@ -128,15 +147,9 @@
 			</NuxtLink>
 			<v-spacer />
 		</v-app-bar>
-		<v-content class="content">
-			<v-container
-				:fluid="$vuetify.breakpoint.smAndDown"
-				style="height: 100%;"
-			>
-				<!-- <v-container> -->
-				<nuxt />
-			</v-container>
-		</v-content>
+		<v-main class="content">
+			<nuxt />
+		</v-main>
 
 		<!-- <v-footer fixed app>
 			<span>&copy; {{ new Date().getFullYear() }} Migush</span>
@@ -234,7 +247,7 @@ export default {
 		}
 	},
 	computed: {
-		Avatar() {
+		avatar() {
 			if (this.$auth.user.avatar) {
 				return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`
 			} else {
@@ -256,6 +269,32 @@ export default {
 .v-card__text,
 .v-card__title {
 	word-break: normal;
+}
+
+.v-slide-group__content {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.smAndDown .v-slide-group__prev,
+.v-slide-group__next {
+	min-width: unset;
+}
+
+.v-parallax__image-container {
+	filter: blur(2px);
+	background: url('/images/diagonal_joycon-180.png') #333;
+	background-repeat: repeat;
+	animation: flow 45s linear infinite;
+}
+
+@keyframes flow {
+	from {
+		background-position: bottom left;
+	}
+	to {
+		background-position: right;
+	}
 }
 
 .box {
@@ -286,6 +325,20 @@ export default {
 		margin-top: 16px;
 	}
 }
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #4e4e4e;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -296,25 +349,26 @@ export default {
 		position: absolute;
 		height: 100%;
 		width: 100%;
-		z-index: -1;
-		background-size: cover;
-		filter: blur(5px) brightness(0.4);
-		// background-image: url('/images/drawer_backgrounds/animalcrossing.png');
-		// background: linear-gradient(
-		// 		to left top,
-		// 		$themezer-aqua 0%,
-		// 		$themezer-average 50%,
-		// 		$themezer-magenta 100%
-		// 	),
-		// 	linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-		// background: linear-gradient(135deg, $themezer-magenta, $themezer-aqua);
-		overflow: hidden;
+		z-index: -5;
+
+		transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color;
+		transition-property: background-color;
+		transition-duration: 0.2s;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1),
+			cubic-bezier(0.4, 0, 0.2, 1);
+		transition-delay: 0s;
 	}
 }
 
 .navbar {
 	user-select: none;
 	background: transparent;
+	.title-link {
+		text-decoration: none;
+	}
+	.title-text {
+		color: white !important;
+	}
 }
 
 .content {

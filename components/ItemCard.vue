@@ -17,7 +17,6 @@
 			<v-img
 				aspect-ratio="1.7778"
 				:src="imgSrc"
-				:lazy-src="'/logo_16-9-256.jpg'"
 				contain
 				:style="
 					type === 'layouts'
@@ -82,4 +81,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/assets/card.scss';
+</style>
+
+<style lang="scss">
+@import '@/assets/card-lazy.scss';
 </style>

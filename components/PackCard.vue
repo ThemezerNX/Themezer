@@ -23,7 +23,6 @@
 					:key="i"
 					height="auto"
 					aspect-ratio="1.7778"
-					:lazy-src="'/logo_16-9-256.jpg'"
 					:src="
 						`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
 					"
@@ -66,4 +65,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/assets/card.scss';
+</style>
+
+<style lang="scss">
+@import '@/assets/card-lazy.scss';
 </style>

@@ -1,9 +1,5 @@
 <template>
-	<CreatorPage
-		:id="$route.params.id"
-		ref="CreatorPage"
-		:is-page-owner="true"
-	/>
+	<CreatorPage :id="$auth.user.id" ref="CreatorPage" :is-page-owner="true" />
 </template>
 
 <script>
@@ -11,15 +7,12 @@ import Vue from 'vue'
 import CreatorPage from '@/components/CreatorPage'
 
 export default Vue.extend({
+	middleware: ['auth'],
+	options: {
+		auth: true
+	},
 	components: {
 		CreatorPage
-	},
-	beforeRouteEnter(to, _from, next) {
-		if (to.params.id) {
-			next()
-		} else {
-			this.$router.push('/')
-		}
 	},
 	beforeRouteLeave(_to, _from, next) {
 		if (this.$refs.CreatorPage && this.$refs.CreatorPage.changes) {

@@ -1,91 +1,92 @@
 <template>
-	<div v-if="pack && pack.details" no-gutters class="pa-2 box">
-		<v-row class="ma-0">
-			<v-col
-				cols="12"
-				xs="12"
-				:sm="landscape ? 8 : 12"
-				md="9"
-				class="pa-2"
-			>
-				<v-carousel
-					continuous
-					hide-delimiters
-					hide-delimiter-background
-					cycle
-					height="auto"
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<div v-if="pack && pack.details" no-gutters class="pa-2 box">
+			<v-row class="ma-0">
+				<v-col
+					cols="12"
+					xs="12"
+					:sm="landscape ? 8 : 12"
+					md="9"
+					class="pa-2"
 				>
-					<v-carousel-item
-						v-for="(theme, i) in pack.themes"
-						:key="i"
+					<v-carousel
+						continuous
+						hide-delimiters
+						hide-delimiter-background
+						cycle
 						height="auto"
-						aspect-ratio="1.7778"
-						:lazy-src="'/logo_16-9-256.jpg'"
-						:src="
-							`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
-						"
 					>
-					</v-carousel-item>
-				</v-carousel>
-			</v-col>
-			<v-col
-				cols="12"
-				xs="12"
-				:sm="landscape ? 4 : 12"
-				md="3"
-				class="pa-2"
-				style="position: relative;"
-			>
-				<h1>
-					{{ pack.details.name }}
-				</h1>
-				<div class="subtitle-1">
-					By
-					<a
-						class="font-weight-bold"
-						:href="`/creators/${pack.creator.id}`"
-					>
-						{{ pack.creator.discord_user.username }}
-					</a>
-				</div>
-				<div
-					v-if="pack.details.description"
-					class="font-weight-thin subtitle-1"
+						<v-carousel-item
+							v-for="(theme, i) in pack.themes"
+							:key="i"
+							height="auto"
+							aspect-ratio="1.7778"
+							:lazy-src="'/logo_16-9-256.jpg'"
+							:src="
+								`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+							"
+						>
+						</v-carousel-item>
+					</v-carousel>
+				</v-col>
+				<v-col
+					cols="12"
+					xs="12"
+					:sm="landscape ? 4 : 12"
+					md="3"
+					class="pa-2"
+					style="position: relative;"
 				>
-					{{ pack.details.description }}
-				</div>
-
-				<div>
-					<v-chip
-						v-for="(category, i) in categories"
-						:key="i"
-						class="ma-2"
-						pill
-						small
+					<h1>
+						{{ pack.details.name }}
+					</h1>
+					<div class="subtitle-1">
+						By
+						<a
+							class="font-weight-bold"
+							:href="`/creators/${pack.creator.id}`"
+						>
+							{{ pack.creator.discord_user.username }}
+						</a>
+					</div>
+					<div
+						v-if="pack.details.description"
+						class="font-weight-thin subtitle-1"
 					>
-						{{ category }}
-					</v-chip>
-				</div>
+						{{ pack.details.description }}
+					</div>
 
-				<v-divider class="my-3" />
-				<h3>
-					Details
-				</h3>
-				<div class="font-weight-light body-2">
-					<span class="font-weight-medium">Version: </span>
-					{{ pack.details.version }}
-				</div>
-				<div class="font-weight-light body-2">
-					<span class="font-weight-medium">Last Updated:</span>
-					{{ niceDate(pack.last_updated) }}
-				</div>
-				<div class="font-weight-light body-2">
-					<span class="font-weight-medium">Downloads: </span>
-					{{ pack.dl_count }}
-				</div>
-				<!-- <div style="position: absolute; bottom: 0;"> -->
-				<v-flex class="d-flex justify-center mt-3">
-					<!-- <v-btn
+					<div>
+						<v-chip
+							v-for="(category, i) in categories"
+							:key="i"
+							class="ma-2"
+							pill
+							small
+						>
+							{{ category }}
+						</v-chip>
+					</div>
+
+					<v-divider class="my-3" />
+					<h3>
+						Details
+					</h3>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">Version: </span>
+						{{ pack.details.version }}
+					</div>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">Last Updated:</span>
+						{{ niceDate(pack.last_updated) }}
+					</div>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">Downloads: </span>
+						{{ pack.dl_count }}
+					</div>
+					<!-- <div style="position: absolute; bottom: 0;"> -->
+					<v-flex class="d-flex justify-center mt-3">
+						<!-- <v-btn
 						v-if="pack.has_pieces"
 						class="mx-2"
 						color="primary"
@@ -94,28 +95,35 @@
 					>
 						Customize <v-icon right>mdi-square-edit-outline</v-icon>
 					</v-btn> -->
-					<v-btn
-						class="mx-2"
-						color="secondary"
-						append
-						:loading="loadingDownload"
-						@click.prevent="downloadPack()"
-					>
-						Get <v-icon right>mdi-download-box-outline</v-icon>
-					</v-btn>
-				</v-flex>
-			</v-col>
-		</v-row>
-		<v-row class="ma-0">
-			<v-col
-				:class="$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'"
-			>
-				<ThemesSlideGroup :items="pack.themes" />
-			</v-col>
-		</v-row>
-	</div>
-	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else>There's nothing here :(</span>
+						<v-btn
+							class="mx-2"
+							color="secondary"
+							append
+							:loading="loadingDownload"
+							@click.prevent="downloadPack()"
+						>
+							Get <v-icon right>mdi-download-box-outline</v-icon>
+						</v-btn>
+					</v-flex>
+				</v-col>
+			</v-row>
+			<v-row class="ma-0">
+				<v-col
+					:class="
+						$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
+					"
+				>
+					<h2 class="px-2">
+						Themes in this Pack
+					</h2>
+					<v-divider />
+					<ThemesSlideGroup :items="pack.themes" />
+				</v-col>
+			</v-row>
+		</div>
+		<LoadingOverlay v-else-if="$apollo.loading" />
+		<span v-else>There's nothing here :(</span>
+	</v-container>
 </template>
 
 <script>

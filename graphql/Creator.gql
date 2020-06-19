@@ -1,0 +1,55 @@
+query me {
+	me {
+		id
+		discord_user {
+			username
+			discriminator
+			avatar
+			system
+			locale
+		}
+		bio
+		joined
+		role
+		banner_image
+		logo_image
+		profile_color
+	}
+}
+
+query creator($id: String!) {
+	creator(id: $id) {
+		id
+		discord_user {
+			username
+			discriminator
+			avatar
+			system
+			locale
+		}
+		bio
+		joined
+		role
+		banner_image
+		logo_image
+		profile_color
+	}
+}
+
+mutation profile(
+	$bio: String
+	$profile_color: String
+	$banner_image: Upload
+	$logo_image: Upload
+	$clear_banner_image: Boolean
+	$clear_logo_image: Boolean
+) {
+	profile(
+		bio: $bio
+		profile_color: $profile_color
+		banner_image: $banner_image
+		logo_image: $logo_image
+		clear_banner_image: $clear_banner_image
+		clear_logo_image: $clear_logo_image
+	)
+}

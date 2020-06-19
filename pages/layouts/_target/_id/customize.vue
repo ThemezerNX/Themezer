@@ -1,157 +1,167 @@
 <template>
-	<div v-if="layout && layout.has_pieces" no-gutters class="pa-2 box_fill">
-		<h1 class="box_text">
-			{{ layout.details.name }}
-		</h1>
-		<div class="subtitle-1 box_text">
-			By {{ layout.details.author.name }}
-		</div>
-		<v-row class="ma-0">
-			<v-col
-				cols="12"
-				xs="12"
-				sm="4"
-				class="pa-2"
-				style="position: relative;"
-			>
-				<v-img
-					aspect-ratio="1.7778"
-					:src="
-						preview ||
-							`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
-					"
-					:lazy-src="'/logo_16-9-256.jpg'"
-					contain
-					class="overlay-image"
-					:style="backgroundStyle"
-				/>
-			</v-col>
-			<v-col cols="12" xs="12" sm="8" class="pa-2">
-				<v-list
-					subheader
-					flat
-					style="background: rgba(255,255,255,0.12);"
-					class="my-3"
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<div
+			v-if="layout && layout.has_pieces"
+			no-gutters
+			class="pa-2 box_fill"
+		>
+			<h1 class="box_text">
+				{{ layout.details.name }}
+			</h1>
+			<div class="subtitle-1 box_text">
+				By {{ layout.details.author.name }}
+			</div>
+			<v-row class="ma-0">
+				<v-col
+					cols="12"
+					xs="12"
+					sm="4"
+					class="pa-2"
+					style="position: relative;"
 				>
-					<v-subheader>Layout Modifications</v-subheader>
-					<div v-for="(piece, i) in layout.pieces" :key="piece.name">
-						<v-list-item v-if="piece.values.length === 1">
-							<v-list-item-content
-								class="pa-0"
-								style="overflow: visible;"
-							>
-								<v-col
-									class="pa-0"
-									cols="12"
-									sm="6"
-									md="8"
-									lg="8"
-									xl="10"
-								>
-									<v-list-item-title>
-										{{ piece.name }}
-									</v-list-item-title>
-									<v-list-item-subtitle>
-										{{ piece.description }}
-									</v-list-item-subtitle>
-								</v-col>
-								<v-col
-									class="pa-0 d-flex"
-									cols="12"
-									sm="6"
-									md="4"
-									lg="4"
-									xl="2"
-									style="position: relative;"
-								>
-									<v-checkbox
-										v-model="data[i]"
-										class="ma-0 pa-0 d-flex align-self-center"
-										style="position: absolute; right: 0;"
-										hide-details
-										width="auto"
-										@change="
-											setPreview(
-												piece,
-												piece.values[0],
-												data[i]
-											)
-										"
-									></v-checkbox>
-								</v-col>
-							</v-list-item-content>
-						</v-list-item>
-
-						<v-list-item v-else-if="piece.values.length > 0">
-							<v-list-item-content class="pa-0">
-								<v-col
-									class="pa-0"
-									cols="12"
-									sm="6"
-									md="8"
-									lg="8"
-									xl="10"
-								>
-									<v-list-item-title>
-										{{ piece.name }}
-									</v-list-item-title>
-									<v-list-item-subtitle
-										style="-webkit-line-clamp: unset;"
-									>
-										{{ piece.description }}
-									</v-list-item-subtitle>
-								</v-col>
-								<v-col
-									class="pa-0"
-									cols="12"
-									sm="6"
-									md="4"
-									lg="4"
-									xl="2"
-								>
-									<v-select
-										v-model="data[i]"
-										class="soloSelectGrey"
-										:items="dropdownKeys(piece.values)"
-										:menu-props="{ offsetY: true }"
-										label="Default"
-										hide-details
-										solo
-										@change="
-											setPreview(
-												piece,
-												piece.values.find(
-													(v) => v.value === data[i]
-												),
-												data[i]
-											)
-										"
-									></v-select>
-								</v-col>
-							</v-list-item-content>
-						</v-list-item>
-					</div>
-				</v-list>
-				<v-flex class="d-flex justify-center">
-					<v-btn
-						color="secondary"
-						append
-						:loading="loadingMerge"
-						@click.prevent="
-							combineLayouts(
-								layout.baselayout,
-								layout.details.name
-							)
+					<v-img
+						aspect-ratio="1.7778"
+						:src="
+							preview ||
+								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 						"
+						:lazy-src="'/logo_16-9-256.jpg'"
+						contain
+						class="overlay-image"
+						:style="backgroundStyle"
+					/>
+				</v-col>
+				<v-col cols="12" xs="12" sm="8" class="pa-2">
+					<v-list
+						subheader
+						flat
+						style="background: rgba(255,255,255,0.12);"
+						class="my-3"
 					>
-						Get <v-icon right>mdi-download-box-outline</v-icon>
-					</v-btn>
-				</v-flex>
-			</v-col>
-		</v-row>
-	</div>
-	<LoadingOverlay v-else-if="$apollo.loading" />
-	<span v-else>There's nothing here :(</span>
+						<v-subheader>Layout Modifications</v-subheader>
+						<div
+							v-for="(piece, i) in layout.pieces"
+							:key="piece.name"
+						>
+							<v-list-item v-if="piece.values.length === 1">
+								<v-list-item-content
+									class="pa-0"
+									style="overflow: visible;"
+								>
+									<v-col
+										class="pa-0"
+										cols="12"
+										sm="6"
+										md="8"
+										lg="8"
+										xl="10"
+									>
+										<v-list-item-title>
+											{{ piece.name }}
+										</v-list-item-title>
+										<v-list-item-subtitle>
+											{{ piece.description }}
+										</v-list-item-subtitle>
+									</v-col>
+									<v-col
+										class="pa-0 d-flex"
+										cols="12"
+										sm="6"
+										md="4"
+										lg="4"
+										xl="2"
+										style="position: relative;"
+									>
+										<v-checkbox
+											v-model="data[i]"
+											class="ma-0 pa-0 d-flex align-self-center"
+											style="position: absolute; right: 0;"
+											hide-details
+											width="auto"
+											@change="
+												setPreview(
+													piece,
+													piece.values[0],
+													data[i]
+												)
+											"
+										></v-checkbox>
+									</v-col>
+								</v-list-item-content>
+							</v-list-item>
+
+							<v-list-item v-else-if="piece.values.length > 0">
+								<v-list-item-content class="pa-0">
+									<v-col
+										class="pa-0"
+										cols="12"
+										sm="6"
+										md="8"
+										lg="8"
+										xl="10"
+									>
+										<v-list-item-title>
+											{{ piece.name }}
+										</v-list-item-title>
+										<v-list-item-subtitle
+											style="-webkit-line-clamp: unset;"
+										>
+											{{ piece.description }}
+										</v-list-item-subtitle>
+									</v-col>
+									<v-col
+										class="pa-0"
+										cols="12"
+										sm="6"
+										md="4"
+										lg="4"
+										xl="2"
+									>
+										<v-select
+											v-model="data[i]"
+											class="soloSelectGrey"
+											:items="dropdownKeys(piece.values)"
+											:menu-props="{ offsetY: true }"
+											label="Default"
+											hide-details
+											solo
+											@change="
+												setPreview(
+													piece,
+													piece.values.find(
+														(v) =>
+															v.value === data[i]
+													),
+													data[i]
+												)
+											"
+										></v-select>
+									</v-col>
+								</v-list-item-content>
+							</v-list-item>
+						</div>
+					</v-list>
+					<v-flex class="d-flex justify-center">
+						<v-btn
+							color="secondary"
+							append
+							:loading="loadingMerge"
+							@click.prevent="
+								combineLayouts(
+									layout.baselayout,
+									layout.details.name
+								)
+							"
+						>
+							Get <v-icon right>mdi-download-box-outline</v-icon>
+						</v-btn>
+					</v-flex>
+				</v-col>
+			</v-row>
+		</div>
+		<LoadingOverlay v-else-if="$apollo.loading" />
+		<span v-else>There's nothing here :(</span>
+	</v-container>
 </template>
 
 <script>
@@ -193,7 +203,7 @@ export default Vue.extend({
 			variables() {
 				return {
 					id: this.id,
-					target: this.$route.params.target
+					target: this.targetFile()
 				}
 			},
 			result({ data }) {

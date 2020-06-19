@@ -7,11 +7,8 @@
 			<h2>
 				Uh oh!
 			</h2>
-			<h1 v-if="error.statusCode === 404">
-				{{ pageNotFound }}
-			</h1>
-			<h1 v-else>
-				{{ otherError }}
+			<h1 class="mb-4">
+				{{ title }}
 			</h1>
 			<v-btn color="secondary" @click="$router.go(-1)">
 				Go Back
@@ -35,11 +32,19 @@ export default {
 			otherError: 'An error occurred'
 		}
 	},
+	computed: {
+		title() {
+			return (
+				this.error.message ||
+				(this.error.statusCode === 404
+					? this.pageNotFound
+					: this.otherError)
+			)
+		}
+	},
 	head() {
-		const title =
-			this.error.statusCode === 404 ? this.pageNotFound : this.otherError
 		return {
-			title
+			title: this.title
 		}
 	}
 }

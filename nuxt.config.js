@@ -75,10 +75,7 @@ export default {
 		'@nuxtjs/markdownit'
 	],
 	markdownit: {
-		preset: 'default',
-		linkify: true,
-		breaks: true,
-		use: ['markdown-it-div', 'markdown-it-attrs']
+		injected: true
 	},
 
 	gtm: {

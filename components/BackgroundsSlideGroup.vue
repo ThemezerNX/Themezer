@@ -18,7 +18,7 @@
 				<v-hover v-if="background" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
-							class="card"
+							class="ma-auto card"
 							:class="
 								`
 								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
@@ -50,7 +50,6 @@
 								:width="
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"
-								:lazy-src="'/logo_16-9-256.jpg'"
 								contain
 							/>
 
@@ -164,15 +163,7 @@ export default {
 </script>
 
 <style lang="scss">
-.v-slide-group__content {
-	padding-top: 6px;
-	padding-bottom: 6px;
-}
-
-.smAndDown .v-slide-group__prev,
-.v-slide-group__next {
-	min-width: unset;
-}
+@import '@/assets/card-lazy.scss';
 
 .card {
 	border: rgba(255, 255, 255, 0.12) solid 1px !important;

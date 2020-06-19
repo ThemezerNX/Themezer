@@ -113,6 +113,28 @@ query themesList($target: String!) {
 	}
 }
 
+query latestThemesList($target: String, $creator_id: String, $limit: Int!) {
+	latestThemesList(target: $target, creator_id: $creator_id, limit: $limit) {
+		uuid
+		id
+		creator {
+			id
+			discord_user {
+				username
+				avatar
+			}
+		}
+		details {
+			name
+			description
+			color
+			version
+		}
+		target
+		last_updated
+	}
+}
+
 mutation downloadTheme($uuid: GUID!, $piece_uuids: [GUID!]) {
 	downloadTheme(uuid: $uuid, piece_uuids: $piece_uuids) {
 		filename
