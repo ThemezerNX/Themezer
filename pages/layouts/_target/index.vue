@@ -88,6 +88,13 @@ export default Vue.extend({
 			prefetch: true
 		}
 	},
+	beforeRouteEnter(to, _from, next) {
+		if (to.params.target) {
+			next()
+		} else {
+			next('/')
+		}
+	},
 	head() {
 		const metaTitle = this.filteredItems
 			? `${this.filteredItems.length} ${

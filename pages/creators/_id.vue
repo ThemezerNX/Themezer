@@ -18,7 +18,7 @@ export default Vue.extend({
 		if (to.params.id) {
 			next()
 		} else {
-			this.$router.push('/')
+			next('/')
 		}
 	},
 	beforeRouteLeave(_to, _from, next) {

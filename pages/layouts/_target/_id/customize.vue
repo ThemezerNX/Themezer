@@ -176,6 +176,13 @@ export default Vue.extend({
 	components: {
 		LoadingOverlay
 	},
+	beforeRouteEnter(to, _from, next) {
+		if (to.params.id) {
+			next()
+		} else {
+			next('/')
+		}
+	},
 	mixins: [urlParser, targetParser],
 	data() {
 		return {

@@ -207,7 +207,7 @@ export default Vue.extend({
 		LoadingOverlay,
 		BackgroundsSlideGroup
 	},
-	mixins: [shared, targetParser],
+	ixins: [shared, targetParser],
 	data() {
 		return {
 			commonlayoutDialog: false,

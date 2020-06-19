@@ -65,6 +65,13 @@ export default Vue.extend({
 		Filters,
 		LoadingOverlay
 	},
+	beforeRouteEnter(to, _from, next) {
+		if (to.params.target) {
+			next()
+		} else {
+			next('/')
+		}
+	},
 	mixins: [targetParser, filter],
 	data() {
 		return {
