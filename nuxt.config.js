@@ -64,12 +64,12 @@ export default {
 		'@nuxtjs/axios',
 		'@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
-		[
-			'nuxt-rfg-icon',
-			{
-				masterPicture: 'static/logo-512.jpg'
-			}
-		],
+		// [
+		// 	'nuxt-rfg-icon',
+		// 	{
+		// 		masterPicture: 'static/logo-512.jpg'
+		// 	}
+		// ],
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
 		'@nuxtjs/markdownit',
@@ -78,8 +78,14 @@ export default {
 
 	redirect: [
 		{
-			from: '^.*(/)$',
-			to: (_from, req) => req.url.replace(/(\/)$/, '')
+			// eslint-disable-next-line
+			from: '(?!^\/$|^\/[?].*$)(.*\/[?](.*)$|.*\/$)',
+			to: (_from, req) => {
+				const base = req._parsedUrl.pathname.replace(/\/$/, '') // We take pathname instead of req.url because of the query parameters
+				const search = req._parsedUrl.search
+				return base + (search != null ? search : '')
+			},
+			statusCode: 301
 		}
 	],
 
@@ -137,21 +143,6 @@ export default {
 		}
 	},
 
-	build: {
-		extend(config, ctx) {
-			config.module.rules.push({
-				test: /\/graphql\/\.(graphql|gql)$/,
-				exclude: /(node_modules|server)/,
-				loader: 'graphql-tag/loader'
-			})
-
-			if (ctx.isDev) {
-				config.mode = 'development'
-			} else if (ctx.isClient) {
-				config.optimization.splitChunks.maxSize = 249856
-			}
-		}
-	},
 	auth: {
 		cookie: {
 			prefix: 'auth.',
@@ -188,6 +179,26 @@ export default {
 					property: 'refresh_token',
 					maxAge: 60 * 60 * 24 * 30
 				}
+			}
+		}
+	},
+
+	router: {
+		trailingSlash: false
+	},
+
+	build: {
+		extend(config, ctx) {
+			config.module.rules.push({
+				test: /\/graphql\/\.(graphql|gql)$/,
+				exclude: /(node_modules|server)/,
+				loader: 'graphql-tag/loader'
+			})
+
+			if (ctx.isDev) {
+				config.mode = 'development'
+			} else if (ctx.isClient) {
+				config.optimization.splitChunks.maxSize = 244000
 			}
 		}
 	}
