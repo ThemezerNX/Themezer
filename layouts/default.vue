@@ -57,7 +57,12 @@
 							</v-list-item-title>
 						</v-list-item-content>
 					</template>
-					<v-list-item dense router exact to="/me">
+					<v-list-item
+						dense
+						router
+						exact
+						:to="`/creators/${$auth.user.id}`"
+					>
 						<v-list-item-title>My Profile</v-list-item-title>
 						<v-list-item-icon>
 							<v-icon>mdi-account</v-icon>

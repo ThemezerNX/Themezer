@@ -50,6 +50,21 @@
 						{{ creator.discord_user.username }}#{{
 							creator.discord_user.discriminator
 						}}
+						<v-tooltip top>
+							<template v-slot:activator="{ on, attrs }">
+								<v-icon
+									v-if="roleIcon"
+									class="mt-n2"
+									v-bind="attrs"
+									v-on="on"
+								>
+									{{ roleIcon }}
+								</v-icon>
+							</template>
+							<span class="text-capitalize">{{
+								creator.role
+							}}</span>
+						</v-tooltip>
 					</h1>
 				</v-col>
 				<v-col v-if="isPageOwner" class="text-center" cols="12">
@@ -294,6 +309,15 @@ export default Vue.extend({
 				!this.changed.clearBannerImage &&
 				!this.changed.clearLogoImage
 			)
+		},
+		roleIcon() {
+			switch (this.creator.role) {
+				case 'verified':
+					return 'mdi-check-decagram'
+
+				default:
+					return null
+			}
 		}
 	},
 	apollo: {
