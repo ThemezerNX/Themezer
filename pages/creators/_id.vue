@@ -84,6 +84,7 @@
 						Bio
 					</h1>
 					<v-divider />
+					<!-- eslint-disable-next-line vue/no-v-html -->
 					<div v-if="creator.bio" v-html="$md.render(creator.bio)" />
 					<span v-else>There's nothing here yet...</span>
 				</v-col>
@@ -249,18 +250,13 @@ export default Vue.extend({
 	},
 	middleware: ['auth'],
 	options: {
-		auth: true
-	},
-	props: {
-		isPageOwner: {
-			type: Boolean,
-			required: false,
-			default: false
-		}
+		auth: false
 	},
 	data() {
 		return {
 			id: this.$route.params.id,
+			isPageOwner:
+				this.$auth.user && this.$route.params.id === this.$auth.user.id,
 			editDialog: false,
 			submitValid: false,
 			loading: {
