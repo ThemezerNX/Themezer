@@ -73,7 +73,8 @@ export default {
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
 		'@nuxtjs/markdownit',
-		'@nuxtjs/redirect-module'
+		'@nuxtjs/redirect-module',
+		['cookie-universal-nuxt', { parseJSON: false }]
 	],
 
 	redirect: [
@@ -100,15 +101,7 @@ export default {
 	apollo: {
 		// errorHandler: '~/plugins/apollo-error-handler.js',
 		clientConfigs: {
-			default: {
-				httpEndpoint: process.env.API_ENDPOINT,
-				httpLinkOptions: {
-					credentials: 'include'
-				},
-				inMemoryCacheOptions: {
-					addTypename: false
-				}
-			}
+			default: '~/plugins/apolloClient.js'
 		}
 	},
 

@@ -168,6 +168,7 @@ export default {
 		return {
 			title: process.env.APP_TITLE,
 			drawer: false,
+			error: null,
 			items: [
 				{
 					icon: 'mdi-package-variant-closed',
@@ -263,8 +264,11 @@ export default {
 		}
 	},
 	methods: {
-		async logout() {
-			await this.$auth.logout()
+		logout() {
+			this.error = null
+			return this.$auth.logout('social').catch((e) => {
+				this.error = e.response.data
+			})
 		}
 	}
 }
@@ -332,7 +336,7 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 	background-color: #1e1e1e;
 }
 
