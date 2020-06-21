@@ -53,7 +53,6 @@
 					<v-img
 						aspect-ratio="1.7778"
 						:src="screenshotBlackUrl"
-						:lazy-src="'/logo_16-9-256.jpg'"
 						contain
 						alt="Screenshot with black background"
 					/>
@@ -85,7 +84,6 @@
 					<v-img
 						aspect-ratio="1.7778"
 						:src="screenshotWhiteUrl"
-						:lazy-src="'/logo_16-9-256.jpg'"
 						contain
 						alt="Screenshot with white background"
 					/>
@@ -144,7 +142,6 @@
 					:src="
 						`data:${resultImage.mimetype};base64,${resultImage.data}`
 					"
-					:lazy-src="'/logo_16-9-256.jpg'"
 					contain
 					alt="Created overlay image"
 					style="background: rgba(255, 255, 255, 0.20);"

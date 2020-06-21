@@ -25,7 +25,6 @@
 							preview ||
 								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 						"
-						:lazy-src="'/logo_16-9-256.jpg'"
 						contain
 						class="overlay-image"
 						:style="backgroundStyle"

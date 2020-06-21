@@ -153,9 +153,6 @@
 																  ]
 																: ''
 														"
-														:lazy-src="
-															'/logo_16-9-256.jpg'
-														"
 														contain
 													>
 														<v-expand-transition>

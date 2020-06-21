@@ -163,8 +163,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/card-lazy.scss';
-
 .card {
 	border: rgba(255, 255, 255, 0.12) solid 1px !important;
 	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;

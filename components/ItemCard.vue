@@ -82,7 +82,3 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/assets/card.scss';
 </style>
-
-<style lang="scss">
-@import '@/assets/card-lazy.scss';
-</style>

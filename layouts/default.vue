@@ -297,6 +297,19 @@ export default {
 	animation: flow 45s linear infinite;
 }
 
+.card .v-image__image--preload {
+	background: url('/images/diagonal_joycon-180.png') #333;
+	background-repeat: repeat;
+	animation: flow 6s linear infinite;
+}
+
+.box_fill .v-image__image--preload,
+.box .v-image__image--preload {
+	background: url('/images/diagonal_joycon-180.png') #333;
+	background-repeat: repeat;
+	animation: flow 30s linear infinite;
+}
+
 @keyframes flow {
 	from {
 		background-position: bottom left;
