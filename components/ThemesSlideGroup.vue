@@ -79,13 +79,6 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
-.card {
-	border: rgba(255, 255, 255, 0.12) solid 1px !important;
-	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
-}
-.card.hover {
-	background: lighten(#1e1e1e, 4%) !important;
-	transform: translateY(-2px);
-}
+<style lang="scss" scoped>
+@import '@/assets/card.scss';
 </style>
