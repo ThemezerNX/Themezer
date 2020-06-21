@@ -101,10 +101,23 @@
 			>
 				<v-col cols="12" class="pt-0">
 					<h1>
-						Latest themes by this creator
+						Latest Themes by this creator
 					</h1>
 					<v-divider />
 					<ThemesSlideGroup :items="latestThemesList" />
+				</v-col>
+			</v-row>
+			<v-row
+				v-if="layoutsList && layoutsList.length > 0"
+				align="center"
+				justify="center"
+			>
+				<v-col cols="12" class="pt-0">
+					<h1>
+						All Layouts by this creator
+					</h1>
+					<v-divider />
+					<LayoutsSlideGroup :items="layoutsList" />
 				</v-col>
 			</v-row>
 		</v-container>
@@ -245,12 +258,15 @@
 import Vue from 'vue'
 import { creator, profile } from '@/graphql/Creator.gql'
 import { latestThemesList } from '@/graphql/Theme.gql'
+import { allLayoutsList } from '@/graphql/Layout.gql'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
+import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
 import error from '@/layouts/error'
 
 export default Vue.extend({
 	components: {
 		ThemesSlideGroup,
+		LayoutsSlideGroup,
 		error
 	},
 	middleware: ['auth'],
@@ -335,7 +351,19 @@ export default Vue.extend({
 			variables() {
 				return {
 					creator_id: this.id,
-					limit: 5
+					limit: 10
+				}
+			},
+			error(e) {
+				this.error = e
+			},
+			prefetch: true
+		},
+		layoutsList: {
+			query: allLayoutsList,
+			variables() {
+				return {
+					creator_id: this.id
 				}
 			},
 			error(e) {

@@ -6,7 +6,6 @@ query pack($id: Int!) {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {
@@ -25,7 +24,6 @@ query pack($id: Int!) {
 				id
 				discord_user {
 					username
-					avatar
 				}
 			}
 			details {
@@ -37,11 +35,14 @@ query pack($id: Int!) {
 			layout {
 				uuid
 				id
+				creator {
+					id
+					discord_user {
+						username
+					}
+				}
 				details {
 					name
-					author {
-						name
-					}
 				}
 			}
 			last_updated

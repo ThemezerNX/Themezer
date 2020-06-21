@@ -31,7 +31,13 @@
 						{{ layout.details.name }}
 					</h1>
 					<div class="subtitle-1">
-						By {{ layout.details.author.name }}
+						By
+						<a
+							class="font-weight-bold"
+							:href="`/creators/${layout.creator.id}`"
+						>
+							{{ layout.creator.discord_user.username }}
+						</a>
 					</div>
 					<div
 						v-if="layout.details.description"
@@ -44,15 +50,6 @@
 					<h3>
 						Details
 					</h3>
-					<div
-						v-if="layout.details.author.discord_tag"
-						class="font-weight-light body-2"
-					>
-						<span class="font-weight-medium">
-							Author's Discord:
-						</span>
-						{{ layout.details.author.discord_tag }}
-					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">Version: </span>
 						{{ layout.details.version }}
@@ -206,7 +203,7 @@ export default Vue.extend({
 		LoadingOverlay,
 		BackgroundsSlideGroup
 	},
-	ixins: [shared, targetParser],
+	mixins: [shared, targetParser],
 	data() {
 		return {
 			commonlayoutDialog: false,

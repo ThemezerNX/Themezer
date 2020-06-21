@@ -169,7 +169,9 @@ export default Vue.extend({
 							creator_name: item.creator.discord_user.username,
 							creator_discord:
 								'#' + item.creator.discord_user.discriminator,
-							categories: item.categories.join('|')
+							categories: item.categories
+								? item.categories.join('|')
+								: ''
 						}
 					})
 

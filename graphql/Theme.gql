@@ -6,7 +6,6 @@ query theme($id: Int!, $target: String!) {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {
@@ -18,11 +17,14 @@ query theme($id: Int!, $target: String!) {
         layout {
             uuid
 			id
+			creator {
+				id
+				discord_user {
+					username
+				}
+			}
             details {
                 name
-                author {
-                    name
-                }
             }
 			target
         }
@@ -33,7 +35,6 @@ query theme($id: Int!, $target: String!) {
 				id
 				discord_user {
 					username
-					avatar
 				}
 			}
             details {
@@ -67,7 +68,6 @@ query themeDetails($id: Int!, $target: String!) {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {
@@ -98,7 +98,6 @@ query themesList($target: String!) {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {
@@ -121,7 +120,6 @@ query latestThemesList($target: String, $creator_id: String, $limit: Int!) {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {

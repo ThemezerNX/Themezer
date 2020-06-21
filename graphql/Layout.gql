@@ -2,12 +2,14 @@ query layout($id: Int!, $target: String!) {
 	layout(id: $id, target: $target) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -34,12 +36,14 @@ query layoutDetails($id: Int!, $target: String!) {
 	layout(id: $id, target: $target) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+			}
+		}
 		details {
 			name
-			author {
-				name
-				discord_tag
-			}
 			description
 			color
 			version
@@ -52,16 +56,32 @@ query layoutDetails($id: Int!, $target: String!) {
 	}
 }
 
-query layoutsList($target: String!) {
-	layoutsList(target: $target) {
+query allLayoutsList($creator_id: String) {
+	layoutsList(creator_id: $creator_id) {
 		uuid
 		id
 		details {
 			name
-			author {
-				name
-				discord_tag
+			color
+		}
+		target
+		last_updated
+	}
+}
+
+
+query layoutsList($target: String) {
+	layoutsList(target: $target) {
+		uuid
+		id
+		creator {
+			id
+			discord_user {
+				username
 			}
+		}
+		details {
+			name
 			description
 			color
 			version
