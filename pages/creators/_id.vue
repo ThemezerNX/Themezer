@@ -14,6 +14,11 @@
 				<v-col class="text-center" cols="12">
 					<v-img
 						v-if="creator.logo_image"
+						contain
+						class="ma-auto"
+						:width="$vuetify.breakpoint.smAndDown ? 200 : 300"
+						max-width="100%"
+						max-height="50vh"
 						:src="
 							`//api.themezer.ga/storage/creators/${creator.id}/logo/${creator.logo_image}`
 						"
@@ -441,7 +446,6 @@ export default Vue.extend({
 
 .parallax {
 	height: auto !important;
-	max-height: 60vh;
 
 	.v-parallax__content {
 		width: 100%;
