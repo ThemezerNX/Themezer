@@ -79,11 +79,6 @@ export default Vue.extend({
 	apollo: {
 		packsList: {
 			query: packsList,
-			variables() {
-				return {
-					target: this.$route.params.target
-				}
-			},
 			prefetch: true
 		}
 	},

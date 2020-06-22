@@ -145,6 +145,7 @@
 												>
 													<v-img
 														aspect-ratio="1.7778"
+														class="placeholder"
 														:src="
 															uploadedScreenshotsUrls[
 																i
@@ -155,6 +156,9 @@
 																: ''
 														"
 														contain
+														:lazy-src="
+															'/logo_16-9-256.jpg'
+														"
 													>
 														<v-expand-transition>
 															<div
@@ -214,7 +218,7 @@
 													By {{ theme.info.Author }}
 													<i>
 														(this will replaced with
-														your Discord username)
+														YOUR Discord account)
 													</i>
 												</div>
 												<v-list-item-subtitle
@@ -294,7 +298,11 @@
 													:items="
 														categories &&
 														categories.length > 0
-															? categories
+															? categories.filter(
+																	(c) =>
+																		c !==
+																		'NSFW'
+															  )
 															: []
 													"
 													outlined
@@ -304,7 +312,9 @@
 													deletable-chips
 													:rules="[
 														rules.category_length,
-														rules.category_amount
+														rules.min_category_amount,
+														rules.max_category_amount,
+														required
 													]"
 													prepend-icon="mdi-shape-outline"
 													label="Categories*"
@@ -437,7 +447,7 @@
 								deletable-chips
 								:rules="[
 									rules.category_length,
-									rules.category_amount
+									rules.max_category_amount
 								]"
 								prepend-icon="mdi-shape-outline"
 								label="Shared categories (this will remove the current set)"
@@ -533,7 +543,7 @@ export default Vue.extend({
 						'Try recreating your theme via the layouts section on this website and see if it your theme is fine after testing it on your Switch.'
 				},
 				{
-					Q: 'It looks different',
+					Q: 'It looks different a bit different',
 					A:
 						'Consider adding a customization option to the Layouts GitHub repository.'
 				},
@@ -546,6 +556,11 @@ export default Vue.extend({
 					Q:
 						"I am really sure don't want my theme to receive automatic layout updates",
 					A: 'Ok. Why not? But okay go ahead submit it...'
+				},
+				{
+					Q: 'I am not the original author of this theme',
+					A:
+						"Unfortunately you shouldn't submit it, because it will be linked to the currently logged in user"
 				}
 			],
 			types: [
@@ -590,7 +605,11 @@ export default Vue.extend({
 					!values ||
 					!values.some((v) => v.length <= 2) ||
 					'A category must be longer than 2 characters',
-				category_amount: (values) =>
+				min_category_amount: (values) =>
+					!values ||
+					values.length > 0 ||
+					'At least 1 category is required',
+				max_category_amount: (values) =>
 					!values ||
 					values.length <= 10 ||
 					'A maximum of 10 categories is allowed',
@@ -598,12 +617,7 @@ export default Vue.extend({
 					!value ||
 					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
 						? true
-						: 'Invalid HEX color'),
-				discord: (value) =>
-					!value ||
-					(/^((.+?)#\d{4})/.test(value)
-						? true
-						: 'Invalid Discord Username#tag')
+						: 'Invalid HEX color')
 			},
 			packCategories: [],
 			submitDetails: {

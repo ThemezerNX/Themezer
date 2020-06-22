@@ -306,6 +306,11 @@ export default {
 	animation: flow 45s linear infinite;
 }
 
+.placeholder .v-image__image--preload {
+	animation: unset !important;
+	background-size: contain !important;
+}
+
 .card .v-image__image--preload {
 	background: url('/images/diagonal_joycon-180.png') #333;
 	background-repeat: repeat;

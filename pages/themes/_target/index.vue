@@ -62,6 +62,7 @@ import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
 import Filters from '@/components/Filters.vue'
 import LoadingOverlay from '@/components/LoadingOverlay.vue'
+import allowedTargets from '@/components/mixins/allowedTargets'
 
 export default Vue.extend({
 	components: {
@@ -70,7 +71,7 @@ export default Vue.extend({
 		LoadingOverlay
 	},
 	beforeRouteEnter(to, _from, next) {
-		if (to.params.target) {
+		if (allowedTargets.includes(to.params.target)) {
 			next()
 		} else {
 			next('/')
