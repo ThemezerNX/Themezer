@@ -297,6 +297,7 @@ export default {
 .smAndDown .v-slide-group__prev,
 .smAndDown .v-slide-group__next {
 	min-width: unset;
+	max-width: fit-content;
 }
 
 .v-parallax__image-container {
