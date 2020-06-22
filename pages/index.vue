@@ -15,7 +15,10 @@
 					src="/logo-256.png"
 					contain
 				/>
-				<h1 class="text-center intro-title">
+				<h1 v-if="$auth.loggedIn" class="text-center intro-title">
+					Welcome back {{ $auth.user.username }}!
+				</h1>
+				<h1 v-else class="text-center intro-title">
 					Welcome to Themezer!
 				</h1>
 				<v-container class="pt-0" style="height: 100%;" fluid>
