@@ -5,8 +5,8 @@
 			show-arrows="always"
 			center-active
 		>
-			<v-slide-item v-for="(theme, i) in items" :key="i">
-				<v-hover v-if="theme" v-slot:default="{ hover }">
+			<v-slide-item v-for="(pack, i) in items" :key="i">
+				<v-hover v-if="pack" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
 							class="mx-auto card"
@@ -25,24 +25,37 @@
 							"
 							router
 							:to="
-								`/themes/${fileNameToWebName(
-									theme.target
-								)}/${createUrlString(
-									theme.id,
-									theme.details.name
+								`/packs/${createUrlString(
+									pack.id,
+									pack.details.name
 								)}`
 							"
 						>
-							<v-img
-								aspect-ratio="1.7778"
-								:src="
-									`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
-								"
-								:width="
-									$vuetify.breakpoint.smAndDown ? 200 : 300
-								"
-								contain
-							/>
+							<v-carousel
+								continuous
+								hide-delimiters
+								hide-delimiter-background
+								:show-arrows="false"
+								:cycle="hover"
+								interval="2000"
+								height="auto"
+							>
+								<v-carousel-item
+									v-for="(theme, j) in pack.themes"
+									:key="j"
+									:width="
+										$vuetify.breakpoint.smAndDown
+											? 200
+											: 300
+									"
+									height="auto"
+									aspect-ratio="1.7778"
+									:src="
+										`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+									"
+								>
+								</v-carousel-item>
+							</v-carousel>
 
 							<v-card-title
 								:class="
@@ -54,12 +67,12 @@
 											? ''
 											: 'py-1 px-3')
 								"
-								v-text="theme.details.name"
+								v-text="pack.details.name"
 							/>
 							<v-card-subtitle
 								v-if="showProps.includes('creator')"
 							>
-								By {{ theme.creator.discord_user.username }}
+								By {{ pack.creator.discord_user.username }}
 							</v-card-subtitle>
 						</v-card>
 					</v-scale-transition>

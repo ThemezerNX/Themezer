@@ -67,7 +67,6 @@ query packDetails($id: Int!) {
 		creator {
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {
@@ -86,7 +85,6 @@ query packDetails($id: Int!) {
 				id
 				discord_user {
 					username
-					avatar
 				}
 			}
 			details {
@@ -110,6 +108,26 @@ query packDetails($id: Int!) {
 	}
 }
 
+query rowPacksList($creator_id: String, $limit: Int) {
+	packsList(creator_id: $creator_id, limit: $limit) {
+		uuid
+		id
+		creator {
+			id
+			discord_user {
+				username
+			}
+		}
+		details {
+			name
+		}
+		last_updated
+		themes {
+			uuid
+		}
+	}
+}
+
 query packsList {
 	packsList {
 		uuid
@@ -118,7 +136,6 @@ query packsList {
 			id
 			discord_user {
 				username
-				avatar
 			}
 		}
 		details {

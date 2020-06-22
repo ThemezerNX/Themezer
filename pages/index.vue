@@ -20,6 +20,22 @@
 				</h1>
 				<v-container class="pt-0" style="height: 100%;" fluid>
 					<v-row
+						v-if="packsList && packsList.length > 0"
+						align="center"
+						justify="center"
+					>
+						<v-col cols="12" class="pt-0">
+							<h2>
+								Latest Packs
+							</h2>
+							<v-divider />
+							<PacksSlideGroup
+								:items="packsList"
+								:show-props="['creator']"
+							/>
+						</v-col>
+					</v-row>
+					<v-row
 						v-if="themesList && themesList.length > 0"
 						align="center"
 						justify="center"
@@ -59,14 +75,17 @@
 
 <script>
 import Vue from 'vue'
+import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
 import { rowLayoutsList } from '@/graphql/Layout.gql'
+import PacksSlideGroup from '@/components/PacksSlideGroup.vue'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
 import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
 import error from '@/layouts/error'
 
 export default Vue.extend({
 	components: {
+		PacksSlideGroup,
 		ThemesSlideGroup,
 		LayoutsSlideGroup,
 		error
@@ -77,6 +96,18 @@ export default Vue.extend({
 		}
 	},
 	apollo: {
+		packsList: {
+			query: rowPacksList,
+			variables() {
+				return {
+					limit: 10
+				}
+			},
+			error(e) {
+				this.error = e
+			},
+			prefetch: true
+		},
 		themesList: {
 			query: rowThemesList,
 			variables() {

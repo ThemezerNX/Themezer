@@ -93,6 +93,19 @@
 				</v-col>
 			</v-row>
 			<v-row
+				v-if="packsList && packsList.length > 0"
+				align="center"
+				justify="center"
+			>
+				<v-col cols="12" class="pt-0">
+					<h1>
+						Latest Packs by this creator
+					</h1>
+					<v-divider />
+					<PacksSlideGroup :items="packsList" />
+				</v-col>
+			</v-row>
+			<v-row
 				v-if="themesList && themesList.length > 0"
 				align="center"
 				justify="center"
@@ -255,14 +268,17 @@
 <script>
 import Vue from 'vue'
 import { creator, profile } from '@/graphql/Creator.gql'
+import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
 import { rowLayoutsList } from '@/graphql/Layout.gql'
+import PacksSlideGroup from '@/components/PacksSlideGroup.vue'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
 import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
 import error from '@/layouts/error'
 
 export default Vue.extend({
 	components: {
+		PacksSlideGroup,
 		ThemesSlideGroup,
 		LayoutsSlideGroup,
 		error
@@ -337,6 +353,19 @@ export default Vue.extend({
 			variables() {
 				return {
 					id: this.id
+				}
+			},
+			error(e) {
+				this.error = e
+			},
+			prefetch: true
+		},
+		packsList: {
+			query: rowPacksList,
+			variables() {
+				return {
+					creator_id: this.id,
+					limit: 10
 				}
 			},
 			error(e) {
