@@ -350,7 +350,6 @@ export default {
 		// transition-duration: 200ms;
 		// transition-timing-function: ease-in-out;
 		border-radius: 4px;
-		// max-height: 70vh;
 	}
 
 	.box_text {
