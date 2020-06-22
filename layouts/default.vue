@@ -294,6 +294,10 @@ export default {
 	padding-bottom: 6px;
 }
 
+.v-slide-group__wrapper {
+	touch-action: inherit !important;
+}
+
 .smAndDown .v-slide-group__prev,
 .smAndDown .v-slide-group__next {
 	min-width: unset;
