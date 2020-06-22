@@ -90,7 +90,25 @@ query themeDetails($id: Int!, $target: String!) {
 	}
 }
 
-query themesList($target: String!) {
+query rowThemesList($target: String, $creator_id: String, $limit: Int) {
+	themesList(target: $target, creator_id: $creator_id, limit: $limit) {
+		uuid
+		id
+		creator {
+			id
+			discord_user {
+				username
+			}
+		}
+		details {
+			name
+		}
+		target
+		last_updated
+	}
+}
+
+query themesList($target: String) {
 	themesList(target: $target) {
 		uuid
 		id
@@ -109,27 +127,6 @@ query themesList($target: String!) {
 		last_updated
 		categories
 		dl_count
-	}
-}
-
-query latestThemesList($target: String, $creator_id: String, $limit: Int!) {
-	latestThemesList(target: $target, creator_id: $creator_id, limit: $limit) {
-		uuid
-		id
-		creator {
-			id
-			discord_user {
-				username
-			}
-		}
-		details {
-			name
-			description
-			color
-			version
-		}
-		target
-		last_updated
 	}
 }
 

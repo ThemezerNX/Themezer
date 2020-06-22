@@ -56,10 +56,16 @@ query layoutDetails($id: Int!, $target: String!) {
 	}
 }
 
-query allLayoutsList($creator_id: String) {
-	layoutsList(creator_id: $creator_id) {
+query rowLayoutsList($target: String, $creator_id: String, $limit: Int) {
+	layoutsList(target: $target, creator_id: $creator_id, limit: $limit) {
 		uuid
 		id
+		creator {
+			id
+			discord_user {
+				username
+			}
+		}
 		details {
 			name
 			color
@@ -70,8 +76,8 @@ query allLayoutsList($creator_id: String) {
 }
 
 
-query layoutsList($target: String) {
-	layoutsList(target: $target) {
+query layoutsList($target: String, $creator_id: String, $limit: Int) {
+	layoutsList(target: $target, creator_id: $creator_id, limit: $limit) {
 		uuid
 		id
 		creator {

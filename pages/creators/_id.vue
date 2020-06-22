@@ -2,7 +2,6 @@
 	<error v-if="error" :error="error" />
 	<div v-else-if="creator">
 		<v-parallax
-			dark
 			:src="
 				creator.banner_image
 					? `//api.themezer.ga/storage/creators/${creator.id}/banner/${creator.banner_image}`
@@ -94,7 +93,7 @@
 				</v-col>
 			</v-row>
 			<v-row
-				v-if="latestThemesList && latestThemesList.length > 0"
+				v-if="themesList && themesList.length > 0"
 				align="center"
 				justify="center"
 			>
@@ -103,7 +102,7 @@
 						Latest Themes by this creator
 					</h1>
 					<v-divider />
-					<ThemesSlideGroup :items="latestThemesList" />
+					<ThemesSlideGroup :items="themesList" />
 				</v-col>
 			</v-row>
 			<v-row
@@ -256,8 +255,8 @@
 <script>
 import Vue from 'vue'
 import { creator, profile } from '@/graphql/Creator.gql'
-import { latestThemesList } from '@/graphql/Theme.gql'
-import { allLayoutsList } from '@/graphql/Layout.gql'
+import { rowThemesList } from '@/graphql/Theme.gql'
+import { rowLayoutsList } from '@/graphql/Layout.gql'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
 import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
 import error from '@/layouts/error'
@@ -345,8 +344,8 @@ export default Vue.extend({
 			},
 			prefetch: true
 		},
-		latestThemesList: {
-			query: latestThemesList,
+		themesList: {
+			query: rowThemesList,
 			variables() {
 				return {
 					creator_id: this.id,
@@ -359,7 +358,7 @@ export default Vue.extend({
 			prefetch: true
 		},
 		layoutsList: {
-			query: allLayoutsList,
+			query: rowLayoutsList,
 			variables() {
 				return {
 					creator_id: this.id

@@ -1,73 +1,102 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<v-layout column justify-center align-center>
-			<v-flex xs12 sm8 md6>
-				<v-card>
-					<v-card-title class="headline">
-						Welcome to the Vuetify + Nuxt.js
-					</v-card-title>
-					<v-card-text>
-						<p>
-							Vuetify is a progressive Material Design component
-							framework for Vue.js. It was designed to empower
-							developers to create amazing applications.
-						</p>
-						<p>
-							For more information on Vuetify, check out the
-							<a href="https://vuetifyjs.com" target="_blank">
-								documentation </a
-							>.
-						</p>
-						<p>
-							If you have questions, please join the official
-							<a
-								href="https://chat.vuetifyjs.com/"
-								target="_blank"
-								title="chat"
-							>
-								discord </a
-							>.
-						</p>
-						<p>
-							Find a bug? Report it on the github
-							<a
-								href="https://github.com/vuetifyjs/vuetify/issues"
-								target="_blank"
-								title="contribute"
-							>
-								issue board </a
-							>.
-						</p>
-						<p>
-							Thank you for developing with Vuetify and I look
-							forward to bringing more exciting features in the
-							future.
-						</p>
-						<div class="text-xs-right">
-							<em><small>&mdash; John Leider</small></em>
-						</div>
-						<hr class="my-3" />
-						<a href="https://nuxtjs.org/" target="_blank">
-							Nuxt Documentation
-						</a>
-						<br />
-						<a
-							href="https://github.com/nuxt/nuxt.js"
-							target="_blank"
-						>
-							Nuxt GitHub
-						</a>
-					</v-card-text>
-				</v-card>
-			</v-flex>
-		</v-layout>
+	<v-container fluid class="pa-0 content" style="height: 100%;">
+		<error v-if="error" :error="error" />
+		<div v-else>
+			<!-- <v-parallax
+			class="d-flex align-center justify-center parallax"
+			height="100%"
+			src="https://res.cloudinary.com/rebelwalls/image/upload/b_black,c_fill,f_auto,fl_progressive,h_533,q_auto,w_800/v1479371023/article/R10961_image1"
+		/> -->
+			<v-layout column justify-center>
+				<v-img
+					class="d-block my-1"
+					height="200"
+					width="auto"
+					src="/logo-256.png"
+					contain
+				/>
+				<h1 class="text-center intro-title">
+					Welcome to Themezer!
+				</h1>
+				<v-container class="pt-0" style="height: 100%;" fluid>
+					<v-row
+						v-if="themesList && themesList.length > 0"
+						align="center"
+						justify="center"
+					>
+						<v-col cols="12" class="pt-0">
+							<h2>
+								Latest Themes
+							</h2>
+							<v-divider />
+							<ThemesSlideGroup
+								:items="themesList"
+								:show-props="['creator']"
+							/>
+						</v-col>
+					</v-row>
+					<v-row
+						v-if="layoutsList && layoutsList.length > 0"
+						align="center"
+						justify="center"
+					>
+						<v-col cols="12" class="pt-0">
+							<h2>
+								Latest Layouts
+							</h2>
+							<v-divider />
+							<LayoutsSlideGroup
+								:items="layoutsList"
+								:show-props="['creator']"
+							/>
+						</v-col>
+					</v-row>
+				</v-container>
+			</v-layout>
+		</div>
 	</v-container>
 </template>
 
 <script>
 import Vue from 'vue'
+import { rowThemesList } from '@/graphql/Theme.gql'
+import { rowLayoutsList } from '@/graphql/Layout.gql'
+import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
+import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
+import error from '@/layouts/error'
 
 export default Vue.extend({
+	components: {
+		ThemesSlideGroup,
+		LayoutsSlideGroup,
+		error
+	},
+	apollo: {
+		themesList: {
+			query: rowThemesList,
+			variables() {
+				return {
+					limit: 10
+				}
+			},
+			error(e) {
+				this.error = e
+			},
+			prefetch: true
+		},
+		layoutsList: {
+			query: rowLayoutsList,
+			variables() {
+				return {
+					limit: 10
+				}
+			},
+			error(e) {
+				this.error = e
+			},
+			prefetch: true
+		}
+	},
 	head() {
 		const metaTitle = 'Themezer Home'
 		const metaDesc =
@@ -105,3 +134,35 @@ export default Vue.extend({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+.parallax {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+}
+
+.content {
+	background: linear-gradient(135deg, #b40a86, #0ab379);
+}
+</style>
+
+<style lang="scss">
+.intro-title {
+	animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+	animation-delay: 700ms;
+}
+
+@keyframes tracking-in-expand {
+	0% {
+		letter-spacing: -0.5em;
+		opacity: 0;
+	}
+	40% {
+		opacity: 0.6;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+</style>

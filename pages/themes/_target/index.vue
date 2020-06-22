@@ -8,7 +8,11 @@
 				/>
 			</v-col>
 			<v-col cols="12" xs="12" sm="8" md="9" xl="10">
-				<h3 v-if="filteredItems">{{ filteredItems.length }} results</h3>
+				<div v-if="filteredItems">
+					<h3>{{ filteredItems.length }} results</h3>
+					<v-divider />
+				</div>
+
 				<v-row v-if="paginatedData && paginatedData.length > 0">
 					<v-col
 						v-for="theme in paginatedData"

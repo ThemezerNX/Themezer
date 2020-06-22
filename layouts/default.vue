@@ -286,7 +286,7 @@ export default {
 }
 
 .smAndDown .v-slide-group__prev,
-.v-slide-group__next {
+.smAndDown .v-slide-group__next {
 	min-width: unset;
 }
 

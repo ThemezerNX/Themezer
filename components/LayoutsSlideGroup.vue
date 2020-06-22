@@ -2,7 +2,7 @@
 	<v-sheet v-if="items" class="mx-auto" style="background: unset;">
 		<v-slide-group
 			:class="$vuetify.breakpoint.smAndDown ? 'smAndDown' : ''"
-			show-arrows
+			show-arrows="always"
 			center-active
 		>
 			<v-slide-item v-for="(layout, i) in items" :key="i">
@@ -49,14 +49,22 @@
 							/>
 
 							<v-card-title
-								class="py-1 px-3"
 								:class="
-									$vuetify.breakpoint.smAndDown
+									($vuetify.breakpoint.smAndDown
 										? 'body-2'
-										: 'subtitle-1'
+										: 'subtitle-1') +
+										' ' +
+										(showProps.includes('creator')
+											? ''
+											: 'py-1 px-3')
 								"
 								v-text="layout.details.name"
 							/>
+							<v-card-subtitle
+								v-if="showProps.includes('creator')"
+							>
+								By {{ layout.creator.discord_user.username }}
+							</v-card-subtitle>
 						</v-card>
 					</v-scale-transition>
 				</v-hover>
@@ -77,6 +85,13 @@ export default Vue.extend({
 			type: Array,
 			required: true,
 			default: null
+		},
+		showProps: {
+			type: Array,
+			required: false,
+			default: () => {
+				return []
+			}
 		}
 	}
 })
