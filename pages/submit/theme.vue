@@ -107,9 +107,10 @@
 						<v-col cols="12" class="pa-2">
 							<div class="subtitle-1 box_text">
 								You must upload a screenshot or an image created
-								using an overlay.png (NOT simply the background
-								image!) for every theme you upload. Do so by
-								clicking the placeholder image.
+								using an overlay.png downloaded from the
+								layout's page (NOT simply the background image!)
+								for every theme you upload. Do so by clicking
+								the placeholder image.
 							</div>
 							<div class="subtitle-1 box_text font-italic">
 								{{

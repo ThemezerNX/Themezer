@@ -95,7 +95,7 @@
 						<v-divider class="my-3" />
 						<h3 style="position: relative;">
 							Common layout
-							<v-tooltip v-model="show" top>
+							<v-tooltip v-model="showCommonInfo" top>
 								<template v-slot:activator="{ on }">
 									<v-btn
 										icon
@@ -143,6 +143,40 @@
 							</v-btn>
 						</v-flex>
 					</div>
+					<v-divider class="my-3" />
+					<h3 style="position: relative;">
+						Overlay png
+						<v-tooltip v-model="showOverlayInfo" top>
+							<template v-slot:activator="{ on }">
+								<v-btn
+									icon
+									style="position: absolute; top: 0; color: black;"
+									class="ml-1 pa-0 grey lighten-1"
+									width="14"
+									height="14"
+									v-on="on"
+									@click="overlayDialog = true"
+								>
+									?
+								</v-btn>
+							</template>
+							<span>What is this?</span>
+						</v-tooltip>
+					</h3>
+					<v-flex class="d-flex justify-center mt-3">
+						<v-btn
+							class="mx-2"
+							color="secondary"
+							append
+							:href="
+								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
+							"
+							target="_blank"
+						>
+							Get
+							<v-icon right>mdi-download-box-outline</v-icon>
+						</v-btn>
+					</v-flex>
 				</v-col>
 			</v-row>
 			<v-row class="ma-0">
@@ -185,6 +219,32 @@
 					</v-card-actions>
 				</v-card>
 			</v-dialog>
+			<v-dialog v-model="overlayDialog" max-width="400">
+				<v-card>
+					<v-card-title class="headline"
+						>What is the Overlay png?</v-card-title
+					>
+
+					<v-card-text>
+						The Overlay png is the image used on this site to
+						preview Layouts. You may also use this to create the
+						'screenshot' you need when uploading a Theme to
+						Themezer.
+					</v-card-text>
+
+					<v-card-actions>
+						<v-spacer></v-spacer>
+
+						<v-btn
+							color="primary"
+							text
+							@click="overlayDialog = false"
+						>
+							Close
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
 		</div>
 		<LoadingOverlay v-else-if="$apollo.loading" />
 		<span v-else>There's nothing here :(</span>
@@ -209,6 +269,7 @@ export default Vue.extend({
 	data() {
 		return {
 			commonlayoutDialog: false,
+			overlayDialog: false,
 			loadingMerge: false,
 			loadingMergeCommon: false
 		}

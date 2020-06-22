@@ -127,7 +127,7 @@
 						<v-divider class="my-3" />
 						<h3 style="position: relative;">
 							Theme Pack
-							<v-tooltip v-model="show" top>
+							<v-tooltip v-model="showPackInfo" top>
 								<template v-slot:activator="{ on }">
 									<v-btn
 										icon
