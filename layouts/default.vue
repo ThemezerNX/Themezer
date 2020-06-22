@@ -163,6 +163,8 @@
 </template>
 
 <script>
+import { updateAuth } from '@/graphql/Creator.gql'
+
 export default {
 	data() {
 		return {
@@ -254,13 +256,20 @@ export default {
 	},
 	computed: {
 		avatar() {
-			if (this.$auth.user.avatar) {
+			if (this.$auth.loggedIn && this.$auth.user.avatar) {
 				return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`
-			} else {
+			} else if (this.$auth.loggedIn) {
 				return `embed/avatars/${parseInt(
 					this.$auth.user.discriminator
 				) % 5}.png`
-			}
+			} else return null
+		}
+	},
+	mounted() {
+		if (this.$auth.loggedIn) {
+			this.$apollo.mutate({
+				mutation: updateAuth
+			})
 		}
 	},
 	methods: {

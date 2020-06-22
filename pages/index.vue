@@ -71,6 +71,11 @@ export default Vue.extend({
 		LayoutsSlideGroup,
 		error
 	},
+	data() {
+		return {
+			error: null
+		}
+	},
 	apollo: {
 		themesList: {
 			query: rowThemesList,

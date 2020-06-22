@@ -36,6 +36,10 @@ query creator($id: String!) {
 	}
 }
 
+mutation updateAuth{
+	updateAuth
+}
+
 mutation profile(
 	$bio: String
 	$profile_color: String

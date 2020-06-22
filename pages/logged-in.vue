@@ -23,7 +23,9 @@ export default Vue.extend({
 	},
 	computed: {
 		isCallback() {
-			return Boolean(this.$route.hash)
+			return Boolean(
+				this.$route.hash && this.$route.hash.includes('access_token')
+			)
 		}
 	},
 	created() {
