@@ -20,6 +20,6 @@ jobs:
                       cd /home/themezer/Themezer
                       git reset --hard
                       git pull
-                      yarn
-                      yarn build
+                      yarn --production
+                      yarn run build
                       pm2 reload /home/themezer/ecosystem.config.js --only Themezer
