@@ -5,7 +5,6 @@
 			:class="hover ? 'hover' : ''"
 			class="ma-auto card"
 			router
-			exact
 			:to="`/packs/${createUrlString(item.id, item.details.name)}`"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
@@ -41,7 +40,11 @@
 			<v-divider v-if="item.details.description" />
 
 			<v-card-text v-if="item.details.description">
-				<div class="description">{{ item.details.description }}</div>
+				<div
+					v-linkified
+					class="description"
+					v-html="item.details.description"
+				/>
 			</v-card-text>
 		</v-card>
 	</v-hover>

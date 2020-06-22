@@ -24,7 +24,6 @@
 							`
 							"
 							router
-							exact
 							:to="
 								`/layouts/${fileNameToWebName(
 									layout.target

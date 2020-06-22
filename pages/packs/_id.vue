@@ -50,10 +50,12 @@
 					</div>
 					<div
 						v-if="pack.details.description"
+						v-linkified:options="{
+							className: 'font-weight-medium'
+						}"
 						class="font-weight-thin subtitle-1"
-					>
-						{{ pack.details.description }}
-					</div>
+						v-html="pack.details.description"
+					/>
 
 					<div>
 						<v-chip

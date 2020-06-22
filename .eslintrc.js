@@ -14,8 +14,9 @@ module.exports = {
 	plugins: [
 		'prettier'
 	],
-	// add your custom rules here
 	rules: {
-		"space-before-function-paren": ["off"],
+		"space-before-function-paren": "off",
+		// Still, only use this if you know what you're doing:
+		"vue/no-v-html": "off"
 	}
 }

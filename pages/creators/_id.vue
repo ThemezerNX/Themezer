@@ -89,7 +89,6 @@
 						Bio
 					</h1>
 					<v-divider />
-					<!-- eslint-disable-next-line vue/no-v-html -->
 					<div v-if="creator.bio" v-html="$md.render(creator.bio)" />
 					<span v-else>There's nothing here yet...</span>
 				</v-col>

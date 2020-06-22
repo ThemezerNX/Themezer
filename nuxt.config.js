@@ -48,6 +48,7 @@ export default {
 		// 	src: '@/plugins/meta',
 		// 	mode: 'client'
 		// },
+		'@/plugins/linkify',
 		{
 			src: '@/plugins/pagination',
 			mode: 'client'

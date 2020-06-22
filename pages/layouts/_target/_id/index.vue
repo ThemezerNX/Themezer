@@ -41,10 +41,12 @@
 					</div>
 					<div
 						v-if="layout.details.description"
+						v-linkified:options="{
+							className: 'font-weight-medium'
+						}"
 						class="font-weight-thin subtitle-1"
-					>
-						{{ layout.details.description }}
-					</div>
+						v-html="layout.details.description"
+					/>
 
 					<v-divider class="my-3" />
 					<h3>

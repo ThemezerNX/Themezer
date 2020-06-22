@@ -24,7 +24,6 @@
 							`
 							"
 							router
-							exact
 							:to="
 								`/themes/${fileNameToWebName(
 									theme.target

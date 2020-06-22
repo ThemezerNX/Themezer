@@ -39,8 +39,6 @@
 									? 80
 									: 100
 							"
-							router
-							exact
 							@click="toggle"
 						>
 							<v-img

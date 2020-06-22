@@ -41,10 +41,12 @@
 					</div>
 					<div
 						v-if="theme.details.description"
+						v-linkified:options="{
+							className: 'font-weight-medium'
+						}"
 						class="font-weight-thin subtitle-1"
-					>
-						{{ theme.details.description }}
-					</div>
+						v-html="theme.details.description"
+					/>
 
 					<div>
 						<v-chip
