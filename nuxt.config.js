@@ -111,7 +111,7 @@ export default {
 			name: 'Themezer',
 			description: process.env.npm_package_description || '',
 			lang: 'en',
-			theme_color: '#d50000',
+			theme_color: '#0AB379',
 			background_color: '#121212'
 		}
 	},
@@ -125,9 +125,9 @@ export default {
 			dark: true,
 			themes: {
 				dark: {
-					primary: '#B40A86',
+					primary: '#0AB379',
 					accent: colors.grey.darken3,
-					secondary: '#0AB379',
+					secondary: '#B40A86',
 					info: colors.teal.lighten1,
 					warning: colors.amber.base,
 					error: colors.deepOrange.accent4,

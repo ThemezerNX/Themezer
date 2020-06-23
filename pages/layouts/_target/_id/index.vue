@@ -268,7 +268,9 @@ export default Vue.extend({
 	mixins: [shared, targetParser],
 	data() {
 		return {
+			showCommonInfo: false,
 			commonlayoutDialog: false,
+			showOverlayInfo: false,
 			overlayDialog: false,
 			loadingMerge: false,
 			loadingMergeCommon: false

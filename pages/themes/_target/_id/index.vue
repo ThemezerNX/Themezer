@@ -202,6 +202,7 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
+			showPackInfo: false,
 			packDialog: false,
 			loadingDownload: false
 		}

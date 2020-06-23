@@ -81,7 +81,10 @@
 						item.header
 					}}</v-subheader>
 					<v-divider v-else-if="item.divider" :key="item.divider" />
-					<v-list-group v-else-if="item.group" :key="item.title">
+					<v-list-group
+						v-else-if="Array.isArray(item.types)"
+						:key="item.title"
+					>
 						<template v-slot:activator>
 							<v-list-item-action>
 								<v-icon v-text="item.icon" />
@@ -181,42 +184,42 @@ export default {
 					header: 'Themes & Layouts'
 				},
 				{
-					group: true,
 					icon: 'mdi-home-outline',
 					title: 'Home Menu',
 					target: 'homemenu',
 					types: ['themes', 'layouts']
 				},
 				{
-					group: true,
 					icon: 'mdi-lock-outline',
 					title: 'Lockscreen',
 					target: 'lockscreen',
 					types: ['themes', 'layouts']
 				},
 				{
-					group: true,
 					icon: 'mdi-apps',
 					title: 'All Apps',
 					target: 'allapps',
 					types: ['themes', 'layouts']
 				},
 				{
-					group: true,
 					icon: 'mdi-cog-outline',
 					title: 'Settings',
 					target: 'settings',
 					types: ['themes', 'layouts']
 				},
 				{
-					group: true,
-					icon: 'mdi-account-outline',
+					icon: 'mdi-account-multiple',
 					title: 'Player Select',
 					target: 'playerselect',
 					types: ['themes', 'layouts']
 				},
 				{
-					group: true,
+					icon: 'mdi-account-outline',
+					title: 'User Page',
+					target: 'userpage',
+					types: ['themes', 'layouts']
+				},
+				{
 					icon: 'mdi-newspaper-variant-outline',
 					title: 'News',
 					target: 'news',
@@ -284,9 +287,13 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+	word-break: break-word;
+}
+
 .v-card__text,
 .v-card__title {
-	word-break: normal;
+	word-break: break-word;
 }
 
 .v-slide-group__content {
