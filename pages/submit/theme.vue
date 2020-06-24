@@ -245,21 +245,21 @@
 																.name
 														}}
 													</a>
-												</v-list-item-subtitle>
-												<v-list-item-subtitle
-													v-if="
-														theme.layout &&
+													<div
+														v-if="
 															theme.used_pieces &&
-															theme.used_pieces
-																.length > 0
-													"
-												>
-													Options:
-													{{
-														optionsString(
-															theme.used_pieces
-														)
-													}}
+																theme
+																	.used_pieces
+																	.length > 0
+														"
+													>
+														Options:
+														{{
+															optionsString(
+																theme.used_pieces
+															)
+														}}
+													</div>
 												</v-list-item-subtitle>
 												<v-list-item-subtitle v-else>
 													The layout was not found in

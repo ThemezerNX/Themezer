@@ -87,6 +87,17 @@
 							{{ theme.layout.details.name }}
 						</a>
 					</div>
+					<div
+						v-if="
+							theme.layout &&
+								theme.pieces &&
+								theme.pieces.length > 0
+						"
+						class="font-weight-light body-2"
+					>
+						<span class="font-weight-medium">Options: </span>
+						{{ optionsString(theme.pieces) }}
+					</div>
 					<div v-if="theme.bg_type" class="font-weight-light body-2">
 						<span class="font-weight-medium">Background: </span>
 						<a
@@ -236,6 +247,19 @@ export default Vue.extend({
 		}
 	},
 	methods: {
+		optionsString(usedPieces) {
+			const values = []
+			if (usedPieces && usedPieces.length > 0) {
+				usedPieces.forEach((piece) => {
+					if (piece.value.value === 'true') {
+						values.push(piece.name)
+					} else {
+						values.push(`${piece.name}: ${piece.value.value}`)
+					}
+				})
+			}
+			return values.join(', ')
+		},
 		downloadTheme() {
 			this.loadingDownload = true
 			const usedPieces = []
