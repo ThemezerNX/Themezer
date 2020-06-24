@@ -11,7 +11,6 @@ query pack($id: Int!) {
 		details {
 			name
 			description
-			color
 			version
 		}
 		last_updated
@@ -29,7 +28,6 @@ query pack($id: Int!) {
 			details {
 				name
 				description
-				color
 				version
 			}
 			layout {
@@ -72,7 +70,6 @@ query packDetails($id: Int!) {
 		details {
 			name
 			description
-			color
 			version
 		}
 		last_updated
@@ -90,7 +87,6 @@ query packDetails($id: Int!) {
 			details {
 				name
 				description
-				color
 				version
 			}
 			last_updated
@@ -141,7 +137,6 @@ query packsList {
 		details {
 			name
 			description
-			color
 			version
 		}
 		last_updated

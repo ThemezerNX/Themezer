@@ -8,13 +8,13 @@
 			<h1 class="box_text">
 				{{ layout.details.name }}
 			</h1>
-			<div class="subtitle-1">
+			<div class="subtitle-1 box_text">
 				By
 				<a
 					class="font-weight-bold"
 					:href="`/creators/${layout.creator.id}`"
 				>
-					{{ layout.creator.discord_user.usernname }}
+					{{ layout.creator.discord_user.username }}
 				</a>
 			</div>
 			<v-row class="ma-0">
