@@ -36,8 +36,7 @@ export default {
 				name: 'description',
 				content: process.env.npm_package_description || ''
 			}
-		],
-		link: [{ rel: 'icon', type: 'image/jpeg', href: '/logo-256.jpg' }]
+		]
 	},
 
 	loading: { color: '#B40A86' },
@@ -68,7 +67,7 @@ export default {
 		[
 			'nuxt-rfg-icon',
 			{
-				masterPicture: 'static/logo-512.jpg'
+				masterPicture: 'static/icon.png'
 			}
 		],
 		'@nuxtjs/pwa',

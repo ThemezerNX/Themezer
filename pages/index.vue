@@ -12,7 +12,7 @@
 					class="d-block my-1"
 					height="200"
 					width="auto"
-					src="/logo-256.png"
+					src="/icon-256.png"
 					contain
 				/>
 				<h1 v-if="$auth.loggedIn" class="text-center intro-title">

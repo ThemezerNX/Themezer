@@ -146,7 +146,7 @@
 					<v-img
 						class="mx-2"
 						contain
-						src="/logo-256.jpg"
+						src="/icon-256.png"
 						width="30"
 						style="border-radius: 5px;"
 					/>
