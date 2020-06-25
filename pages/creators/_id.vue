@@ -267,6 +267,7 @@
 
 <script>
 import Vue from 'vue'
+import removeMd from 'remove-markdown'
 import { creator, profile } from '@/graphql/Creator.gql'
 import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
@@ -491,6 +492,54 @@ export default Vue.extend({
 						this.error = null
 					}, 8100)
 				})
+		}
+	},
+	head() {
+		if (this.creator) {
+			const metaTitle = `${this.creator.discord_user.username} | Creators`
+			const metaDesc = this.creator.bio
+				? removeMd(this.creator.bio)
+				: `${this.creator.discord_user.username}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.discord_user.username}.`
+			const metaImg = this.creator.logo_image
+				? `//api.themezer.ga/storage/creators/${this.creator.id}/logo/${this.creator.logo_image}`
+				: `https://cdn.discordapp.com/${this.avatar}?size=256`
+
+			return {
+				title: metaTitle,
+				meta: [
+					{
+						hid: 'description',
+						name: 'description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:title',
+						name: 'og:title',
+						property: 'og:title',
+						content: metaTitle
+					},
+					{
+						hid: 'og:description',
+						name: 'og:description',
+						property: 'og:description',
+						content: metaDesc
+					},
+					{
+						hid: 'og:image',
+						name: 'og:image',
+						property: 'og:image',
+						content: metaImg
+					},
+					this.creator.profile_color
+						? {
+								hid: 'theme-color',
+								name: 'theme-color',
+								property: 'theme-color',
+								content: this.creator.profile_color
+						  }
+						: {}
+				]
+			}
 		}
 	}
 })

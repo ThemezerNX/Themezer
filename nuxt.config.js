@@ -108,6 +108,7 @@ export default {
 	pwa: {
 		manifest: {
 			name: 'Themezer',
+			short_name: 'Themezer',
 			description: process.env.npm_package_description || '',
 			lang: 'en',
 			theme_color: '#0AB379',
