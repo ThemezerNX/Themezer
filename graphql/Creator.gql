@@ -36,8 +36,15 @@ query creator($id: String!) {
 	}
 }
 
-mutation updateAuth{
-	updateAuth
+mutation updateAuth($accepts: Boolean) {
+	updateAuth(accepts: $accepts) {
+		has_accepted
+		backup_code
+	}
+}
+
+mutation restoreAccount($creator_id: String!, $backup_code: String!) {
+	restoreAccount(creator_id: $creator_id, backup_code: $backup_code)
 }
 
 mutation profile(

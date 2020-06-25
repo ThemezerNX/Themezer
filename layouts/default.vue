@@ -162,6 +162,100 @@
 		<!-- <v-footer fixed app>
 			<span>&copy; {{ new Date().getFullYear() }} Migush</span>
 		</v-footer> -->
+		<v-dialog
+			v-if="$auth.loggedIn && $auth.user"
+			v-model="acceptDialog"
+			max-width="800"
+			class="mx-auto"
+			persistent
+		>
+			<v-card>
+				<v-card-title
+					class="title font-weight-regular justify-space-between"
+				>
+					<span>Backup Code</span>
+				</v-card-title>
+
+				<v-card-text>
+					In order to ensure you retain access to you Themezer account
+					if anything happens to your Discord account, here is your
+					creator ID and a backup code you can use in order to restore
+					your account and connect a new Discord account. Be sure to
+					store this backup code somewhere safe! The creator ID can
+					also be found in the url of the creator page of your
+					previous Themezer account. To restore your account, visit
+					the about page.
+					<div>
+						THIS IS THE ONLY TIME YOU CAN VIEW THE BACKUP CODE!
+					</div>
+					<v-flex class="d-flex">
+						<v-text-field
+							ref="creatorId"
+							v-model="$auth.user.id"
+							class="my-5"
+							hide-details
+							readonly
+							outlined
+							prepend-icon="mdi-identifier"
+						></v-text-field>
+
+						<v-tooltip v-model="copyIdSuccess" nudge-top top>
+							<template v-slot:activator="{ attrs }">
+								<v-btn
+									v-bind="attrs"
+									class="align-self-center ml-2"
+									@click="copyId"
+									>copy</v-btn
+								>
+							</template>
+							<span>Copied!</span>
+						</v-tooltip>
+					</v-flex>
+					<v-flex class="d-flex">
+						<v-text-field
+							ref="backupCode"
+							v-model="backupCode"
+							class="my-5"
+							hide-details
+							readonly
+							outlined
+							prepend-icon="mdi-key-variant"
+							:type="showBackupCode ? 'text' : 'password'"
+							:append-icon="
+								showBackupCode ? 'mdi-eye-off' : 'mdi-eye'
+							"
+							@click:append="
+								() => (showBackupCode = !showBackupCode)
+							"
+						></v-text-field>
+
+						<v-tooltip v-model="copyCodeSuccess" nudge-top top>
+							<template v-slot:activator="{ attrs }">
+								<v-btn
+									v-bind="attrs"
+									class="align-self-center ml-2"
+									@click="copyCode"
+									>copy</v-btn
+								>
+							</template>
+							<span>Copied!</span>
+						</v-tooltip>
+					</v-flex>
+
+					<v-flex class="d-flex">
+						<v-spacer />
+						<v-btn
+							:disabled="!countdownFinished"
+							color="secondary"
+							:loading="loading.accept"
+							@click.prevent="accept()"
+						>
+							Continue <v-icon right>mdi-check-outline</v-icon>
+						</v-btn>
+					</v-flex>
+				</v-card-text>
+			</v-card>
+		</v-dialog>
 	</v-app>
 </template>
 
@@ -254,7 +348,17 @@ export default {
 					title: 'About',
 					to: '/about'
 				}
-			]
+			],
+			acceptDialog: false,
+			accepts: true,
+			backupCode: null,
+			showBackupCode: false,
+			copyIdSuccess: false,
+			copyCodeSuccess: false,
+			countdownFinished: false,
+			loading: {
+				accept: false
+			}
 		}
 	},
 	computed: {
@@ -268,11 +372,35 @@ export default {
 			} else return null
 		}
 	},
+	watch: {
+		acceptDialog() {
+			setTimeout(() => {
+				this.countdownFinished = true
+			}, 10000)
+		}
+	},
 	mounted() {
 		if (this.$auth.loggedIn) {
-			this.$apollo.mutate({
-				mutation: updateAuth
-			})
+			this.loading.accept = true
+			this.$apollo
+				.mutate({
+					mutation: updateAuth
+				})
+				.then(({ data }) => {
+					this.loading.accept = false
+					if (data.updateAuth) {
+						if (data.updateAuth.has_accepted === true) {
+							this.accepts = true
+						} else {
+							this.accepts = false
+							this.acceptDialog = true
+							this.backupCode = data.updateAuth.backup_code
+						}
+					}
+				})
+				.catch(() => {
+					this.loading.accept = false
+				})
 		}
 	},
 	methods: {
@@ -281,6 +409,58 @@ export default {
 			return this.$auth.logout('social').catch((e) => {
 				this.error = e.response.data
 			})
+		},
+		accept() {
+			this.$apollo
+				.mutate({
+					mutation: updateAuth,
+					variables: {
+						accepts: true
+					}
+				})
+				.then(({ data }) => {
+					this.loading.accept = false
+					if (data.updateAuth) {
+						if (data.updateAuth.has_accepted === true) {
+							this.accepts = true
+							this.acceptDialog = false
+							this.backupCode = null
+						}
+					}
+				})
+				.catch(() => {
+					this.loading.accept = false
+				})
+		},
+		copyCode() {
+			const textToCopy = this.$refs.backupCode.$el.querySelector('input')
+			textToCopy.select()
+
+			try {
+				const successful = document.execCommand('copy')
+				if (!successful) throw new Error('error')
+				else this.copyCodeSuccess = true
+				setTimeout(() => {
+					this.copyCodeSuccess = false
+				}, 2000)
+			} catch (err) {
+				alert('Oops, unable to copy')
+			}
+		},
+		copyId() {
+			const textToCopy = this.$refs.creatorId.$el.querySelector('input')
+			textToCopy.select()
+
+			try {
+				const successful = document.execCommand('copy')
+				if (!successful) throw new Error('error')
+				else this.copyIdSuccess = true
+				setTimeout(() => {
+					this.copyIdSuccess = false
+				}, 2000)
+			} catch (err) {
+				alert('Oops, unable to copy')
+			}
 		}
 	}
 }
