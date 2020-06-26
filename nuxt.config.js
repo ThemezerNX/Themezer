@@ -206,15 +206,15 @@ export default {
 			if (ctx.isDev) {
 				config.mode = 'development'
 			} else if (ctx.isClient) {
-				// config.optimization.splitChunks.maxSize = 244000
-				// config.optimization.splitChunks.cacheGroups = {
-				// 	styles: {
-				// 		name: 'styles',
-				// 		test: /\.(css|vue)$/,
-				// 		chunks: 'all',
-				// 		enforce: true
-				// 	}
-				// }
+				config.optimization.splitChunks.maxSize = 244000
+				config.optimization.splitChunks.cacheGroups = {
+					styles: {
+						name: 'styles',
+						test: /\.(css|vue)$/,
+						chunks: 'all',
+						enforce: true
+					}
+				}
 			}
 		}
 	}
