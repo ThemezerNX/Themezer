@@ -31,7 +31,7 @@ export default Vue.extend({
 	background: transparentize(#1e1e1e, 0.5);
 	user-select: none;
 	border-radius: 100px;
-	position: absolute;
+	position: absolute !important;
 	right: 0;
 	top: 0;
 }
