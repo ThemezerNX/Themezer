@@ -502,11 +502,10 @@ html {
 	word-break: break-word;
 }
 
+.v-card__subtitle,
 .v-card__text,
 .v-card__title {
-	word-break: break-word;
-	padding: 0;
-	margin: 16px;
+	word-break: break-word !important;
 }
 
 .v-slide-group__content {

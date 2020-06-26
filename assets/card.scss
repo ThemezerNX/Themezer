@@ -1,21 +1,41 @@
 .card {
 	height: 100%;
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
-    transform-origin: center top 0px;
+	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
+	transform-origin: center top 0px;
+	overflow: hidden;
 
-    .overlay-image {
-        transition: background-image 200ms;
-        background: #2d2d2d;
-    }
+	.overlay-image {
+		transition: background-image 200ms;
+		background: #2d2d2d;
+	}
 
-    .description, .title {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        max-width: fit-content;
-    }
+	@mixin dotting {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		max-width: fit-content;
+		padding: 0;
+		margin: 16px;
+	}
+
+	.title {
+		@include dotting;
+		-webkit-line-clamp: 2;
+		margin-bottom: unset !important;
+	}
+
+	.creator {
+		@include dotting;
+		-webkit-line-clamp: 1;
+		margin-top: unset !important;
+	}
+	
+	.description {
+		@include dotting;
+		-webkit-line-clamp: 3;
+		max-width: fit-content;
+	}
 }
 .card.hover {
 	background: lighten(#1e1e1e, 4%) !important;

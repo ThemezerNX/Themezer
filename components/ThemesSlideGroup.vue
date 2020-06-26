@@ -32,6 +32,7 @@
 									theme.details.name
 								)}`
 							"
+							color="grey darken-4"
 						>
 							<div v-if="theme.layout" class="badges-wrapper">
 								<CertifiedBadge />
@@ -63,6 +64,7 @@
 							/>
 							<v-card-subtitle
 								v-if="showProps.includes('creator')"
+								class="creator"
 							>
 								By {{ theme.creator.discord_user.username }}
 							</v-card-subtitle>

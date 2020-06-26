@@ -32,6 +32,7 @@
 									layout.details.name
 								)}`
 							"
+							color="grey darken-4"
 						>
 							<v-img
 								aspect-ratio="1.7778"
@@ -63,6 +64,7 @@
 							/>
 							<v-card-subtitle
 								v-if="showProps.includes('creator')"
+								class="creator"
 							>
 								By {{ layout.creator.discord_user.username }}
 							</v-card-subtitle>

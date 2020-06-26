@@ -31,7 +31,7 @@
 
 			<v-card-title class="title" v-text="item.details.name" />
 
-			<v-card-subtitle>
+			<v-card-subtitle class="creator">
 				{{ item.creator.discord_user.username }} • v{{
 					item.details.version
 				}}
@@ -39,12 +39,8 @@
 
 			<v-divider v-if="item.details.description" />
 
-			<v-card-text v-if="item.details.description">
-				<div
-					v-linkified
-					class="description"
-					v-html="item.details.description"
-				/>
+			<v-card-text v-if="item.details.description" class="description">
+				<div v-linkified v-html="item.details.description" />
 			</v-card-text>
 		</v-card>
 	</v-hover>

@@ -30,6 +30,7 @@
 									pack.details.name
 								)}`
 							"
+							color="grey darken-4"
 						>
 							<v-carousel
 								continuous
@@ -72,6 +73,7 @@
 							/>
 							<v-card-subtitle
 								v-if="showProps.includes('creator')"
+								class="creator"
 							>
 								By {{ pack.creator.discord_user.username }}
 							</v-card-subtitle>

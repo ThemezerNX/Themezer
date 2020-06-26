@@ -39,6 +39,7 @@
 									? 80
 									: 100
 							"
+							color="grey darken-4"
 							@click="toggle"
 						>
 							<v-img
@@ -53,7 +54,7 @@
 
 							<v-card-title
 								v-if="background.url"
-								class="py-1 px-3"
+								class="my-1 mx-3 title"
 								:class="
 									$vuetify.breakpoint.smAndDown
 										? 'body-2'
