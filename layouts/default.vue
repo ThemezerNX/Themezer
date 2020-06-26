@@ -433,35 +433,65 @@ export default {
 				})
 		},
 		copyCode() {
-			const textToCopy = this.$refs.backupCode.$el.querySelector('input')
-			textToCopy.select()
-
-			try {
-				const successful = document.execCommand('copy')
-				if (!successful) throw new Error('error')
-				else this.copyCodeSuccess = true
-				setTimeout(() => {
-					this.copyCodeSuccess = false
-				}, 2000)
-			} catch (err) {
-				alert('Oops, unable to copy')
-			}
+			navigator.clipboard
+				.writeText(this.backupCode)
+				.then(() => {
+					this.copyCodeSuccess = true
+					setTimeout(() => {
+						this.copyCodeSuccess = false
+					}, 2000)
+				})
+				.catch((e) => {
+					// eslint-disable-next-line no-console
+					console.log('Something went wrong, unable to copy', e)
+				})
 		},
 		copyId() {
-			const textToCopy = this.$refs.creatorId.$el.querySelector('input')
-			textToCopy.select()
-
-			try {
-				const successful = document.execCommand('copy')
-				if (!successful) throw new Error('error')
-				else this.copyIdSuccess = true
-				setTimeout(() => {
-					this.copyIdSuccess = false
-				}, 2000)
-			} catch (err) {
-				alert('Oops, unable to copy')
-			}
+			navigator.clipboard
+				.writeText(this.$auth.user.id)
+				.then(() => {
+					this.copyIdSuccess = true
+					setTimeout(() => {
+						this.copyIdSuccess = false
+					}, 2000)
+				})
+				.catch((e) => {
+					// eslint-disable-next-line no-console
+					console.log('Something went wrong, unable to copy', e)
+				})
 		}
+		// copyCode() {
+		// 	this.showBackupCode = true
+		// 	const textToCopy = this.$refs.backupCode.$el.querySelector('input')
+		// 	textToCopy.select()
+
+		// 	try {
+		// 		const successful = document.execCommand('copy')
+		// 		this.showBackupCode = false
+		// 		if (!successful) throw new Error('error')
+		// 		else this.copyCodeSuccess = true
+		// 		setTimeout(() => {
+		// 			this.copyCodeSuccess = false
+		// 		}, 2000)
+		// 	} catch (err) {
+		// 		alert('Oops, unable to copy')
+		// 	}
+		// },
+		// copyId() {
+		// 	const textToCopy = this.$refs.creatorId.$el.querySelector('input')
+		// 	textToCopy.select()
+
+		// 	try {
+		// 		const successful = document.execCommand('copy')
+		// 		if (!successful) throw new Error('error')
+		// 		else this.copyIdSuccess = true
+		// 		setTimeout(() => {
+		// 			this.copyIdSuccess = false
+		// 		}, 2000)
+		// 	} catch (err) {
+		// 		alert('Oops, unable to copy')
+		// 	}
+		// }
 	}
 }
 </script>
