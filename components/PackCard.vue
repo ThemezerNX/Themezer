@@ -29,7 +29,7 @@
 				</v-carousel-item>
 			</v-carousel>
 
-			<v-card-title v-text="item.details.name" />
+			<v-card-title class="title" v-text="item.details.name" />
 
 			<v-card-subtitle>
 				{{ item.creator.discord_user.username }} • v{{

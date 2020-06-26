@@ -58,6 +58,7 @@
 							</v-carousel>
 
 							<v-card-title
+								class="title"
 								:class="
 									($vuetify.breakpoint.smAndDown
 										? 'body-2'
@@ -65,7 +66,7 @@
 										' ' +
 										(showProps.includes('creator')
 											? ''
-											: 'py-1 px-3')
+											: 'my-1 mx-3')
 								"
 								v-text="pack.details.name"
 							/>

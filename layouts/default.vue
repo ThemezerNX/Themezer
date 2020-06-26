@@ -505,6 +505,8 @@ html {
 .v-card__text,
 .v-card__title {
 	word-break: break-word;
+	padding: 0;
+	margin: 16px;
 }
 
 .v-slide-group__content {
