@@ -78,8 +78,7 @@ export default {
 
 	redirect: [
 		{
-			// eslint-disable-next-line
-			from: '(?!^\/$|^\/[?].*$)(.*\/[?](.*)$|.*\/$)',
+			from: '(?!^/$|^/[?].*$)(.*/[?](.*)$|.*/$)',
 			to: (_from, req) => {
 				const base = req._parsedUrl.pathname.replace(/\/$/, '') // We take pathname instead of req.url because of the query parameters
 				const search = req._parsedUrl.search

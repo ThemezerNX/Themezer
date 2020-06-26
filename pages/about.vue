@@ -63,8 +63,9 @@
 					informed of a backup code you could use if you ever lost
 					access to your Discord account. You can use it here to
 					regain access to your Themezer account. The Discord account
-					you are currently logged in with will be tied to your
-					Themezer data.
+					you are currently logged in with will be linked to your
+					previous Themezer data. Make sure to update your layouts
+					with your new creator ID!
 					<v-form v-model="restoreValid">
 						<v-text-field
 							v-model="creatorId"

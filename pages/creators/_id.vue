@@ -1,6 +1,6 @@
 <template>
 	<error v-if="error" :error="error" />
-	<div v-else-if="creator">
+	<div v-else-if="creator && id === creator.id">
 		<v-parallax
 			:src="
 				creator.banner_image
@@ -405,17 +405,25 @@ export default Vue.extend({
 	watch: {
 		creator(creator) {
 			if (creator) {
-				this.$store.commit('SET_PROFILE_COLOR', creator.profile_color)
-
-				this.changed.profileColor = creator.profile_color
-				this.changed.bio = creator.bio
-
-				if (creator.discord_user.avatar) {
-					this.avatar = `avatars/${creator.id}/${creator.discord_user.avatar}`
+				if (this.id !== creator.id) {
+					// Sort of redirect, needs proper HTML 301 (moved permanently)
+					this.$router.push(`/creators/${creator.id}`)
 				} else {
-					this.avatar = `embed/avatars/${parseInt(
-						creator.discord_user.discriminator
-					) % 5}.png`
+					this.$store.commit(
+						'SET_PROFILE_COLOR',
+						creator.profile_color
+					)
+
+					this.changed.profileColor = creator.profile_color
+					this.changed.bio = creator.bio
+
+					if (creator.discord_user.avatar) {
+						this.avatar = `avatars/${creator.id}/${creator.discord_user.avatar}`
+					} else {
+						this.avatar = `embed/avatars/${parseInt(
+							creator.discord_user.discriminator
+						) % 5}.png`
+					}
 				}
 			}
 		}
