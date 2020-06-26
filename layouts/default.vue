@@ -411,6 +411,7 @@ export default {
 			})
 		},
 		accept() {
+			this.loading.accept = true
 			this.$apollo
 				.mutate({
 					mutation: updateAuth,
