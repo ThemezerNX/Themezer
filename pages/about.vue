@@ -140,7 +140,7 @@ export default Vue.extend({
 		return {
 			error: null,
 			message: null,
-			restoreDialog: true,
+			restoreDialog: false,
 			restoreValid: false,
 			showBackupCode: false,
 			creatorId: null,
