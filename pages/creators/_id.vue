@@ -502,9 +502,19 @@ export default Vue.extend({
 			const metaDesc = this.creator.bio
 				? removeMd(this.creator.bio)
 				: `${this.creator.discord_user.username}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.discord_user.username}.`
+
+			let avatar = null
+			if (this.creator.discord_user.avatar) {
+				avatar = `avatars/${this.creator.id}/${this.creator.discord_user.avatar}`
+			} else {
+				avatar = `embed/avatars/${parseInt(
+					this.creator.discord_user.discriminator
+				) % 5}.png`
+			}
+
 			const metaImg = this.creator.logo_image
 				? `//api.themezer.ga/storage/creators/${this.creator.id}/logo/${this.creator.logo_image}`
-				: `https://cdn.discordapp.com/${this.avatar}?size=256`
+				: `https://cdn.discordapp.com/${avatar}?size=256`
 
 			return {
 				title: metaTitle,
