@@ -88,7 +88,7 @@
 						Bio
 					</h1>
 					<v-divider />
-					<div v-if="creator.bio" v-html="$md.render(creator.bio)" />
+					<markdown v-if="creator.bio" :source="creator.bio" />
 					<span v-else>There's nothing here yet...</span>
 				</v-col>
 			</v-row>
@@ -158,7 +158,7 @@
 							maxlength="1000"
 							prepend-icon="mdi-pencil"
 							counter="1000"
-							label="Bio (supports Markdown)"
+							label="Bio (supports Markdown and HTML)"
 							auto-grow
 							@change="
 								changed.bio === '' ? (changed.bio = null) : null
@@ -268,17 +268,19 @@
 <script>
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
+import Markdown from '@/components/Markdown'
 import { creator, profile } from '@/graphql/Creator.gql'
 import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
 import { rowLayoutsList } from '@/graphql/Layout.gql'
-import PacksSlideGroup from '@/components/PacksSlideGroup.vue'
-import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
-import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
+import PacksSlideGroup from '@/components/PacksSlideGroup'
+import ThemesSlideGroup from '@/components/ThemesSlideGroup'
+import LayoutsSlideGroup from '@/components/LayoutsSlideGroup'
 import error from '@/layouts/error'
 
 export default Vue.extend({
 	components: {
+		Markdown,
 		PacksSlideGroup,
 		ThemesSlideGroup,
 		LayoutsSlideGroup,

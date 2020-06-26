@@ -72,7 +72,6 @@ export default {
 		],
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
-		'@nuxtjs/markdownit',
 		'@nuxtjs/redirect-module',
 		['cookie-universal-nuxt', { parseJSON: false }]
 	],
@@ -89,10 +88,6 @@ export default {
 			statusCode: 301
 		}
 	],
-
-	markdownit: {
-		injected: true
-	},
 
 	gtm: {
 		id: 'GTM-T5ZBWPZ'
@@ -182,6 +177,8 @@ export default {
 	},
 
 	build: {
+		extractCSS: process.env.NODE_ENV === 'production',
+		parallel: true,
 		extend(config, ctx) {
 			config.module.rules.push({
 				test: /\/graphql\/\.(graphql|gql)$/,
@@ -189,10 +186,35 @@ export default {
 				loader: 'graphql-tag/loader'
 			})
 
+			// config.module.rules.push({
+			// 	test: /\.s(c|a)ss$/,
+			// 	use: [
+			// 		'vue-style-loader',
+			// 		'css-loader',
+			// 		{
+			// 			loader: 'sass-loader',
+			// 			options: {
+			// 				implementation: require('sass'),
+			// 				sassOptions: {
+			// 					fiber: require('fibers')
+			// 				}
+			// 			}
+			// 		}
+			// 	]
+			// })
+
 			if (ctx.isDev) {
 				config.mode = 'development'
 			} else if (ctx.isClient) {
-				config.optimization.splitChunks.maxSize = 244000
+				// config.optimization.splitChunks.maxSize = 244000
+				// config.optimization.splitChunks.cacheGroups = {
+				// 	styles: {
+				// 		name: 'styles',
+				// 		test: /\.(css|vue)$/,
+				// 		chunks: 'all',
+				// 		enforce: true
+				// 	}
+				// }
 			}
 		}
 	}

@@ -20,7 +20,6 @@
 		"@nuxtjs/axios": "^5.11.0",
 		"@nuxtjs/dotenv": "^1.4.0",
 		"@nuxtjs/gtm": "^2.3.0",
-		"@nuxtjs/markdownit": "^1.2.9",
 		"@nuxtjs/pwa": "^3.0.0-0",
 		"@nuxtjs/redirect-module": "^0.3.1",
 		"@nuxtjs/vuetify": "^1.0.0",
@@ -30,15 +29,14 @@
 		"babel-runtime": "^6.26.0",
 		"cookie-universal-nuxt": "^2.1.4",
 		"core-js": "^2.6.5",
-		"cross-fetch": "^3.0.5",
+		"marked": "^1.1.0",
 		"minisearch": "^2.3.1",
 		"nested-object-assign": "^1.0.3",
 		"nuxt": "^2.0.0",
 		"nuxt-rfg-icon": "^0.6.4",
 		"remove-markdown": "^0.3.0",
 		"vue-linkify": "^1.0.1",
-		"vuejs-paginate": "^2.1.0",
-		"vuelidate": "^0.7.5"
+		"vuejs-paginate": "^2.1.0"
 	},
 	"devDependencies": {
 		"@nuxtjs/eslint-config-typescript": "^1.0.0",

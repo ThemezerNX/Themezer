@@ -1,6 +1,5 @@
 // Source: https://stackoverflow.com/a/60801428/12314121
 import { createUploadLink } from 'apollo-upload-client'
-import 'cross-fetch/polyfill'
 
 export default ({ app }) => {
 	const token = app.$cookies.get('auth._token.social')

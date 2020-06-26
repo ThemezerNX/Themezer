@@ -81,9 +81,9 @@ import Vue from 'vue'
 import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
 import { rowLayoutsList } from '@/graphql/Layout.gql'
-import PacksSlideGroup from '@/components/PacksSlideGroup.vue'
-import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
-import LayoutsSlideGroup from '@/components/LayoutsSlideGroup.vue'
+import PacksSlideGroup from '@/components/PacksSlideGroup'
+import ThemesSlideGroup from '@/components/ThemesSlideGroup'
+import LayoutsSlideGroup from '@/components/LayoutsSlideGroup'
 import error from '@/layouts/error'
 
 export default Vue.extend({
