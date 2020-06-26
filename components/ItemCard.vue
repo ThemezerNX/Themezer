@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CertifiedBadge from '@/components/CertifiedBadge'
+import CertifiedBadge from '@/components/CertifiedBadge.vue'
 import urlParser from '@/components/mixins/urlParser'
 
 export default Vue.extend({

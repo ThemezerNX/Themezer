@@ -134,7 +134,7 @@ import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import { pack, downloadPack } from '@/graphql/Pack.gql'
 import ThemesSlideGroup from '@/components/ThemesSlideGroup.vue'
-import LoadingOverlay from '@/components/LoadingOverlay'
+import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
 	components: {

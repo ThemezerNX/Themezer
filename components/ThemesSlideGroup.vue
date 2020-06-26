@@ -75,7 +75,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CertifiedBadge from '@/components/CertifiedBadge'
+import CertifiedBadge from '@/components/CertifiedBadge.vue'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 
