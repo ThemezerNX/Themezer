@@ -33,6 +33,10 @@
 								)}`
 							"
 						>
+							<div v-if="theme.layout" class="badges-wrapper">
+								<CertifiedBadge />
+							</div>
+
 							<v-img
 								aspect-ratio="1.7778"
 								:src="
@@ -71,10 +75,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import CertifiedBadge from '@/components/CertifiedBadge'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 
 export default Vue.extend({
+	components: {
+		CertifiedBadge
+	},
 	mixins: [targetParser, urlParser],
 	props: {
 		items: {

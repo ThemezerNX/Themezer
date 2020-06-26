@@ -120,6 +120,9 @@ query rowPacksList($creator_id: String, $limit: Int) {
 		last_updated
 		themes {
 			uuid
+			layout {
+				uuid
+			}
 		}
 	}
 }

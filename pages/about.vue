@@ -34,7 +34,13 @@
 						>Create an issue on GitHub</a
 					>.
 				</p>
-				<p>
+				<div>
+					What does the
+					<CertifiedBadge inline /> badge mean? It means that the
+					layout used in the theme was downloaded from Themezer and is
+					automatically updated when downloading.
+				</div>
+				<p class="mt-4">
 					Need to restore your Themezer account?
 					<v-btn text color="primary" @click="restoreDialog = true"
 						>Open the dialog</v-btn
@@ -134,9 +140,13 @@
 
 <script>
 import Vue from 'vue'
+import CertifiedBadge from '@/components/CertifiedBadge'
 import { restoreAccount } from '@/graphql/Creator.gql'
 
 export default Vue.extend({
+	components: {
+		CertifiedBadge
+	},
 	data() {
 		return {
 			error: null,

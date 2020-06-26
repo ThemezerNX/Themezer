@@ -13,6 +13,10 @@
 			"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
+			<div v-if="item.layout" class="badges-wrapper">
+				<CertifiedBadge />
+			</div>
+
 			<v-img
 				aspect-ratio="1.7778"
 				:src="imgSrc"
@@ -48,9 +52,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import CertifiedBadge from '@/components/CertifiedBadge'
 import urlParser from '@/components/mixins/urlParser'
 
 export default Vue.extend({
+	components: {
+		CertifiedBadge
+	},
 	mixins: [urlParser],
 	props: {
 		item: {
