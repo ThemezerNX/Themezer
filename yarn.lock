@@ -1675,10 +1675,6 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@themezernx/layout-id-parser@https://github.com/ThemezerNX/Layout-ID-Parser.git":
-  version "1.0.1"
-  resolved "https://github.com/ThemezerNX/Layout-ID-Parser.git#f621b6bd44956ab882c53fc3a4175d1bad64bc46"
-
 "@types/accepts@*", "@types/accepts@^1.3.5":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
