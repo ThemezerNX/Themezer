@@ -11,15 +11,11 @@
 
 <script>
 import Vue from 'vue'
-import LoadingOverlay from '@/components/LoadingOverlay.vue'
 
 export default Vue.extend({
 	middleware: ['auth'],
 	options: {
 		auth: true
-	},
-	components: {
-		LoadingOverlay
 	},
 	computed: {
 		isCallback() {

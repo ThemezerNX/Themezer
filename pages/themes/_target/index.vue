@@ -57,19 +57,11 @@
 <script>
 import Vue from 'vue'
 import { themesList } from '@/graphql/Theme.gql'
-import ItemCard from '@/components/ItemCard.vue'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
-import Filters from '@/components/Filters.vue'
-import LoadingOverlay from '@/components/LoadingOverlay.vue'
 import allowedTargets from '@/components/mixins/allowedTargets'
 
 export default Vue.extend({
-	components: {
-		ItemCard,
-		Filters,
-		LoadingOverlay
-	},
 	beforeRouteEnter(to, _from, next) {
 		if (allowedTargets.includes(to.params.target)) {
 			next()

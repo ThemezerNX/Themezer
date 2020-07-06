@@ -171,6 +171,8 @@ export default {
 		}
 	},
 
+	components: true,
+
 	router: {
 		trailingSlash: false
 	},

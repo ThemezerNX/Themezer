@@ -204,12 +204,8 @@ import shared from '@/layouts/details/SharedScript'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import { theme, downloadTheme } from '@/graphql/Theme.gql'
-import LoadingOverlay from '@/components/LoadingOverlay'
 
 export default Vue.extend({
-	components: {
-		LoadingOverlay
-	},
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {

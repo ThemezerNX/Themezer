@@ -140,13 +140,9 @@
 
 <script>
 import Vue from 'vue'
-import CertifiedBadge from '@/components/CertifiedBadge'
 import { restoreAccount } from '@/graphql/Creator.gql'
 
 export default Vue.extend({
-	components: {
-		CertifiedBadge
-	},
 	data() {
 		return {
 			error: null,
