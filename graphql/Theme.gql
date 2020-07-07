@@ -54,6 +54,7 @@ query theme($id: Int!, $target: String!) {
 		target
         categories
 		dl_count
+		like_count
 		bg_type
 	}
 }
@@ -83,6 +84,7 @@ query themeDetails($id: Int!, $target: String!) {
         }
         categories
 		dl_count
+		like_count
 		bg_type
 	}
 }
@@ -129,6 +131,7 @@ query themesList($target: String) {
 		last_updated
 		categories
 		dl_count
+		like_count
 	}
 }
 

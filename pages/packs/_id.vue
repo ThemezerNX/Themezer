@@ -10,6 +10,7 @@
 					class="pa-2"
 				>
 					<v-carousel
+						class="overlay-image"
 						continuous
 						hide-delimiters
 						hide-delimiter-background
@@ -69,7 +70,22 @@
 						</v-chip>
 					</div>
 
-					<v-divider class="my-3" />
+					<v-flex class="d-flex justify-center">
+						<v-divider class="mx-3 my-auto" />
+						<LikeButton
+							v-if="$auth.loggedIn"
+							:id="pack.uuid"
+							type="packs"
+							:count="pack.like_count"
+							:value="
+								$auth.user.liked.packs
+									.map((p) => p.uuid)
+									.includes(pack.uuid)
+							"
+						/>
+						<v-divider class="mx-3 my-auto" />
+					</v-flex>
+
 					<h3>
 						Details
 					</h3>
@@ -85,26 +101,20 @@
 						<span class="font-weight-medium">Downloads: </span>
 						{{ pack.dl_count }}
 					</div>
-					<!-- <div style="position: absolute; bottom: 0;"> -->
+
 					<v-flex class="d-flex justify-center mt-3">
-						<!-- <v-btn
-						v-if="pack.has_pieces"
-						class="mx-2"
-						color="primary"
-						to="customize"
-						append
-					>
-						Customize <v-icon right>mdi-square-edit-outline</v-icon>
-					</v-btn> -->
+						<v-divider class="mx-3 my-auto" />
 						<v-btn
 							class="mx-2"
 							color="secondary"
+							rounded
 							append
 							:loading="loadingDownload"
 							@click.prevent="downloadPack()"
 						>
-							Get <v-icon right>mdi-download-box-outline</v-icon>
+							<v-icon>mdi-download</v-icon>
 						</v-btn>
+						<v-divider class="mx-3 my-auto" />
 					</v-flex>
 				</v-col>
 			</v-row>

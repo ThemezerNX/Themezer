@@ -59,7 +59,22 @@
 							{{ category }}
 						</v-chip>
 					</div>
-					<v-divider class="my-3" />
+
+					<v-flex class="d-flex justify-center">
+						<v-divider class="mx-3 my-auto" />
+						<LikeButton
+							v-if="$auth.loggedIn"
+							:id="theme.uuid"
+							:count="theme.like_count"
+							type="themes"
+							:value="
+								$auth.user.liked.themes
+									.map((t) => t.uuid)
+									.includes(theme.uuid)
+							"
+						/>
+						<v-divider class="mx-3 my-auto" />
+					</v-flex>
 					<h3>
 						Details
 					</h3>
@@ -113,29 +128,22 @@
 						<span class="font-weight-medium">Downloads: </span>
 						{{ theme.dl_count }}
 					</div>
-					<!-- <div style="position: absolute; bottom: 0;"> -->
-					<v-flex class="d-flex justify-center mt-3">
-						<!-- <v-btn
-						v-if="theme.has_pieces"
-						class="mx-2"
-						color="primary"
-						to="customize"
-						append
-					>
-						Customize <v-icon right>mdi-square-edit-outline</v-icon>
-					</v-btn> -->
+
+					<v-flex class="d-flex justify-center my-3">
+						<v-divider class="mx-3 my-auto" />
 						<v-btn
 							class="mx-2"
 							color="secondary"
 							append
+							rounded
 							:loading="loadingDownload"
 							@click.prevent="downloadTheme()"
 						>
-							Get <v-icon right>mdi-download-box-outline</v-icon>
+							<v-icon>mdi-download</v-icon>
 						</v-btn>
+						<v-divider class="mx-3 my-auto" />
 					</v-flex>
 					<div v-if="theme.pack">
-						<v-divider class="my-3" />
 						<h3 style="position: relative;">
 							Theme Pack
 							<v-tooltip v-model="showPackInfo" top>
@@ -186,7 +194,12 @@
 					<v-card-actions>
 						<v-spacer></v-spacer>
 
-						<v-btn color="primary" text @click="packDialog = false">
+						<v-btn
+							rounded
+							color="primary"
+							text
+							@click="packDialog = false"
+						>
 							Close
 						</v-btn>
 					</v-card-actions>

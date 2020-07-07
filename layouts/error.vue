@@ -10,7 +10,7 @@
 			<h1 class="mb-4">
 				{{ title }}
 			</h1>
-			<v-btn color="secondary" @click="$router.go(-1)">
+			<v-btn rounded color="secondary" @click="$router.go(-1)">
 				Go Back
 			</v-btn>
 		</v-container>

@@ -107,6 +107,7 @@
 					class="d-flex justify-center mt-3"
 				>
 					<v-btn
+						rounded
 						color="primary"
 						class="mx-2"
 						append
@@ -117,6 +118,7 @@
 					</v-btn>
 					<v-btn
 						v-if="resultImage"
+						rounded
 						class="mx-2"
 						color="secondary"
 						append
@@ -128,7 +130,7 @@
 							)
 						"
 					>
-						Download <v-icon right>mdi-download-box-outline</v-icon>
+						Download <v-icon right>mdi-download</v-icon>
 					</v-btn>
 				</v-flex>
 			</v-row>

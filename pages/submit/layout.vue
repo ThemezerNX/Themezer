@@ -17,6 +17,7 @@
 			<v-flex class="d-flex justify-center my-3">
 				<v-btn
 					color="primary"
+					rounded
 					class="mx-2"
 					router
 					href="https://github.com/ThemezerNX/Layouts"

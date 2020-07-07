@@ -16,9 +16,10 @@
 						: ''
 				"
 			/>
-			<v-list nav>
+			<v-list rounded nav>
 				<v-list-item
 					v-if="!$auth.loggedIn"
+					class="my-2"
 					link
 					two-line
 					router
@@ -37,7 +38,7 @@
 					</v-list-item-content>
 					<v-icon>mdi-login</v-icon>
 				</v-list-item>
-				<v-list-group v-if="$auth.loggedIn" no-action>
+				<v-list-group v-if="$auth.loggedIn" no-action class="mb-2">
 					<template v-slot:activator>
 						<v-list-item-avatar>
 							<img
@@ -93,17 +94,17 @@
 						</template>
 						<template v-for="type in item.types">
 							<v-list-item
-								:key="type"
+								:key="item.title + type.name"
 								router
-								:to="`/${type}/${item.target}`"
+								:to="`/${type.name}/${item.target}`"
 								dense
-								class="ml-11"
+								class="ml-11 pl-5"
 							>
 								<v-list-item-title
 									class="text-capitalize"
-									v-text="type"
+									v-text="type.name"
 								/>
-								<v-list-item-icon>
+								<v-list-item-icon v-if="type.icon">
 									<v-icon v-text="type.icon" />
 								</v-list-item-icon>
 							</v-list-item>
@@ -199,6 +200,7 @@
 						<v-tooltip v-model="copyIdSuccess" nudge-top top>
 							<template v-slot:activator="{ attrs }">
 								<v-btn
+									rounded
 									v-bind="attrs"
 									class="align-self-center ml-2"
 									@click="copyId"
@@ -229,6 +231,7 @@
 						<v-tooltip v-model="copyCodeSuccess" nudge-top top>
 							<template v-slot:activator="{ attrs }">
 								<v-btn
+									rounded
 									v-bind="attrs"
 									class="align-self-center ml-2"
 									@click="copyCode"
@@ -242,6 +245,7 @@
 					<v-flex class="d-flex">
 						<v-spacer />
 						<v-btn
+							rounded
 							:disabled="!countdownFinished"
 							color="secondary"
 							:loading="loading.accept"
@@ -258,6 +262,17 @@
 
 <script>
 import { updateAuth } from '@/graphql/Creator.gql'
+
+const bothTypes = [
+	{
+		name: 'themes',
+		icon: 'mdi-format-color-fill'
+	},
+	{
+		name: 'layouts',
+		icon: 'mdi-code-json'
+	}
+]
 
 export default {
 	data() {
@@ -278,49 +293,49 @@ export default {
 					icon: 'mdi-home-outline',
 					title: 'Home Menu',
 					target: 'homemenu',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-lock-outline',
 					title: 'Lockscreen',
 					target: 'lockscreen',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-apps',
 					title: 'All Apps',
 					target: 'allapps',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-cog-outline',
 					title: 'Settings',
 					target: 'settings',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-account-multiple',
 					title: 'Player Select',
 					target: 'playerselect',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-account-outline',
 					title: 'User Page',
 					target: 'userpage',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					icon: 'mdi-newspaper-variant-outline',
 					title: 'News',
 					target: 'news',
-					types: ['themes', 'layouts']
+					types: bothTypes
 				},
 				{
 					header: 'Submit'
 				},
 				{
-					icon: 'mdi-file-image-outline',
+					icon: 'mdi-format-color-fill',
 					title: 'Theme',
 					to: '/submit/theme'
 				},
@@ -499,6 +514,11 @@ html {
 	word-break: break-word;
 }
 
+.v-list--nav .v-list-item,
+.v-list--rounded .v-list-item {
+	margin-bottom: 6px;
+}
+
 .v-card__subtitle,
 .v-card__text,
 .v-card__title {
@@ -556,7 +576,7 @@ html {
 
 .box {
 	background-color: #1e1e1e;
-	border-radius: 4px;
+	border-radius: 10px;
 	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
 		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
@@ -570,7 +590,7 @@ html {
 		background-position: center;
 		// transition-duration: 200ms;
 		// transition-timing-function: ease-in-out;
-		border-radius: 4px;
+		border-radius: 10px;
 	}
 
 	.box_text {

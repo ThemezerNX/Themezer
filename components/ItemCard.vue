@@ -29,7 +29,7 @@
 				class="overlay-image"
 			/>
 
-			<v-card-title class="title" v-text="item.details.name" />
+			<v-card-title class="title mb-0" v-text="item.details.name" />
 
 			<v-card-subtitle class="creator">
 				{{ item.creator.discord_user.username }} • v{{

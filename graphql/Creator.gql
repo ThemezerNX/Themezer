@@ -14,6 +14,7 @@ query me {
 		banner_image
 		logo_image
 		profile_color
+		like_count
 	}
 }
 
@@ -33,6 +34,7 @@ query creator($id: String!) {
 		banner_image
 		logo_image
 		profile_color
+		like_count
 	}
 }
 

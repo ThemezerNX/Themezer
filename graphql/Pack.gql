@@ -16,6 +16,7 @@ query pack($id: Int!) {
 		last_updated
 		categories
 		dl_count
+		like_count
 		themes {
 			uuid
 			id
@@ -75,6 +76,7 @@ query packDetails($id: Int!) {
 		last_updated
 		categories
 		dl_count
+		like_count
 		themes {
 			uuid
 			id
@@ -145,6 +147,7 @@ query packsList {
 		last_updated
 		categories
 		dl_count
+		like_count
 		themes {
 			uuid
 		}

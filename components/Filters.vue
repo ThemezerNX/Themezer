@@ -3,16 +3,19 @@
 		class="ma-auto"
 		router
 		exact
-		:style="`border: rgba(255, 255, 255, 0.12) solid 2px;`"
+		:style="
+			`border: rgba(255, 255, 255, 0.12) solid 2px; border-radius: 10px;`
+		"
 	>
 		<div class="group">
 			<v-card-title class="title">
 				Search
 			</v-card-title>
 
-			<v-card-actions>
+			<v-card-actions class="mx-2">
 				<v-text-field
 					v-model="query"
+					rounded
 					label="Search in everything"
 					dense
 					single-line
@@ -27,7 +30,7 @@
 				Sort by
 			</v-card-title>
 
-			<v-card-actions class="link-group">
+			<v-card-actions class="link-group mx-2">
 				<nuxt-link
 					v-for="(option, i) in sortOptions"
 					:key="i"
@@ -78,7 +81,7 @@
 			<v-card-actions v-if="!unsupportedFilters.includes('nsfw')">
 				<v-checkbox
 					v-model="nsfw"
-					class="ma-0"
+					class="ma-0 mx-2"
 					label="Show NSFW"
 					color="red"
 					hide-details
@@ -108,6 +111,12 @@ export default Vue.extend({
 					id: 'downloads',
 					key: 'dl_count',
 					icon: 'mdi-download-outline'
+				},
+				{
+					title: 'Likes',
+					id: 'likes',
+					key: 'like_count',
+					icon: 'mdi-heart'
 				},
 				{
 					title: 'Updated',
@@ -204,7 +213,10 @@ export default Vue.extend({
 						const sortOption = this.$data.sortOptions.find(
 							(o: any) => o.id === this.currentSort
 						)
-						if (sortOption.id === 'downloads') {
+						if (
+							sortOption.id === 'downloads' ||
+							sortOption.id === 'likes'
+						) {
 							if (this.currentSortOrder === 'asc') {
 								return a[sortOption.key] - b[sortOption.key]
 							} else if (this.currentSortOrder === 'desc') {
@@ -287,12 +299,13 @@ export default Vue.extend({
 
 .sort-item {
 	width: 100%;
+	position: relative;
 	font-weight: 600;
 	font-size: 0.95em;
 	text-decoration: none;
 	padding: 6px 12px;
 	margin: 4px 0;
-	border-radius: 2px;
+	border-radius: 100px;
 	border: 1px solid rgba(255, 255, 255, 0.08);
 	color: rgba(255, 255, 255, 0.8);
 
@@ -327,7 +340,7 @@ export default Vue.extend({
 		right: 0;
 		transition: transform 200ms ease;
 		position: absolute;
-		margin-right: 12px;
+		margin-right: 6px;
 	}
 }
 </style>

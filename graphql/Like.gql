@@ -1,0 +1,22 @@
+query myLikes {
+	me {
+		liked {
+			creators {
+				id
+			}
+			layouts {
+				uuid
+			}
+			themes {
+				uuid
+			}
+			packs {
+				uuid
+			}
+		}
+	}
+}
+
+mutation setLike($type: String!, $id: String!, $value: Boolean!) {
+	setLike(type: $type, id: $id, value: $value)
+}

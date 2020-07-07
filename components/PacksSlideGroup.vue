@@ -66,7 +66,7 @@
 										: 'subtitle-1') +
 										' ' +
 										(showProps.includes('creator')
-											? ''
+											? 'mb-0'
 											: 'my-1 mx-3')
 								"
 								v-text="pack.details.name"

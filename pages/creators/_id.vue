@@ -72,9 +72,20 @@
 					</h1>
 				</v-col>
 				<v-col v-if="isPageOwner" class="text-center" cols="12">
-					<v-btn color="secondary" @click="editDialog = true">
+					<v-btn rounded color="secondary" @click="editDialog = true">
 						Edit Profile <v-icon right>mdi-pencil</v-icon>
 					</v-btn>
+					<LikeButton
+						v-if="$auth.loggedIn"
+						:id="creator.id"
+						type="creators"
+						:count="creator.like_count"
+						:value="
+							$auth.user.liked.creators
+								.map((c) => c.id)
+								.includes(creator.id)
+						"
+					/>
 				</v-col>
 			</v-row>
 		</v-parallax>
@@ -145,7 +156,7 @@
 						<span>Edit Profile</span>
 						<v-spacer></v-spacer>
 
-						<v-btn icon @click="editDialog = false">
+						<v-btn rounded icon @click="editDialog = false">
 							<v-icon>
 								mdi-close
 							</v-icon>
@@ -201,6 +212,7 @@
 						<v-flex class="d-flex mt-n4 mb-2">
 							<v-spacer />
 							<v-btn
+								rounded
 								:disabled="
 									!creator.banner_image ||
 										changed.clearBannerImage ||
@@ -227,6 +239,7 @@
 						<v-flex class="d-flex mt-n4 mb-2">
 							<v-spacer />
 							<v-btn
+								rounded
 								:disabled="
 									!creator.logo_image ||
 										changed.clearLogoImage ||
@@ -243,6 +256,7 @@
 						</v-flex>
 						<v-flex class="d-flex">
 							<v-btn
+								rounded
 								:disabled="!changes || loading.submit"
 								color="red"
 								@click.prevent="discard()"
@@ -252,6 +266,7 @@
 							</v-btn>
 							<v-spacer />
 							<v-btn
+								rounded
 								:disabled="!submitValid || !changes"
 								color="secondary"
 								type="submit"
@@ -586,7 +601,7 @@ export default Vue.extend({
 		width: fit-content;
 		margin: auto;
 		background-color: #222222a0;
-		border-radius: 20px;
+		border-radius: 200px;
 		text-align: center;
 		word-break: break-all;
 		box-shadow: #00000050 0px 1px 30px;

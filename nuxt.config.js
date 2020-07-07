@@ -62,7 +62,6 @@ export default {
 
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/auth-next',
 		'@nuxtjs/apollo',
 		[
 			'nuxt-rfg-icon',
@@ -73,7 +72,8 @@ export default {
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
 		'@nuxtjs/redirect-module',
-		['cookie-universal-nuxt', { parseJSON: false }]
+		['cookie-universal-nuxt', { parseJSON: false }],
+		'@nuxtjs/auth-next'
 	],
 
 	redirect: [
@@ -144,7 +144,7 @@ export default {
 		},
 		strategies: {
 			social: {
-				scheme: 'oauth2',
+				scheme: '@/schemes/customScheme',
 				clientId: '722724539028734003',
 				endpoints: {
 					// logout: 'https://discord.com/api/oauth2/token/revoke', needs POST method(?)
@@ -178,32 +178,10 @@ export default {
 	},
 
 	build: {
+		transpile: ['@nuxtjs/auth-next'],
 		extractCSS: process.env.NODE_ENV === 'production',
 		parallel: true,
 		extend(config, ctx) {
-			config.module.rules.push({
-				test: /\/graphql\/\.(graphql|gql)$/,
-				exclude: /(node_modules|server)/,
-				loader: 'graphql-tag/loader'
-			})
-
-			// config.module.rules.push({
-			// 	test: /\.s(c|a)ss$/,
-			// 	use: [
-			// 		'vue-style-loader',
-			// 		'css-loader',
-			// 		{
-			// 			loader: 'sass-loader',
-			// 			options: {
-			// 				implementation: require('sass'),
-			// 				sassOptions: {
-			// 					fiber: require('fibers')
-			// 				}
-			// 			}
-			// 		}
-			// 	]
-			// })
-
 			if (ctx.isDev) {
 				config.mode = 'development'
 			} else if (ctx.isClient) {

@@ -29,6 +29,7 @@ query layout($id: Int!, $target: String!) {
 		}
 		commonlayout
 		dl_count
+		like_count
 	}
 }
 
@@ -53,6 +54,7 @@ query layoutDetails($id: Int!, $target: String!) {
 		has_pieces
 		commonlayout
 		dl_count
+		like_count
 	}
 }
 
@@ -95,5 +97,6 @@ query layoutsList($target: String, $creator_id: String, $limit: Int) {
 		target
 		last_updated
 		dl_count
+		like_count
 	}
 }

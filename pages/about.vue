@@ -42,7 +42,11 @@
 				</div>
 				<p class="mt-4">
 					Need to restore your Themezer account?
-					<v-btn text color="primary" @click="restoreDialog = true"
+					<v-btn
+						rounded
+						text
+						color="primary"
+						@click="restoreDialog = true"
 						>Open the dialog</v-btn
 					>
 				</p>
@@ -57,7 +61,7 @@
 					<span>Restore Account</span>
 					<v-spacer></v-spacer>
 
-					<v-btn icon @click="restoreDialog = false">
+					<v-btn rounded icon @click="restoreDialog = false">
 						<v-icon>
 							mdi-close
 						</v-icon>
@@ -114,6 +118,7 @@
 						<v-flex class="d-flex">
 							<v-spacer />
 							<v-btn
+								rounded
 								:disabled="!restoreValid"
 								color="secondary"
 								:loading="loading.restore"

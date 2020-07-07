@@ -481,6 +481,7 @@
 							></v-text-field>
 							<v-btn
 								color="secondary"
+								rounded
 								type="submit"
 								:loading="loading.submit"
 								:disabled="!submitValid"

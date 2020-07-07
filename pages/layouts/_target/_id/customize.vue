@@ -5,9 +5,7 @@
 			no-gutters
 			class="pa-2 box_fill"
 		>
-			<h1 class="box_text">
-				{{ layout.details.name }}
-			</h1>
+			<h1 class="box_text">Customize {{ layout.details.name }}</h1>
 			<div class="subtitle-1 box_text">
 				By
 				<a
@@ -146,9 +144,11 @@
 							</v-list-item>
 						</div>
 					</v-list>
-					<v-flex class="d-flex justify-center">
+					<v-flex class="d-flex justify-center my-3">
+						<v-divider class="mx-3 my-auto" />
 						<v-btn
 							color="secondary"
+							rounded
 							append
 							:loading="loadingMerge"
 							@click.prevent="
@@ -158,8 +158,9 @@
 								)
 							"
 						>
-							Get <v-icon right>mdi-download-box-outline</v-icon>
+							<v-icon>mdi-download</v-icon>
 						</v-btn>
+						<v-divider class="mx-3 my-auto" />
 					</v-flex>
 				</v-col>
 			</v-row>
