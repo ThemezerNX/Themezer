@@ -4,10 +4,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-	SET_PROFILE_COLOR(state, color) {
+	SET_PROFILE_COLOR(state: any, color: string) {
 		state.profileColor = color
 	},
-	SET_BACKGROUND(state, url) {
+	SET_BACKGROUND(state: any, url: string) {
 		state.background = url
 	}
 }

@@ -95,7 +95,7 @@ export default {
 	apollo: {
 		// errorHandler: '~/plugins/apollo-error-handler.js',
 		clientConfigs: {
-			default: '~/plugins/apolloClient.js'
+			default: '~/plugins/apolloClient'
 		}
 	},
 
