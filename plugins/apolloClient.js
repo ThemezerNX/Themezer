@@ -5,7 +5,6 @@ export default ({ app }) => {
 	const token = app.$cookies.get('auth._token.social')
 
 	return {
-		// httpEndpoint: process.env.API_ENDPOINT,
 		inMemoryCacheOptions: {
 			addTypename: false
 		},
