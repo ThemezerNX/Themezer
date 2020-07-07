@@ -23,7 +23,6 @@
 					two-line
 					router
 					to="/login"
-					exact
 				>
 					<v-list-item-avatar>
 						<v-icon large>
@@ -60,7 +59,6 @@
 					<v-list-item
 						dense
 						router
-						exact
 						:to="`/creators/${$auth.user.id}`"
 					>
 						<v-list-item-title>My Profile</v-list-item-title>
@@ -117,7 +115,6 @@
 						class="my-2"
 						:to="item.to"
 						router
-						exact
 					>
 						<v-list-item-action>
 							<v-icon v-text="item.icon" />
@@ -141,7 +138,7 @@
 			"
 		>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-			<NuxtLink exact to="/" class="title-link">
+			<NuxtLink to="/" class="title-link">
 				<v-toolbar-title class="d-flex title-text">
 					<v-img
 						class="mx-2"
@@ -186,7 +183,7 @@
 					previous Themezer account. To restore your account, visit
 					the about page.
 					<div>
-						THIS IS THE ONLY TIME YOU CAN VIEW THE BACKUP CODE!
+						THIS IS THE ONLY TIME YOU CAN VIEW THIS BACKUP CODE!
 					</div>
 					<v-flex class="d-flex">
 						<v-text-field
@@ -630,7 +627,7 @@ html {
 	}
 }
 
-.content {
-	// background: linear-gradient(135deg, #b40a86, #0ab379);
-}
+// .content {
+// 	background: linear-gradient(0deg, #b40a86, #0ab379);
+// }
 </style>

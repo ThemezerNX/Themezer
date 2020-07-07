@@ -6,9 +6,9 @@
 			</h1>
 			<div class="subtitle-1 box_text">
 				Create a transparent overlay for your layout and customizations.
-				You may use the tool here, or manually create an overlay if for
-				example your theme uses partially-transparent panels. Either
-				way, an overlay is required for layouts on this website.
+				You may use the tool here, or manually create an overlay if you
+				can. Either way, an overlay is required for layouts on this
+				website.
 			</div>
 			<h2 class="box_text">
 				1. Upload Layout
@@ -17,9 +17,8 @@
 				Upload your layout here. You will get two NXThemes: one with a
 				black background and one with a white one (be sure to allow the
 				site to download multiple files). For each do the following:
-				install it on your Switch and take a screenshot of the menu the
-				layout is for. Transfer them to your PC afterwards. Have you
-				done that? Go to step 2.
+				install it on your Switch and take a screenshot. Transfer them
+				to your PC afterwards. Have you done that? Go to step 2.
 			</div>
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">

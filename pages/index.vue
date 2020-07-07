@@ -61,7 +61,7 @@
 					>
 						<v-col cols="12" class="pt-0">
 							<h2>
-								Latest Layouts
+								Latest Updated Layouts
 							</h2>
 							<v-divider />
 							<LayoutsSlideGroup
@@ -176,7 +176,7 @@ export default Vue.extend({
 }
 
 .content {
-	background: linear-gradient(135deg, #b40a86, #0ab379);
+	background: linear-gradient(0deg, #b40a86, #0ab379);
 }
 </style>
 

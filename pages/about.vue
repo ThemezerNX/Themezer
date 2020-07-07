@@ -71,7 +71,7 @@
 					regain access to your Themezer account. The Discord account
 					you are currently logged in with will be linked to your
 					previous Themezer data. Make sure to update your layouts
-					with your new creator ID!
+					with your new creator ID afterwards!
 					<v-form v-model="restoreValid">
 						<v-text-field
 							v-model="creatorId"

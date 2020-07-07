@@ -84,12 +84,15 @@
 		>
 			<v-row align="center" justify="center">
 				<v-col cols="12" class="pt-0">
-					<h1>
-						Bio
-					</h1>
-					<v-divider />
-					<markdown v-if="creator.bio" :source="creator.bio" />
-					<span v-else>There's nothing here yet...</span>
+					<markdown
+						v-if="creator.bio"
+						class="markdown"
+						:source="creator.bio"
+					/>
+					<span v-else
+						>This creator hasn't written anything about him- or
+						herself yet...</span
+					>
 				</v-col>
 			</v-row>
 			<v-row
@@ -588,5 +591,11 @@ export default Vue.extend({
 		word-break: break-all;
 		box-shadow: #00000050 0px 1px 30px;
 	}
+}
+
+.markdown {
+	background-color: #2a2a2a;
+	padding: 20px;
+	border-radius: 4px;
 }
 </style>
