@@ -421,6 +421,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .v-menu__content {
-	border-radius: 10px;
+	border-radius: 10px !important;
 }
 </style>
