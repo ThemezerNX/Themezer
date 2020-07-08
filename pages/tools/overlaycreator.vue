@@ -183,6 +183,10 @@ export default Vue.extend({
 						)
 					})
 				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loadingUploadLayout = false
+				})
 		},
 		onScreenshotBlackChange(file) {
 			if (file) {

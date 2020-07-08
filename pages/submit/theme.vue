@@ -486,14 +486,6 @@
 					</v-row>
 				</div>
 			</v-form>
-			<v-snackbar
-				v-model="snackbar"
-				bottom
-				:timeout="8000"
-				:color="error ? 'error' : 'green'"
-			>
-				{{ error || message }}
-			</v-snackbar>
 		</div>
 	</v-container>
 </template>
@@ -521,9 +513,6 @@ export default Vue.extend({
 	data() {
 		return {
 			forceUpdate: 0,
-			snackbar: false,
-			error: null,
-			message: null,
 			QnAs: [
 				{
 					Q:
@@ -670,26 +659,9 @@ export default Vue.extend({
 						this.$apollo.queries.categories.skip = false
 						this.$apollo.queries.categories.refetch()
 					})
-					.catch((error) => {
-						// eslint-disable-next-line no-console
-						console.error(error)
-						const parsedError = JSON.parse(JSON.stringify(error))
-						if (
-							parsedError.graphQLErrors &&
-							parsedError.graphQLErrors.length > 0 &&
-							parsedError.graphQLErrors[0].message
-						) {
-							this.error = parsedError.graphQLErrors[0].message
-						} else {
-							this.error = error.message
-								.toString()
-								.replace('GraphQL error: ', '')
-						}
+					.catch((err) => {
+						this.$snackbar.error(err)
 						this.loading.uploadSingleOrZip = false
-						this.snackbar = true
-						setTimeout(() => {
-							this.error = null
-						}, 8100)
 					})
 			}
 		},
@@ -744,41 +716,22 @@ export default Vue.extend({
 					})
 					.then(({ data }) => {
 						if (data.submitThemes === true) {
+							let message
 							if (this.selectedSubmitType === 'pack') {
-								this.message = 'Pack submitted successfully!'
+								message = 'Pack submitted successfully!'
 							} else {
-								this.message = 'Themes submitted successfully!'
+								message = 'Themes submitted successfully!'
 							}
 							this.loading.submit = false
 							this.clearAll()
+							this.$snackbar.message(message)
 						} else {
-							this.error = 'Unknown error'
-							setTimeout(() => {
-								this.error = null
-							}, 8100)
+							this.$snackbar.error(new Error('Unknown error'))
 						}
-						this.snackbar = true
 					})
-					.catch((error) => {
-						// eslint-disable-next-line no-console
-						console.error(error)
-						const parsedError = JSON.parse(JSON.stringify(error))
-						if (
-							parsedError.graphQLErrors &&
-							parsedError.graphQLErrors.length > 0 &&
-							parsedError.graphQLErrors[0].message
-						) {
-							this.error = parsedError.graphQLErrors[0].message
-						} else {
-							this.error = error.message
-								.toString()
-								.replace('GraphQL error: ', '')
-						}
+					.catch((err) => {
+						this.$snackbar.error(err)
 						this.loading.submit = false
-						this.snackbar = true
-						setTimeout(() => {
-							this.error = null
-						}, 8100)
 					})
 			}
 		}

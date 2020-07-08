@@ -63,7 +63,7 @@ export default Vue.extend({
 					? 'Check out ' +
 					  (this.type ? `this ${this.type} ` : '') +
 					  `'${this.name}'` +
-					  ` by ${this.creator}` +
+					  (this.creator ? ` by ${this.creator}` : '') +
 					  ` on Themezer!`
 					: undefined,
 				url: window.location.href

@@ -365,6 +365,10 @@ export default Vue.extend({
 						this.layout.details.name
 					)
 				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loadingMerge = false
+				})
 		},
 		download() {
 			this.combineLayouts(

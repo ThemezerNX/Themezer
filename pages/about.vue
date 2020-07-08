@@ -132,14 +132,6 @@
 				</v-card-text>
 			</v-card>
 		</v-dialog>
-		<v-snackbar
-			v-model="snackbar"
-			bottom
-			:timeout="8000"
-			:color="error ? 'error' : 'green'"
-		>
-			{{ error || message }}
-		</v-snackbar>
 	</v-layout>
 </template>
 
@@ -150,14 +142,11 @@ import { restoreAccount } from '@/graphql/Creator.gql'
 export default Vue.extend({
 	data() {
 		return {
-			error: null,
-			message: null,
 			restoreDialog: false,
 			restoreValid: false,
 			showBackupCode: false,
 			creatorId: null,
 			backupCode: null,
-			snackbar: false,
 			rules: {
 				required: (value) => !!value || 'Required',
 				creatorId: (value) =>
@@ -187,20 +176,15 @@ export default Vue.extend({
 				.then(({ data }) => {
 					this.loading.restore = false
 					if (data.restoreAccount) {
-						this.message = 'Restored successfully!'
-						this.snackbar = true
-						setTimeout(() => {
-							this.$router.go()
-						}, 3000)
+						this.$snackbar.message('Restored successfully!')
 					} else {
-						this.error = 'Creator ID or Backup Code invalid!'
-						this.snackbar = true
-						setTimeout(() => {
-							this.error = null
-						}, 8100)
+						this.$snackbar.error(
+							new Error('Creator ID or Backup Code invalid!')
+						)
 					}
 				})
-				.catch(() => {
+				.catch((err) => {
+					this.$snackbar.error(err)
 					this.loading.accept = false
 				})
 		}

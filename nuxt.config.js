@@ -48,6 +48,7 @@ export default {
 		// 	mode: 'client'
 		// },
 		'@/plugins/linkify',
+		'@/plugins/snackbar',
 		{
 			src: '@/plugins/pagination',
 			mode: 'client'
@@ -93,7 +94,6 @@ export default {
 	},
 
 	apollo: {
-		// errorHandler: '~/plugins/apollo-error-handler.js',
 		clientConfigs: {
 			default: '~/plugins/apolloClient'
 		}

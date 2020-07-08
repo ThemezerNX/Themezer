@@ -293,6 +293,10 @@ export default Vue.extend({
 						data.downloadTheme.filename
 					)
 				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loadingDownload = false
+				})
 		}
 	},
 	head() {

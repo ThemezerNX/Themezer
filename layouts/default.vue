@@ -261,6 +261,7 @@
 				</v-card-text>
 			</v-card>
 		</v-dialog>
+		<Snackbar />
 	</v-app>
 </template>
 
@@ -414,7 +415,9 @@ export default {
 						}
 					}
 				})
-				.catch(() => {
+				.catch((err) => {
+					this.$snackbar.error(err)
+
 					this.loading.accept = false
 				})
 		}
@@ -445,7 +448,8 @@ export default {
 						}
 					}
 				})
-				.catch(() => {
+				.catch((err) => {
+					this.$snackbar.error(err)
 					this.loading.accept = false
 				})
 		},

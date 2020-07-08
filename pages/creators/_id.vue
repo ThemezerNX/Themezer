@@ -500,27 +500,9 @@ export default Vue.extend({
 						this.$apollo.queries.creator.refetch()
 					}
 				})
-				.catch((error) => {
+				.catch((err) => {
+					this.$snackbar.error(err)
 					this.loading.submit = false
-					// eslint-disable-next-line no-console
-					console.error(error)
-					const parsedError = JSON.parse(JSON.stringify(error))
-					if (
-						parsedError.graphQLErrors &&
-						parsedError.graphQLErrors.length > 0 &&
-						parsedError.graphQLErrors[0].message
-					) {
-						this.error = parsedError.graphQLErrors[0].message
-					} else {
-						this.error = error.message
-							.toString()
-							.replace('GraphQL error: ', '')
-					}
-					this.loading.uploadSingleOrZip = false
-					this.snackbar = true
-					setTimeout(() => {
-						this.error = null
-					}, 8100)
 				})
 		}
 	},

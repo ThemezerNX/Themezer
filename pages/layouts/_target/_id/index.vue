@@ -303,6 +303,10 @@ export default Vue.extend({
 						this.layout.details.name
 					)
 				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loadingMerge = false
+				})
 		},
 		downloadCommon() {
 			this.loadingMergeCommon = true
@@ -322,6 +326,10 @@ export default Vue.extend({
 						'application/json',
 						`${this.layout.details.name} - Common layout`
 					)
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loadingMergeCommon = false
 				})
 		}
 	},
