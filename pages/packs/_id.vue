@@ -70,8 +70,7 @@
 						</v-chip>
 					</div>
 
-					<v-flex class="d-flex justify-center">
-						<v-divider class="mx-3 my-auto" />
+					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
 							:id="pack.uuid"
@@ -83,8 +82,12 @@
 									.includes(pack.uuid)
 							"
 						/>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						<ShareButton
+							type="pack"
+							:name="pack.details.name"
+							:creator="pack.creator.discord_user.username"
+						/>
+					</ButtonDivider>
 
 					<h3>
 						Details
@@ -102,20 +105,12 @@
 						{{ pack.dl_count }}
 					</div>
 
-					<v-flex class="d-flex justify-center mt-3">
-						<v-divider class="mx-3 my-auto" />
-						<v-btn
-							class="mx-2"
-							color="secondary"
-							rounded
-							append
+					<ButtonDivider>
+						<DownloadButton
+							:download-function="downloadPack"
 							:loading="loadingDownload"
-							@click.prevent="downloadPack()"
-						>
-							<v-icon>mdi-download</v-icon>
-						</v-btn>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						/>
+					</ButtonDivider>
 				</v-col>
 			</v-row>
 			<v-row class="ma-0">

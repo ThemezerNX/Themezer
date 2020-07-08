@@ -9,7 +9,7 @@
 				>mdi-certificate-outline</v-icon
 			>
 		</template>
-		<span class="text-capitalize">Uses a Themezer Layout</span>
+		<span>Uses a Themezer layout</span>
 	</v-tooltip>
 </template>
 

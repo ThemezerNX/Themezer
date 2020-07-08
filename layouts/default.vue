@@ -473,38 +473,6 @@ export default {
 					console.log('Something went wrong, unable to copy', e)
 				})
 		}
-		// copyCode() {
-		// 	this.showBackupCode = true
-		// 	const textToCopy = this.$refs.backupCode.$el.querySelector('input')
-		// 	textToCopy.select()
-
-		// 	try {
-		// 		const successful = document.execCommand('copy')
-		// 		this.showBackupCode = false
-		// 		if (!successful) throw new Error('error')
-		// 		else this.copyCodeSuccess = true
-		// 		setTimeout(() => {
-		// 			this.copyCodeSuccess = false
-		// 		}, 2000)
-		// 	} catch (err) {
-		// 		alert('Oops, unable to copy')
-		// 	}
-		// },
-		// copyId() {
-		// 	const textToCopy = this.$refs.creatorId.$el.querySelector('input')
-		// 	textToCopy.select()
-
-		// 	try {
-		// 		const successful = document.execCommand('copy')
-		// 		if (!successful) throw new Error('error')
-		// 		else this.copyIdSuccess = true
-		// 		setTimeout(() => {
-		// 			this.copyIdSuccess = false
-		// 		}, 2000)
-		// 	} catch (err) {
-		// 		alert('Oops, unable to copy')
-		// 	}
-		// }
 	}
 }
 </script>
@@ -516,7 +484,7 @@ html {
 
 .v-list--nav .v-list-item,
 .v-list--rounded .v-list-item {
-	margin-bottom: 6px;
+	margin-bottom: 0 !important;
 }
 
 .v-card__subtitle,
@@ -547,12 +515,8 @@ html {
 	animation: flow 45s linear infinite;
 }
 
-.placeholder .v-image__image--preload {
-	animation: unset !important;
-	background-size: contain !important;
-}
-
-.card .v-image__image--preload {
+.card .v-image__image--preload,
+.placeholder {
 	background: url('/images/diagonal_joycon-180.png') #333;
 	background-repeat: repeat;
 	animation: flow 6s linear infinite;

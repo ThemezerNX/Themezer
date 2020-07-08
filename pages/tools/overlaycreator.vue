@@ -102,37 +102,19 @@
 						@change="onScreenshotWhiteChange"
 					/>
 				</v-col>
-				<v-flex
-					v-if="blackImg && whiteImg"
-					class="d-flex justify-center mt-3"
-				>
+
+				<ButtonDivider v-if="blackImg && whiteImg">
 					<v-btn
 						rounded
 						color="primary"
-						class="mx-2"
 						append
 						:loading="loadingUploadScreenshots"
 						@click.prevent="uploadScreenshots"
 					>
 						Create <v-icon right>mdi-image-edit-outline</v-icon>
 					</v-btn>
-					<v-btn
-						v-if="resultImage"
-						rounded
-						class="mx-2"
-						color="secondary"
-						append
-						@click.prevent="
-							downloadFileB64(
-								resultImage.data,
-								'image/png',
-								resultImage.filename
-							)
-						"
-					>
-						Download <v-icon right>mdi-download</v-icon>
-					</v-btn>
-				</v-flex>
+					<DownloadButton :download-function="download" />
+				</ButtonDivider>
 			</v-row>
 			<h2 v-if="resultImage" class="box_text">
 				Result
@@ -233,6 +215,13 @@ export default Vue.extend({
 					this.resultImage = data.createOverlay
 					this.loadingUploadScreenshots = false
 				})
+		},
+		download() {
+			this.downloadFileB64(
+				this.resultImage.data,
+				'image/png',
+				this.resultImage.filename
+			)
 		}
 	},
 	head() {

@@ -144,24 +144,12 @@
 							</v-list-item>
 						</div>
 					</v-list>
-					<v-flex class="d-flex justify-center my-3">
-						<v-divider class="mx-3 my-auto" />
-						<v-btn
-							color="secondary"
-							rounded
-							append
+					<ButtonDivider>
+						<DownloadButton
+							:download-function="download"
 							:loading="loadingMerge"
-							@click.prevent="
-								combineLayouts(
-									layout.baselayout,
-									layout.details.name
-								)
-							"
-						>
-							<v-icon>mdi-download</v-icon>
-						</v-btn>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						/>
+					</ButtonDivider>
 				</v-col>
 			</v-row>
 		</div>
@@ -273,6 +261,12 @@ export default Vue.extend({
 						this.layout.details.name
 					)
 				})
+		},
+		download() {
+			this.combineLayouts(
+				this.layout.baselayout,
+				this.layout.details.name
+			)
 		}
 	},
 	head() {

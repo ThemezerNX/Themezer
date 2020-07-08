@@ -149,16 +149,9 @@
 														:src="
 															uploadedScreenshotsUrls[
 																i
-															]
-																? uploadedScreenshotsUrls[
-																		i
-																  ]
-																: ''
+															] || ''
 														"
 														contain
-														:lazy-src="
-															'/logo_16-9-256.jpg'
-														"
 													>
 														<v-expand-transition>
 															<div
@@ -314,7 +307,7 @@
 														rules.category_length,
 														rules.min_category_amount,
 														rules.max_category_amount,
-														required
+														rules.required
 													]"
 													prepend-icon="mdi-shape-outline"
 													label="Categories*"

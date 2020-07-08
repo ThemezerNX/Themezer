@@ -60,8 +60,7 @@
 						</v-chip>
 					</div>
 
-					<v-flex class="d-flex justify-center">
-						<v-divider class="mx-3 my-auto" />
+					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
 							:id="theme.uuid"
@@ -73,8 +72,13 @@
 									.includes(theme.uuid)
 							"
 						/>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						<ShareButton
+							type="theme"
+							:name="theme.details.name"
+							:creator="theme.creator.discord_user.username"
+						/>
+					</ButtonDivider>
+
 					<h3>
 						Details
 					</h3>
@@ -129,20 +133,13 @@
 						{{ theme.dl_count }}
 					</div>
 
-					<v-flex class="d-flex justify-center my-3">
-						<v-divider class="mx-3 my-auto" />
-						<v-btn
-							class="mx-2"
-							color="secondary"
-							append
-							rounded
+					<ButtonDivider>
+						<DownloadButton
+							:download-function="downloadTheme"
 							:loading="loadingDownload"
-							@click.prevent="downloadTheme()"
-						>
-							<v-icon>mdi-download</v-icon>
-						</v-btn>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						/>
+					</ButtonDivider>
+
 					<div v-if="theme.pack">
 						<h3 style="position: relative;">
 							Theme Pack

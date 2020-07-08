@@ -48,8 +48,7 @@
 						v-html="layout.details.description"
 					/>
 
-					<v-flex class="d-flex justify-center">
-						<v-divider class="mx-3 my-auto" />
+					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
 							:id="layout.uuid"
@@ -61,8 +60,12 @@
 									.includes(layout.uuid)
 							"
 						/>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						<ShareButton
+							type="layout"
+							:name="layout.details.name"
+							:creator="layout.creator.discord_user.username"
+						/>
+					</ButtonDivider>
 
 					<h3>
 						Details
@@ -84,31 +87,17 @@
 						{{ layout.dl_count }}
 					</div>
 
-					<v-flex class="d-flex justify-center my-3">
-						<v-divider class="mx-3 my-auto" />
-						<v-btn
+					<ButtonDivider>
+						<CustomizeButton
 							v-if="layout.has_pieces"
-							class="mx-2"
-							color="primary"
-							rounded
 							to="customize"
-							append
 							:loading="loadingMerge"
-						>
-							<v-icon>mdi-square-edit-outline</v-icon>
-						</v-btn>
-						<v-btn
-							class="mx-2"
-							color="secondary"
-							rounded
-							append
+						/>
+						<DownloadButton
+							:download-function="download"
 							:loading="loadingMerge"
-							@click.prevent="download()"
-						>
-							<v-icon>mdi-download</v-icon>
-						</v-btn>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						/>
+					</ButtonDivider>
 
 					<div v-if="commonlayoutObject">
 						<h3 style="position: relative;">
@@ -148,20 +137,12 @@
 							</span>
 							{{ commonlayoutObject.TargetName }}
 						</div>
-						<v-flex class="d-flex justify-center my-3">
-							<v-divider class="mx-3 my-auto" />
-							<v-btn
-								class="mx-2"
-								color="secondary"
-								rounded
-								append
+						<ButtonDivider>
+							<DownloadButton
+								:download-function="downloadCommon"
 								:loading="loadingMergeCommon"
-								@click.prevent="downloadCommon()"
-							>
-								<v-icon>mdi-download</v-icon>
-							</v-btn>
-							<v-divider class="mx-3 my-auto" />
-						</v-flex>
+							/>
+						</ButtonDivider>
 					</div>
 					<h3 style="position: relative;">
 						Overlay png
@@ -182,22 +163,13 @@
 							<span>What is this?</span>
 						</v-tooltip>
 					</h3>
-					<v-flex class="d-flex justify-center my-3">
-						<v-divider class="mx-3 my-auto" />
-						<v-btn
-							class="mx-2"
-							color="secondary"
-							rounded
-							append
-							:href="
+					<ButtonDivider>
+						<DownloadButton
+							:download-href="
 								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 							"
-							target="_blank"
-						>
-							<v-icon>mdi-download</v-icon>
-						</v-btn>
-						<v-divider class="mx-3 my-auto" />
-					</v-flex>
+						/>
+					</ButtonDivider>
 				</v-col>
 			</v-row>
 			<v-row class="ma-0">

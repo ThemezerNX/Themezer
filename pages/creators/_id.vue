@@ -72,20 +72,30 @@
 					</h1>
 				</v-col>
 				<v-col v-if="isPageOwner" class="text-center" cols="12">
-					<v-btn rounded color="secondary" @click="editDialog = true">
-						Edit Profile <v-icon right>mdi-pencil</v-icon>
-					</v-btn>
-					<LikeButton
-						v-if="$auth.loggedIn"
-						:id="creator.id"
-						type="creators"
-						:count="creator.like_count"
-						:value="
-							$auth.user.liked.creators
-								.map((c) => c.id)
-								.includes(creator.id)
-						"
-					/>
+					<ButtonDivider :hide-dividers="true">
+						<v-btn
+							rounded
+							color="secondary"
+							@click="editDialog = true"
+						>
+							Edit Profile <v-icon right>mdi-pencil</v-icon>
+						</v-btn>
+						<LikeButton
+							v-if="$auth.loggedIn"
+							:id="creator.id"
+							type="creators"
+							:count="creator.like_count"
+							:value="
+								$auth.user.liked.creators
+									.map((c) => c.id)
+									.includes(creator.id)
+							"
+						/>
+						<ShareButton
+							type="creator"
+							:name="creator.discord_user.username"
+						/>
+					</ButtonDivider>
 				</v-col>
 			</v-row>
 		</v-parallax>

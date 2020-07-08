@@ -4,6 +4,7 @@
 			<v-btn
 				class="button"
 				dark
+				rounded
 				:color="newValue ? 'red' : ''"
 				v-bind="attrs"
 				v-on="on"
@@ -13,9 +14,7 @@
 				<v-icon right>mdi-heart</v-icon>
 			</v-btn>
 		</template>
-		<span class="text-capitalize">{{
-			newValue ? 'Unlike this' : 'I like this!'
-		}}</span>
+		<span>{{ newValue ? 'Unlike this' : 'I like this!' }}</span>
 	</v-tooltip>
 </template>
 
@@ -71,6 +70,7 @@ export default Vue.extend({
 				.catch((err: Error) => {
 					this.newValue = !this.newValue
 					this.newCount = this.newCount + (this.newValue ? 1 : -1)
+					// eslint-disable-next-line no-console
 					console.error(err)
 				})
 		}
@@ -82,7 +82,5 @@ export default Vue.extend({
 .button {
 	padding-top: 2px;
 	background-color: #555;
-	user-select: none;
-	border-radius: 100px;
 }
 </style>
