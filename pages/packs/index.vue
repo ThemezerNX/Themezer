@@ -2,6 +2,7 @@
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
+				<h2 class="text-center">{{ targetName() }} Packs</h2>
 				<Filters
 					ref="filter"
 					:unsupported-filters="unsupportedFilters"

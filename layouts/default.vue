@@ -38,7 +38,7 @@
 					</v-list-item-content>
 					<v-icon>mdi-login</v-icon>
 				</v-list-item>
-				<v-list-group v-if="$auth.loggedIn" no-action class="mb-2">
+				<v-list-group v-if="$auth.loggedIn" no-action>
 					<template v-slot:activator>
 						<v-list-item-avatar>
 							<img
@@ -74,12 +74,16 @@
 						</v-list-item-icon>
 					</v-list-item>
 				</v-list-group>
-				<v-divider />
+				<v-divider class="mt-2" />
 				<template v-for="item in items">
 					<v-subheader v-if="item.header" :key="item.header">{{
 						item.header
 					}}</v-subheader>
-					<v-divider v-else-if="item.divider" :key="item.divider" />
+					<v-divider
+						v-else-if="item.divider"
+						:key="item.divider"
+						class="mt-2"
+					/>
 					<v-list-group
 						v-else-if="Array.isArray(item.types)"
 						:key="item.title"

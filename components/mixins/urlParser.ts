@@ -15,12 +15,13 @@ export default Vue.extend({
 			return `${name.replace(nameREGEX, '-')}-${id}`
 		},
 		updateUrlString(id: number, name: string) {
-			this.$router.push(
-				this.$route.path.replace(
+			this.$router.push({
+				path: this.$route.path.replace(
 					this.$route.params.id,
 					this.createUrlString(id, name)
-				)
-			)
+				),
+				query: this.$route.query
+			})
 		}
 	}
 })

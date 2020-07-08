@@ -5,7 +5,8 @@
 			no-gutters
 			class="pa-2 box_fill"
 		>
-			<h1 class="box_text">Customize {{ layout.details.name }}</h1>
+			<h1 class="box_text">Customize Layout</h1>
+			<h2 class="box_text mt-0">{{ layout.details.name }}</h2>
 			<div class="subtitle-1 box_text">
 				By
 				<a
@@ -34,11 +35,17 @@
 						:style="backgroundStyle"
 					/>
 				</v-col>
-				<v-col cols="12" xs="12" sm="8" class="pa-2">
+				<v-col
+					v-show="restoredActivePieces"
+					cols="12"
+					xs="12"
+					sm="8"
+					class="pa-2"
+				>
 					<v-list
 						subheader
 						flat
-						style="background: rgba(255,255,255,0.12);"
+						style="background: rgba(255,255,255,0.12); border-radius: 10px;"
 						class="my-3"
 					>
 						<v-subheader>Layout Modifications</v-subheader>
@@ -59,7 +66,9 @@
 										lg="8"
 										xl="10"
 									>
-										<v-list-item-title>
+										<v-list-item-title
+											style="white-space: inherit;"
+										>
 											{{ piece.name }}
 										</v-list-item-title>
 										<v-list-item-subtitle>
@@ -77,11 +86,16 @@
 									>
 										<v-checkbox
 											v-model="data[i]"
+											:input-value="data[i]"
 											class="ma-0 pa-0 d-flex align-self-center"
 											style="position: absolute; right: 0;"
 											hide-details
 											width="auto"
 											@change="
+												valueChange(
+													$event,
+													piece.values
+												)
 												setPreview(
 													piece,
 													piece.values[0],
@@ -103,7 +117,9 @@
 										lg="8"
 										xl="10"
 									>
-										<v-list-item-title>
+										<v-list-item-title
+											style="white-space: inherit;"
+										>
 											{{ piece.name }}
 										</v-list-item-title>
 										<v-list-item-subtitle
@@ -122,6 +138,7 @@
 									>
 										<v-select
 											v-model="data[i]"
+											:input-value="data[i]"
 											class="soloSelectGrey"
 											:items="dropdownKeys(piece.values)"
 											:menu-props="{ offsetY: true }"
@@ -129,6 +146,10 @@
 											hide-details
 											solo
 											@change="
+												valueChange(
+													data[i],
+													piece.values
+												)
 												setPreview(
 													piece,
 													piece.values.find(
@@ -148,6 +169,12 @@
 						<DownloadButton
 							:download-function="download"
 							:loading="loadingMerge"
+						/>
+						<ShareButton
+							type="customized layout"
+							tooltip="Permalink"
+							:name="layout.details.name"
+							:creator="layout.creator.discord_user.username"
 						/>
 					</ButtonDivider>
 				</v-col>
@@ -178,7 +205,9 @@ export default Vue.extend({
 		return {
 			data: [],
 			preview: null,
-			loadingMerge: false
+			loadingMerge: false,
+			activePieces: [],
+			restoredActivePieces: false
 		}
 	},
 	computed: {
@@ -192,7 +221,54 @@ export default Vue.extend({
 			} else {
 				return `background: #e2e2e2;`
 			}
+		},
+		activePiecesComputed() {
+			return this.activePieces
 		}
+	},
+	watch: {
+		activePiecesComputed(n) {
+			this.$router.push({
+				query: { pieces: n.length > 0 ? n.join() : undefined }
+			})
+		}
+	},
+	mounted() {
+		if (this.$route.query.pieces) {
+			this.activePieces = this.$route.query.pieces
+				.toLowerCase()
+				.split(',')
+				.filter((uuid) =>
+					this.layout.pieces.some((p) =>
+						p.values.some((v) => v.uuid === uuid)
+					)
+				)
+
+			if (this.activePieces.length > 0) {
+				this.activePieces.forEach((aP) => {
+					let index
+					let value
+					for (let i = 0; i < this.layout.pieces.length; i++) {
+						this.layout.pieces[i].values.find((v) => {
+							if (v.uuid === aP) {
+								index = i
+								if (this.layout.pieces[i].values.length > 1) {
+									// Dropdown
+									value = v.value
+								} else {
+									// Checkbox
+									value = true
+								}
+								return true
+							}
+						})
+					}
+
+					this.data[index] = value
+				})
+			}
+		}
+		this.restoredActivePieces = true
 	},
 	apollo: {
 		layout: {
@@ -226,16 +302,44 @@ export default Vue.extend({
 				}
 			} else this.preview = null
 		},
+		valueChange(value, pieces) {
+			if (value === true) {
+				// Checkbox
+				this.activePieces.push(pieces[0].uuid)
+			} else if (value === false) {
+				// Unchecked checkbox
+				this.activePieces = this.activePieces.filter(
+					(u) => u !== pieces[0].uuid
+				)
+			} else if (typeof value === 'string') {
+				// Dropdown
+				const newPiece = pieces.find((v) => v.value === value)
+				const removePieces = pieces
+					.filter((v) => v.value !== value)
+					.map((v) => v.uuid)
+
+				this.activePieces = this.activePieces.filter(
+					(uuid) => !removePieces.includes(uuid)
+				)
+
+				if (newPiece) {
+					// If not 'Default'
+					this.activePieces.push(newPiece.uuid)
+				}
+			}
+		},
 		combineLayouts() {
 			const usedPieces = []
 
 			for (let i = 0; i < this.data.length; i++) {
 				if (this.data[i] === true) {
+					// Checkbox
 					usedPieces.push(this.layout.pieces[i].values[0].uuid)
 				} else if (
 					typeof this.data[i] === 'string' &&
 					this.data[i] !== 'Default'
 				) {
+					// Dropdown
 					const selected = this.layout.pieces[i].values.find(
 						(v) => v.value === this.data[i]
 					)

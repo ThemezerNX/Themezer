@@ -15,7 +15,7 @@
 				<v-icon>mdi-download</v-icon>
 			</v-btn>
 		</template>
-		<span>Download</span>
+		<span>{{ tooltip || 'Download' }}</span>
 	</v-tooltip>
 </template>
 
@@ -23,6 +23,11 @@
 import Vue from 'vue'
 export default Vue.extend({
 	props: {
+		tooltip: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		downloadFunction: {
 			type: Function,
 			required: false,

@@ -1,11 +1,8 @@
 <template>
-	<v-container
-		class="main"
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
+				<h2 class="text-center">{{ targetName() }} Layouts</h2>
 				<Filters
 					ref="filter"
 					:unsupported-filters="unsupportedFilters"

@@ -1,7 +1,7 @@
 <template>
 	<v-tooltip v-model="copyLinkSuccess" top>
 		<template v-slot:activator="{}">
-			<v-tooltip v-model="tooltip" top>
+			<v-tooltip v-model="tooltipActive" top>
 				<template v-slot:activator="{ on, attrs }">
 					<v-btn
 						class="button"
@@ -16,7 +16,7 @@
 						<v-icon>mdi-share-variant</v-icon>
 					</v-btn>
 				</template>
-				<span>Share</span>
+				<span>{{ tooltip || 'Share' }}</span>
 			</v-tooltip>
 		</template>
 		<span>Copied!</span>
@@ -28,6 +28,11 @@ import Vue from 'vue'
 
 export default Vue.extend({
 	props: {
+		tooltip: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		type: {
 			type: String,
 			required: false,
@@ -47,7 +52,7 @@ export default Vue.extend({
 	data() {
 		return {
 			copyLinkSuccess: false,
-			tooltip: false
+			tooltipActive: false
 		}
 	},
 	methods: {
@@ -56,7 +61,7 @@ export default Vue.extend({
 				title: this.type ? `Themezer ${this.type}` : 'Themezer item',
 				text: this.name
 					? 'Check out ' +
-					  (this.type ? `the ${this.type} ` : '') +
+					  (this.type ? `this ${this.type} ` : '') +
 					  `'${this.name}'` +
 					  ` by ${this.creator}` +
 					  ` on Themezer!`
@@ -80,7 +85,7 @@ export default Vue.extend({
 			navigator.clipboard
 				.writeText(window.location.href)
 				.then(() => {
-					this.tooltip = false
+					this.tooltipActive = false
 					this.copyLinkSuccess = true
 					setTimeout(() => {
 						this.copyLinkSuccess = false
