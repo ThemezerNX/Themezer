@@ -79,6 +79,7 @@
 					<v-form v-model="restoreValid">
 						<v-text-field
 							v-model="creatorId"
+							rounded
 							class="mt-5"
 							:disabled="!$auth.loggedIn"
 							label="Previous Creator ID"
@@ -97,6 +98,7 @@
 						></v-text-field>
 						<v-text-field
 							v-model="backupCode"
+							rounded
 							:disabled="!$auth.loggedIn"
 							label="Backup Code"
 							:error-messages="

@@ -52,6 +52,7 @@
 					<v-file-input
 						v-if="selectedType === 'single'"
 						v-model="uploadSingleOrZip"
+						rounded
 						:loading="loading.uploadSingleOrZip"
 						label=".NXTheme file"
 						filled
@@ -68,6 +69,7 @@
 						<v-file-input
 							v-if="selectedType === 'zip'"
 							v-model="uploadSingleOrZip"
+							rounded
 							:loading="loading.uploadSingleOrZip"
 							label=".zip file"
 							filled
@@ -123,6 +125,7 @@
 								<v-card
 									v-if="theme"
 									:key="theme.info.ThemeName"
+									style="border-radius: 10px;"
 									class="mx-auto"
 									:class="
 										i === detectedThemes.length - 1
@@ -276,6 +279,7 @@
 														detectedThemes[i]
 															.description
 													"
+													rounded
 													label="Theme description"
 													maxlength="500"
 													counter="500"
@@ -299,6 +303,7 @@
 															: []
 													"
 													outlined
+													rounded
 													allow-overflow
 													chips
 													small-chips
@@ -341,6 +346,7 @@
 														detectedThemes[i]
 															.version
 													"
+													rounded
 													maxlength="10"
 													counter="10"
 													label="Theme version*"
@@ -405,6 +411,7 @@
 							<v-text-field
 								v-if="selectedSubmitType === 'pack'"
 								v-model="submitDetails.name"
+								rounded
 								minlength="3"
 								maxlength="50"
 								counter="50"
@@ -417,6 +424,7 @@
 							<v-text-field
 								v-if="selectedSubmitType === 'pack'"
 								v-model="submitDetails.description"
+								rounded
 								maxlength="500"
 								counter="500"
 								label="Pack Description*"
@@ -428,6 +436,7 @@
 							<v-combobox
 								v-if="detectedThemes.length > 1"
 								v-model="packCategories"
+								rounded
 								:items="
 									categories && categories.length > 0
 										? categories
@@ -464,6 +473,7 @@
 							<v-text-field
 								v-if="selectedSubmitType === 'pack'"
 								v-model="submitDetails.version"
+								rounded
 								label="Pack version*"
 								maxlength="10"
 								counter="10"
@@ -799,5 +809,6 @@ export default Vue.extend({
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
 		0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+	border-radius: 10px;
 }
 </style>

@@ -194,6 +194,7 @@
 						</span>
 						<v-text-field
 							v-model="changed.profileColor"
+							rounded
 							:disabled="loading.submit"
 							class="pt-2"
 							label="Profile color"
@@ -210,6 +211,8 @@
 						></v-text-field>
 						<v-file-input
 							v-model="changed.bannerImage"
+							rounded
+							rounded
 							label="Banner"
 							outlined
 							prepend-icon="mdi-image-area"
@@ -239,6 +242,7 @@
 						</v-flex>
 						<v-file-input
 							v-model="changed.logoImage"
+							rounded
 							label="Logo (replaces Discord avatar)"
 							outlined
 							prepend-icon="mdi-image"

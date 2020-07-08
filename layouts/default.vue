@@ -194,6 +194,7 @@
 						<v-text-field
 							ref="creatorId"
 							v-model="$auth.user.id"
+							rounded
 							class="my-5"
 							hide-details
 							readonly
@@ -218,6 +219,7 @@
 						<v-text-field
 							ref="backupCode"
 							v-model="backupCode"
+							rounded
 							class="my-5"
 							hide-details
 							readonly
@@ -528,6 +530,10 @@ html {
 	background: url('/images/diagonal_joycon-180.png') #333;
 	background-repeat: repeat;
 	animation: flow 6s linear infinite;
+}
+
+.placeholder {
+	border-radius: 10px;
 }
 
 .box_fill .v-image__image--preload,

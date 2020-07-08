@@ -23,6 +23,7 @@
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
 					<v-file-input
+						rounded
 						label=".json layout file"
 						filled
 						prepend-icon="mdi-code-json"
@@ -63,6 +64,7 @@
 					class="pa-2"
 				>
 					<v-file-input
+						rounded
 						label="Screenshot with black background"
 						filled
 						prepend-icon="mdi-monitor-screenshot"
@@ -94,6 +96,7 @@
 					class="pa-2"
 				>
 					<v-file-input
+						rounded
 						label="Screenshot with white background"
 						filled
 						prepend-icon="mdi-monitor-screenshot"

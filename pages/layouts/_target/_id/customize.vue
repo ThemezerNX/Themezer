@@ -138,6 +138,7 @@
 									>
 										<v-select
 											v-model="data[i]"
+											rounded
 											:input-value="data[i]"
 											class="soloSelectGrey"
 											:items="dropdownKeys(piece.values)"
@@ -417,3 +418,9 @@ export default Vue.extend({
 	}
 })
 </script>
+
+<style lang="scss">
+.v-menu__content {
+	border-radius: 10px;
+}
+</style>
