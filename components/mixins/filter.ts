@@ -5,7 +5,12 @@ export default Vue.extend({
 		return {
 			filteredItems: null,
 			filterLoading: true,
-			itemsPerPage: 12
+			itemsPerPage: 12,
+			currentPageNumber:
+				this.$route.query.page &&
+				parseInt(this.$route.query.page as string) > 0
+					? parseInt(this.$route.query.page as string)
+					: 1
 		}
 	},
 	computed: {
@@ -15,12 +20,6 @@ export default Vue.extend({
 				const size = this.$data.itemsPerPage
 				return Math.ceil(length / size)
 			} else return 1
-		},
-		currentPageNumber(): number {
-			return this.$route.query.page &&
-				parseInt(this.$route.query.page as string) > 0
-				? parseInt(this.$route.query.page as string)
-				: 1
 		},
 		paginatedData(): Array<object> | null {
 			if (this.$data.filteredItems) {
@@ -41,6 +40,12 @@ export default Vue.extend({
 	},
 	methods: {
 		paginationEvent(n: string) {
+			const top: any = this.$refs.top
+			const position =
+				top.getBoundingClientRect().top + window.pageYOffset - 64
+
+			window.scrollTo({ top: position, behavior: 'smooth' })
+
 			const query = Object.assign({}, this.$route.query)
 			query.page = n
 			this.$router.push({ query })

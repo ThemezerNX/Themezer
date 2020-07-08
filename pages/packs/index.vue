@@ -8,7 +8,7 @@
 					:unsupported-filters="unsupportedFilters"
 				/>
 			</v-col>
-			<v-col cols="12" xs="12" sm="8" md="9" xl="10">
+			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
 				<div v-if="filteredItems">
 					<h3>{{ filteredItems.length }} results</h3>
 					<v-divider />
