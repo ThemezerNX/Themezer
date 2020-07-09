@@ -10,7 +10,7 @@ export default Vue.extend({
 	},
 	methods: {
 		sortItems(array: Array<any>) {
-			if (this.sortBy) {
+			if (array.length > 1 && this.sortBy) {
 				array.sort((a: any, b: any) => {
 					if (this.sortBy === 'name') {
 						const nameA = a.details.name.toLowerCase()
