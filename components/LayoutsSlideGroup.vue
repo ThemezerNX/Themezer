@@ -5,7 +5,7 @@
 			show-arrows="always"
 			center-active
 		>
-			<v-slide-item v-for="(layout, i) in sortItems(items)" :key="i">
+			<v-slide-item v-for="(layout, i) in sortedItems" :key="i">
 				<v-hover v-if="layout" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card

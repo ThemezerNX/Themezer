@@ -8,10 +8,12 @@ export default Vue.extend({
 			default: null
 		}
 	},
-	methods: {
-		sortItems(array: Array<any>) {
-			if (array.length > 1 && this.sortBy) {
-				array.sort((a: any, b: any) => {
+	computed: {
+		sortedItems() {
+			const arrayCopy = [].concat((this as any).items || [])
+
+			if (arrayCopy.length > 1 && this.sortBy) {
+				arrayCopy.sort((a: any, b: any) => {
 					if (this.sortBy === 'name') {
 						const nameA = a.details.name.toLowerCase()
 						const nameB = b.details.name.toLowerCase()
@@ -27,7 +29,7 @@ export default Vue.extend({
 				})
 			}
 
-			return array
+			return arrayCopy
 		}
 	}
 })
