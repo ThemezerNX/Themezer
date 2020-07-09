@@ -213,7 +213,6 @@
 						<v-file-input
 							v-model="changed.bannerImage"
 							rounded
-							rounded
 							label="Banner"
 							outlined
 							prepend-icon="mdi-image-area"
