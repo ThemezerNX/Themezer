@@ -176,6 +176,7 @@
 					<v-card-text>
 						<v-textarea
 							v-model="changed.bio"
+							rounded
 							:disabled="loading.submit"
 							class="pt-1"
 							outlined
