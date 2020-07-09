@@ -18,90 +18,11 @@ query pack($id: Int!) {
 		dl_count
 		like_count
 		themes {
-			uuid
 			id
-			creator {
-				id
-				discord_user {
-					username
-				}
-			}
 			details {
 				name
-				description
-				version
-			}
-			layout {
-				uuid
-				id
-				creator {
-					id
-					discord_user {
-						username
-					}
-				}
-				details {
-					name
-				}
-			}
-			last_updated
-			pieces {
-				name
-				value {
-					value
-					uuid
-				}
 			}
 			target
-			categories
-			dl_count
-		}
-	}
-}
-
-query packDetails($id: Int!) {
-	pack(id: $id) {
-		uuid
-		id
-		creator {
-			discord_user {
-				username
-			}
-		}
-		details {
-			name
-			description
-			version
-		}
-		last_updated
-		categories
-		dl_count
-		like_count
-		themes {
-			uuid
-			id
-			creator {
-				id
-				discord_user {
-					username
-				}
-			}
-			details {
-				name
-				description
-				version
-			}
-			last_updated
-			pieces {
-				name
-				value {
-					value
-					uuid
-				}
-			}
-			target
-			categories
-			dl_count
 		}
 	}
 }

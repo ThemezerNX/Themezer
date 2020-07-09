@@ -14,34 +14,17 @@ query theme($id: Int!, $target: String!) {
 			version
 		}
         layout {
-            uuid
 			id
-			creator {
-				id
-				discord_user {
-					username
-				}
-			}
             details {
                 name
             }
 			target
         }
         pack {
-            uuid
 			id
-			creator {
-				id
-				discord_user {
-					username
-				}
-			}
             details {
                 name
-                description
-                version
             }
-            last_updated
         }
 		last_updated
 		pieces {
@@ -52,36 +35,6 @@ query theme($id: Int!, $target: String!) {
 			}
         }
 		target
-        categories
-		dl_count
-		like_count
-		bg_type
-	}
-}
-
-query themeDetails($id: Int!, $target: String!) {
-	themeDetails(id: $id, target: $target) {
-		uuid
-		id
-		creator {
-			id
-			discord_user {
-				username
-			}
-		}
-		details {
-			name
-			description
-			version
-		}
-		last_updated
-		pieces {
-            name
-			value {
-				value
-				uuid
-			}
-        }
         categories
 		dl_count
 		like_count

@@ -33,31 +33,6 @@ query layout($id: Int!, $target: String!) {
 	}
 }
 
-query layoutDetails($id: Int!, $target: String!) {
-	layout(id: $id, target: $target) {
-		uuid
-		id
-		creator {
-			id
-			discord_user {
-				username
-			}
-		}
-		details {
-			name
-			description
-			color
-			version
-		}
-		target
-		last_updated
-		has_pieces
-		commonlayout
-		dl_count
-		like_count
-	}
-}
-
 query rowLayoutsList($target: String, $creator_id: String, $limit: Int) {
 	layoutsList(target: $target, creator_id: $creator_id, limit: $limit) {
 		uuid
