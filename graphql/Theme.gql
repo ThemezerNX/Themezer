@@ -88,7 +88,7 @@ query themesList($target: String) {
 	}
 }
 
-mutation downloadTheme($uuid: GUID!, $piece_uuids: [GUID!]) {
+query downloadTheme($uuid: GUID!, $piece_uuids: [GUID!]) {
 	downloadTheme(uuid: $uuid, piece_uuids: $piece_uuids) {
 		filename
 		data

@@ -75,3 +75,7 @@ query layoutsList($target: String, $creator_id: String, $limit: Int) {
 		like_count
 	}
 }
+
+query mergeJson($uuid: GUID!, $piece_uuids: [GUID!], $common: Boolean) {
+	mergeJson(uuid: $uuid, piece_uuids: $piece_uuids, common: $common)
+}

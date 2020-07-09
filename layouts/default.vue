@@ -257,7 +257,8 @@
 							:loading="loading.accept"
 							@click.prevent="accept()"
 						>
-							Continue <v-icon right>mdi-check-outline</v-icon>
+							Continue
+							<v-icon right>mdi-arrow-right</v-icon>
 						</v-btn>
 					</v-flex>
 				</v-card-text>

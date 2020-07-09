@@ -188,8 +188,7 @@
 
 <script>
 import Vue from 'vue'
-import { layout } from '@/graphql/Layout.gql'
-import { mergeJson } from '@/graphql/Merging.gql'
+import { layout, mergeJson } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
 

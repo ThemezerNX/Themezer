@@ -76,7 +76,7 @@ query packsList {
 	}
 }
 
-mutation downloadPack($uuid: GUID!) {
+query downloadPack($uuid: GUID!) {
 	downloadPack(uuid: $uuid) {
 		filename
 		data

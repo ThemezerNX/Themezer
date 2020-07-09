@@ -1,4 +1,4 @@
-mutation createOverlaysNXTheme($layout: Upload!) {
+query createOverlaysNXTheme($layout: Upload!) {
 	createOverlaysNXTheme(layout: $layout) {
 		filename
 		data
@@ -6,7 +6,7 @@ mutation createOverlaysNXTheme($layout: Upload!) {
 	}
 }
 
-mutation createOverlay($themeName: String, $blackImg: Upload!, $whiteImg: Upload!) {
+query createOverlay($themeName: String, $blackImg: Upload!, $whiteImg: Upload!) {
 	createOverlay(themeName: $themeName, blackImg: $blackImg, whiteImg: $whiteImg) {
         filename
 		data

@@ -249,9 +249,8 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import { mergeJson } from '@/graphql/Merging.gql'
+import { layout, mergeJson } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
-import { layout } from '@/graphql/Layout.gql'
 
 export default Vue.extend({
 	mixins: [shared, targetParser],
