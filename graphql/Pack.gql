@@ -18,6 +18,7 @@ query pack($id: Int!) {
 		dl_count
 		like_count
 		themes {
+			uuid
 			id
 			details {
 				name

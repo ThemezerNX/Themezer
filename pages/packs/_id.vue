@@ -123,7 +123,7 @@
 						Themes in this Pack
 					</h2>
 					<v-divider />
-					<ThemesSlideGroup :items="pack.themes" />
+					<ThemesSlideGroup :items="pack.themes" sort-by="name" />
 				</v-col>
 			</v-row>
 		</div>

@@ -5,7 +5,7 @@
 			show-arrows="always"
 			center-active
 		>
-			<v-slide-item v-for="(pack, i) in items" :key="i">
+			<v-slide-item v-for="(pack, i) in sortItems(items)" :key="i">
 				<v-hover v-if="pack" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
@@ -89,9 +89,10 @@
 import Vue from 'vue'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
+import slideGroupSorting from '@/components/mixins/slideGroupSorting'
 
 export default Vue.extend({
-	mixins: [targetParser, urlParser],
+	mixins: [targetParser, urlParser, slideGroupSorting],
 	props: {
 		items: {
 			type: Array,
