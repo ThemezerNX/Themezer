@@ -14,6 +14,12 @@ export default Vue.extend({
 		}
 	},
 	computed: {
+		currentQueryPageNumber() {
+			return this.$route.query.page &&
+				parseInt(this.$route.query.page as string) > 0
+				? parseInt(this.$route.query.page as string)
+				: 1
+		},
 		pageCount(): number {
 			if (this.$data.filteredItems) {
 				const length = this.$data.filteredItems.length
@@ -29,6 +35,11 @@ export default Vue.extend({
 
 				return this.$data.filteredItems.slice(start, end)
 			} else return null
+		}
+	},
+	watch: {
+		currentQueryPageNumber(n) {
+			this.currentPageNumber = n
 		}
 	},
 	mounted() {
