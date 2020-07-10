@@ -3,7 +3,7 @@
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
 				<h2 class="text-center">{{ targetName() }} Packs</h2>
-				<Filters
+				<SearchFilters
 					ref="filter"
 					:unsupported-filters="unsupportedFilters"
 				/>
@@ -62,6 +62,9 @@ import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
 
 export default Vue.extend({
+	components: {
+		SearchFilters: () => import('@/components/Filters.vue')
+	},
 	mixins: [targetParser, filter],
 	data() {
 		return {

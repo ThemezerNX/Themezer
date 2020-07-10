@@ -3,7 +3,7 @@
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
 				<h2 class="text-center">{{ targetName() }} Themes</h2>
-				<Filters
+				<SearchFilters
 					ref="filter"
 					:unsupported-filters="unsupportedFilters"
 				/>
@@ -69,6 +69,9 @@ export default Vue.extend({
 		} else {
 			next('/')
 		}
+	},
+	components: {
+		SearchFilters: () => import('@/components/Filters.vue')
 	},
 	mixins: [targetParser, filter],
 	data() {
