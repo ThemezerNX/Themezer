@@ -14,6 +14,7 @@
 		"lint-fix": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore . --fix"
 	},
 	"dependencies": {
+		"@mdi/font": "^5.3.45",
 		"@nuxt/typescript-build": "^0.6.0",
 		"@nuxt/typescript-runtime": "^1.0.0",
 		"@nuxtjs/apollo": "^4.0.0-rc19",
@@ -39,7 +40,6 @@
 		"vuejs-paginate": "^2.1.0"
 	},
 	"devDependencies": {
-		"@mdi/font": "^5.3.45",
 		"@nuxt/typescript-build": "^0.6.0",
 		"@nuxtjs/eslint-config-typescript": "^1.0.0",
 		"@nuxtjs/eslint-module": "^1.0.0",
