@@ -68,7 +68,7 @@ export default Vue.extend({
 		return {
 			type: 'layouts',
 			list: 'layoutsList',
-			unsupportedFilters: ['filters']
+			unsupportedFilters: ['nsfw', 'withLayoutName']
 		}
 	},
 	apollo: {

@@ -546,6 +546,23 @@ html {
 	animation: flow 30s linear infinite;
 }
 
+.v-autocomplete__content.v-menu__content {
+	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+		0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+	border-radius: 10px !important;
+}
+
+.v-select.v-input--dense .v-input__append-inner {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: -15px;
+}
+
+.v-select.v-input--dense .v-chip {
+	margin: 4px 0 !important;
+}
+
 @keyframes flow {
 	from {
 		background-position: bottom left;

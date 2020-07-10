@@ -75,6 +75,9 @@ query themesList($target: String) {
 		}
 		layout {
 			uuid
+			details {
+				name
+			}
 		}
 		details {
 			name

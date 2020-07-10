@@ -7,7 +7,11 @@
 			`border: rgba(255, 255, 255, 0.12) solid 2px; border-radius: 10px;`
 		"
 	>
-		<div class="group">
+		<div
+			class="group"
+			@mousedown="searchHover = true"
+			@mouseleave="searchHover = false"
+		>
 			<v-card-title class="title">
 				Search
 			</v-card-title>
@@ -21,8 +25,74 @@
 					single-line
 					outlined
 					hide-details
+					@blur="focussed = false"
+					@focus="focussed = true"
 				></v-text-field>
 			</v-card-actions>
+			<v-expand-transition name="card-animation" mode="out-in">
+				<div
+					v-show="
+						focussed ||
+							searchHover ||
+							withCreator.length > 0 ||
+							withLayoutName.length > 0
+					"
+					class="mx-2 search-in"
+				>
+					<v-card-subtitle class="pa-0 mx-2">
+						With
+					</v-card-subtitle>
+					<v-card-actions>
+						<v-autocomplete
+							v-model="withCreator"
+							:items="
+								creators && creators.length > 0 ? creators : []
+							"
+							label="Creator"
+							outlined
+							hide-details
+							chips
+							dense
+							rounded
+							multiple
+							small-chips
+							deletable-chips
+							auto-select-first
+							single-line
+							:menu-props="{ bottom: true, offsetY: true }"
+							@click="focussed = true"
+							@blur="focussed = false"
+						></v-autocomplete>
+					</v-card-actions>
+					<v-card-actions>
+						<v-autocomplete
+							v-if="
+								!unsupportedFilters.includes('withLayoutName')
+							"
+							v-model="withLayoutName"
+							label="Layout name"
+							:items="
+								layoutNames && layoutNames.length > 0
+									? layoutNames
+									: []
+							"
+							multiple
+							outlined
+							rounded
+							single-line
+							dense
+							:menu-props="{ bottom: true, offsetY: true }"
+							hide-details
+							chips
+							small-chips
+							deletable-chips
+							auto-select-first
+							@focus="focussed = true"
+							@blur="focussed = false"
+						></v-autocomplete>
+					</v-card-actions>
+				</div>
+			</v-expand-transition>
 		</div>
 
 		<div class="group">
@@ -73,7 +143,8 @@
 			</v-card-actions>
 		</div>
 
-		<div v-if="!unsupportedFilters.includes('filters')" class="group">
+		<!-- for now this 'if' statement is required here, change it when there is more than one filter -->
+		<div v-if="!unsupportedFilters.includes('nsfw')" class="group">
 			<v-card-title class="title">
 				Filters
 			</v-card-title>
@@ -87,6 +158,17 @@
 					hide-details
 				></v-checkbox>
 			</v-card-actions>
+
+			<!-- <v-card-actions v-if="!unsupportedFilters.includes('layout')">
+				<v-checkbox
+					v-model="hasLayout"
+					class="ma-0 mx-2"
+					label="Has custom layout"
+					indeterminate
+					color="red"
+					hide-details
+				></v-checkbox>
+			</v-card-actions> -->
 		</div>
 	</v-card>
 </template>
@@ -125,8 +207,17 @@ export default Vue.extend({
 					icon: 'mdi-calendar-clock'
 				}
 			],
-			filterCooldownActive: false,
+			// Search with
 			query: '',
+			typingQueryTimer: null,
+			focussed: false,
+			searchHover: false,
+			withCreator: [],
+			typingWithCreatorTimers: null,
+			withLayoutName: [],
+			typingWithLayoutNameTimer: null,
+			// Filters
+			hasLayout: null,
 			nsfw: false
 		}
 	},
@@ -134,6 +225,16 @@ export default Vue.extend({
 		currentSearch(): string | undefined {
 			return this.$route.query.query
 				? (this.$route.query.query as string)
+				: undefined
+		},
+		currentWithCreator(): string | undefined {
+			return this.$route.query.creator
+				? (this.$route.query.creator as string)
+				: undefined
+		},
+		currentWithLayoutName(): string | undefined {
+			return this.$route.query.layoutname
+				? (this.$route.query.layoutname as string)
 				: undefined
 		},
 		currentSort(): string {
@@ -145,6 +246,38 @@ export default Vue.extend({
 			return this.$route.query.order
 				? (this.$route.query.order as string)
 				: 'desc'
+		},
+		creators(): Array<string> {
+			const items = this.$parent.$data[this.$parent.$data.list]
+			if (items) {
+				return items
+					.map((i: any) => {
+						return i.creator.discord_user.username
+					})
+					.sort()
+			} else return []
+		},
+		layoutNames(): Array<string> {
+			const items = this.$parent.$data[this.$parent.$data.list]
+			if (items) {
+				const array: Array<string> = []
+
+				items.forEach((i: any) => {
+					if (i.themes) {
+						// Packs
+						i.themes.forEach((t: any) => {
+							if (t.layout) {
+								array.push(t.layout.details.name)
+							}
+						})
+					} else if (i.layout) {
+						// Themes
+						array.push(i.layout.details.name)
+					}
+				})
+
+				return array.sort()
+			} else return []
 		},
 		filteredItems(): Array<object> {
 			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -166,8 +299,8 @@ export default Vue.extend({
 						],
 						storeFields: ['id'],
 						searchOptions: {
-							boost: { name: 2 },
-							fuzzy: 0.2
+							// boost: { name: 2 },
+							fuzzy: 0.1
 						}
 					})
 					const itms = items.map((item: any) => {
@@ -197,16 +330,46 @@ export default Vue.extend({
 
 				items = items
 					.filter((item: any): boolean => {
-						if (
-							!this.unsupportedFilters.includes('filters') ||
-							!this.unsupportedFilters.includes('nsfw')
-						) {
+						if (!this.unsupportedFilters.includes('nsfw')) {
 							return this.nsfw
 								? true
 								: !(
 										Array.isArray(item.categories) &&
 										item.categories.includes('NSFW')
 								  )
+						} else return true
+					})
+					.filter((item: any): boolean => {
+						if (this.withCreator.length > 0) {
+							return this.withCreator.some((c: string) =>
+								item.creator.discord_user.username
+									.toLowerCase()
+									.includes(c.toLowerCase())
+							)
+						} else return true
+					})
+					.filter((item: any): boolean => {
+						if (
+							!this.unsupportedFilters.includes(
+								'withLayoutName'
+							) &&
+							this.withLayoutName.length > 0
+						) {
+							return this.withLayoutName.some((c: string) => {
+								if (item.themes) {
+									// Pack
+									return item.themes.some((t: any) =>
+										t.layout?.details.name
+											.toLowerCase()
+											.includes(c.toLowerCase())
+									)
+								} else if (item.layout) {
+									// Theme
+									return item.layout.details.name
+										.toLowerCase()
+										.includes(c.toLowerCase())
+								} else return false
+							})
 						} else return true
 					})
 					.sort((a: any, b: any) => {
@@ -248,18 +411,62 @@ export default Vue.extend({
 			this.updateParentFiltered()
 		},
 		query(n) {
-			const query = Object.assign({}, this.$route.query)
-			delete query.page
-			if (n === '') delete query.query
-			else query.query = n
-
-			this.$router.push({
-				query
-			})
+			clearTimeout(this.$data.typingQueryTimer)
+			this.$data.typingQueryTimer = setTimeout(() => {
+				const query = Object.assign({}, this.$route.query)
+				delete query.page
+				if (n === '') delete query.query
+				else query.query = n
+				this.$router.push({
+					query
+				})
+			}, 1000)
+		},
+		withCreator(n) {
+			clearTimeout(this.$data.typingWithCreatorTimer)
+			this.$data.typingWithCreatorTimer = setTimeout(() => {
+				const query = Object.assign({}, this.$route.query)
+				delete query.page
+				if (n.length === 0) delete query.creator
+				else query.creator = n.join(',')
+				this.$router.push({
+					query
+				})
+			}, 1000)
+		},
+		withLayoutName(n) {
+			clearTimeout(this.$data.typingWithLayoutNameTimer)
+			this.$data.typingWithLayoutNameTimer = setTimeout(() => {
+				const query = Object.assign({}, this.$route.query)
+				delete query.page
+				if (n.length === 0) delete query.layoutname
+				else query.layoutname = n.join(',')
+				this.$router.push({
+					query
+				})
+			}, 1000)
+		},
+		currentSearch(n) {
+			// This is needed to ensure the query is updated on the browser back button
+			this.$data.query = n || ''
+		},
+		currentWithCreator(n) {
+			// This is needed to ensure the query is updated on the browser back button
+			this.$data.withCreator = n ? (n as string).split(',') : []
+		},
+		currentWithLayoutName(n) {
+			// This is needed to ensure the query is updated on the browser back button
+			this.$data.withLayoutName = n ? (n as string).split(',') : []
 		}
 	},
 	mounted() {
 		this.$data.query = this.$route.query.query || ''
+		this.$data.withCreator = this.$route.query.creator
+			? (this.$route.query.creator as string).split(',')
+			: []
+		this.$data.withLayoutName = this.$route.query.layoutname
+			? (this.$route.query.layoutname as string).split(',')
+			: []
 		this.updateParentFiltered()
 	},
 	methods: {

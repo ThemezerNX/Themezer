@@ -72,6 +72,11 @@ query packsList {
 		like_count
 		themes {
 			uuid
+			layout {
+				details {
+					name
+				}
+			}
 		}
 	}
 }
