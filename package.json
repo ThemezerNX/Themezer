@@ -14,7 +14,6 @@
 		"lint-fix": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore . --fix"
 	},
 	"dependencies": {
-		"@mdi/font": "^5.3.45",
 		"@nuxt/typescript-build": "^0.6.0",
 		"@nuxt/typescript-runtime": "^1.0.0",
 		"@nuxtjs/apollo": "^4.0.0-rc19",
@@ -26,6 +25,7 @@
 		"@nuxtjs/redirect-module": "^0.3.1",
 		"@nuxtjs/vuetify": "^1.0.0",
 		"@types/webpack-env": "^1.15.2",
+		"@mdi/font": "^5.3.45",
 		"array-object-merge": "^1.2.1",
 		"babel-runtime": "^6.26.0",
 		"cookie-universal-nuxt": "^2.1.4",
