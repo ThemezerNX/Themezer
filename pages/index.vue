@@ -3,25 +3,26 @@
 		<error v-if="error" :error="error" />
 		<div v-else>
 			<!-- <v-parallax
-			class="d-flex align-center justify-center parallax"
-			height="100%"
-			src="https://res.cloudinary.com/rebelwalls/image/upload/b_black,c_fill,f_auto,fl_progressive,h_533,q_auto,w_800/v1479371023/article/R10961_image1"
-		/> -->
+				class="d-flex align-center justify-center parallax"
+				height="100%"
+				src="https://res.cloudinary.com/rebelwalls/image/upload/b_black,c_fill,f_auto,fl_progressive,h_533,q_auto,w_800/v1479371023/article/R10961_image1"
+			/> -->
 			<v-layout column justify-center>
-				<v-img
-					class="d-block my-1"
-					height="200"
-					width="auto"
-					src="/icon-256.png"
-					contain
-				/>
-				<h1 v-if="$auth.loggedIn" class="text-center intro-title">
-					Welcome back {{ $auth.user.username }}!
-				</h1>
-				<h1 v-else class="text-center intro-title">
-					Welcome to Themezer!
-				</h1>
 				<v-container class="pt-0" style="height: 100%;" fluid>
+					<v-img
+						class="d-block my-1"
+						height="200"
+						width="auto"
+						src="/icon-256.png"
+						style="-webkit-filter: drop-shadow(0px 0px 10px rgb(255 255 255 / 10%));"
+						contain
+					/>
+					<h1 v-if="$auth.loggedIn" class="text-center intro-title">
+						Welcome back {{ $auth.user.username }}!
+					</h1>
+					<h1 v-else class="text-center intro-title">
+						Welcome to Themezer!
+					</h1>
 					<v-row
 						v-if="packsList && packsList.length > 0"
 						align="center"
@@ -71,6 +72,8 @@
 						</v-col>
 					</v-row>
 				</v-container>
+				<div class="circle-1 primary" />
+				<div class="circle-2 secondary" />
 			</v-layout>
 		</div>
 	</v-container>
@@ -169,6 +172,34 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.container {
+	z-index: 1;
+}
+
+.circle-1 {
+	border-radius: 50%;
+	position: fixed;
+	min-height: 300px;
+	height: 65vw;
+	min-width: 300px;
+	width: 65vw;
+	opacity: 0.85;
+	top: 80vh;
+	left: -15vw;
+}
+
+.circle-2 {
+	border-radius: 50%;
+	position: fixed;
+	min-height: 200px;
+	height: 15vw;
+	min-width: 200px;
+	width: 15vw;
+	top: -10vh;
+	opacity: 0.7;
+	right: -2vw;
+}
+
 .parallax {
 	position: fixed;
 	height: 100%;
@@ -176,7 +207,8 @@ export default Vue.extend({
 }
 
 .content {
-	background: linear-gradient(0deg, #b40a86, #0ab379);
+	// background: linear-gradient(0deg, #b40a86, #0ab379);
+	z-index: 5;
 }
 </style>
 

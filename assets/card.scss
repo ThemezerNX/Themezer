@@ -1,3 +1,5 @@
+@import '@/assets/variables.scss';
+
 .card {
 	height: 100%;
 	transition: cubic-bezier(0.165, 0.84, 0.44, 1) 1s;
@@ -38,6 +40,6 @@
 	}
 }
 .card.hover {
-	background: lighten(#1e1e1e, 4%) !important;
+	background: darken($themezer-primary, 15%) !important;
 	transform: translateY(-2px);
 }

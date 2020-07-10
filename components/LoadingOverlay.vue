@@ -13,6 +13,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/variables.scss';
+
 .holder {
 	height: 100%;
 	display: flex;
@@ -22,13 +24,13 @@ export default {
 
 @keyframes bg-color {
 	0% {
-		color: $themezer-magenta;
+		color: $themezer-primary;
 	}
 	50% {
-		color: $themezer-aqua;
+		color: $themezer-secondary;
 	}
 	100% {
-		color: $themezer-magenta;
+		color: $themezer-primary;
 	}
 }
 

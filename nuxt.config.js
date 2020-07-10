@@ -1,4 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 
 export default {
@@ -42,11 +41,6 @@ export default {
 	loading: { color: '#B40A86' },
 
 	plugins: [
-		// '@/plugins/mergeJson',
-		// {
-		// 	src: '@/plugins/meta',
-		// 	mode: 'client'
-		// },
 		'@/plugins/linkify',
 		'@/plugins/snackbar',
 		{
@@ -81,7 +75,7 @@ export default {
 		{
 			from: '(?!^/$|^/[?].*$)(.*/[?](.*)$|.*/$)',
 			to: (_from, req) => {
-				const base = req._parsedUrl.pathname.replace(/\/$/, '') // We take pathname instead of req.url because of the query parameters
+				const base = req._parsedUrl.pathname.replace(/\/$/, '')
 				const search = req._parsedUrl.search
 				return base + (search != null ? search : '')
 			},
@@ -114,21 +108,7 @@ export default {
 	 ** https://github.com/nuxt-community/vuetify-module
 	 */
 	vuetify: {
-		customVariables: ['~/assets/variables.scss'],
-		theme: {
-			dark: true,
-			themes: {
-				dark: {
-					primary: '#0AB379',
-					accent: colors.grey.darken3,
-					secondary: '#B40A86',
-					info: colors.teal.lighten1,
-					warning: colors.amber.base,
-					error: colors.deepOrange.accent4,
-					success: colors.green.accent3
-				}
-			}
-		}
+		optionsPath: './vuetify.options.ts'
 	},
 
 	auth: {

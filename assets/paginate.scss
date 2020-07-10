@@ -1,3 +1,5 @@
+@import '@/assets/variables.scss';
+
 a {
 	outline: 0;
 	border: none;
@@ -26,7 +28,7 @@ a {
 		min-height: 50px;
 
 		color: #fff;
-		background-color: darken($themezer-aqua, 15);
+		background-color: darken($themezer-secondary, 15);
 		font-weight: 700;
 		font-size: 20px;
 
@@ -34,7 +36,7 @@ a {
 		margin: 0 5px;
 
 		&.active {
-			background-color: darken($themezer-magenta, 4);
+			background-color: darken($themezer-primary, 4);
 		}
 
 		&:hover {

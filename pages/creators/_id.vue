@@ -605,8 +605,8 @@ export default Vue.extend({
 }
 
 .markdown {
-	background-color: #2a2a2a;
+	background-color: #00000050;
 	padding: 20px;
-	border-radius: 4px;
+	border-radius: 10px;
 }
 </style>

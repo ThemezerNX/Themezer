@@ -280,6 +280,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/variables.scss';
+
 .group:first-of-type {
 	padding-top: 16px;
 }
@@ -319,8 +321,8 @@ export default Vue.extend({
 
 	&.nuxt-link-exact-active.asc,
 	&.router-link-exact-active.asc {
-		border: 1px solid darken($themezer-aqua, 5%);
-		background-color: darken($themezer-aqua, 2%);
+		border: 1px solid darken($themezer-primary, 5%);
+		background-color: darken($themezer-primary, 2%);
 		color: #1e1e1e;
 		.order {
 			transform: unset;
@@ -329,8 +331,8 @@ export default Vue.extend({
 
 	&.nuxt-link-exact-active.desc,
 	&.router-link-exact-active.desc {
-		border: 1px solid darken($themezer-magenta, 5%);
-		background-color: darken($themezer-magenta, 2%);
+		border: 1px solid darken($themezer-secondary, 5%);
+		background-color: darken($themezer-secondary, 2%);
 		color: white;
 		.order {
 			transform: rotateZ(180deg);

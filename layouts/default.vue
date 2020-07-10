@@ -150,7 +150,7 @@
 						contain
 						src="/icon-256.png"
 						width="30"
-						style="border-radius: 5px;"
+						style="border-radius: 5px; -webkit-filter: drop-shadow(0px 0px 2px rgb(255 255 255 / 10%));"
 					/>
 					{{ title }}
 				</v-toolbar-title>
@@ -489,6 +489,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/assets/variables.scss';
+
 html {
 	word-break: break-word;
 }
