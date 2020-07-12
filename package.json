@@ -9,7 +9,7 @@
 		"dev": "nuxt-ts",
 		"build": "rimraf static/icons && nuxt-ts build",
 		"start": "nuxt-ts start",
-		"generate": "nuxt-ts generate",
+		"generate": "yarn run build --target static && nuxt export",
 		"lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
 		"lint-fix": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore . --fix"
 	},
@@ -30,6 +30,8 @@
 		"babel-runtime": "^6.26.0",
 		"cookie-universal-nuxt": "^2.1.4",
 		"core-js": "^2.6.5",
+		"gm": "^1.23.1",
+		"imagemin-webpack-plugin": "^2.4.2",
 		"marked": "^1.1.0",
 		"minisearch": "^2.3.1",
 		"nested-object-assign": "^1.0.3",

@@ -45,7 +45,9 @@
 							<v-img
 								v-if="background.url"
 								aspect-ratio="1.7778"
-								:src="background.url"
+								:src="
+									require(`@/assets/backgrounds/${background.url}`)
+								"
 								:width="
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"
@@ -94,56 +96,51 @@ export default {
 				},
 				{
 					name: 'Breath of the Wild Forest',
-					url:
-						'/images/backgrounds/Games/Breath of the Wild Forest.jpg'
+					url: 'Games/Breath_of_the_Wild_Forest.jpg'
 				},
 				{
 					name: 'Skyrim Mountains',
-					url: '/images/backgrounds/Games/Skyrim Mountains.jpg'
+					url: 'Games/Skyrim_Mountains.jpg'
 				},
 				{
 					name: "Assassin's Creed Odyssey",
-					url: '/images/backgrounds/Games/Assassins Creed Odyssey.jpg'
+					url: 'Games/Assassins_Creed_Odyssey.jpg'
 				},
 				{
 					name: 'Far Cry 5',
-					url: '/images/backgrounds/Games/Far Cry 5.jpg'
+					url: 'Games/Far_Cry_5.jpg'
 				},
 				{
 					name: 'Breath of the Wild Art',
-					url: '/images/backgrounds/Games/Zelda BotW Art.jpg'
+					url: 'Games/Zelda_BotW_Art.jpg'
 				},
 				{
 					name: 'Animal Crossing New Horizons',
-					url:
-						'/images/backgrounds/Games/Animal Crossing New Horizons.jpg'
+					url: 'Games/Animal_Crossing_New_Horizons.jpg'
 				},
 				{
 					name: 'Sea',
-					url: '/images/backgrounds/Nature/Sea.jpg'
+					url: 'Nature/Sea.jpg'
 				},
 				{
 					name: 'Spiderman Into the Spiderverse',
-					url:
-						'/images/backgrounds/Movies/Spiderman Into the Spiderverse - 2.jpg'
+					url: 'Movies/Spiderman_Into_the_Spiderverse_-_2.jpg'
 				},
 				{
 					name: 'PewDiePie',
-					url: '/images/backgrounds/PewDiePie.jpg'
+					url: 'PewDiePie.jpg'
 				},
 				{
 					name: 'Darling in the Franxx',
-					url:
-						'/images/backgrounds/Movies/Darling in the Franxx - 1.jpg'
+					url: 'Movies/Darling_in_the_Franxx_-_1.jpg'
 				},
 				{
 					name: 'Nier Automata',
-					url: '/images/backgrounds/Games/Nier Automata - 1.jpg'
+					url: 'Games/Nier_Automata_-_1.jpg'
 				},
 				{
 					name: 'Persona 5 Ryuji',
-					url:
-						'/images/backgrounds/Games/Persona 5/Persona 5 Ryuji.jpg'
+					url: 'Games/Persona_5/Persona_5_Ryuji.jpg'
 				}
 			]
 		}

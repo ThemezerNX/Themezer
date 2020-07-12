@@ -212,9 +212,13 @@ export default Vue.extend({
 	},
 	computed: {
 		backgroundStyle() {
-			if (this.$store.state.background)
-				return `background-image: url(${this.$store.state.background});`
-			else if (this.$route.params.target === 'playerselect') {
+			if (this.$store.state.background) {
+				return (
+					'background-image: url(' +
+					require(`@/assets/backgrounds/${this.$store.state.background}`) +
+					')'
+				)
+			} else if (this.$route.params.target === 'playerselect') {
 				return `background-image: url(/images/blurredhome.jpg);`
 			} else if (this.layout.details.color) {
 				return `background: ${this.layout.details.color};`

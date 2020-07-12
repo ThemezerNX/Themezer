@@ -1,4 +1,5 @@
 require('dotenv').config()
+const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 export default {
 	env: {
@@ -158,14 +159,28 @@ export default {
 	},
 
 	build: {
-		transpile: ['@nuxtjs/auth-next'],
+		transpile: ['@nuxtjs/auth-next', 'vuetify/lib'],
 		extractCSS: process.env.NODE_ENV === 'production',
-		parallel: true,
-		extend(config, ctx) {
-			if (ctx.isDev) {
+		parallel: process.env.NODE_ENV !== 'production',
+		optimization: {
+			splitChunks: {
+				chunks: 'all'
+			}
+		},
+		plugins: [
+			new ImageminPlugin({
+				disable: process.env.NODE_ENV !== 'production',
+				pngquant: {
+					quality: '80-100'
+				}
+			})
+		],
+		extend(config, { isDev, isClient, loaders: { vue } }) {
+			if (isDev) {
 				config.mode = 'development'
-			} else if (ctx.isClient) {
-				config.optimization.splitChunks.maxSize = 244000
+			} else if (isClient) {
+				vue.transformAssetUrls['v-img'] = 'src'
+				config.optimization.splitChunks.maxSize = 200000
 				config.optimization.splitChunks.cacheGroups = {
 					styles: {
 						name: 'styles',
