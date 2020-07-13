@@ -89,10 +89,10 @@
 							>creation tool on this website
 						</nuxt-link>
 						or using the
-						<a
-							href="https://github.com/exelix11/SwitchThemeInjector"
+						<nuxt-link
+							to="https://github.com/exelix11/SwitchThemeInjector"
 							target="_blank"
-							>Switch Theme Injector</a
+							>Switch Theme Injector</nuxt-link
 						>. You may return after creating an NXTheme/NXThemes.
 					</div>
 				</v-col>
@@ -221,9 +221,9 @@
 													v-if="theme.layout"
 												>
 													Layout:
-													<a
+													<nuxt-link
 														exact
-														:href="
+														:to="
 															`/layouts/${fileNameToWebName(
 																theme.layout
 																	.target
@@ -240,7 +240,7 @@
 															theme.layout.details
 																.name
 														}}
-													</a>
+													</nuxt-link>
 													<div
 														v-if="
 															theme.used_pieces &&

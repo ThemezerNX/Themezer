@@ -32,12 +32,12 @@
 					</h1>
 					<div class="subtitle-1">
 						By
-						<a
+						<nuxt-link
 							class="font-weight-bold"
-							:href="`/creators/${theme.creator.id}`"
+							:to="`/creators/${theme.creator.id}`"
 						>
 							{{ theme.creator.discord_user.username }}
-						</a>
+						</nuxt-link>
 					</div>
 					<div
 						v-if="theme.details.description"
@@ -92,9 +92,9 @@
 					</div>
 					<div v-if="theme.layout" class="font-weight-light body-2">
 						<span class="font-weight-medium">Layout: </span>
-						<a
+						<nuxt-link
 							class="font-weight-bold"
-							:href="
+							:to="
 								`/layouts/${fileNameToWebName(
 									theme.layout.target
 								)}/${createUrlString(
@@ -104,7 +104,7 @@
 							"
 						>
 							{{ theme.layout.details.name }}
-						</a>
+						</nuxt-link>
 					</div>
 					<div
 						v-if="
@@ -119,14 +119,15 @@
 					</div>
 					<div v-if="theme.bg_type" class="font-weight-light body-2">
 						<span class="font-weight-medium">Background: </span>
-						<a
+						<nuxt-link
 							class="font-weight-bold"
-							:href="
+							target="_blank"
+							:to="
 								`//api.themezer.ga/storage/themes/${theme.uuid}/image.${theme.bg_type}`
 							"
 						>
 							{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
-						</a>
+						</nuxt-link>
 					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">Downloads: </span>
@@ -135,6 +136,7 @@
 
 					<ButtonDivider>
 						<DownloadButton
+							tooltip="Download theme"
 							:download-function="downloadTheme"
 							:loading="loadingDownload"
 						/>
@@ -163,8 +165,8 @@
 						<div class="subtitle-1">
 							This Theme is part of the the following Theme Pack:
 						</div>
-						<a
-							:href="
+						<nuxt-link
+							:to="
 								`/packs/${createUrlString(
 									theme.pack.id,
 									theme.pack.details.name
@@ -173,7 +175,7 @@
 							class="subtitle-1 font-weight-bold"
 						>
 							{{ theme.pack.details.name }}
-						</a>
+						</nuxt-link>
 					</div>
 				</v-col>
 			</v-row>

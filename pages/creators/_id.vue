@@ -310,10 +310,6 @@ export default Vue.extend({
 	components: {
 		error
 	},
-	middleware: ['auth'],
-	options: {
-		auth: false
-	},
 	data() {
 		return {
 			id: this.$route.params.id,

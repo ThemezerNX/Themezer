@@ -9,12 +9,12 @@
 			<h2 class="box_text mt-0">{{ layout.details.name }}</h2>
 			<div class="subtitle-1 box_text">
 				By
-				<a
+				<nuxt-link
 					class="font-weight-bold"
-					:href="`/creators/${layout.creator.id}`"
+					:to="`/creators/${layout.creator.id}`"
 				>
 					{{ layout.creator.discord_user.username }}
-				</a>
+				</nuxt-link>
 			</div>
 			<v-row class="ma-0">
 				<v-col
@@ -168,6 +168,7 @@
 					</v-list>
 					<ButtonDivider>
 						<DownloadButton
+							tooltip="Download layout"
 							:download-function="download"
 							:loading="loadingMerge"
 						/>
@@ -223,7 +224,7 @@ export default Vue.extend({
 			} else if (this.layout.details.color) {
 				return `background: ${this.layout.details.color};`
 			} else {
-				return `background: #e2e2e2;`
+				return `background: #2d2d2d;`
 			}
 		},
 		activePiecesComputed() {

@@ -32,12 +32,12 @@
 					</h1>
 					<div class="subtitle-1">
 						By
-						<a
+						<nuxt-link
 							class="font-weight-bold"
-							:href="`/creators/${layout.creator.id}`"
+							:to="`/creators/${layout.creator.id}`"
 						>
 							{{ layout.creator.discord_user.username }}
-						</a>
+						</nuxt-link>
 					</div>
 					<div
 						v-if="layout.details.description"
@@ -94,6 +94,7 @@
 							:loading="loadingMerge"
 						/>
 						<DownloadButton
+							tooltip="Download layout"
 							:download-function="download"
 							:loading="loadingMerge"
 						/>
@@ -277,7 +278,7 @@ export default Vue.extend({
 			} else if (this.layout.details.color) {
 				return `background: ${this.layout.details.color};`
 			} else {
-				return `background: #e2e2e2;`
+				return `background: #2d2d2d;`
 			}
 		},
 		commonlayoutObject() {

@@ -52,6 +52,7 @@
 				>
 					<v-img
 						aspect-ratio="1.7778"
+						class="placeholder"
 						:src="screenshotBlackUrl"
 						contain
 						alt="Screenshot with black background"
@@ -84,6 +85,7 @@
 				>
 					<v-img
 						aspect-ratio="1.7778"
+						class="placeholder"
 						:src="screenshotWhiteUrl"
 						contain
 						alt="Screenshot with white background"
@@ -116,7 +118,10 @@
 					>
 						Create <v-icon right>mdi-image-edit-outline</v-icon>
 					</v-btn>
-					<DownloadButton :download-function="download" />
+					<DownloadButton
+						v-if="resultImage"
+						:download-function="download"
+					/>
 				</ButtonDivider>
 			</v-row>
 			<h2 v-if="resultImage" class="box_text">
@@ -125,6 +130,7 @@
 			<v-col v-if="resultImage" cols="12" xs="12" sm="4" class="pa-2">
 				<v-img
 					aspect-ratio="1.7778"
+					class="placeholder"
 					:src="
 						`data:${resultImage.mimetype};base64,${resultImage.data}`
 					"
@@ -157,7 +163,6 @@ export default Vue.extend({
 			loadingUploadScreenshots: false
 		}
 	},
-	apollo: {},
 	methods: {
 		onLayoutChange(file) {
 			if (file) {
@@ -219,7 +224,11 @@ export default Vue.extend({
 					}
 				})
 				.then(({ data }) => {
+					this.loadingUploadScreenshots = false
 					this.resultImage = data.createOverlay
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
 					this.loadingUploadScreenshots = false
 				})
 		},

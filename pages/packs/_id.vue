@@ -42,12 +42,12 @@
 					</h1>
 					<div class="subtitle-1">
 						By
-						<a
+						<nuxt-link
 							class="font-weight-bold"
-							:href="`/creators/${pack.creator.id}`"
+							:to="`/creators/${pack.creator.id}`"
 						>
 							{{ pack.creator.discord_user.username }}
-						</a>
+						</nuxt-link>
 					</div>
 					<div
 						v-if="pack.details.description"
@@ -107,6 +107,7 @@
 
 					<ButtonDivider>
 						<DownloadButton
+							tooltip="Download pack"
 							:download-function="downloadPack"
 							:loading="loadingDownload"
 						/>
