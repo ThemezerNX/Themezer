@@ -76,6 +76,6 @@ query layoutsList($target: String, $creator_id: String, $limit: Int) {
 	}
 }
 
-query mergeJson($uuid: GUID!, $piece_uuids: [GUID!], $common: Boolean) {
-	mergeJson(uuid: $uuid, piece_uuids: $piece_uuids, common: $common)
+query mergeJsonByUUID($uuid: GUID!, $piece_uuids: [GUID!], $common: Boolean) {
+	mergeJsonByUUID(uuid: $uuid, piece_uuids: $piece_uuids, common: $common)
 }

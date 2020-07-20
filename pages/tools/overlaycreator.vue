@@ -17,8 +17,9 @@
 				Upload your layout here. You will get two NXThemes: one with a
 				black background and one with a white one (be sure to allow the
 				site to download multiple files). For each do the following:
-				install it on your Switch and take a screenshot. Transfer them
-				to your PC afterwards. Have you done that? Go to step 2.
+				install it on your Switch and take a screenshot. Transfer the
+				screenshots to your PC afterwards. Have you done that? Go to
+				step 2.
 			</div>
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
@@ -29,11 +30,38 @@
 						prepend-icon="mdi-code-json"
 						accept="application/json"
 						hide-details
-						:loading="loadingUploadLayout"
 						@change="onLayoutChange"
 					/>
 				</v-col>
+				<v-col cols="12" class="pa-2">
+					<v-file-input
+						rounded
+						label=".json piece file (optional)"
+						filled
+						prepend-icon="mdi-code-json"
+						accept="application/json"
+						hide-details
+						@change="onPieceChange"
+					/>
+				</v-col>
+
+				<ButtonDivider>
+					<v-btn
+						rounded
+						color="primary"
+						append
+						:loading="loadingUploadLayout"
+						:disabled="!layoutJson"
+						@click.prevent="uploadLayout()"
+					>
+						Get
+						<v-icon right class="mt-1"
+							>mdi-format-color-fill</v-icon
+						>
+					</v-btn>
+				</ButtonDivider>
 			</v-row>
+
 			<h2 class="box_text">
 				2. Upload Screenshots
 			</h2>
@@ -42,39 +70,6 @@
 				Upload them to their own field below.
 			</div>
 			<v-row class="ma-0">
-				<v-col
-					v-if="screenshotBlackUrl"
-					cols="12"
-					xs="12"
-					sm="2"
-					class="pa-2"
-					style="position: relative;"
-				>
-					<v-img
-						aspect-ratio="1.7778"
-						class="placeholder"
-						:src="screenshotBlackUrl"
-						contain
-						alt="Screenshot with black background"
-					/>
-				</v-col>
-				<v-col
-					cols="12"
-					xs="12"
-					:sm="screenshotBlackUrl ? 10 : 12"
-					class="pa-2"
-				>
-					<v-file-input
-						rounded
-						label="Screenshot with black background"
-						filled
-						prepend-icon="mdi-monitor-screenshot"
-						accept="image/jpeg"
-						hide-details
-						@change="onScreenshotBlackChange"
-					/>
-				</v-col>
-
 				<v-col
 					v-if="screenshotWhiteUrl"
 					cols="12"
@@ -108,38 +103,77 @@
 					/>
 				</v-col>
 
-				<ButtonDivider v-if="blackImg && whiteImg">
+				<v-col
+					v-if="screenshotBlackUrl"
+					cols="12"
+					xs="12"
+					sm="2"
+					class="pa-2"
+					style="position: relative;"
+				>
+					<v-img
+						aspect-ratio="1.7778"
+						class="placeholder"
+						:src="screenshotBlackUrl"
+						contain
+						alt="Screenshot with black background"
+					/>
+				</v-col>
+				<v-col
+					cols="12"
+					xs="12"
+					:sm="screenshotBlackUrl ? 10 : 12"
+					class="pa-2"
+				>
+					<v-file-input
+						rounded
+						label="Screenshot with black background"
+						filled
+						prepend-icon="mdi-monitor-screenshot"
+						accept="image/jpeg"
+						hide-details
+						@change="onScreenshotBlackChange"
+					/>
+				</v-col>
+
+				<ButtonDivider>
 					<v-btn
 						rounded
 						color="primary"
 						append
 						:loading="loadingUploadScreenshots"
+						:disabled="!(blackImg && whiteImg)"
 						@click.prevent="uploadScreenshots"
 					>
-						Create <v-icon right>mdi-image-edit-outline</v-icon>
+						Create overlay
+						<v-icon right>mdi-image-edit-outline</v-icon>
 					</v-btn>
+				</ButtonDivider>
+			</v-row>
+
+			<v-row v-if="resultImage" class="ma-0">
+				<h2 class="box_text">
+					Result
+				</h2>
+				<v-col cols="12" xs="12" sm="4" class="pa-2">
+					<v-img
+						aspect-ratio="1.7778"
+						class="placeholder"
+						:src="
+							`data:${resultImage.mimetype};base64,${resultImage.data}`
+						"
+						contain
+						alt="Created overlay image"
+						style="background: rgba(255, 255, 255, 0.20);"
+					/>
+				</v-col>
+				<ButtonDivider>
 					<DownloadButton
-						v-if="resultImage"
 						label="Download image"
 						:download-function="download"
 					/>
 				</ButtonDivider>
 			</v-row>
-			<h2 v-if="resultImage" class="box_text">
-				Result
-			</h2>
-			<v-col v-if="resultImage" cols="12" xs="12" sm="4" class="pa-2">
-				<v-img
-					aspect-ratio="1.7778"
-					class="placeholder"
-					:src="
-						`data:${resultImage.mimetype};base64,${resultImage.data}`
-					"
-					contain
-					alt="Created overlay image"
-					style="background: rgba(255, 255, 255, 0.20);"
-				/>
-			</v-col>
 		</v-sheet>
 	</v-container>
 </template>
@@ -172,7 +206,11 @@ export default Vue.extend({
 		onLayoutChange(file) {
 			if (file) {
 				this.layoutJson = file
-				this.uploadLayout()
+			}
+		},
+		onPieceChange(file) {
+			if (file) {
+				this.pieceJson = file
 			}
 		},
 		uploadLayout() {
@@ -183,7 +221,8 @@ export default Vue.extend({
 				.mutate({
 					mutation: createOverlaysNXTheme,
 					variables: {
-						layout: this.layoutJson
+						layout: this.layoutJson,
+						piece: this.pieceJson
 					}
 				})
 				.then(({ data }) => {

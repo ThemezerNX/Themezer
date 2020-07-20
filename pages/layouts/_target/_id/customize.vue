@@ -190,7 +190,7 @@
 
 <script>
 import Vue from 'vue'
-import { layout, mergeJson } from '@/graphql/Layout.gql'
+import { layout, mergeJsonByUUID } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
 
@@ -321,7 +321,7 @@ export default Vue.extend({
 		valueChange(value, pieces) {
 			if (value === true) {
 				// Checkbox
-				this.activePieces.replace(pieces[0].uuid)
+				this.activePieces.push(pieces[0].uuid)
 			} else if (value === false) {
 				// Unchecked checkbox
 				this.activePieces = this.activePieces.filter(
@@ -340,7 +340,7 @@ export default Vue.extend({
 
 				if (newPiece) {
 					// If not 'Default'
-					this.activePieces.replace(newPiece.uuid)
+					this.activePieces.push(newPiece.uuid)
 				}
 			}
 		},
@@ -350,7 +350,7 @@ export default Vue.extend({
 			for (let i = 0; i < this.data.length; i++) {
 				if (this.data[i] === true) {
 					// Checkbox
-					usedPieces.replace(this.layout.pieces[i].values[0].uuid)
+					usedPieces.push(this.layout.pieces[i].values[0].uuid)
 				} else if (
 					typeof this.data[i] === 'string' &&
 					this.data[i] !== 'Default'
@@ -359,14 +359,14 @@ export default Vue.extend({
 					const selected = this.layout.pieces[i].values.find(
 						(v) => v.value === this.data[i]
 					)
-					usedPieces.replace(selected.uuid)
+					usedPieces.push(selected.uuid)
 				}
 			}
 
 			this.loadingMerge = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJson,
+					mutation: mergeJsonByUUID,
 					variables: {
 						uuid: this.layout.uuid,
 						piece_uuids: usedPieces
@@ -376,7 +376,7 @@ export default Vue.extend({
 					this.loadingMerge = false
 
 					this.downloadFile(
-						data.mergeJson,
+						data.mergeJsonByUUID,
 						'application/json',
 						this.layout.details.name
 					)

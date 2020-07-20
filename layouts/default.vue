@@ -522,7 +522,6 @@ html {
 }
 
 .v-parallax__image-container {
-	filter: blur(2px);
 	background: url('/images/diagonal_joycon-180.png') #333;
 	background-repeat: repeat;
 	animation: flow 45s linear infinite;

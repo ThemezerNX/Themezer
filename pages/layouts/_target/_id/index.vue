@@ -257,7 +257,7 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import { layout, mergeJson } from '@/graphql/Layout.gql'
+import { layout, mergeJsonByUUID } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 
 export default Vue.extend({
@@ -311,7 +311,7 @@ export default Vue.extend({
 			this.loadingMerge = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJson,
+					mutation: mergeJsonByUUID,
 					variables: {
 						uuid: this.layout.uuid,
 						piece_uuids: []
@@ -321,7 +321,7 @@ export default Vue.extend({
 					this.loadingMerge = false
 
 					this.downloadFile(
-						data.mergeJson,
+						data.mergeJsonByUUID,
 						'application/json',
 						this.layout.details.name
 					)
@@ -335,7 +335,7 @@ export default Vue.extend({
 			this.loadingMergeCommon = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJson,
+					mutation: mergeJsonByUUID,
 					variables: {
 						uuid: this.layout.uuid,
 						common: true
@@ -345,7 +345,7 @@ export default Vue.extend({
 					this.loadingMergeCommon = false
 
 					this.downloadFile(
-						data.mergeJson,
+						data.mergeJsonByUUID,
 						'application/json',
 						`${this.layout.details.name} - Common layout`
 					)
