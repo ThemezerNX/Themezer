@@ -1,6 +1,10 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div v-if="layout && layout.details" no-gutters class="pa-2 box_fill">
+		<v-sheet
+			v-if="layout && layout.details"
+			no-gutters
+			class="pa-2 box_fill"
+		>
 			<v-row class="ma-0">
 				<v-col
 					cols="12"
@@ -241,7 +245,7 @@
 					</v-card-actions>
 				</v-card>
 			</v-dialog>
-		</div>
+		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
 		<span v-else>There's nothing here :(</span>
 	</v-container>
@@ -254,6 +258,16 @@ import { layout, mergeJson } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 
 export default Vue.extend({
+	components: {
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		CustomizeButton: () =>
+			import('@/components/buttons/CustomizeButton.vue'),
+		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
+		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+		BackgroundsSlideGroup: () =>
+			import('@/components/BackgroundsSlideGroup.vue')
+	},
 	mixins: [shared, targetParser],
 	data() {
 		return {
@@ -342,13 +356,16 @@ export default Vue.extend({
 			query: layout,
 			variables() {
 				return {
-					id: this.id,
-					target: this.targetFile()
+					id: this.id
 				}
 			},
 			result({ data }) {
 				if (data && data.layout) {
-					this.updateUrlString(this.id, data.layout.details.name)
+					this.updateUrlString(
+						this.id,
+						data.layout.details.name,
+						this.fileNameToWebName(data.layout.target)
+					)
 				}
 			},
 			// fetchPolicy: 'no-cache',

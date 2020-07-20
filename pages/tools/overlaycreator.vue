@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div no-gutters class="pa-2 box_fill">
+		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Overlay Creator
 			</h1>
@@ -120,6 +120,7 @@
 					</v-btn>
 					<DownloadButton
 						v-if="resultImage"
+						label="Download image"
 						:download-function="download"
 					/>
 				</ButtonDivider>
@@ -139,7 +140,7 @@
 					style="background: rgba(255, 255, 255, 0.20);"
 				/>
 			</v-col>
-		</div>
+		</v-sheet>
 	</v-container>
 </template>
 
@@ -151,6 +152,10 @@ import {
 } from '@/graphql/CreateOverlay.gql'
 
 export default Vue.extend({
+	components: {
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		DownloadButton: () => import('@/components/buttons/DownloadButton.vue')
+	},
 	data() {
 		return {
 			layoutJson: null,

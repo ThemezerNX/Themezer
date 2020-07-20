@@ -568,7 +568,7 @@ html {
 		background-position: bottom left;
 	}
 	to {
-		background-position: right;
+		background-position: top right;
 	}
 }
 

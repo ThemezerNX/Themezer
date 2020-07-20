@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div no-gutters class="pa-2 box_fill">
+		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Theme Submissions
 			</h1>
@@ -318,25 +318,6 @@
 													label="Categories*"
 													multiple
 												></v-combobox>
-												<!-- <v-text-field
-												v-model="
-													detectedThemes[i].color
-												"
-												label="Theme card color on Themezer"
-												:color="detectedThemes[i].color"
-												outlined
-												:rules="[rules.hex]"
-												prepend-icon="mdi-format-color-fill"
-												@change="
-													forceUpdate++
-													detectedThemes[i].color ===
-													''
-														? (detectedThemes[
-																i
-														  ].color = null)
-														: null
-												"
-											></v-text-field> -->
 												<v-text-field
 													v-if="
 														selectedSubmitType ===
@@ -455,21 +436,6 @@
 								label="Shared categories (this will remove the current set)"
 								multiple
 							></v-combobox>
-							<!-- <v-text-field
-								v-if="selectedSubmitType === 'pack'"
-								v-model="submitDetails.color"
-								label="Pack card color on Themezer"
-								:color="submitDetails.color"
-								outlined
-								:rules="[rules.hex]"
-								prepend-icon="mdi-format-color-fill"
-								@change="
-									forceUpdate++
-									submitDetails.color === ''
-										? (submitDetails.color = null)
-										: null
-								"
-							></v-text-field> -->
 							<v-text-field
 								v-if="selectedSubmitType === 'pack'"
 								v-model="submitDetails.version"
@@ -496,7 +462,7 @@
 					</v-row>
 				</div>
 			</v-form>
-		</div>
+		</v-sheet>
 	</v-container>
 </template>
 

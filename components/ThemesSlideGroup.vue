@@ -78,14 +78,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CertifiedBadge from '@/components/CertifiedBadge.vue'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import slideGroupSorting from '@/components/mixins/slideGroupSorting'
 
 export default Vue.extend({
 	components: {
-		CertifiedBadge
+		CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
 	},
 	mixins: [targetParser, urlParser, slideGroupSorting],
 	props: {

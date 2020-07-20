@@ -105,11 +105,10 @@
 		>
 			<v-row align="center" justify="center">
 				<v-col cols="12" class="pt-0">
-					<markdown
-						v-if="creator.bio"
-						class="markdown"
-						:source="creator.bio"
-					/>
+					<v-sheet v-if="creator.bio" class="markdown-wrapper">
+						<Markdown class="markdown" :source="creator.bio" />
+					</v-sheet>
+
 					<span v-else
 						>This creator hasn't written anything about him- or
 						herself yet...</span
@@ -126,7 +125,11 @@
 						Latest Packs by this creator
 					</h1>
 					<v-divider />
-					<PacksSlideGroup :items="packsList" />
+					<ItemGrid
+						:items="packsList"
+						type="packs"
+						more-url="/packs?page=2&sort=updated&order=desc"
+					/>
 				</v-col>
 			</v-row>
 			<v-row
@@ -139,7 +142,7 @@
 						Latest Themes by this creator
 					</h1>
 					<v-divider />
-					<ThemesSlideGroup :items="themesList" />
+					<ItemGrid :items="themesList" type="themes" />
 				</v-col>
 			</v-row>
 			<v-row
@@ -149,10 +152,10 @@
 			>
 				<v-col cols="12" class="pt-0">
 					<h1>
-						All Layouts by this creator
+						Latest Layouts by this creator
 					</h1>
 					<v-divider />
-					<LayoutsSlideGroup :items="layoutsList" />
+					<ItemGrid :items="layoutsList" type="layouts" />
 				</v-col>
 			</v-row>
 		</v-container>
@@ -213,7 +216,7 @@
 						<v-file-input
 							v-model="changed.bannerImage"
 							rounded
-							label="Banner"
+							label="Banner (recommended: >= 1920x800)"
 							outlined
 							prepend-icon="mdi-image-area"
 							:rules="[rules.banner_size]"
@@ -308,7 +311,12 @@ import error from '@/layouts/error.vue'
 
 export default Vue.extend({
 	components: {
-		error
+		error,
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
+		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+		Markdown: () => import('@/components/Markdown.vue'),
+		ItemGrid: () => import('@/components/ItemGrid.vue')
 	},
 	data() {
 		return {
@@ -388,7 +396,7 @@ export default Vue.extend({
 			variables() {
 				return {
 					creator_id: this.id,
-					limit: 10
+					limit: 6
 				}
 			},
 			error(e) {
@@ -401,7 +409,7 @@ export default Vue.extend({
 			variables() {
 				return {
 					creator_id: this.id,
-					limit: 10
+					limit: 6
 				}
 			},
 			error(e) {
@@ -413,7 +421,8 @@ export default Vue.extend({
 			query: rowLayoutsList,
 			variables() {
 				return {
-					creator_id: this.id
+					creator_id: this.id,
+					limit: 6
 				}
 			},
 			error(e) {
@@ -600,9 +609,11 @@ export default Vue.extend({
 	}
 }
 
-.markdown {
-	background-color: #00000050;
-	padding: 20px;
+.markdown-wrapper {
 	border-radius: 10px;
+}
+
+.markdown {
+	padding: 20px;
 }
 </style>

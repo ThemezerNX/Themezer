@@ -152,7 +152,7 @@ export default {
 		}
 	},
 
-	components: true,
+	components: false,
 
 	router: {
 		trailingSlash: false

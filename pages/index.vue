@@ -33,8 +33,9 @@
 								Latest Packs
 							</h2>
 							<v-divider />
-							<PacksSlideGroup
+							<ItemGrid
 								:items="packsList"
+								type="packs"
 								:show-props="['creator']"
 							/>
 						</v-col>
@@ -49,8 +50,9 @@
 								Latest Themes
 							</h2>
 							<v-divider />
-							<ThemesSlideGroup
+							<ItemGrid
 								:items="themesList"
+								type="themes"
 								:show-props="['creator']"
 							/>
 						</v-col>
@@ -65,8 +67,9 @@
 								Latest Updated Layouts
 							</h2>
 							<v-divider />
-							<LayoutsSlideGroup
+							<ItemGrid
 								:items="layoutsList"
+								type="layouts"
 								:show-props="['creator']"
 							/>
 						</v-col>
@@ -88,6 +91,7 @@ import error from '@/layouts/error.vue'
 
 export default Vue.extend({
 	components: {
+		ItemGrid: () => import('@/components/ItemGrid.vue'),
 		error
 	},
 	data() {
@@ -100,7 +104,7 @@ export default Vue.extend({
 			query: rowPacksList,
 			variables() {
 				return {
-					limit: 10
+					limit: 12
 				}
 			},
 			error(e) {
@@ -112,7 +116,7 @@ export default Vue.extend({
 			query: rowThemesList,
 			variables() {
 				return {
-					limit: 10
+					limit: 12
 				}
 			},
 			error(e) {
@@ -124,7 +128,7 @@ export default Vue.extend({
 			query: rowLayoutsList,
 			variables() {
 				return {
-					limit: 10
+					limit: 12
 				}
 			},
 			error(e) {

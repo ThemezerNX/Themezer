@@ -13,6 +13,9 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+	components: {
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+	},
 	middleware: ['auth'],
 	options: {
 		auth: true

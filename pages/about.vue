@@ -1,6 +1,6 @@
 <template>
 	<v-layout column justify-center align-center pa-3>
-		<v-card max-width="600">
+		<v-card max-width="600" style="border-radius: 10px;">
 			<v-card-title class="headline">
 				About
 			</v-card-title>
@@ -142,6 +142,9 @@ import Vue from 'vue'
 import { restoreAccount } from '@/graphql/Creator.gql'
 
 export default Vue.extend({
+	components: {
+		CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
+	},
 	data() {
 		return {
 			restoreDialog: false,

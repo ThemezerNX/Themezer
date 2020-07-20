@@ -14,14 +14,26 @@ export default Vue.extend({
 		createUrlString(id: number, name: string) {
 			return `${name.replace(nameREGEX, '-')}-${id}`
 		},
-		updateUrlString(id: number, name: string) {
-			this.$router.push({
-				path: this.$route.path.replace(
-					this.$route.params.id,
-					this.createUrlString(id, name)
-				),
-				query: this.$route.query
-			})
+		updateUrlString(id: number, name: string, target?: string) {
+			let newPath = this.$route.path.replace(
+				this.$route.params.id,
+				this.createUrlString(id, name)
+			)
+
+			if (target) {
+				newPath = newPath.replace(
+					new RegExp(this.$route.params.target),
+					target
+				)
+			}
+
+			this.$router
+				.replace({
+					path: newPath,
+					query: this.$route.query
+				})
+				// Don't throw 'redundant navigation'
+				.catch(() => {})
 		}
 	}
 })

@@ -1,5 +1,5 @@
-query layout($id: Int!, $target: String!) {
-	layout(id: $id, target: $target) {
+query layout($id: Int!) {
+	layout(id: $id) {
 		uuid
 		id
 		creator {

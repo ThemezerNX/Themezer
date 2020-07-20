@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div
+		<v-sheet
 			v-if="layout && layout.has_pieces"
 			no-gutters
 			class="pa-2 box_fill"
@@ -181,7 +181,7 @@
 					</ButtonDivider>
 				</v-col>
 			</v-row>
-		</div>
+		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
 		<span v-else>There's nothing here :(</span>
 	</v-container>
@@ -200,6 +200,11 @@ export default Vue.extend({
 		} else {
 			next('/')
 		}
+	},
+	components: {
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		ShareButton: () => import('@/components/buttons/ShareButton.vue')
 	},
 	mixins: [urlParser, targetParser],
 	data() {
@@ -233,7 +238,7 @@ export default Vue.extend({
 	},
 	watch: {
 		activePiecesComputed(n) {
-			this.$router.push({
+			this.$router.replace({
 				query: { pieces: n.length > 0 ? n.join() : undefined }
 			})
 		}
@@ -280,13 +285,16 @@ export default Vue.extend({
 			query: layout,
 			variables() {
 				return {
-					id: this.id,
-					target: this.targetFile()
+					id: this.id
 				}
 			},
 			result({ data }) {
 				if (data && data.layout) {
-					this.updateUrlString(this.id, data.layout.details.name)
+					this.updateUrlString(
+						this.id,
+						data.layout.details.name,
+						this.fileNameToWebName(data.layout.target)
+					)
 				}
 			},
 			prefetch: true
@@ -310,7 +318,7 @@ export default Vue.extend({
 		valueChange(value, pieces) {
 			if (value === true) {
 				// Checkbox
-				this.activePieces.push(pieces[0].uuid)
+				this.activePieces.replace(pieces[0].uuid)
 			} else if (value === false) {
 				// Unchecked checkbox
 				this.activePieces = this.activePieces.filter(
@@ -329,7 +337,7 @@ export default Vue.extend({
 
 				if (newPiece) {
 					// If not 'Default'
-					this.activePieces.push(newPiece.uuid)
+					this.activePieces.replace(newPiece.uuid)
 				}
 			}
 		},
@@ -339,7 +347,7 @@ export default Vue.extend({
 			for (let i = 0; i < this.data.length; i++) {
 				if (this.data[i] === true) {
 					// Checkbox
-					usedPieces.push(this.layout.pieces[i].values[0].uuid)
+					usedPieces.replace(this.layout.pieces[i].values[0].uuid)
 				} else if (
 					typeof this.data[i] === 'string' &&
 					this.data[i] !== 'Default'
@@ -348,7 +356,7 @@ export default Vue.extend({
 					const selected = this.layout.pieces[i].values.find(
 						(v) => v.value === this.data[i]
 					)
-					usedPieces.push(selected.uuid)
+					usedPieces.replace(selected.uuid)
 				}
 			}
 

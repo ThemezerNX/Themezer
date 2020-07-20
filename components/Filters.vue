@@ -112,7 +112,7 @@
 					}"
 					:to="{
 						query: {
-							page: '1',
+							page: undefined,
 							query: currentSearch,
 							sort: option.id,
 							order: nextSortOrder(option.id)

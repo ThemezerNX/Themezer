@@ -3,14 +3,17 @@
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
 				<h2 class="text-center">{{ targetName() }} Packs</h2>
-				<SearchFilters
+				<Filters
 					ref="filter"
 					:unsupported-filters="unsupportedFilters"
 				/>
 			</v-col>
 			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
 				<div v-if="filteredItems">
-					<h3>{{ filteredItems.length }} results</h3>
+					<h3>
+						{{ filteredItems.length }}
+						{{ filteredItems.length === 1 ? 'result' : 'results' }}
+					</h3>
 					<v-divider />
 				</div>
 
@@ -24,7 +27,11 @@
 						md="4"
 						xl="3"
 					>
-						<PackCard :item="pack" />
+						<ItemCard
+							:item="pack"
+							type="packs"
+							:show-props="['creator', 'description']"
+						/>
 					</v-col>
 				</v-row>
 
@@ -63,7 +70,9 @@ import filter from '@/components/mixins/filter'
 
 export default Vue.extend({
 	components: {
-		SearchFilters: () => import('@/components/Filters.vue')
+		Filters: () => import('@/components/Filters.vue'),
+		ItemCard: () => import('@/components/ItemCard.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	mixins: [targetParser, filter],
 	data() {

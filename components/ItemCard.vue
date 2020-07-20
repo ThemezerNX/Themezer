@@ -6,10 +6,10 @@
 			class="ma-auto card"
 			router
 			:to="
-				`${$route.params.target}/${createUrlString(
-					item.id,
-					item.details.name
-				)}`
+				(type === 'packs'
+					? '/packs'
+					: `/${type}/${fileNameToWebName(item.target)}`) +
+					`/${createUrlString(item.id, item.details.name)}`
 			"
 			:style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
 		>
@@ -17,7 +17,30 @@
 				<CertifiedBadge />
 			</div>
 
+			<v-carousel
+				v-if="type === 'packs'"
+				continuous
+				hide-delimiters
+				hide-delimiter-background
+				:show-arrows="false"
+				:cycle="hover"
+				interval="2000"
+				height="auto"
+			>
+				<v-carousel-item
+					v-for="(theme, i) in item.themes"
+					:key="i"
+					height="auto"
+					aspect-ratio="1.7778"
+					:src="
+						`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+					"
+				>
+				</v-carousel-item>
+			</v-carousel>
+
 			<v-img
+				v-else
 				aspect-ratio="1.7778"
 				:src="imgSrc"
 				contain
@@ -29,17 +52,29 @@
 				class="overlay-image"
 			/>
 
-			<v-card-title class="title mb-0" v-text="item.details.name" />
+			<v-card-title
+				class="title mb-0 subtitle-1"
+				:class="showProps.includes('creator') ? 'mb-0' : 'my-1 mx-3'"
+				v-text="item.details.name"
+			/>
 
-			<v-card-subtitle class="creator">
-				{{ item.creator.discord_user.username }} • v{{
-					item.details.version
-				}}
+			<v-card-subtitle
+				v-if="showProps.includes('creator')"
+				class="creator"
+			>
+				By {{ item.creator.discord_user.username }}
+				{{ item.details.version ? `• v${item.details.version}` : '' }}
 			</v-card-subtitle>
 
 			<v-divider v-if="item.details.description" />
 
-			<v-card-text v-if="item.details.description" class="description">
+			<v-card-text
+				v-if="
+					item.details.description &&
+						showProps.includes('description')
+				"
+				class="description"
+			>
 				<div v-linkified v-html="item.details.description" />
 			</v-card-text>
 		</v-card>
@@ -48,14 +83,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import CertifiedBadge from '@/components/CertifiedBadge.vue'
 import urlParser from '@/components/mixins/urlParser'
+import targetParser from '@/components/mixins/targetParser'
 
 export default Vue.extend({
 	components: {
-		CertifiedBadge
+		CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
 	},
-	mixins: [urlParser],
+	mixins: [urlParser, targetParser],
 	props: {
 		item: {
 			type: Object,
@@ -64,8 +99,14 @@ export default Vue.extend({
 		},
 		type: {
 			type: String,
-			required: true,
-			default: null
+			required: true
+		},
+		showProps: {
+			type: Array,
+			required: false,
+			default: () => {
+				return []
+			}
 		}
 	},
 	computed: {

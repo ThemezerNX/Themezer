@@ -1,5 +1,5 @@
-query theme($id: Int!, $target: String!) {
-	theme(id: $id, target: $target) {
+query theme($id: Int!) {
+	theme(id: $id) {
 		uuid
 		id
 		creator {
@@ -84,6 +84,7 @@ query themesList($target: String) {
 			description
 			version
 		}
+		target
 		last_updated
 		categories
 		dl_count

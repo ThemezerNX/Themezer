@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div v-if="pack && pack.details" no-gutters class="pa-2 box">
+		<v-sheet v-if="pack && pack.details" no-gutters class="pa-2 box">
 			<v-row class="ma-0">
 				<v-col
 					cols="12"
@@ -127,7 +127,7 @@
 					<ThemesSlideGroup :items="pack.themes" sort-by="name" />
 				</v-col>
 			</v-row>
-		</div>
+		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
 		<span v-else>There's nothing here :(</span>
 	</v-container>
@@ -141,6 +141,13 @@ import urlParser from '@/components/mixins/urlParser'
 import { pack, downloadPack } from '@/graphql/Pack.gql'
 
 export default Vue.extend({
+	components: {
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
+		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+		ThemesSlideGroup: () => import('@/components/ThemesSlideGroup.vue')
+	},
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {

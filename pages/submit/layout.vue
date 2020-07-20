@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div no-gutters class="pa-2 box">
+		<v-sheet no-gutters class="pa-2 box">
 			<h1 class="box_text">
 				Layout Submissions
 			</h1>
@@ -26,7 +26,7 @@
 					Go to GitHub <v-icon right>mdi-github</v-icon>
 				</v-btn>
 			</v-flex>
-		</div>
+		</v-sheet>
 	</v-container>
 </template>
 

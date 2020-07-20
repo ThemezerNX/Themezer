@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div v-if="theme && theme.details" no-gutters class="pa-2 box">
+		<v-sheet v-if="theme && theme.details" no-gutters class="pa-2 box">
 			<v-row class="ma-0">
 				<v-col
 					cols="12"
@@ -204,7 +204,7 @@
 					</v-card-actions>
 				</v-card>
 			</v-dialog>
-		</div>
+		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
 		<span v-else>There's nothing here :(</span>
 	</v-container>
@@ -218,6 +218,12 @@ import urlParser from '@/components/mixins/urlParser'
 import { theme, downloadTheme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({
+	components: {
+		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
+		ShareButton: () => import('@/components/buttons/ShareButton.vue')
+	},
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
@@ -241,16 +247,18 @@ export default Vue.extend({
 			query: theme,
 			variables() {
 				return {
-					id: this.id,
-					target: this.targetFile()
+					id: this.id
 				}
 			},
 			result({ data }) {
 				if (data && data.theme) {
-					this.updateUrlString(this.id, data.theme.details.name)
+					this.updateUrlString(
+						this.id,
+						data.theme.details.name,
+						this.fileNameToWebName(data.theme.target)
+					)
 				}
 			},
-			// fetchPolicy: 'no-cache',
 			prefetch: true
 		}
 	},
