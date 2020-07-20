@@ -11,7 +11,7 @@
 				@click="like()"
 			>
 				{{ newCount }}
-				<v-icon right>mdi-heart</v-icon>
+				<v-icon right>{{ icon || 'mdi-heart' }}</v-icon>
 			</v-btn>
 		</template>
 		<span>{{ newValue ? 'Unlike this' : 'I like this!' }}</span>
@@ -24,6 +24,11 @@ import { setLike } from '@/graphql/Like.gql'
 
 export default Vue.extend({
 	props: {
+		icon: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		type: {
 			type: String,
 			required: true,

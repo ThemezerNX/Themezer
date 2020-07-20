@@ -66,7 +66,7 @@
 							/>
 
 							<v-row
-								v-else
+								v-else-if="background.clear"
 								class="fill-height"
 								align="center"
 								justify="center"
@@ -75,6 +75,27 @@
 									color="white"
 									size="48"
 									v-text="'mdi-close-circle-outline'"
+								/>
+							</v-row>
+
+							<v-row
+								v-else-if="background.upload"
+								class="fill-height"
+								align="center"
+								justify="center"
+								@click="$refs.backgroundUpload[0].click()"
+							>
+								<v-icon
+									color="white"
+									size="48"
+									v-text="'mdi-upload'"
+								/>
+								<input
+									ref="backgroundUpload"
+									type="file"
+									style="display: none"
+									accept="image/*"
+									@change="handleBackgroundUpload"
 								/>
 							</v-row>
 						</v-card>
@@ -92,7 +113,7 @@ export default {
 			activeBackground: 0,
 			backgrounds: [
 				{
-					url: null
+					clear: true
 				},
 				{
 					name: 'Breath of the Wild Forest',
@@ -141,6 +162,9 @@ export default {
 				{
 					name: 'Persona 5 Ryuji',
 					url: 'Games/Persona_5/Persona_5_Ryuji.jpg'
+				},
+				{
+					upload: true
 				}
 			]
 		}
@@ -153,6 +177,14 @@ export default {
 					? encodeURI(this.backgrounds[selected].url)
 					: null
 			)
+		}
+	},
+	methods: {
+		handleBackgroundUpload(input) {
+			if (input && input.target.files[0]) {
+				const imageUrl = URL.createObjectURL(input.target.files[0])
+				this.$store.commit('SET_BACKGROUND', imageUrl)
+			}
 		}
 	}
 }

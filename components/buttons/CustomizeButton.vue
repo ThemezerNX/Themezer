@@ -10,7 +10,7 @@
 				:loading="loading"
 				v-on="on"
 			>
-				<v-icon>mdi-square-edit-outline</v-icon>
+				<v-icon>{{ icon || 'mdi-square-edit-outline' }}</v-icon>
 			</v-btn>
 		</template>
 		<span>Customize</span>
@@ -21,6 +21,11 @@
 import Vue from 'vue'
 export default Vue.extend({
 	props: {
+		icon: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		to: {
 			type: String,
 			required: false,

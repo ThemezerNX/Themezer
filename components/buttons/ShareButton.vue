@@ -13,7 +13,7 @@
 						v-on="on"
 						@click="share()"
 					>
-						<v-icon>mdi-share-variant</v-icon>
+						<v-icon>{{ icon || 'mdi-share-variant' }}</v-icon>
 					</v-btn>
 				</template>
 				<span>{{ tooltip || 'Share' }}</span>
@@ -28,6 +28,11 @@ import Vue from 'vue'
 
 export default Vue.extend({
 	props: {
+		icon: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		tooltip: {
 			type: String,
 			required: false,

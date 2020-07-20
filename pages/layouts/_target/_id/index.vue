@@ -18,9 +18,10 @@
 						:src="
 							`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 						"
-						contain
+						cover
 						class="overlay-image"
 						:style="backgroundStyle"
+						style="background-size: cover;"
 					/>
 				</v-col>
 				<v-col
@@ -98,7 +99,8 @@
 							:loading="loadingMerge"
 						/>
 						<DownloadButton
-							tooltip="Download layout"
+							icon="mdi-code-json"
+							tooltip="Download layout only"
 							:download-function="download"
 							:loading="loadingMerge"
 						/>
@@ -144,6 +146,7 @@
 						</div>
 						<ButtonDivider>
 							<DownloadButton
+								tooltip="Download common"
 								:download-function="downloadCommon"
 								:loading="loadingMergeCommon"
 							/>
@@ -284,7 +287,9 @@ export default Vue.extend({
 			if (this.$store.state.background) {
 				return (
 					'background-image: url(' +
-					require(`@/assets/backgrounds/${this.$store.state.background}`) +
+					(this.$store.state.background.startsWith('blob')
+						? this.$store.state.background
+						: require(`@/assets/backgrounds/${this.$store.state.background}`)) +
 					')'
 				)
 			} else if (this.$route.params.target === 'playerselect') {

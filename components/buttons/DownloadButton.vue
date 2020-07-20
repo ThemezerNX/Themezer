@@ -12,7 +12,7 @@
 				v-on="on"
 				@click="downloadFunction()"
 			>
-				<v-icon>mdi-download</v-icon>
+				<v-icon>{{ icon || 'mdi-download' }}</v-icon>
 			</v-btn>
 		</template>
 		<span>{{ tooltip || 'Download' }}</span>
@@ -23,6 +23,11 @@
 import Vue from 'vue'
 export default Vue.extend({
 	props: {
+		icon: {
+			type: String,
+			required: false,
+			default: undefined
+		},
 		tooltip: {
 			type: String,
 			required: false,

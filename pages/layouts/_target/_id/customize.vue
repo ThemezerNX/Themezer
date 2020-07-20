@@ -30,9 +30,10 @@
 							preview ||
 								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 						"
-						contain
+						cover
 						class="overlay-image"
 						:style="backgroundStyle"
+						style="background-size: cover;"
 					/>
 				</v-col>
 				<v-col
@@ -221,7 +222,9 @@ export default Vue.extend({
 			if (this.$store.state.background) {
 				return (
 					'background-image: url(' +
-					require(`@/assets/backgrounds/${this.$store.state.background}`) +
+					(this.$store.state.background.startsWith('blob')
+						? this.$store.state.background
+						: require(`@/assets/backgrounds/${this.$store.state.background}`)) +
 					')'
 				)
 			} else if (this.$route.params.target === 'playerselect') {
