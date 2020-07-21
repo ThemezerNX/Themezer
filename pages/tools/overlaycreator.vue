@@ -24,24 +24,24 @@
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
 					<v-file-input
+						v-model="layoutJson"
 						rounded
 						label=".json layout file"
 						filled
 						prepend-icon="mdi-code-json"
 						accept="application/json"
 						hide-details
-						@change="onLayoutChange"
 					/>
 				</v-col>
 				<v-col cols="12" class="pa-2">
 					<v-file-input
+						v-model="pieceJson"
 						rounded
 						label=".json piece file (optional)"
 						filled
 						prepend-icon="mdi-code-json"
 						accept="application/json"
 						hide-details
-						@change="onPieceChange"
 					/>
 				</v-col>
 
@@ -193,6 +193,7 @@ export default Vue.extend({
 	data() {
 		return {
 			layoutJson: null,
+			pieceJson: null,
 			loadingUploadLayout: false,
 			blackImg: null,
 			screenshotBlackUrl: null,
@@ -203,19 +204,7 @@ export default Vue.extend({
 		}
 	},
 	methods: {
-		onLayoutChange(file) {
-			if (file) {
-				this.layoutJson = file
-			}
-		},
-		onPieceChange(file) {
-			if (file) {
-				this.pieceJson = file
-			}
-		},
 		uploadLayout() {
-			if (!this.layoutJson) return
-
 			this.loadingUploadLayout = true
 			this.$apollo
 				.mutate({

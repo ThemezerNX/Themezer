@@ -271,16 +271,14 @@
 <script>
 import { updateAuth } from '@/graphql/Creator.gql'
 
-const bothTypes = [
-	{
-		name: 'themes',
-		icon: 'mdi-format-color-fill'
-	},
-	{
-		name: 'layouts',
-		icon: 'mdi-code-json'
-	}
-]
+const themes = {
+	name: 'themes',
+	icon: 'mdi-format-color-fill'
+}
+const layouts = {
+	name: 'layouts',
+	icon: 'mdi-code-json'
+}
 
 export default {
 	data() {
@@ -301,44 +299,44 @@ export default {
 					icon: 'mdi-home-outline',
 					title: 'Home Menu',
 					target: 'homemenu',
-					types: bothTypes
+					types: [themes, layouts]
 				},
 				{
 					icon: 'mdi-lock-outline',
 					title: 'Lockscreen',
 					target: 'lockscreen',
-					types: bothTypes
+					types: [themes, layouts]
 				},
 				{
 					icon: 'mdi-apps',
 					title: 'All Apps',
 					target: 'allapps',
-					types: bothTypes
+					types: [themes, layouts]
 				},
-				{
-					icon: 'mdi-cog-outline',
-					title: 'Settings',
-					target: 'settings',
-					types: bothTypes
-				},
+				// {
+				// 	icon: 'mdi-cog-outline',
+				// 	title: 'Settings',
+				// 	target: 'settings',
+				// 	types: [themes, layouts]
+				// },
 				{
 					icon: 'mdi-account-multiple',
 					title: 'Player Select',
 					target: 'playerselect',
-					types: bothTypes
+					types: [themes, layouts]
 				},
-				{
-					icon: 'mdi-account-outline',
-					title: 'User Page',
-					target: 'userpage',
-					types: bothTypes
-				},
-				{
-					icon: 'mdi-newspaper-variant-outline',
-					title: 'News',
-					target: 'news',
-					types: bothTypes
-				},
+				// {
+				// 	icon: 'mdi-account-outline',
+				// 	title: 'User Page',
+				// 	target: 'userpage',
+				// 	types: [themes, layouts]
+				// },
+				// {
+				// 	icon: 'mdi-newspaper-variant-outline',
+				// 	title: 'News',
+				// 	target: 'news',
+				// 	types: [themes, layouts]
+				// },
 				{
 					header: 'Submit'
 				},

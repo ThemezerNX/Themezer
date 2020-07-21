@@ -28,6 +28,7 @@ query creator($id: String!) {
 			system
 			locale
 		}
+		custom_username
 		bio
 		joined
 		role
@@ -37,6 +38,7 @@ query creator($id: String!) {
 		like_count
 	}
 }
+
 
 mutation updateAuth($accepts: Boolean) {
 	updateAuth(accepts: $accepts) {
@@ -50,6 +52,7 @@ mutation restoreAccount($creator_id: String!, $backup_code: String!) {
 }
 
 mutation profile(
+	$custom_username: String
 	$bio: String
 	$profile_color: String
 	$banner_image: Upload
@@ -58,6 +61,7 @@ mutation profile(
 	$clear_logo_image: Boolean
 ) {
 	profile(
+		custom_username: $custom_username
 		bio: $bio
 		profile_color: $profile_color
 		banner_image: $banner_image

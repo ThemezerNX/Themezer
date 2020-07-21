@@ -51,8 +51,11 @@
 								alt="Creator Avatar"
 							/>
 						</v-avatar>
-						{{ creator.discord_user.username }}#{{
-							creator.discord_user.discriminator
+						{{ creator.discord_user.username
+						}}{{
+							!!creator.custom_username
+								? ''
+								: `#${creator.discord_user.discriminator}`
 						}}
 						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
@@ -177,6 +180,22 @@
 					</v-card-title>
 
 					<v-card-text>
+						<v-text-field
+							v-model="changed.customUsername"
+							rounded
+							:disabled="loading.submit"
+							class="pt-1"
+							outlined
+							maxlength="50"
+							prepend-icon="mdi-pencil"
+							counter="50"
+							label="Custom display name"
+							@change="
+								changed.customUsername === ''
+									? (changed.customUsername = null)
+									: null
+							"
+						></v-text-field>
 						<v-textarea
 							v-model="changed.bio"
 							rounded
@@ -331,6 +350,7 @@ export default Vue.extend({
 
 			changed: {
 				profileColor: null,
+				customUsername: null,
 				bio: null,
 				bannerImage: null,
 				logoImage: null,
@@ -361,6 +381,7 @@ export default Vue.extend({
 		changes() {
 			return !(
 				this.creator.profile_color === this.changed.profileColor &&
+				this.creator.custom_username === this.changed.customUsername &&
 				this.creator.bio === this.changed.bio &&
 				!this.changed.bannerImage &&
 				!this.changed.logoImage &&
@@ -444,6 +465,7 @@ export default Vue.extend({
 					)
 
 					this.changed.profileColor = creator.profile_color
+					this.changed.customUsername = creator.custom_username
 					this.changed.bio = creator.bio
 
 					if (creator.discord_user.avatar) {
@@ -476,6 +498,7 @@ export default Vue.extend({
 		discard() {
 			this.changed = {
 				profileColor: this.creator.profile_color,
+				customUsername: null,
 				bio: this.creator.bio,
 				bannerImage: null,
 				logoImage: null,
@@ -490,6 +513,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: profile,
 					variables: {
+						custom_username: this.changed.customUsername,
 						bio: this.changed.bio,
 						profile_color: this.changed.profileColor,
 						banner_image: this.changed.bannerImage,

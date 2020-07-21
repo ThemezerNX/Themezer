@@ -21,7 +21,6 @@
 						cover
 						class="overlay-image"
 						:style="backgroundStyle"
-						style="background-size: cover;"
 					/>
 				</v-col>
 				<v-col
@@ -173,6 +172,7 @@
 					</h3>
 					<ButtonDivider>
 						<DownloadButton
+							tooltip="Download overlay"
 							:download-href="
 								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
 							"
@@ -417,3 +417,9 @@ export default Vue.extend({
 	}
 })
 </script>
+
+<style lang="scss" scoped>
+.overlay-image {
+	background-size: cover !important;
+}
+</style>
