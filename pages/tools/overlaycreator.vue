@@ -151,10 +151,12 @@
 				</ButtonDivider>
 			</v-row>
 
-			<v-row v-if="resultImage" class="ma-0">
-				<h2 class="box_text">
-					Result
-				</h2>
+			<v-row v-if="!!resultImage" class="ma-0">
+				<v-col cols="12" xs="12" class="pa-0">
+					<h2 class="box_text">
+						3. Result
+					</h2>
+				</v-col>
 				<v-col cols="12" xs="12" sm="4" class="pa-2">
 					<v-img
 						aspect-ratio="1.7778"
@@ -165,14 +167,20 @@
 						contain
 						alt="Created overlay image"
 						style="background: rgba(255, 255, 255, 0.20);"
+						@click="download"
 					/>
 				</v-col>
-				<ButtonDivider>
-					<DownloadButton
-						label="Download image"
-						:download-function="download"
-					/>
-				</ButtonDivider>
+
+				<v-col cols="12" xs="12" class="pa-0">
+					<ButtonDivider>
+						<DownloadButton
+							tooltip="Download image"
+							:download-function="download"
+						>
+							Save
+						</DownloadButton>
+					</ButtonDivider>
+				</v-col>
 			</v-row>
 		</v-sheet>
 	</v-container>
