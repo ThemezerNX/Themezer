@@ -13,9 +13,12 @@
 						v-on="on"
 						@click="share()"
 					>
-						<v-icon style="margin-top: -3px; margin-left: 3px">{{
-							icon || 'mdi-share'
-						}}</v-icon>
+						<slot />
+						<v-icon
+							:right="!!$slots.default"
+							style="margin-top: -3px; margin-left: 3px"
+							>{{ icon || 'mdi-share' }}</v-icon
+						>
 					</v-btn>
 				</template>
 				<span>{{ tooltip || 'Share' }}</span>

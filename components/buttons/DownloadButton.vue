@@ -12,7 +12,10 @@
 				v-on="on"
 				@click="downloadFunction()"
 			>
-				<v-icon>{{ icon || 'mdi-download' }}</v-icon>
+				<slot />
+				<v-icon :right="!!$slots.default">{{
+					icon || 'mdi-download'
+				}}</v-icon>
 			</v-btn>
 		</template>
 		<span>{{ tooltip || 'Download' }}</span>

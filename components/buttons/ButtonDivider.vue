@@ -3,13 +3,13 @@
 		<v-divider
 			v-if="!hideDividers"
 			class="mx-3"
-			:class="!!this.$slots.default ? 'my-auto' : ''"
+			:class="!!$slots.default ? 'my-auto' : ''"
 		/>
 		<div>
 			<slot />
 		</div>
 		<v-divider
-			v-if="!hideDividers && !!this.$slots.default"
+			v-if="!hideDividers && !!$slots.default"
 			class="mx-3 my-auto"
 		/>
 	</v-flex>

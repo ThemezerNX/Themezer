@@ -10,7 +10,10 @@
 				:loading="loading"
 				v-on="on"
 			>
-				<v-icon>{{ icon || 'mdi-square-edit-outline' }}</v-icon>
+				<slot />
+				<v-icon :right="!!$slots.default">{{
+					icon || 'mdi-square-edit-outline'
+				}}</v-icon>
 			</v-btn>
 		</template>
 		<span>Customize</span>
