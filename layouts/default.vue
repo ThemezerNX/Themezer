@@ -490,7 +490,7 @@ export default {
 @import '@/assets/variables.scss';
 
 html {
-	word-break: break-word;
+	word-break: break-word !important;
 }
 
 .v-list--nav .v-list-item,
