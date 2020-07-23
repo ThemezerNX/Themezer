@@ -147,7 +147,7 @@
 							<DownloadButton
 								tooltip="Download common"
 								:download-function="downloadCommon"
-								:loading="loadingMergeCommon"
+								:loading="loadingGetCommon"
 							/>
 						</ButtonDivider>
 					</div>
@@ -257,7 +257,7 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import { layout, mergeJsonByUUID } from '@/graphql/Layout.gql'
+import { layout, mergeJsonByUUID, getCommonJson } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 
 export default Vue.extend({
@@ -279,7 +279,7 @@ export default Vue.extend({
 			showOverlayInfo: false,
 			overlayDialog: false,
 			loadingMerge: false,
-			loadingMergeCommon: false
+			loadingGetCommon: false
 		}
 	},
 	computed: {
@@ -332,27 +332,26 @@ export default Vue.extend({
 				})
 		},
 		downloadCommon() {
-			this.loadingMergeCommon = true
+			this.loadingGetCommon = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJsonByUUID,
+					mutation: getCommonJson,
 					variables: {
-						uuid: this.layout.uuid,
-						common: true
+						uuid: this.layout.uuid
 					}
 				})
 				.then(({ data }) => {
-					this.loadingMergeCommon = false
+					this.loadingGetCommon = false
 
 					this.downloadFile(
-						data.mergeJsonByUUID,
+						data.getCommonJson,
 						'application/json',
 						`${this.layout.details.name} - Common layout`
 					)
 				})
 				.catch((err) => {
 					this.$snackbar.error(err)
-					this.loadingMergeCommon = false
+					this.loadingGetCommon = false
 				})
 		}
 	},

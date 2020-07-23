@@ -235,7 +235,7 @@
 						<v-file-input
 							v-model="changed.bannerImage"
 							rounded
-							label="Banner (recommended: >= 1920x800)"
+							label="Banner (recommended: 1920x800)"
 							outlined
 							prepend-icon="mdi-image-area"
 							:rules="[rules.banner_size]"
