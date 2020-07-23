@@ -93,6 +93,7 @@
 					class="pa-2"
 				>
 					<v-file-input
+						v-value="whiteImg"
 						rounded
 						label="Screenshot with white background"
 						filled
@@ -126,6 +127,7 @@
 					class="pa-2"
 				>
 					<v-file-input
+						v-value="blackImg"
 						rounded
 						label="Screenshot with black background"
 						filled
@@ -214,6 +216,9 @@ export default Vue.extend({
 	methods: {
 		uploadLayout() {
 			this.loadingUploadLayout = true
+			this.blackImg = null
+			this.whiteImg = null
+
 			this.$apollo
 				.mutate({
 					mutation: createOverlaysNXTheme,
@@ -240,14 +245,12 @@ export default Vue.extend({
 		onScreenshotBlackChange(file) {
 			if (file) {
 				this.resultImage = null
-				this.blackImg = file
 				this.screenshotBlackUrl = URL.createObjectURL(file)
 			}
 		},
 		onScreenshotWhiteChange(file) {
 			if (file) {
 				this.resultImage = null
-				this.whiteImg = file
 				this.screenshotWhiteUrl = URL.createObjectURL(file)
 			}
 		},

@@ -6,8 +6,8 @@ query createOverlaysNXTheme($layout: Upload!, $piece: Upload) {
 	}
 }
 
-query createOverlay($themeName: String, $blackImg: Upload!, $whiteImg: Upload!) {
-	createOverlay(themeName: $themeName, blackImg: $blackImg, whiteImg: $whiteImg) {
+query createOverlay($blackImg: Upload!, $whiteImg: Upload!) {
+	createOverlay(blackImg: $blackImg, whiteImg: $whiteImg) {
         filename
 		data
 		mimetype
