@@ -26,7 +26,7 @@
 					<v-file-input
 						v-model="layoutJson"
 						rounded
-						label=".json layout file"
+						label=".json layout"
 						filled
 						prepend-icon="mdi-code-json"
 						accept="application/json"
@@ -38,6 +38,17 @@
 						v-model="pieceJson"
 						rounded
 						label=".json piece file (optional)"
+						filled
+						prepend-icon="mdi-code-json"
+						accept="application/json"
+						hide-details
+					/>
+				</v-col>
+				<v-col cols="12" class="pa-2">
+					<v-file-input
+						v-model="commonJson"
+						rounded
+						label=".json common layout (optional)"
 						filled
 						prepend-icon="mdi-code-json"
 						accept="application/json"
@@ -191,7 +202,7 @@
 <script>
 import Vue from 'vue'
 import {
-	createOverlaysNXTheme,
+	createOverlayNXThemes,
 	createOverlay
 } from '@/graphql/CreateOverlay.gql'
 
@@ -204,6 +215,7 @@ export default Vue.extend({
 		return {
 			layoutJson: null,
 			pieceJson: null,
+			commonJson: null,
 			loadingUploadLayout: false,
 			blackImg: null,
 			screenshotBlackUrl: null,
@@ -221,15 +233,16 @@ export default Vue.extend({
 
 			this.$apollo
 				.mutate({
-					mutation: createOverlaysNXTheme,
+					mutation: createOverlayNXThemes,
 					variables: {
 						layout: this.layoutJson,
-						piece: this.pieceJson
+						piece: this.pieceJson,
+						common: this.commonJson
 					}
 				})
 				.then(({ data }) => {
 					this.loadingUploadLayout = false
-					data.createOverlaysNXTheme.forEach((file) => {
+					data.createOverlayNXThemes.forEach((file) => {
 						this.downloadFileB64(
 							file.data,
 							file.mimetype,

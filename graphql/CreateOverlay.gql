@@ -1,5 +1,5 @@
-query createOverlaysNXTheme($layout: Upload!, $piece: Upload) {
-	createOverlaysNXTheme(layout: $layout, piece: $piece) {
+query createOverlayNXThemes($layout: Upload!, $piece: Upload, $common: Upload) {
+	createOverlayNXThemes(layout: $layout, piece: $piece, common: $common) {
 		filename
 		data
 		mimetype
