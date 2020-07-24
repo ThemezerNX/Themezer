@@ -5,7 +5,7 @@ query myLikes {
 				id
 			}
 			layouts {
-				uuid
+				id
 			}
 			themes {
 				id

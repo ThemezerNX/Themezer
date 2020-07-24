@@ -89,8 +89,8 @@ query themesList($target: String) {
 	}
 }
 
-query downloadTheme($id: GUID!, $piece_uuids: [GUID!]) {
-	downloadTheme(id: $uuid, piece_uuids: $piece_uuids) {
+query downloadTheme($id: String!, $piece_uuids: [GUID!]) {
+	downloadTheme(id: $id, piece_uuids: $piece_uuids) {
 		filename
 		data
 		mimetype

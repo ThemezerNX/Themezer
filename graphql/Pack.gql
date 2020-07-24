@@ -43,7 +43,7 @@ query rowPacksList($creator_id: String, $limit: Int) {
 		themes {
 			id
 			layout {
-				uuid
+				id
 			}
 		}
 	}
