@@ -1,6 +1,5 @@
 query pack($id: String!) {
 	pack(id: $id) {
-		uuid
 		id
 		creator {
 			id
@@ -18,7 +17,7 @@ query pack($id: String!) {
 		dl_count
 		like_count
 		themes {
-			uuid
+			id
 			id
 			details {
 				name
@@ -30,7 +29,6 @@ query pack($id: String!) {
 
 query rowPacksList($creator_id: String, $limit: Int) {
 	packsList(creator_id: $creator_id, limit: $limit) {
-		uuid
 		id
 		creator {
 			id
@@ -43,7 +41,7 @@ query rowPacksList($creator_id: String, $limit: Int) {
 		}
 		last_updated
 		themes {
-			uuid
+			id
 			layout {
 				uuid
 			}
@@ -53,7 +51,6 @@ query rowPacksList($creator_id: String, $limit: Int) {
 
 query packsList {
 	packsList {
-		uuid
 		id
 		creator {
 			id
@@ -71,7 +68,7 @@ query packsList {
 		dl_count
 		like_count
 		themes {
-			uuid
+			id
 			layout {
 				details {
 					name
@@ -81,8 +78,8 @@ query packsList {
 	}
 }
 
-query downloadPack($uuid: GUID!) {
-	downloadPack(uuid: $uuid) {
+query downloadPack($id: String!) {
+	downloadPack(id: $id) {
 		filename
 		data
 		mimetype

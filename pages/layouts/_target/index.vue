@@ -19,8 +19,8 @@
 
 				<v-row v-if="paginatedData && paginatedData.length > 0">
 					<v-col
-						v-for="theme in paginatedData"
-						:key="theme.uuid"
+						v-for="layout in paginatedData"
+						:key="layout.id"
 						cols="12"
 						xs="12"
 						sm="6"
@@ -28,7 +28,7 @@
 						xl="3"
 					>
 						<ItemCard
-							:item="theme"
+							:item="layout"
 							:type="type"
 							:show-props="['creator', 'description']"
 						/>

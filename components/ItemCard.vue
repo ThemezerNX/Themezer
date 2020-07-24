@@ -33,7 +33,7 @@
 					height="auto"
 					aspect-ratio="1.7778"
 					:src="
-						`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
+						`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
 					"
 				>
 				</v-carousel-item>
@@ -114,7 +114,7 @@ export default Vue.extend({
 			if (this.type === 'layouts')
 				return `//api.themezer.ga/cdn/layouts/${this.item.uuid}/overlay.png`
 			else if (this.type === 'themes')
-				return `//api.themezer.ga/cdn/themes/${this.item.uuid}/screenshot.jpg`
+				return `//api.themezer.ga/cdn/themes/${this.item.id}/screenshot.jpg`
 			else return ''
 		}
 	}

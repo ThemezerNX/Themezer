@@ -305,7 +305,7 @@ export default Vue.extend({
 					})
 					const itms = items.map((item: any) => {
 						return {
-							id: item.uuid,
+							id: item.id,
 							name: item.details.name,
 							description: item.details.name,
 							creator_name: item.creator.discord_user.username,
@@ -321,10 +321,10 @@ export default Vue.extend({
 					const rs = miniSearch.search(this.$data.query, {
 						prefix: true
 					})
-					const resultUUIDs = rs.map((r: any) => r.id)
+					const resultIDs = rs.map((r: any) => r.id)
 
 					items = items.filter((item: any) =>
-						resultUUIDs.includes(item.uuid)
+						resultIDs.includes(item.id)
 					)
 				}
 

@@ -55,13 +55,13 @@
 					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
-							:id="layout.uuid"
+							:id="layout.id"
 							:count="layout.like_count"
 							type="layouts"
 							:value="
 								$auth.user.liked.layouts
-									.map((l) => l.uuid)
-									.includes(layout.uuid)
+									.map((l) => l.id)
+									.includes(layout.id)
 							"
 						/>
 						<ShareButton
@@ -74,6 +74,10 @@
 					<h3>
 						Details
 					</h3>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">ID: </span>
+						{{ layout.id }}
+					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">Version: </span>
 						{{ layout.details.version }}
@@ -259,7 +263,7 @@ import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
 import {
 	layout,
-	mergeJsonByUUID,
+	downloadLayout,
 	downloadCommonLayout
 } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
@@ -315,9 +319,9 @@ export default Vue.extend({
 			this.loadingMerge = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJsonByUUID,
+					mutation: downloadLayout,
 					variables: {
-						uuid: this.layout.uuid,
+						id: this.layout.id,
 						piece_uuids: []
 					}
 				})
@@ -325,7 +329,7 @@ export default Vue.extend({
 					this.loadingMerge = false
 
 					this.downloadFile(
-						data.mergeJsonByUUID,
+						data.downloadLayout,
 						'application/json',
 						this.layout.details.name
 					)
@@ -341,7 +345,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: downloadCommonLayout,
 					variables: {
-						uuid: this.layout.uuid
+						id: this.layout.id
 					}
 				})
 				.then(({ data }) => {

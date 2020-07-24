@@ -23,7 +23,7 @@
 							height="auto"
 							aspect-ratio="1.7778"
 							:src="
-								`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
+								`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
 							"
 						>
 						</v-carousel-item>
@@ -73,13 +73,13 @@
 					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
-							:id="pack.uuid"
+							:id="pack.id"
 							type="packs"
 							:count="pack.like_count"
 							:value="
 								$auth.user.liked.packs
-									.map((p) => p.uuid)
-									.includes(pack.uuid)
+									.map((p) => p.id)
+									.includes(pack.id)
 							"
 						/>
 						<ShareButton
@@ -92,6 +92,10 @@
 					<h3>
 						Details
 					</h3>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">ID: </span>
+						{{ pack.id }}
+					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">Version: </span>
 						{{ pack.details.version }}
@@ -202,7 +206,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: downloadPack,
 					variables: {
-						uuid: this.pack.uuid
+						id: this.pack.id
 					}
 				})
 				.then(({ data }) => {
@@ -224,7 +228,7 @@ export default Vue.extend({
 		if (this.pack) {
 			const metaTitle = `${this.pack.details.name} | Packs`
 			const metaDesc = this.pack.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
+			const metaImg = `//api.themezer.ga/cdn/themes/${this.pack.themes[0].id}/screenshot.jpg`
 
 			return {
 				title: metaTitle,

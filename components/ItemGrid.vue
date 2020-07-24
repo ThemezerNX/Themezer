@@ -3,7 +3,7 @@
 		<v-row v-if="items && items.length > 0">
 			<v-col
 				v-for="item in items"
-				:key="item.uuid"
+				:key="item.id"
 				cols="12"
 				xs="12"
 				sm="6"

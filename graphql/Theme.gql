@@ -1,6 +1,5 @@
 query theme($id: String!) {
 	theme(id: $id) {
-		uuid
 		id
 		creator {
 			id
@@ -44,7 +43,6 @@ query theme($id: String!) {
 
 query rowThemesList($target: String, $creator_id: String, $limit: Int) {
 	themesList(target: $target, creator_id: $creator_id, limit: $limit) {
-		uuid
 		id
 		creator {
 			id
@@ -65,7 +63,6 @@ query rowThemesList($target: String, $creator_id: String, $limit: Int) {
 
 query themesList($target: String) {
 	themesList(target: $target) {
-		uuid
 		id
 		creator {
 			id
@@ -92,8 +89,8 @@ query themesList($target: String) {
 	}
 }
 
-query downloadTheme($uuid: GUID!, $piece_uuids: [GUID!]) {
-	downloadTheme(uuid: $uuid, piece_uuids: $piece_uuids) {
+query downloadTheme($id: GUID!, $piece_uuids: [GUID!]) {
+	downloadTheme(id: $uuid, piece_uuids: $piece_uuids) {
 		filename
 		data
 		mimetype

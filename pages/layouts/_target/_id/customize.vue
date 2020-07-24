@@ -368,7 +368,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: downloadLayout,
 					variables: {
-						uuid: this.layout.uuid,
+						id: this.layout.id,
 						piece_uuids: usedPieces
 					}
 				})

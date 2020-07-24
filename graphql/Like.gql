@@ -8,10 +8,10 @@ query myLikes {
 				uuid
 			}
 			themes {
-				uuid
+				id
 			}
 			packs {
-				uuid
+				id
 			}
 		}
 	}

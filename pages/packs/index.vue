@@ -20,7 +20,7 @@
 				<v-row v-if="paginatedData && paginatedData.length > 0">
 					<v-col
 						v-for="pack in paginatedData"
-						:key="pack.uuid"
+						:key="pack.id"
 						cols="12"
 						xs="12"
 						sm="6"

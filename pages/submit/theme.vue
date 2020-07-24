@@ -669,7 +669,7 @@ export default Vue.extend({
 					return {
 						info: t.info,
 						tmp: t.tmp,
-						layout_uuid: t.layout ? t.layout.uuid : null,
+						layout_id: t.layout ? t.layout.id : null,
 						used_pieces: t.used_pieces,
 						target: t.target,
 						color: t.color,

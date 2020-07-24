@@ -20,7 +20,7 @@
 				<v-row v-if="paginatedData && paginatedData.length > 0">
 					<v-col
 						v-for="theme in paginatedData"
-						:key="theme.uuid"
+						:key="theme.id"
 						cols="12"
 						xs="12"
 						sm="6"

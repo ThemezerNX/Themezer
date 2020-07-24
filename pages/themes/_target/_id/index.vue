@@ -12,7 +12,7 @@
 					<v-img
 						aspect-ratio="1.7778"
 						:src="
-							`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
+							`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
 						"
 						contain
 						class="overlay-image"
@@ -63,13 +63,13 @@
 					<ButtonDivider>
 						<LikeButton
 							v-if="$auth.loggedIn"
-							:id="theme.uuid"
+							:id="theme.id"
 							:count="theme.like_count"
 							type="themes"
 							:value="
 								$auth.user.liked.themes
-									.map((t) => t.uuid)
-									.includes(theme.uuid)
+									.map((t) => t.id)
+									.includes(theme.id)
 							"
 						/>
 						<ShareButton
@@ -82,6 +82,10 @@
 					<h3>
 						Details
 					</h3>
+					<div class="font-weight-light body-2">
+						<span class="font-weight-medium">ID: </span>
+						{{ theme.id }}
+					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">Version: </span>
 						{{ theme.details.version }}
@@ -123,7 +127,7 @@
 							class="font-weight-bold"
 							target="_blank"
 							:to="
-								`//api.themezer.ga/cdn/themes/${theme.uuid}/image.${theme.bg_type}`
+								`//api.themezer.ga/cdn/themes/${theme.id}/image.${theme.bg_type}`
 							"
 						>
 							{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
@@ -290,7 +294,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: downloadTheme,
 					variables: {
-						uuid: this.theme.uuid,
+						id: this.theme.id,
 						piece_uuids: usedPieces
 					}
 				})
@@ -315,7 +319,7 @@ export default Vue.extend({
 				this.theme.details.name
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.theme.uuid}/screenshot.jpg`
+			const metaImg = `//api.themezer.ga/cdn/themes/${this.theme.id}/screenshot.jpg`
 
 			return {
 				title: metaTitle,
