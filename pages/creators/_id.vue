@@ -322,7 +322,7 @@
 <script>
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
-import { creator, profile } from '@/graphql/Creator.gql'
+import { creator, updateProfile } from '@/graphql/Creator.gql'
 import { rowPacksList } from '@/graphql/Pack.gql'
 import { rowThemesList } from '@/graphql/Theme.gql'
 import { rowLayoutsList } from '@/graphql/Layout.gql'
@@ -511,7 +511,7 @@ export default Vue.extend({
 
 			this.$apollo
 				.mutate({
-					mutation: profile,
+					mutation: updateProfile,
 					variables: {
 						custom_username: this.changed.customUsername,
 						bio: this.changed.bio,
@@ -524,7 +524,7 @@ export default Vue.extend({
 				})
 				.then(({ data }) => {
 					this.loading.submit = false
-					if (data && data.profile) {
+					if (data && data.updateProfile) {
 						this.editDialog = false
 						this.changed.bannerImage = null
 						this.changed.logoImage = null

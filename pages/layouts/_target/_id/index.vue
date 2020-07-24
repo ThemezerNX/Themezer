@@ -257,7 +257,11 @@
 <script>
 import Vue from 'vue'
 import shared from '@/layouts/details/SharedScript'
-import { layout, mergeJsonByUUID, getCommonJson } from '@/graphql/Layout.gql'
+import {
+	layout,
+	mergeJsonByUUID,
+	downloadCommonLayout
+} from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 
 export default Vue.extend({
@@ -335,7 +339,7 @@ export default Vue.extend({
 			this.loadingGetCommon = true
 			this.$apollo
 				.mutate({
-					mutation: getCommonJson,
+					mutation: downloadCommonLayout,
 					variables: {
 						uuid: this.layout.uuid
 					}
@@ -344,7 +348,7 @@ export default Vue.extend({
 					this.loadingGetCommon = false
 
 					this.downloadFile(
-						data.getCommonJson,
+						data.downloadCommonLayout,
 						'application/json',
 						`${this.layout.details.name} - Common layout`
 					)

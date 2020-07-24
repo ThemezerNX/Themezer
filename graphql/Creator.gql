@@ -51,7 +51,7 @@ mutation restoreAccount($creator_id: String!, $backup_code: String!) {
 	restoreAccount(creator_id: $creator_id, backup_code: $backup_code)
 }
 
-mutation profile(
+mutation updateProfile(
 	$custom_username: String
 	$bio: String
 	$profile_color: String

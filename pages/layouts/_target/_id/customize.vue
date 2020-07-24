@@ -190,7 +190,7 @@
 
 <script>
 import Vue from 'vue'
-import { layout, mergeJsonByUUID } from '@/graphql/Layout.gql'
+import { layout, downloadLayout } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
 
@@ -366,7 +366,7 @@ export default Vue.extend({
 			this.loadingMerge = true
 			this.$apollo
 				.mutate({
-					mutation: mergeJsonByUUID,
+					mutation: downloadLayout,
 					variables: {
 						uuid: this.layout.uuid,
 						piece_uuids: usedPieces
@@ -376,7 +376,7 @@ export default Vue.extend({
 					this.loadingMerge = false
 
 					this.downloadFile(
-						data.mergeJsonByUUID,
+						data.downloadLayout,
 						'application/json',
 						this.layout.details.name
 					)
