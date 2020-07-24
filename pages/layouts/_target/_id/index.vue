@@ -16,7 +16,7 @@
 					<v-img
 						aspect-ratio="1.7778"
 						:src="
-							`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
+							`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
 						"
 						cover
 						class="overlay-image"
@@ -174,7 +174,7 @@
 						<DownloadButton
 							tooltip="Download overlay"
 							:download-href="
-								`//api.themezer.ga/storage/layouts/${layout.uuid}/overlay.png`
+								`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
 							"
 						/>
 					</ButtonDivider>
@@ -386,7 +386,7 @@ export default Vue.extend({
 				this.layout.details.name
 			} | ${this.targetName()} | Layouts`
 			const metaDesc = this.layout.details.description
-			const metaImg = `//api.themezer.ga/storage/layouts/${this.layout.uuid}/overlay.png`
+			const metaImg = `//api.themezer.ga/cdn/layouts/${this.layout.uuid}/overlay.png`
 
 			return {
 				title: metaTitle,

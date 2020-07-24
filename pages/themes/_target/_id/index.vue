@@ -12,7 +12,7 @@
 					<v-img
 						aspect-ratio="1.7778"
 						:src="
-							`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+							`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
 						"
 						contain
 						class="overlay-image"
@@ -123,7 +123,7 @@
 							class="font-weight-bold"
 							target="_blank"
 							:to="
-								`//api.themezer.ga/storage/themes/${theme.uuid}/image.${theme.bg_type}`
+								`//api.themezer.ga/cdn/themes/${theme.uuid}/image.${theme.bg_type}`
 							"
 						>
 							{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
@@ -315,7 +315,7 @@ export default Vue.extend({
 				this.theme.details.name
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = `//api.themezer.ga/storage/themes/${this.theme.uuid}/screenshot.jpg`
+			const metaImg = `//api.themezer.ga/cdn/themes/${this.theme.uuid}/screenshot.jpg`
 
 			return {
 				title: metaTitle,

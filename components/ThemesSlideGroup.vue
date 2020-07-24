@@ -41,7 +41,7 @@
 							<v-img
 								aspect-ratio="1.7778"
 								:src="
-									`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+									`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
 								"
 								:width="
 									$vuetify.breakpoint.smAndDown ? 200 : 300
@@ -96,7 +96,7 @@ export default Vue.extend({
 		showProps: {
 			type: Array,
 			required: false,
-			default: () => {
+			default() {
 				return []
 			}
 		}

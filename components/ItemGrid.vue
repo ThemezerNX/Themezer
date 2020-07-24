@@ -49,7 +49,7 @@ export default Vue.extend({
 		showProps: {
 			type: Array,
 			required: false,
-			default: () => {
+			default() {
 				return []
 			}
 		}

@@ -23,7 +23,7 @@
 							height="auto"
 							aspect-ratio="1.7778"
 							:src="
-								`//api.themezer.ga/storage/themes/${theme.uuid}/screenshot.jpg`
+								`//api.themezer.ga/cdn/themes/${theme.uuid}/screenshot.jpg`
 							"
 						>
 						</v-carousel-item>
@@ -224,7 +224,7 @@ export default Vue.extend({
 		if (this.pack) {
 			const metaTitle = `${this.pack.details.name} | Packs`
 			const metaDesc = this.pack.details.description
-			const metaImg = `//api.themezer.ga/storage/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
+			const metaImg = `//api.themezer.ga/cdn/themes/${this.pack.themes[0].uuid}/screenshot.jpg`
 
 			return {
 				title: metaTitle,
