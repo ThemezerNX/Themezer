@@ -1,4 +1,4 @@
-query layout($id: Int!) {
+query layout($id: String!) {
 	layout(id: $id) {
 		uuid
 		id

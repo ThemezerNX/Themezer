@@ -1,4 +1,4 @@
-query pack($id: Int!) {
+query pack($id: String!) {
 	pack(id: $id) {
 		uuid
 		id

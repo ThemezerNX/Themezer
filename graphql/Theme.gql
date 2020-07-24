@@ -1,4 +1,4 @@
-query theme($id: Int!) {
+query theme($id: String!) {
 	theme(id: $id) {
 		uuid
 		id

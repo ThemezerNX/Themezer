@@ -4,10 +4,10 @@ const nameREGEX = /[^a-zA-Z0-9_.]+/gm
 
 export default Vue.extend({
 	computed: {
-		id(): number {
+		id(): string | null {
 			const array = this.$route.params.id.split('-')
-			const last = parseInt(array[array.length - 1])
-			return isNaN(last) ? 0 : last
+			const last = array[array.length - 1]
+			return last || null
 		}
 	},
 	methods: {
