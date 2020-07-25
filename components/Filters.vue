@@ -424,41 +424,51 @@ export default Vue.extend({
 				})
 			}, 1000)
 		},
-		withCreator(n) {
-			clearTimeout(this.$data.typingWithCreatorTimer)
-			this.$data.typingWithCreatorTimer = setTimeout(() => {
-				const query = Object.assign({}, this.$route.query)
-				delete query.page
-				if (n.length === 0) delete query.creator
-				else query.creator = n.join(',')
-				this.$router.push({
-					query
-				})
-			}, 1000)
+		withCreator(n, o) {
+			if (n.length !== o.length) {
+				clearTimeout(this.$data.typingWithCreatorTimer)
+				this.$data.typingWithCreatorTimer = setTimeout(() => {
+					const query = Object.assign({}, this.$route.query)
+					delete query.page
+					if (n.length === 0) delete query.creator
+					else query.creator = n.join(',')
+					this.$router.push({
+						query
+					})
+				}, 1000)
+			}
 		},
-		withLayoutName(n) {
-			clearTimeout(this.$data.typingWithLayoutNameTimer)
-			this.$data.typingWithLayoutNameTimer = setTimeout(() => {
-				const query = Object.assign({}, this.$route.query)
-				delete query.page
-				if (n.length === 0) delete query.layoutname
-				else query.layoutname = n.join(',')
-				this.$router.push({
-					query
-				})
-			}, 1000)
+		withLayoutName(n, o) {
+			if (n.length !== o.length) {
+				clearTimeout(this.$data.typingWithLayoutNameTimer)
+				this.$data.typingWithLayoutNameTimer = setTimeout(() => {
+					const query = Object.assign({}, this.$route.query)
+					delete query.page
+					if (n.length === 0) delete query.layoutname
+					else query.layoutname = n.join(',')
+					this.$router.push({
+						query
+					})
+				}, 1000)
+			}
 		},
-		currentSearch(n) {
+		currentSearch(n, o) {
 			// This is needed to ensure the query is updated on the browser back button
-			this.$data.query = n || ''
+			if (n && o) {
+				this.$data.query = n
+			}
 		},
-		currentWithCreator(n) {
+		currentWithCreator(n, o) {
 			// This is needed to ensure the query is updated on the browser back button
-			this.$data.withCreator = n ? (n as string).split(',') : []
+			if (n && o) {
+				this.$data.withCreator = (n as string).split(',')
+			}
 		},
-		currentWithLayoutName(n) {
+		currentWithLayoutName(n, o) {
 			// This is needed to ensure the query is updated on the browser back button
-			this.$data.withLayoutName = n ? (n as string).split(',') : []
+			if (n && o) {
+				this.$data.withLayoutName = (n as string).split(',')
+			}
 		}
 	},
 	mounted() {

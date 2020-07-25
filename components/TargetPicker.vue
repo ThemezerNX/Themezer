@@ -87,6 +87,8 @@ export default Vue.extend({
 		filter: brightness(0.4);
 		position: absolute;
 		width: 100%;
+		height: 110%;
+		object-fit: cover;
 	}
 }
 

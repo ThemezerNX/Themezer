@@ -14,12 +14,11 @@
 				<ItemCard :item="item" :type="type" :show-props="showProps" />
 			</v-col>
 		</v-row>
-		<nuxt-link
-			v-if="moreUrl && items.length === 12"
-			style="text-shadow: 0px 0px 4px black;"
-			:to="moreUrl"
-		>
-			<div class="flex-grow-1 text-right">
+		<nuxt-link v-if="moreUrl && items.length === limit" :to="moreUrl">
+			<div
+				class="flex-grow-1 text-right"
+				style="text-shadow: 0px 0px 4px black;"
+			>
 				More items
 			</div>
 		</nuxt-link>
@@ -46,6 +45,11 @@ export default Vue.extend({
 			type: String,
 			required: false,
 			default: null
+		},
+		limit: {
+			type: Number,
+			required: false,
+			default: 12
 		},
 		items: {
 			type: Array,

@@ -129,6 +129,7 @@
 					</h1>
 					<v-divider />
 					<ItemGrid
+						:limit="6"
 						:items="packsList"
 						type="packs"
 						:more-url="
@@ -148,6 +149,7 @@
 					</h1>
 					<v-divider />
 					<ItemGrid
+						:limit="6"
 						:items="themesList"
 						type="themes"
 						:more-url="
@@ -167,6 +169,7 @@
 					</h1>
 					<v-divider />
 					<ItemGrid
+						:limit="6"
 						:items="layoutsList"
 						type="layouts"
 						:more-url="

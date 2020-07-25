@@ -25,7 +25,7 @@ export default Vue.extend({
 				const length = this.$data.filteredItems.length
 				const size = this.$data.itemsPerPage
 				return Math.ceil(length / size)
-			} else return 1
+			} else return 0
 		},
 		paginatedData(): Array<object> | null {
 			if (this.$data.filteredItems) {
@@ -43,7 +43,7 @@ export default Vue.extend({
 		}
 	},
 	mounted() {
-		if (this.currentPageNumber > this.pageCount) {
+		if (this.pageCount !== 0 && this.currentPageNumber > this.pageCount) {
 			const query = Object.assign({}, this.$route.query)
 			delete query.page
 			this.$router.push({ query })
