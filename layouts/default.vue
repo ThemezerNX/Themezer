@@ -270,15 +270,7 @@
 
 <script>
 import { updateAuth } from '@/graphql/Creator.gql'
-
-const themes = {
-	name: 'themes',
-	icon: 'mdi-format-color-fill'
-}
-const layouts = {
-	name: 'layouts',
-	icon: 'mdi-code-json'
-}
+import targets from '@/components/mixins/targets'
 
 export default {
 	data() {
@@ -295,48 +287,7 @@ export default {
 				{
 					header: 'Themes & Layouts'
 				},
-				{
-					icon: 'mdi-home-outline',
-					title: 'Home Menu',
-					target: 'homemenu',
-					types: [themes, layouts]
-				},
-				{
-					icon: 'mdi-lock-outline',
-					title: 'Lockscreen',
-					target: 'lockscreen',
-					types: [themes, layouts]
-				},
-				{
-					icon: 'mdi-apps',
-					title: 'All Apps',
-					target: 'allapps',
-					types: [themes, layouts]
-				},
-				// {
-				// 	icon: 'mdi-cog-outline',
-				// 	title: 'Settings',
-				// 	target: 'settings',
-				// 	types: [themes, layouts]
-				// },
-				{
-					icon: 'mdi-account-multiple',
-					title: 'Player Select',
-					target: 'playerselect',
-					types: [themes, layouts]
-				},
-				// {
-				// 	icon: 'mdi-account-outline',
-				// 	title: 'User Page',
-				// 	target: 'userpage',
-				// 	types: [themes, layouts]
-				// },
-				// {
-				// 	icon: 'mdi-newspaper-variant-outline',
-				// 	title: 'News',
-				// 	target: 'news',
-				// 	types: [themes, layouts]
-				// },
+				...targets,
 				{
 					header: 'Submit'
 				},
@@ -489,6 +440,8 @@ export default {
 <style lang="scss">
 @import '@/assets/variables.scss';
 
+$border-radius: 10px;
+
 html {
 	word-break: break-word !important;
 }
@@ -533,7 +486,7 @@ html {
 }
 
 .placeholder {
-	border-radius: 10px;
+	border-radius: $border-radius;
 }
 
 .box_fill .v-image__image--preload,
@@ -547,7 +500,7 @@ html {
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
 		0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-	border-radius: 10px !important;
+	border-radius: $border-radius !important;
 }
 
 .v-select.v-input--dense .v-input__append-inner {
@@ -571,7 +524,7 @@ html {
 
 .box {
 	background-color: #1e1e1e;
-	border-radius: 10px;
+	border-radius: $border-radius;
 	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
 		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
@@ -585,7 +538,7 @@ html {
 		background-position: center;
 		// transition-duration: 200ms;
 		// transition-timing-function: ease-in-out;
-		border-radius: 10px;
+		border-radius: $border-radius;
 	}
 
 	.box_text {

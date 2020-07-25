@@ -14,8 +14,14 @@
 				<ItemCard :item="item" :type="type" :show-props="showProps" />
 			</v-col>
 		</v-row>
-		<nuxt-link v-if="moreUrl && items.length === 12" :to="moreUrl">
-			More items
+		<nuxt-link
+			v-if="moreUrl && items.length === 12"
+			style="text-shadow: 0px 0px 4px black;"
+			:to="moreUrl"
+		>
+			<div class="flex-grow-1 text-right">
+				More items
+			</div>
 		</nuxt-link>
 	</div>
 </template>

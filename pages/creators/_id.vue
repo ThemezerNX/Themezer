@@ -131,7 +131,9 @@
 					<ItemGrid
 						:items="packsList"
 						type="packs"
-						more-url="/packs?page=2&sort=updated&order=desc"
+						:more-url="
+							`/packs?sort=updated&order=desc&creator=${creator.discord_user.username}`
+						"
 					/>
 				</v-col>
 			</v-row>
@@ -145,7 +147,13 @@
 						Latest Themes by this creator
 					</h1>
 					<v-divider />
-					<ItemGrid :items="themesList" type="themes" />
+					<ItemGrid
+						:items="themesList"
+						type="themes"
+						:more-url="
+							`/themes?sort=updated&order=desc&creator=${creator.discord_user.username}`
+						"
+					/>
 				</v-col>
 			</v-row>
 			<v-row
@@ -158,7 +166,13 @@
 						Latest Layouts by this creator
 					</h1>
 					<v-divider />
-					<ItemGrid :items="layoutsList" type="layouts" />
+					<ItemGrid
+						:items="layoutsList"
+						type="layouts"
+						:more-url="
+							`/layouts?sort=updated&order=desc&creator=${creator.discord_user.username}`
+						"
+					/>
 				</v-col>
 			</v-row>
 		</v-container>

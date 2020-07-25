@@ -13,15 +13,17 @@
 					md="9"
 					class="pa-2"
 				>
-					<v-img
-						aspect-ratio="1.7778"
-						:src="
-							`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
-						"
-						cover
-						class="overlay-image"
-						:style="backgroundStyle"
-					/>
+					<v-fade-transition>
+						<v-img
+							aspect-ratio="1.7778"
+							:src="
+								`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+							"
+							cover
+							class="overlay-image transition-fast-in-fast-out"
+							:style="backgroundStyle"
+						/>
+					</v-fade-transition>
 				</v-col>
 				<v-col
 					cols="12"

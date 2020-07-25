@@ -1,9 +1,9 @@
 <template>
 	<v-hover v-if="item && item.details" v-slot:default="{ hover }">
 		<v-card
-			:elevation="hover ? 16 : null"
-			:class="hover ? 'hover' : ''"
-			class="ma-auto card"
+			:elevation="hover ? 12 : 2"
+			:class="{ 'on-hover': hover }"
+			class="ma-auto card transition-fast-in-fast-out"
 			router
 			:to="
 				(type === 'packs'

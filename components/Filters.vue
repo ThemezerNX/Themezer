@@ -115,7 +115,9 @@
 							page: undefined,
 							query: currentSearch,
 							sort: option.id,
-							order: nextSortOrder(option.id)
+							order: nextSortOrder(option.id),
+							creator: $route.query.creator,
+							layoutname: $route.query.layoutname
 						}
 					}"
 				>

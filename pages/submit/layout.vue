@@ -7,11 +7,11 @@
 			<div class="subtitle-1 box_text">
 				You can submit layouts to the Themezer Layouts GitHub
 				repository. See the
-				<nuxt-link
-					to="https://github.com/ThemezerNX/Layouts/blob/master/README.md"
+				<a
+					href="https://github.com/ThemezerNX/Layouts/blob/master/README.md"
 				>
 					README.md
-				</nuxt-link>
+				</a>
 				for instructions.
 			</div>
 			<v-flex class="d-flex justify-center my-3">
