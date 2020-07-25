@@ -40,13 +40,13 @@ export default Vue.extend({
 	watch: {
 		currentQueryPageNumber(n) {
 			this.currentPageNumber = n
-		}
-	},
-	mounted() {
-		if (this.pageCount !== 0 && this.currentPageNumber > this.pageCount) {
-			const query = Object.assign({}, this.$route.query)
-			delete query.page
-			this.$router.push({ query })
+		},
+		pageCount(n) {
+			if (this.currentPageNumber > n) {
+				const query = Object.assign({}, this.$route.query)
+				delete query.page
+				this.$router.push({ query })
+			}
 		}
 	},
 	methods: {
