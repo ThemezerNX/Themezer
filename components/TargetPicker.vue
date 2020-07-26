@@ -43,7 +43,9 @@
 						>
 							<img
 								class="thumbnail transition-fast-in-fast-out"
-								:src="require(`@/assets/stock/${target.image}`)"
+								:src="
+									require(`@/assets/stock/360/${target.image}`)
+								"
 							/>
 							<div class="display-2 flex-grow-1 text-center">
 								<v-icon size="60">{{ target.icon }}</v-icon>
@@ -80,8 +82,9 @@ export default Vue.extend({
 .card {
 	border-radius: 10px !important;
 	overflow: hidden;
+	text-shadow: 0 0 5px black;
 	.thumbnail {
-		opacity: 0;
+		opacity: 20%;
 		left: 0;
 		transform: scale(1.05);
 		filter: brightness(0.4);
@@ -96,7 +99,8 @@ export default Vue.extend({
 	// background: darken($themezer-primary, 15%) !important;
 	transform: translateY(-5px);
 	.thumbnail {
-		opacity: 100;
+		opacity: 100%;
+		filter: brightness(0.6);
 		transform: rotate(-10deg) scale(1.25);
 	}
 }
