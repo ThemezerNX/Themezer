@@ -339,7 +339,7 @@
 <script>
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
-import { creator, updateProfile } from '@/graphql/Creator.gql'
+import { me, creator, updateProfile } from '@/graphql/Creator.gql'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
 import { rowLayoutList } from '@/graphql/Layout.gql'
@@ -358,7 +358,8 @@ export default Vue.extend({
 		return {
 			id: this.$route.params.id,
 			isPageOwner:
-				this.$auth.user && this.$route.params.id === this.$auth.user.id,
+				this.$auth.loggedIn &&
+				this.$route.params.id === this.$auth.user.id,
 			editDialog: false,
 			submitValid: false,
 			loading: {
@@ -418,10 +419,19 @@ export default Vue.extend({
 	},
 	apollo: {
 		creator: {
-			query: creator,
+			query() {
+				return this.$data.isPageOwner ? me : creator
+			},
 			variables() {
 				return {
 					id: this.id
+				}
+			},
+			update(res) {
+				if (this.$data.isPageOwner) {
+					return res?.me
+				} else {
+					return res?.creator
 				}
 			},
 			error(e) {

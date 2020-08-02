@@ -116,11 +116,6 @@ export default Vue.extend({
 			prefetch: true
 		}
 	},
-	computed: {
-		nsfw() {
-			return this.$refs.filter?.nsfw
-		}
-	},
 	head() {
 		// eslint-disable-next-line camelcase
 		const resultAmount = this.itemList?.pagination?.item_count
