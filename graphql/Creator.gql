@@ -60,7 +60,7 @@ mutation updateProfile(
 	$clear_banner_image: Boolean
 	$clear_logo_image: Boolean
 ) {
-	profile(
+	updateProfile(
 		custom_username: $custom_username
 		bio: $bio
 		profile_color: $profile_color
