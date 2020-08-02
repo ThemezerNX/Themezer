@@ -37,6 +37,7 @@
 		"nested-object-assign": "^1.0.3",
 		"nuxt": "^2.0.0",
 		"nuxt-rfg-icon": "^0.6.4",
+		"object-hash": "^2.0.3",
 		"remove-markdown": "^0.3.0",
 		"rxjs": "^6.6.0",
 		"vue-linkify": "^1.0.1",
