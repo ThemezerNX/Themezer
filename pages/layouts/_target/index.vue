@@ -9,17 +9,27 @@
 				/>
 			</v-col>
 			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
-				<div v-if="filteredItems">
+				<div v-if="itemList && itemList.pagination">
 					<h3>
-						{{ filteredItems.length }}
-						{{ filteredItems.length === 1 ? 'result' : 'results' }}
+						{{ itemList.pagination.item_count }}
+						{{
+							itemList.pagination.item_count === 1
+								? 'result'
+								: 'results'
+						}}
 					</h3>
 					<v-divider />
 				</div>
 
-				<v-row v-if="paginatedData && paginatedData.length > 0">
+				<v-row
+					v-if="
+						itemList &&
+							itemList.layoutList &&
+							itemList.layoutList.length > 0
+					"
+				>
 					<v-col
-						v-for="layout in paginatedData"
+						v-for="layout in itemList.layoutList"
 						:key="layout.id"
 						cols="12"
 						xs="12"
@@ -35,15 +45,17 @@
 					</v-col>
 				</v-row>
 
-				<LoadingOverlay v-else-if="$apollo.loading || filterLoading" />
-				<span v-else-if="!layoutsList || layoutsList.length === 0"
-					>There are no layouts here yet :(</span
-				>
-				<span v-else-if="filteredItems && filteredItems.length === 0"
-					>There were no results matching your filters :(</span
+				<LoadingOverlay v-else-if="$apollo.loading" />
+				<span
+					v-else-if="
+						!itemList.layoutList
+							? false
+							: itemList.layoutList.length === 0
+					"
+					>There were no results</span
 				>
 				<paginate
-					v-model="currentPageNumber"
+					v-model="pageNumber"
 					container-class="pagination-container"
 					:no-li-surround="true"
 					break-view-link-class="hidden"
@@ -64,7 +76,7 @@
 
 <script>
 import Vue from 'vue'
-import { layoutsList } from '@/graphql/Layout.gql'
+import { layoutList, allCreators } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
 import allowedTargets from '@/components/mixins/allowedTargets'
@@ -79,17 +91,30 @@ export default Vue.extend({
 	data() {
 		return {
 			type: 'layouts',
-			list: 'layoutsList',
-			unsupportedFilters: ['nsfw', 'withLayoutName']
+			list: 'layoutList',
+			unsupportedFilters: ['nsfw', 'withLayouts'],
+			allCreatorsQuery: allCreators
 		}
 	},
 	apollo: {
-		layoutsList: {
-			query: layoutsList,
+		itemList: {
+			query: layoutList,
 			variables() {
-				return {
-					target: this.targetFile()
+				const vars = {
+					q: 'layoutList',
+					target: this.targetFile(),
+					limit: 6,
+					page: this.currentPage,
+					query: this.currentSearch,
+					sort: this.currentSort,
+					order: this.currentOrder,
+					creators: this.currentCreators
 				}
+				vars.hash = this.$hashString(vars)
+				return vars
+			},
+			update(data) {
+				return data
 			},
 			prefetch: true
 		}
@@ -102,18 +127,17 @@ export default Vue.extend({
 		}
 	},
 	head() {
-		const metaTitle = this.filteredItems
-			? `${this.filteredItems.length} ${
-					this.filteredItems.length === 1 ? 'result' : 'results'
-			  } | ${this.targetName()} | Layouts`
-			: `${this.targetName()} | Layouts`
+		// eslint-disable-next-line camelcase
+		const resultAmount = this.itemList?.pagination?.item_count
 
-		const metaDesc =
-			this.layoutsList &&
-			this.filteredItems &&
-			this.filteredItems.length !== this.layoutsList.length
-				? 'Filtered Layouts on Themezer'
-				: 'All Layouts on Themezer'
+		const metaTitle =
+			resultAmount !== null
+				? `${resultAmount} ${
+						resultAmount === 1 ? 'result' : 'results'
+				  } | ${this.targetName()} | Layouts`
+				: `${this.targetName()} | Layouts`
+
+		const metaDesc = 'Layouts on Themezer'
 
 		const metaImg = null
 

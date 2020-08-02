@@ -1,3 +1,25 @@
+query allCreators($target: String) {
+    themeList(target: $target) {
+        creator {
+			id
+			discord_user {
+				username
+			}
+		}
+    }
+}
+
+query allLayouts($target: String) {
+    themeList(target: $target) {
+        layout {
+			id
+			details {
+				name
+			}
+		}
+    }
+}
+
 query theme($id: String!) {
 	theme(id: $id) {
 		id
@@ -41,8 +63,8 @@ query theme($id: String!) {
 	}
 }
 
-query rowThemesList($target: String, $creator_id: String, $limit: Int) {
-	themesList(target: $target, creator_id: $creator_id, limit: $limit) {
+query rowThemeList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+	themeList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
 			id
@@ -51,7 +73,10 @@ query rowThemesList($target: String, $creator_id: String, $limit: Int) {
 			}
 		}
 		layout {
-			uuid
+			id
+			details {
+				name
+			}
 		}
 		details {
 			name
@@ -59,10 +84,17 @@ query rowThemesList($target: String, $creator_id: String, $limit: Int) {
 		target
 		last_updated
 	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
+	}
 }
 
-query themesList($target: String) {
-	themesList(target: $target) {
+query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+	themeList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
 			id
@@ -71,6 +103,7 @@ query themesList($target: String) {
 			}
 		}
 		layout {
+			id
 			uuid
 			details {
 				name
@@ -86,6 +119,13 @@ query themesList($target: String) {
 		categories
 		dl_count
 		like_count
+	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
 	}
 }
 

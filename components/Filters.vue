@@ -34,8 +34,8 @@
 					v-show="
 						focussed ||
 							searchHover ||
-							withCreator.length > 0 ||
-							withLayoutName.length > 0
+							withCreators.length > 0 ||
+							withLayouts.length > 0
 					"
 					class="mx-2 search-in"
 				>
@@ -44,11 +44,9 @@
 					</v-card-subtitle>
 					<v-card-actions>
 						<v-autocomplete
-							v-model="withCreator"
-							:items="
-								creators && creators.length > 0 ? creators : []
-							"
-							label="Creator"
+							v-model="withCreators"
+							:items="allCreators || []"
+							label="Creators"
 							outlined
 							hide-details
 							chips
@@ -60,22 +58,18 @@
 							auto-select-first
 							single-line
 							:menu-props="{ bottom: true, offsetY: true }"
+							:loading="loading.allCreators"
+							@mouseover.once="getParentAllCreators()"
 							@click="focussed = true"
 							@blur="focussed = false"
 						></v-autocomplete>
 					</v-card-actions>
 					<v-card-actions>
 						<v-autocomplete
-							v-if="
-								!unsupportedFilters.includes('withLayoutName')
-							"
-							v-model="withLayoutName"
+							v-if="!unsupportedFilters.includes('withLayouts')"
+							v-model="withLayouts"
 							label="Layout name"
-							:items="
-								layoutNames && layoutNames.length > 0
-									? layoutNames
-									: []
-							"
+							:items="allLayouts || []"
 							multiple
 							outlined
 							rounded
@@ -87,6 +81,9 @@
 							small-chips
 							deletable-chips
 							auto-select-first
+							:loading="loading.allLayouts"
+							@mouseover.once="getParentAllLayouts()"
+							@click="focussed = true"
 							@focus="focussed = true"
 							@blur="focussed = false"
 						></v-autocomplete>
@@ -107,24 +104,27 @@
 					class="sort-item"
 					:class="{
 						'nuxt-link-exact-active': currentSort === option.id,
-						asc: currentSortOrder === 'asc',
-						desc: currentSortOrder === 'desc'
+						asc: currentOrder === 'asc',
+						desc: currentOrder === 'desc'
 					}"
 					:to="{
 						query: {
 							page: undefined,
-							query: currentSearch,
+							query: $parent.currentSearch,
 							sort: option.id,
-							order: nextSortOrder(option.id),
-							creator: $route.query.creator,
-							layoutname: $route.query.layoutname
+							order: nextSortOrder,
+							creators: withCreators
+								? withCreators.join(',')
+								: undefined,
+							layouts: withLayouts
+								? withLayouts.join(',')
+								: undefined
 						}
 					}"
 				>
 					<v-icon
 						:color="
-							currentSortOrder === 'asc' &&
-							currentSort === option.id
+							currentSort === option.id && currentOrder === 'asc'
 								? '#1e1e1e'
 								: 'white'
 						"
@@ -135,7 +135,7 @@
 					<span v-show="currentSort === option.id" class="order">
 						<v-icon
 							:color="
-								currentSortOrder === 'asc' ? '#1e1e1e' : 'white'
+								currentOrder === 'asc' ? '#1e1e1e' : 'white'
 							"
 						>
 							mdi-arrow-up
@@ -177,7 +177,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import MiniSearch from 'minisearch'
 
 export default Vue.extend({
 	props: {
@@ -209,209 +208,52 @@ export default Vue.extend({
 					icon: 'mdi-calendar-clock'
 				}
 			],
+			loading: {
+				allCreators: false,
+				allLayouts: false
+			},
+			allCreators: null,
+			allLayouts: null,
 			// Search with
 			query: '',
 			typingQueryTimer: null,
 			focussed: false,
 			searchHover: false,
-			withCreator: [],
-			typingWithCreatorTimers: null,
-			withLayoutName: [],
-			typingWithLayoutNameTimer: null,
+			withCreators: [],
+			typingWithCreatorsTimer: null,
+			withLayouts: [],
+			typingWithLayoutsTimer: null,
 			// Filters
 			hasLayout: null,
 			nsfw: false
 		}
 	},
 	computed: {
-		currentSearch(): string | undefined {
-			return this.$route.query.query
-				? (this.$route.query.query as string)
-				: undefined
-		},
-		currentWithCreator(): string | undefined {
-			return this.$route.query.creator
-				? (this.$route.query.creator as string)
-				: undefined
-		},
-		currentWithLayoutName(): string | undefined {
-			return this.$route.query.layoutname
-				? (this.$route.query.layoutname as string)
-				: undefined
-		},
 		currentSort(): string {
 			return this.$route.query.sort
 				? (this.$route.query.sort as string)
 				: 'downloads'
 		},
-		currentSortOrder(): string {
+		currentOrder(): string {
 			return this.$route.query.order
 				? (this.$route.query.order as string)
 				: 'desc'
 		},
-		creators(): Array<string> {
-			const items = this.$parent.$data[this.$parent.$data.list]
-			if (items) {
-				return items
-					.map((i: any) => {
-						return i.creator.discord_user.username
-					})
-					.sort()
-			} else return []
-		},
-		layoutNames(): Array<string> {
-			const items = this.$parent.$data[this.$parent.$data.list]
-			if (items) {
-				const array: Array<string> = []
-
-				items.forEach((i: any) => {
-					if (i.themes) {
-						// Packs
-						i.themes.forEach((t: any) => {
-							if (t.layout) {
-								array.push(t.layout.details.name)
-							}
-						})
-					} else if (i.layout) {
-						// Themes
-						array.push(i.layout.details.name)
-					}
-				})
-
-				return array.sort()
-			} else return []
-		},
-		filteredItems(): Array<object> {
-			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-			let items: any = null
-			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-			this.$parent.$data.filterLoading = true
-
-			items = this.$parent.$data[this.$parent.$data.list]
-
-			if (items) {
-				if (this.$data.query) {
-					const miniSearch = new MiniSearch({
-						fields: [
-							'name',
-							'description',
-							'creator_name',
-							'creator_discord',
-							'categories'
-						],
-						storeFields: ['id'],
-						searchOptions: {
-							// boost: { name: 2 },
-							fuzzy: 0.1
-						}
-					})
-					const itms = items.map((item: any) => {
-						return {
-							id: item.id,
-							name: item.details.name,
-							description: item.details.name,
-							creator_name: item.creator.discord_user.username,
-							creator_discord:
-								'#' + item.creator.discord_user.discriminator,
-							categories: item.categories
-								? item.categories.join('|')
-								: ''
-						}
-					})
-
-					miniSearch.addAll(itms)
-					const rs = miniSearch.search(this.$data.query, {
-						prefix: true
-					})
-					const resultIDs = rs.map((r: any) => r.id)
-
-					items = items.filter((item: any) =>
-						resultIDs.includes(item.id)
-					)
+		nextSortOrder(): string | null {
+			if (
+				this.$data.sortOptions.some(
+					(s: any) => s.id === this.currentSort
+				)
+			) {
+				if (this.currentOrder === 'asc') {
+					return 'desc'
+				} else {
+					return 'asc'
 				}
-
-				items = items
-					.filter((item: any): boolean => {
-						if (!this.unsupportedFilters.includes('nsfw')) {
-							return this.nsfw
-								? true
-								: !(
-										Array.isArray(item.categories) &&
-										item.categories.includes('NSFW')
-								  )
-						} else return true
-					})
-					.filter((item: any): boolean => {
-						if (this.withCreator.length > 0) {
-							return this.withCreator.some((c: string) =>
-								item.creator.discord_user.username
-									.toLowerCase()
-									.includes(c.toLowerCase())
-							)
-						} else return true
-					})
-					.filter((item: any): boolean => {
-						if (
-							!this.unsupportedFilters.includes(
-								'withLayoutName'
-							) &&
-							this.withLayoutName.length > 0
-						) {
-							return this.withLayoutName.some((c: string) => {
-								if (item.themes) {
-									// Pack
-									return item.themes.some((t: any) =>
-										t.layout?.details.name
-											.toLowerCase()
-											.includes(c.toLowerCase())
-									)
-								} else if (item.layout) {
-									// Theme
-									return item.layout.details.name
-										.toLowerCase()
-										.includes(c.toLowerCase())
-								} else return false
-							})
-						} else return true
-					})
-					.sort((a: any, b: any) => {
-						const sortOption = this.$data.sortOptions.find(
-							(o: any) => o.id === this.currentSort
-						)
-						if (
-							sortOption.id === 'downloads' ||
-							sortOption.id === 'likes'
-						) {
-							if (this.currentSortOrder === 'asc') {
-								return a[sortOption.key] - b[sortOption.key]
-							} else if (this.currentSortOrder === 'desc') {
-								return b[sortOption.key] - a[sortOption.key]
-							}
-						} else if (sortOption.id === 'updated') {
-							if (this.currentSortOrder === 'asc') {
-								return (
-									new Date(a[sortOption.key]).getTime() -
-									new Date(b[sortOption.key]).getTime()
-								)
-							} else if (this.currentSortOrder === 'desc') {
-								return (
-									new Date(b[sortOption.key]).getTime() -
-									new Date(a[sortOption.key]).getTime()
-								)
-							}
-						}
-					})
-			}
-			// eslint-disable-next-line vue/no-side-effects-in-computed-properties
-			this.$parent.$data.filterLoading = false
-
-			return items || this.$parent.$data.filteredItems
+			} else return 'desc'
 		}
 	},
 	watch: {
-		filteredItems() {
-			this.updateParentFiltered()
-		},
 		query(n) {
 			clearTimeout(this.$data.typingQueryTimer)
 			this.$data.typingQueryTimer = setTimeout(() => {
@@ -422,77 +264,88 @@ export default Vue.extend({
 				this.$router.push({
 					query
 				})
-			}, 1000)
+			}, 400)
 		},
-		withCreator(n, o) {
+		withCreators(n, o) {
 			if (n.length !== o.length) {
-				clearTimeout(this.$data.typingWithCreatorTimer)
-				this.$data.typingWithCreatorTimer = setTimeout(() => {
+				clearTimeout(this.$data.typingWithCreatorsTimer)
+				this.$data.typingWithCreatorsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)
 					delete query.page
-					if (n.length === 0) delete query.creator
-					else query.creator = n.join(',')
+					if (n.length === 0) delete query.creators
+					else query.creators = n.join(',')
 					this.$router.push({
 						query
 					})
-				}, 1000)
+				}, 400)
 			}
 		},
-		withLayoutName(n, o) {
+		withLayouts(n, o) {
 			if (n.length !== o.length) {
-				clearTimeout(this.$data.typingWithLayoutNameTimer)
-				this.$data.typingWithLayoutNameTimer = setTimeout(() => {
+				clearTimeout(this.$data.typingWithLayoutsTimer)
+				this.$data.typingWithLayoutsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)
 					delete query.page
-					if (n.length === 0) delete query.layoutname
-					else query.layoutname = n.join(',')
+					if (n.length === 0) delete query.layouts
+					else query.layouts = n.join(',')
 					this.$router.push({
 						query
 					})
-				}, 1000)
-			}
-		},
-		currentSearch(n, o) {
-			// This is needed to ensure the query is updated on the browser back button
-			if (n && o) {
-				this.$data.query = n
-			}
-		},
-		currentWithCreator(n, o) {
-			// This is needed to ensure the query is updated on the browser back button
-			if (n && o) {
-				this.$data.withCreator = (n as string).split(',')
-			}
-		},
-		currentWithLayoutName(n, o) {
-			// This is needed to ensure the query is updated on the browser back button
-			if (n && o) {
-				this.$data.withLayoutName = (n as string).split(',')
+				}, 400)
 			}
 		}
 	},
 	mounted() {
 		this.$data.query = this.$route.query.query || ''
-		this.$data.withCreator = this.$route.query.creator
-			? (this.$route.query.creator as string).split(',')
-			: []
-		this.$data.withLayoutName = this.$route.query.layoutname
-			? (this.$route.query.layoutname as string).split(',')
-			: []
-		this.updateParentFiltered()
+		if ((this.$parent as any).currentCreators) {
+			this.$data.withCreators = (this.$parent as any).currentCreators
+			this.getParentAllCreators()
+		}
+		if ((this.$parent as any).currentLayouts) {
+			this.$data.withLayouts = (this.$parent as any).currentLayouts
+			this.getParentAllLayouts()
+		}
 	},
 	methods: {
-		updateParentFiltered() {
-			this.$parent.$data.filteredItems = this.filteredItems
+		getParentAllCreators() {
+			this.$data.loading.allCreators = true
+			;(this.$parent as any).getAllCreators().then((res: Array<any>) => {
+				this.$data.allCreators = res.map((item) => {
+					return {
+						text: item.creator.discord_user.username,
+						value: item.creator.id
+					}
+				})
+				this.$data.loading.allCreators = false
+			})
 		},
-		nextSortOrder(type: string): string | null {
-			if (this.currentSort === type) {
-				if (this.currentSortOrder === 'asc') {
-					return 'desc'
-				} else if (this.currentSortOrder === 'desc') {
-					return 'asc'
-				} else return null
-			} else return 'desc'
+		getParentAllLayouts() {
+			this.$data.loading.allLayouts = true
+			;(this.$parent as any).getAllLayouts().then((res: Array<any>) => {
+				const all: Array<any> = []
+				if (this.$parent.$data.type === 'themes') {
+					res.forEach((item) => {
+						if (item.layout) {
+							all.push({
+								text: item.layout.details.name,
+								value: item.layout.id
+							})
+						}
+					})
+				} else {
+					res.forEach((item) => {
+						if (item.themes.layout)
+							all.push({
+								text: item.themes.layout.details.name,
+								value: item.themes.layout.id
+							})
+					})
+				}
+
+				this.$data.allLayouts = all
+
+				this.$data.loading.allLayouts = false
+			})
 		}
 	}
 })

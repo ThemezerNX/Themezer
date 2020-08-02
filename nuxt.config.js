@@ -44,6 +44,7 @@ export default {
 	plugins: [
 		'@/plugins/linkify',
 		'@/plugins/snackbar',
+		'@/plugins/hashString',
 		{
 			src: '@/plugins/pagination',
 			mode: 'client'

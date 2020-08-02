@@ -1,3 +1,28 @@
+query allCreators {
+    packList {
+        creator {
+			id
+			discord_user {
+				username
+			}
+		}
+    }
+}
+
+query allLayouts {
+    packList {
+        themes {
+			id
+			layout {
+				id
+				details {
+					name
+				}
+			}
+		}
+    }
+}
+
 query pack($id: String!) {
 	pack(id: $id) {
 		id
@@ -18,7 +43,6 @@ query pack($id: String!) {
 		like_count
 		themes {
 			id
-			id
 			details {
 				name
 			}
@@ -27,8 +51,8 @@ query pack($id: String!) {
 	}
 }
 
-query rowPacksList($creator_id: String, $limit: Int) {
-	packsList(creator_id: $creator_id, limit: $limit) {
+query rowPackList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+	packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
 			id
@@ -47,10 +71,17 @@ query rowPacksList($creator_id: String, $limit: Int) {
 			}
 		}
 	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
+	}
 }
 
-query packsList {
-	packsList {
+query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+	packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
 			id
@@ -70,11 +101,19 @@ query packsList {
 		themes {
 			id
 			layout {
+				id
 				details {
 					name
 				}
 			}
 		}
+	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
 	}
 }
 

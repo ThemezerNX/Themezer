@@ -9,17 +9,27 @@
 				/>
 			</v-col>
 			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
-				<div v-if="filteredItems">
+				<div v-if="itemList && itemList.pagination">
 					<h3>
-						{{ filteredItems.length }}
-						{{ filteredItems.length === 1 ? 'result' : 'results' }}
+						{{ itemList.pagination.item_count }}
+						{{
+							itemList.pagination.item_count === 1
+								? 'result'
+								: 'results'
+						}}
 					</h3>
 					<v-divider />
 				</div>
 
-				<v-row v-if="paginatedData && paginatedData.length > 0">
+				<v-row
+					v-if="
+						itemList &&
+							itemList.packList &&
+							itemList.packList.length > 0
+					"
+				>
 					<v-col
-						v-for="pack in paginatedData"
+						v-for="pack in itemList.packList"
 						:key="pack.id"
 						cols="12"
 						xs="12"
@@ -35,15 +45,17 @@
 					</v-col>
 				</v-row>
 
-				<LoadingOverlay v-else-if="$apollo.loading || filterLoading" />
-				<span v-else-if="!packsList || packsList.length === 0"
-					>There are no packs here yet :(</span
-				>
-				<span v-else-if="filteredItems && filteredItems.length === 0"
-					>There were no results matching your filters :(</span
+				<LoadingOverlay v-else-if="$apollo.loading" />
+				<span
+					v-else-if="
+						!itemList.packList
+							? false
+							: itemList.packList.length === 0
+					"
+					>There were no results</span
 				>
 				<paginate
-					v-model="currentPageNumber"
+					v-model="pageNumber"
 					container-class="pagination-container"
 					:no-li-surround="true"
 					break-view-link-class="hidden"
@@ -64,7 +76,7 @@
 
 <script>
 import Vue from 'vue'
-import { packsList } from '@/graphql/Pack.gql'
+import { packList, allCreators, allLayouts } from '@/graphql/Pack.gql'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
 
@@ -77,29 +89,50 @@ export default Vue.extend({
 	mixins: [targetParser, filter],
 	data() {
 		return {
-			list: 'packsList',
-			unsupportedFilters: []
+			type: 'packs',
+			list: 'packList',
+			unsupportedFilters: [],
+			allCreatorsQuery: allCreators,
+			allLayoutsQuery: allLayouts
 		}
 	},
 	apollo: {
-		packsList: {
-			query: packsList,
+		itemList: {
+			query: packList,
+			variables() {
+				const vars = {
+					q: 'packList',
+					target: this.targetFile(),
+					limit: 6,
+					page: this.currentPage,
+					query: this.currentSearch,
+					sort: this.currentSort,
+					order: this.currentOrder,
+					creators: this.currentCreators,
+					layouts: this.currentLayouts,
+					nsfw: this.$refs.filter?.nsfw
+				}
+				vars.hash = this.$hashString(vars)
+				return vars
+			},
+			update(data) {
+				return data
+			},
 			prefetch: true
 		}
 	},
 	head() {
-		const metaTitle = this.filteredItems
-			? `${this.filteredItems.length} ${
-					this.filteredItems.length === 1 ? 'result' : 'results'
-			  } | Packs`
-			: `Packs`
+		// eslint-disable-next-line camelcase
+		const resultAmount = this.itemList?.pagination?.item_count
 
-		const metaDesc =
-			this.packsList &&
-			this.filteredItems &&
-			this.filteredItems.length !== this.packsList.length
-				? 'Filtered Packs on Themezer'
-				: 'All Packs on Themezer'
+		const metaTitle =
+			resultAmount !== null
+				? `${resultAmount} ${
+						resultAmount === 1 ? 'result' : 'results'
+				  } | Packs`
+				: `Packs`
+
+		const metaDesc = 'Packs on Themezer'
 
 		const metaImg = null
 

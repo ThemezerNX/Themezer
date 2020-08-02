@@ -119,7 +119,7 @@
 				</v-col>
 			</v-row>
 			<v-row
-				v-if="packsList && packsList.length > 0"
+				v-if="packList && packList.length > 0"
 				align="center"
 				justify="center"
 			>
@@ -130,16 +130,16 @@
 					<v-divider />
 					<ItemGrid
 						:limit="6"
-						:items="packsList"
+						:items="packList"
 						type="packs"
 						:more-url="
-							`/packs?sort=updated&order=desc&creator=${creator.discord_user.username}`
+							`/packs?sort=updated&order=desc&creator=${creator.id}`
 						"
 					/>
 				</v-col>
 			</v-row>
 			<v-row
-				v-if="themesList && themesList.length > 0"
+				v-if="themeList && themeList.length > 0"
 				align="center"
 				justify="center"
 			>
@@ -150,16 +150,16 @@
 					<v-divider />
 					<ItemGrid
 						:limit="6"
-						:items="themesList"
+						:items="themeList"
 						type="themes"
 						:more-url="
-							`/themes?sort=updated&order=desc&creator=${creator.discord_user.username}`
+							`/themes?sort=updated&order=desc&creator=${creator.id}`
 						"
 					/>
 				</v-col>
 			</v-row>
 			<v-row
-				v-if="layoutsList && layoutsList.length > 0"
+				v-if="layoutList && layoutList.length > 0"
 				align="center"
 				justify="center"
 			>
@@ -170,10 +170,10 @@
 					<v-divider />
 					<ItemGrid
 						:limit="6"
-						:items="layoutsList"
+						:items="layoutList"
 						type="layouts"
 						:more-url="
-							`/layouts?sort=updated&order=desc&creator=${creator.discord_user.username}`
+							`/layouts?sort=updated&order=desc&creator=${creator.id}`
 						"
 					/>
 				</v-col>
@@ -340,9 +340,9 @@
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
 import { creator, updateProfile } from '@/graphql/Creator.gql'
-import { rowPacksList } from '@/graphql/Pack.gql'
-import { rowThemesList } from '@/graphql/Theme.gql'
-import { rowLayoutsList } from '@/graphql/Layout.gql'
+import { rowPackList } from '@/graphql/Pack.gql'
+import { rowThemeList } from '@/graphql/Theme.gql'
+import { rowLayoutList } from '@/graphql/Layout.gql'
 import error from '@/layouts/error.vue'
 
 export default Vue.extend({
@@ -429,11 +429,11 @@ export default Vue.extend({
 			},
 			prefetch: true
 		},
-		packsList: {
-			query: rowPacksList,
+		packList: {
+			query: rowPackList,
 			variables() {
 				return {
-					creator_id: this.id,
+					creators: [this.id],
 					limit: 6
 				}
 			},
@@ -442,11 +442,11 @@ export default Vue.extend({
 			},
 			prefetch: true
 		},
-		themesList: {
-			query: rowThemesList,
+		themeList: {
+			query: rowThemeList,
 			variables() {
 				return {
-					creator_id: this.id,
+					creators: [this.id],
 					limit: 6
 				}
 			},
@@ -455,11 +455,11 @@ export default Vue.extend({
 			},
 			prefetch: true
 		},
-		layoutsList: {
-			query: rowLayoutsList,
+		layoutList: {
+			query: rowLayoutList,
 			variables() {
 				return {
-					creator_id: this.id,
+					creators: [this.id],
 					limit: 6
 				}
 			},

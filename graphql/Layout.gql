@@ -1,7 +1,18 @@
+query allCreators($target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
+    layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
+        creator {
+			id
+			discord_user {
+				username
+			}
+		}
+    }
+}
+
 query layout($id: String!) {
 	layout(id: $id) {
-		uuid
 		id
+		uuid
 		creator {
 			id
 			discord_user {
@@ -33,10 +44,10 @@ query layout($id: String!) {
 	}
 }
 
-query rowLayoutsList($target: String, $creator_id: String, $limit: Int) {
-	layoutsList(target: $target, creator_id: $creator_id, limit: $limit) {
-		uuid
+query rowLayoutList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
+	layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
 		id
+		uuid
 		creator {
 			id
 			discord_user {
@@ -50,13 +61,20 @@ query rowLayoutsList($target: String, $creator_id: String, $limit: Int) {
 		target
 		last_updated
 	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
+	}
 }
 
 
-query layoutsList($target: String, $creator_id: String, $limit: Int) {
-	layoutsList(target: $target, creator_id: $creator_id, limit: $limit) {
-		uuid
+query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
+	layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
 		id
+		uuid
 		creator {
 			id
 			discord_user {
@@ -73,6 +91,13 @@ query layoutsList($target: String, $creator_id: String, $limit: Int) {
 		last_updated
 		dl_count
 		like_count
+	}
+
+	pagination(hash: $hash) {
+		page
+		limit
+		page_count
+		item_count
 	}
 }
 

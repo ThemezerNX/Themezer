@@ -3,49 +3,51 @@ import Vue from 'vue'
 export default Vue.extend({
 	data() {
 		return {
-			filteredItems: null,
-			filterLoading: true,
-			itemsPerPage: 12,
-			currentPageNumber:
-				this.$route.query.page &&
-				parseInt(this.$route.query.page as string) > 0
-					? parseInt(this.$route.query.page as string)
+			pageNumber:
+				this.$route.query.page && Number(this.$route.query.page) > 0
+					? Number(this.$route.query.page)
 					: 1
 		}
 	},
 	computed: {
-		currentQueryPageNumber() {
-			return this.$route.query.page &&
-				parseInt(this.$route.query.page as string) > 0
-				? parseInt(this.$route.query.page as string)
-				: 1
+		currentPage() {
+			return this.$data.pageNumber
 		},
 		pageCount(): number {
-			if (this.$data.filteredItems) {
-				const length = this.$data.filteredItems.length
-				const size = this.$data.itemsPerPage
-				return Math.ceil(length / size)
-			} else return 0
+			// eslint-disable-next-line camelcase
+			return this.$data.itemList?.pagination?.page_count || 0
 		},
-		paginatedData(): Array<object> | null {
-			if (this.$data.filteredItems) {
-				const start =
-					(this.currentPageNumber - 1) * this.$data.itemsPerPage
-				const end = start + this.$data.itemsPerPage
-
-				return this.$data.filteredItems.slice(start, end)
-			} else return null
+		currentSearch(): string | undefined {
+			return this.$route.query.query
+				? (this.$route.query.query as string)
+				: undefined
+		},
+		currentCreators(): Array<string> | undefined {
+			return this.$route.query.creators
+				? (this.$route.query.creators as string).split(',')
+				: undefined
+		},
+		currentLayouts(): Array<string> | undefined {
+			return this.$route.query.layouts
+				? (this.$route.query.layouts as string).split(',')
+				: undefined
+		},
+		currentSort(): string {
+			return this.$route.query.sort
+				? (this.$route.query.sort as string)
+				: 'downloads'
+		},
+		currentOrder(): string {
+			return this.$route.query.order
+				? (this.$route.query.order as string)
+				: 'desc'
 		}
 	},
 	watch: {
-		currentQueryPageNumber(n) {
-			this.currentPageNumber = n
-		},
-		pageCount(n) {
-			if (this.currentPageNumber > n) {
-				const query = Object.assign({}, this.$route.query)
-				delete query.page
-				this.$router.push({ query })
+		currentSearch(n, o) {
+			// This is needed to ensure the query is updated on the browser back button
+			if (n && o) {
+				this.$data.query = n
 			}
 		}
 	},
@@ -54,12 +56,44 @@ export default Vue.extend({
 			const top: any = this.$refs.top
 			const position =
 				top.getBoundingClientRect().top + window.pageYOffset - 64
-
 			window.scrollTo({ top: position, behavior: 'smooth' })
-
 			const query = Object.assign({}, this.$route.query)
 			query.page = n
 			this.$router.push({ query })
+		},
+		getAllCreators() {
+			return new Promise((resolve, reject) => {
+				;(this as any).$apollo
+					.query({
+						query: this.$data.allCreatorsQuery,
+						variables: {
+							target: (this as any).targetFile()
+						}
+					})
+					.then((res: any) => {
+						resolve(res?.data?.[this.$data.list])
+					})
+					.catch((err: any) => {
+						reject(err)
+					})
+			})
+		},
+		getAllLayouts() {
+			return new Promise((resolve, reject) => {
+				;(this as any).$apollo
+					.query({
+						query: this.$data.allLayoutsQuery,
+						variables: {
+							target: (this as any).targetFile()
+						}
+					})
+					.then((res: any) => {
+						resolve(res?.data?.[this.$data.list])
+					})
+					.catch((err: any) => {
+						reject(err)
+					})
+			})
 		}
 	}
 })
