@@ -11,10 +11,10 @@ export default Vue.extend({
 		}
 	},
 	methods: {
-		createUrlString(id: number, name: string) {
+		createUrlString(id: string, name: string) {
 			return `${name.replace(nameREGEX, '-')}-${id}`
 		},
-		updateUrlString(id: number, name: string, target?: string) {
+		updateUrlString(id: string, name: string, target?: string) {
 			let newPath = this.$route.path.replace(
 				this.$route.params.id,
 				this.createUrlString(id, name)

@@ -294,7 +294,7 @@ export default Vue.extend({
 			result({ data }) {
 				if (data && data.layout) {
 					this.updateUrlString(
-						this.id,
+						data.layout.id,
 						data.layout.details.name,
 						this.fileNameToWebName(data.layout.target)
 					)

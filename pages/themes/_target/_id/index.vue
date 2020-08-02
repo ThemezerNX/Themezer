@@ -257,7 +257,7 @@ export default Vue.extend({
 			result({ data }) {
 				if (data && data.theme) {
 					this.updateUrlString(
-						this.id,
+						data.theme.id,
 						data.theme.details.name,
 						this.fileNameToWebName(data.theme.target)
 					)

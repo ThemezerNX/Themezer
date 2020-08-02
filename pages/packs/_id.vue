@@ -191,7 +191,7 @@ export default Vue.extend({
 			},
 			result({ data }) {
 				if (data && data.pack) {
-					this.updateUrlString(this.id, data.pack.details.name)
+					this.updateUrlString(data.pack.id, data.pack.details.name)
 				}
 			},
 			// fetchPolicy: 'no-cache',
