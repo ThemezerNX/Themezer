@@ -254,6 +254,9 @@ export default Vue.extend({
 		}
 	},
 	watch: {
+		nsfw(n) {
+			this.$parent.$data.nsfw = n
+		},
 		query(n) {
 			clearTimeout(this.$data.typingQueryTimer)
 			this.$data.typingQueryTimer = setTimeout(() => {

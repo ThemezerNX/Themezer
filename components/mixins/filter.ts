@@ -6,7 +6,10 @@ export default Vue.extend({
 			pageNumber:
 				this.$route.query.page && Number(this.$route.query.page) > 0
 					? Number(this.$route.query.page)
-					: 1
+					: 1,
+			loading: {
+				fetching: false
+			}
 		}
 	},
 	computed: {
@@ -62,6 +65,7 @@ export default Vue.extend({
 			this.$router.push({ query })
 		},
 		getAllCreators() {
+			this.$data.loading.fetching = true
 			return new Promise((resolve, reject) => {
 				;(this as any).$apollo
 					.query({
@@ -71,14 +75,17 @@ export default Vue.extend({
 						}
 					})
 					.then((res: any) => {
+						this.$data.loading.fetching = false
 						resolve(res?.data?.[this.$data.list])
 					})
 					.catch((err: any) => {
+						this.$data.loading.fetching = false
 						reject(err)
 					})
 			})
 		},
 		getAllLayouts() {
+			this.$data.loading.fetching = true
 			return new Promise((resolve, reject) => {
 				;(this as any).$apollo
 					.query({
@@ -88,9 +95,11 @@ export default Vue.extend({
 						}
 					})
 					.then((res: any) => {
+						this.$data.loading.fetching = false
 						resolve(res?.data?.[this.$data.list])
 					})
 					.catch((err: any) => {
+						this.$data.loading.fetching = false
 						reject(err)
 					})
 			})

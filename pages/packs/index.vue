@@ -9,66 +9,60 @@
 				/>
 			</v-col>
 			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
-				<div v-if="itemList && itemList.pagination">
-					<h3>
-						{{ itemList.pagination.item_count }}
-						{{
-							itemList.pagination.item_count === 1
-								? 'result'
-								: 'results'
-						}}
-					</h3>
-					<v-divider />
-				</div>
+				<LoadingOverlay :loading="$apollo.loading">
+					<div v-if="itemList && itemList.pagination">
+						<h3>
+							{{ itemList.pagination.item_count }}
+							{{
+								itemList.pagination.item_count === 1
+									? 'result'
+									: 'results'
+							}}
+						</h3>
+						<v-divider />
+					</div>
 
-				<v-row
-					v-if="
-						itemList &&
-							itemList.packList &&
-							itemList.packList.length > 0
-					"
-				>
-					<v-col
-						v-for="pack in itemList.packList"
-						:key="pack.id"
-						cols="12"
-						xs="12"
-						sm="6"
-						md="4"
-						xl="3"
+					<v-row
+						v-if="
+							itemList &&
+								itemList.packList &&
+								itemList.packList.length > 0
+						"
 					>
-						<ItemCard
-							:item="pack"
-							type="packs"
-							:show-props="['creator', 'description']"
-						/>
-					</v-col>
-				</v-row>
+						<v-col
+							v-for="pack in itemList.packList"
+							:key="pack.id"
+							cols="12"
+							xs="12"
+							sm="6"
+							md="4"
+							xl="3"
+						>
+							<ItemCard
+								:item="pack"
+								type="packs"
+								:show-props="['creator', 'description']"
+							/>
+						</v-col>
+					</v-row>
 
-				<LoadingOverlay v-else-if="$apollo.loading" />
-				<span
-					v-else-if="
-						!itemList.packList
-							? false
-							: itemList.packList.length === 0
-					"
-					>There were no results</span
-				>
-				<paginate
-					v-model="pageNumber"
-					container-class="pagination-container"
-					:no-li-surround="true"
-					break-view-link-class="hidden"
-					page-link-class="button--pagination"
-					:page-count="pageCount"
-					:page-range="5"
-					:click-handler="paginationEvent"
-					prev-text
-					next-text
-					page-class="page-item"
-				>
-					<span slot="breakViewContent"></span>
-				</paginate>
+					<span v-else>There were no results</span>
+					<paginate
+						v-model="pageNumber"
+						container-class="pagination-container"
+						:no-li-surround="true"
+						break-view-link-class="hidden"
+						page-link-class="button--pagination"
+						:page-count="pageCount"
+						:page-range="5"
+						:click-handler="paginationEvent"
+						prev-text
+						next-text
+						page-class="page-item"
+					>
+						<span slot="breakViewContent"></span>
+					</paginate>
+				</LoadingOverlay>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -93,7 +87,8 @@ export default Vue.extend({
 			list: 'packList',
 			unsupportedFilters: [],
 			allCreatorsQuery: allCreators,
-			allLayoutsQuery: allLayouts
+			allLayoutsQuery: allLayouts,
+			nsfw: false
 		}
 	},
 	apollo: {
@@ -110,7 +105,7 @@ export default Vue.extend({
 					order: this.currentOrder,
 					creators: this.currentCreators,
 					layouts: this.currentLayouts,
-					nsfw: this.$refs.filter?.nsfw
+					nsfw: this.nsfw
 				}
 				vars.hash = this.$hashString(vars)
 				return vars
@@ -121,12 +116,17 @@ export default Vue.extend({
 			prefetch: true
 		}
 	},
+	computed: {
+		nsfw() {
+			return this.$refs.filter?.nsfw
+		}
+	},
 	head() {
 		// eslint-disable-next-line camelcase
 		const resultAmount = this.itemList?.pagination?.item_count
 
 		const metaTitle =
-			resultAmount !== null
+			resultAmount !== undefined
 				? `${resultAmount} ${
 						resultAmount === 1 ? 'result' : 'results'
 				  } | Packs`
