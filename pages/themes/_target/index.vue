@@ -114,7 +114,7 @@ export default Vue.extend({
 				const vars = {
 					q: 'themeList',
 					target: this.targetFile(),
-					limit: 6,
+					limit: 18,
 					page: this.currentPage,
 					query: this.currentSearch,
 					sort: this.currentSort,
