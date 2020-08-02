@@ -63,7 +63,7 @@ query theme($id: String!) {
 	}
 }
 
-query rowThemeList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+query rowThemeList($target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
 	themeList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
@@ -83,13 +83,6 @@ query rowThemeList($hash: String!, $target: String, $limit: Int, $page: Int, $qu
 		}
 		target
 		last_updated
-	}
-
-	pagination(hash: $hash) {
-		page
-		limit
-		page_count
-		item_count
 	}
 }
 

@@ -51,7 +51,7 @@ query pack($id: String!) {
 	}
 }
 
-query rowPackList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
+query rowPackList($limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
 	packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
 		id
 		creator {
@@ -70,13 +70,6 @@ query rowPackList($hash: String!, $limit: Int, $page: Int, $query: String, $sort
 				id
 			}
 		}
-	}
-
-	pagination(hash: $hash) {
-		page
-		limit
-		page_count
-		item_count
 	}
 }
 
