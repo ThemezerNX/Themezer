@@ -23,8 +23,8 @@ export default {
 	props: {
 		loading: {
 			type: Boolean,
-			required: true,
-			default: false
+			required: false,
+			default: true
 		}
 	}
 }

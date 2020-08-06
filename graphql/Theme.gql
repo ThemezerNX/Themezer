@@ -125,7 +125,7 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
 query downloadTheme($id: String!, $piece_uuids: [GUID!]) {
 	downloadTheme(id: $id, piece_uuids: $piece_uuids) {
 		filename
-		data
+		url
 		mimetype
 	}
 }

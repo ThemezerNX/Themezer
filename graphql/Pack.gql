@@ -113,7 +113,7 @@ query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: S
 query downloadPack($id: String!) {
 	downloadPack(id: $id) {
 		filename
-		data
+		url
 		mimetype
 	}
 }

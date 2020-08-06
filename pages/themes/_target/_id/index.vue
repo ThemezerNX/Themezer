@@ -301,9 +301,8 @@ export default Vue.extend({
 				.then(({ data }) => {
 					this.loadingDownload = false
 
-					this.downloadFileB64(
-						data.downloadTheme.data,
-						data.downloadTheme.mimetype,
+					this.downloadFileUrl(
+						data.downloadTheme.url,
 						data.downloadTheme.filename
 					)
 				})
