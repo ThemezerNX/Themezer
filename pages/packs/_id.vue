@@ -92,6 +92,14 @@
 					<h3>
 						Details
 					</h3>
+					<div
+						class="font-weight-light text-body-1 font-weight-medium"
+					>
+						<span class="font-weight-bold"
+							>Theme Installer ID:
+						</span>
+						P{{ pack.id }}
+					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">ID: </span>
 						{{ pack.id }}
