@@ -84,7 +84,7 @@ export default Vue.extend({
 	overflow: hidden;
 	text-shadow: 0 0 5px black;
 	.thumbnail {
-		opacity: 20%;
+		opacity: 0.2;
 		left: 0;
 		transform: scale(1.05);
 		filter: brightness(0.4);
@@ -99,7 +99,7 @@ export default Vue.extend({
 	// background: darken($themezer-primary, 15%) !important;
 	transform: translateY(-5px);
 	.thumbnail {
-		opacity: 100%;
+		opacity: 1;
 		filter: brightness(0.6);
 		transform: rotate(-10deg) scale(1.25);
 	}
