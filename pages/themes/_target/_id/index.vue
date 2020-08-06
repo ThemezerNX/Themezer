@@ -295,7 +295,7 @@ export default Vue.extend({
 					mutation: downloadTheme,
 					variables: {
 						id: this.theme.id,
-						piece_uuids: usedPieces
+						piece_uuids: usedPieces.length > 0 ? usedPieces : null
 					}
 				})
 				.then(({ data }) => {
