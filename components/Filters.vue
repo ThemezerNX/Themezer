@@ -57,6 +57,7 @@
 							deletable-chips
 							auto-select-first
 							single-line
+							:disabled="onlybyme"
 							:menu-props="{ bottom: true, offsetY: true }"
 							:loading="loading.allCreators"
 							@mouseover.once="getParentAllCreators()"
@@ -145,11 +146,25 @@
 			</v-card-actions>
 		</div>
 
-		<!-- for now this 'if' statement is required here, change it when there is more than one filter -->
-		<div v-if="!unsupportedFilters.includes('nsfw')" class="group">
+		<div class="group">
 			<v-card-title class="title">
 				Filters
 			</v-card-title>
+
+			<v-card-actions v-if="!unsupportedFilters.includes('my')">
+				<v-checkbox
+					v-model="onlybyme"
+					class="ma-0 mx-2"
+					label="Made by me"
+					hide-details
+					@change.once="getParentAllCreators()"
+					@change="
+						$event
+							? (withCreators = [$auth.user.id])
+							: (withCreators = [])
+					"
+				></v-checkbox>
+			</v-card-actions>
 
 			<v-card-actions v-if="!unsupportedFilters.includes('nsfw')">
 				<v-checkbox
@@ -160,17 +175,6 @@
 					hide-details
 				></v-checkbox>
 			</v-card-actions>
-
-			<!-- <v-card-actions v-if="!unsupportedFilters.includes('layout')">
-				<v-checkbox
-					v-model="hasLayout"
-					class="ma-0 mx-2"
-					label="Has custom layout"
-					indeterminate
-					color="red"
-					hide-details
-				></v-checkbox>
-			</v-card-actions> -->
 		</div>
 	</v-card>
 </template>
@@ -225,6 +229,7 @@ export default Vue.extend({
 			typingWithLayoutsTimer: null,
 			// Filters
 			hasLayout: null,
+			onlybyme: false,
 			nsfw: false
 		}
 	},
