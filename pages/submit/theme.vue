@@ -212,9 +212,9 @@
 													class="subtitle-1"
 												>
 													By {{ theme.info.Author }}
-													<i>
+													<i class="subtitle-2">
 														(this will replaced with
-														YOUR Discord account)
+														YOUR username)
 													</i>
 												</div>
 												<v-list-item-subtitle
@@ -270,10 +270,29 @@
 																.has_commonlayout
 													"
 												>
-													Has a modified Common layout
+													Common layout: ✅
 												</v-list-item-subtitle>
 											</v-col>
 											<v-col class="pb-0">
+												<v-autocomplete
+													v-if="!theme.layout"
+													v-model="
+														detectedThemes[i]
+															.layout_id
+													"
+													:items="layoutList"
+													auto-select-first
+													label="Manual layout selection"
+													prepend-icon="mdi-code-json"
+													outlined
+													rounded
+													allow-overflow
+													@mouseover="
+														currentThemeTarget =
+															theme.target
+													"
+												>
+												</v-autocomplete>
 												<v-text-field
 													v-model="
 														detectedThemes[i]
@@ -471,7 +490,11 @@ import Vue from 'vue'
 import { allCategories } from '@/graphql/Filtering.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
-import { uploadSingleOrZip, submitThemes } from '@/graphql/SubmitTheme.gql'
+import {
+	allLayouts,
+	uploadSingleOrZip,
+	submitThemes
+} from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
 	middleware: ['auth'],
@@ -482,6 +505,26 @@ export default Vue.extend({
 	apollo: {
 		categories: {
 			query: allCategories,
+			prefetch: false,
+			skip: true
+		},
+		layoutList: {
+			query: allLayouts,
+			variables() {
+				return {
+					target: this.currentThemeTarget
+				}
+			},
+			update(data) {
+				if (data?.layoutList) {
+					return data.layoutList.map((l) => {
+						return {
+							text: `'${l.details.name}' by ${l.creator.display_name}`,
+							value: l.id
+						}
+					})
+				} else return []
+			},
 			prefetch: false,
 			skip: true
 		}
@@ -553,6 +596,7 @@ export default Vue.extend({
 				uploadSingleOrZip: false,
 				submit: false
 			},
+			currentThemeTarget: null,
 			detectedThemes: null,
 			uploadedScreenshots: [],
 			uploadedScreenshotsUrls: [],
@@ -634,6 +678,8 @@ export default Vue.extend({
 
 						this.$apollo.queries.categories.skip = false
 						this.$apollo.queries.categories.refetch()
+						this.$apollo.queries.layoutList.skip = false
+						this.$apollo.queries.layoutList.refetch()
 					})
 					.catch((err) => {
 						this.$snackbar.error(err)
@@ -669,7 +715,7 @@ export default Vue.extend({
 					return {
 						info: t.info,
 						tmp: t.tmp,
-						layout_id: t.layout ? t.layout.id : null,
+						layout_id: t.layout ? t.layout.id : t.layout_id || null,
 						used_pieces: t.used_pieces,
 						target: t.target,
 						color: t.color,
