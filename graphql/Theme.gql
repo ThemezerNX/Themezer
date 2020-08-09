@@ -121,3 +121,7 @@ query downloadTheme($id: String!, $piece_uuids: [GUID!]) {
 		mimetype
 	}
 }
+
+mutation deleteTheme($id: String!) {
+	deleteTheme(id: $id)
+}

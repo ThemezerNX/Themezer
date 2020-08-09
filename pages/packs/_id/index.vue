@@ -92,6 +92,11 @@
 							:name="pack.details.name"
 							:creator="pack.creator.display_name"
 						/>
+						<EditButton
+							v-if="$auth.loggedIn"
+							type="pack"
+							:creator-id="pack.creator.id"
+						/>
 					</ButtonDivider>
 
 					<h3>
@@ -163,7 +168,8 @@ export default Vue.extend({
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
-		ThemesSlideGroup: () => import('@/components/ThemesSlideGroup.vue')
+		ThemesSlideGroup: () => import('@/components/ThemesSlideGroup.vue'),
+		EditButton: () => import('@/components/buttons/EditButton.vue')
 	},
 	mixins: [errorHandler, shared, targetParser, urlParser],
 	data() {

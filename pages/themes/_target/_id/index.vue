@@ -82,6 +82,11 @@
 							:name="theme.details.name"
 							:creator="theme.creator.display_name"
 						/>
+						<EditButton
+							v-if="$auth.loggedIn"
+							type="theme"
+							:creator-id="theme.creator.id"
+						/>
 					</ButtonDivider>
 
 					<h3>
@@ -239,7 +244,8 @@ export default Vue.extend({
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
-		ShareButton: () => import('@/components/buttons/ShareButton.vue')
+		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+		EditButton: () => import('@/components/buttons/EditButton.vue')
 	},
 	mixins: [errorHandler, shared, targetParser, urlParser],
 	data() {

@@ -109,3 +109,7 @@ query downloadPack($id: String!) {
 		mimetype
 	}
 }
+
+mutation deletePack($id: String!) {
+	deletePack(id: $id)
+}
