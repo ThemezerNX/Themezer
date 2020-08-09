@@ -1,5 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+	<error v-if="error" :error="error" />
+	<v-container
+		v-else
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
 		<v-sheet
 			v-if="layout && layout.has_pieces"
 			no-gutters
@@ -184,12 +189,12 @@
 			</v-row>
 		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
-		<span v-else>There's nothing here :(</span>
 	</v-container>
 </template>
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import { layout, downloadLayout } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
@@ -207,7 +212,7 @@ export default Vue.extend({
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue')
 	},
-	mixins: [urlParser, targetParser],
+	mixins: [errorHandler, urlParser, targetParser],
 	data() {
 		return {
 			data: [],
@@ -299,6 +304,9 @@ export default Vue.extend({
 						this.fileNameToWebName(data.layout.target)
 					)
 				}
+			},
+			error(e) {
+				this.error = e
 			},
 			prefetch: true
 		}

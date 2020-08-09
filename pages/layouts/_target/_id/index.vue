@@ -1,5 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+	<error v-if="error" :error="error" />
+	<v-container
+		v-else
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
 		<v-sheet
 			v-if="layout && layout.details"
 			no-gutters
@@ -256,12 +261,12 @@
 			</v-dialog>
 		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
-		<span v-else>There's nothing here :(</span>
 	</v-container>
 </template>
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import shared from '@/layouts/details/SharedScript'
 import {
 	layout,
@@ -281,7 +286,7 @@ export default Vue.extend({
 		BackgroundsSlideGroup: () =>
 			import('@/components/BackgroundsSlideGroup.vue')
 	},
-	mixins: [shared, targetParser],
+	mixins: [errorHandler, shared, targetParser],
 	data() {
 		return {
 			showCommonInfo: false,
@@ -381,6 +386,9 @@ export default Vue.extend({
 						this.fileNameToWebName(data.layout.target)
 					)
 				}
+			},
+			error(e) {
+				this.error = e
 			},
 			// fetchPolicy: 'no-cache',
 			prefetch: true

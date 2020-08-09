@@ -339,21 +339,21 @@
 <script>
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
+import errorHandler from '@/components/mixins/errorHandler'
 import { me, creator, updateProfile } from '@/graphql/Creator.gql'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
 import { rowLayoutList } from '@/graphql/Layout.gql'
-import error from '@/layouts/error.vue'
 
 export default Vue.extend({
 	components: {
-		error,
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		Markdown: () => import('@/components/Markdown.vue'),
 		ItemGrid: () => import('@/components/ItemGrid.vue')
 	},
+	mixins: [errorHandler],
 	data() {
 		return {
 			id: this.$route.params.id,
@@ -376,7 +376,6 @@ export default Vue.extend({
 				clearLogoImage: false
 			},
 
-			error: null,
 			avatar: null,
 			rules: {
 				hex: (value) =>

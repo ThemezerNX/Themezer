@@ -1,7 +1,7 @@
 <template>
-	<v-container fluid class="pa-0 content" style="height: 100%;">
-		<error v-if="error" :error="error" />
-		<div v-else>
+	<error v-if="error" :error="error" />
+	<v-container v-else fluid class="pa-0 content" style="height: 100%;">
+		<div>
 			<!-- <v-parallax
 				class="d-flex align-center justify-center parallax"
 				height="100%"
@@ -87,16 +87,16 @@
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
 import { rowLayoutList } from '@/graphql/Layout.gql'
-import error from '@/layouts/error.vue'
 
 export default Vue.extend({
 	components: {
-		ItemGrid: () => import('@/components/ItemGrid.vue'),
-		error
+		ItemGrid: () => import('@/components/ItemGrid.vue')
 	},
+	mixins: [errorHandler],
 	data() {
 		return {
 			error: null

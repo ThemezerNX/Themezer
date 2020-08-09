@@ -22,7 +22,7 @@ export default {
 	layout: 'empty',
 	props: {
 		error: {
-			type: Error,
+			type: Object,
 			default: null
 		}
 	},
@@ -35,7 +35,7 @@ export default {
 	computed: {
 		title() {
 			return (
-				this.error.message ||
+				this.error.message.replace('GraphQL error: ', '') ||
 				(this.error.statusCode === 404
 					? this.pageNotFound
 					: this.otherError)

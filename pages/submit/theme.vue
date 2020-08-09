@@ -1,5 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+	<error v-if="error" :error="error" />
+	<v-container
+		v-else
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
 		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Theme Submissions
@@ -487,6 +492,7 @@
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import { allCategories } from '@/graphql/Filtering.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
@@ -501,12 +507,15 @@ export default Vue.extend({
 	options: {
 		auth: true
 	},
-	mixins: [targetParser, urlParser],
+	mixins: [errorHandler, targetParser, urlParser],
 	apollo: {
 		categories: {
 			query: allCategories,
 			prefetch: false,
-			skip: true
+			skip: true,
+			error(e) {
+				this.error = e
+			}
 		},
 		layoutList: {
 			query: allLayouts,
@@ -524,6 +533,9 @@ export default Vue.extend({
 						}
 					})
 				} else return []
+			},
+			error(e) {
+				this.error = e
 			},
 			prefetch: false,
 			skip: true

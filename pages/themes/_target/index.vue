@@ -1,5 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+	<error v-if="error" :error="error" />
+	<v-container
+		v-else
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
 				<h2 class="text-center">{{ targetName() }} Themes</h2>
@@ -78,6 +83,7 @@
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import { themeList, allCreators, allLayouts } from '@/graphql/Theme.gql'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
@@ -96,7 +102,7 @@ export default Vue.extend({
 		ItemCard: () => import('@/components/ItemCard.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [targetParser, filter],
+	mixins: [errorHandler, targetParser, filter],
 	data() {
 		return {
 			type: 'themes',
@@ -128,6 +134,9 @@ export default Vue.extend({
 			},
 			update(data) {
 				return data
+			},
+			error(e) {
+				this.error = e
 			},
 			prefetch: true
 		}

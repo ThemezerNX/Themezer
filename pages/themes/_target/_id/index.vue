@@ -1,5 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+	<error v-if="error" :error="error" />
+	<v-container
+		v-else
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
 		<v-sheet v-if="theme && theme.details" no-gutters class="pa-2 box">
 			<v-row class="ma-0">
 				<v-col
@@ -218,12 +223,12 @@
 			</v-dialog>
 		</v-sheet>
 		<LoadingOverlay v-else-if="$apollo.loading" />
-		<span v-else>There's nothing here :(</span>
 	</v-container>
 </template>
 
 <script>
 import Vue from 'vue'
+import errorHandler from '@/components/mixins/errorHandler'
 import shared from '@/layouts/details/SharedScript'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
@@ -236,9 +241,10 @@ export default Vue.extend({
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue')
 	},
-	mixins: [shared, targetParser, urlParser],
+	mixins: [errorHandler, shared, targetParser, urlParser],
 	data() {
 		return {
+			error: null,
 			showPackInfo: false,
 			packDialog: false,
 			loadingDownload: false
@@ -270,6 +276,9 @@ export default Vue.extend({
 						this.fileNameToWebName(data.theme.target)
 					)
 				}
+			},
+			error(e) {
+				this.error = e
 			},
 			prefetch: true
 		}
