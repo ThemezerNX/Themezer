@@ -51,7 +51,9 @@
 						</v-col>
 					</v-row>
 
-					<span v-else>There were no results</span>
+					<span v-else-if="!$apollo.loading"
+						>There were no results</span
+					>
 					<paginate
 						v-model="pageNumber"
 						container-class="pagination-container"
