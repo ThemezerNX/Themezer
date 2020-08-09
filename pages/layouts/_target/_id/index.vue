@@ -42,7 +42,7 @@
 							class="font-weight-bold"
 							:to="`/creators/${layout.creator.id}`"
 						>
-							{{ layout.creator.discord_user.username }}
+							{{ layout.creator.display_name }}
 						</nuxt-link>
 					</div>
 					<div
@@ -69,7 +69,7 @@
 						<ShareButton
 							type="layout"
 							:name="layout.details.name"
-							:creator="layout.creator.discord_user.username"
+							:creator="layout.creator.display_name"
 						/>
 					</ButtonDivider>
 

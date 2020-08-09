@@ -2,9 +2,7 @@ query allCreators {
     packList {
         creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
     }
 }
@@ -28,9 +26,7 @@ query pack($id: String!) {
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name
@@ -56,9 +52,7 @@ query rowPackList($limit: Int, $page: Int, $query: String, $sort: String, $order
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name
@@ -78,9 +72,7 @@ query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: S
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name

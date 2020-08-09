@@ -36,7 +36,7 @@
 							class="font-weight-bold"
 							:to="`/creators/${theme.creator.id}`"
 						>
-							{{ theme.creator.discord_user.username }}
+							{{ theme.creator.display_name }}
 						</nuxt-link>
 					</div>
 					<div
@@ -75,7 +75,7 @@
 						<ShareButton
 							type="theme"
 							:name="theme.details.name"
-							:creator="theme.creator.discord_user.username"
+							:creator="theme.creator.display_name"
 						/>
 					</ButtonDivider>
 

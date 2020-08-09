@@ -315,7 +315,7 @@ export default Vue.extend({
 			;(this.$parent as any).getAllCreators().then((res: Array<any>) => {
 				this.$data.allCreators = res.map((item) => {
 					return {
-						text: item.creator.discord_user.username,
+						text: item.creator.display_name,
 						value: item.creator.id
 					}
 				})

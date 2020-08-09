@@ -51,7 +51,7 @@
 								alt="Creator Avatar"
 							/>
 						</v-avatar>
-						{{ creator.discord_user.username
+						{{ creator.display_name
 						}}{{
 							!!creator.custom_username
 								? ''
@@ -96,7 +96,7 @@
 						/>
 						<ShareButton
 							type="creator"
-							:name="creator.discord_user.username"
+							:name="creator.display_name"
 						/>
 					</ButtonDivider>
 				</v-col>
@@ -568,10 +568,10 @@ export default Vue.extend({
 	},
 	head() {
 		if (this.creator) {
-			const metaTitle = `${this.creator.discord_user.username} | Creators`
+			const metaTitle = `${this.creator.display_name} | Creators`
 			const metaDesc = this.creator.bio
 				? removeMd(this.creator.bio)
-				: `${this.creator.discord_user.username}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.discord_user.username}.`
+				: `${this.creator.display_name}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.display_name}.`
 
 			let avatar = null
 			if (this.creator.discord_user.avatar) {

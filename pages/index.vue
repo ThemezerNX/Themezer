@@ -109,7 +109,7 @@ export default Vue.extend({
 				const vars = {
 					q: 'packList',
 					limit: 12,
-					order: 'latest'
+					sort: 'updated'
 				}
 				vars.hash = this.$hashString(vars)
 
@@ -126,7 +126,7 @@ export default Vue.extend({
 				const vars = {
 					q: 'themeList',
 					limit: 12,
-					order: 'latest'
+					sort: 'updated'
 				}
 				vars.hash = this.$hashString(vars)
 
@@ -143,7 +143,7 @@ export default Vue.extend({
 				const vars = {
 					q: 'layoutList',
 					limit: 12,
-					order: 'latest'
+					sort: 'updated'
 				}
 				vars.hash = this.$hashString(vars)
 

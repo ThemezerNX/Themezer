@@ -46,7 +46,7 @@
 							class="font-weight-bold"
 							:to="`/creators/${pack.creator.id}`"
 						>
-							{{ pack.creator.discord_user.username }}
+							{{ pack.creator.display_name }}
 						</nuxt-link>
 					</div>
 					<div
@@ -85,7 +85,7 @@
 						<ShareButton
 							type="pack"
 							:name="pack.details.name"
-							:creator="pack.creator.discord_user.username"
+							:creator="pack.creator.display_name"
 						/>
 					</ButtonDivider>
 

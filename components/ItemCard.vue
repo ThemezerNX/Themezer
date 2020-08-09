@@ -62,7 +62,7 @@
 				v-if="showProps.includes('creator')"
 				class="creator"
 			>
-				By {{ item.creator.discord_user.username }}
+				By {{ item.creator.display_name }}
 				{{ item.details.version ? `• v${item.details.version}` : '' }}
 			</v-card-subtitle>
 

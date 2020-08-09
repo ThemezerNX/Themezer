@@ -66,7 +66,7 @@
 								v-if="showProps.includes('creator')"
 								class="creator"
 							>
-								By {{ theme.creator.discord_user.username }}
+								By {{ theme.creator.display_name }}
 							</v-card-subtitle>
 						</v-card>
 					</v-scale-transition>

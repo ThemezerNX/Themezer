@@ -1,12 +1,11 @@
 query me {
 	me {
 		id
+		display_name
+		custom_username
 		discord_user {
-			username
 			discriminator
 			avatar
-			system
-			locale
 		}
 		bio
 		joined
@@ -21,14 +20,12 @@ query me {
 query creator($id: String!) {
 	creator(id: $id) {
 		id
+		display_name
+		custom_username
 		discord_user {
-			username
 			discriminator
 			avatar
-			system
-			locale
 		}
-		custom_username
 		bio
 		joined
 		role

@@ -2,9 +2,7 @@ query allCreators($target: String, $limit: Int, $page: Int, $query: String, $sor
     layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
         creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
     }
 }
@@ -15,9 +13,7 @@ query layout($id: String!) {
 		uuid
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name
@@ -50,9 +46,7 @@ query rowLayoutList($target: String, $limit: Int, $page: Int, $query: String, $s
 		uuid
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name
@@ -70,9 +64,7 @@ query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $quer
 		uuid
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name

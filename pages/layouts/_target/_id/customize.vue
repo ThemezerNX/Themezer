@@ -13,7 +13,7 @@
 					class="font-weight-bold"
 					:to="`/creators/${layout.creator.id}`"
 				>
-					{{ layout.creator.discord_user.username }}
+					{{ layout.creator.display_name }}
 				</nuxt-link>
 			</div>
 			<v-row class="ma-0">
@@ -177,7 +177,7 @@
 							type="customized layout"
 							tooltip="Permalink"
 							:name="layout.details.name"
-							:creator="layout.creator.discord_user.username"
+							:creator="layout.creator.display_name"
 						/>
 					</ButtonDivider>
 				</v-col>

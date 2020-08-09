@@ -2,9 +2,7 @@ query allCreators($target: String) {
     themeList(target: $target) {
         creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
     }
 }
@@ -25,9 +23,7 @@ query theme($id: String!) {
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		details {
 			name
@@ -68,9 +64,7 @@ query rowThemeList($target: String, $limit: Int, $page: Int, $query: String, $so
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		layout {
 			id
@@ -91,9 +85,7 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
 		id
 		creator {
 			id
-			discord_user {
-				username
-			}
+			display_name
 		}
 		layout {
 			id
