@@ -14,7 +14,21 @@ export default Vue.extend({
 	},
 	computed: {
 		currentPage() {
-			return this.$data.pageNumber
+			if (
+				this.$data.pageNumber <= this.pageCount ||
+				!(this as any).itemList
+			) {
+				return this.$data.pageNumber
+			} else {
+				const query = Object.assign({}, this.$route.query)
+				delete query.page
+				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+				this.$router.push({
+					query
+				})
+				// eslint-disable-next-line vue/no-side-effects-in-computed-properties
+				return 1
+			}
 		},
 		pageCount(): number {
 			// eslint-disable-next-line camelcase

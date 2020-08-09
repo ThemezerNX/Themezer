@@ -228,7 +228,6 @@ export default Vue.extend({
 			withLayouts: [],
 			typingWithLayoutsTimer: null,
 			// Filters
-			hasLayout: null,
 			onlybyme: false,
 			nsfw: false
 		}
@@ -275,7 +274,7 @@ export default Vue.extend({
 			}, 400)
 		},
 		withCreators(n, o) {
-			if (n.length !== o.length) {
+			if (this.$data.allCreators && n.length !== o.length) {
 				clearTimeout(this.$data.typingWithCreatorsTimer)
 				this.$data.typingWithCreatorsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)
@@ -289,7 +288,7 @@ export default Vue.extend({
 			}
 		},
 		withLayouts(n, o) {
-			if (n.length !== o.length) {
+			if (this.$data.allLayouts && n.length !== o.length) {
 				clearTimeout(this.$data.typingWithLayoutsTimer)
 				this.$data.typingWithLayoutsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)
