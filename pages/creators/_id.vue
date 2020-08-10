@@ -133,7 +133,7 @@
 						:items="packList"
 						type="packs"
 						:more-url="
-							`/packs?sort=updated&order=desc&creator=${creator.id}`
+							`/packs?sort=updated&order=desc&creators=${creator.id}`
 						"
 					/>
 				</v-col>
@@ -153,7 +153,7 @@
 						:items="themeList"
 						type="themes"
 						:more-url="
-							`/themes?sort=updated&order=desc&creator=${creator.id}`
+							`/themes?sort=updated&order=desc&creators=${creator.id}`
 						"
 					/>
 				</v-col>
@@ -173,7 +173,7 @@
 						:items="layoutList"
 						type="layouts"
 						:more-url="
-							`/layouts?sort=updated&order=desc&creator=${creator.id}`
+							`/layouts?sort=updated&order=desc&creators=${creator.id}`
 						"
 					/>
 				</v-col>

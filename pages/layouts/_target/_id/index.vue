@@ -189,6 +189,17 @@
 							"
 						/>
 					</ButtonDivider>
+					<nuxt-link
+						:to="
+							`/themes/${fileNameToWebName(
+								layout.target
+							)}?sort=updated&order=desc&layouts=${layout.id}`
+						"
+					>
+						<div style="text-shadow: 0 0 4px black;">
+							All Themes made with this layout
+						</div>
+					</nuxt-link>
 				</v-col>
 			</v-row>
 			<v-row class="ma-0">
