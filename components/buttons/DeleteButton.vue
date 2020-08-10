@@ -13,44 +13,48 @@
 				Delete
 				<v-icon right>{{ icon || 'mdi-delete' }}</v-icon>
 			</v-btn>
+			<v-dialog
+				v-model="showDialog"
+				max-width="400"
+				:persistent="loading"
+			>
+				<v-card>
+					<v-card-title class="headline"
+						>You're at the edge of deleting this {{ type }} forever.
+						Are you absolutely sure?</v-card-title
+					>
+
+					<v-card-text>
+						All data related to this {{ type }} will be removed from
+						the server.
+					</v-card-text>
+
+					<v-card-actions>
+						<v-btn
+							rounded
+							:loading="loading"
+							color="red"
+							text
+							@click="del()"
+						>
+							Delete
+						</v-btn>
+						<v-spacer></v-spacer>
+
+						<v-btn
+							rounded
+							color="primary"
+							text
+							:disabled="loading"
+							@click="showDialog = false"
+						>
+							Cancel
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
 		</template>
 		<span>Delete this {{ type }}</span>
-		<v-dialog v-model="showDialog" max-width="400" :persistent="loading">
-			<v-card>
-				<v-card-title class="headline"
-					>You're at the edge of deleting this {{ type }} forever. Are
-					you absolutely sure?</v-card-title
-				>
-
-				<v-card-text>
-					All data related to this {{ type }} will be removed from the
-					server.
-				</v-card-text>
-
-				<v-card-actions>
-					<v-btn
-						rounded
-						:loading="loading"
-						color="red"
-						text
-						@click="del()"
-					>
-						Delete
-					</v-btn>
-					<v-spacer></v-spacer>
-
-					<v-btn
-						rounded
-						color="primary"
-						text
-						:disabled="loading"
-						@click="showDialog = false"
-					>
-						Cancel
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
 	</v-tooltip>
 </template>
 
