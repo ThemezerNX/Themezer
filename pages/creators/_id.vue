@@ -413,6 +413,8 @@ export default Vue.extend({
 		},
 		roleIcon() {
 			switch (this.creator.role) {
+				case 'admin':
+					return 'mdi-shield-check'
 				case 'verified':
 					return 'mdi-check-decagram'
 
