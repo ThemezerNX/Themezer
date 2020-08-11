@@ -7,7 +7,7 @@
 	>
 		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
-				Theme Submissions
+				Theme/Pack Submissions
 			</h1>
 			<div class="subtitle-1 box_text">
 				You can submit themes here for listing on this website. The
@@ -15,17 +15,17 @@
 			</div>
 			<div class="subtitle-1 box_text">
 				If you downloaded a layout from this website it included a
-				Themezer 'ID' key in the .json file. You must never edit these
-				values! These are used to indicate which layout was used so that
-				when people download your theme, they also get the most
-				up-to-date version of the layout and customization options. If
-				you downloaded the layout from elsewhere and it doesn't include
-				the two entries, you should try to find the layout in
+				Themezer 'ID' key in the .json file. You must never edit this
+				value! It is used to indicate which layout was used so that when
+				people download your theme, they also get the most up-to-date
+				version of the layout and customization options. If you
+				downloaded the layout from elsewhere and it doesn't include the
+				two entries, you should try to find the layout in
 				<nuxt-link exact to="/layouts">
-					the Layouts section.
+					the Layouts section
 				</nuxt-link>
-				Be really sure it is the exact same layout, or else you might
-				lose some features!
+				and select it in the dropdown. Be really sure it is the exact
+				same layout, or else you might lose some features!
 			</div>
 			<template v-for="QnA in QnAs">
 				<h4 :key="QnA.Q" class="box_text font-italic mt-1">
@@ -37,7 +37,7 @@
 			</template>
 
 			<h2 class="box_text">
-				1. Upload the theme
+				1. Upload the theme/pack
 			</h2>
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
@@ -580,9 +580,9 @@ export default Vue.extend({
 					A: 'Ok. Why not? But okay go ahead submit it...'
 				},
 				{
-					Q: 'I am not the original author of this theme',
+					Q: 'I am not the original author of this theme/pack',
 					A:
-						"Unfortunately you shouldn't submit it, because it will be linked to the currently logged in user"
+						'Unfortunately you may not submit it, because it will be linked to the currently logged in user'
 				}
 			],
 			types: [
