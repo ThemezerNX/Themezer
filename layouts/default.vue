@@ -293,7 +293,7 @@ export default {
 				},
 				{
 					icon: 'mdi-format-color-fill',
-					title: 'Theme',
+					title: 'Theme/Pack',
 					to: '/submit/theme'
 				},
 				{
@@ -449,6 +449,10 @@ html {
 .v-list--nav .v-list-item,
 .v-list--rounded .v-list-item {
 	margin-bottom: 0 !important;
+}
+
+.v-card {
+	border-radius: $border-radius !important;
 }
 
 .v-card__subtitle,

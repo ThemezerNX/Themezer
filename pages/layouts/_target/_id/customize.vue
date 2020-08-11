@@ -5,190 +5,196 @@
 		:fluid="$vuetify.breakpoint.smAndDown"
 		style="height: 100%;"
 	>
-		<v-sheet
-			v-if="layout && layout.has_pieces"
-			no-gutters
-			class="pa-2 box_fill"
-		>
-			<h1 class="box_text">Customize Layout</h1>
-			<h2 class="box_text mt-0">{{ layout.details.name }}</h2>
-			<div class="subtitle-1 box_text">
-				By
-				<nuxt-link
-					class="font-weight-bold"
-					:to="`/creators/${layout.creator.id}`"
-				>
-					{{ layout.creator.display_name }}
-				</nuxt-link>
-			</div>
-			<v-row class="ma-0">
-				<v-col
-					cols="12"
-					xs="12"
-					sm="4"
-					class="pa-2"
-					style="position: relative;"
-				>
-					<v-img
-						aspect-ratio="1.7778"
-						:src="
-							preview ||
-								`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
-						"
-						cover
-						class="overlay-image"
-						:style="backgroundStyle"
-						style="background-size: cover;"
-					/>
-				</v-col>
-				<v-col
-					v-show="restoredActivePieces"
-					cols="12"
-					xs="12"
-					sm="8"
-					class="pa-2"
-				>
-					<v-list
-						subheader
-						flat
-						style="background: rgba(255,255,255,0.12); border-radius: 10px;"
-						class="my-3"
+		<LoadingOverlay :loading="$apollo.loading">
+			<v-sheet
+				v-if="layout && layout.has_pieces"
+				no-gutters
+				class="pa-2 box_fill"
+			>
+				<h1 class="box_text">Customize Layout</h1>
+				<h2 class="box_text mt-0">{{ layout.details.name }}</h2>
+				<div class="subtitle-1 box_text">
+					By
+					<nuxt-link
+						class="font-weight-bold"
+						:to="`/creators/${layout.creator.id}`"
 					>
-						<v-subheader>Layout Modifications</v-subheader>
-						<div
-							v-for="(piece, i) in layout.pieces"
-							:key="piece.name"
+						{{ layout.creator.display_name }}
+					</nuxt-link>
+				</div>
+				<v-row class="ma-0">
+					<v-col
+						cols="12"
+						xs="12"
+						sm="4"
+						class="pa-2"
+						style="position: relative;"
+					>
+						<v-img
+							aspect-ratio="1.7778"
+							:src="
+								preview ||
+									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+							"
+							cover
+							class="overlay-image"
+							:style="backgroundStyle"
+							style="background-size: cover;"
+						/>
+					</v-col>
+					<v-col
+						v-show="restoredActivePieces"
+						cols="12"
+						xs="12"
+						sm="8"
+						class="pa-2"
+					>
+						<v-list
+							subheader
+							flat
+							style="background: rgba(255,255,255,0.12); border-radius: 10px;"
+							class="my-3"
 						>
-							<v-list-item v-if="piece.values.length === 1">
-								<v-list-item-content
-									class="pa-0"
-									style="overflow: visible;"
-								>
-									<v-col
+							<v-subheader>Layout Modifications</v-subheader>
+							<div
+								v-for="(piece, i) in layout.pieces"
+								:key="piece.name"
+							>
+								<v-list-item v-if="piece.values.length === 1">
+									<v-list-item-content
 										class="pa-0"
-										cols="12"
-										sm="6"
-										md="8"
-										lg="8"
-										xl="10"
+										style="overflow: visible;"
 									>
-										<v-list-item-title
-											style="white-space: inherit;"
+										<v-col
+											class="pa-0"
+											cols="12"
+											sm="6"
+											md="8"
+											lg="8"
+											xl="10"
 										>
-											{{ piece.name }}
-										</v-list-item-title>
-										<v-list-item-subtitle>
-											{{ piece.description }}
-										</v-list-item-subtitle>
-									</v-col>
-									<v-col
-										class="pa-0 d-flex"
-										cols="12"
-										sm="6"
-										md="4"
-										lg="4"
-										xl="2"
-										style="position: relative;"
-									>
-										<v-checkbox
-											v-model="data[i]"
-											:input-value="data[i]"
-											class="ma-0 pa-0 d-flex align-self-center"
-											style="position: absolute; right: 0;"
-											hide-details
-											width="auto"
-											@change="
-												valueChange(
-													$event,
-													piece.values
-												)
-												setPreview(
-													piece,
-													piece.values[0],
-													data[i]
-												)
-											"
-										></v-checkbox>
-									</v-col>
-								</v-list-item-content>
-							</v-list-item>
+											<v-list-item-title
+												style="white-space: inherit;"
+											>
+												{{ piece.name }}
+											</v-list-item-title>
+											<v-list-item-subtitle>
+												{{ piece.description }}
+											</v-list-item-subtitle>
+										</v-col>
+										<v-col
+											class="pa-0 d-flex"
+											cols="12"
+											sm="6"
+											md="4"
+											lg="4"
+											xl="2"
+											style="position: relative;"
+										>
+											<v-checkbox
+												v-model="data[i]"
+												:input-value="data[i]"
+												class="ma-0 pa-0 d-flex align-self-center"
+												style="position: absolute; right: 0;"
+												hide-details
+												width="auto"
+												@change="
+													valueChange(
+														$event,
+														piece.values
+													)
+													setPreview(
+														piece,
+														piece.values[0],
+														data[i]
+													)
+												"
+											></v-checkbox>
+										</v-col>
+									</v-list-item-content>
+								</v-list-item>
 
-							<v-list-item v-else-if="piece.values.length > 0">
-								<v-list-item-content class="pa-0">
-									<v-col
-										class="pa-0"
-										cols="12"
-										sm="6"
-										md="8"
-										lg="8"
-										xl="10"
-									>
-										<v-list-item-title
-											style="white-space: inherit;"
+								<v-list-item
+									v-else-if="piece.values.length > 0"
+								>
+									<v-list-item-content class="pa-0">
+										<v-col
+											class="pa-0"
+											cols="12"
+											sm="6"
+											md="8"
+											lg="8"
+											xl="10"
 										>
-											{{ piece.name }}
-										</v-list-item-title>
-										<v-list-item-subtitle
-											style="-webkit-line-clamp: unset;"
+											<v-list-item-title
+												style="white-space: inherit;"
+											>
+												{{ piece.name }}
+											</v-list-item-title>
+											<v-list-item-subtitle
+												style="-webkit-line-clamp: unset;"
+											>
+												{{ piece.description }}
+											</v-list-item-subtitle>
+										</v-col>
+										<v-col
+											class="pa-0"
+											cols="12"
+											sm="6"
+											md="4"
+											lg="4"
+											xl="2"
 										>
-											{{ piece.description }}
-										</v-list-item-subtitle>
-									</v-col>
-									<v-col
-										class="pa-0"
-										cols="12"
-										sm="6"
-										md="4"
-										lg="4"
-										xl="2"
-									>
-										<v-select
-											v-model="data[i]"
-											rounded
-											:input-value="data[i]"
-											class="soloSelectGrey"
-											:items="dropdownKeys(piece.values)"
-											:menu-props="{ offsetY: true }"
-											label="Default"
-											hide-details
-											solo
-											@change="
-												valueChange(
-													data[i],
-													piece.values
-												)
-												setPreview(
-													piece,
-													piece.values.find(
-														(v) =>
-															v.value === data[i]
-													),
-													data[i]
-												)
-											"
-										></v-select>
-									</v-col>
-								</v-list-item-content>
-							</v-list-item>
-						</div>
-					</v-list>
-					<ButtonDivider>
-						<DownloadButton
-							tooltip="Download layout"
-							:download-function="download"
-							:loading="loadingMerge"
-						/>
-						<ShareButton
-							type="customized layout"
-							tooltip="Permalink"
-							:name="layout.details.name"
-							:creator="layout.creator.display_name"
-						/>
-					</ButtonDivider>
-				</v-col>
-			</v-row>
-		</v-sheet>
-		<LoadingOverlay v-else-if="$apollo.loading" />
+											<v-select
+												v-model="data[i]"
+												rounded
+												:input-value="data[i]"
+												class="soloSelectGrey"
+												:items="
+													dropdownKeys(piece.values)
+												"
+												:menu-props="{ offsetY: true }"
+												label="Default"
+												hide-details
+												solo
+												@change="
+													valueChange(
+														data[i],
+														piece.values
+													)
+													setPreview(
+														piece,
+														piece.values.find(
+															(v) =>
+																v.value ===
+																data[i]
+														),
+														data[i]
+													)
+												"
+											></v-select>
+										</v-col>
+									</v-list-item-content>
+								</v-list-item>
+							</div>
+						</v-list>
+						<ButtonDivider>
+							<DownloadButton
+								tooltip="Download layout"
+								:download-function="download"
+								:loading="loadingMerge"
+							/>
+							<ShareButton
+								type="customized layout"
+								tooltip="Permalink"
+								:name="layout.details.name"
+								:creator="layout.creator.display_name"
+							/>
+						</ButtonDivider>
+					</v-col>
+				</v-row>
+			</v-sheet>
+		</LoadingOverlay>
 	</v-container>
 </template>
 
@@ -210,7 +216,8 @@ export default Vue.extend({
 	components: {
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
-		ShareButton: () => import('@/components/buttons/ShareButton.vue')
+		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	mixins: [errorHandler, urlParser, targetParser],
 	data() {

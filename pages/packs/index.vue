@@ -102,6 +102,7 @@ export default Vue.extend({
 	apollo: {
 		itemList: {
 			query: packList,
+			fetchPolicy: 'cache-and-network',
 			variables() {
 				const vars = {
 					q: 'packList',

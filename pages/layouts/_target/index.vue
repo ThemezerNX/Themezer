@@ -101,6 +101,7 @@ export default Vue.extend({
 	apollo: {
 		itemList: {
 			query: layoutList,
+			fetchPolicy: 'cache-and-network',
 			variables() {
 				const vars = {
 					q: 'layoutList',

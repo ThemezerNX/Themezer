@@ -80,6 +80,11 @@ export default Vue.extend({
 			type: String,
 			required: true
 		},
+		goBack: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
 		returnUrl: {
 			type: String,
 			required: false,
@@ -102,13 +107,22 @@ export default Vue.extend({
 						id: this.id
 					}
 				})
-				.then(() => {
+				.then((res: any) => {
 					this.loading = false
 					this.showDialog = false
 					;(this as any).$snackbar.message(
-						`${this.type} deleted successfully!`
+						`${this.type.charAt(0).toUpperCase() +
+							this.type.slice(1)} deleted successfully!`
 					)
-					this.$router.push(this.returnUrl)
+
+					console.log(res)
+					if (this.goBack && !res?.data?.deleteTheme) {
+						this.$router.back()
+					} else {
+						this.$router.push(
+							res?.data?.deleteTheme || this.returnUrl
+						)
+					}
 				})
 				.catch((e: any) => {
 					this.loading = false

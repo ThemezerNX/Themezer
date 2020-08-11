@@ -13,7 +13,7 @@
 			<v-slide-item
 				v-for="(background, i) in backgrounds"
 				:key="i"
-				v-slot:default="{ active, toggle }"
+				v-slot:default="{ toggle }"
 			>
 				<v-hover v-if="background" v-slot:default="{ hover }">
 					<v-scale-transition>

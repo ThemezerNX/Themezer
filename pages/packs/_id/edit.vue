@@ -5,63 +5,66 @@
 		:fluid="$vuetify.breakpoint.smAndDown"
 		style="height: 100%;"
 	>
-		<v-sheet v-if="pack" no-gutters class="pa-2 box_fill">
-			<h1 class="box_text">Edit Pack</h1>
-			<nuxt-link
-				class="font-weight-bold"
-				:to="`/packs/${createUrlString(pack.id, pack.details.name)}`"
-			>
-				<h2 class="box_text mt-0">{{ pack.details.name }}</h2>
-			</nuxt-link>
-
-			<v-form ref="submitForm" v-model="submitValid"> </v-form>
-
-			<v-divider class="my-3 mx-2" />
-
-			<h3 class="box_text mt-0">Themes in this pack:</h3>
-			<h3 class="box_text mt-0 subtitle-1 font-italic">
-				(Click any to edit)
-			</h3>
-			<v-list rounded>
-				<v-list-item
-					v-for="theme in pack.themes"
-					:key="theme.id"
+		<LoadingOverlay :loading="$apollo.loading">
+			<v-sheet v-if="pack" no-gutters class="pa-2 box_fill">
+				<h1 class="box_text">Edit Pack</h1>
+				<nuxt-link
+					class="font-weight-bold"
 					:to="
-						`/themes/${fileNameToWebName(
-							theme.target
-						)}/${createUrlString(
-							theme.id,
-							theme.details.name
-						)}/edit`
+						`/packs/${createUrlString(pack.id, pack.details.name)}`
 					"
 				>
-					<v-list-item-avatar width="140" height="auto" tile>
-						<v-img
-							aspect-ratio="1.7778"
-							style="border-radius: 10px;"
-							:src="
-								`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-							"
-							contain
-						/>
-					</v-list-item-avatar>
+					<h2 class="box_text mt-0">{{ pack.details.name }}</h2>
+				</nuxt-link>
 
-					<v-list-item-content>
-						<v-list-item-title
-							v-text="theme.details.name"
-						></v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
+				<v-form ref="submitForm" v-model="submitValid"> </v-form>
 
-			<ButtonDivider>
-				<DeleteButton
-					:id="pack.id"
-					type="pack"
-					:query="deleteQuery"
-					return-url="/packs"
-				/>
-				<!-- <v-btn
+				<v-divider class="my-3 mx-2" />
+
+				<h3 class="box_text mt-0">Themes in this pack:</h3>
+				<h3 class="box_text mt-0 subtitle-1 font-italic">
+					(Click any to edit)
+				</h3>
+				<v-list rounded>
+					<v-list-item
+						v-for="theme in pack.themes"
+						:key="theme.id"
+						:to="
+							`/themes/${fileNameToWebName(
+								theme.target
+							)}/${createUrlString(
+								theme.id,
+								theme.details.name
+							)}/edit`
+						"
+					>
+						<v-list-item-avatar width="140" height="auto" tile>
+							<v-img
+								aspect-ratio="1.7778"
+								style="border-radius: 10px;"
+								:src="
+									`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
+								"
+								contain
+							/>
+						</v-list-item-avatar>
+
+						<v-list-item-content>
+							<v-list-item-title
+								v-text="theme.details.name"
+							></v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-list>
+
+				<ButtonDivider>
+					<DeleteButton
+						:id="pack.id"
+						type="pack"
+						:query="deleteQuery"
+						return-url="/packs"
+					/>
+					<!-- <v-btn
 					rounded
 					:disabled="!changes || loading.submit"
 					color="red"
@@ -80,9 +83,9 @@
 				>
 					Save <v-icon right>mdi-cube-send</v-icon>
 				</v-btn> -->
-			</ButtonDivider>
-		</v-sheet>
-		<LoadingOverlay v-else-if="$apollo.loading" />
+				</ButtonDivider>
+			</v-sheet>
+		</LoadingOverlay>
 	</v-container>
 </template>
 
@@ -102,7 +105,8 @@ export default Vue.extend({
 	},
 	components: {
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-		DeleteButton: () => import('@/components/buttons/DeleteButton.vue')
+		DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	mixins: [errorHandler, urlParser, targetParser],
 	data() {
@@ -148,6 +152,7 @@ export default Vue.extend({
 	apollo: {
 		pack: {
 			query: pack,
+			fetchPolicy: 'cache-and-network',
 			variables() {
 				return {
 					id: this.id

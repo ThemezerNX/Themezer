@@ -5,121 +5,171 @@
 		:fluid="$vuetify.breakpoint.smAndDown"
 		style="height: 100%;"
 	>
-		<v-sheet
-			v-if="layout && layout.details"
-			no-gutters
-			class="pa-2 box_fill"
-		>
-			<v-row class="ma-0">
-				<v-col
-					cols="12"
-					xs="12"
-					:sm="landscape ? 8 : 12"
-					md="9"
-					class="pa-2"
-				>
-					<v-fade-transition>
-						<v-img
-							aspect-ratio="1.7778"
-							:src="
-								`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
-							"
-							cover
-							class="overlay-image transition-fast-in-fast-out"
-							:style="backgroundStyle"
+		<LoadingOverlay :loading="$apollo.loading">
+			<v-sheet
+				v-if="layout && layout.details"
+				no-gutters
+				class="pa-2 box_fill"
+			>
+				<v-row class="ma-0">
+					<v-col
+						cols="12"
+						xs="12"
+						:sm="landscape ? 8 : 12"
+						md="9"
+						class="pa-2"
+					>
+						<v-fade-transition>
+							<v-img
+								aspect-ratio="1.7778"
+								:src="
+									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+								"
+								cover
+								class="overlay-image transition-fast-in-fast-out"
+								:style="backgroundStyle"
+							/>
+						</v-fade-transition>
+					</v-col>
+					<v-col
+						cols="12"
+						xs="12"
+						:sm="landscape ? 4 : 12"
+						md="3"
+						class="pa-2"
+						style="position: relative;"
+					>
+						<h1>
+							{{ layout.details.name }}
+						</h1>
+						<div class="subtitle-1">
+							By
+							<nuxt-link
+								class="font-weight-bold"
+								:to="`/creators/${layout.creator.id}`"
+							>
+								{{ layout.creator.display_name }}
+							</nuxt-link>
+						</div>
+						<div
+							v-if="layout.details.description"
+							v-linkified:options="{
+								className: 'font-weight-medium'
+							}"
+							class="font-weight-thin subtitle-1"
+							v-html="layout.details.description"
 						/>
-					</v-fade-transition>
-				</v-col>
-				<v-col
-					cols="12"
-					xs="12"
-					:sm="landscape ? 4 : 12"
-					md="3"
-					class="pa-2"
-					style="position: relative;"
-				>
-					<h1>
-						{{ layout.details.name }}
-					</h1>
-					<div class="subtitle-1">
-						By
-						<nuxt-link
-							class="font-weight-bold"
-							:to="`/creators/${layout.creator.id}`"
-						>
-							{{ layout.creator.display_name }}
-						</nuxt-link>
-					</div>
-					<div
-						v-if="layout.details.description"
-						v-linkified:options="{
-							className: 'font-weight-medium'
-						}"
-						class="font-weight-thin subtitle-1"
-						v-html="layout.details.description"
-					/>
 
-					<ButtonDivider>
-						<LikeButton
-							v-if="$auth.loggedIn"
-							:id="layout.id"
-							:count="layout.like_count"
-							type="layouts"
-							:value="
-								$auth.user.liked.layouts
-									.map((l) => l.id)
-									.includes(layout.id)
-							"
-						/>
-						<ShareButton
-							type="layout"
-							:name="layout.details.name"
-							:creator="layout.creator.display_name"
-						/>
-					</ButtonDivider>
+						<ButtonDivider>
+							<LikeButton
+								v-if="$auth.loggedIn"
+								:id="layout.id"
+								:count="layout.like_count"
+								type="layouts"
+								:value="
+									$auth.user.liked.layouts
+										.map((l) => l.id)
+										.includes(layout.id)
+								"
+							/>
+							<ShareButton
+								type="layout"
+								:name="layout.details.name"
+								:creator="layout.creator.display_name"
+							/>
+						</ButtonDivider>
 
-					<h3>
-						Details
-					</h3>
-					<div class="font-weight-light body-2">
-						<span class="font-weight-medium">ID: </span>
-						{{ layout.id }}
-					</div>
-					<div class="font-weight-light body-2">
-						<span class="font-weight-medium">Version: </span>
-						{{ layout.details.version }}
-					</div>
-					<div class="font-weight-light body-2">
-						<span class="font-weight-medium">Last Updated:</span>
-						{{ niceDate(layout.last_updated) }}
-					</div>
-					<div class="font-weight-light body-2">
-						<span class="font-weight-medium">Target File: </span>
-						{{ layout.target }}.szs
-					</div>
-					<div class="font-weight-light body-2">
-						<span class="font-weight-medium">Downloads: </span>
-						{{ layout.dl_count }}
-					</div>
+						<h3>
+							Details
+						</h3>
+						<div class="font-weight-light body-2">
+							<span class="font-weight-medium">ID: </span>
+							{{ layout.id }}
+						</div>
+						<div class="font-weight-light body-2">
+							<span class="font-weight-medium">Version: </span>
+							{{ layout.details.version }}
+						</div>
+						<div class="font-weight-light body-2">
+							<span class="font-weight-medium"
+								>Last Updated:</span
+							>
+							{{ niceDate(layout.last_updated) }}
+						</div>
+						<div class="font-weight-light body-2">
+							<span class="font-weight-medium"
+								>Target File:
+							</span>
+							{{ layout.target }}.szs
+						</div>
+						<div class="font-weight-light body-2">
+							<span class="font-weight-medium">Downloads: </span>
+							{{ layout.dl_count }}
+						</div>
 
-					<ButtonDivider>
-						<CustomizeButton
-							v-if="layout.has_pieces"
-							to="customize"
-							:loading="loadingMerge"
-						/>
-						<DownloadButton
-							icon="mdi-code-json"
-							tooltip="Download layout only"
-							:download-function="download"
-							:loading="loadingMerge"
-						/>
-					</ButtonDivider>
+						<ButtonDivider>
+							<CustomizeButton
+								v-if="layout.has_pieces"
+								to="customize"
+								:loading="loadingMerge"
+							/>
+							<DownloadButton
+								icon="mdi-code-json"
+								tooltip="Download layout only"
+								:download-function="download"
+								:loading="loadingMerge"
+							/>
+						</ButtonDivider>
 
-					<div v-if="commonlayoutObject">
+						<div v-if="commonlayoutObject">
+							<h3 style="position: relative;">
+								Common layout
+								<v-tooltip v-model="showCommonInfo" top>
+									<template v-slot:activator="{ on }">
+										<v-btn
+											icon
+											style="position: absolute; top: 0; color: black;"
+											class="ml-1 pa-0 grey lighten-1"
+											width="14"
+											height="14"
+											v-on="on"
+											@click="commonlayoutDialog = true"
+										>
+											?
+										</v-btn>
+									</template>
+									<span>What is this?</span>
+								</v-tooltip>
+							</h3>
+							<div class="font-weight-thin subtitle-1">
+								{{ commonlayoutObject.PatchName }}
+							</div>
+							<div
+								v-if="commonlayoutObject.AuthorName"
+								class="font-weight-light body-2"
+							>
+								<span class="font-weight-medium">
+									Author:
+								</span>
+								{{ commonlayoutObject.AuthorName }}
+							</div>
+							<div class="font-weight-light body-2">
+								<span class="font-weight-medium"
+									>Target File:
+								</span>
+								{{ commonlayoutObject.TargetName }}
+							</div>
+							<ButtonDivider>
+								<DownloadButton
+									tooltip="Download common"
+									:download-function="downloadCommon"
+									:loading="loadingGetCommon"
+								/>
+							</ButtonDivider>
+						</div>
 						<h3 style="position: relative;">
-							Common layout
-							<v-tooltip v-model="showCommonInfo" top>
+							Overlay png
+							<v-tooltip v-model="showOverlayInfo" top>
 								<template v-slot:activator="{ on }">
 									<v-btn
 										icon
@@ -128,7 +178,7 @@
 										width="14"
 										height="14"
 										v-on="on"
-										@click="commonlayoutDialog = true"
+										@click="overlayDialog = true"
 									>
 										?
 									</v-btn>
@@ -136,142 +186,98 @@
 								<span>What is this?</span>
 							</v-tooltip>
 						</h3>
-						<div class="font-weight-thin subtitle-1">
-							{{ commonlayoutObject.PatchName }}
-						</div>
-						<div
-							v-if="commonlayoutObject.AuthorName"
-							class="font-weight-light body-2"
-						>
-							<span class="font-weight-medium">
-								Author:
-							</span>
-							{{ commonlayoutObject.AuthorName }}
-						</div>
-						<div class="font-weight-light body-2">
-							<span class="font-weight-medium"
-								>Target File:
-							</span>
-							{{ commonlayoutObject.TargetName }}
-						</div>
 						<ButtonDivider>
 							<DownloadButton
-								tooltip="Download common"
-								:download-function="downloadCommon"
-								:loading="loadingGetCommon"
+								tooltip="Download overlay"
+								:download-href="
+									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+								"
 							/>
 						</ButtonDivider>
-					</div>
-					<h3 style="position: relative;">
-						Overlay png
-						<v-tooltip v-model="showOverlayInfo" top>
-							<template v-slot:activator="{ on }">
-								<v-btn
-									icon
-									style="position: absolute; top: 0; color: black;"
-									class="ml-1 pa-0 grey lighten-1"
-									width="14"
-									height="14"
-									v-on="on"
-									@click="overlayDialog = true"
-								>
-									?
-								</v-btn>
-							</template>
-							<span>What is this?</span>
-						</v-tooltip>
-					</h3>
-					<ButtonDivider>
-						<DownloadButton
-							tooltip="Download overlay"
-							:download-href="
-								`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+						<nuxt-link
+							:to="
+								`/themes/${fileNameToWebName(
+									layout.target
+								)}?sort=updated&order=desc&layouts=${layout.id}`
 							"
-						/>
-					</ButtonDivider>
-					<nuxt-link
-						:to="
-							`/themes/${fileNameToWebName(
-								layout.target
-							)}?sort=updated&order=desc&layouts=${layout.id}`
+						>
+							<div style="text-shadow: 0 0 4px black;">
+								All Themes made with this layout
+							</div>
+						</nuxt-link>
+					</v-col>
+				</v-row>
+				<v-row class="ma-0">
+					<v-col
+						:class="
+							$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
 						"
 					>
-						<div style="text-shadow: 0 0 4px black;">
-							All Themes made with this layout
-						</div>
-					</nuxt-link>
-				</v-col>
-			</v-row>
-			<v-row class="ma-0">
-				<v-col
-					:class="
-						$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
-					"
-				>
-					<BackgroundsSlideGroup />
-				</v-col>
-			</v-row>
-			<v-dialog v-model="commonlayoutDialog" max-width="400">
-				<v-card>
-					<v-card-title class="headline"
-						>What is the Common layout?</v-card-title
-					>
-
-					<v-card-text>
-						The Common layout is the footer seen in and shared
-						across the Home Menu, All Apps, Settings and News. The
-						stock version contains the currently active controller
-						on the left, the divider line and the button actions on
-						the right. Some layouts include a Common layout to hide
-						the line or make other minor modifications. Modifying
-						the Common layout for Player Select and User Page is
-						unsupported by the Switch Theme Injector. It is always
-						recommended to download and use this layout as well!
-					</v-card-text>
-
-					<v-card-actions>
-						<v-spacer></v-spacer>
-
-						<v-btn
-							rounded
-							color="primary"
-							text
-							@click="commonlayoutDialog = false"
+						<BackgroundsSlideGroup />
+					</v-col>
+				</v-row>
+				<v-dialog v-model="commonlayoutDialog" max-width="400">
+					<v-card>
+						<v-card-title class="headline"
+							>What is the Common layout?</v-card-title
 						>
-							Close
-						</v-btn>
-					</v-card-actions>
-				</v-card>
-			</v-dialog>
-			<v-dialog v-model="overlayDialog" max-width="400">
-				<v-card>
-					<v-card-title class="headline"
-						>What is the Overlay png?</v-card-title
-					>
 
-					<v-card-text>
-						The Overlay png is the image used on this site to
-						preview Layouts. You may also use this to create the
-						'screenshot' you need when uploading a Theme to
-						Themezer.
-					</v-card-text>
+						<v-card-text>
+							The Common layout is the footer seen in and shared
+							across the Home Menu, All Apps, Settings and News.
+							The stock version contains the currently active
+							controller on the left, the divider line and the
+							button actions on the right. Some layouts include a
+							Common layout to hide the line or make other minor
+							modifications. Modifying the Common layout for
+							Player Select and User Page is unsupported by the
+							Switch Theme Injector. It is always recommended to
+							download and use this layout as well!
+						</v-card-text>
 
-					<v-card-actions>
-						<v-spacer></v-spacer>
+						<v-card-actions>
+							<v-spacer></v-spacer>
 
-						<v-btn
-							rounded
-							color="primary"
-							text
-							@click="overlayDialog = false"
+							<v-btn
+								rounded
+								color="primary"
+								text
+								@click="commonlayoutDialog = false"
+							>
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+				<v-dialog v-model="overlayDialog" max-width="400">
+					<v-card>
+						<v-card-title class="headline"
+							>What is the Overlay png?</v-card-title
 						>
-							Close
-						</v-btn>
-					</v-card-actions>
-				</v-card>
-			</v-dialog>
-		</v-sheet>
-		<LoadingOverlay v-else-if="$apollo.loading" />
+
+						<v-card-text>
+							The Overlay png is the image used on this site to
+							preview Layouts. You may also use this to create the
+							'screenshot' you need when uploading a Theme to
+							Themezer.
+						</v-card-text>
+
+						<v-card-actions>
+							<v-spacer></v-spacer>
+
+							<v-btn
+								rounded
+								color="primary"
+								text
+								@click="overlayDialog = false"
+							>
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+			</v-sheet>
+		</LoadingOverlay>
 	</v-container>
 </template>
 
@@ -295,7 +301,8 @@ export default Vue.extend({
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		BackgroundsSlideGroup: () =>
-			import('@/components/BackgroundsSlideGroup.vue')
+			import('@/components/BackgroundsSlideGroup.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	mixins: [errorHandler, shared, targetParser],
 	data() {

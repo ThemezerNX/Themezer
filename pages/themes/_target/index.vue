@@ -118,6 +118,7 @@ export default Vue.extend({
 	apollo: {
 		itemList: {
 			query: themeList,
+			fetchPolicy: 'cache-and-network',
 			variables() {
 				const vars = {
 					q: 'themeList',

@@ -5,46 +5,47 @@
 		:fluid="$vuetify.breakpoint.smAndDown"
 		style="height: 100%;"
 	>
-		<v-sheet v-if="theme" no-gutters class="pa-2 box_fill">
-			<h1 class="box_text">Edit Theme</h1>
-			<nuxt-link
-				class="font-weight-bold"
-				:to="
-					`/themes/${fileNameToWebName(
-						theme.target
-					)}/${createUrlString(theme.id, theme.details.name)}`
-				"
-			>
-				<h2 class="box_text mt-0">{{ theme.details.name }}</h2>
-			</nuxt-link>
-			<div class="subtitle-1 box_text">
-				Part of
+		<LoadingOverlay :loading="$apollo.loading">
+			<v-sheet v-if="theme" no-gutters class="pa-2 box_fill">
+				<h1 class="box_text">Edit Theme</h1>
 				<nuxt-link
 					class="font-weight-bold"
 					:to="
-						`/packs/${createUrlString(
-							theme.pack.id,
-							theme.pack.details.name
-						)}`
+						`/themes/${fileNameToWebName(
+							theme.target
+						)}/${createUrlString(theme.id, theme.details.name)}`
 					"
 				>
-					{{ theme.pack.details.name }}
+					<h2 class="box_text mt-0">{{ theme.details.name }}</h2>
 				</nuxt-link>
-			</div>
+				<div v-if="theme.pack" class="subtitle-1 box_text">
+					Part of
+					<nuxt-link
+						class="font-weight-bold"
+						:to="
+							`/packs/${createUrlString(
+								theme.pack.id,
+								theme.pack.details.name
+							)}`
+						"
+					>
+						{{ theme.pack.details.name }}
+					</nuxt-link>
+				</div>
 
-			<v-form ref="submitForm" v-model="submitValid">
-				<v-col cols="12" xs="12" sm="4" md="2" class="pa-2">
-					<v-hover v-slot:default="{ hover }">
-						<v-img
-							aspect-ratio="1.7778"
-							class="placeholder"
-							:src="
-								uploadedScreenshotUrl ||
-									`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-							"
-							contain
-						>
-							<!-- <v-expand-transition>
+				<v-form ref="submitForm" v-model="submitValid">
+					<v-col cols="12" xs="12" sm="4" md="2" class="pa-2">
+						<v-hover v-slot:default="{ hover }">
+							<v-img
+								aspect-ratio="1.7778"
+								style="border-radius: 10px;"
+								:src="
+									uploadedScreenshotUrl ||
+										`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
+								"
+								contain
+							>
+								<!-- <v-expand-transition>
 								<div
 									v-if="!uploadedScreenshot || hover"
 									class="d-flex display-3 transition-fast-in-fast-out v-card--reveal"
@@ -66,29 +67,36 @@
 									/>
 								</div>
 							</v-expand-transition> -->
-						</v-img>
-					</v-hover>
-				</v-col>
+							</v-img>
+						</v-hover>
+					</v-col>
 
-				<v-col
-					cols="12"
-					xs="12"
-					sm="8"
-					md="10"
-					class="pa-2"
-					style="position: relative;"
-				>
-				</v-col>
-			</v-form>
+					<v-col
+						cols="12"
+						xs="12"
+						sm="8"
+						md="10"
+						class="pa-2"
+						style="position: relative;"
+					>
+					</v-col>
+				</v-form>
 
-			<ButtonDivider>
-				<DeleteButton
-					:id="theme.id"
-					type="theme"
-					:query="deleteQuery"
-					:return-url="`/themes/${this.$route.params.target}`"
-				/>
-				<!-- <v-btn
+				<ButtonDivider>
+					<DeleteButton
+						:id="theme.id"
+						type="theme"
+						:query="deleteQuery"
+						:go-back="
+							!!(
+								fromRoute &&
+								fromRoute.name &&
+								fromRoute.name.startsWith('packs')
+							)
+						"
+						:return-url="`/themes/${this.$route.params.target}`"
+					/>
+					<!-- <v-btn
 					rounded
 					:disabled="!changes || loading.submit"
 					color="red"
@@ -107,9 +115,9 @@
 				>
 					Save <v-icon right>mdi-cube-send</v-icon>
 				</v-btn> -->
-			</ButtonDivider>
-		</v-sheet>
-		<LoadingOverlay v-else-if="$apollo.loading" />
+				</ButtonDivider>
+			</v-sheet>
+		</LoadingOverlay>
 	</v-container>
 </template>
 
@@ -121,19 +129,22 @@ import { theme, deleteTheme } from '@/graphql/Theme.gql'
 import urlParser from '~/components/mixins/urlParser'
 
 export default Vue.extend({
-	beforeRouteEnter(_to, _from, next) {
+	beforeRouteEnter(_to, from, next) {
 		next((vm) => {
+			vm.fromRoute = from
 			if (vm.$auth.loggedIn) next()
 			else next('/')
 		})
 	},
 	components: {
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-		DeleteButton: () => import('@/components/buttons/DeleteButton.vue')
+		DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	mixins: [errorHandler, urlParser, targetParser],
 	data() {
 		return {
+			fromRoute: null,
 			isPageOwner: true,
 			loading: {
 				submit: false
@@ -175,6 +186,7 @@ export default Vue.extend({
 	apollo: {
 		theme: {
 			query: theme,
+			fetchPolicy: 'cache-and-network',
 			variables() {
 				return {
 					id: this.id
