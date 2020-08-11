@@ -98,7 +98,7 @@
 						<span class="font-weight-bold"
 							>Theme Installer ID:
 						</span>
-						T{{ theme.id }}
+						t{{ theme.id }}
 					</div>
 					<div class="font-weight-light body-2">
 						<span class="font-weight-medium">ID: </span>
