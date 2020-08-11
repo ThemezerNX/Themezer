@@ -1,22 +1,3 @@
-query myLikes {
-	me {
-		liked {
-			creators {
-				id
-			}
-			layouts {
-				id
-			}
-			themes {
-				id
-			}
-			packs {
-				id
-			}
-		}
-	}
-}
-
 mutation setLike($type: String!, $id: String!, $value: Boolean!) {
 	setLike(type: $type, id: $id, value: $value)
 }

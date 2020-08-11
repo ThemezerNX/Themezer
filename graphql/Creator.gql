@@ -1,3 +1,23 @@
+query extendMe {
+	me {
+		role
+		liked {
+			creators {
+				id
+			}
+			layouts {
+				id
+			}
+			themes {
+				id
+			}
+			packs {
+				id
+			}
+		}
+	}
+}
+
 query me {
 	me {
 		id
@@ -14,6 +34,7 @@ query me {
 		logo_image
 		profile_color
 		like_count
+		old_ids
 	}
 }
 
@@ -33,6 +54,7 @@ query creator($id: String!) {
 		logo_image
 		profile_color
 		like_count
+		old_ids
 	}
 }
 
@@ -49,6 +71,7 @@ mutation restoreAccount($creator_id: String!, $backup_code: String!) {
 }
 
 mutation updateProfile(
+	$id: String!
 	$custom_username: String
 	$bio: String
 	$profile_color: String
@@ -58,6 +81,7 @@ mutation updateProfile(
 	$clear_logo_image: Boolean
 ) {
 	updateProfile(
+		id: $id
 		custom_username: $custom_username
 		bio: $bio
 		profile_color: $profile_color

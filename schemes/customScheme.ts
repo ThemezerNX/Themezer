@@ -1,5 +1,5 @@
 import Oauth2Scheme from '@nuxtjs/auth-next/dist/schemes/oauth2'
-import { myLikes } from '@/graphql/Like.gql'
+import { extendMe } from '@/graphql/Creator.gql'
 
 export default class CustomScheme extends Oauth2Scheme {
 	async fetchUser() {
@@ -23,7 +23,7 @@ export default class CustomScheme extends Oauth2Scheme {
 			const {
 				data: { me }
 			} = await $apollo.query({
-				query: myLikes,
+				query: extendMe,
 				fetchPolicy: 'network-only'
 			})
 

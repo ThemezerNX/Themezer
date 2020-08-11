@@ -74,7 +74,11 @@
 						</v-tooltip>
 					</h1>
 				</v-col>
-				<v-col v-if="isPageOwner" class="text-center" cols="12">
+				<v-col
+					v-if="isPageOwner || isAdmin"
+					class="text-center"
+					cols="12"
+				>
 					<ButtonDivider :hide-dividers="true">
 						<v-btn
 							rounded
@@ -360,6 +364,7 @@ export default Vue.extend({
 			isPageOwner:
 				this.$auth.loggedIn &&
 				this.$route.params.id === this.$auth.user.id,
+			isAdmin: this.$auth.user.role === 'admin',
 			editDialog: false,
 			submitValid: false,
 			loading: {
@@ -419,7 +424,7 @@ export default Vue.extend({
 	apollo: {
 		creator: {
 			query() {
-				return this.$data.isPageOwner ? me : creator
+				return this.$data.isPageOwner && !this.isAdmin ? me : creator
 			},
 			variables() {
 				return {
@@ -427,7 +432,7 @@ export default Vue.extend({
 				}
 			},
 			update(res) {
-				if (this.$data.isPageOwner) {
+				if (this.$data.isPageOwner && !this.$data.isAdmin) {
 					return res?.me
 				} else {
 					return res?.creator
@@ -481,7 +486,7 @@ export default Vue.extend({
 	watch: {
 		creator(creator) {
 			if (creator) {
-				if (this.id !== creator.id) {
+				if (creator.old_ids && creator.old_ids.includes(this.id)) {
 					// Sort of redirect, needs proper HTML 301 (moved permanently)
 					this.$router.push(`/creators/${creator.id}`)
 				} else {
@@ -539,6 +544,7 @@ export default Vue.extend({
 				.mutate({
 					mutation: updateProfile,
 					variables: {
+						id: this.id,
 						custom_username: this.changed.customUsername,
 						bio: this.changed.bio,
 						profile_color: this.changed.profileColor,

@@ -3,7 +3,7 @@
 		v-model="snackbar"
 		bottom
 		:timeout="8000"
-		:color="error ? 'error' : 'green'"
+		:color="error ? 'error' : 'green darken-1'"
 	>
 		{{ error || message }}
 	</v-snackbar>
