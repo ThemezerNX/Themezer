@@ -305,9 +305,13 @@
 													"
 													rounded
 													label="Theme description"
+													minlength="10"
 													maxlength="500"
 													counter="500"
 													outlined
+													:rules="[
+														rules.description_length
+													]"
 													prepend-icon="mdi-pencil-outline"
 													@change="forceUpdate++"
 												></v-text-field>
@@ -423,18 +427,22 @@
 								label="Pack Name*"
 								outlined
 								prepend-icon="mdi-pencil-outline"
-								:rules="[rules.required]"
+								:rules="[rules.required, rules.name_length]"
 								@change="forceUpdate++"
 							></v-text-field>
 							<v-text-field
 								v-if="selectedSubmitType === 'pack'"
 								v-model="submitDetails.description"
 								rounded
+								minlength="10"
 								maxlength="500"
 								counter="500"
 								label="Pack Description*"
 								outlined
-								:rules="[rules.required]"
+								:rules="[
+									rules.required,
+									rules.description_length
+								]"
 								prepend-icon="mdi-pencil-outline"
 								@change="forceUpdate++"
 							></v-text-field>
@@ -615,6 +623,14 @@ export default Vue.extend({
 			selectedSubmitType: null,
 			submitValid: false,
 			rules: {
+				description_length: (value) =>
+					!value ||
+					(value.length >= 10 && value.length <= 500) ||
+					'A description must be between 9 and 501 characters long',
+				name_length: (value) =>
+					!value ||
+					(value.length >= 3 && value.length <= 50) ||
+					'A name must be between 2 and 51 characters long',
 				required: (value) => !!value || 'Required',
 				category_length: (values) =>
 					!values ||
