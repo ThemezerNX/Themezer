@@ -66,7 +66,7 @@
 					>
 						<v-col cols="12" class="pt-0">
 							<h2>
-								Latest Updated Layouts
+								Latest Layouts
 							</h2>
 							<v-divider />
 							<ItemGrid
@@ -108,8 +108,7 @@ export default Vue.extend({
 			variables() {
 				const vars = {
 					q: 'packList',
-					limit: 12,
-					sort: 'updated'
+					limit: 12
 				}
 				vars.hash = this.$hashString(vars)
 
@@ -125,8 +124,7 @@ export default Vue.extend({
 			variables() {
 				const vars = {
 					q: 'themeList',
-					limit: 12,
-					sort: 'updated'
+					limit: 12
 				}
 				vars.hash = this.$hashString(vars)
 
@@ -142,8 +140,7 @@ export default Vue.extend({
 			variables() {
 				const vars = {
 					q: 'layoutList',
-					limit: 12,
-					sort: 'updated'
+					limit: 12
 				}
 				vars.hash = this.$hashString(vars)
 

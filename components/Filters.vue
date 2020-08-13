@@ -196,19 +196,21 @@ export default Vue.extend({
 				{
 					title: 'Downloads',
 					id: 'downloads',
-					key: 'dl_count',
 					icon: 'mdi-download-outline'
 				},
 				{
 					title: 'Likes',
 					id: 'likes',
-					key: 'like_count',
 					icon: 'mdi-heart'
 				},
 				{
 					title: 'Updated',
 					id: 'updated',
-					key: 'last_updated',
+					icon: 'mdi-calendar-edit'
+				},
+				{
+					title: 'Added',
+					id: 'id',
 					icon: 'mdi-calendar-clock'
 				}
 			],
