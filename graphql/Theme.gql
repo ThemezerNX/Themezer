@@ -56,6 +56,10 @@ query theme($id: String!) {
 		dl_count
 		like_count
 		bg_type
+		preview {
+			original
+			thumb
+		}
 	}
 }
 
@@ -77,6 +81,9 @@ query rowThemeList($target: String, $limit: Int, $page: Int, $query: String, $so
 		}
 		target
 		last_updated
+		preview {
+			thumb
+		}
 	}
 }
 
@@ -104,6 +111,9 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
 		categories
 		dl_count
 		like_count
+		preview {
+			thumb
+		}
 	}
 
 	pagination(hash: $hash) {

@@ -43,6 +43,9 @@ query pack($id: String!) {
 				name
 			}
 			target
+			preview {
+				thumb
+			}
 		}
 	}
 }
@@ -62,6 +65,9 @@ query rowPackList($limit: Int, $page: Int, $query: String, $sort: String, $order
 			id
 			layout {
 				id
+			}
+			preview {
+				thumb
 			}
 		}
 	}
@@ -90,6 +96,9 @@ query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: S
 				details {
 					name
 				}
+			}
+			preview {
+				thumb
 			}
 		}
 	}

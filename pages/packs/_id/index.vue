@@ -28,9 +28,7 @@
 								:key="i"
 								height="auto"
 								aspect-ratio="1.7778"
-								:src="
-									`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-								"
+								:src="theme.preview.thumb"
 							>
 							</v-carousel-item>
 						</v-carousel>
@@ -103,14 +101,6 @@
 						<h3>
 							Details
 						</h3>
-						<div
-							class="font-weight-light text-body-1 font-weight-medium"
-						>
-							<span class="font-weight-bold"
-								>Theme Installer ID:
-							</span>
-							p{{ pack.id }}
-						</div>
 						<div class="font-weight-light body-2">
 							<span class="font-weight-medium">ID: </span>
 							{{ pack.id }}
@@ -137,6 +127,10 @@
 								:loading="loadingDownload"
 							/>
 						</ButtonDivider>
+
+						<ThemeInstaller :id="pack.id" type="pack" />
+
+						<ButtonDivider />
 					</v-col>
 				</v-row>
 				<v-row class="ma-0">
@@ -167,6 +161,8 @@ import { pack, downloadPack } from '@/graphql/Pack.gql'
 
 export default Vue.extend({
 	components: {
+		ThemeInstaller: () =>
+			import('@/components/sections/ThemeInstaller.vue'),
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
@@ -253,7 +249,7 @@ export default Vue.extend({
 		if (this.pack) {
 			const metaTitle = `${this.pack.details.name} | Packs`
 			const metaDesc = this.pack.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.pack.themes[0].id}/screenshot.jpg`
+			const metaImg = this.pack.themes[0].preview.thumb
 
 			return {
 				title: metaTitle,

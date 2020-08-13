@@ -1,0 +1,84 @@
+<template>
+	<div style="text-align: center">
+		<h3 style="position: relative;">
+			Theme Installer
+			<v-tooltip v-model="showTooltip" top>
+				<template v-slot:activator="{ on }">
+					<v-btn
+						icon
+						style="position: absolute; top: 0; color: black;"
+						class="ml-1 pa-0 grey lighten-1"
+						width="14"
+						height="14"
+						v-on="on"
+						@click="show = true"
+					>
+						?
+					</v-btn>
+				</template>
+				<span>What is this?</span>
+			</v-tooltip>
+		</h3>
+		<v-dialog v-model="show" max-width="400">
+			<v-card>
+				<v-card-title class="headline"
+					>What is the Theme Installer?</v-card-title
+				>
+
+				<v-card-text>
+					The
+					<a
+						href="https://github.com/exelix11/SwitchThemeInjector/"
+						target="_blank"
+						>Theme Installer</a
+					>
+					is an homebrew app that runs on the switch itself and can be
+					used to install and manage themes. The IDs displayed on
+					Themezer can be used to install them directly. The ID
+					<span
+						class="text-overline"
+						style="font-size: 0.9rem !important;"
+					>
+						({{ type === 'theme' ? 't' : 'p' }}{{ id }})</span
+					>can be input on the 'Download themes' tab in the app. Be
+					sure to select Themezer as the provider.
+				</v-card-text>
+
+				<v-card-actions>
+					<v-spacer></v-spacer>
+
+					<v-btn rounded color="primary" text @click="show = false">
+						Close
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<div class="font-weight-light text-body-1 font-weight-medium">
+			<span class="text-overline" style="font-size: 1.2rem !important;">
+				{{ type === 'theme' ? 't' : 'p' }}{{ id }}
+			</span>
+		</div>
+	</div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+	props: {
+		id: {
+			type: String,
+			required: true
+		},
+		type: {
+			type: String,
+			required: true
+		}
+	},
+	data() {
+		return {
+			showTooltip: false,
+			show: false
+		}
+	}
+})
+</script>

@@ -32,9 +32,7 @@
 					:key="i"
 					height="auto"
 					aspect-ratio="1.7778"
-					:src="
-						`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-					"
+					:src="theme.preview.thumb"
 				>
 				</v-carousel-item>
 			</v-carousel>
@@ -113,8 +111,7 @@ export default Vue.extend({
 		imgSrc(): String {
 			if (this.type === 'layouts')
 				return `//api.themezer.ga/cdn/layouts/${this.item.uuid}/overlay.png`
-			else if (this.type === 'themes')
-				return `//api.themezer.ga/cdn/themes/${this.item.id}/screenshot.jpg`
+			else if (this.type === 'themes') return this.item.preview.thumb
 			else return ''
 		}
 	}

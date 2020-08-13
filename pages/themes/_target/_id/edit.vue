@@ -40,8 +40,7 @@
 								aspect-ratio="1.7778"
 								style="border-radius: 10px;"
 								:src="
-									uploadedScreenshotUrl ||
-										`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
+									uploadedScreenshotUrl || theme.preview.thumb
 								"
 								contain
 							>
@@ -228,7 +227,7 @@ export default Vue.extend({
 				this.theme.details.name
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.theme.id}/screenshot.jpg`
+			const metaImg = this.theme.preview.thumb
 
 			return {
 				title: metaTitle,

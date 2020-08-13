@@ -3,14 +3,15 @@
 		<v-divider
 			v-if="!hideDividers"
 			class="mx-2"
-			:class="!!$slots.default ? 'my-auto' : ''"
+			:class="!!$slots.default ? 'my-auto' : 'my-2'"
 		/>
 		<div class="button-parent">
 			<slot />
 		</div>
 		<v-divider
 			v-if="!hideDividers && !!$slots.default"
-			class="mx-2 my-auto"
+			class="mx-2"
+			:class="!!$slots.default ? 'my-auto' : 'my-2'"
 		/>
 	</v-flex>
 </template>

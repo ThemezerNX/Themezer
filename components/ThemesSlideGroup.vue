@@ -40,9 +40,7 @@
 
 							<v-img
 								aspect-ratio="1.7778"
-								:src="
-									`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-								"
+								:src="theme.preview.thumb"
 								:width="
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"

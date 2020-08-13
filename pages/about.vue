@@ -7,8 +7,7 @@
 			<v-card-text>
 				<p>
 					Themezer is a site for Nintendo Switch themes and layouts
-					for themes. Source Code for the Website and API are
-					available on the
+					for themes. Source Code for the project can be found on the
 					<a
 						href="https://github.com/ThemezerNX"
 						target="_blank"
@@ -37,8 +36,7 @@
 				<div>
 					What does the
 					<CertifiedBadge inline /> badge mean? It means that the
-					layout used in the theme was downloaded from Themezer and is
-					automatically updated when downloading.
+					theme is kept up to date whenever there are layout changes.
 				</div>
 				<p class="mt-4">
 					Need to restore your Themezer account?

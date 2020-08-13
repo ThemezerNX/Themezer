@@ -42,9 +42,7 @@
 							<v-img
 								aspect-ratio="1.7778"
 								style="border-radius: 10px;"
-								:src="
-									`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-								"
+								:src="theme.preview.thumb"
 								contain
 							/>
 						</v-list-item-avatar>
@@ -191,7 +189,7 @@ export default Vue.extend({
 		if (this.pack) {
 			const metaTitle = `Edit | ${this.pack.details.name} | Packs`
 			const metaDesc = this.pack.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.pack.themes[0].id}/screenshot.jpg`
+			const metaImg = this.pack.themes[0].preview.thumb
 
 			return {
 				title: metaTitle,

@@ -17,9 +17,7 @@
 					>
 						<v-img
 							aspect-ratio="1.7778"
-							:src="
-								`//api.themezer.ga/cdn/themes/${theme.id}/screenshot.jpg`
-							"
+							:src="theme.preview.original"
 							contain
 							class="overlay-image"
 							:style="backgroundStyle"
@@ -93,14 +91,6 @@
 						<h3>
 							Details
 						</h3>
-						<div
-							class="font-weight-light text-body-1 font-weight-medium"
-						>
-							<span class="font-weight-bold"
-								>Theme Installer ID:
-							</span>
-							t{{ theme.id }}
-						</div>
 						<div class="font-weight-light body-2">
 							<span class="font-weight-medium">ID: </span>
 							{{ theme.id }}
@@ -172,6 +162,10 @@
 								:loading="loadingDownload"
 							/>
 						</ButtonDivider>
+
+						<ThemeInstaller :id="theme.id" type="theme" />
+
+						<ButtonDivider />
 
 						<div v-if="theme.pack">
 							<h3 style="position: relative;">
@@ -251,6 +245,8 @@ import { theme, downloadTheme } from '@/graphql/Theme.gql'
 
 export default Vue.extend({
 	components: {
+		ThemeInstaller: () =>
+			import('@/components/sections/ThemeInstaller.vue'),
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
@@ -352,7 +348,7 @@ export default Vue.extend({
 				this.theme.details.name
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = `//api.themezer.ga/cdn/themes/${this.theme.id}/screenshot.jpg`
+			const metaImg = this.theme.preview.thumb
 
 			return {
 				title: metaTitle,
