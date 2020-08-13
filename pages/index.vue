@@ -34,7 +34,7 @@
 							</h2>
 							<v-divider />
 							<ItemGrid
-								more-url="/packs?sort=updated&order=desc"
+								more-url="/packs?sort=id&order=desc"
 								:items="packList"
 								type="packs"
 								:show-props="['creator']"
@@ -52,7 +52,7 @@
 							</h2>
 							<v-divider />
 							<ItemGrid
-								more-url="/themes?sort=updated&order=desc"
+								more-url="/themes?sort=id&order=desc"
 								:items="themeList"
 								type="themes"
 								:show-props="['creator']"
@@ -70,7 +70,7 @@
 							</h2>
 							<v-divider />
 							<ItemGrid
-								more-url="/layouts?sort=updated&order=desc"
+								more-url="/layouts?sort=id&order=desc"
 								:items="layoutList"
 								type="layouts"
 								:show-props="['creator']"

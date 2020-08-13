@@ -17,7 +17,7 @@
 					>.
 				</p>
 				<p>
-					If you have any question, please join the
+					If you have any questions, please join the
 					<a
 						href="https://discord.gg/VBa3bjp"
 						target="_blank"
