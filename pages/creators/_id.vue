@@ -211,6 +211,7 @@
 							prepend-icon="mdi-pencil"
 							counter="50"
 							label="Custom display name"
+							:rules="[rules.utf8_only]"
 							@change="
 								changed.customUsername === ''
 									? (changed.customUsername = null)
@@ -383,11 +384,22 @@ export default Vue.extend({
 
 			avatar: null,
 			rules: {
+				utf8_only: (input) => {
+					if (!input) return true
+					let output = ''
+					for (let i = 0; i < input.length; i++) {
+						if (input.charCodeAt(i) <= 127) {
+							output += input.charAt(i)
+						}
+					}
+					return (
+						input === output || 'Only UTF-8 characters are allowed'
+					)
+				},
 				hex: (value) =>
 					!value ||
-					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
-						? true
-						: 'Invalid HEX color'),
+					/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value) ||
+					'Invalid HEX color',
 				banner_size: (file) =>
 					!file ||
 					file.size < 1048576 ||
