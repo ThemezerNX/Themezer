@@ -429,7 +429,7 @@ export default Vue.extend({
 					return 'mdi-shield-check'
 				case 'verified':
 					return 'mdi-check-decagram'
-				case 'cool':
+				case 'cool dino':
 					return 'mdi-google-downasaur'
 
 				default:

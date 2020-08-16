@@ -112,6 +112,10 @@ query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: S
 	}
 }
 
+query randomPackIDs($limit: Int!) {
+	randomPackIDs(limit: $limit)
+}
+
 query downloadPack($id: String!) {
 	downloadPack(id: $id) {
 		filename

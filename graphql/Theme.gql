@@ -125,6 +125,10 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
 	}
 }
 
+query randomThemeIDs($limit: Int!) {
+	randomThemeIDs(limit: $limit)
+}
+
 query downloadTheme($id: String!, $piece_uuids: [GUID!]) {
 	downloadTheme(id: $id, piece_uuids: $piece_uuids) {
 		filename

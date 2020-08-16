@@ -86,6 +86,10 @@ query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $quer
 	}
 }
 
+query randomLayoutIDs($limit: Int!) {
+	randomLayoutIDs(limit: $limit)
+}
+
 query downloadLayout($id: String!, $piece_uuids: [GUID!]) {
 	downloadLayout(id: $id, piece_uuids: $piece_uuids)
 }

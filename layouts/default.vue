@@ -159,6 +159,30 @@
 				</v-toolbar-title>
 			</NuxtLink>
 			<v-spacer />
+			<v-toolbar-items>
+				<v-menu bottom left>
+					<template v-slot:activator="{ on, attrs }">
+						<v-btn dark icon v-bind="attrs" v-on="on">
+							<v-icon>mdi-shuffle</v-icon>
+						</v-btn>
+					</template>
+
+					<v-list>
+						<v-list-item
+							v-for="(item, i) in randomMenuItems"
+							:key="i"
+							@click="item.function"
+						>
+							<v-list-item-action>
+								<v-icon v-text="item.icon" />
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title v-text="item.title" />
+							</v-list-item-content>
+						</v-list-item>
+					</v-list>
+				</v-menu>
+			</v-toolbar-items>
 		</v-app-bar>
 		<v-main class="content">
 			<nuxt />
@@ -273,6 +297,9 @@
 
 <script>
 import { updateAuth } from '@/graphql/Creator.gql'
+import { randomPackIDs } from '@/graphql/Pack.gql'
+import { randomThemeIDs } from '@/graphql/Theme.gql'
+import { randomLayoutIDs } from '@/graphql/Layout.gql'
 import targets from '@/components/mixins/targets'
 
 export default {
@@ -319,6 +346,23 @@ export default {
 					icon: 'mdi-information-outline',
 					title: 'About',
 					to: '/about'
+				}
+			],
+			randomMenuItems: [
+				{
+					icon: 'mdi-folder-zip-outline',
+					title: 'Random Pack',
+					function: this.randomPack
+				},
+				{
+					icon: 'mdi-format-color-fill',
+					title: 'Random Theme',
+					function: this.randomTheme
+				},
+				{
+					icon: 'mdi-code-json',
+					title: 'Random Layout',
+					function: this.randomLayout
 				}
 			],
 			acceptDialog: false,
@@ -378,6 +422,54 @@ export default {
 		}
 	},
 	methods: {
+		randomPack() {
+			this.$apollo
+				.query({
+					query: randomPackIDs,
+					variables: {
+						limit: 1
+					},
+					fetchPolicy: 'no-cache'
+				})
+				.then(({ data }) => {
+					this.$router.push(`/packs/${data.randomPackIDs[0]}`)
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+				})
+		},
+		randomTheme() {
+			this.$apollo
+				.query({
+					query: randomThemeIDs,
+					variables: {
+						limit: 1
+					},
+					fetchPolicy: 'no-cache'
+				})
+				.then(({ data }) => {
+					this.$router.push(`/themes/_/${data.randomThemeIDs[0]}`)
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+				})
+		},
+		randomLayout() {
+			this.$apollo
+				.query({
+					query: randomLayoutIDs,
+					variables: {
+						limit: 1
+					},
+					fetchPolicy: 'no-cache'
+				})
+				.then(({ data }) => {
+					this.$router.push(`/layouts/_/${data.randomLayoutIDs[0]}`)
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+				})
+		},
 		logout() {
 			this.error = null
 			return this.$auth.logout('social').catch((e) => {
