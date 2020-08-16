@@ -1,11 +1,6 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
-		<LoadingOverlay :loading="$apollo.loading">
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<LoadingOverlay :loading="!!$apollo.loading">
 			<v-sheet v-if="theme" no-gutters class="pa-2 box_fill">
 				<h1 class="box_text">Edit Theme</h1>
 				<nuxt-link
@@ -122,7 +117,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import targetParser from '@/components/mixins/targetParser'
 import { theme, deleteTheme } from '@/graphql/Theme.gql'
 import urlParser from '~/components/mixins/urlParser'
@@ -140,7 +134,7 @@ export default Vue.extend({
 		DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [errorHandler, urlParser, targetParser],
+	mixins: [urlParser, targetParser],
 	data() {
 		return {
 			fromRoute: null,
@@ -207,9 +201,9 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
-			prefetch: true
+			prefetch: false
 		}
 	},
 	methods: {

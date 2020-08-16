@@ -86,7 +86,7 @@ query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $quer
 	}
 }
 
-query randomLayoutIDs($limit: Int!) {
+query randomLayoutIDs($limit: Int) {
 	randomLayoutIDs(limit: $limit)
 }
 

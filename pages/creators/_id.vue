@@ -1,350 +1,365 @@
 <template>
-	<error v-if="error" :error="error" />
-	<div v-else-if="creator && id === creator.id">
-		<v-parallax
-			:src="
-				creator.banner_image
-					? `//api.themezer.ga/cdn/creators/${creator.id}/banner/${creator.banner_image}`
-					: ''
-			"
-			class="d-flex align-center justify-center parallax"
-		>
-			<v-row class="profile d-flex py-4" align="center" justify="center">
-				<v-col class="text-center" cols="12">
-					<v-img
-						v-if="creator.logo_image"
-						contain
-						class="ma-auto"
-						:width="$vuetify.breakpoint.smAndDown ? 200 : 300"
-						max-width="100%"
-						max-height="50vh"
-						:src="
-							`//api.themezer.ga/cdn/creators/${creator.id}/logo/${creator.logo_image}`
-						"
-					>
-					</v-img>
-					<v-avatar
-						v-else
-						:size="$vuetify.breakpoint.smAndDown ? 150 : 200"
-						class="avatar"
-					>
-						<img
-							v-if="avatar"
-							:src="
-								`https://cdn.discordapp.com/${avatar}?size=256`
-							"
-							alt="Creator Avatar"
-						/>
-					</v-avatar>
-				</v-col>
-				<v-col class="text-center" cols="12">
-					<h1 class="font-weight-regular discord-name py-1 px-3">
-						<v-avatar
+	<LoadingOverlay :loading="!!$apollo.loading">
+		<div v-if="creator && id === creator.id">
+			<v-parallax
+				:src="
+					creator.banner_image
+						? `//api.themezer.ga/cdn/creators/${creator.id}/banner/${creator.banner_image}`
+						: ''
+				"
+				class="d-flex align-center justify-center parallax"
+			>
+				<v-row
+					class="profile d-flex py-4"
+					align="center"
+					justify="center"
+				>
+					<v-col class="text-center" cols="12">
+						<v-img
 							v-if="creator.logo_image"
-							:size="$vuetify.breakpoint.smAndDown ? 32 : 48"
+							contain
+							class="ma-auto"
+							:width="$vuetify.breakpoint.smAndDown ? 200 : 300"
+							max-width="100%"
+							max-height="50vh"
+							:src="
+								`//api.themezer.ga/cdn/creators/${creator.id}/logo/${creator.logo_image}`
+							"
+						>
+						</v-img>
+						<v-avatar
+							v-else
+							:size="$vuetify.breakpoint.smAndDown ? 150 : 200"
 							class="avatar"
 						>
 							<img
+								v-if="avatar"
 								:src="
-									`https://cdn.discordapp.com/${avatar}?size=64`
+									`https://cdn.discordapp.com/${avatar}?size=256`
 								"
 								alt="Creator Avatar"
 							/>
 						</v-avatar>
-						{{ creator.display_name
-						}}{{
-							!!creator.custom_username
-								? ''
-								: `#${creator.discord_user.discriminator}`
-						}}
-						<v-tooltip top>
-							<template v-slot:activator="{ on, attrs }">
-								<v-icon
-									v-if="roleIcon"
-									class="mt-n1"
-									v-bind="attrs"
-									v-on="on"
-								>
-									{{ roleIcon }}
-								</v-icon>
-							</template>
-							<span class="text-capitalize">{{
-								creator.role
-							}}</span>
-						</v-tooltip>
-					</h1>
-				</v-col>
-				<v-col
-					v-if="isPageOwner || isAdmin"
-					class="text-center"
-					cols="12"
-				>
-					<ButtonDivider :hide-dividers="true">
-						<v-btn
-							rounded
-							color="secondary"
-							@click="editDialog = true"
-						>
-							Edit Profile <v-icon right>mdi-pencil</v-icon>
-						</v-btn>
-						<LikeButton
-							v-if="$auth.loggedIn"
-							:id="creator.id"
-							type="creators"
-							:count="creator.like_count"
-							:value="
-								$auth.user.liked.creators
-									.map((c) => c.id)
-									.includes(creator.id)
-							"
-						/>
-						<ShareButton
-							type="creator"
-							:name="creator.display_name"
-						/>
-					</ButtonDivider>
-				</v-col>
-			</v-row>
-		</v-parallax>
-		<v-container
-			:fluid="$vuetify.breakpoint.smAndDown"
-			style="height: 100%;"
-		>
-			<v-row align="center" justify="center">
-				<v-col cols="12" class="pt-0">
-					<v-sheet v-if="creator.bio" class="markdown-wrapper">
-						<Markdown class="markdown" :source="creator.bio" />
-					</v-sheet>
-
-					<span v-else
-						>This creator hasn't written anything about him- or
-						herself yet...</span
+					</v-col>
+					<v-col class="text-center" cols="12">
+						<h1 class="font-weight-regular discord-name py-1 px-3">
+							<v-avatar
+								v-if="creator.logo_image"
+								:size="$vuetify.breakpoint.smAndDown ? 32 : 48"
+								class="avatar"
+							>
+								<img
+									:src="
+										`https://cdn.discordapp.com/${avatar}?size=64`
+									"
+									alt="Creator Avatar"
+								/>
+							</v-avatar>
+							{{ creator.display_name
+							}}{{
+								!!creator.custom_username
+									? ''
+									: `#${creator.discord_user.discriminator}`
+							}}
+							<v-tooltip top>
+								<template v-slot:activator="{ on, attrs }">
+									<v-icon
+										v-if="roleIcon"
+										class="mt-n1"
+										v-bind="attrs"
+										v-on="on"
+									>
+										{{ roleIcon }}
+									</v-icon>
+								</template>
+								<span class="text-capitalize">{{
+									creator.role
+								}}</span>
+							</v-tooltip>
+						</h1>
+					</v-col>
+					<v-col
+						v-if="isPageOwner || isAdmin"
+						class="text-center"
+						cols="12"
 					>
-				</v-col>
-			</v-row>
-			<v-row
-				v-if="packList && packList.length > 0"
-				align="center"
-				justify="center"
-			>
-				<v-col cols="12" class="pt-0">
-					<h1>
-						Latest Packs by this creator
-					</h1>
-					<v-divider />
-					<ItemGrid
-						:limit="6"
-						:items="packList"
-						type="packs"
-						:more-url="
-							`/packs?sort=updated&order=desc&creators=${creator.id}`
-						"
-					/>
-				</v-col>
-			</v-row>
-			<v-row
-				v-if="themeList && themeList.length > 0"
-				align="center"
-				justify="center"
-			>
-				<v-col cols="12" class="pt-0">
-					<h1>
-						Latest Themes by this creator
-					</h1>
-					<v-divider />
-					<ItemGrid
-						:limit="6"
-						:items="themeList"
-						type="themes"
-						:more-url="
-							`/themes?sort=updated&order=desc&creators=${creator.id}`
-						"
-					/>
-				</v-col>
-			</v-row>
-			<v-row
-				v-if="layoutList && layoutList.length > 0"
-				align="center"
-				justify="center"
-			>
-				<v-col cols="12" class="pt-0">
-					<h1>
-						Latest Layouts by this creator
-					</h1>
-					<v-divider />
-					<ItemGrid
-						:limit="6"
-						:items="layoutList"
-						type="layouts"
-						:more-url="
-							`/layouts?sort=updated&order=desc&creators=${creator.id}`
-						"
-					/>
-				</v-col>
-			</v-row>
-		</v-container>
-
-		<v-dialog v-model="editDialog" max-width="800" class="mx-auto">
-			<v-form v-model="submitValid">
-				<v-card>
-					<v-card-title
-						class="title font-weight-regular justify-space-between"
-					>
-						<span>Edit Profile</span>
-						<v-spacer></v-spacer>
-
-						<v-btn rounded icon @click="editDialog = false">
-							<v-icon>
-								mdi-close
-							</v-icon>
-						</v-btn>
-					</v-card-title>
-
-					<v-card-text>
-						<v-text-field
-							v-model="changed.customUsername"
-							rounded
-							:disabled="loading.submit"
-							class="pt-1"
-							outlined
-							maxlength="50"
-							prepend-icon="mdi-pencil"
-							counter="50"
-							label="Custom display name"
-							:rules="[rules.utf8_only]"
-							@change="
-								changed.customUsername === ''
-									? (changed.customUsername = null)
-									: null
-							"
-						></v-text-field>
-						<v-textarea
-							v-model="changed.bio"
-							rounded
-							:disabled="loading.submit"
-							class="pt-1"
-							outlined
-							maxlength="1000"
-							prepend-icon="mdi-pencil"
-							counter="1000"
-							label="Bio (supports Markdown and HTML)"
-							auto-grow
-							@change="
-								changed.bio === '' ? (changed.bio = null) : null
-							"
-						></v-textarea>
-						<span class="caption grey--text text--darken-1">
-							Profile color will affect the navigation bar and
-							side menu
-						</span>
-						<v-text-field
-							v-model="changed.profileColor"
-							rounded
-							:disabled="loading.submit"
-							class="pt-2"
-							label="Profile color"
-							:color="changed.profileColor"
-							outlined
-							maxlength="7"
-							:rules="[rules.hex]"
-							prepend-icon="mdi-format-color-fill"
-							@change="
-								changed.profileColor === ''
-									? (changed.profileColor = null)
-									: null
-							"
-						></v-text-field>
-						<v-file-input
-							v-model="changed.bannerImage"
-							rounded
-							label="Banner (recommended: 1920x800)"
-							outlined
-							prepend-icon="mdi-image-area"
-							:rules="[rules.banner_size]"
-							accept="image/*"
-							:disabled="
-								changed.clearBannerImage || loading.submit
-							"
-						/>
-						<v-flex class="d-flex mt-n4 mb-2">
-							<v-spacer />
+						<ButtonDivider :hide-dividers="true">
 							<v-btn
 								rounded
-								:disabled="
-									!creator.banner_image ||
-										changed.clearBannerImage ||
-										changed.bannerImage ||
-										loading.submit
-								"
-								text
-								color="red"
-								@click.prevent="changed.clearBannerImage = true"
-							>
-								Remove current banner
-								<v-icon right>mdi-delete-outline</v-icon>
-							</v-btn>
-						</v-flex>
-						<v-file-input
-							v-model="changed.logoImage"
-							rounded
-							label="Logo (replaces Discord avatar)"
-							outlined
-							prepend-icon="mdi-image"
-							:rules="[rules.logo_size]"
-							accept="image/*"
-							:disabled="changed.clearLogoImage || loading.submit"
-						/>
-						<v-flex class="d-flex mt-n4 mb-2">
-							<v-spacer />
-							<v-btn
-								rounded
-								:disabled="
-									!creator.logo_image ||
-										changed.clearLogoImage ||
-										changed.logoImage ||
-										loading.submit
-								"
-								text
-								color="red"
-								@click.prevent="changed.clearLogoImage = true"
-							>
-								Remove current logo
-								<v-icon right>mdi-delete-outline</v-icon>
-							</v-btn>
-						</v-flex>
-						<v-flex class="d-flex">
-							<v-btn
-								rounded
-								:disabled="!changes || loading.submit"
-								color="red"
-								@click.prevent="discard()"
-							>
-								Discard
-								<v-icon right>mdi-delete-sweep-outline</v-icon>
-							</v-btn>
-							<v-spacer />
-							<v-btn
-								rounded
-								:disabled="!submitValid || !changes"
 								color="secondary"
-								type="submit"
-								:loading="loading.submit"
-								@click.prevent="submit()"
+								@click="editDialog = true"
 							>
-								Save <v-icon right>mdi-cube-send</v-icon>
+								Edit Profile <v-icon right>mdi-pencil</v-icon>
 							</v-btn>
-						</v-flex>
-					</v-card-text>
-				</v-card>
-			</v-form>
-		</v-dialog>
-	</div>
+							<LikeButton
+								v-if="$auth.loggedIn"
+								:id="creator.id"
+								type="creators"
+								:count="creator.like_count"
+								:value="
+									$auth.user.liked.creators
+										.map((c) => c.id)
+										.includes(creator.id)
+								"
+							/>
+							<ShareButton
+								type="creator"
+								:name="creator.display_name"
+							/>
+						</ButtonDivider>
+					</v-col>
+				</v-row>
+			</v-parallax>
+			<v-container
+				:fluid="$vuetify.breakpoint.smAndDown"
+				style="height: 100%;"
+			>
+				<v-row align="center" justify="center">
+					<v-col cols="12" class="pt-0">
+						<v-sheet v-if="creator.bio" class="markdown-wrapper">
+							<Markdown class="markdown" :source="creator.bio" />
+						</v-sheet>
+
+						<span v-else
+							>This creator hasn't written anything about him- or
+							herself yet...</span
+						>
+					</v-col>
+				</v-row>
+				<v-row
+					v-if="packList && packList.length > 0"
+					align="center"
+					justify="center"
+				>
+					<v-col cols="12" class="pt-0">
+						<h1>
+							Latest Packs by this creator
+						</h1>
+						<v-divider />
+						<ItemGrid
+							:limit="6"
+							:items="packList"
+							type="packs"
+							:more-url="
+								`/packs?sort=updated&order=desc&creators=${creator.id}`
+							"
+						/>
+					</v-col>
+				</v-row>
+				<v-row
+					v-if="themeList && themeList.length > 0"
+					align="center"
+					justify="center"
+				>
+					<v-col cols="12" class="pt-0">
+						<h1>
+							Latest Themes by this creator
+						</h1>
+						<v-divider />
+						<ItemGrid
+							:limit="6"
+							:items="themeList"
+							type="themes"
+							:more-url="
+								`/themes?sort=updated&order=desc&creators=${creator.id}`
+							"
+						/>
+					</v-col>
+				</v-row>
+				<v-row
+					v-if="layoutList && layoutList.length > 0"
+					align="center"
+					justify="center"
+				>
+					<v-col cols="12" class="pt-0">
+						<h1>
+							Latest Layouts by this creator
+						</h1>
+						<v-divider />
+						<ItemGrid
+							:limit="6"
+							:items="layoutList"
+							type="layouts"
+							:more-url="
+								`/layouts?sort=updated&order=desc&creators=${creator.id}`
+							"
+						/>
+					</v-col>
+				</v-row>
+			</v-container>
+
+			<v-dialog v-model="editDialog" max-width="800" class="mx-auto">
+				<v-form v-model="submitValid">
+					<v-card>
+						<v-card-title
+							class="title font-weight-regular justify-space-between"
+						>
+							<span>Edit Profile</span>
+							<v-spacer></v-spacer>
+
+							<v-btn rounded icon @click="editDialog = false">
+								<v-icon>
+									mdi-close
+								</v-icon>
+							</v-btn>
+						</v-card-title>
+
+						<v-card-text>
+							<v-text-field
+								v-model="changed.customUsername"
+								rounded
+								:disabled="loading.submit"
+								class="pt-1"
+								outlined
+								maxlength="50"
+								prepend-icon="mdi-pencil"
+								counter="50"
+								label="Custom display name"
+								:rules="[rules.utf8_only]"
+								@change="
+									changed.customUsername === ''
+										? (changed.customUsername = null)
+										: null
+								"
+							></v-text-field>
+							<v-textarea
+								v-model="changed.bio"
+								rounded
+								:disabled="loading.submit"
+								class="pt-1"
+								outlined
+								maxlength="1000"
+								prepend-icon="mdi-pencil"
+								counter="1000"
+								label="Bio (supports Markdown and HTML)"
+								auto-grow
+								:rules="[rules.no_scripts]"
+								@change="
+									changed.bio === ''
+										? (changed.bio = null)
+										: null
+								"
+							></v-textarea>
+							<span class="caption grey--text text--darken-1">
+								Profile color will affect the navigation bar and
+								side menu
+							</span>
+							<v-text-field
+								v-model="changed.profileColor"
+								rounded
+								:disabled="loading.submit"
+								class="pt-2"
+								label="Profile color"
+								:color="changed.profileColor"
+								outlined
+								maxlength="7"
+								:rules="[rules.hex]"
+								prepend-icon="mdi-format-color-fill"
+								@change="
+									changed.profileColor === ''
+										? (changed.profileColor = null)
+										: null
+								"
+							></v-text-field>
+							<v-file-input
+								v-model="changed.bannerImage"
+								rounded
+								label="Banner (recommended: 1920x800)"
+								outlined
+								prepend-icon="mdi-image-area"
+								:rules="[rules.banner_size]"
+								accept="image/*"
+								:disabled="
+									changed.clearBannerImage || loading.submit
+								"
+							/>
+							<v-flex class="d-flex mt-n4 mb-2">
+								<v-spacer />
+								<v-btn
+									rounded
+									:disabled="
+										!creator.banner_image ||
+											changed.clearBannerImage ||
+											changed.bannerImage ||
+											loading.submit
+									"
+									text
+									color="red"
+									@click.prevent="
+										changed.clearBannerImage = true
+									"
+								>
+									Remove current banner
+									<v-icon right>mdi-delete-outline</v-icon>
+								</v-btn>
+							</v-flex>
+							<v-file-input
+								v-model="changed.logoImage"
+								rounded
+								label="Logo (replaces Discord avatar)"
+								outlined
+								prepend-icon="mdi-image"
+								:rules="[rules.logo_size]"
+								accept="image/*"
+								:disabled="
+									changed.clearLogoImage || loading.submit
+								"
+							/>
+							<v-flex class="d-flex mt-n4 mb-2">
+								<v-spacer />
+								<v-btn
+									rounded
+									:disabled="
+										!creator.logo_image ||
+											changed.clearLogoImage ||
+											changed.logoImage ||
+											loading.submit
+									"
+									text
+									color="red"
+									@click.prevent="
+										changed.clearLogoImage = true
+									"
+								>
+									Remove current logo
+									<v-icon right>mdi-delete-outline</v-icon>
+								</v-btn>
+							</v-flex>
+							<v-flex class="d-flex">
+								<v-btn
+									rounded
+									:disabled="!changes || loading.submit"
+									color="red"
+									@click.prevent="discard()"
+								>
+									Discard
+									<v-icon right
+										>mdi-delete-sweep-outline</v-icon
+									>
+								</v-btn>
+								<v-spacer />
+								<v-btn
+									rounded
+									:disabled="!submitValid || !changes"
+									color="secondary"
+									type="submit"
+									:loading="loading.submit"
+									@click.prevent="submit()"
+								>
+									Save <v-icon right>mdi-cube-send</v-icon>
+								</v-btn>
+							</v-flex>
+						</v-card-text>
+					</v-card>
+				</v-form>
+			</v-dialog>
+		</div>
+	</LoadingOverlay>
 </template>
 
 <script>
 import Vue from 'vue'
 import removeMd from 'remove-markdown'
-import errorHandler from '@/components/mixins/errorHandler'
 import { me, creator, updateProfile } from '@/graphql/Creator.gql'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
@@ -358,7 +373,6 @@ export default Vue.extend({
 		Markdown: () => import('@/components/Markdown.vue'),
 		ItemGrid: () => import('@/components/ItemGrid.vue')
 	},
-	mixins: [errorHandler],
 	data() {
 		return {
 			id: this.$route.params.id,
@@ -396,6 +410,10 @@ export default Vue.extend({
 						input === output || 'Only UTF-8 characters are allowed'
 					)
 				},
+				no_scripts: (value) =>
+					!value ||
+					!/< *script *>.*?< *\/ *script *>/gim.test(value) ||
+					'Script tags are not allowed',
 				hex: (value) =>
 					!value ||
 					/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value) ||
@@ -455,9 +473,9 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
-			prefetch: true
+			prefetch: false
 		},
 		packList: {
 			query: rowPackList,
@@ -468,7 +486,7 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			prefetch: true
 		},
@@ -481,7 +499,7 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			prefetch: true
 		},
@@ -494,7 +512,7 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			prefetch: true
 		}

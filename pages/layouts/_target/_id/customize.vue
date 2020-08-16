@@ -1,11 +1,6 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
-		<LoadingOverlay :loading="$apollo.loading">
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<LoadingOverlay :loading="!!$apollo.loading">
 			<v-sheet
 				v-if="layout && layout.has_pieces"
 				no-gutters
@@ -200,7 +195,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import { layout, downloadLayout } from '@/graphql/Layout.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '~/components/mixins/urlParser'
@@ -219,7 +213,7 @@ export default Vue.extend({
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [errorHandler, urlParser, targetParser],
+	mixins: [urlParser, targetParser],
 	data() {
 		return {
 			data: [],
@@ -313,9 +307,9 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
-			prefetch: true
+			prefetch: false
 		}
 	},
 	methods: {

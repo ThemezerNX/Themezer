@@ -1,10 +1,5 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
 		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Theme/Pack Submissions
@@ -218,8 +213,8 @@
 												>
 													By {{ theme.info.Author }}
 													<i class="subtitle-2">
-														(this will replaced with
-														YOUR username)
+														(this will be replaced
+														with YOUR username)
 													</i>
 												</div>
 												<v-list-item-subtitle
@@ -500,7 +495,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import { allCategories } from '@/graphql/Filtering.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
@@ -515,14 +509,14 @@ export default Vue.extend({
 	options: {
 		auth: true
 	},
-	mixins: [errorHandler, targetParser, urlParser],
+	mixins: [targetParser, urlParser],
 	apollo: {
 		categories: {
 			query: allCategories,
 			prefetch: false,
 			skip: true,
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			}
 		},
 		layoutList: {
@@ -543,7 +537,7 @@ export default Vue.extend({
 				} else return []
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			prefetch: false,
 			skip: true

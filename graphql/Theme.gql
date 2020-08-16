@@ -125,7 +125,7 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
 	}
 }
 
-query randomThemeIDs($limit: Int!) {
+query randomThemeIDs($limit: Int) {
 	randomThemeIDs(limit: $limit)
 }
 

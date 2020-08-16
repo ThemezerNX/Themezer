@@ -1,10 +1,5 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
 		<v-row>
 			<v-col cols="12" xs="12" sm="4" md="3" xl="2">
 				<h2 class="text-center">{{ targetName() }} Packs</h2>
@@ -14,7 +9,7 @@
 				/>
 			</v-col>
 			<v-col ref="top" cols="12" xs="12" sm="8" md="9" xl="10">
-				<LoadingOverlay :loading="$apollo.loading">
+				<LoadingOverlay :loading="!!$apollo.loading">
 					<div v-if="itemList && itemList.pagination">
 						<h3>
 							{{ itemList.pagination.item_count }}
@@ -77,7 +72,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import { packList, allCreators, allLayouts } from '@/graphql/Pack.gql'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
@@ -88,7 +82,7 @@ export default Vue.extend({
 		ItemCard: () => import('@/components/ItemCard.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [errorHandler, targetParser, filter],
+	mixins: [targetParser, filter],
 	data() {
 		return {
 			type: 'packs',
@@ -123,7 +117,7 @@ export default Vue.extend({
 				return data
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			prefetch: true
 		}

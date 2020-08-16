@@ -1,16 +1,7 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
-		<LoadingOverlay :loading="$apollo.loading">
-			<v-sheet
-				v-if="layout && layout.details"
-				no-gutters
-				class="pa-2 box_fill"
-			>
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<LoadingOverlay :loading="!!$apollo.loading">
+			<v-sheet v-if="layout" no-gutters class="pa-2 box_fill">
 				<v-row class="ma-0">
 					<v-col
 						cols="12"
@@ -283,7 +274,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import shared from '@/layouts/details/SharedScript'
 import {
 	layout,
@@ -304,7 +294,7 @@ export default Vue.extend({
 			import('@/components/BackgroundsSlideGroup.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [errorHandler, shared, targetParser],
+	mixins: [shared, targetParser],
 	data() {
 		return {
 			showCommonInfo: false,
@@ -406,10 +396,9 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
-			// fetchPolicy: 'no-cache',
-			prefetch: true
+			prefetch: false
 		}
 	},
 	head() {

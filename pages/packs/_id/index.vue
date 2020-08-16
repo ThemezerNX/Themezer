@@ -1,11 +1,6 @@
 <template>
-	<error v-if="error" :error="error" />
-	<v-container
-		v-else
-		:fluid="$vuetify.breakpoint.smAndDown"
-		style="height: 100%;"
-	>
-		<LoadingOverlay :loading="$apollo.loading">
+	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
+		<LoadingOverlay :loading="!!$apollo.loading">
 			<v-sheet v-if="pack && pack.details" no-gutters class="pa-2 box">
 				<v-row class="ma-0">
 					<v-col
@@ -153,7 +148,6 @@
 
 <script>
 import Vue from 'vue'
-import errorHandler from '@/components/mixins/errorHandler'
 import shared from '@/layouts/details/SharedScript'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
@@ -171,7 +165,7 @@ export default Vue.extend({
 		EditButton: () => import('@/components/buttons/EditButton.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [errorHandler, shared, targetParser, urlParser],
+	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
 			packDialog: false,
@@ -214,10 +208,10 @@ export default Vue.extend({
 				}
 			},
 			error(e) {
-				this.error = e
+				this.$nuxt.error(e)
 			},
 			// fetchPolicy: 'no-cache',
-			prefetch: true
+			prefetch: false
 		}
 	},
 	methods: {

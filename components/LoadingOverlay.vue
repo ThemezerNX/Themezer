@@ -2,7 +2,7 @@
 	<v-fade-transition>
 		<div style="position: relative;">
 			<v-fade-transition>
-				<v-flex v-if="loading" class="holder">
+				<v-flex v-show="loading" class="holder">
 					<v-progress-circular
 						class="circle"
 						indeterminate
@@ -19,7 +19,6 @@
 
 <script>
 export default {
-	name: 'LoadingOverlay',
 	props: {
 		loading: {
 			type: Boolean,
@@ -35,6 +34,7 @@ export default {
 
 .holder {
 	width: 100%;
+	min-height: 90vh;
 	height: 100%;
 	display: flex;
 	justify-content: center;
