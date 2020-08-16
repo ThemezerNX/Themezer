@@ -438,7 +438,7 @@ export default Vue.extend({
 	apollo: {
 		creator: {
 			query() {
-				return this.$data.isPageOwner && !this.isAdmin ? me : creator
+				return this.$data.isPageOwner ? me : creator
 			},
 			variables() {
 				return {
@@ -446,7 +446,7 @@ export default Vue.extend({
 				}
 			},
 			update(res) {
-				if (this.$data.isPageOwner && !this.$data.isAdmin) {
+				if (this.$data.isPageOwner) {
 					return res?.me
 				} else {
 					return res?.creator
@@ -577,6 +577,9 @@ export default Vue.extend({
 						this.changed.clearBannerImage = false
 						this.changed.clearLogoImage = false
 						this.$apollo.queries.creator.refetch()
+						this.$snackbar.message(
+							'Success! Changes might take some time to apply.'
+						)
 					}
 				})
 				.catch((err) => {
