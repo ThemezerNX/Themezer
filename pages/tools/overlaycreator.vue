@@ -25,7 +25,7 @@
 					href="https://github.com/ThemezerNX/Layouts#3-creating-overlays"
 					target="_blank"
 				>
-					Click more detailed instructions
+					More detailed instructions
 				</a>
 			</div>
 			<v-row class="ma-0">
