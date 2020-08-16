@@ -426,9 +426,6 @@ export default {
 			this.$apollo
 				.query({
 					query: randomPackIDs,
-					variables: {
-						limit: 1
-					},
 					fetchPolicy: 'no-cache'
 				})
 				.then(({ data }) => {
@@ -442,9 +439,6 @@ export default {
 			this.$apollo
 				.query({
 					query: randomThemeIDs,
-					variables: {
-						limit: 1
-					},
 					fetchPolicy: 'no-cache'
 				})
 				.then(({ data }) => {
@@ -458,9 +452,6 @@ export default {
 			this.$apollo
 				.query({
 					query: randomLayoutIDs,
-					variables: {
-						limit: 1
-					},
 					fetchPolicy: 'no-cache'
 				})
 				.then(({ data }) => {

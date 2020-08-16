@@ -85,7 +85,8 @@ export default Vue.extend({
 					.query({
 						query: this.$data.allCreatorsQuery,
 						variables: {
-							target: (this as any).targetFile()
+							target: (this as any).targetFile(),
+							nsfw: true
 						}
 					})
 					.then((res: any) => {
@@ -105,7 +106,8 @@ export default Vue.extend({
 					.query({
 						query: this.$data.allLayoutsQuery,
 						variables: {
-							target: (this as any).targetFile()
+							target: (this as any).targetFile(),
+							nsfw: true
 						}
 					})
 					.then((res: any) => {

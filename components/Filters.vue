@@ -7,16 +7,21 @@
 			`border: rgba(255, 255, 255, 0.12) solid 2px; border-radius: 10px;`
 		"
 	>
-		<div
-			class="group"
-			@mousedown="searchHover = true"
-			@mouseleave="searchHover = false"
-		>
+		<div class="group" @mouseleave="searchHover = false">
 			<v-card-title class="title">
 				Search
+				<v-spacer />
+				<v-btn
+					class="px-1"
+					text
+					color="secondary"
+					@click="$router.push($route.path)"
+				>
+					Clear all
+				</v-btn>
 			</v-card-title>
 
-			<v-card-actions class="mx-2">
+			<v-card-actions class="mx-2" @mousedown="searchHover = true">
 				<v-text-field
 					v-model="query"
 					rounded
@@ -38,6 +43,7 @@
 							withLayouts.length > 0
 					"
 					class="mx-2 search-in"
+					@mousedown="searchHover = true"
 				>
 					<v-card-subtitle class="pa-0 mx-2">
 						With
@@ -114,12 +120,14 @@
 							query: $parent.currentSearch,
 							sort: option.id,
 							order: nextSortOrder,
-							creators: withCreators
-								? withCreators.join(',')
-								: undefined,
-							layouts: withLayouts
-								? withLayouts.join(',')
-								: undefined
+							creators:
+								withCreators.length > 0
+									? withCreators.join(',')
+									: undefined,
+							layouts:
+								withLayouts.length > 0
+									? withLayouts.join(',')
+									: undefined
 						}
 					}"
 				>
@@ -342,12 +350,14 @@ export default Vue.extend({
 						}
 					})
 				} else {
-					res.forEach((item) => {
-						if (item.themes.layout)
-							all.push({
-								text: item.themes.layout.details.name,
-								value: item.themes.layout.id
-							})
+					res.forEach((pack) => {
+						pack.themes.forEach((theme: any) => {
+							if (theme.layout)
+								all.push({
+									text: theme.layout.details.name,
+									value: theme.layout.id
+								})
+						})
 					})
 				}
 

@@ -1,5 +1,5 @@
-query allCreators {
-    packList {
+query allCreators($nsfw: Boolean) {
+    packList(nsfw: $nsfw) {
         creator {
 			id
 			display_name
@@ -7,8 +7,8 @@ query allCreators {
     }
 }
 
-query allLayouts {
-    packList {
+query allLayouts($nsfw: Boolean) {
+    packList(nsfw: $nsfw) {
         themes {
 			id
 			layout {

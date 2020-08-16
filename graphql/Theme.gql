@@ -1,5 +1,5 @@
-query allCreators($target: String) {
-    themeList(target: $target) {
+query allCreators($target: String, $nsfw: Boolean) {
+    themeList(target: $target, nsfw: $nsfw) {
         creator {
 			id
 			display_name
@@ -7,8 +7,8 @@ query allCreators($target: String) {
     }
 }
 
-query allLayouts($target: String) {
-    themeList(target: $target) {
+query allLayouts($target: String, $nsfw: Boolean) {
+    themeList(target: $target, nsfw: $nsfw) {
         layout {
 			id
 			details {
