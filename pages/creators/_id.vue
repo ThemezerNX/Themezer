@@ -61,7 +61,7 @@
 							<template v-slot:activator="{ on, attrs }">
 								<v-icon
 									v-if="roleIcon"
-									class="mt-n2"
+									class="mt-n1"
 									v-bind="attrs"
 									v-on="on"
 								>
@@ -429,6 +429,8 @@ export default Vue.extend({
 					return 'mdi-shield-check'
 				case 'verified':
 					return 'mdi-check-decagram'
+				case 'cool':
+					return 'mdi-google-downasaur'
 
 				default:
 					return null
