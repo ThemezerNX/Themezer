@@ -17,9 +17,9 @@
 				Upload your layout here. You will get two NXThemes: one with a
 				black background and one with a white one (be sure to allow the
 				site to download multiple files). For each do the following:
-				install it on your Switch and take a screenshot. Transfer the
-				screenshots to your PC afterwards. Have you done that? Go to
-				step 2.
+				install it on your Switch and take a screenshot (do NOT change
+				the system theme!). Transfer the screenshots to your PC
+				afterwards. Have you done that? Go to step 2.
 			</div>
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
@@ -104,7 +104,7 @@
 					class="pa-2"
 				>
 					<v-file-input
-						v-value="whiteImg"
+						v-model="whiteImg"
 						rounded
 						label="Screenshot with white background"
 						filled
@@ -138,7 +138,7 @@
 					class="pa-2"
 				>
 					<v-file-input
-						v-value="blackImg"
+						v-model="blackImg"
 						rounded
 						label="Screenshot with black background"
 						filled
