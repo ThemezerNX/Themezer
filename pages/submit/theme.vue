@@ -259,9 +259,11 @@
 												</v-list-item-subtitle>
 												<v-list-item-subtitle v-else>
 													The layout was not found in
-													the database. Please read
-													the information at the top
-													of this page.
+													the database or the theme
+													doesn't have one (be sure to
+													read the information at the
+													top of this page at least
+													once)
 												</v-list-item-subtitle>
 												<v-list-item-subtitle
 													v-if="
