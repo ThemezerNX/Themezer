@@ -1,5 +1,8 @@
 query allCreators($target: String, $nsfw: Boolean) {
     themeList(target: $target, nsfw: $nsfw) {
+		layout {
+			id
+		}
         creator {
 			id
 			display_name
