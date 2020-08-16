@@ -76,6 +76,7 @@ query rowThemeList($target: String, $limit: Int, $page: Int, $query: String, $so
 				name
 			}
 		}
+		categories
 		details {
 			name
 		}

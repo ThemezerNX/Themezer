@@ -60,6 +60,7 @@ query rowPackList($limit: Int, $page: Int, $query: String, $sort: String, $order
 		details {
 			name
 		}
+		categories
 		last_updated
 		themes {
 			id
