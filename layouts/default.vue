@@ -79,11 +79,13 @@
 					<v-subheader v-if="item.header" :key="item.header">{{
 						item.header
 					}}</v-subheader>
+
 					<v-divider
 						v-else-if="item.divider"
 						:key="item.divider"
 						class="mt-2"
 					/>
+
 					<v-list-group
 						v-else-if="Array.isArray(item.types)"
 						:key="item.title"
@@ -114,6 +116,7 @@
 							</v-list-item>
 						</template>
 					</v-list-group>
+
 					<v-list-item
 						v-else
 						:key="item.title"
