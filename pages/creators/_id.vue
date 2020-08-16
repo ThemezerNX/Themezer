@@ -44,7 +44,10 @@
 					<v-col class="text-center" cols="12">
 						<h1 class="font-weight-regular discord-name py-1 px-3">
 							<v-avatar
-								v-if="creator.logo_image"
+								v-if="
+									creator.logo_image &&
+										creator.role !== 'system'
+								"
 								:size="$vuetify.breakpoint.smAndDown ? 32 : 48"
 								class="avatar"
 							>
@@ -443,6 +446,8 @@ export default Vue.extend({
 		},
 		roleIcon() {
 			switch (this.creator.role) {
+				case 'system':
+					return 'mdi-cogs'
 				case 'admin':
 					return 'mdi-shield-check'
 				case 'verified':
