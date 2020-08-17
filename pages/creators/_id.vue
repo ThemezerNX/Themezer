@@ -376,6 +376,67 @@ export default Vue.extend({
 		Markdown: () => import('@/components/Markdown.vue'),
 		ItemGrid: () => import('@/components/ItemGrid.vue')
 	},
+	// async asyncData({ error, app, params }) {
+	// 	const syncData = {
+	// 		id: params.id,
+	// 		isPageOwner: app.$auth.loggedIn && params.id === app.$auth.user.id,
+	// 		changed: {
+	// 			profileColor: null,
+	// 			customUsername: null,
+	// 			bio: null,
+	// 			bannerImage: null,
+	// 			logoImage: null,
+	// 			clearBannerImage: false,
+	// 			clearLogoImage: false
+	// 		}
+	// 	}
+
+	// 	syncData.creator = await app.apolloProvider.clients.defaultClient
+	// 		.query({
+	// 			query: syncData.isPageOwner ? me : creator,
+	// 			variables: { id: params.id }
+	// 		})
+	// 		.then(({ data }) => {
+	// 			if (syncData.isPageOwner) {
+	// 				return data?.me
+	// 			} else {
+	// 				return data?.creator
+	// 			}
+	// 		})
+	// 		.catch((e) => {
+	// 			error(e)
+	// 		})
+
+	// 	if (syncData.creator) {
+	// 		if (
+	// 			syncData.creator.old_ids &&
+	// 			syncData.creator.old_ids.includes(syncData.id)
+	// 		) {
+	// 			// Sort of redirect, needs proper HTML 301 (moved permanently)
+	// 			app.$router.push(`/creators/${syncData.creator.id}`)
+	// 		} else {
+	// 			app.$store.commit(
+	// 				'SET_PROFILE_COLOR',
+	// 				syncData.creator.profile_color
+	// 			)
+
+	// 			syncData.changed.profileColor = syncData.creator.profile_color
+	// 			syncData.changed.customUsername =
+	// 				syncData.creator.custom_username
+	// 			syncData.changed.bio = syncData.creator.bio
+
+	// 			if (syncData.creator.discord_user.avatar) {
+	// 				syncData.avatar = `avatars/${syncData.creator.id}/${syncData.creator.discord_user.avatar}`
+	// 			} else {
+	// 				syncData.avatar = `embed/avatars/${parseInt(
+	// 					syncData.creator.discord_user.discriminator
+	// 				) % 5}.png`
+	// 			}
+	// 		}
+	// 	}
+
+	// 	return syncData
+	// },
 	data() {
 		return {
 			id: this.$route.params.id,
@@ -480,7 +541,7 @@ export default Vue.extend({
 			error(e) {
 				this.$nuxt.error(e)
 			},
-			prefetch: false
+			prefetch: true
 		},
 		packList: {
 			query: rowPackList,

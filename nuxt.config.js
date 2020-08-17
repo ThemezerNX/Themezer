@@ -2,6 +2,7 @@ require('dotenv').config()
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 export default {
+	debug: false,
 	env: {
 		APP_TITLE: 'Themezer',
 		API_ENDPOINT: process.env.API_ENDPOINT
@@ -37,6 +38,15 @@ export default {
 				content: process.env.npm_package_description || ''
 			}
 		]
+	},
+
+	messages: {
+		loading: 'Loading...',
+		error_404: 'This page could not be found. Go back',
+		server_error: 'URL Malformed',
+		server_error_details:
+			"The URL is likely malformed. Go back using your browser's back button or go",
+		client_error_details: 'An error occurred while rendering the page.'
 	},
 
 	loading: { color: '#B40A86' },
@@ -92,7 +102,8 @@ export default {
 	apollo: {
 		clientConfigs: {
 			default: '~/plugins/apolloClient'
-		}
+		},
+		errorHandler: '~/plugins/apolloErrorHandler'
 	},
 
 	pwa: {
