@@ -119,7 +119,10 @@
 							page: undefined,
 							query: $parent.currentSearch,
 							sort: option.id,
-							order: nextSortOrder,
+							order:
+								currentSort === option.id
+									? nextSortOrder
+									: 'desc',
 							creators:
 								withCreators.length > 0
 									? withCreators.join(',')
@@ -254,17 +257,11 @@ export default Vue.extend({
 				: 'desc'
 		},
 		nextSortOrder(): string | null {
-			if (
-				this.$data.sortOptions.some(
-					(s: any) => s.id === this.currentSort
-				)
-			) {
-				if (this.currentOrder === 'asc') {
-					return 'desc'
-				} else {
-					return 'asc'
-				}
-			} else return 'desc'
+			if (this.currentOrder === 'asc') {
+				return 'desc'
+			} else {
+				return 'asc'
+			}
 		}
 	},
 	watch: {

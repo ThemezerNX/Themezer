@@ -97,7 +97,7 @@
 						</h1>
 					</v-col>
 					<v-col
-						v-if="isPageOwner || $auth.user.isAdmin"
+						v-if="isPageOwner || ($auth.user && $auth.user.isAdmin)"
 						class="text-center"
 						cols="12"
 					>
@@ -247,7 +247,7 @@
 								class="pt-1"
 								outlined
 								maxlength="1000"
-								prepend-icon="mdi-pencil"
+								prepend-icon="mdi-bio"
 								counter="1000"
 								label="Bio (supports Markdown and HTML)"
 								auto-grow

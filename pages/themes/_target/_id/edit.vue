@@ -171,7 +171,7 @@ export default Vue.extend({
 	computed: {},
 	watch: {
 		isPageOwner(n) {
-			if (!n && !this.$auth.user.isAdmin) {
+			if (!n && !this.$auth.user?.isAdmin) {
 				this.$router.push('/')
 			}
 		}

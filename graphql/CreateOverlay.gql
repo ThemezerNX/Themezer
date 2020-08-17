@@ -1,4 +1,4 @@
-query createOverlayNXThemes($layout: Upload!, $piece: Upload, $common: Upload) {
+query createOverlayNXThemes($layout: Upload, $piece: Upload, $common: Upload) {
 	createOverlayNXThemes(layout: $layout, piece: $piece, common: $common) {
 		filename
 		data

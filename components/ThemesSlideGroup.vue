@@ -44,7 +44,7 @@
 								:width="
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"
-								contain
+								cover
 							/>
 
 							<v-card-title

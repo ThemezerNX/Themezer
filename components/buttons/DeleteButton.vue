@@ -115,7 +115,6 @@ export default Vue.extend({
 							this.type.slice(1)} deleted successfully!`
 					)
 
-					console.log(res)
 					if (this.goBack && !res?.data?.deleteTheme) {
 						this.$router.back()
 					} else {

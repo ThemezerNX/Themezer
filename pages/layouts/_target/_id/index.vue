@@ -93,18 +93,22 @@
 							</span>
 							{{ layout.target }}.szs
 						</div>
-						<div class="font-weight-light body-2">
+						<div
+							v-if="!isDefaultLayout"
+							class="font-weight-light body-2"
+						>
 							<span class="font-weight-medium">Downloads: </span>
 							{{ layout.dl_count }}
 						</div>
 
 						<ButtonDivider>
 							<CustomizeButton
-								v-if="layout.has_pieces"
+								v-if="layout.has_pieces && !isDefaultLayout"
 								to="customize"
 								:loading="loadingMerge"
 							/>
 							<DownloadButton
+								v-if="!isDefaultLayout"
 								icon="mdi-code-json"
 								tooltip="Download layout only"
 								:download-function="download"
@@ -327,6 +331,9 @@ export default Vue.extend({
 			if (this.layout.commonlayout) {
 				return JSON.parse(this.layout.commonlayout)
 			} else return null
+		},
+		isDefaultLayout() {
+			return !this.layout.basebaselayout
 		}
 	},
 	methods: {

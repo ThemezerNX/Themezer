@@ -41,7 +41,7 @@
 				v-else
 				aspect-ratio="1.7778"
 				:src="imgSrc"
-				contain
+				cover
 				:style="
 					type === 'layouts'
 						? `background-color: ${item.details.color};`
