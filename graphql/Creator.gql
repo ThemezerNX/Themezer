@@ -1,6 +1,6 @@
 query extendMe {
 	me {
-		role
+		roles
 		liked {
 			creators {
 				id
@@ -29,7 +29,7 @@ query me {
 		}
 		bio
 		joined
-		role
+		roles
 		banner_image
 		logo_image
 		profile_color
@@ -49,7 +49,7 @@ query creator($id: String!) {
 		}
 		bio
 		joined
-		role
+		roles
 		banner_image
 		logo_image
 		profile_color

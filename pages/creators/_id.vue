@@ -42,11 +42,12 @@
 						</v-avatar>
 					</v-col>
 					<v-col class="text-center" cols="12">
-						<h1 class="font-weight-regular discord-name py-1 px-3">
+						<h1 class="font-weight-regular discord-name py-1 px-4">
 							<v-avatar
 								v-if="
 									creator.logo_image &&
-										creator.role !== 'system'
+										creator.roles &&
+										!creator.roles.includes('system')
 								"
 								:size="$vuetify.breakpoint.smAndDown ? 32 : 48"
 								class="avatar"
@@ -58,31 +59,45 @@
 									alt="Creator Avatar"
 								/>
 							</v-avatar>
+
 							{{ creator.display_name
 							}}{{
 								!!creator.custom_username
 									? ''
 									: `#${creator.discord_user.discriminator}`
 							}}
-							<v-tooltip top>
-								<template v-slot:activator="{ on, attrs }">
-									<v-icon
-										v-if="roleIcon"
-										class="mt-n1"
-										v-bind="attrs"
-										v-on="on"
-									>
-										{{ roleIcon }}
-									</v-icon>
-								</template>
-								<span class="text-capitalize">{{
-									creator.role
-								}}</span>
-							</v-tooltip>
+
+							<v-template v-if="creator.roles">
+								<v-tooltip
+									v-for="(role, i) in creator.roles"
+									:key="role"
+									top
+								>
+									<template v-slot:activator="{ on, attrs }">
+										<v-icon
+											class="mt-n1"
+											:class="{
+												'mr-1':
+													i !==
+													creator.roles.length - 1
+											}"
+											v-bind="attrs"
+											v-on="on"
+										>
+											{{ roleIcon(role.split('|')[0]) }}
+										</v-icon>
+									</template>
+									<span class="text-capitalize">{{
+										role.split('|')[
+											role.split('|').length - 1
+										]
+									}}</span>
+								</v-tooltip>
+							</v-template>
 						</h1>
 					</v-col>
 					<v-col
-						v-if="isPageOwner || isAdmin"
+						v-if="isPageOwner || $auth.user.isAdmin"
 						class="text-center"
 						cols="12"
 					>
@@ -443,7 +458,6 @@ export default Vue.extend({
 			isPageOwner:
 				this.$auth.loggedIn &&
 				this.$route.params.id === this.$auth.user.id,
-			isAdmin: this.$auth.user.role === 'admin',
 			editDialog: false,
 			submitValid: false,
 			loading: {
@@ -504,21 +518,6 @@ export default Vue.extend({
 				!this.changed.clearBannerImage &&
 				!this.changed.clearLogoImage
 			)
-		},
-		roleIcon() {
-			switch (this.creator.role) {
-				case 'system':
-					return 'mdi-cogs'
-				case 'admin':
-					return 'mdi-shield-check'
-				case 'verified':
-					return 'mdi-check-decagram'
-				case 'very cool dino':
-					return 'mdi-google-downasaur'
-
-				default:
-					return null
-			}
 		}
 	},
 	apollo: {
@@ -626,6 +625,21 @@ export default Vue.extend({
 		this.$store.commit('SET_PROFILE_COLOR', null)
 	},
 	methods: {
+		roleIcon(role) {
+			switch (role) {
+				case 'system':
+					return 'mdi-cogs'
+				case 'admin':
+					return 'mdi-shield-check'
+				case 'verified':
+					return 'mdi-check-decagram'
+				case 'dino':
+					return 'mdi-google-downasaur'
+
+				default:
+					return null
+			}
+		},
 		discard() {
 			this.changed = {
 				profileColor: this.creator.profile_color,

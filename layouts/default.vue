@@ -350,7 +350,7 @@ export default {
 			],
 			randomMenuItems: [
 				{
-					icon: 'mdi-folder-zip-outline',
+					icon: 'mdi-package-variant-closed',
 					title: 'Random Pack',
 					function: this.randomPack
 				},

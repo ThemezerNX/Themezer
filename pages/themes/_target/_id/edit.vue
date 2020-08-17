@@ -139,7 +139,6 @@ export default Vue.extend({
 		return {
 			fromRoute: null,
 			isPageOwner: true,
-			isAdmin: true,
 			loading: {
 				submit: false
 			},
@@ -172,7 +171,7 @@ export default Vue.extend({
 	computed: {},
 	watch: {
 		isPageOwner(n) {
-			if (!n && !this.isAdmin) {
+			if (!n && !this.$auth.user.isAdmin) {
 				this.$router.push('/')
 			}
 		}
@@ -191,7 +190,6 @@ export default Vue.extend({
 					this.isPageOwner =
 						this.$auth.loggedIn &&
 						data.theme.creator.id === this.$auth.user.id
-					this.isAdmin = this.$auth.user.role === 'admin'
 
 					this.updateUrlString(
 						data.theme.id,

@@ -29,7 +29,8 @@ export default class CustomScheme extends Oauth2Scheme {
 
 			this.$auth.setUser({
 				...data,
-				...me
+				...me,
+				isAdmin: !!me.roles?.includes('admin')
 			})
 		} catch (e) {
 			this.$auth.setUser({

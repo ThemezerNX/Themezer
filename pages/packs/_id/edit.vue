@@ -155,7 +155,7 @@ export default Vue.extend({
 					this.isPageOwner =
 						this.$auth.loggedIn &&
 						(data.pack.creator.id === this.$auth.user.id ||
-							this.$auth.user.role === 'admin')
+							this.$auth.user.isAdmin)
 
 					this.updateUrlString(
 						data.pack.id,
