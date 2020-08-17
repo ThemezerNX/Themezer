@@ -5,31 +5,60 @@
 				Theme/Pack Submissions
 			</h1>
 			<div class="subtitle-1 box_text">
-				You can submit themes here for listing on this website. The
-				following questions will guide you through the process.
+				You can submit themes here for listing on this Themezer.
 			</div>
 			<div class="subtitle-1 box_text">
-				If you downloaded a layout from this website it included a
-				Themezer 'ID' key in the .json file. You must never edit this
-				value! It is used to indicate which layout was used so that when
-				people download your theme, they also get the most up-to-date
-				version of the layout and customization options. If you
-				downloaded the layout from elsewhere and it doesn't include the
-				two entries, you should try to find the layout in
+				If you downloaded the theme from elsewhere and Themezer doesn't
+				recognize the layout, you should try to find the layout in
 				<nuxt-link exact to="/layouts">
 					the Layouts section
 				</nuxt-link>
 				and select it in the dropdown. Be really sure it is the exact
-				same layout, or else you might lose some features!
+				same layout, or else you might lose some features! For more
+				detailed instructions,
+				<v-btn
+					text
+					color="primary"
+					style="height: 24px"
+					rounded
+					class="px-1"
+					@click="FAQDialog = true"
+					>read the FAQ</v-btn
+				>
+				<v-dialog v-model="FAQDialog" max-width="800" class="mx-auto">
+					<v-card>
+						<v-card-title
+							class="title font-weight-regular justify-space-between"
+						>
+							<span>FAQ</span>
+							<v-spacer></v-spacer>
+
+							<v-btn rounded icon @click="FAQDialog = false">
+								<v-icon>
+									mdi-close
+								</v-icon>
+							</v-btn>
+						</v-card-title>
+
+						<v-card-text>
+							<template v-for="faq in FAQ">
+								<h4
+									:key="faq.Q"
+									class="box_text font-italic mt-1"
+								>
+									{{ faq.Q }}
+								</h4>
+								<div
+									:key="faq.A"
+									class="subtitle-2 box_text font-weight-light"
+								>
+									{{ faq.A }}
+								</div>
+							</template>
+						</v-card-text>
+					</v-card>
+				</v-dialog>
 			</div>
-			<template v-for="QnA in QnAs">
-				<h4 :key="QnA.Q" class="box_text font-italic mt-1">
-					{{ QnA.Q }}
-				</h4>
-				<div :key="QnA.A" class="subtitle-2 box_text font-weight-light">
-					{{ QnA.A }}
-				</div>
-			</template>
 
 			<h2 class="box_text">
 				1. Upload the theme/pack
@@ -85,15 +114,11 @@
 						class="subtitle-1 box_text"
 					>
 						You can create NXThemes using the
-						<nuxt-link to="/tools/create-nxtheme"
-							>creation tool on this website
-						</nuxt-link>
-						or using the
-						<nuxt-link
-							to="https://github.com/exelix11/SwitchThemeInjector"
+						<a
+							href="https://exelix11.github.io/SwitchThemeInjector/v2/"
 							target="_blank"
-							>Switch Theme Injector</nuxt-link
-						>. You may return after creating an NXTheme/NXThemes.
+							>WebInjector</a
+						>. You may submit the created NXTheme here.
 					</div>
 				</v-col>
 			</v-row>
@@ -108,9 +133,9 @@
 					<v-row v-else class="ma-0">
 						<v-col cols="12" class="pa-2">
 							<div class="subtitle-1 box_text">
-								You must upload a screenshot or an image created
-								using an overlay.png downloaded from the
-								layout's page (NOT simply the background image!)
+								You must upload a screenshot (NOT simply the
+								background image!) or an image created using an
+								overlay.png downloaded from the layout's page
 								for every theme you upload. Do so by clicking
 								the placeholder image.
 							</div>
@@ -258,12 +283,8 @@
 													</div>
 												</v-list-item-subtitle>
 												<v-list-item-subtitle v-else>
-													The layout was not found in
-													the database or the theme
-													doesn't have one (be sure to
-													read the information at the
-													top of this page at least
-													once)
+													The layout was not found on
+													Themezer
 												</v-list-item-subtitle>
 												<v-list-item-subtitle
 													v-if="
@@ -548,39 +569,6 @@ export default Vue.extend({
 	data() {
 		return {
 			forceUpdate: 0,
-			QnAs: [
-				{
-					Q:
-						"I couldn't find the layout in the Layouts GitHub repository/I made the layout myself (not just edited another one)",
-					A:
-						'Consider uploading it to the Layouts GitHub repository or asking the original Creator to do so.'
-				},
-				{
-					Q: 'My layout .json differs only by a bit',
-					A:
-						'Try recreating your theme via the layouts section on this website and see if it your theme is fine after testing it on your Switch.'
-				},
-				{
-					Q: 'It looks different a bit different',
-					A:
-						'Consider adding a customization option to the Layouts GitHub repository.'
-				},
-				{
-					Q: "I don't know how to 'GitHub'",
-					A:
-						'First read the instructions in the GitHub repository. If you are still unsure on how to contribute, ask someone else for help or Google it.'
-				},
-				{
-					Q:
-						"I am really sure don't want my theme to receive automatic layout updates",
-					A: 'Ok. Why not? But okay go ahead submit it...'
-				},
-				{
-					Q: 'I am not the original author of this theme/pack',
-					A:
-						'Unfortunately you may not submit it, because it will be linked to the currently logged in user'
-				}
-			],
 			types: [
 				{
 					id: 'single',
@@ -589,12 +577,11 @@ export default Vue.extend({
 				{
 					id: 'zip',
 					label: 'A .zip with .NXThemes (max 25MB)'
+				},
+				{
+					id: 'files',
+					label: 'An image'
 				}
-				// {
-				// 	id: 'files',
-				// 	label: 'Separate files',
-				// 	disabled: true
-				// }
 			],
 			submitTypes: [
 				{
@@ -606,6 +593,45 @@ export default Vue.extend({
 					label: 'Separate Themes'
 				}
 			],
+			FAQ: [
+				{
+					Q: 'I am not the original author of this theme/pack',
+					A:
+						'Unfortunately you may not submit it, because it will be linked to your account'
+				},
+				{
+					Q: "I couldn't find the layout/I made the layout myself",
+					A:
+						'Consider uploading it to the Layouts GitHub repository or asking the original Creator to do so.'
+				},
+				{
+					Q: 'I have modified another layout a bit',
+					A:
+						'Consider adding a customization option to the original in the Layouts GitHub repository.'
+				},
+				{
+					Q: 'My layout differs a bit',
+					A:
+						'Try recreating your theme and see if it is fine after testing it on your Switch.'
+				},
+				{
+					Q: 'It looks different',
+					A:
+						'Consider adding a customization option to the original in the Layouts GitHub repository.'
+				},
+				{
+					Q: "I don't know how to 'GitHub'",
+					A:
+						'First read the instructions in the GitHub repository. If you are still unsure on how to contribute, ask someone else for help or Google it.'
+				},
+				{
+					Q:
+						"I am really sure don't want my theme to receive automatic updates",
+					A:
+						"Uhm... why not? It's frii. Anyway, feel free to submit it."
+				}
+			],
+			FAQDialog: false,
 			selectedType: null,
 			uploadSingleOrZip: null,
 			loading: {

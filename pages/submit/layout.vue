@@ -9,6 +9,7 @@
 				repository. See the
 				<a
 					href="https://github.com/ThemezerNX/Layouts/blob/master/README.md"
+					target="_blank"
 				>
 					README.md
 				</a>

@@ -90,25 +90,6 @@
 						"
 						:return-url="`/themes/${this.$route.params.target}`"
 					/>
-					<!-- <v-btn
-					rounded
-					:disabled="!changes || loading.submit"
-					color="red"
-					@click.prevent="discard()"
-				>
-					Discard
-					<v-icon right>mdi-delete-sweep-outline</v-icon>
-				</v-btn>
-				<v-btn
-					rounded
-					:disabled="!submitValid || !changes"
-					color="secondary"
-					type="submit"
-					:loading="loading.submit"
-					@click.prevent="submit()"
-				>
-					Save <v-icon right>mdi-cube-send</v-icon>
-				</v-btn> -->
 				</ButtonDivider>
 			</v-sheet>
 		</LoadingOverlay>

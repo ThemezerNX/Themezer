@@ -12,9 +12,12 @@
 				Search
 				<v-spacer />
 				<v-btn
+					rounded
 					class="px-1"
+					style="height: 24px"
 					text
 					color="secondary"
+					:disabled="$route.path === $route.fullPath"
 					@click="$router.push($route.path)"
 				>
 					Clear all

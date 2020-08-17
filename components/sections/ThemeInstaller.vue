@@ -6,6 +6,7 @@
 				<template v-slot:activator="{ on }">
 					<v-btn
 						icon
+						rounded
 						style="position: absolute; top: 0; color: black;"
 						class="ml-1 pa-0 grey lighten-1"
 						width="14"

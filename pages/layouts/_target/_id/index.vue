@@ -122,6 +122,7 @@
 								<v-tooltip v-model="showCommonInfo" top>
 									<template v-slot:activator="{ on }">
 										<v-btn
+											rounded
 											icon
 											style="position: absolute; top: 0; color: black;"
 											class="ml-1 pa-0 grey lighten-1"
@@ -167,6 +168,7 @@
 							<v-tooltip v-model="showOverlayInfo" top>
 								<template v-slot:activator="{ on }">
 									<v-btn
+										rounded
 										icon
 										style="position: absolute; top: 0; color: black;"
 										class="ml-1 pa-0 grey lighten-1"

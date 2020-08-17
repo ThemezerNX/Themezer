@@ -162,7 +162,7 @@
 			<v-toolbar-items>
 				<v-menu bottom left>
 					<template v-slot:activator="{ on, attrs }">
-						<v-btn dark icon v-bind="attrs" v-on="on">
+						<v-btn rounded dark icon v-bind="attrs" v-on="on">
 							<v-icon>mdi-shuffle</v-icon>
 						</v-btn>
 					</template>
