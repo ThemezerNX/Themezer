@@ -191,7 +191,7 @@
 					/>
 				</v-col>
 
-				<v-col cols="12" xs="12" class="pa-0">
+				<v-col ref="dlButton" cols="12" xs="12" class="pa-0">
 					<ButtonDivider>
 						<DownloadButton
 							tooltip="Download image"
@@ -290,6 +290,10 @@ export default Vue.extend({
 				.then(({ data }) => {
 					this.loadingUploadScreenshots = false
 					this.resultImage = data.createOverlay
+
+					const button = this.$refs.dlButton
+					const position = button.getBoundingClientRect().bottom
+					window.scrollTo({ top: position, behavior: 'smooth' })
 				})
 				.catch((err) => {
 					this.$snackbar.error(err)
