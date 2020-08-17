@@ -19,6 +19,7 @@
 
 <script>
 export default {
+	name: 'LoadingOverlay',
 	props: {
 		loading: {
 			type: Boolean,

@@ -211,7 +211,7 @@ export default Vue.extend({
 				this.$nuxt.error(e)
 			},
 			// fetchPolicy: 'no-cache',
-			prefetch: false
+			prefetch: true
 		}
 	},
 	methods: {
