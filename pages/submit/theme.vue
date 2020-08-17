@@ -199,7 +199,7 @@
 																	"
 																	full-width
 																	height="100%"
-																	label="Upload Screenshot* (.jpg)"
+																	label="Upload Screenshot* (jpg, 1280x720)"
 																	class="screenshot_upload"
 																	filled
 																	color="black"
