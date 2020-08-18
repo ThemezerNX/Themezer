@@ -327,12 +327,16 @@ export default Vue.extend({
 		getParentAllCreators() {
 			this.$data.loading.allCreators = true
 			;(this.$parent as any).getAllCreators().then((res: Array<any>) => {
-				this.$data.allCreators = res.map((item) => {
-					return {
-						text: item.creator.display_name,
-						value: item.creator.id
-					}
-				})
+				this.$data.allCreators = res
+					.map((item) => {
+						return {
+							text: item.creator.display_name,
+							value: item.creator.id
+						}
+					})
+					.sort((a, b) =>
+						a.text.toLowerCase().localeCompare(b.text.toLowerCase())
+					)
 				this.$data.loading.allCreators = false
 			})
 		},
@@ -361,7 +365,9 @@ export default Vue.extend({
 					})
 				}
 
-				this.$data.allLayouts = all
+				this.$data.allLayouts = all.sort((a, b) =>
+					a.text.toLowerCase().localeCompare(b.text.toLowerCase())
+				)
 
 				this.$data.loading.allLayouts = false
 			})

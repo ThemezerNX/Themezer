@@ -42,6 +42,9 @@ query pack($id: String!) {
 			details {
 				name
 			}
+			layout {
+				id
+			}
 			target
 			preview {
 				thumb

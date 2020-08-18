@@ -540,6 +540,11 @@ export default Vue.extend({
 			skip: true,
 			error(e) {
 				this.$nuxt.error(e)
+			},
+			update(res) {
+				return res?.categories.sort((a, b) =>
+					a.toLowerCase().localeCompare(b.toLowerCase())
+				)
 			}
 		},
 		layoutList: {
@@ -551,12 +556,18 @@ export default Vue.extend({
 			},
 			update(data) {
 				if (data?.layoutList) {
-					return data.layoutList.map((l) => {
-						return {
-							text: `'${l.details.name}' by ${l.creator.display_name}`,
-							value: l.id
-						}
-					})
+					return data.layoutList
+						.map((l) => {
+							return {
+								text: `'${l.details.name}' by ${l.creator.display_name}`,
+								value: l.id
+							}
+						})
+						.sort((a, b) =>
+							a.text
+								.toLowerCase()
+								.localeCompare(b.text.toLowerCase())
+						)
 				} else return []
 			},
 			error(e) {
