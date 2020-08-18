@@ -26,11 +26,11 @@ export default {
 			},
 			{
 				name: 'theme-color',
-				content: '#B40A86'
+				content: '#0ab379'
 			},
 			{
 				name: 'msapplication-TileColor',
-				content: '#B40A86'
+				content: '#0ab379'
 			},
 			{
 				hid: 'description',
@@ -49,7 +49,7 @@ export default {
 		client_error_details: 'An error occurred while rendering the page.'
 	},
 
-	loading: { color: '#B40A86' },
+	loading: { color: '#0ab379' },
 
 	plugins: [
 		'@/plugins/linkify',
@@ -112,7 +112,7 @@ export default {
 			short_name: 'Themezer',
 			description: process.env.npm_package_description || '',
 			lang: 'en',
-			theme_color: '#0AB379',
+			theme_color: '#0ab379',
 			background_color: '#121212'
 		}
 	},
