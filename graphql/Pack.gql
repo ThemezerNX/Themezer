@@ -45,6 +45,7 @@ query pack($id: String!) {
 			layout {
 				id
 			}
+			categories
 			target
 			preview {
 				thumb

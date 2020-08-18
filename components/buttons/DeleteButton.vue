@@ -20,7 +20,7 @@
 			>
 				<v-card>
 					<v-card-title class="headline"
-						>You're at the edge of deleting this {{ type }} forever.
+						>You're super close to deleting this {{ type }} forever.
 						Are you absolutely sure?</v-card-title
 					>
 
@@ -123,9 +123,9 @@ export default Vue.extend({
 						)
 					}
 				})
-				.catch((e: any) => {
+				.catch((err: any) => {
 					this.loading = false
-					;(this as any).$snackbar.error(e)
+					;(this as any).$snackbar.error(err)
 				})
 		}
 	}

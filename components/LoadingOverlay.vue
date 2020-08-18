@@ -8,9 +8,11 @@
 						indeterminate
 						size="64"
 					/>
+					<!-- Text below loader -->
+					<!-- <h1 v-show="message">Redirecting...</h1> -->
 				</v-flex>
 			</v-fade-transition>
-			<div class="wrapper pa-3" :class="{ shadow: loading }">
+			<div class="wrapper pa-3" :class="{ shadow: loading && shadow }">
 				<slot />
 			</div>
 		</div>
@@ -22,6 +24,11 @@ export default {
 	name: 'LoadingOverlay',
 	props: {
 		loading: {
+			type: Boolean,
+			required: false,
+			default: true
+		},
+		shadow: {
 			type: Boolean,
 			required: false,
 			default: true
@@ -42,6 +49,7 @@ export default {
 	align-items: center;
 	position: absolute;
 	z-index: 3;
+	border-radius: 10px;
 	background: rgba(0, 0, 0, 0.5);
 	// border-radius: 10px;
 }

@@ -77,6 +77,7 @@ export default Vue.extend({
 					this.newCount = this.newCount + (this.newValue ? 1 : -1)
 					// eslint-disable-next-line no-console
 					console.error(err)
+					;(this as any).$snackbar.error(err)
 				})
 		}
 	}

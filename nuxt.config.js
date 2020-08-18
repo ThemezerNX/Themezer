@@ -43,13 +43,13 @@ export default {
 	messages: {
 		loading: 'Loading...',
 		error_404: 'This page could not be found. Go back',
-		server_error: 'URL malformed or item not found',
+		server_error: 'URL malformed, item not found or server not responding',
 		server_error_details:
-			"The URL is likely malformed. Go back using your browser's back button or go",
+			"The URL is likely malformed. Try going back using your browser's back button or go",
 		client_error_details: 'An error occurred while rendering the page.'
 	},
 
-	loading: { color: '#0ab379' },
+	loading: { color: '#b40a86' },
 
 	plugins: [
 		'@/plugins/linkify',

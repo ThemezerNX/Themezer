@@ -33,11 +33,6 @@ export default Vue.extend({
 			type: String,
 			required: true,
 			default: null
-		},
-		creatorId: {
-			type: String,
-			required: true,
-			default: null
 		}
 	}
 })

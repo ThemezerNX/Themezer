@@ -76,10 +76,11 @@
 								:name="theme.details.name"
 								:creator="theme.creator.display_name"
 							/>
-							<EditButton
-								v-if="$auth.loggedIn"
+							<EditButton v-if="mayModerate" type="theme" />
+							<ReportButton
+								v-if="!mayModerate"
 								type="theme"
-								:creator-id="theme.creator.id"
+								:nsfw="theme.categories.includes('NSFW')"
 							/>
 						</ButtonDivider>
 
@@ -244,6 +245,7 @@ export default Vue.extend({
 			import('@/components/sections/ThemeInstaller.vue'),
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		ReportButton: () => import('@/components/buttons/ReportButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		EditButton: () => import('@/components/buttons/EditButton.vue'),
@@ -252,7 +254,7 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
-			error: null,
+			isPageOwner: false,
 			showPackInfo: false,
 			packDialog: false,
 			loadingDownload: false
@@ -266,6 +268,9 @@ export default Vue.extend({
 			// } else {
 			// 	return `background: #e2e2e2;`
 			// }
+		},
+		mayModerate() {
+			return this.isPageOwner || this.$auth.user?.isAdmin
 		}
 	},
 	apollo: {
@@ -278,6 +283,10 @@ export default Vue.extend({
 			},
 			result({ data }) {
 				if (data && data.theme) {
+					this.isPageOwner =
+						this.$auth.loggedIn &&
+						data.theme.creator.id === this.$auth.user.id
+
 					this.updateUrlString(
 						data.theme.id,
 						data.theme.details.name,

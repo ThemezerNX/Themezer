@@ -149,7 +149,6 @@ export default Vue.extend({
 			uploadedScreenshotUrl: null
 		}
 	},
-	computed: {},
 	watch: {
 		isPageOwner(n) {
 			if (!n && !this.$auth.user?.isAdmin) {

@@ -101,9 +101,12 @@ export default Vue.extend({
 						this.copyLinkSuccess = false
 					}, 2000)
 				})
-				.catch((e) => {
+				.catch((err) => {
 					// eslint-disable-next-line no-console
-					console.log('Something went wrong, unable to copy', e)
+					console.error(err)
+					;(this as any).$snackbar.error(
+						'Something went wrong, unable to copy'
+					)
 				})
 		}
 	}

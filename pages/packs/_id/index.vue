@@ -86,10 +86,13 @@
 								:name="pack.details.name"
 								:creator="pack.creator.display_name"
 							/>
-							<EditButton
-								v-if="$auth.loggedIn"
+							<EditButton v-if="mayModerate" type="pack" />
+							<ReportButton
+								v-if="!mayModerate"
 								type="pack"
-								:creator-id="pack.creator.id"
+								:nsfw="
+									pack.themes[0].categories.includes('NSFW')
+								"
 							/>
 						</ButtonDivider>
 
@@ -159,6 +162,7 @@ export default Vue.extend({
 			import('@/components/sections/ThemeInstaller.vue'),
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
+		ReportButton: () => import('@/components/buttons/ReportButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		ThemesSlideGroup: () => import('@/components/ThemesSlideGroup.vue'),
@@ -168,6 +172,7 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
+			isPageOwner: false,
 			packDialog: false,
 			loadingDownload: false
 		}
@@ -192,6 +197,9 @@ export default Vue.extend({
 					)
 			}
 			return c
+		},
+		mayModerate() {
+			return this.isPageOwner || this.$auth.user?.isAdmin
 		}
 	},
 	apollo: {
@@ -204,13 +212,16 @@ export default Vue.extend({
 			},
 			result({ data }) {
 				if (data && data.pack) {
+					this.isPageOwner =
+						this.$auth.loggedIn &&
+						data.pack.creator.id === this.$auth.user.id
+
 					this.updateUrlString(data.pack.id, data.pack.details.name)
 				}
 			},
 			error(e) {
 				this.$nuxt.error(e)
 			},
-			// fetchPolicy: 'no-cache',
 			prefetch: true
 		}
 	},

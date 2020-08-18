@@ -1,0 +1,3 @@
+mutation reportURL($url: String!, $type: String!, $nsfw: Boolean, $reason: String) {
+    reportURL(url: $url, type: $type, nsfw: $nsfw, reason: $reason)
+}

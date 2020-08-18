@@ -1,11 +1,12 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<div v-show="isCallback">
-			<v-alert color="info">
-				You are now logged in!
-			</v-alert>
-			<LoadingOverlay />
-		</div>
+		<LoadingOverlay :shadow="false">
+			<div v-show="!isCallback">
+				<v-alert style="z-index: 5;" color="info">
+					You are now logged in!
+				</v-alert>
+			</div>
+		</LoadingOverlay>
 	</v-container>
 </template>
 

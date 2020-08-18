@@ -23,7 +23,7 @@
 					link
 					two-line
 					router
-					to="/login"
+					@click="$auth.loginWith('social')"
 				>
 					<v-list-item-avatar>
 						<v-icon large>
@@ -160,7 +160,7 @@
 			</NuxtLink>
 			<v-spacer />
 			<v-toolbar-items>
-				<v-menu bottom left>
+				<v-menu bottom left offset-y>
 					<template v-slot:activator="{ on, attrs }">
 						<v-btn rounded dark icon v-bind="attrs" v-on="on">
 							<v-icon>mdi-shuffle</v-icon>
@@ -535,6 +535,12 @@ html {
 .v-list--nav .v-list-item,
 .v-list--rounded .v-list-item {
 	margin-bottom: 0 !important;
+}
+
+.v-menu__content {
+	.v-card {
+		background-color: #424242 !important;
+	}
 }
 
 .v-card {
