@@ -196,11 +196,13 @@ export default Vue.extend({
 	},
 	head() {
 		if (this.theme) {
-			const metaTitle = `Edit | ${
-				this.theme.details.name
+			const metaTitle = `Edit | ${this.theme.details.name}${
+				this.theme.categories.includes('NSFW') ? ' (NSFW!)' : ''
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = this.theme.preview.thumb
+			const metaImg = !this.theme.categories.includes('NSFW')
+				? this.theme.preview.thumb
+				: null
 
 			return {
 				title: metaTitle,
