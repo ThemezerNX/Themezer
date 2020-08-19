@@ -153,7 +153,10 @@ export default Vue.extend({
 					this.loading = false
 					this.showDialog = false
 					this.hasReported = true
-					;(this as any).$snackbar.message('Page reported!')
+					;(this as any).$snackbar.message(
+						`${this.type.charAt(0).toUpperCase() +
+							this.type.slice(1)} reported successfully!`
+					)
 				})
 				.catch((err: Error) => {
 					// eslint-disable-next-line no-console

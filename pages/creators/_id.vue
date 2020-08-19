@@ -96,13 +96,10 @@
 							</v-template>
 						</h1>
 					</v-col>
-					<v-col
-						v-if="isPageOwner || ($auth.user && $auth.user.isAdmin)"
-						class="text-center"
-						cols="12"
-					>
+					<v-col class="text-center" cols="12">
 						<ButtonDivider :hide-dividers="true">
 							<v-btn
+								v-if="mayModerate"
 								rounded
 								color="secondary"
 								@click="editDialog = true"
@@ -123,6 +120,13 @@
 							<ShareButton
 								type="creator"
 								:name="creator.display_name"
+							/>
+							<ReportButton
+								v-if="!mayModerate"
+								type="pack"
+								:nsfw="
+									pack.themes[0].categories.includes('NSFW')
+								"
 							/>
 						</ButtonDivider>
 					</v-col>
@@ -518,6 +522,9 @@ export default Vue.extend({
 				!this.changed.clearBannerImage &&
 				!this.changed.clearLogoImage
 			)
+		},
+		mayModerate() {
+			return this.isPageOwner || this.$auth.user?.isAdmin
 		}
 	},
 	apollo: {
