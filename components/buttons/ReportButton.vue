@@ -20,7 +20,7 @@
 						@click="
 							$auth.loggedIn
 								? (showDialog = true)
-								: (showLoginDialog = false)
+								: (showLoginDialog = true)
 						"
 					>
 						Report
