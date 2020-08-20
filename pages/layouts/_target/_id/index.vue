@@ -14,7 +14,7 @@
 							<v-img
 								aspect-ratio="1.7778"
 								:src="
-									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+									`${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
 								"
 								cover
 								class="overlay-image transition-fast-in-fast-out"
@@ -187,7 +187,7 @@
 							<DownloadButton
 								tooltip="Download overlay"
 								:download-href="
-									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+									`${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
 								"
 							/>
 						</ButtonDivider>
@@ -303,6 +303,7 @@ export default Vue.extend({
 	mixins: [shared, targetParser],
 	data() {
 		return {
+			API_ENDPOINT: process.env.API_ENDPOINT,
 			showCommonInfo: false,
 			commonlayoutDialog: false,
 			showOverlayInfo: false,
@@ -416,7 +417,7 @@ export default Vue.extend({
 				this.layout.details.name
 			} | ${this.targetName()} | Layouts`
 			const metaDesc = this.layout.details.description
-			const metaImg = `//api.themezer.ga/cdn/layouts/${this.layout.uuid}/overlay.png`
+			const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`
 
 			return {
 				title: metaTitle,

@@ -140,7 +140,7 @@
 								class="font-weight-bold"
 								target="_blank"
 								:to="
-									`//api.themezer.ga/cdn/themes/${theme.id}/image.${theme.bg_type}`
+									`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`
 								"
 							>
 								{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
@@ -254,6 +254,7 @@ export default Vue.extend({
 	mixins: [shared, targetParser, urlParser],
 	data() {
 		return {
+			API_ENDPOINT: process.env.API_ENDPOINT,
 			isPageOwner: false,
 			showPackInfo: false,
 			packDialog: false,

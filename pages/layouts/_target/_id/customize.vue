@@ -29,7 +29,7 @@
 							aspect-ratio="1.7778"
 							:src="
 								preview ||
-									`//api.themezer.ga/cdn/layouts/${layout.uuid}/overlay.png`
+									`${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
 							"
 							cover
 							class="overlay-image"
@@ -216,6 +216,7 @@ export default Vue.extend({
 	mixins: [urlParser, targetParser],
 	data() {
 		return {
+			API_ENDPOINT: process.env.API_ENDPOINT,
 			data: [],
 			preview: null,
 			loadingMerge: false,
@@ -322,7 +323,7 @@ export default Vue.extend({
 			if (data && data !== 'Default') {
 				if (value.image) {
 					this.preview = encodeURI(
-						`//api.themezer.ga/cdn/layouts/${this.layout.uuid}/pieces/${option.name}/${value.image}`
+						`${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/pieces/${option.name}/${value.image}`
 					)
 				}
 			} else this.preview = null
@@ -408,7 +409,7 @@ export default Vue.extend({
 				this.layout.details.name
 			} | ${this.targetName()} | Layouts`
 			const metaDesc = this.layout.details.description
-			const metaImg = `//api.themezer.ga/cdn/layouts/${this.layout.uuid}/overlay.png`
+			const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`
 
 			return {
 				title: metaTitle,

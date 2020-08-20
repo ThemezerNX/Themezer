@@ -5,6 +5,7 @@ export default {
 	debug: false,
 	env: {
 		APP_TITLE: 'Themezer',
+		ENDPOINT: process.env.ENDPOINT,
 		API_ENDPOINT: process.env.API_ENDPOINT
 	},
 

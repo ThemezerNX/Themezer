@@ -110,7 +110,7 @@ export default Vue.extend({
 	computed: {
 		imgSrc(): String {
 			if (this.type === 'layouts')
-				return `//api.themezer.ga/cdn/layouts/${this.item.uuid}/overlay.png`
+				return `${process.env.API_ENDPOINT}cdn/layouts/${this.item.uuid}/overlay.png`
 			else if (this.type === 'themes') return this.item.preview.thumb
 			else return ''
 		}

@@ -4,7 +4,7 @@
 			<v-parallax
 				:src="
 					creator.banner_image
-						? `//api.themezer.ga/cdn/creators/${creator.id}/banner/${creator.banner_image}`
+						? `${API_ENDPOINT}cdn/creators/${creator.id}/banner/${creator.banner_image}`
 						: ''
 				"
 				class="d-flex align-center justify-center parallax"
@@ -23,7 +23,7 @@
 							max-width="100%"
 							max-height="50vh"
 							:src="
-								`//api.themezer.ga/cdn/creators/${creator.id}/logo/${creator.logo_image}`
+								`${API_ENDPOINT}cdn/creators/${creator.id}/logo/${creator.logo_image}`
 							"
 						>
 						</v-img>
@@ -453,6 +453,7 @@ export default Vue.extend({
 	// },
 	data() {
 		return {
+			API_ENDPOINT: process.env.API_ENDPOINT,
 			id: this.$route.params.id,
 			isPageOwner:
 				this.$auth.loggedIn &&
@@ -707,7 +708,7 @@ export default Vue.extend({
 			}
 
 			const metaImg = this.creator.logo_image
-				? `//api.themezer.ga/cdn/creators/${this.creator.id}/logo/${this.creator.logo_image}`
+				? `${process.env.API_ENDPOINT}cdn/creators/${this.creator.id}/logo/${this.creator.logo_image}`
 				: `https://cdn.discordapp.com/${avatar}?size=256`
 
 			return {
