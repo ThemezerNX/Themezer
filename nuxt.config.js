@@ -96,7 +96,7 @@ export default {
 	],
 
 	gtm: {
-		id: 'GTM-T5ZBWPZ'
+		id: process.env.GTM_TAG
 	},
 
 	apollo: {
@@ -140,7 +140,7 @@ export default {
 				scheme: '@/schemes/customScheme',
 				clientId: '722724539028734003',
 				endpoints: {
-					// logout: 'https://discord.com/api/oauth2/token/revoke', needs POST method(?)
+					// logout: 'https://discord.com/api/oauth2/token/revoke', // needs official example: invalid_client
 					authorization: 'https://discord.com/api/oauth2/authorize',
 					token: {
 						url: 'https://discord.com/api/oauth2/token',

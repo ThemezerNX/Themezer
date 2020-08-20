@@ -1,4 +1,5 @@
 import Oauth2Scheme from '@nuxtjs/auth-next/dist/schemes/oauth2'
+// import { encodeQuery } from '@nuxtjs/auth-next/dist/utils'
 import { extendMe } from '@/graphql/Creator.gql'
 
 export default class CustomScheme extends Oauth2Scheme {
@@ -38,4 +39,23 @@ export default class CustomScheme extends Oauth2Scheme {
 			})
 		}
 	}
+
+	// async logout() {
+	// 	if (this.options.endpoints.logout) {
+	// 		this.requestHandler.clearHeader()
+	// 		await this.$auth.request(this.name, {
+	// 			method: 'post',
+	// 			headers: {
+	// 				'content-type': 'application/x-www-form-urlencoded',
+	// 				authorization: 'Basic GL5ySl3enoRBN4XyWknTq585fNl1yw'
+	// 			},
+	// 			url: this.options.endpoints.logout,
+	// 			data: {
+	// 				token: 'Basic GL5ySl3enoRBN4XyWknTq585fNl1yw'
+	// 			}
+	// 		})
+
+	// 		return this.$auth.reset()
+	// 	}
+	// }
 }
