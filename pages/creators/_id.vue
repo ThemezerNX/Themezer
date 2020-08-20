@@ -121,7 +121,7 @@
 								type="creator"
 								:name="creator.display_name"
 							/>
-							<ReportButton v-if="!mayModerate" type="pack" />
+							<ReportButton v-if="!mayModerate" type="creator" />
 						</ButtonDivider>
 					</v-col>
 				</v-row>
@@ -384,6 +384,7 @@ import { rowLayoutList } from '@/graphql/Layout.gql'
 export default Vue.extend({
 	components: {
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
+		ReportButton: () => import('@/components/buttons/ReportButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		Markdown: () => import('@/components/Markdown.vue'),
