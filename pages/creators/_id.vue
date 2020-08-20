@@ -121,13 +121,7 @@
 								type="creator"
 								:name="creator.display_name"
 							/>
-							<ReportButton
-								v-if="!mayModerate"
-								type="pack"
-								:nsfw="
-									pack.themes[0].categories.includes('NSFW')
-								"
-							/>
+							<ReportButton v-if="!mayModerate" type="pack" />
 						</ButtonDivider>
 					</v-col>
 				</v-row>
