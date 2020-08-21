@@ -23,7 +23,7 @@
 								:key="i"
 								height="auto"
 								aspect-ratio="1.7778"
-								:src="theme.preview.thumb"
+								:src="theme.preview.original"
 							>
 							</v-carousel-item>
 						</v-carousel>
