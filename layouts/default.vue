@@ -188,9 +188,13 @@
 			<nuxt />
 		</v-main>
 
-		<!-- <v-footer fixed app>
-			<span>&copy; {{ new Date().getFullYear() }} Migush</span>
-		</v-footer> -->
+		<v-footer inset absolute app>
+			<span class="pr-3"
+				>&copy; {{ new Date().getFullYear() }} Themezer</span
+			>
+			<nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
+			<nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
+		</v-footer>
 		<v-dialog
 			v-if="$auth.loggedIn && $auth.user"
 			v-model="acceptDialog"
@@ -199,96 +203,157 @@
 			persistent
 		>
 			<v-card>
-				<v-card-title
-					class="title font-weight-regular justify-space-between"
-				>
-					<span>Backup Code</span>
-				</v-card-title>
-
-				<v-card-text>
-					In order to ensure you retain access to you Themezer account
-					if anything happens to your Discord account, here is your
-					creator ID and a backup code you can use in order to restore
-					your account and connect a new Discord account. Be sure to
-					store this backup code somewhere safe! The creator ID can
-					also be found in the url of the creator page of your
-					previous Themezer account. To restore your account, visit
-					the about page.
-					<div>
-						THIS IS THE ONLY TIME YOU CAN VIEW THIS BACKUP CODE!
-					</div>
-					<v-flex class="d-flex">
-						<v-text-field
-							ref="creatorId"
-							v-model="$auth.user.id"
-							rounded
-							class="my-5"
-							hide-details
-							readonly
-							outlined
-							prepend-icon="mdi-identifier"
-						></v-text-field>
-
-						<v-tooltip v-model="copyIdSuccess" nudge-top top>
-							<template v-slot:activator="{ attrs }">
-								<v-btn
-									rounded
-									v-bind="attrs"
-									class="align-self-center ml-2"
-									@click="copyId"
-									>copy</v-btn
-								>
-							</template>
-							<span>Copied!</span>
-						</v-tooltip>
-					</v-flex>
-					<v-flex class="d-flex">
-						<v-text-field
-							ref="backupCode"
-							v-model="backupCode"
-							rounded
-							class="my-5"
-							hide-details
-							readonly
-							outlined
-							prepend-icon="mdi-key-variant"
-							:type="showBackupCode ? 'text' : 'password'"
-							:append-icon="
-								showBackupCode ? 'mdi-eye-off' : 'mdi-eye'
-							"
-							@click:append="
-								() => (showBackupCode = !showBackupCode)
-							"
-						></v-text-field>
-
-						<v-tooltip v-model="copyCodeSuccess" nudge-top top>
-							<template v-slot:activator="{ attrs }">
-								<v-btn
-									rounded
-									v-bind="attrs"
-									class="align-self-center ml-2"
-									@click="copyCode"
-									>copy</v-btn
-								>
-							</template>
-							<span>Copied!</span>
-						</v-tooltip>
-					</v-flex>
-
-					<v-flex class="d-flex">
-						<v-spacer />
-						<v-btn
-							rounded
-							:disabled="!countdownFinished"
-							color="secondary"
-							:loading="loading.accept"
-							@click.prevent="accept()"
+				<v-window v-model="step" touchless>
+					<v-window-item :value="0">
+						<v-card-title
+							class="title font-weight-regular justify-space-between"
 						>
-							Continue
-							<v-icon right>mdi-arrow-right</v-icon>
-						</v-btn>
-					</v-flex>
-				</v-card-text>
+							<span>Welcome to Themezer!</span>
+						</v-card-title>
+
+						<v-card-text>
+							<p class="mb-4">
+								Now you can finally upload your themes! But...
+								there are a few rules here on Themezer:
+							</p>
+
+							<h1 class="mb-2">
+								Terms of Service
+							</h1>
+							<div v-for="item in tos" :key="item.title">
+								<h2>{{ item.title }}</h2>
+								<p>
+									{{ item.content }}
+								</p>
+							</div>
+
+							<v-flex class="d-flex">
+								<v-spacer />
+								<v-btn
+									rounded
+									:disabled="!countdownFinished"
+									color="secondary"
+									@click.prevent="step++"
+								>
+									Accept
+									<v-icon right>mdi-arrow-right</v-icon>
+								</v-btn>
+							</v-flex>
+						</v-card-text>
+					</v-window-item>
+					<v-window-item :value="1">
+						<v-card-title
+							class="title font-weight-regular justify-space-between"
+						>
+							<span>Backup Code</span>
+						</v-card-title>
+
+						<v-card-text>
+							In order to ensure you retain access to you Themezer
+							account if anything happens to your Discord account,
+							here is your creator ID and a backup code you can
+							use in order to restore your account and connect a
+							new Discord account. Be sure to store this backup
+							code somewhere safe! The creator ID can also be
+							found in the url of the creator page of your
+							previous Themezer account. To restore your account,
+							visit the about page.
+							<div>
+								THIS IS THE ONLY TIME YOU CAN VIEW THIS BACKUP
+								CODE!
+							</div>
+							<v-flex class="d-flex">
+								<v-text-field
+									ref="creatorId"
+									v-model="$auth.user.id"
+									rounded
+									class="my-5"
+									hide-details
+									readonly
+									outlined
+									prepend-icon="mdi-identifier"
+								></v-text-field>
+
+								<v-tooltip
+									v-model="copyIdSuccess"
+									nudge-top
+									top
+								>
+									<template v-slot:activator="{ attrs }">
+										<v-btn
+											rounded
+											v-bind="attrs"
+											class="align-self-center ml-2"
+											@click="copyId"
+											>copy</v-btn
+										>
+									</template>
+									<span>Copied!</span>
+								</v-tooltip>
+							</v-flex>
+							<v-flex class="d-flex">
+								<v-text-field
+									ref="backupCode"
+									v-model="backupCode"
+									rounded
+									class="my-5"
+									hide-details
+									readonly
+									outlined
+									prepend-icon="mdi-key-variant"
+									:type="showBackupCode ? 'text' : 'password'"
+									:append-icon="
+										showBackupCode
+											? 'mdi-eye-off'
+											: 'mdi-eye'
+									"
+									@click:append="
+										() => (showBackupCode = !showBackupCode)
+									"
+								></v-text-field>
+
+								<v-tooltip
+									v-model="copyCodeSuccess"
+									nudge-top
+									top
+								>
+									<template v-slot:activator="{ attrs }">
+										<v-btn
+											rounded
+											v-bind="attrs"
+											class="align-self-center ml-2"
+											@click="copyCode"
+											>copy</v-btn
+										>
+									</template>
+									<span>Copied!</span>
+								</v-tooltip>
+							</v-flex>
+
+							<v-flex class="d-flex">
+								<v-btn
+									rounded
+									color="secondary"
+									@click.prevent="step--"
+								>
+									Previous
+									<v-icon right>mdi-arrow-left</v-icon>
+								</v-btn>
+								<v-spacer />
+								<v-btn
+									rounded
+									:disabled="!backupCountdownFinished"
+									color="secondary"
+									:loading="loading.accept"
+									@click.prevent="accept()"
+								>
+									Finish
+									<v-icon right>mdi-check</v-icon>
+								</v-btn>
+							</v-flex>
+						</v-card-text>
+					</v-window-item>
+				</v-window>
 			</v-card>
 		</v-dialog>
 		<Snackbar />
@@ -300,7 +365,8 @@ import { updateAuth } from '@/graphql/Creator.gql'
 import { randomPackIDs } from '@/graphql/Pack.gql'
 import { randomThemeIDs } from '@/graphql/Theme.gql'
 import { randomLayoutIDs } from '@/graphql/Layout.gql'
-import targets from '@/components/mixins/targets'
+import targets from '@/assets/targets'
+import tos from '@/assets/tos'
 
 export default {
 	data() {
@@ -366,12 +432,15 @@ export default {
 				}
 			],
 			acceptDialog: false,
+			step: 0,
+			tos,
 			accepts: true,
 			backupCode: null,
 			showBackupCode: false,
 			copyIdSuccess: false,
 			copyCodeSuccess: false,
 			countdownFinished: false,
+			backupCountdownFinished: false,
 			loading: {
 				accept: false
 			}
@@ -393,6 +462,13 @@ export default {
 			setTimeout(() => {
 				this.countdownFinished = true
 			}, 10000)
+		},
+		step(n) {
+			if (n === 1) {
+				setTimeout(() => {
+					this.backupCountdownFinished = true
+				}, 10000)
+			}
 		}
 	},
 	mounted() {

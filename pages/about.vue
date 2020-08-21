@@ -192,6 +192,21 @@ export default Vue.extend({
 					this.loading.accept = false
 				})
 		}
+	},
+	head() {
+		const metaTitle = 'About'
+
+		return {
+			title: metaTitle,
+			meta: [
+				{
+					hid: 'og:title',
+					name: 'og:title',
+					property: 'og:title',
+					content: metaTitle
+				}
+			]
+		}
 	}
 })
 </script>

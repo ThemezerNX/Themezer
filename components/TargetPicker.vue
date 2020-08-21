@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import targets from '@/components/mixins/targets'
+import targets from '@/assets/targets'
 
 export default Vue.extend({
 	data() {

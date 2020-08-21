@@ -150,10 +150,9 @@ export default Vue.extend({
 		}
 	},
 	head() {
-		const metaTitle = 'Themezer Home'
+		const metaTitle = 'Home'
 		const metaDesc =
 			'A customization site for Nintendo Switch Themes and Layouts.'
-		const metaImg = null
 
 		return {
 			title: metaTitle,
@@ -174,12 +173,6 @@ export default Vue.extend({
 					name: 'og:description',
 					property: 'og:description',
 					content: metaDesc
-				},
-				{
-					hid: 'og:image',
-					name: 'og:image',
-					property: 'og:image',
-					content: metaImg
 				}
 			]
 		}
