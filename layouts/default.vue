@@ -319,7 +319,7 @@ export default {
 				},
 				...targets,
 				{
-					header: 'Submit'
+					header: 'Submitting'
 				},
 				{
 					icon: 'mdi-format-color-fill',
