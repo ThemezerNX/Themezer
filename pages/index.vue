@@ -151,28 +151,15 @@ export default Vue.extend({
 	},
 	head() {
 		const metaTitle = 'Home'
-		const metaDesc =
-			'A customization site for Nintendo Switch Themes and Layouts.'
 
 		return {
 			title: metaTitle,
 			meta: [
 				{
-					hid: 'description',
-					name: 'description',
-					content: metaDesc
-				},
-				{
 					hid: 'og:title',
 					name: 'og:title',
 					property: 'og:title',
 					content: metaTitle
-				},
-				{
-					hid: 'og:description',
-					name: 'og:description',
-					property: 'og:description',
-					content: metaDesc
 				}
 			]
 		}
