@@ -109,8 +109,7 @@
 							/>
 							<DownloadButton
 								v-if="!!layout.baselayout"
-								icon="mdi-code-json"
-								tooltip="Download layout only"
+								tooltip="Download layout"
 								:download-function="download"
 								:loading="loadingMerge"
 							/>

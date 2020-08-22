@@ -29,13 +29,12 @@
 import Vue from 'vue'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
-import slideGroupSorting from '@/components/mixins/slideGroupSorting'
 
 export default Vue.extend({
 	components: {
 		ItemCard: () => import('@/components/ItemCard.vue')
 	},
-	mixins: [targetParser, urlParser, slideGroupSorting],
+	mixins: [targetParser, urlParser],
 	props: {
 		type: {
 			type: String,

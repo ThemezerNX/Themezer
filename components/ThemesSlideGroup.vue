@@ -5,7 +5,7 @@
 			show-arrows="always"
 			center-active
 		>
-			<v-slide-item v-for="(theme, i) in sortedItems" :key="i">
+			<v-slide-item v-for="(theme, i) in items" :key="i">
 				<v-hover v-if="theme" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
@@ -78,13 +78,12 @@
 import Vue from 'vue'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
-import slideGroupSorting from '@/components/mixins/slideGroupSorting'
 
 export default Vue.extend({
 	components: {
 		CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
 	},
-	mixins: [targetParser, urlParser, slideGroupSorting],
+	mixins: [targetParser, urlParser],
 	props: {
 		items: {
 			type: Array,

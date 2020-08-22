@@ -50,7 +50,7 @@
 							style="background: rgba(255,255,255,0.12); border-radius: 10px;"
 							class="my-3"
 						>
-							<v-subheader>Layout Modifications</v-subheader>
+							<v-subheader>Layout pieces</v-subheader>
 							<div
 								v-for="(piece, i) in layout.pieces"
 								:key="piece.name"
