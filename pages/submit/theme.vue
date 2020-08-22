@@ -361,7 +361,7 @@
 														rules.required
 													]"
 													prepend-icon="mdi-shape-outline"
-													label="Categories*"
+													label="Categories (you can create new ones)*"
 													multiple
 												></v-combobox>
 												<v-text-field
@@ -388,6 +388,9 @@
 													"
 													label="NSFW"
 													class="mt-0"
+													@change="
+														nsfwConfirm($event, i)
+													"
 												/>
 											</v-col>
 										</v-list-item-content>
@@ -512,6 +515,38 @@
 					</v-row>
 				</div>
 			</v-form>
+			<v-dialog v-model="nsfwDialog" persistent max-width="600">
+				<v-card>
+					<v-card-title class="headline"
+						>Theme will be marked as NSFW, continue?
+					</v-card-title>
+
+					<v-card-actions>
+						<v-btn
+							rounded
+							color="red"
+							text
+							@click="
+								nsfwDialog = false
+								detectedThemes[nsfwDialogThemeNr].nsfw = false
+							"
+						>
+							No, cancel
+						</v-btn>
+
+						<v-spacer />
+
+						<v-btn
+							rounded
+							color="primary"
+							text
+							@click="nsfwDialog = false"
+						>
+							Yes
+						</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
 		</v-sheet>
 	</v-container>
 </template>
@@ -703,6 +738,8 @@ export default Vue.extend({
 						"Uhm... why not? It's frii. Anyway, feel free to submit it."
 				}
 			],
+			nsfwDialog: false,
+			nsfwDialogThemeNr: null,
 			FAQDialog: false,
 			selectedType: null,
 			uploadSingleOrZip: null,
@@ -775,6 +812,12 @@ export default Vue.extend({
 				description: null,
 				color: null,
 				version: null
+			}
+		},
+		nsfwConfirm(value, i) {
+			if (value) {
+				this.nsfwDialog = true
+				this.nsfwDialogThemeNr = i
 			}
 		},
 		clearSwitchSubmitType() {
