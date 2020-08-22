@@ -141,7 +141,10 @@
 							Themes in this Pack
 						</h2>
 						<v-divider />
-						<ThemesSlideGroup :items="pack.themes" />
+						<ThemesSlideGroup
+							:items="pack.themes"
+							:show-props="['target']"
+						/>
 					</v-col>
 				</v-row>
 			</v-sheet>

@@ -64,6 +64,13 @@
 				{{ item.details.version ? `• v${item.details.version}` : '' }}
 			</v-card-subtitle>
 
+			<v-card-subtitle
+				v-if="showProps.includes('creator') && item.target"
+				class="creator"
+			>
+				{{ item.target }}
+			</v-card-subtitle>
+
 			<v-divider v-if="item.details.description" />
 
 			<v-card-text

@@ -71,6 +71,34 @@ export default Vue.extend({
 				default:
 					return null
 			}
+		},
+		fileNameToNiceWebName(s: string): string | null {
+			switch (s) {
+				case 'ResidentMenu.szs':
+				case 'ResidentMenu':
+					return 'Home Menu'
+				case 'Entrance.szs':
+				case 'Entrance':
+					return 'Lockscreen'
+				case 'MyPage.szs':
+				case 'MyPage':
+					return 'User Page'
+				case 'Flaunch.szs':
+				case 'Flaunch':
+					return 'All Apps'
+				case 'Set.szs':
+				case 'Set':
+					return 'Settings'
+				case 'Notification.szs':
+				case 'Notification':
+					return 'News'
+				case 'Psl.szs':
+				case 'Psl':
+					return 'Player Select'
+
+				default:
+					return null
+			}
 		}
 	}
 })

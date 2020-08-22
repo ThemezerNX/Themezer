@@ -26,7 +26,7 @@
 		-webkit-line-clamp: 2;
 	}
 
-	.creator {
+	.creator, .target {
 		@include dotting;
 		-webkit-line-clamp: 1;
 		margin-top: unset !important;

@@ -54,7 +54,8 @@
 										? 'body-2'
 										: 'subtitle-1') +
 										' ' +
-										(showProps.includes('creator')
+										(showProps.includes('creator') ||
+										showProps.includes('target')
 											? 'mb-0'
 											: 'my-1 mx-3')
 								"
@@ -65,6 +66,12 @@
 								class="creator"
 							>
 								By {{ theme.creator.display_name }}
+							</v-card-subtitle>
+							<v-card-subtitle
+								v-if="showProps.includes('target')"
+								class="target"
+							>
+								{{ fileNameToNiceWebName(theme.target) }}
 							</v-card-subtitle>
 						</v-card>
 					</v-scale-transition>
