@@ -2,6 +2,7 @@ query allLayouts($target: String) {
 	layoutList(target: $target) {
 		id
 		creator {
+			id
 			display_name
 		}
 		details {
