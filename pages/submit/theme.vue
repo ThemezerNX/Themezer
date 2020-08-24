@@ -288,7 +288,11 @@
 												</v-list-item-subtitle>
 												<v-list-item-subtitle>
 													Target:
-													{{ theme.target }}
+													{{
+														fileNameToNiceWebName(
+															theme.target
+														)
+													}}
 												</v-list-item-subtitle>
 												<v-list-item-subtitle
 													v-if="
