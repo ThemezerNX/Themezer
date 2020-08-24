@@ -283,8 +283,7 @@
 													</div>
 												</v-list-item-subtitle>
 												<v-list-item-subtitle v-else>
-													The layout was not found on
-													Themezer
+													Layout: custom
 												</v-list-item-subtitle>
 												<v-list-item-subtitle>
 													Target:
