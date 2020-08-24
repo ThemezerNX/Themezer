@@ -256,7 +256,7 @@ export default Vue.extend({
 	head() {
 		if (this.pack) {
 			const metaTitle = `${this.pack.details.name}${
-				this.pack.themes[0].categories.includes('NSFW')
+				this.pack.themes.some((t) => t.categories?.includes('NSFW'))
 					? ' (NSFW!)'
 					: ''
 			} | Packs`

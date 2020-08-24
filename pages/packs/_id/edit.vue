@@ -163,12 +163,14 @@ export default Vue.extend({
 	head() {
 		if (this.pack) {
 			const metaTitle = `Edit | ${this.pack.details.name}${
-				this.pack.themes[0].categories.includes('NSFW')
+				this.pack.themes.some((t) => t.categories?.includes('NSFW'))
 					? ' (NSFW!)'
 					: ''
 			} | Packs`
 			const metaDesc = this.pack.details.description
-			const metaImg = !this.pack.themes[0].categories.includes('NSFW')
+			const metaImg = !this.pack.themes.some((t) =>
+				t.categories?.includes('NSFW')
+			)
 				? this.pack.themes[0].preview.thumb
 				: null
 
