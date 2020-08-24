@@ -52,7 +52,12 @@
 
 			<v-card-title
 				class="title mb-0 subtitle-1"
-				:class="showProps.includes('creator') ? 'mb-0' : 'my-1 mx-3'"
+				:class="
+					showProps.includes('creator') ||
+					showProps.includes('target')
+						? 'mb-0'
+						: 'my-1 mx-3'
+				"
 				v-text="item.details.name"
 			/>
 
@@ -65,7 +70,7 @@
 			</v-card-subtitle>
 
 			<v-card-subtitle
-				v-if="showProps.includes('creator') && item.target"
+				v-if="showProps.includes('target') && item.target"
 				class="creator"
 			>
 				{{ item.target }}
