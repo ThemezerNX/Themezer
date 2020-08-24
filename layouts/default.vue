@@ -75,20 +75,16 @@
 					</v-list-item>
 				</v-list-group>
 				<v-divider class="mt-2" />
-				<template v-for="item in items">
-					<v-subheader v-if="item.header" :key="item.header">{{
+				<template v-for="(item, i) in items">
+					<v-subheader v-if="!!item.header" :key="i">{{
 						item.header
 					}}</v-subheader>
 
-					<v-divider
-						v-else-if="item.divider"
-						:key="item.divider"
-						class="mt-2"
-					/>
+					<v-divider v-else-if="item.divider" :key="i" class="mt-2" />
 
 					<v-list-group
 						v-else-if="Array.isArray(item.types)"
-						:key="item.title"
+						:key="i"
 					>
 						<template v-slot:activator>
 							<v-list-item-action>
@@ -119,10 +115,11 @@
 
 					<v-list-item
 						v-else
-						:key="item.title"
+						:key="i"
 						class="my-2"
 						:to="item.to"
 						router
+						:href="item.href"
 					>
 						<v-list-item-action>
 							<v-icon v-text="item.icon" />
@@ -404,6 +401,17 @@ export default {
 					icon: 'mdi-image-edit-outline',
 					title: 'Overlay Creator',
 					to: '/tools/overlaycreator'
+				},
+				{
+					icon: 'mdi-web',
+					title: 'Online Theme Creator',
+					href: 'https://exelix11.github.io/SwitchThemeInjector/v2/'
+				},
+				{
+					icon: 'mdi-open-in-app',
+					title: 'Themezer NX App',
+					href:
+						'https://github.com/suchmememanyskill/themezer-nx/releases'
 				},
 				{
 					divider: true
