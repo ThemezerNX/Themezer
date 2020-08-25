@@ -101,12 +101,10 @@
 							>
 							{{ niceDate(theme.last_updated) }}
 						</div>
-						<div
-							v-if="theme.layout"
-							class="font-weight-light body-2"
-						>
+						<div class="font-weight-light body-2">
 							<span class="font-weight-medium">Layout: </span>
 							<nuxt-link
+								v-if="theme.layout"
 								class="font-weight-bold"
 								:to="
 									`/layouts/${fileNameToWebName(
@@ -119,6 +117,9 @@
 							>
 								{{ theme.layout.details.name }}
 							</nuxt-link>
+							<template v-else>
+								Custom
+							</template>
 						</div>
 						<div
 							v-if="
