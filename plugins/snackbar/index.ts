@@ -5,7 +5,7 @@ export default (context: any, inject: any) => {
 	const storeModule = {
 		namespaced: true,
 		state: () => ({
-			message: 'Gaming week',
+			message: null,
 			error: null
 		}),
 		mutations: {
