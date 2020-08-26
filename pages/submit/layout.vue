@@ -8,7 +8,7 @@
 				You can submit layouts to the Themezer Layouts GitHub
 				repository. See the
 				<a
-					href="https://github.com/ThemezerNX/Layouts/blob/master/README.md"
+					href="https://github.com/ThemezerNX/Layouts#readme"
 					target="_blank"
 				>
 					README.md
