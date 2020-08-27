@@ -74,7 +74,15 @@
 								v-if="$auth.loggedIn"
 								:id="pack.id"
 								type="packs"
-								:count="pack.like_count"
+								:count="
+									pack.like_count > 0
+										? pack.like_count
+										: $auth.user.liked.packs
+												.map((p) => p.id)
+												.includes(pack.id)
+										? 1
+										: 0
+								"
 								:value="
 									$auth.user.liked.packs
 										.map((p) => p.id)

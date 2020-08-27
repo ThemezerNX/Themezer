@@ -55,7 +55,15 @@
 							<LikeButton
 								v-if="$auth.loggedIn"
 								:id="layout.id"
-								:count="layout.like_count"
+								:count="
+									layout.like_count > 0
+										? layout.like_count
+										: $auth.user.liked.layouts
+												.map((l) => l.id)
+												.includes(layout.id)
+										? 1
+										: 0
+								"
 								type="layouts"
 								:value="
 									$auth.user.liked.layouts

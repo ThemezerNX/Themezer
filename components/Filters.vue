@@ -377,7 +377,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/variables.scss';
+@import '~assets/variables.scss';
 
 .group:first-of-type {
 	padding-top: 16px;
@@ -421,6 +421,7 @@ export default Vue.extend({
 		border: 1px solid darken($themezer-primary, 5%);
 		background-color: darken($themezer-primary, 2%);
 		color: #1e1e1e;
+
 		.order {
 			transform: unset;
 		}
@@ -431,10 +432,12 @@ export default Vue.extend({
 		border: 1px solid darken($themezer-secondary, 5%);
 		background-color: darken($themezer-secondary, 2%);
 		color: white;
+
 		.order {
 			transform: rotateZ(180deg);
 		}
 	}
+
 	.order {
 		right: 0;
 		transition: transform 200ms ease;

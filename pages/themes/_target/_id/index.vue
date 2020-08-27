@@ -63,7 +63,15 @@
 							<LikeButton
 								v-if="$auth.loggedIn"
 								:id="theme.id"
-								:count="theme.like_count"
+								:count="
+									theme.like_count > 0
+										? theme.like_count
+										: $auth.user.liked.themes
+												.map((t) => t.id)
+												.includes(theme.id)
+										? 1
+										: 0
+								"
 								type="themes"
 								:value="
 									$auth.user.liked.themes

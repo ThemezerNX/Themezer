@@ -1,8 +1,8 @@
-@import '@/assets/variables.scss';
+@import '~assets/variables.scss';
 
 .card {
 	height: 100%;
-	transform-origin: center top 0px;
+	transform-origin: center top 0;
 	border-radius: 10px !important;
 	overflow: hidden;
 
@@ -31,7 +31,7 @@
 		-webkit-line-clamp: 1;
 		margin-top: unset !important;
 	}
-	
+
 	.description {
 		@include dotting;
 		-webkit-line-clamp: 3;

@@ -67,7 +67,7 @@
 									: `#${creator.discord_user.discriminator}`
 							}}
 
-							<v-template v-if="creator.roles">
+							<template v-if="creator.roles">
 								<v-tooltip
 									v-for="(role, i) in creator.roles"
 									:key="role"
@@ -93,7 +93,7 @@
 										]
 									}}</span>
 								</v-tooltip>
-							</v-template>
+							</template>
 						</h1>
 					</v-col>
 					<v-col class="text-center" cols="12">
@@ -104,13 +104,22 @@
 								color="secondary"
 								@click="editDialog = true"
 							>
-								Edit Profile <v-icon right>mdi-pencil</v-icon>
+								Edit Profile
+								<v-icon right>mdi-pencil</v-icon>
 							</v-btn>
 							<LikeButton
 								v-if="$auth.loggedIn"
 								:id="creator.id"
 								type="creators"
-								:count="creator.like_count"
+								:count="
+									creator.like_count > 0
+										? creator.like_count
+										: $auth.user.liked.creators
+												.map((c) => c.id)
+												.includes(creator.id)
+										? 1
+										: 0
+								"
 								:value="
 									$auth.user.liked.creators
 										.map((c) => c.id)
@@ -350,8 +359,8 @@
 								>
 									Discard
 									<v-icon right
-										>mdi-delete-sweep-outline</v-icon
-									>
+										>mdi-delete-sweep-outline
+									</v-icon>
 								</v-btn>
 								<v-spacer />
 								<v-btn
@@ -362,7 +371,8 @@
 									:loading="loading.submit"
 									@click.prevent="submit()"
 								>
-									Save <v-icon right>mdi-cube-send</v-icon>
+									Save
+									<v-icon right>mdi-cube-send</v-icon>
 								</v-btn>
 							</v-flex>
 						</v-card-text>
@@ -375,11 +385,12 @@
 
 <script>
 import Vue from 'vue'
-import removeMd from 'remove-markdown'
 import { me, creator, updateProfile } from '@/graphql/Creator.gql'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
 import { rowLayoutList } from '@/graphql/Layout.gql'
+
+const removeMd = require('remove-markdown')
 
 export default Vue.extend({
 	components: {
@@ -388,7 +399,8 @@ export default Vue.extend({
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),
 		Markdown: () => import('@/components/Markdown.vue'),
-		ItemGrid: () => import('@/components/ItemGrid.vue')
+		ItemGrid: () => import('@/components/ItemGrid.vue'),
+		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
 	// async asyncData({ error, app, params }) {
 	// 	const syncData = {
@@ -771,7 +783,7 @@ export default Vue.extend({
 	.avatar {
 		user-select: none;
 		margin-top: -4px;
-		box-shadow: #00000060 0px 5px 30px;
+		box-shadow: #00000060 0 5px 30px;
 	}
 
 	.discord-name {
@@ -781,7 +793,7 @@ export default Vue.extend({
 		border-radius: 200px;
 		text-align: center;
 		word-break: break-all;
-		box-shadow: #00000050 0px 1px 30px;
+		box-shadow: #00000050 0 1px 30px;
 	}
 }
 
