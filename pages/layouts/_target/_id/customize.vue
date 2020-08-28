@@ -248,47 +248,12 @@ export default Vue.extend({
 	},
 	watch: {
 		activePiecesComputed(n) {
-			this.$router.replace({
-				query: { pieces: n.length > 0 ? n.join() : undefined }
-			})
+			this.$router
+				.replace({
+					query: { pieces: n.length > 0 ? n.join() : undefined }
+				}) // Don't throw 'redundant navigation'
+				.catch(() => {})
 		}
-	},
-	mounted() {
-		if (this.$route.query.pieces) {
-			this.activePieces = this.$route.query.pieces
-				.toLowerCase()
-				.split(',')
-				.filter((uuid) =>
-					this.layout.pieces.some((p) =>
-						p.values.some((v) => v.uuid === uuid)
-					)
-				)
-
-			if (this.activePieces.length > 0) {
-				this.activePieces.forEach((aP) => {
-					let index
-					let value
-					for (let i = 0; i < this.layout.pieces.length; i++) {
-						this.layout.pieces[i].values.find((v) => {
-							if (v.uuid === aP) {
-								index = i
-								if (this.layout.pieces[i].values.length > 1) {
-									// Dropdown
-									value = v.value
-								} else {
-									// Checkbox
-									value = true
-								}
-								return true
-							}
-						})
-					}
-
-					this.data[index] = value
-				})
-			}
-		}
-		this.restoredActivePieces = true
 	},
 	apollo: {
 		layout: {
@@ -305,6 +270,50 @@ export default Vue.extend({
 						data.layout.details.name,
 						this.fileNameToWebName(data.layout.target)
 					)
+
+					if (this.$route.query.pieces) {
+						this.activePieces = this.$route.query.pieces
+							.toLowerCase()
+							.split(',')
+							.filter((uuid) =>
+								data.layout.pieces.some((p) =>
+									p.values.some((v) => v.uuid === uuid)
+								)
+							)
+
+						if (this.activePieces.length > 0) {
+							this.activePieces.forEach((aP) => {
+								let index
+								let value
+								for (
+									let i = 0;
+									i < data.layout.pieces.length;
+									i++
+								) {
+									data.layout.pieces[i].values.find((v) => {
+										if (v.uuid === aP) {
+											index = i
+											if (
+												data.layout.pieces[i].values
+													.length > 1
+											) {
+												// Dropdown
+												value = v.value
+											} else {
+												// Checkbox
+												value = true
+											}
+											return true
+										}
+									})
+								}
+
+								// noinspection JSUnusedAssignment
+								this.$data.data[index] = value
+							})
+						}
+					}
+					this.restoredActivePieces = true
 				}
 			},
 			error(e) {
