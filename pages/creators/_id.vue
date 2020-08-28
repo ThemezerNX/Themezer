@@ -1,5 +1,5 @@
 <template>
-	<LoadingOverlay :loading="!!$apollo.loading">
+	<LoadingOverlay :loading="!!$apollo.loading" :margin="false">
 		<div v-if="creator && id === creator.id">
 			<v-parallax
 				:src="

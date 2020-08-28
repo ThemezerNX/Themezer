@@ -12,7 +12,10 @@
 					<!-- <h1 v-show="message">Redirecting...</h1> -->
 				</v-flex>
 			</v-fade-transition>
-			<div class="wrapper pa-3" :class="{ shadow: loading && shadow }">
+			<div
+				class="wrapper"
+				:class="{ shadow: loading && shadow, 'ma-3': margin }"
+			>
 				<slot />
 			</div>
 		</div>
@@ -32,13 +35,18 @@ export default {
 			type: Boolean,
 			required: false,
 			default: true
+		},
+		margin: {
+			type: Boolean,
+			required: false,
+			default: true
 		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/variables.scss';
+@import '~assets/variables.scss';
 
 .holder {
 	width: 100%;
