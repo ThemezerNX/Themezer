@@ -284,7 +284,10 @@ export default Vue.extend({
 			}, 400)
 		},
 		withCreators(n, o) {
-			if (this.$data.allCreators && n.length !== o.length) {
+			if (
+				(this.$data.allCreators || this.$data.loading.allCreators) &&
+				n.length !== o.length
+			) {
 				clearTimeout(this.$data.typingWithCreatorsTimer)
 				this.$data.typingWithCreatorsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)
@@ -298,7 +301,10 @@ export default Vue.extend({
 			}
 		},
 		withLayouts(n, o) {
-			if (this.$data.allLayouts && n.length !== o.length) {
+			if (
+				(this.$data.allLayouts || this.$data.loading.allLayouts) &&
+				n.length !== o.length
+			) {
 				clearTimeout(this.$data.typingWithLayoutsTimer)
 				this.$data.typingWithLayoutsTimer = setTimeout(() => {
 					const query = Object.assign({}, this.$route.query)

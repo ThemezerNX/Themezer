@@ -30,12 +30,10 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.button-divider {
-	.button-parent {
-		text-align: center;
-		.v-btn {
-			margin: 3px 3px;
-		}
+.button-divider .button-parent {
+	text-align: center;
+	.v-btn {
+		margin: 3px 3px;
 	}
 }
 </style>

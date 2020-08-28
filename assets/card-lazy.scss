@@ -1,5 +1,6 @@
 .v-image__image--preload {
-	background: url('/images/diagonal_joycon-180.png') #00000050;
-	background-repeat: repeat;
+    background-image: url('~static/images/diagonal_joycon-180.png');
+    background-color: #00000050;
+    background-repeat: repeat;
 	animation: flow 6s linear infinite;
 }
