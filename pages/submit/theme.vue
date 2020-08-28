@@ -5,17 +5,10 @@
 				Theme/Pack Submissions
 			</h1>
 			<div class="subtitle-1 box_text">
-				You can submit themes here for listing on this Themezer.
-			</div>
-			<div class="subtitle-1 box_text">
 				If you downloaded the theme from elsewhere and Themezer doesn't
-				recognize the layout, you should try to find the layout in
-				<nuxt-link exact to="/layouts">
-					the Layouts section
-				</nuxt-link>
-				and select it in the dropdown. Be really sure it is the exact
-				same layout, or else you might lose some features! For more
-				detailed instructions,
+				recognize the layout, you should select it in the dropdown. Be
+				really sure it is the exact same layout, or else you might lose
+				some features! For more detailed instructions,
 				<v-btn
 					text
 					color="primary"
@@ -23,14 +16,14 @@
 					rounded
 					class="px-1"
 					@click="FAQDialog = true"
-					>read the FAQ</v-btn
+					>read this.</v-btn
 				>
 				<v-dialog v-model="FAQDialog" max-width="800" class="mx-auto">
 					<v-card>
 						<v-card-title
 							class="title font-weight-regular justify-space-between"
 						>
-							<span>FAQ</span>
+							<span>More info</span>
 							<v-spacer></v-spacer>
 
 							<v-btn rounded icon @click="FAQDialog = false">
@@ -41,6 +34,15 @@
 						</v-card-title>
 
 						<v-card-text>
+							<h2 class="box_text mt-1">Screenshots</h2>
+							<div class="subtitle-2 box_text font-weight-normal">
+								Themezer requires a SCREENSHOT for every theme.
+								Only the background image is NOT sufficient.
+							</div>
+						</v-card-text>
+
+						<v-card-text>
+							<h2 class="box_text mt-1">FAQ</h2>
 							<template v-for="faq in FAQ">
 								<h4
 									:key="faq.Q"
@@ -65,9 +67,6 @@
 			</h2>
 			<v-row class="ma-0">
 				<v-col cols="12" class="pa-2">
-					<div class="subtitle-1 box_text font-italic">
-						I have...
-					</div>
 					<v-radio-group v-model="selectedType" row class="mt-0">
 						<v-radio
 							v-for="type in types"
@@ -83,7 +82,7 @@
 						v-model="uploadSingleOrZip"
 						rounded
 						:loading="loading.uploadSingleOrZip"
-						label=".NXTheme file"
+						label="NXTheme file"
 						filled
 						prepend-icon="mdi-file-outline"
 						accept=".nxtheme"
@@ -92,7 +91,7 @@
 					/>
 					<div v-if="selectedType === 'zip'">
 						<div class="subtitle-1 box_text">
-							Make sure the .NXThemes are in the root of the .zip
+							Make sure the NXThemes are in the root of the zip
 							(not in a folder)!
 						</div>
 						<v-file-input
@@ -100,7 +99,7 @@
 							v-model="uploadSingleOrZip"
 							rounded
 							:loading="loading.uploadSingleOrZip"
-							label=".zip file"
+							label="Zip file"
 							filled
 							prepend-icon="mdi-folder-zip-outline"
 							accept="application/zip"
@@ -133,18 +132,9 @@
 					<v-row v-else class="ma-0">
 						<v-col cols="12" class="pa-2">
 							<div class="subtitle-1 box_text">
-								You must upload a screenshot (NOT simply the
-								background image!) or an image created using an
-								overlay.png downloaded from the layout's page
-								for every theme you upload. Do so by clicking
-								the placeholder image.
-							</div>
-							<div class="subtitle-1 box_text font-italic">
-								{{
-									detectedThemes.length > 1
-										? 'The following NXThemes were detected:'
-										: 'The following NXTheme was detected:'
-								}}
+								You must upload a SCREENSHOT (NOT simply the
+								background image). Do so by clicking the
+								placeholder image.
 							</div>
 							<template v-for="(theme, i) in detectedThemes">
 								<v-card
@@ -199,7 +189,7 @@
 																	"
 																	full-width
 																	height="100%"
-																	label="Upload Screenshot* (jpg, 1280x720)"
+																	label="SCREENSHOT* (jpg, 1280x720)"
 																	class="screenshot_upload"
 																	filled
 																	color="black"
@@ -368,7 +358,7 @@
 														rules.required
 													]"
 													prepend-icon="mdi-shape-outline"
-													label="Categories (you can create new ones)*"
+													label="Categories ([enter] for new category)*"
 													multiple
 												></v-combobox>
 												<v-text-field
@@ -393,6 +383,7 @@
 													v-model="
 														detectedThemes[i].nsfw
 													"
+													color="red"
 													label="NSFW"
 													class="mt-0"
 													@change="
@@ -408,7 +399,7 @@
 									:key="theme"
 									class="subtitle-1 box_text font-italic"
 								>
-									An error occuered
+									An error occurred
 								</div>
 							</template>
 						</v-col>
@@ -686,11 +677,11 @@ export default Vue.extend({
 			types: [
 				{
 					id: 'single',
-					label: 'A single .NXTheme'
+					label: 'A single NXTheme'
 				},
 				{
 					id: 'zip',
-					label: 'A .zip with .NXThemes (max 25MB)'
+					label: 'A zip with  (max 25MB)'
 				},
 				{
 					id: 'files',
@@ -982,6 +973,11 @@ export default Vue.extend({
 	width: 100%;
 	max-width: unset;
 	text-align: center;
+}
+
+.screenshot_upload .v-text-field__slot .v-label {
+	display: contents;
+	position: unset;
 }
 
 .screenshot_upload .v-input__append-inner,
