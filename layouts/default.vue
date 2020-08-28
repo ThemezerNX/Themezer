@@ -43,6 +43,7 @@
 						<v-list-item-avatar>
 							<img
 								v-if="$auth.loggedIn"
+								alt="avatar"
 								:src="
 									`https://cdn.discordapp.com/${avatar}?size=64`
 								"
@@ -74,13 +75,13 @@
 						</v-list-item-icon>
 					</v-list-item>
 				</v-list-group>
-				<v-divider class="mt-2" />
+				<v-divider class="my-2" />
 				<template v-for="(item, i) in items">
 					<v-subheader v-if="!!item.header" :key="i">{{
 						item.header
 					}}</v-subheader>
 
-					<v-divider v-else-if="item.divider" :key="i" class="mt-2" />
+					<v-divider v-else-if="item.divider" :key="i" class="my-2" />
 
 					<v-list-group
 						v-else-if="Array.isArray(item.types)"
@@ -150,7 +151,7 @@
 						contain
 						src="/icon-256.png"
 						width="30"
-						style="border-radius: 5px; -webkit-filter: drop-shadow(0px 0px 2px rgb(255 255 255 / 10%));"
+						style="border-radius: 5px; -webkit-filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.1));"
 					/>
 					{{ title }}
 				</v-toolbar-title>
@@ -271,11 +272,7 @@
 									prepend-icon="mdi-identifier"
 								></v-text-field>
 
-								<v-tooltip
-									v-model="copyIdSuccess"
-									nudge-top
-									top
-								>
+								<v-tooltip v-model="copyIdSuccess" top>
 									<template v-slot:activator="{ attrs }">
 										<v-btn
 											rounded
@@ -309,11 +306,7 @@
 									"
 								></v-text-field>
 
-								<v-tooltip
-									v-model="copyCodeSuccess"
-									nudge-top
-									top
-								>
+								<v-tooltip v-model="copyCodeSuccess" top>
 									<template v-slot:activator="{ attrs }">
 										<v-btn
 											rounded
@@ -608,7 +601,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/variables.scss';
+@import '~assets/variables.scss';
 
 $border-radius: 10px;
 
@@ -616,8 +609,7 @@ html {
 	word-break: break-word !important;
 }
 
-.v-list--nav .v-list-item,
-.v-list--rounded .v-list-item {
+.v-list-group__header.v-list-item {
 	margin-bottom: 0 !important;
 }
 
@@ -677,9 +669,8 @@ html {
 }
 
 .v-autocomplete__content.v-menu__content {
-	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-		0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 	border-radius: $border-radius !important;
 }
 
@@ -705,8 +696,8 @@ html {
 .box {
 	background-color: #1e1e1e;
 	border-radius: $border-radius !important;
-	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+		0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
 	&_fill {
 		@extend .box;

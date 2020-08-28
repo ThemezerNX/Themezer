@@ -12,7 +12,25 @@
 					<h2 class="box_text mt-0">{{ pack.details.name }}</h2>
 				</nuxt-link>
 
-				<v-form ref="submitForm" v-model="submitValid"> </v-form>
+				<v-form ref="submitForm" v-model="submitValid">
+					<v-text-field
+						v-model="changed.customUsername"
+						rounded
+						:disabled="loading.submit"
+						class="pt-1"
+						outlined
+						maxlength="50"
+						prepend-icon="mdi-pencil"
+						counter="50"
+						label="Custom display name"
+						:rules="[rules.utf8_only]"
+						@change="
+							changed.customUsername === ''
+								? (changed.customUsername = null)
+								: null
+						"
+					></v-text-field>
+				</v-form>
 
 				<v-divider class="my-3 mx-2" />
 

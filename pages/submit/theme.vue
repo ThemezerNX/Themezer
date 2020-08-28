@@ -325,7 +325,8 @@
 													counter="500"
 													outlined
 													:rules="[
-														rules.description_length
+														rules.description_length,
+														rules.utf8_only
 													]"
 													prepend-icon="mdi-pencil-outline"
 													@change="forceUpdate++"
@@ -355,7 +356,8 @@
 														rules.category_length,
 														rules.min_category_amount,
 														rules.max_category_amount,
-														rules.required
+														rules.required,
+														rules.utf8_only
 													]"
 													prepend-icon="mdi-shape-outline"
 													label="Categories ([enter] for new category)*"
@@ -375,7 +377,10 @@
 													counter="10"
 													label="Theme version*"
 													outlined
-													:rules="[rules.required]"
+													:rules="[
+														rules.required,
+														rules.utf8_only
+													]"
 													prepend-icon="mdi-update"
 													@change="forceUpdate++"
 												></v-text-field>
@@ -446,7 +451,11 @@
 								label="Pack Name*"
 								outlined
 								prepend-icon="mdi-pencil-outline"
-								:rules="[rules.required, rules.name_length]"
+								:rules="[
+									rules.required,
+									rules.name_length,
+									rules.utf8_only
+								]"
 								@change="forceUpdate++"
 							></v-text-field>
 							<v-text-field
@@ -460,7 +469,8 @@
 								outlined
 								:rules="[
 									rules.required,
-									rules.description_length
+									rules.description_length,
+									rules.utf8_only
 								]"
 								prepend-icon="mdi-pencil-outline"
 								@change="forceUpdate++"
@@ -481,7 +491,8 @@
 								deletable-chips
 								:rules="[
 									rules.category_length,
-									rules.max_category_amount
+									rules.max_category_amount,
+									rules.utf8_only
 								]"
 								prepend-icon="mdi-shape-outline"
 								label="Shared categories (this will remove the current set)"
@@ -495,7 +506,7 @@
 								maxlength="10"
 								counter="10"
 								outlined
-								:rules="[rules.required]"
+								:rules="[rules.required, rules.utf8_only]"
 								prepend-icon="mdi-update"
 								@change="forceUpdate++"
 							></v-text-field>
@@ -752,6 +763,19 @@ export default Vue.extend({
 			selectedSubmitType: null,
 			submitValid: false,
 			rules: {
+				utf8_only: (input) => {
+					if (!input) return true
+					let output = ''
+					input = input.toString()
+					for (let i = 0; i < input.length; i++) {
+						if (input.charCodeAt(i) <= 127) {
+							output += input.charAt(i)
+						}
+					}
+					return (
+						input === output || 'Only UTF-8 characters are allowed'
+					)
+				},
 				description_length: (value) =>
 					!value ||
 					(value.length >= 10 && value.length <= 500) ||

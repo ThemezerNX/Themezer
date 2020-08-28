@@ -13,7 +13,7 @@
 						height="200"
 						width="auto"
 						src="/icon-256.png"
-						style="-webkit-filter: drop-shadow(0px 0px 10px rgb(255 255 255 / 10%));"
+						style="-webkit-filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.1));"
 						contain
 					/>
 					<h1 v-if="$auth.loggedIn" class="text-center intro-title">
