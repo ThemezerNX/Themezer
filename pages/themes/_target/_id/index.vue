@@ -145,15 +145,15 @@
 							class="font-weight-light body-2"
 						>
 							<span class="font-weight-medium">Background: </span>
-							<nuxt-link
+							<a
 								class="font-weight-bold"
 								target="_blank"
-								:to="
+								:href="
 									`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`
 								"
 							>
-								{{ theme.bg_type === 'jpg' ? 'JPG' : 'DDS' }}
-							</nuxt-link>
+								{{ theme.bg_type.toUpperCase() }}
+							</a>
 						</div>
 						<div class="font-weight-light body-2">
 							<span class="font-weight-medium">Downloads: </span>
