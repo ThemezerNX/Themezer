@@ -132,3 +132,7 @@ query downloadPack($id: String!) {
 mutation deletePack($id: String!) {
 	deletePack(id: $id)
 }
+
+mutation updatePack($id: String!, $name: String!, $description: String!, $version: String!) {
+    updatePack(id: $id, name: $name, description: $description, version: $version)
+}

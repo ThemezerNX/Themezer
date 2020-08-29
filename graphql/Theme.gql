@@ -143,3 +143,7 @@ query downloadTheme($id: String!, $piece_uuids: [GUID!]) {
 mutation deleteTheme($id: String!) {
 	deleteTheme(id: $id)
 }
+
+mutation updateTheme($id: String!, $file: Upload, $name: String!, $description: String, $version: String!, $categories: [String!], $nsfw: Boolean) {
+    updateTheme(id: $id, file: $file, name: $name, description: $description, version: $version, categories: $categories, nsfw: $nsfw)
+}

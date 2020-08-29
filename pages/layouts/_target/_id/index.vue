@@ -110,9 +110,9 @@
 						</div>
 
 						<ButtonDivider>
-							<CustomizeButton
+							<OptionsButton
 								v-if="layout.has_pieces && !!layout.baselayout"
-								to="customize"
+								to="options"
 								:loading="loadingMerge"
 							/>
 							<DownloadButton
@@ -298,8 +298,7 @@ import targetParser from '@/components/mixins/targetParser'
 export default Vue.extend({
 	components: {
 		ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-		CustomizeButton: () =>
-			import('@/components/buttons/CustomizeButton.vue'),
+		OptionsButton: () => import('@/components/buttons/OptionsButton.vue'),
 		DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
 		LikeButton: () => import('@/components/buttons/LikeButton.vue'),
 		ShareButton: () => import('@/components/buttons/ShareButton.vue'),

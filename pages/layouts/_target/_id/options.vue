@@ -7,7 +7,19 @@
 				class="pa-2 box_fill"
 			>
 				<h1 class="box_text">Customize Layout</h1>
-				<h2 class="box_text mt-0">{{ layout.details.name }}</h2>
+				<h2 class="box_text mt-0">
+					<nuxt-link
+						class="font-weight-bold"
+						:to="
+							`/layouts/${$route.params.target}/${createUrlString(
+								layout.id,
+								layout.details.name
+							)}`
+						"
+					>
+						{{ layout.details.name }}
+					</nuxt-link>
+				</h2>
 				<div class="subtitle-1 box_text">
 					By
 					<nuxt-link
@@ -17,6 +29,9 @@
 						{{ layout.creator.display_name }}
 					</nuxt-link>
 				</div>
+
+				<v-divider class="my-3 mx-2" />
+
 				<v-row class="ma-0">
 					<v-col
 						cols="12"

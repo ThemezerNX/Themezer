@@ -385,7 +385,8 @@
 
 <script>
 import Vue from 'vue'
-import { me, creator, updateProfile } from '@/graphql/Creator.gql'
+import rules from '@/assets/rules'
+import { creator, me, updateProfile } from '@/graphql/Creator.gql'
 import { rowPackList } from '@/graphql/Pack.gql'
 import { rowThemeList } from '@/graphql/Theme.gql'
 import { rowLayoutList } from '@/graphql/Layout.gql'
@@ -487,36 +488,7 @@ export default Vue.extend({
 			},
 
 			avatar: null,
-			rules: {
-				utf8_only: (input) => {
-					if (!input) return true
-					let output = ''
-					for (let i = 0; i < input.length; i++) {
-						if (input.charCodeAt(i) <= 127) {
-							output += input.charAt(i)
-						}
-					}
-					return (
-						input === output || 'Only UTF-8 characters are allowed'
-					)
-				},
-				no_scripts: (value) =>
-					!value ||
-					!/< *script *>.*?< *\/ *script *>/gim.test(value) ||
-					'Script tags are not allowed',
-				hex: (value) =>
-					!value ||
-					/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value) ||
-					'Invalid HEX color',
-				banner_size: (file) =>
-					!file ||
-					file.size < 1048576 ||
-					'Image size should be less than 1 MB!',
-				logo_size: (file) =>
-					!file ||
-					file.size < 1048576 ||
-					'Image size should be less than 1 MB!'
-			}
+			rules
 		}
 	},
 	computed: {
@@ -658,7 +630,7 @@ export default Vue.extend({
 		discard() {
 			this.changed = {
 				profileColor: this.creator.profile_color,
-				customUsername: null,
+				customUsername: this.creator.custom_username,
 				bio: this.creator.bio,
 				bannerImage: null,
 				logoImage: null,

@@ -1,81 +1,172 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<LoadingOverlay :loading="!!$apollo.loading">
+		<LoadingOverlay :loading="!!$apollo.queries.theme.loading">
 			<v-sheet v-if="theme" no-gutters class="pa-2 box_fill">
 				<h1 class="box_text">Edit Theme</h1>
-				<nuxt-link
-					class="font-weight-bold"
-					:to="
-						`/themes/${fileNameToWebName(
-							theme.target
-						)}/${createUrlString(theme.id, theme.details.name)}`
-					"
-				>
-					<h2 class="box_text mt-0">{{ theme.details.name }}</h2>
-				</nuxt-link>
-				<div v-if="theme.pack" class="subtitle-1 box_text">
-					Part of
+				<h2 class="box_text mt-0">
 					<nuxt-link
 						class="font-weight-bold"
 						:to="
-							`/packs/${createUrlString(
-								theme.pack.id,
-								theme.pack.details.name
-							)}`
+							`/themes/${fileNameToWebName(
+								theme.target
+							)}/${createUrlString(theme.id, theme.details.name)}`
 						"
 					>
-						{{ theme.pack.details.name }}
+						{{ theme.details.name }}
 					</nuxt-link>
-				</div>
+				</h2>
 
-				<v-form ref="submitForm" v-model="submitValid">
-					<v-col cols="12" xs="12" sm="4" md="2" class="pa-2">
-						<v-hover v-slot:default="{ hover }">
-							<v-img
-								aspect-ratio="1.7778"
-								style="border-radius: 10px;"
-								:src="
-									uploadedScreenshotUrl || theme.preview.thumb
-								"
-								contain
-							>
-								<!-- <v-expand-transition>
-								<div
-									v-if="!uploadedScreenshot || hover"
-									class="d-flex display-3 transition-fast-in-fast-out v-card--reveal"
-									style="height: 100%; background: rgba(0, 0, 0, 0.5);"
+				<v-divider class="my-3 mx-2" />
+
+				<v-form
+					v-if="changed"
+					ref="submitForm"
+					v-model="submitValid"
+					class="box_text"
+				>
+					<v-row class="ma-0">
+						<v-col cols="12" xs="12" sm="4" class="pa-2">
+							<v-hover v-slot:default="{ hover }">
+								<v-img
+									aspect-ratio="1.7778"
+									class="placeholder"
+									:src="
+										uploadedScreenshotUrl ||
+											theme.preview.original
+									"
+									contain
 								>
-									<v-file-input
-										v-model="uploadedScreenshot"
-										full-width
-										height="100%"
-										label="Upload Screenshot* (.jpg)"
-										class="screenshot_upload"
-										filled
-										color="black"
-										accept="image/jpeg"
-										hide-details
-										:rules="[rules.required]"
-										style="cursor: pointer;"
-										@change="onScreenshotChange($event)"
-									/>
-								</div>
-							</v-expand-transition> -->
-							</v-img>
-						</v-hover>
-					</v-col>
+									<v-expand-transition>
+										<div
+											v-if="hover"
+											class="d-flex display-3 transition-fast-in-fast-out v-card--reveal"
+											style="height: 100%; background: rgba(0,0,0,0.5);"
+										>
+											<v-file-input
+												v-model="uploadedScreenshot"
+												full-width
+												height="100%"
+												label="SCREENSHOT* (jpg, 1280x720)"
+												class="screenshot_upload"
+												filled
+												color="black"
+												accept="image/jpeg"
+												hide-details
+												:rules="[rules.required]"
+												style="cursor: pointer;"
+												@change="
+													onScreenshotChange(
+														$event,
+														i
+													)
+												"
+											/>
+										</div>
+									</v-expand-transition>
+								</v-img>
+							</v-hover>
+						</v-col>
+						<v-col cols="12" xs="12" sm="8" class="pa-2">
+							<v-text-field
+								v-model="changed.details.name"
+								rounded
+								minlength="3"
+								maxlength="50"
+								counter="50"
+								label="Theme Name*"
+								outlined
+								prepend-icon="mdi-pencil-outline"
+								:rules="[
+									rules.required,
+									rules.name_length,
+									rules.utf8_only
+								]"
+							></v-text-field>
+							<v-text-field
+								v-model="changed.details.description"
+								rounded
+								minlength="10"
+								maxlength="500"
+								counter="500"
+								label="Theme Description"
+								outlined
+								:rules="[
+									rules.description_length,
+									rules.utf8_only
+								]"
+								prepend-icon="mdi-pencil-outline"
+							></v-text-field>
+							<v-combobox
+								v-model="changed.categories"
+								rounded
+								:items="
+									categories && categories.length > 0
+										? categories.filter((c) => c !== 'NSFW')
+										: []
+								"
+								:loading="loading.categories"
+								outlined
+								allow-overflow
+								chips
+								small-chips
+								deletable-chips
+								:rules="[
+									rules.category_length,
+									rules.max_category_amount,
+									rules.utf8_only
+								]"
+								prepend-icon="mdi-shape-outline"
+								label="Categories* ([enter] for new category)"
+								multiple
+								@mouseover.once="
+									loading.categories = true
+									$apollo.queries.categories.skip = false
+								"
+							></v-combobox>
+							<v-text-field
+								v-model="changed.details.version"
+								rounded
+								label="Theme version*"
+								maxlength="10"
+								counter="10"
+								outlined
+								:rules="[rules.required, rules.utf8_only]"
+								prepend-icon="mdi-update"
+							></v-text-field>
+							<v-checkbox
+								v-model="changed.nsfw"
+								color="red"
+								label="NSFW"
+								class="mt-0"
+							/>
 
-					<v-col
-						cols="12"
-						xs="12"
-						sm="8"
-						md="10"
-						class="pa-2"
-						style="position: relative;"
-					>
-					</v-col>
+							<ButtonDivider :margin="false">
+								<v-btn
+									rounded
+									:disabled="!changes || loading.submit"
+									color="red"
+									@click.prevent="discard()"
+								>
+									Discard
+									<v-icon right
+										>mdi-delete-sweep-outline
+									</v-icon>
+								</v-btn>
+								<v-btn
+									rounded
+									:disabled="!changes || !submitValid"
+									color="secondary"
+									type="submit"
+									:loading="loading.submit"
+									@click.prevent="submit()"
+								>
+									Save
+									<v-icon right>mdi-cube-send</v-icon>
+								</v-btn>
+							</ButtonDivider>
+						</v-col>
+					</v-row>
 				</v-form>
-
 				<ButtonDivider>
 					<DeleteButton
 						:id="theme.id"
@@ -98,8 +189,10 @@
 
 <script>
 import Vue from 'vue'
+import rules from '@/assets/rules'
 import targetParser from '@/components/mixins/targetParser'
-import { theme, deleteTheme } from '@/graphql/Theme.gql'
+import { allCategories } from '@/graphql/Filtering.gql'
+import { theme, deleteTheme, updateTheme } from '@/graphql/Theme.gql'
 import urlParser from '~/components/mixins/urlParser'
 
 export default Vue.extend({
@@ -123,35 +216,38 @@ export default Vue.extend({
 			loading: {
 				submit: false
 			},
+			changed: null,
+
 			deleteQuery: deleteTheme,
 			submitValid: false,
-			rules: {
-				required: (value) => !!value || 'Required',
-				category_length: (values) =>
-					!values ||
-					!values.some((v) => v.length <= 2) ||
-					'A category must be longer than 2 characters',
-				min_category_amount: (values) =>
-					!values ||
-					values.length > 0 ||
-					'At least 1 category is required',
-				max_category_amount: (values) =>
-					!values ||
-					values.length <= 10 ||
-					'A maximum of 10 categories is allowed',
-				hex: (value) =>
-					!value ||
-					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
-						? true
-						: 'Invalid HEX color')
-			},
+			rules,
 			uploadedScreenshot: null,
 			uploadedScreenshotUrl: null
 		}
 	},
+	computed: {
+		changes() {
+			return (
+				JSON.stringify(this.theme) !== JSON.stringify(this.changed) ||
+				!!this.uploadedScreenshot
+			)
+		}
+	},
+	beforeRouteLeave(_to, _from, next) {
+		if (this.$refs.CreatorPage && this.$refs.CreatorPage.changes) {
+			const answer = window.confirm(
+				'Do you really want to leave? you have unsaved changes!'
+			)
+			if (answer) {
+				next()
+			} else {
+				next(false)
+			}
+		} else next()
+	},
 	watch: {
 		isPageOwner(n) {
-			if (!n && !this.$auth.user?.isAdmin) {
+			if (!n) {
 				this.$router.push('/')
 			}
 		}
@@ -169,39 +265,93 @@ export default Vue.extend({
 				if (data && data.theme) {
 					this.isPageOwner =
 						this.$auth.loggedIn &&
-						data.theme.creator.id === this.$auth.user.id
+						(data.theme.creator.id === this.$auth.user.id ||
+							this.$auth.user.isAdmin)
 
 					this.updateUrlString(
 						data.theme.id,
 						data.theme.details.name,
 						this.fileNameToWebName(data.theme.target)
 					)
+					if (data.theme.categories?.includes('NSFW'))
+						data.theme.nsfw = true
+					data.theme.categories = data.theme.categories.filter(
+						(c) => c !== 'NSFW'
+					)
+					this.changed = JSON.parse(JSON.stringify(data.theme))
 				}
 			},
 			error(e) {
 				this.$nuxt.error(e)
 			},
 			prefetch: true
+		},
+		categories: {
+			query: allCategories,
+			prefetch: false,
+			skip: true,
+			result() {
+				this.loading.categories = false
+			},
+			error(e) {
+				this.$nuxt.error(e)
+			},
+			update(res) {
+				return res?.categories.sort((a, b) =>
+					a.toLowerCase().localeCompare(b.toLowerCase())
+				)
+			}
 		}
 	},
 	methods: {
 		onScreenshotChange(file) {
 			if (file) {
 				this.uploadedScreenshotUrl = URL.createObjectURL(file)
-
-				this.forceUpdate++
 			}
+		},
+		discard() {
+			this.changed = JSON.parse(JSON.stringify(this.theme))
+			this.uploadedScreenshot = null
+			this.uploadedScreenshotUrl = null
+		},
+		submit() {
+			this.loading.submit = true
+
+			this.$apollo
+				.mutate({
+					mutation: updateTheme,
+					variables: {
+						id: this.id,
+						file: this.uploadedScreenshot,
+						name: this.changed.details.name,
+						description: this.changed.details.description,
+						version: this.changed.details.version,
+						categories: this.changed.categories,
+						nsfw: this.changed.nsfw
+					}
+				})
+				.then(({ data }) => {
+					this.loading.submit = false
+					if (data && data.updateTheme) {
+						this.$apollo.queries.theme.refetch()
+						this.$snackbar.message(
+							'Success! Changes might take some time to apply.'
+						)
+					}
+				})
+				.catch((err) => {
+					this.$snackbar.error(err)
+					this.loading.submit = false
+				})
 		}
 	},
 	head() {
 		if (this.theme) {
 			const metaTitle = `Edit | ${this.theme.details.name}${
-				this.theme.categories.includes('NSFW') ? ' (NSFW!)' : ''
+				this.theme.nsfw ? ' (NSFW!)' : ''
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = !this.theme.categories.includes('NSFW')
-				? this.theme.preview.thumb
-				: null
+			const metaImg = !this.theme.nsfw ? this.theme.preview.thumb : null
 
 			return {
 				title: metaTitle,
@@ -237,25 +387,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.screenshot_upload .v-input__control {
-	height: 100%;
-}
-
-.screenshot_upload .v-input__slot {
-	cursor: pointer !important;
-}
-
-.screenshot_upload .v-text-field__slot label,
-.screenshot_upload .v-text-field__slot .v-file-input__text {
-	width: 100%;
-	max-width: unset;
-	text-align: center;
-}
-
-.screenshot_upload .v-input__append-inner,
-.screenshot_upload .v-input__prepend-outer {
-	display: none;
-}
+@import '~assets/screenshot-upload.scss';
 
 .v-menu__content {
 	border-radius: 10px !important;

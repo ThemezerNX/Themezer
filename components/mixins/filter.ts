@@ -13,6 +13,9 @@ export default Vue.extend({
 		}
 	},
 	computed: {
+		urlPageNr() {
+			return Number(this.$route.query.page)
+		},
 		currentPage() {
 			if (
 				this.$data.pageNumber <= this.pageCount ||
@@ -61,6 +64,11 @@ export default Vue.extend({
 		}
 	},
 	watch: {
+		urlPageNr(n) {
+			if (n) {
+				this.$data.pageNumber = n
+			}
+		},
 		currentSearch(n, o) {
 			// This is needed to ensure the query is updated on the browser back button
 			if (n && o) {

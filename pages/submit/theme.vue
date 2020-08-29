@@ -272,6 +272,26 @@
 														}}
 													</div>
 												</v-list-item-subtitle>
+												<!--TODO: this ain't working-->
+												<v-list-item-subtitle
+													v-else-if="theme.layout_id"
+												>
+													Layout:
+													<nuxt-link
+														exact
+														:to="
+															`/layouts/${fileNameToWebName(
+																theme.target
+															)}/${createUrlString(
+																theme.layout_id,
+																''
+															)}`
+														"
+														target="_blank"
+													>
+														Manually selected
+													</nuxt-link>
+												</v-list-item-subtitle>
 												<v-list-item-subtitle v-else>
 													Layout: custom
 												</v-list-item-subtitle>
@@ -300,7 +320,9 @@
 														detectedThemes[i]
 															.layout_id
 													"
-													:items="layoutList"
+													:items="
+														layouts[theme.target]
+													"
 													auto-select-first
 													label="Manual layout selection"
 													prepend-icon="mdi-code-json"
@@ -360,7 +382,7 @@
 														rules.utf8_only
 													]"
 													prepend-icon="mdi-shape-outline"
-													label="Categories ([enter] for new category)*"
+													label="Categories* ([enter] for new category)"
 													multiple
 												></v-combobox>
 												<v-text-field
@@ -410,12 +432,6 @@
 						</v-col>
 					</v-row>
 				</div>
-				<!-- <div
-				v-if="
-					detectedThemes &&
-						uploadedScreenshots.length === detectedThemes.length
-				"
-			> -->
 				<div v-if="detectedThemes">
 					<h2 class="box_text">
 						3. Submission Details
@@ -562,13 +578,14 @@
 
 <script>
 import Vue from 'vue'
+import rules from '@/assets/rules'
 import { allCategories } from '@/graphql/Filtering.gql'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import {
 	allLayouts,
-	uploadSingleOrZip,
-	submitThemes
+	submitThemes,
+	uploadSingleOrZip
 } from '@/graphql/SubmitTheme.gql'
 
 export default Vue.extend({
@@ -670,9 +687,12 @@ export default Vue.extend({
 						})
 					}
 
-					return layouts.sort((a, b) =>
+					const final = layouts.sort((a, b) =>
 						a.text.toLowerCase().localeCompare(b.text.toLowerCase())
 					)
+
+					this.$set(this.layouts, this.currentThemeTarget, final)
+					return final
 				} else return []
 			},
 			error(e) {
@@ -692,7 +712,7 @@ export default Vue.extend({
 				},
 				{
 					id: 'zip',
-					label: 'A zip with  (max 25MB)'
+					label: 'A zip with NXThemes (pack/multiple, max 25MB)'
 				},
 				{
 					id: 'files',
@@ -747,6 +767,15 @@ export default Vue.extend({
 						"Uhm... why not? It's frii. Anyway, feel free to submit it."
 				}
 			],
+			layouts: {
+				ResidentMenu: [],
+				Entrance: [],
+				MyPage: [],
+				Flaunch: [],
+				Set: [],
+				Notification: [],
+				Psl: []
+			},
 			nsfwDialog: false,
 			nsfwDialogThemeNr: null,
 			FAQDialog: false,
@@ -762,47 +791,7 @@ export default Vue.extend({
 			uploadedScreenshotsUrls: [],
 			selectedSubmitType: null,
 			submitValid: false,
-			rules: {
-				utf8_only: (input) => {
-					if (!input) return true
-					let output = ''
-					input = input.toString()
-					for (let i = 0; i < input.length; i++) {
-						if (input.charCodeAt(i) <= 127) {
-							output += input.charAt(i)
-						}
-					}
-					return (
-						input === output || 'Only UTF-8 characters are allowed'
-					)
-				},
-				description_length: (value) =>
-					!value ||
-					(value.length >= 10 && value.length <= 500) ||
-					'A description must be between 9 and 501 characters long',
-				name_length: (value) =>
-					!value ||
-					(value.length >= 3 && value.length <= 50) ||
-					'A name must be between 2 and 51 characters long',
-				required: (value) => !!value || 'Required',
-				category_length: (values) =>
-					!values ||
-					!values.some((v) => v.length <= 2) ||
-					'A category must be longer than 2 characters',
-				min_category_amount: (values) =>
-					!values ||
-					values.length > 0 ||
-					'At least 1 category is required',
-				max_category_amount: (values) =>
-					!values ||
-					values.length <= 10 ||
-					'A maximum of 10 categories is allowed',
-				hex: (value) =>
-					!value ||
-					(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
-						? true
-						: 'Invalid HEX color')
-			},
+			rules,
 			packCategories: [],
 			submitDetails: {
 				name: null,
@@ -866,7 +855,6 @@ export default Vue.extend({
 						this.$apollo.queries.categories.skip = false
 						this.$apollo.queries.categories.refetch()
 						this.$apollo.queries.layoutList.skip = false
-						this.$apollo.queries.layoutList.refetch()
 					})
 					.catch((err) => {
 						this.$snackbar.error(err)
@@ -984,28 +972,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.screenshot_upload .v-input__control {
-	height: 100%;
-}
-
-.screenshot_upload .v-input__slot {
-	cursor: pointer !important;
-}
-
-.screenshot_upload .v-text-field__slot label,
-.screenshot_upload .v-text-field__slot .v-file-input__text {
-	width: 100%;
-	max-width: unset;
-	text-align: center;
-}
-
-.screenshot_upload .v-text-field__slot .v-label {
-	display: contents;
-	position: unset;
-}
-
-.screenshot_upload .v-input__append-inner,
-.screenshot_upload .v-input__prepend-outer {
-	display: none;
-}
+@import '~assets/screenshot-upload.scss';
 </style>

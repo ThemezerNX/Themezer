@@ -131,5 +131,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/card.scss';
+@import '~assets/card.scss';
 </style>

@@ -654,7 +654,7 @@ html {
 .placeholder {
 	background: url('/images/diagonal_joycon-180.png') #333;
 	background-repeat: repeat;
-	animation: flow 6s linear infinite;
+	animation: flow 8s linear infinite;
 }
 
 .placeholder {
@@ -714,6 +714,7 @@ html {
 
 	.box_text {
 		margin-left: 8px;
+		margin-right: 8px;
 	}
 
 	h2.box_text {

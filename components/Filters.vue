@@ -17,7 +17,12 @@
 					style="height: 24px"
 					text
 					color="secondary"
-					:disabled="$route.path === $route.fullPath"
+					:disabled="
+						$route.path === $route.fullPath ||
+							(Object.keys($route.query).includes('page')
+								? Object.keys($route.query).length === 1
+								: Object.keys($route.query).length > 0)
+					"
 					@click="$router.push($route.path)"
 				>
 					Clear all

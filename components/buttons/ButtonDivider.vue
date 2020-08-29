@@ -2,16 +2,24 @@
 	<v-flex class="button-divider d-flex justify-center my-2">
 		<v-divider
 			v-if="!hideDividers"
-			class="mx-2"
-			:class="!!$slots.default ? 'my-auto' : 'my-2'"
+			:class="{
+				'my-auto': !!$slots.default,
+				'my-2': !$slots.default,
+				'mx-2': margin,
+				'mr-2': !margin
+			}"
 		/>
 		<div class="button-parent">
 			<slot />
 		</div>
 		<v-divider
 			v-if="!hideDividers && !!$slots.default"
-			class="mx-2"
-			:class="!!$slots.default ? 'my-auto' : 'my-2'"
+			:class="{
+				'my-auto': !!$slots.default,
+				'my-2': !$slots.default,
+				'mx-2': margin,
+				'ml-2': !margin
+			}"
 		/>
 	</v-flex>
 </template>
@@ -24,6 +32,11 @@ export default Vue.extend({
 			type: Boolean,
 			required: false,
 			default: false
+		},
+		margin: {
+			type: Boolean,
+			required: false,
+			default: true
 		}
 	}
 })
