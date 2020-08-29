@@ -192,6 +192,7 @@
 			>
 			<nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
 			<nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
+			<a target="_blank" href="https://status.themezer.net/">Status</a>
 		</v-footer>
 		<v-dialog
 			v-if="$auth.loggedIn && $auth.user"
