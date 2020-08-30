@@ -140,7 +140,7 @@
 								<v-card
 									v-if="theme"
 									:key="theme.info.ThemeName"
-									style="border-radius: 10px;"
+									style="border-radius: 10px; background-color: rgba(255, 255, 255, 0.02);"
 									class="mx-auto"
 									:class="
 										i === detectedThemes.length - 1
@@ -323,6 +323,10 @@
 													:items="
 														layouts[theme.target]
 													"
+													:loading="
+														!!$apollo.queries
+															.layoutList.loading
+													"
 													auto-select-first
 													label="Manual layout selection"
 													prepend-icon="mdi-code-json"
@@ -367,6 +371,10 @@
 																		'NSFW'
 															  )
 															: []
+													"
+													:loading="
+														!!$apollo.queries
+															.categories.loading
 													"
 													outlined
 													rounded
@@ -579,129 +587,25 @@
 <script>
 import Vue from 'vue'
 import rules from '@/assets/rules'
-import { allCategories } from '@/graphql/Filtering.gql'
+import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
+import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
-import {
-	allLayouts,
-	submitThemes,
-	uploadSingleOrZip
-} from '@/graphql/SubmitTheme.gql'
+import { submitThemes, uploadSingleOrZip } from '@/graphql/SubmitTheme.gql'
+import optionsString from '@/components/mixins/optionsString'
 
 export default Vue.extend({
 	middleware: ['auth'],
 	options: {
 		auth: true
 	},
-	mixins: [targetParser, urlParser],
-	apollo: {
-		categories: {
-			query: allCategories,
-			prefetch: false,
-			skip: true,
-			error(e) {
-				this.$nuxt.error(e)
-			},
-			update(res) {
-				return res?.categories.sort((a, b) =>
-					a.toLowerCase().localeCompare(b.toLowerCase())
-				)
-			}
-		},
-		layoutList: {
-			query: allLayouts,
-			variables() {
-				return {
-					target: this.currentThemeTarget
-				}
-			},
-			update(data) {
-				if (data?.layoutList) {
-					const layouts = data.layoutList.map((l) => {
-						return {
-							text: `'${l.details.name}' by ${l.creator.display_name}`,
-							value: l.id
-						}
-					})
-
-					// Add some extra very common layouts
-					if (this.currentThemeTarget === 'ResidentMenu') {
-						layouts.push({
-							text: `'Doge Layout Rounded' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '249186838592487425'
-								).creator.display_name
-							}`,
-							value: 'e|7638bb49-7475-4d11-a76a-ec9d63b12b94'
-						})
-						layouts.push({
-							text: `'DogeLayout - M-Edition Rounded' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '123859829453357056'
-								).creator.display_name
-							}`,
-							value: '4|c4c1239e-a3ec-43b9-835a-49f6220aa222'
-						})
-						layouts.push({
-							text: `'Small Compact Homescreen Rounded' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '155500696693768202'
-								).creator.display_name
-							}`,
-							value: 'f|e818c9af-ca39-48cd-8ed1-a979b69ea142'
-						})
-					} else if (this.currentThemeTarget === 'Flaunch') {
-						layouts.push({
-							text: `'All Apps 90% Scale Rounded' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '249186838592487425'
-								).creator.display_name
-							}`,
-							value: 'b|2ee3f0bc-9140-402e-bdfc-d50042c4d45e'
-						})
-					} else if (this.currentThemeTarget === 'Psl') {
-						layouts.push({
-							text: `'Transparent Playerselect 90% Scale Centered' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '123859829453357056'
-								).creator.display_name
-							}`,
-							value:
-								'3|b77b434f-5811-42fc-bd5e-ab44d7f24b61,d22d7557-99da-4710-a2d8-0bb3c7bfac14'
-						})
-						layouts.push({
-							text: `'Transparent Playerselect 90% Scale' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '123859829453357056'
-								).creator.display_name
-							}`,
-							value: '3|b77b434f-5811-42fc-bd5e-ab44d7f24b61'
-						})
-						layouts.push({
-							text: `'Transparent Playerselect Centered' by ${
-								data.layoutList.find(
-									(l) => l.creator.id === '123859829453357056'
-								).creator.display_name
-							}`,
-							value: '3|d22d7557-99da-4710-a2d8-0bb3c7bfac14'
-						})
-					}
-
-					const final = layouts.sort((a, b) =>
-						a.text.toLowerCase().localeCompare(b.text.toLowerCase())
-					)
-
-					this.$set(this.layouts, this.currentThemeTarget, final)
-					return final
-				} else return []
-			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
-			prefetch: false,
-			skip: true
-		}
-	},
+	mixins: [
+		targetParser,
+		urlParser,
+		allLayoutsDropdown,
+		allCategoriesDropdown,
+		optionsString
+	],
 	data() {
 		return {
 			forceUpdate: 0,
@@ -767,15 +671,6 @@ export default Vue.extend({
 						"Uhm... why not? It's frii. Anyway, feel free to submit it."
 				}
 			],
-			layouts: {
-				ResidentMenu: [],
-				Entrance: [],
-				MyPage: [],
-				Flaunch: [],
-				Set: [],
-				Notification: [],
-				Psl: []
-			},
 			nsfwDialog: false,
 			nsfwDialogThemeNr: null,
 			FAQDialog: false,
@@ -785,14 +680,12 @@ export default Vue.extend({
 				uploadSingleOrZip: false,
 				submit: false
 			},
-			currentThemeTarget: null,
 			detectedThemes: null,
 			uploadedScreenshots: [],
 			uploadedScreenshotsUrls: [],
 			selectedSubmitType: null,
 			submitValid: false,
 			rules,
-			packCategories: [],
 			submitDetails: {
 				name: null,
 				description: null,
@@ -801,13 +694,7 @@ export default Vue.extend({
 			}
 		}
 	},
-	watch: {
-		packCategories() {
-			this.detectedThemes.forEach((t) => {
-				t.categories = this.packCategories
-			})
-		}
-	},
+
 	methods: {
 		clearAll() {
 			this.uploadSingleOrZip = null
@@ -861,19 +748,6 @@ export default Vue.extend({
 						this.loading.uploadSingleOrZip = false
 					})
 			}
-		},
-		optionsString(usedPieces) {
-			const values = []
-			if (usedPieces && usedPieces.length > 0) {
-				usedPieces.forEach((piece) => {
-					if (piece.value.value === 'true') {
-						values.push(piece.name)
-					} else {
-						values.push(`${piece.name}: ${piece.value.value}`)
-					}
-				})
-			}
-			return values.join(', ')
 		},
 		onScreenshotChange(file, i) {
 			if (file) {

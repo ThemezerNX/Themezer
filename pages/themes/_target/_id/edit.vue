@@ -82,6 +82,31 @@
 									rules.utf8_only
 								]"
 							></v-text-field>
+							<v-autocomplete
+								v-model="changed.layout.id"
+								value="Custom"
+								:items="layouts[theme.target]"
+								auto-select-first
+								label="Layout"
+								:loading="!!$apollo.queries.layoutList.loading"
+								prepend-icon="mdi-code-json"
+								outlined
+								rounded
+								persistent-hint
+								:hint="
+									changed.pieces
+										? optionsString(changed.pieces)
+										: !changed.layout.id
+										? 'Replaces custom layout! IRREVERSIBLE!'
+										: null
+								"
+								allow-overflow
+								@mouseover.once="
+									$apollo.queries.layoutList.skip = false
+								"
+								@change="changed.pieces = []"
+							>
+							</v-autocomplete>
 							<v-text-field
 								v-model="changed.details.description"
 								rounded
@@ -104,7 +129,7 @@
 										? categories.filter((c) => c !== 'NSFW')
 										: []
 								"
-								:loading="loading.categories"
+								:loading="!!$apollo.queries.categories.loading"
 								outlined
 								allow-overflow
 								chips
@@ -119,7 +144,6 @@
 								label="Categories* ([enter] for new category)"
 								multiple
 								@mouseover.once="
-									loading.categories = true
 									$apollo.queries.categories.skip = false
 								"
 							></v-combobox>
@@ -190,10 +214,12 @@
 <script>
 import Vue from 'vue'
 import rules from '@/assets/rules'
+import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
+import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
 import targetParser from '@/components/mixins/targetParser'
-import { allCategories } from '@/graphql/Filtering.gql'
 import { theme, deleteTheme, updateTheme } from '@/graphql/Theme.gql'
 import urlParser from '~/components/mixins/urlParser'
+import optionsString from '@/components/mixins/optionsString'
 
 export default Vue.extend({
 	beforeRouteEnter(_to, from, next) {
@@ -208,7 +234,13 @@ export default Vue.extend({
 		DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
 		LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
 	},
-	mixins: [urlParser, targetParser],
+	mixins: [
+		urlParser,
+		targetParser,
+		allLayoutsDropdown,
+		allCategoriesDropdown,
+		optionsString
+	],
 	data() {
 		return {
 			fromRoute: null,
@@ -228,7 +260,15 @@ export default Vue.extend({
 	computed: {
 		changes() {
 			return (
-				JSON.stringify(this.theme) !== JSON.stringify(this.changed) ||
+				this.theme.details.name !== this.changed.details.name ||
+				this.theme.details.description !==
+					this.changed.details.description ||
+				(this.theme.layout?.id !== this.changed.layout.id &&
+					this.theme.layout?.id) ||
+				JSON.stringify(this.theme.pieces) !==
+					JSON.stringify(this.changed.pieces) ||
+				JSON.stringify(this.theme.categories) !==
+					JSON.stringify(this.changed.categories) ||
 				!!this.uploadedScreenshot
 			)
 		}
@@ -273,34 +313,23 @@ export default Vue.extend({
 						data.theme.details.name,
 						this.fileNameToWebName(data.theme.target)
 					)
+
+					this.currentThemeTarget = data.theme.target
+					this.$apollo.queries.layoutList.skip = false
+
 					if (data.theme.categories?.includes('NSFW'))
 						data.theme.nsfw = true
 					data.theme.categories = data.theme.categories.filter(
 						(c) => c !== 'NSFW'
 					)
 					this.changed = JSON.parse(JSON.stringify(data.theme))
+					if (!this.changed.layout) this.changed.layout = {}
 				}
 			},
 			error(e) {
 				this.$nuxt.error(e)
 			},
 			prefetch: true
-		},
-		categories: {
-			query: allCategories,
-			prefetch: false,
-			skip: true,
-			result() {
-				this.loading.categories = false
-			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
-			update(res) {
-				return res?.categories.sort((a, b) =>
-					a.toLowerCase().localeCompare(b.toLowerCase())
-				)
-			}
 		}
 	},
 	methods: {
@@ -324,6 +353,8 @@ export default Vue.extend({
 						id: this.id,
 						file: this.uploadedScreenshot,
 						name: this.changed.details.name,
+						layout_id: this.changed.layout.id,
+						used_pieces: this.changed.layout.pieces,
 						description: this.changed.details.description,
 						version: this.changed.details.version,
 						categories: this.changed.categories,

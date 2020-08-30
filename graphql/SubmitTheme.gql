@@ -1,16 +1,3 @@
-query allLayouts($target: String) {
-	layoutList(target: $target) {
-		id
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-		}
-	}
-}
-
 mutation uploadSingleOrZip($file: Upload!) {
 	uploadSingleOrZip(file: $file) {
 		info {
