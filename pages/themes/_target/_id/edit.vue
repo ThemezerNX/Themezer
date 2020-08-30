@@ -84,7 +84,6 @@
 							></v-text-field>
 							<v-autocomplete
 								v-model="changed.layout.id"
-								value="Custom"
 								:items="layouts[theme.target]"
 								auto-select-first
 								label="Layout"
@@ -94,8 +93,10 @@
 								rounded
 								persistent-hint
 								:hint="
-									changed.pieces
-										? optionsString(changed.pieces)
+									changed.pieces && changed.pieces.length > 0
+										? `Options: ${optionsString(
+												changed.pieces
+										  )}`
 										: !changed.layout.id
 										? 'Replaces custom layout! IRREVERSIBLE!'
 										: null
@@ -263,10 +264,15 @@ export default Vue.extend({
 				this.theme.details.name !== this.changed.details.name ||
 				this.theme.details.description !==
 					this.changed.details.description ||
-				(this.theme.layout?.id !== this.changed.layout.id &&
-					this.theme.layout?.id) ||
-				JSON.stringify(this.theme.pieces) !==
-					JSON.stringify(this.changed.pieces) ||
+				this.theme.details.version !== this.changed.details.version ||
+				(this.theme.layout?.id &&
+					this.theme.layout.id +
+						(this.theme.pieces?.length > 0
+							? `|${this.theme.pieces
+									.map((p) => p.value.uuid)
+									.join(',')}`
+							: '') !==
+						this.changed.layout.id) ||
 				JSON.stringify(this.theme.categories) !==
 					JSON.stringify(this.changed.categories) ||
 				!!this.uploadedScreenshot
@@ -322,8 +328,18 @@ export default Vue.extend({
 					data.theme.categories = data.theme.categories.filter(
 						(c) => c !== 'NSFW'
 					)
+
 					this.changed = JSON.parse(JSON.stringify(data.theme))
 					if (!this.changed.layout) this.changed.layout = {}
+					else {
+						this.changed.layout.id =
+							this.changed.layout.id +
+							(this.changed.pieces?.length > 0
+								? `|${this.changed.pieces
+										.map((p) => p.value.uuid)
+										.join(',')}`
+								: '')
+					}
 				}
 			},
 			error(e) {
@@ -339,7 +355,22 @@ export default Vue.extend({
 			}
 		},
 		discard() {
+			if (this.theme.categories?.includes('NSFW')) this.theme.nsfw = true
+			this.theme.categories = this.theme.categories.filter(
+				(c) => c !== 'NSFW'
+			)
 			this.changed = JSON.parse(JSON.stringify(this.theme))
+			if (!this.changed.layout) this.changed.layout = {}
+			else {
+				this.changed.layout.id =
+					this.changed.layout.id +
+					(this.changed.pieces?.length > 0
+						? `|${this.changed.pieces
+								.map((p) => p.value.uuid)
+								.join(',')}`
+						: '')
+			}
+
 			this.uploadedScreenshot = null
 			this.uploadedScreenshotUrl = null
 		},
@@ -354,7 +385,6 @@ export default Vue.extend({
 						file: this.uploadedScreenshot,
 						name: this.changed.details.name,
 						layout_id: this.changed.layout.id,
-						used_pieces: this.changed.layout.pieces,
 						description: this.changed.details.description,
 						version: this.changed.details.version,
 						categories: this.changed.categories,
