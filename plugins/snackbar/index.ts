@@ -20,11 +20,13 @@ export default (context: any, inject: any) => {
 
 	context.store.registerModule('snackbar', storeModule)
 
+	let timer: any
 	const $snackbar = {
 		message(message: string) {
 			context.store.commit('snackbar/SET_MESSAGE', message)
 
-			setTimeout(() => {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
 				context.store.commit('snackbar/SET_MESSAGE', null)
 			}, 8100)
 		},
@@ -37,7 +39,8 @@ export default (context: any, inject: any) => {
 				error.message.replace('GraphQL error: ', '') || 'Unknown Error'
 			)
 
-			setTimeout(() => {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
 				context.store.commit('snackbar/SET_ERROR', null)
 			}, 8100)
 		}

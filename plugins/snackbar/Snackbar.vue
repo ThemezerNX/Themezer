@@ -1,39 +1,37 @@
 <template>
-	<v-snackbar
-		v-model="snackbar"
-		bottom
-		:timeout="8000"
-		:color="error ? 'error' : 'green darken-1'"
-	>
+	<v-snackbar v-model="snackbar" bottom :timeout="false" :color="color">
 		{{ error || message }}
 	</v-snackbar>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	data() {
 		return {
-			snackbar: false
+			snackbar: false,
+			color: null
 		}
 	},
 	computed: {
 		message() {
-			return this.$store.state.snackbar
-				? this.$store.state.snackbar.message
-				: null
+			return (this as any).$store.state.snackbar?.message
 		},
 		error() {
-			return this.$store.state.snackbar
-				? this.$store.state.snackbar.error
-				: null
+			return (this as any).$store.state.snackbar?.error
 		}
 	},
 	watch: {
-		message(n) {
-			if (n && n !== '') this.snackbar = true
+		message(n: string) {
+			if (n && n !== '') {
+				;(this as any).$data.color = 'green darken-2'
+				;(this as any).snackbar = true
+			} else (this as any).snackbar = false
 		},
-		error(n) {
-			if (n && n !== '') this.snackbar = true
+		error(n: string) {
+			if (n && n !== '') {
+				;(this as any).$data.color = 'error'
+				;(this as any).snackbar = true
+			} else (this as any).snackbar = false
 		}
 	}
 }
