@@ -14,7 +14,11 @@
 			</v-fade-transition>
 			<div
 				class="wrapper"
-				:class="{ shadow: loading && shadow, 'ma-3': margin }"
+				:class="{
+					shadow: loading && shadow,
+					'ma-3': margin,
+					'mb-6': $vuetify.breakpoint.xs
+				}"
 			>
 				<slot />
 			</div>
