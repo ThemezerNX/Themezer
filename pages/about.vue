@@ -10,6 +10,7 @@
 					Source Code for the project can be found on the
 					<a
 						href="https://github.com/ThemezerNX"
+						rel="noopener"
 						target="_blank"
 						title="discord"
 						>ThemezerNX GitHub</a
@@ -19,6 +20,7 @@
 					If you have any questions, please join the
 					<a
 						href="https://discord.gg/VBa3bjp"
+						rel="noopener"
 						target="_blank"
 						title="discord"
 						>Discord server</a
@@ -28,6 +30,7 @@
 					Found a bug or have a suggestion?
 					<a
 						href="https://github.com/ThemezerNX/Themezer/issues"
+						rel="noopener"
 						target="_blank"
 						title="contribute"
 						>Create an issue on GitHub</a

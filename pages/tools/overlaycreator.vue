@@ -23,6 +23,7 @@
 				Have you done that? Go to step 2.
 				<a
 					href="https://github.com/ThemezerNX/Layouts#3-creating-overlays"
+					rel="noopener"
 					target="_blank"
 				>
 					More detailed instructions

@@ -115,6 +115,7 @@
 						You can create NXThemes using the
 						<a
 							href="https://exelix11.github.io/SwitchThemeInjector/v2/"
+							rel="noopener"
 							target="_blank"
 							>WebInjector</a
 						>. You may submit the created NXTheme here.

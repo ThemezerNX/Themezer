@@ -9,6 +9,7 @@
 				repository. See the
 				<a
 					href="https://github.com/ThemezerNX/Layouts#readme"
+					rel="noopener"
 					target="_blank"
 				>
 					README.md
@@ -22,6 +23,7 @@
 					class="mx-2"
 					router
 					href="https://github.com/ThemezerNX/Layouts"
+					rel="noopener"
 					target="_blank"
 				>
 					Go to GitHub <v-icon right>mdi-github</v-icon>

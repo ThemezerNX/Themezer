@@ -121,6 +121,7 @@
 						:to="item.to"
 						router
 						:href="item.href"
+						rel="noopener"
 					>
 						<v-list-item-action>
 							<v-icon v-text="item.icon" />

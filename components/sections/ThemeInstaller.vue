@@ -31,6 +31,7 @@
 					<a
 						href="https://github.com/exelix11/SwitchThemeInjector/"
 						target="_blank"
+						rel="noopener"
 						>Theme Installer</a
 					>
 					is an homebrew app that runs on the switch itself and can be
