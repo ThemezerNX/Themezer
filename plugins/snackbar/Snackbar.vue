@@ -1,5 +1,5 @@
 <template>
-	<v-snackbar v-model="snackbar" bottom :timeout="false" :color="color">
+	<v-snackbar v-model="snackbar" bottom timeout="-1" :color="color">
 		{{ error || message }}
 	</v-snackbar>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<v-sheet no-gutters class="pa-2 box_fill">
+		<v-sheet ref="sheet" no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Overlay Creator
 			</h1>
@@ -192,7 +192,7 @@
 					/>
 				</v-col>
 
-				<v-col ref="dlButton" cols="12" xs="12" class="pa-0">
+				<v-col cols="12" xs="12" class="pa-0">
 					<ButtonDivider>
 						<DownloadButton
 							tooltip="Download image"
@@ -292,7 +292,7 @@ export default Vue.extend({
 					this.loadingUploadScreenshots = false
 					this.resultImage = data.createOverlay
 
-					const button = this.$refs.dlButton
+					const button = this.$refs.sheet
 					const position = button.getBoundingClientRect().bottom
 					window.scrollTo({ top: position, behavior: 'smooth' })
 				})
