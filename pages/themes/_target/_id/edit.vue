@@ -273,6 +273,7 @@ export default Vue.extend({
 									.join(',')}`
 							: '') !==
 						this.changed.layout.id) ||
+				(!this.theme.layout?.id && this.changed.layout.id) ||
 				JSON.stringify(this.theme.categories) !==
 					JSON.stringify(this.changed.categories) ||
 				!!this.uploadedScreenshot
