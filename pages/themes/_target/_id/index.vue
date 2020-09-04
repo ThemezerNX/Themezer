@@ -13,7 +13,7 @@
 						<v-img
 							aspect-ratio="1.7778"
 							:src="theme.preview.original"
-							contain
+							cover
 							class="overlay-image"
 							:style="backgroundStyle"
 						/>

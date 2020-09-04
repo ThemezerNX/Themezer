@@ -281,9 +281,9 @@ export default Vue.extend({
 		}
 	},
 	beforeRouteLeave(_to, _from, next) {
-		if (this.$refs.CreatorPage && this.$refs.CreatorPage.changes) {
+		if (this.changes) {
 			const answer = window.confirm(
-				'Do you really want to leave? you have unsaved changes!'
+				'Do you really want to leave? You have unsaved changes!'
 			)
 			if (answer) {
 				next()
