@@ -48,7 +48,6 @@
 											color="black"
 											accept="image/jpeg"
 											hide-details
-											:rules="[rules.required]"
 											style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
 											@change="
 												onScreenshotChange($event, i)
@@ -387,6 +386,7 @@ export default Vue.extend({
 				.then(({ data }) => {
 					this.loading.submit = false
 					if (data && data.updateTheme) {
+						this.uploadedScreenshot = null
 						this.$apollo.queries.theme.refetch()
 						this.$snackbar.message(
 							'Success! Changes might take some time to apply.'
