@@ -42,7 +42,7 @@ export default {
 				hid: 'og:image',
 				name: 'og:image',
 				property: 'og:image',
-				content: '/icon-256.png'
+				content: '/icon-256-filled.png'
 			}
 		]
 	},
