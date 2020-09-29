@@ -75,16 +75,27 @@
 						</v-list-item-icon>
 					</v-list-item>
 				</v-list-group>
-				<v-divider class="my-2" />
 				<template v-for="(item, i) in items">
-					<v-subheader v-if="!!item.header" :key="i">{{
-						item.header
-					}}</v-subheader>
+					<v-subheader
+						v-if="!!item.header"
+						:key="i"
+						class="mt-4"
+						inset
+						style="height: 24px;"
+					>
+						{{ item.header }}
+						<v-icon v-if="item.icon" right v-text="item.icon" />
+					</v-subheader>
 
-					<v-divider v-else-if="item.divider" :key="i" class="my-2" />
+					<v-divider
+						v-else-if="item.divider"
+						:key="i"
+						:inset="item.inset"
+						class="my-2"
+					/>
 
 					<v-list-group
-						v-else-if="Array.isArray(item.types)"
+						v-else-if="Array.isArray(item.menus)"
 						:key="i"
 					>
 						<template v-slot:activator>
@@ -95,17 +106,17 @@
 								<v-list-item-title v-text="item.title" />
 							</v-list-item-content>
 						</template>
-						<template v-for="type in item.types">
+						<template v-for="type in item.menus">
 							<v-list-item
-								:key="item.title + type.name"
+								:key="item.name + type.target"
 								router
-								:to="`/${type.name}/${item.target}`"
+								:to="`/${item.name}/${type.target}`"
 								dense
 								class="ml-11 pl-5"
 							>
 								<v-list-item-title
 									class="text-capitalize"
-									v-text="type.name"
+									v-text="type.title"
 								/>
 								<v-list-item-icon v-if="type.icon">
 									<v-icon v-text="type.icon" />
@@ -368,16 +379,26 @@ export default {
 			error: null,
 			items: [
 				{
-					icon: 'mdi-package-variant-closed',
-					title: 'Theme Packs',
-					to: '/packs'
+					header: 'Download',
+					icon: 'mdi-download'
 				},
 				{
-					header: 'Themes & Layouts'
+					divider: true,
+					inset: true
+				},
+				{
+					icon: 'mdi-package-variant-closed',
+					title: 'Packs',
+					to: '/packs'
 				},
 				...targets,
 				{
-					header: 'Submitting'
+					header: 'Submit',
+					icon: 'mdi-upload'
+				},
+				{
+					divider: true,
+					inset: true
 				},
 				{
 					icon: 'mdi-format-color-fill',
@@ -391,6 +412,10 @@ export default {
 				},
 				{
 					header: 'Tools'
+				},
+				{
+					divider: true,
+					inset: true
 				},
 				{
 					icon: 'mdi-image-edit-outline',
@@ -409,7 +434,8 @@ export default {
 						'https://github.com/suchmememanyskill/themezer-nx/releases'
 				},
 				{
-					divider: true
+					divider: true,
+					inset: false
 				},
 				{
 					icon: 'mdi-information-outline',
@@ -612,7 +638,7 @@ html {
 }
 
 .v-list-group__header.v-list-item {
-	margin-bottom: 0 !important;
+	margin-bottom: 8px !important;
 }
 
 .v-menu__content {

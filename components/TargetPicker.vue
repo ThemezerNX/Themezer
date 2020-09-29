@@ -17,7 +17,7 @@
 				</h3>
 			</v-col>
 			<v-hover
-				v-for="target in targets"
+				v-for="target in targets.menus"
 				v-slot:default="{ hover }"
 				:key="target.target"
 			>
@@ -43,6 +43,7 @@
 						>
 							<img
 								class="thumbnail transition-fast-in-fast-out"
+								alt="menu screenshot"
 								:src="
 									require(`@/assets/stock/360/${target.image}`)
 								"
@@ -68,10 +69,8 @@ import targets from '@/assets/targets'
 export default Vue.extend({
 	data() {
 		return {
-			targets: targets.filter((target) =>
-				target.types.find(
-					(type) => type.name === this.$parent.$data.type
-				)
+			targets: targets.find(
+				(type) => type.name === this.$parent.$data.type
 			)
 		}
 	}

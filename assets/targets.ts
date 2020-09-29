@@ -1,60 +1,59 @@
-const themes = {
-	name: 'themes',
-	icon: 'mdi-format-color-fill'
-}
-const layouts = {
-	name: 'layouts',
-	icon: 'mdi-code-json'
-}
-
-export default [
+export const menus = [
 	{
 		icon: 'mdi-home-outline',
 		title: 'Home Menu',
 		target: 'homemenu',
-		image: 'ResidentMenu.jpg',
-		types: [themes, layouts]
+		image: 'ResidentMenu.jpg'
 	},
 	{
 		icon: 'mdi-lock-outline',
 		title: 'Lockscreen',
 		target: 'lockscreen',
-		image: 'Entrance.jpg',
-		types: [themes, layouts]
+		image: 'Entrance.jpg'
 	},
 	{
 		icon: 'mdi-apps',
 		title: 'All Apps',
 		target: 'allapps',
-		image: 'Flaunch.jpg',
-		types: [themes, layouts]
+		image: 'Flaunch.jpg'
 	},
 	{
 		icon: 'mdi-cog-outline',
 		title: 'Settings',
 		target: 'settings',
-		image: 'Set.jpg',
-		types: [themes, layouts]
+		image: 'Set.jpg'
 	},
 	{
 		icon: 'mdi-account-multiple',
 		title: 'Player Select',
 		target: 'playerselect',
-		image: 'Psl.jpg',
-		types: [themes, layouts]
+		image: 'Psl.jpg'
 	},
 	{
 		icon: 'mdi-account-outline',
 		title: 'User Page',
 		target: 'userpage',
-		image: 'MyPage.jpg',
-		types: [themes, layouts]
+		image: 'MyPage.jpg'
 	},
 	{
 		icon: 'mdi-newspaper-variant-outline',
 		title: 'News',
 		target: 'news',
-		image: 'Notification.jpg',
-		types: [themes, layouts]
+		image: 'Notification.jpg'
+	}
+]
+
+export default [
+	{
+		name: 'themes',
+		title: 'Themes',
+		icon: 'mdi-format-color-fill',
+		menus: [...menus]
+	},
+	{
+		name: 'layouts',
+		title: 'Layouts',
+		icon: 'mdi-code-json',
+		menus: [...menus]
 	}
 ]
