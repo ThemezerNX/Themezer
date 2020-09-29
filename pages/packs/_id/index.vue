@@ -25,6 +25,9 @@
 								aspect-ratio="1.7778"
 								:src="theme.preview.original"
 							>
+								<div class="theme-name subtitle-1">
+									{{ theme.details.name }}
+								</div>
 							</v-carousel-item>
 						</v-carousel>
 					</v-col>
@@ -305,3 +308,18 @@ export default Vue.extend({
 	}
 })
 </script>
+
+<style lang="scss">
+.overlay-image .theme-name {
+	padding: 5px 10px;
+	width: fit-content;
+	border-radius: 0 0 10px 0;
+	background-color: rgba(0, 0, 0, 0.4);
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+}
+</style>
