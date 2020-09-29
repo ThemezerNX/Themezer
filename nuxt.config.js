@@ -42,7 +42,7 @@ export default {
 				hid: 'og:image',
 				name: 'og:image',
 				property: 'og:image',
-				content: '/icon-256-filled.png'
+				content: '/icon-filled-128.png'
 			}
 		]
 	},
@@ -80,7 +80,7 @@ export default {
 		[
 			'nuxt-rfg-icon',
 			{
-				masterPicture: 'static/icon.png'
+				masterPicture: 'static/icon-filled.png'
 			}
 		],
 		'@nuxtjs/pwa',

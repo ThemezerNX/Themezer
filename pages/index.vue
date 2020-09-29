@@ -13,7 +13,7 @@
 						height="200"
 						width="auto"
 						src="/icon-256.png"
-						style="-webkit-filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.1));"
+						style="-webkit-filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));"
 						contain
 					/>
 					<h1 v-if="$auth.loggedIn" class="text-center intro-title">
@@ -182,6 +182,8 @@ export default Vue.extend({
 	opacity: 0.85;
 	top: 80vh;
 	left: -15vw;
+	box-shadow: 1px -2px 8px 1px rgba(0, 0, 0, 0.2),
+		0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .circle-2 {
@@ -194,6 +196,8 @@ export default Vue.extend({
 	top: -10vh;
 	opacity: 0.7;
 	right: -2vw;
+	box-shadow: -1px 2px 8px 1px rgba(0, 0, 0, 0.2),
+		0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 .parallax {

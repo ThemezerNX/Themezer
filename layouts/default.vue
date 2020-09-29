@@ -166,9 +166,9 @@
 					<v-img
 						class="mr-4"
 						contain
-						src="/icon-256-filled.png"
+						src="/icon-filled-64.png"
 						width="32"
-						style="border-radius: 5px; -webkit-filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.1));"
+						style="border-radius: 5px;"
 					/>
 					{{ title }}
 				</v-toolbar-title>
@@ -828,7 +828,7 @@ html {
 	}
 }
 
-// .content {
-// 	background: linear-gradient(0deg, #b40a86, #0ab379);
-// }
+.content {
+	background: linear-gradient(25deg, #b40a862a, #0ab37940);
+}
 </style>
