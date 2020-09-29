@@ -45,6 +45,12 @@ export const menus = [
 
 export default [
 	{
+		name: 'packs',
+		title: 'Packs',
+		icon: 'mdi-package-variant-closed',
+		to: '/packs'
+	},
+	{
 		name: 'themes',
 		title: 'Themes',
 		icon: 'mdi-format-color-fill',

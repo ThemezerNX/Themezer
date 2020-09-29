@@ -157,23 +157,35 @@
 			"
 		>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-			<NuxtLink to="/" class="title-link">
+			<NuxtLink to="/" class="title-link mx-6">
 				<v-toolbar-title class="d-flex title-text">
 					<v-img
-						class="mx-2"
+						class="mr-4"
 						contain
-						src="/icon-256.png"
-						width="30"
+						src="/icon-256-filled.png"
+						width="32"
 						style="border-radius: 5px; -webkit-filter: drop-shadow(0px 0px 2px rgba(255, 255, 255, 0.1));"
 					/>
 					{{ title }}
 				</v-toolbar-title>
 			</NuxtLink>
+			<v-toolbar-items class="d-none d-sm-flex">
+				<v-btn
+					v-for="target in targets"
+					:key="target.name"
+					:to="`/${target.name}`"
+					depressed="true"
+					style="background-color: transparent"
+				>
+					{{ target.title }}
+					<v-icon right>{{ target.icon }}</v-icon>
+				</v-btn>
+			</v-toolbar-items>
 			<v-spacer />
 			<v-toolbar-items>
 				<v-menu bottom left offset-y>
 					<template v-slot:activator="{ on, attrs }">
-						<v-btn rounded dark icon v-bind="attrs" v-on="on">
+						<v-btn v-bind="attrs" depressed="true" v-on="on">
 							<v-icon>mdi-shuffle</v-icon>
 						</v-btn>
 					</template>
@@ -375,6 +387,7 @@ import tos from '@/assets/tos'
 export default {
 	data() {
 		return {
+			targets,
 			title: process.env.APP_TITLE,
 			drawer: false,
 			error: null,
@@ -386,11 +399,6 @@ export default {
 				{
 					divider: true,
 					inset: true
-				},
-				{
-					icon: 'mdi-package-variant-closed',
-					title: 'Packs',
-					to: '/packs'
 				},
 				...targets,
 				{
