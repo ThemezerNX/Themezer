@@ -61,6 +61,7 @@
 					<v-list-item
 						dense
 						router
+						class="ml-11 pl-5"
 						:to="`/creators/${$auth.user.id}`"
 					>
 						<v-list-item-title>My Profile</v-list-item-title>
@@ -68,7 +69,7 @@
 							<v-icon>mdi-account</v-icon>
 						</v-list-item-icon>
 					</v-list-item>
-					<v-list-item dense @click="logout()">
+					<v-list-item class="ml-11 pl-5" dense @click="logout()">
 						<v-list-item-title>Logout</v-list-item-title>
 						<v-list-item-icon>
 							<v-icon>mdi-logout</v-icon>
