@@ -83,7 +83,7 @@ export default Vue.extend({
 	overflow: hidden;
 	text-shadow: 0 0 5px black;
 	.thumbnail {
-		opacity: 0.2;
+		opacity: 0.3;
 		left: 0;
 		transform: scale(1.05);
 		filter: brightness(0.4);
