@@ -29,7 +29,7 @@
 							<v-hover v-slot:default="{ hover }">
 								<v-img
 									aspect-ratio="1.7778"
-									class="placeholder"
+									class="placeholder display-3"
 									:src="
 										uploadedScreenshotUrl ||
 											theme.preview.original
@@ -37,31 +37,23 @@
 									contain
 								>
 									<v-expand-transition>
-										<div
-											v-if="hover"
-											class="d-flex display-3 transition-fast-in-fast-out v-card--reveal"
-											style="height: 100%; background: rgba(0,0,0,0.5);"
-										>
-											<v-file-input
-												v-model="uploadedScreenshot"
-												full-width
-												height="100%"
-												label="SCREENSHOT* (jpg, 1280x720)"
-												class="screenshot_upload"
-												filled
-												color="black"
-												accept="image/jpeg"
-												hide-details
-												:rules="[rules.required]"
-												style="cursor: pointer;"
-												@change="
-													onScreenshotChange(
-														$event,
-														i
-													)
-												"
-											/>
-										</div>
+										<v-file-input
+											v-show="hover"
+											v-model="uploadedScreenshot"
+											full-width
+											height="100%"
+											label="SCREENSHOT* (jpg, 1280x720)"
+											class="screenshot_upload transition-fast-in-fast-out v-card--reveal"
+											filled
+											color="black"
+											accept="image/jpeg"
+											hide-details
+											:rules="[rules.required]"
+											style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
+											@change="
+												onScreenshotChange($event, i)
+											"
+										/>
 									</v-expand-transition>
 								</v-img>
 							</v-hover>
