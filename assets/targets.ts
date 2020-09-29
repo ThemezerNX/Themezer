@@ -48,18 +48,22 @@ export default [
 		name: 'packs',
 		title: 'Packs',
 		icon: 'mdi-package-variant-closed',
+		class: 'd-sm-none',
 		to: '/packs'
 	},
 	{
 		name: 'themes',
 		title: 'Themes',
 		icon: 'mdi-format-color-fill',
+		class: 'd-sm-none',
+		margin_top: '4px',
 		menus: [...menus]
 	},
 	{
 		name: 'layouts',
 		title: 'Layouts',
 		icon: 'mdi-code-json',
+		class: 'd-sm-none',
 		menus: [...menus]
 	}
 ]

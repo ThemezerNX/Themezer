@@ -80,8 +80,9 @@
 					<v-subheader
 						v-if="!!item.header"
 						:key="i"
-						class="mt-4"
+						class="mt-5"
 						inset
+						:class="item.class"
 						style="height: 24px;"
 					>
 						{{ item.header }}
@@ -93,11 +94,13 @@
 						:key="i"
 						:inset="item.inset"
 						class="my-2"
+						:class="item.class"
 					/>
 
 					<v-list-group
 						v-else-if="Array.isArray(item.menus)"
 						:key="i"
+						:class="item.class"
 					>
 						<template v-slot:activator>
 							<v-list-item-action>
@@ -130,6 +133,7 @@
 						v-else
 						:key="i"
 						class="my-2"
+						:class="item.class"
 						:to="item.to"
 						router
 						:href="item.href"
@@ -174,18 +178,27 @@
 					v-for="target in targets"
 					:key="target.name"
 					:to="`/${target.name}`"
-					depressed="true"
+					:depressed="true"
 					style="background-color: transparent"
 				>
 					{{ target.title }}
-					<v-icon right>{{ target.icon }}</v-icon>
+					<v-icon
+						right
+						:style="`margin-top: ${target.margin_top};`"
+						>{{ target.icon }}</v-icon
+					>
 				</v-btn>
 			</v-toolbar-items>
 			<v-spacer />
 			<v-toolbar-items>
 				<v-menu bottom left offset-y>
 					<template v-slot:activator="{ on, attrs }">
-						<v-btn v-bind="attrs" depressed="true" v-on="on">
+						<v-btn
+							v-bind="attrs"
+							:depressed="true"
+							style="background-color: transparent"
+							v-on="on"
+						>
 							<v-icon>mdi-shuffle</v-icon>
 						</v-btn>
 					</template>
@@ -394,11 +407,13 @@ export default {
 			items: [
 				{
 					header: 'Download',
-					icon: 'mdi-download'
+					icon: 'mdi-download',
+					class: 'd-flex d-sm-none'
 				},
 				{
 					divider: true,
-					inset: true
+					inset: true,
+					class: 'd-flex d-sm-none'
 				},
 				...targets,
 				{
@@ -420,7 +435,8 @@ export default {
 					to: '/submit/layout'
 				},
 				{
-					header: 'Tools'
+					header: 'Tools',
+					icon: 'mdi-tools'
 				},
 				{
 					divider: true,
@@ -444,7 +460,7 @@ export default {
 				},
 				{
 					divider: true,
-					inset: false
+					inset: true
 				},
 				{
 					icon: 'mdi-information-outline',
@@ -719,6 +735,14 @@ html {
 
 .v-select.v-input--dense .v-chip {
 	margin: 4px 0 !important;
+}
+
+//For some reason this is missing in a build
+.v-btn__content .v-icon--left,
+.v-btn__content .v-icon--right {
+	font-size: 18px !important;
+	height: 18px !important;
+	width: 18px !important;
 }
 
 @keyframes flow {
