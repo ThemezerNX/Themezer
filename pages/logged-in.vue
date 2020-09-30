@@ -1,6 +1,6 @@
 <template>
 	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<LoadingOverlay :shadow="false">
+		<LoadingOverlay :shadow="false" :dim="false">
 			<div v-show="!isCallback">
 				<v-alert style="z-index: 5;" color="info">
 					You are now logged in!

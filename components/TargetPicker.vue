@@ -50,7 +50,7 @@
 							/>
 							<div class="display-2 flex-grow-1 text-center">
 								<v-icon size="60">{{ target.icon }}</v-icon>
-								<h6 style="z-index: 2; position: relative;">
+								<h6 style="position: relative;">
 									{{ target.title }}
 								</h6>
 							</div>
@@ -81,7 +81,7 @@ export default Vue.extend({
 .card {
 	border-radius: 10px !important;
 	overflow: hidden;
-	text-shadow: 0 0 5px black;
+	text-shadow: 0 0 5px #000000;
 	.thumbnail {
 		opacity: 0.3;
 		left: 0;

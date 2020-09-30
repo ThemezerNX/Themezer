@@ -2,7 +2,13 @@
 	<v-fade-transition>
 		<div style="position: relative;">
 			<v-fade-transition>
-				<v-flex v-show="loading" class="holder">
+				<v-flex
+					v-show="loading"
+					class="holder"
+					:class="{
+						dim: dim
+					}"
+				>
 					<v-progress-circular
 						class="circle"
 						indeterminate
@@ -40,6 +46,11 @@ export default {
 			required: false,
 			default: true
 		},
+		dim: {
+			type: Boolean,
+			required: false,
+			default: true
+		},
 		margin: {
 			type: Boolean,
 			required: false,
@@ -62,7 +73,9 @@ export default {
 	position: absolute;
 	z-index: 3;
 	border-radius: 10px;
-	background: rgba(0, 0, 0, 0.3);
+	&.dim {
+		background: rgba(0, 0, 0, 0.3);
+	}
 	// border-radius: 10px;
 }
 
