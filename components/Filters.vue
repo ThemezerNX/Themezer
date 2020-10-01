@@ -22,7 +22,7 @@
 					text
 					color="secondary"
 					:disabled="
-						$route.path === $route.fullPath ||
+						Object.keys($route.query).length === 0 ||
 							(Object.keys($route.query).includes('page')
 								? Object.keys($route.query).length === 1
 								: !Object.keys($route.query).length)
