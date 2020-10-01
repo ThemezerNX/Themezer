@@ -7,7 +7,11 @@
 			`border: rgba(255, 255, 255, 0.12) solid 2px; border-radius: 10px;`
 		"
 	>
-		<div class="group" @mouseleave="searchHover = false">
+		<div
+			class="group"
+			@mouseover="searchHover = true"
+			@mouseleave="searchHover = false"
+		>
 			<v-card-title class="title">
 				Search
 				<v-spacer />
@@ -21,7 +25,7 @@
 						$route.path === $route.fullPath ||
 							(Object.keys($route.query).includes('page')
 								? Object.keys($route.query).length === 1
-								: Object.keys($route.query).length > 0)
+								: !Object.keys($route.query).length)
 					"
 					@click="$router.push($route.path)"
 				>
@@ -29,7 +33,7 @@
 				</v-btn>
 			</v-card-title>
 
-			<v-card-actions class="mx-2" @mousedown="searchHover = true">
+			<v-card-actions class="mx-2" @focus="focussed = true">
 				<v-text-field
 					v-model="query"
 					rounded
@@ -51,7 +55,7 @@
 							withLayouts.length > 0
 					"
 					class="mx-2 search-in"
-					@mousedown="searchHover = true"
+					@mouseover="searchHover = true"
 				>
 					<v-card-subtitle class="pa-0 mx-2">
 						With
@@ -99,7 +103,6 @@
 							:loading="loading.allLayouts"
 							@mouseover.once="getParentAllLayouts()"
 							@click="focussed = true"
-							@focus="focussed = true"
 							@blur="focussed = false"
 						></v-autocomplete>
 					</v-card-actions>
@@ -270,6 +273,16 @@ export default Vue.extend({
 			} else {
 				return 'asc'
 			}
+		},
+		currentCreators(): Array<string> | undefined {
+			return this.$route.query.creators
+				? (this.$route.query.creators as string).split(',')
+				: undefined
+		},
+		currentLayouts(): Array<string> | undefined {
+			return this.$route.query.layouts
+				? (this.$route.query.layouts as string).split(',')
+				: undefined
 		}
 	},
 	watch: {
@@ -320,6 +333,16 @@ export default Vue.extend({
 						query
 					})
 				}, 400)
+			}
+		},
+		currentCreators(n) {
+			if (!n) {
+				this.withCreators = []
+			}
+		},
+		currentLayouts(n) {
+			if (!n) {
+				this.withLayouts = []
 			}
 		}
 	},

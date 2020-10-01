@@ -9,7 +9,7 @@
 				<v-hover v-if="theme" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
-							class="mx-auto card"
+							class="mx-auto card transition-fast-in-fast-out"
 							:class="
 								`
 								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
@@ -20,7 +20,7 @@
 										? 'me-1'
 										: 'me-2'
 								}
-								${hover ? 'hover' : ''}
+								${hover ? 'on-hover' : ''}
 							`
 							"
 							router
@@ -45,6 +45,8 @@
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"
 								cover
+								class="ma-2"
+								style="border-radius: 5px"
 							/>
 
 							<v-card-title

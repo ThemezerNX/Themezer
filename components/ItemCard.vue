@@ -27,13 +27,19 @@
 				interval="2000"
 				height="auto"
 			>
-				<v-carousel-item
-					v-for="(theme, i) in item.themes"
-					:key="i"
-					height="auto"
-					aspect-ratio="1.7778"
-					:src="theme.preview.thumb"
-				>
+				<v-carousel-item v-for="(theme, i) in item.themes" :key="i">
+					<v-img
+						:src="theme.preview.thumb"
+						cover
+						:style="
+							type === 'layouts'
+								? `background-color: ${item.details.color};`
+								: ''
+						"
+						aspect-ratio="1.7778"
+						style="border-radius: 5px"
+						class="overlay-image ma-2"
+					/>
 				</v-carousel-item>
 			</v-carousel>
 
@@ -47,7 +53,8 @@
 						? `background-color: ${item.details.color};`
 						: ''
 				"
-				class="overlay-image"
+				style="border-radius: 5px"
+				class="overlay-image ma-2"
 			/>
 
 			<v-card-title
