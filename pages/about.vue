@@ -53,6 +53,14 @@
 					>
 				</p>
 				<hr class="mb-2" />
+				<span class="pr-3"
+					>&copy; {{ new Date().getFullYear() }} Themezer</span
+				>
+				<nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
+				<nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
+				<a target="_blank" href="https://status.themezer.net/"
+					>Status</a
+				>
 			</v-card-text>
 		</v-card>
 		<v-dialog v-model="restoreDialog" max-width="800" class="mx-auto">
