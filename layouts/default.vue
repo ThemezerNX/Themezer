@@ -662,6 +662,17 @@ html {
 	word-break: break-word !important;
 }
 
+.page-enter-active,
+.page-leave-active {
+	transition-property: opacity;
+	transition-timing-function: ease-out;
+	transition-duration: 50ms;
+}
+.page-enter,
+.page-leave-to {
+	opacity: 0;
+}
+
 //Page animations
 //.page-enter-active,
 //.page-leave-active {

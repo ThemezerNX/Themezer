@@ -4,6 +4,7 @@
 			<v-col
 				v-for="item in items"
 				:key="item.id"
+				class="pa-2"
 				cols="12"
 				xs="12"
 				sm="6"

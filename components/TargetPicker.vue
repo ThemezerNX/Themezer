@@ -8,13 +8,15 @@
 		<v-row style="height: 100%;" class="d-flex align-center">
 			<v-col cols="12" style="align-self: flex-end;">
 				<h1
-					class="flex-grow-1 display-2 font-weight-medium text-center"
+					class="flex-grow-1 text-center display-2 font-weight-medium"
 				>
 					Choose A Menu
 				</h1>
-				<h3 class="flex-grow-1 text-center">
-					to view {{ $parent.$data.type }}
-				</h3>
+				<h2
+					class="flex-grow-1 text-center display-1 font-weight-medium text-capitalize"
+				>
+					{{ $parent.$data.type }}
+				</h2>
 			</v-col>
 			<v-hover
 				v-for="target in targets.menus"

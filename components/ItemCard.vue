@@ -58,7 +58,7 @@
 			/>
 
 			<v-card-title
-				class="title mb-0 subtitle-1"
+				class="title subtitle-1"
 				:class="
 					showProps.includes('creator') ||
 					showProps.includes('target')
