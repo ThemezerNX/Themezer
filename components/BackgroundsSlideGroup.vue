@@ -18,7 +18,7 @@
 				<v-hover v-if="background" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
-							class="ma-auto card"
+							class="ma-auto card transition-fast-in-fast-out"
 							:class="
 								`
 								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
@@ -29,7 +29,7 @@
 										? 'me-1'
 										: 'me-2'
 								}
-								${hover ? 'hover' : ''}
+								${hover ? 'on-hover' : ''}
 							`
 							"
 							:width="
@@ -52,6 +52,8 @@
 									$vuetify.breakpoint.smAndDown ? 200 : 300
 								"
 								contain
+								style="border-radius: 5px"
+								class="ma-2"
 							/>
 
 							<v-card-title

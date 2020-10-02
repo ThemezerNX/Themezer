@@ -26,7 +26,6 @@
 				:cycle="hover"
 				interval="2000"
 				height="auto"
-				class="mb-n2"
 			>
 				<v-carousel-item v-for="(theme, i) in item.themes" :key="i">
 					<v-img
