@@ -39,7 +39,6 @@
 									? 80
 									: 100
 							"
-							color="grey darken-4"
 							@click="toggle"
 						>
 							<v-img
