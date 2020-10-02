@@ -32,7 +32,6 @@
 									theme.details.name
 								)}`
 							"
-							color="grey darken-4"
 						>
 							<div v-if="theme.layout" class="badges-wrapper">
 								<CertifiedBadge />
