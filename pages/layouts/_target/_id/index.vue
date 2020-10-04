@@ -156,7 +156,10 @@
 								</span>
 								{{ commonlayoutObject.AuthorName }}
 							</div>
-							<div class="font-weight-light body-2">
+							<div
+								v-if="commonlayoutObject.TargetName"
+								class="font-weight-light body-2"
+							>
 								<span class="font-weight-medium"
 									>Target File:
 								</span>
