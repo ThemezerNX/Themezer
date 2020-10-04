@@ -39,8 +39,8 @@
 				<div>
 					What does the
 					<CertifiedBadge inline /> badge mean? It means that the
-					nxtheme you download is updated whenever there are changes
-					made to the layout or theme itself.
+					nxtheme you download is updated automatically whenever there
+					are changes made to the layout or theme itself.
 				</div>
 				<p class="mt-4">
 					Need to restore your Themezer account?
@@ -49,7 +49,7 @@
 						text
 						color="primary"
 						@click="restoreDialog = true"
-						>Open the dialog</v-btn
+						>Click here</v-btn
 					>
 				</p>
 				<hr class="mb-2" />

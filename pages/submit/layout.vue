@@ -12,9 +12,13 @@
 					rel="noopener"
 					target="_blank"
 				>
-					README.md
-				</a>
-				for instructions.
+					README.md</a
+				>
+				for instructions. If this is just too technical for you, you can
+				<a href="https://discord.gg/nnm8wyM" rel="noopener">
+					join the Discord</a
+				>, ask for help in #submitting and one of the staff will do it
+				for you.
 			</div>
 			<v-flex class="d-flex justify-center my-3">
 				<v-btn

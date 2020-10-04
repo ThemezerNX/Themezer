@@ -6,9 +6,8 @@
 			</h1>
 			<div class="subtitle-1 box_text">
 				If Themezer doesn't recognize the layout, you should select it
-				in the dropdown. Be really sure it is the exact same layout, or
-				else you might lose some features! For more detailed
-				instructions,
+				in the dropdown. Make sure it is the exact same layout or else
+				you might lose some features! For more detailed instructions,
 				<v-btn
 					text
 					color="primary"
@@ -91,8 +90,8 @@
 					/>
 					<div v-if="selectedType === 'zip'">
 						<div class="subtitle-1 box_text">
-							Make sure the NXThemes are in the root of the zip
-							(not in a folder)!
+							Make sure the NXThemes are in the root of the zip,
+							not in a folder!
 						</div>
 						<v-file-input
 							v-if="selectedType === 'zip'"
@@ -118,7 +117,7 @@
 							rel="noopener"
 							target="_blank"
 							>WebInjector</a
-						>. You may submit the created NXTheme here.
+						>. You may submit the created NXTheme(s) here.
 					</div>
 				</v-col>
 			</v-row>
@@ -612,7 +611,7 @@ export default Vue.extend({
 				},
 				{
 					id: 'zip',
-					label: 'A zip with NXThemes (pack/multiple, max 25MB)'
+					label: 'A zip with NXThemes (pack/bulk, max 25MB)'
 				},
 				{
 					id: 'files',
@@ -622,7 +621,7 @@ export default Vue.extend({
 			submitTypes: [
 				{
 					id: 'pack',
-					label: 'Theme Pack'
+					label: 'Pack'
 				},
 				{
 					id: 'separate',

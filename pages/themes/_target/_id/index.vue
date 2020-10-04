@@ -174,7 +174,7 @@
 
 						<div v-if="theme.pack">
 							<h3 style="position: relative;">
-								Theme Pack
+								Pack
 								<v-tooltip v-model="showPackInfo" top>
 									<template v-slot:activator="{ on }">
 										<v-btn
@@ -194,8 +194,7 @@
 								</v-tooltip>
 							</h3>
 							<div class="subtitle-1">
-								This Theme is part of the the following Theme
-								Pack:
+								This Theme is part of the the following Pack:
 							</div>
 							<nuxt-link
 								:to="
@@ -214,12 +213,13 @@
 				<v-dialog v-model="packDialog" max-width="400">
 					<v-card>
 						<v-card-title class="headline"
-							>What is a Theme Pack?</v-card-title
+							>What is a Pack?</v-card-title
 						>
 
 						<v-card-text>
-							Theme Packs are just zips with multiple themes
-							created by the same user.
+							Packs are zips with multiple themes created by the
+							same user. It can contain multiple themes for a
+							single menu.
 						</v-card-text>
 
 						<v-card-actions>

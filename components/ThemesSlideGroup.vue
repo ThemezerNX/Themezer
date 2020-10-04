@@ -9,6 +9,7 @@
 				<v-hover v-if="theme" v-slot:default="{ hover }">
 					<v-scale-transition>
 						<v-card
+							:elevation="hover ? 12 : 2"
 							class="mx-auto card transition-fast-in-fast-out"
 							:class="
 								`

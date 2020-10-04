@@ -453,7 +453,7 @@ export default {
 					href: 'https://exelix11.github.io/SwitchThemeInjector/v2/'
 				},
 				{
-					icon: 'mdi-open-in-app',
+					icon: 'mdi-application',
 					title: 'Themezer NX App',
 					href:
 						'https://github.com/suchmememanyskill/themezer-nx/releases'
