@@ -20,6 +20,19 @@ export default ({ app }: { app: any }) => {
 			addTypename: false
 		},
 		defaultHttpLink: false,
-		link: ApolloLink.from([uploadLink])
+		link: ApolloLink.from([uploadLink]),
+		apollo: {
+			defaultOptions: {
+				watchQuery: {
+					errorPolicy: 'all'
+				},
+				query: {
+					errorPolicy: 'all'
+				},
+				mutate: {
+					errorPolicy: 'all'
+				}
+			}
+		}
 	}
 }
