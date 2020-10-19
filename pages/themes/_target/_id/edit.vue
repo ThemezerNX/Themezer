@@ -256,6 +256,7 @@ export default Vue.extend({
 				this.theme.details.description !==
 					this.changed.details.description ||
 				this.theme.details.version !== this.changed.details.version ||
+				this.theme.nsfw !== this.changed.nsfw ||
 				(this.theme.layout?.id &&
 					this.theme.layout.id +
 						(this.theme.pieces?.length > 0
