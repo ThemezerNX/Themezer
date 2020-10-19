@@ -524,9 +524,6 @@ export default Vue.extend({
 					return res?.creator
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		},
 		packList: {
@@ -536,9 +533,6 @@ export default Vue.extend({
 					creators: [this.id],
 					limit: 6
 				}
-			},
-			error(e) {
-				this.$nuxt.error(e)
 			},
 			prefetch: true
 		},
@@ -550,9 +544,6 @@ export default Vue.extend({
 					limit: 6
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		},
 		layoutList: {
@@ -562,9 +553,6 @@ export default Vue.extend({
 					creators: [this.id],
 					limit: 6
 				}
-			},
-			error(e) {
-				this.$nuxt.error(e)
 			},
 			prefetch: true
 		}
@@ -737,8 +725,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '~vuetify/src/styles/styles.sass';
-
 .parallax {
 	height: auto !important;
 
@@ -746,10 +732,7 @@ export default Vue.extend({
 		width: 100%;
 		height: 100%;
 		position: relative;
-		background: radial-gradient(
-			transparent 0%,
-			map-get($material-dark, 'background') 150%
-		);
+		background: radial-gradient(transparent 0%, #121212 150%);
 	}
 
 	.avatar {

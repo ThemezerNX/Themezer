@@ -111,9 +111,6 @@ export default Vue.extend({
 
 				return vars
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		},
 		themeList: {
@@ -127,9 +124,6 @@ export default Vue.extend({
 
 				return vars
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		},
 		layoutList: {
@@ -142,9 +136,6 @@ export default Vue.extend({
 				vars.hash = this.$hashString(vars)
 
 				return vars
-			},
-			error(e) {
-				this.$nuxt.error(e)
 			},
 			prefetch: true
 		}

@@ -113,9 +113,6 @@ export default Vue.extend({
 			update(data) {
 				return data
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		}
 	},
@@ -174,5 +171,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/assets/paginate.scss';
+@import '~assets/paginate.scss';
 </style>

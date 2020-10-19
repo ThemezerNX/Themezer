@@ -331,10 +331,7 @@ export default Vue.extend({
 					this.restoredActivePieces = true
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
-			prefetch: false
+			prefetch: true
 		}
 	},
 	methods: {

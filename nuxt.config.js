@@ -2,7 +2,6 @@ require('dotenv').config()
 const ImageminPlugin = require('imagemin-webpack-plugin').default
 
 export default {
-	debug: false,
 	env: {
 		APP_TITLE: 'Themezer',
 		ENDPOINT: process.env.ENDPOINT,
@@ -13,8 +12,6 @@ export default {
 		port: process.env.PORT,
 		host: process.env.HOST
 	},
-
-	mode: 'universal',
 
 	head: {
 		titleTemplate: '%s | Themezer',
@@ -50,6 +47,7 @@ export default {
 	messages: {
 		loading: 'Loading...',
 		error_404: 'This page could not be found. Go back',
+		server_error: 'Item not found, URL malformed or server not responding',
 		server_error_details:
 			"An error occurred. Try going back using your browser's back button or go",
 		client_error_details:
@@ -124,9 +122,6 @@ export default {
 		}
 	},
 
-	/*
-	 ** https://github.com/nuxt-community/vuetify-module
-	 */
 	vuetify: {
 		optionsPath: './vuetify.options.ts'
 	},

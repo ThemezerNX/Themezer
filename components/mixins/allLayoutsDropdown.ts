@@ -120,9 +120,6 @@ export default Vue.extend({
 					return final
 				} else return []
 			},
-			error(e: any) {
-				;(this as any).$nuxt.error(e)
-			},
 			prefetch: false,
 			skip: true
 		}

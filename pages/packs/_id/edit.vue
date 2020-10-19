@@ -230,9 +230,6 @@ export default Vue.extend({
 					this.changed = JSON.parse(JSON.stringify(data.pack))
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		}
 	},

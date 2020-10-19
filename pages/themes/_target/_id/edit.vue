@@ -335,9 +335,6 @@ export default Vue.extend({
 					}
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		}
 	},

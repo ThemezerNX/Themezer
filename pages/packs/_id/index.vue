@@ -233,9 +233,6 @@ export default Vue.extend({
 					this.updateUrlString(data.pack.id, data.pack.details.name)
 				}
 			},
-			error(e) {
-				this.$nuxt.error(e)
-			},
 			prefetch: true
 		}
 	},

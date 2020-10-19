@@ -17,9 +17,6 @@ export default Vue.extend({
 			result() {
 				;(this as any).$data.loading.categories = false
 			},
-			error(e: any) {
-				;(this as any).$nuxt.error(e)
-			},
 			update(res: any) {
 				return res?.categories.sort((a: string, b: string) =>
 					a.toLowerCase().localeCompare(b.toLowerCase())
