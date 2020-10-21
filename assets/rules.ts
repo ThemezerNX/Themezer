@@ -33,7 +33,7 @@ export default {
 		!value ||
 		(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
 			? true
-			: 'Invalid HEX color'),
+			: 'Invalid HEX'),
 	no_scripts: (value: string) =>
 		!value ||
 		!/< *script *>.*?< *\/ *script *>/gim.test(value) ||

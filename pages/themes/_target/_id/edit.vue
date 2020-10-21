@@ -73,6 +73,20 @@
 									rules.utf8_only
 								]"
 							></v-text-field>
+							<v-text-field
+								v-model="changed.details.description"
+								rounded
+								minlength="10"
+								maxlength="500"
+								counter="500"
+								label="Theme Description"
+								outlined
+								:rules="[
+									rules.description_length,
+									rules.utf8_only
+								]"
+								prepend-icon="mdi-pencil-outline"
+							></v-text-field>
 							<v-autocomplete
 								v-model="changed.layout.id"
 								:items="layouts[theme.target]"
@@ -99,20 +113,22 @@
 								@change="changed.pieces = []"
 							>
 							</v-autocomplete>
-							<v-text-field
-								v-model="changed.details.description"
-								rounded
-								minlength="10"
-								maxlength="500"
-								counter="500"
-								label="Theme Description"
+							<v-autocomplete
+								v-model="changed.pack.id"
+								:items="packList || []"
+								:loading="!!$apollo.queries.packList.loading"
+								auto-select-first
 								outlined
-								:rules="[
-									rules.description_length,
-									rules.utf8_only
-								]"
-								prepend-icon="mdi-pencil-outline"
-							></v-text-field>
+								rounded
+								persistent-hint
+								allow-overflow
+								clearable
+								prepend-icon="mdi-package-variant-closed"
+								label="Pack"
+								@mouseover.once="
+									$apollo.queries.packList.skip = false
+								"
+							></v-autocomplete>
 							<v-combobox
 								v-model="changed.categories"
 								rounded
@@ -208,6 +224,7 @@ import Vue from 'vue'
 import rules from '@/assets/rules'
 import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
 import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
+import allPacksDropdown from '@/components/mixins/allPacksDropdown'
 import targetParser from '@/components/mixins/targetParser'
 import { theme, deleteTheme, updateTheme } from '@/graphql/Theme.gql'
 import urlParser from '~/components/mixins/urlParser'
@@ -231,6 +248,7 @@ export default Vue.extend({
 		targetParser,
 		allLayoutsDropdown,
 		allCategoriesDropdown,
+		allPacksDropdown,
 		optionsString
 	],
 	data() {
@@ -257,6 +275,7 @@ export default Vue.extend({
 					this.changed.details.description ||
 				this.theme.details.version !== this.changed.details.version ||
 				this.theme.nsfw !== this.changed.nsfw ||
+				this.theme.pack?.id !== this.changed.pack.id ||
 				(this.theme.layout?.id &&
 					this.theme.layout.id +
 						(this.theme.pieces?.length > 0
@@ -314,7 +333,10 @@ export default Vue.extend({
 					)
 
 					this.currentThemeTarget = data.theme.target
-					this.$apollo.queries.layoutList.skip = false
+					if (data.theme.layout)
+						this.$apollo.queries.layoutList.skip = false
+					if (data.theme.pack)
+						this.$apollo.queries.packList.skip = false
 
 					if (data.theme.categories?.includes('NSFW'))
 						data.theme.nsfw = true
@@ -323,6 +345,9 @@ export default Vue.extend({
 					)
 
 					this.changed = JSON.parse(JSON.stringify(data.theme))
+					if (!this.changed.pack) {
+						this.changed.pack = {}
+					}
 					if (!this.changed.layout) this.changed.layout = {}
 					else {
 						this.changed.layout.id =
@@ -375,6 +400,7 @@ export default Vue.extend({
 						file: this.uploadedScreenshot,
 						name: this.changed.details.name,
 						layout_id: this.changed.layout.id,
+						pack_id: this.changed.pack.id,
 						description: this.changed.details.description,
 						version: this.changed.details.version,
 						categories: this.changed.categories,

@@ -14,3 +14,17 @@ query allLayouts($target: String) {
         }
     }
 }
+
+query allPacks($creators: [String!]) {
+    packList(creators: $creators) {
+        id
+        creator {
+            id
+            display_name
+        }
+        categories
+        details {
+            name
+        }
+    }
+}
