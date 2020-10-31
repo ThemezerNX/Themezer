@@ -146,8 +146,8 @@
 						</v-sheet>
 
 						<span v-else
-							>This creator hasn't written anything about him- or
-							herself yet...</span
+							>This creator hasn't written anything about
+							themselves yet...</span
 						>
 					</v-col>
 				</v-row>
