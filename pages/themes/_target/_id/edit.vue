@@ -110,7 +110,10 @@
 								@mouseover.once="
 									$apollo.queries.layoutList.skip = false
 								"
-								@change="changed.pieces = []"
+								@change="
+									changed.pieces = []
+									changed.layout.id = changed.layout.simple_id
+								"
 							>
 							</v-autocomplete>
 							<v-autocomplete
@@ -378,6 +381,7 @@ export default Vue.extend({
 			this.changed = JSON.parse(JSON.stringify(this.theme))
 			if (!this.changed.layout) this.changed.layout = {}
 			else {
+				this.changed.layout.simple_id = this.changed.layout.id
 				this.changed.layout.id =
 					this.changed.layout.id +
 					(this.changed.pieces?.length > 0
@@ -385,6 +389,9 @@ export default Vue.extend({
 								.map((p) => p.value.uuid)
 								.join(',')}`
 						: '')
+			}
+			if (!this.changed.pack) {
+				this.changed.pack = {}
 			}
 
 			this.uploadedScreenshot = null
