@@ -88,7 +88,7 @@
 								prepend-icon="mdi-pencil-outline"
 							></v-text-field>
 							<v-autocomplete
-								v-model="changed.layout.id"
+								v-model="changed.layout.simple_id"
 								:items="layouts[theme.target]"
 								auto-select-first
 								label="Layout"
@@ -350,6 +350,7 @@ export default Vue.extend({
 					}
 					if (!this.changed.layout) this.changed.layout = {}
 					else {
+						this.changed.layout.simple_id = this.changed.layout.id
 						this.changed.layout.id =
 							this.changed.layout.id +
 							(this.changed.pieces?.length > 0
