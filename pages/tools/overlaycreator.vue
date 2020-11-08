@@ -1,6 +1,10 @@
 <template>
-	<v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-		<v-sheet ref="sheet" no-gutters class="pa-2 box_fill">
+	<v-container
+		ref="sheet"
+		:fluid="$vuetify.breakpoint.smAndDown"
+		style="height: 100%;"
+	>
+		<v-sheet no-gutters class="pa-2 box_fill">
 			<h1 class="box_text">
 				Overlay Creator
 			</h1>
@@ -292,9 +296,12 @@ export default Vue.extend({
 					this.loadingUploadScreenshots = false
 					this.resultImage = data.createOverlay
 
-					const button = this.$refs.sheet
-					const position = button.getBoundingClientRect().bottom
-					window.scrollTo({ top: position, behavior: 'smooth' })
+					const self = this
+					setTimeout(() => {
+						const button = self.$refs.sheet
+						const position = button.getBoundingClientRect().bottom
+						window.scrollTo({ top: position, behavior: 'smooth' })
+					}, 200)
 				})
 				.catch((err) => {
 					this.$snackbar.error(err)
