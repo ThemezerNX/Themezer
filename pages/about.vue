@@ -19,7 +19,7 @@
 				<p>
 					If you have any questions, please join the
 					<a
-						href="https://discord.gg/VBa3bjp"
+						href="https://discord.gg/nnm8wyM"
 						rel="noopener"
 						target="_blank"
 						title="discord"
