@@ -230,6 +230,15 @@
 						</v-card-title>
 
 						<v-card-text>
+							<v-checkbox
+								v-if="
+									!this.isPageOwner && this.$auth.user.isAdmin
+								"
+								v-model="changed.isBlocked"
+								color="red"
+								label="Block user from submitting"
+								class="mt-0"
+							/>
 							<v-text-field
 								v-model="changed.customUsername"
 								rounded
@@ -484,7 +493,8 @@ export default Vue.extend({
 				bannerImage: null,
 				logoImage: null,
 				clearBannerImage: false,
-				clearLogoImage: false
+				clearLogoImage: false,
+				isBlocked: null
 			},
 
 			avatar: null,
@@ -500,7 +510,8 @@ export default Vue.extend({
 				!this.changed.bannerImage &&
 				!this.changed.logoImage &&
 				!this.changed.clearBannerImage &&
-				!this.changed.clearLogoImage
+				!this.changed.clearLogoImage &&
+				this.creator.is_blocked === this.changed.isBlocked
 			)
 		},
 		mayModerate() {
@@ -572,6 +583,7 @@ export default Vue.extend({
 					this.changed.profileColor = creator.profile_color
 					this.changed.customUsername = creator.custom_username
 					this.changed.bio = creator.bio
+					this.changed.isBlocked = creator.is_blocked
 
 					if (creator.discord_user.avatar) {
 						this.avatar = `avatars/${creator.id}/${creator.discord_user.avatar}`
@@ -623,7 +635,8 @@ export default Vue.extend({
 				bannerImage: null,
 				logoImage: null,
 				clearBannerImage: false,
-				clearLogoImage: false
+				clearLogoImage: false,
+				isBlocked: this.creator.is_blocked
 			}
 		},
 		submit() {
@@ -640,7 +653,8 @@ export default Vue.extend({
 						banner_image: this.changed.bannerImage,
 						logo_image: this.changed.logoImage,
 						clear_banner_image: this.changed.clearBannerImage,
-						clear_logo_image: this.changed.clearLogoImage
+						clear_logo_image: this.changed.clearLogoImage,
+						is_blocked: this.changed.isBlocked
 					}
 				})
 				.then(({ data }) => {
