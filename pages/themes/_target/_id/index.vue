@@ -126,7 +126,15 @@
 								{{ theme.layout.details.name }}
 							</nuxt-link>
 							<template v-else>
-								Custom
+								<a
+									class="font-weight-bold"
+									target="_blank"
+									:href="
+										`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`
+									"
+								>
+									Custom
+								</a>
 							</template>
 						</div>
 						<div
