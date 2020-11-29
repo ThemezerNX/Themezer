@@ -128,9 +128,11 @@
 							<template v-else>
 								<a
 									class="font-weight-bold"
-									target="_blank"
-									:href="
-										`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`
+									@click="
+										downloadFileUrl(
+											`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
+											`${theme.details.name} (custom layout)`
+										)
 									"
 								>
 									Custom
