@@ -128,6 +128,7 @@
 							<template v-else>
 								<a
 									class="font-weight-bold"
+									href="#"
 									@click="
 										downloadFileUrl(
 											`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
