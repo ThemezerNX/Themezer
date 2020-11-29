@@ -131,7 +131,8 @@
 									@click="
 										downloadFileUrl(
 											`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
-											`${theme.details.name} (custom layout)`
+											'application/json',
+											`${theme.details.name} (custom layout).json`
 										)
 									"
 								>
@@ -354,6 +355,7 @@ export default Vue.extend({
 
 					this.downloadFileUrl(
 						data.downloadTheme.url,
+						undefined,
 						data.downloadTheme.filename
 					)
 				})

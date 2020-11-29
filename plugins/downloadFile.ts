@@ -20,15 +20,18 @@ Vue.mixin({
 			link.click()
 			URL.revokeObjectURL(link.href)
 		},
-		downloadFileUrl(url, label) {
+		downloadFileUrl(url, mimetype, label) {
 			this.$axios({ url, responseType: 'arraybuffer' }).then(function(
 				response
 			) {
-				const blob = new Blob([response.data])
+				const blob = new Blob([response.data], {
+					type: mimetype
+				})
 				const link = document.createElement('a')
 				link.href = URL.createObjectURL(blob)
 				link.download = label
 				link.click()
+				URL.revokeObjectURL(link.href)
 			})
 		},
 		downloadFile(string, mimetype, label) {

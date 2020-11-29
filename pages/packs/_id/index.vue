@@ -252,6 +252,7 @@ export default Vue.extend({
 
 					this.downloadFileUrl(
 						data.downloadPack.url,
+						undefined,
 						data.downloadPack.filename
 					)
 				})
