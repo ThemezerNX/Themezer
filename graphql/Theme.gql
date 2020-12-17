@@ -45,6 +45,7 @@ query theme($id: String!) {
             details {
                 name
             }
+			categories
         }
 		last_updated
 		pieces {

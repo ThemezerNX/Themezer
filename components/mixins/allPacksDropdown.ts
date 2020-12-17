@@ -10,7 +10,8 @@ export default Vue.extend({
 			skip: true,
 			variables() {
 				return {
-					creators: [(this as any).theme.creator.id]
+					creators: [(this as any).theme.creator.id],
+					nsfw: true
 				}
 			},
 			result() {

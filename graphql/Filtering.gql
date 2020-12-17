@@ -15,8 +15,8 @@ query allLayouts($target: String) {
     }
 }
 
-query allPacks($creators: [String!]) {
-    packList(creators: $creators) {
+query allPacks($creators: [String!], $nsfw: Boolean) {
+    packList(creators: $creators, nsfw: $nsfw) {
         id
         creator {
             id
