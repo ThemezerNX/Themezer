@@ -232,7 +232,7 @@
 						<v-card-text>
 							<v-checkbox
 								v-if="
-									!this.isPageOwner && this.$auth.user?.isAdmin
+									!this.isPageOwner && this.$auth.user && this.$auth.user.isAdmin
 								"
 								v-model="changed.isBlocked"
 								color="red"
