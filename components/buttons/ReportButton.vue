@@ -123,7 +123,7 @@ export default Vue.extend({
 		},
 		nsfw: {
 			type: Boolean,
-			required: true,
+			required: false,
 			default: false
 		}
 	},
