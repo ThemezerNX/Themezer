@@ -271,7 +271,7 @@ export default Vue.extend({
 			} | Packs`
 			const metaDesc = this.pack.details.description
 			const metaImg = !this.pack.themes[0].categories.includes('NSFW')
-				? this.pack.themes[0].preview.thumb
+				? this.pack.themes[0].preview.original
 				: null
 
 			return {

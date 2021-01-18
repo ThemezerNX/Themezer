@@ -437,7 +437,7 @@ export default Vue.extend({
 				this.theme.nsfw ? ' (NSFW!)' : ''
 			} | ${this.targetName()} | Themes`
 			const metaDesc = this.theme.details.description
-			const metaImg = !this.theme.nsfw ? this.theme.preview.thumb : null
+			const metaImg = !this.theme.nsfw ? this.theme.preview.original : null
 
 			return {
 				title: metaTitle,

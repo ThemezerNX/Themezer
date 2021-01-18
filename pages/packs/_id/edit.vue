@@ -276,7 +276,7 @@ export default Vue.extend({
 			const metaImg = !this.pack.themes.some((t) =>
 				t.categories?.includes('NSFW')
 			)
-				? this.pack.themes[0].preview.thumb
+				? this.pack.themes[0].preview.original
 				: null
 
 			return {
