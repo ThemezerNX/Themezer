@@ -221,14 +221,16 @@
                 </v-menu>
             </v-toolbar-items>
         </v-app-bar>
-        <v-main class="content">
+
+        <img :src="require('~/assets/ink_splatters/550393.svg')" class="splatters-2"/>
+        <img :src="require('~/assets/ink_splatters/550391.svg')" class="splatters-1"/>
+
+        <v-main>
             <nuxt/>
         </v-main>
 
         <v-footer absolute app inset>
-			<span class="pr-3"
-      >&copy; {{ new Date().getFullYear() }} Themezer</span
-      >
+            <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
             <nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
             <nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
             <a href="https://status.themezer.net/" target="_blank">Status</a>
@@ -420,8 +422,7 @@ export default {
                 },
                 ...targets,
                 {
-                    header: 'Submit',
-                    icon: 'mdi-upload'
+                    header: 'Submit:',
                 },
                 {
                     divider: true,
@@ -438,8 +439,7 @@ export default {
                     to: '/submit/layout'
                 },
                 {
-                    header: 'Tools',
-                    icon: 'mdi-tools'
+                    header: 'Tools:',
                 },
                 {
                     divider: true,
@@ -460,6 +460,25 @@ export default {
                     title: 'Themezer NX App',
                     href:
                         'https://github.com/suchmememanyskill/themezer-nx/releases'
+                },
+                {
+                    header: 'Guides:',
+                },
+                {
+                    divider: true,
+                    inset: true
+                },
+                {
+                    icon: 'mdi-help-circle-outline',
+                    title: 'Creating Themes/Fonts',
+                    href:
+                        'https://nh-server.github.io/switch-guide/extras/theming/'
+                },
+                {
+                    icon: 'mdi-help-circle-outline',
+                    title: 'Creating Layouts',
+                    href:
+                        'https://github.com/FuryBaguette/SwitchLayoutEditor/wiki'
                 },
                 {
                     divider: true,
@@ -673,120 +692,14 @@ html {
     transition-duration: 50ms;
 }
 
+.row {
+    margin: 0 -12px;
+}
+
 .page-enter,
 .page-leave-to {
     opacity: 0;
 }
-
-//Page animations
-//.page-enter-active,
-//.page-leave-active {
-//	transition-duration: 200ms;
-//}
-//
-//.page-leave-active {
-//	transition-timing-function: ease-in-out;
-//}
-//
-//.page-enter-active {
-//	transition-timing-function: ease-out-in;
-//}
-//
-//.page-enter,
-//.page-leave-to {
-//	opacity: 100;
-//}
-//
-//.page-enter {
-//	transform: translate(50vw, 0);
-//}
-//
-//.page-leave-to {
-//	transform: translate(-50vw, 0);
-//}
-
-//$t-duration: 400ms;
-//$t-delay: 0ms;
-//
-//.page-enter-active,
-//.page-leave-active {
-//	transition-duration: $t-duration * 2;
-//	z-index: 99;
-//	&::before,
-//	&::after {
-//		content: '';
-//		position: fixed;
-//		top: 0;
-//		left: 0;
-//		z-index: 2;
-//		display: block;
-//		width: 100%;
-//		height: 50%;
-//		transition-property: opacity, transform;
-//		transition-timing-function: ease-in-out;
-//	}
-//
-//	&::before {
-//		background-color: #2e2e2e;
-//	}
-//
-//	&::after {
-//		top: 50%;
-//		background-color: #2e2e2e;
-//	}
-//}
-//
-//.page-leave {
-//	&::before,
-//	&::after {
-//		transform: scaleX(0);
-//	}
-//}
-//
-//.page-leave-active {
-//	&::before {
-//		transition-duration: $t-duration;
-//	}
-//
-//	&::after {
-//		transition-duration: $t-duration - $t-delay;
-//		transition-delay: $t-delay;
-//	}
-//}
-//
-//.page-leave-to {
-//	&::before,
-//	&::after {
-//		transform: scale(1);
-//		transform-origin: left;
-//	}
-//}
-//
-//.page-enter {
-//	&::before,
-//	&::after {
-//		transform: scaleX(1);
-//	}
-//}
-//
-//.page-enter-active {
-//	&::before {
-//		transition-duration: $t-duration;
-//	}
-//
-//	&::after {
-//		transition-duration: $t-duration - $t-delay;
-//		transition-delay: $t-delay;
-//	}
-//}
-//
-//.page-enter-to {
-//	&::before,
-//	&::after {
-//		transform: scaleX(0);
-//		transform-origin: right;
-//	}
-//}
 
 .v-list-group__header.v-list-item {
     margin-bottom: 8px !important;
@@ -894,8 +807,6 @@ html {
     .overlay-image {
         background-size: contain;
         background-position: center;
-        // transition-duration: 200ms;
-        // transition-timing-function: ease-in-out;
         border-radius: $border-radius;
     }
 
@@ -956,7 +867,26 @@ html {
     }
 }
 
-.content {
-    background: linear-gradient(25deg, #b40a862a, #0ab37940);
+.splatters-1 {
+    opacity: 0.9;
+    position: fixed;
+    min-height: 800px;
+    height: 120vh;
+    min-width: 100vw;
+    top: 0;
+    left: -20vw;
+    rotate: -70deg;
 }
+
+.splatters-2 {
+    opacity: 0.9;
+    position: fixed;
+    height: 120vh;
+    min-height: 800px;
+    min-width: 60vw;
+    top: 0;
+    right: -6vw;
+    rotate: 35deg;
+}
+
 </style>

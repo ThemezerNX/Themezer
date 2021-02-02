@@ -13,13 +13,13 @@
                         contain
                         height="200"
                         src="/icon-256.png"
-                        style="-webkit-filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));"
+                        style="filter: drop-shadow(1px 1px 0 #4a4a4a) drop-shadow(-1px 1px 0 #4a4a4a) drop-shadow(1px -1px 0 #4a4a4a) drop-shadow(-1px -1px 0 #4a4a4a);"
                         width="auto"
                     />
-                    <h1 v-if="$auth.loggedIn" class="text-center intro-title">
+                    <h1 v-if="$auth.loggedIn" class="text-center">
                         Welcome back {{ $auth.user.username }}!
                     </h1>
-                    <h1 v-else class="text-center intro-title">
+                    <h1 v-else class="text-center">
                         Welcome to Themezer!
                     </h1>
                     <v-row
@@ -77,8 +77,6 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <div class="circle-1 primary"/>
-                <div class="circle-2 secondary"/>
             </v-layout>
         </div>
     </v-container>
@@ -163,34 +161,6 @@ export default Vue.extend({
     z-index: 1;
 }
 
-.circle-1 {
-    border-radius: 50%;
-    position: fixed;
-    min-height: 300px;
-    height: 65vw;
-    min-width: 300px;
-    width: 65vw;
-    opacity: 0.85;
-    top: 80vh;
-    left: -15vw;
-    box-shadow: 1px -2px 8px 1px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.circle-2 {
-    border-radius: 50%;
-    position: fixed;
-    min-height: 200px;
-    height: 15vw;
-    min-width: 200px;
-    width: 15vw;
-    top: -10vh;
-    opacity: 0.7;
-    right: -2vw;
-    box-shadow: -1px 2px 8px 1px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
 .parallax {
     position: fixed;
     height: 100%;
@@ -200,25 +170,5 @@ export default Vue.extend({
 .content {
     // background: linear-gradient(0deg, #b40a86, #0ab379);
     z-index: 5;
-}
-</style>
-
-<style lang="scss">
-.intro-title {
-    animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
-    animation-delay: 700ms;
-}
-
-@keyframes tracking-in-expand {
-    0% {
-        letter-spacing: -0.5em;
-        opacity: 0;
-    }
-    40% {
-        opacity: 0.6;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 </style>
