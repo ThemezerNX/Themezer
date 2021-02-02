@@ -201,6 +201,9 @@
                                 tooltip="Download overlay"
                             />
                         </ButtonDivider>
+                        <h3>
+                            Themes
+                        </h3>
                         <nuxt-link
                             :to="
 								`/themes/${fileNameToWebName(
