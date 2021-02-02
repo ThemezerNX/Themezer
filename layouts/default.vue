@@ -926,6 +926,8 @@ html {
 
     &.splatter-1 {
         opacity: 0;
+        transform: scale(0.9);
+        rotate: (-75deg);
         animation: fadeIn 600ms, scaleIn 600ms, turnSplatter1 600ms;
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
@@ -940,6 +942,8 @@ html {
 
     &.splatter-2 {
         opacity: 0;
+        transform: scale(0.9);
+        rotate: (40deg);
         animation: fadeIn 600ms, scaleIn 600ms, turnSplatter2 600ms;
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
