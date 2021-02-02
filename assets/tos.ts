@@ -17,7 +17,7 @@ export default [
     {
         title: "NSFW",
         content:
-            "NSFW submissions must use the NSFW checkbox provided. Real and animated nudity is allowed but no 'Sex Acts' (anything pornographic) should be shown, or implied. No depictions of under 18's (real or animated). This includes 'Lolita' content where the character is visibly under the age of 18 no matter how old you state they are, as well as characters that are known to be under the age of 18.",
+            "NSFW submissions must use the NSFW checkbox provided. Everything meant to invoke sexual arousal is considered NSFW. Real and animated nudity is allowed but no 'Sex Acts' (anything pornographic) should be shown or implied. No depictions of under 18's (real or animated). This includes 'Lolita' content where the character is visibly under the age of 18 no matter how old you state they are, as well as characters that are known to be under the age of 18.",
     },
     {
         title: "Account termination",
