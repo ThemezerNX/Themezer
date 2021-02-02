@@ -14,11 +14,10 @@
                 >
                     README.md</a
                 >
-                for instructions. If this is just too technical for you, you can
+                for instructions. If it's too technical for you, don't hesitate to
                 <a href="https://discord.gg/nnm8wyM" rel="noopener">
-                    join the Discord</a
-                >, ask for help in #submitting and one of the staff will do it
-                for you.
+                    join our Discord</a
+                > and ask for help in #submitting. One of the moderators will happily do it for you!
             </div>
             <v-flex class="d-flex justify-center my-3">
                 <v-btn
