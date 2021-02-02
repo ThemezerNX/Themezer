@@ -149,7 +149,7 @@
 
 <script>
 import Vue from 'vue'
-import rules from '@/assets/rules'
+import rules from '~/assets/lang/rules'
 import targetParser from '@/components/mixins/targetParser'
 import {deletePack, pack, updatePack} from '@/graphql/Pack.gql'
 import urlParser from '~/components/mixins/urlParser'

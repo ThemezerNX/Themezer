@@ -85,6 +85,7 @@ export default Vue.extend({
     mixins: [targetParser, filter],
     data() {
         return {
+            cookieBanner: true,
             type: 'packs',
             list: 'packList',
             unsupportedFilters: [],

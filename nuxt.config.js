@@ -1,5 +1,5 @@
-require('dotenv').config()
-const ImageminPlugin = require('imagemin-webpack-plugin').default
+require('dotenv').config();
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 export default {
     env: {
@@ -66,6 +66,10 @@ export default {
         },
         {
             src: '@/plugins/downloadFile',
+            mode: 'client'
+        },
+        {
+            src: '@/plugins/cookieBanner',
             mode: 'client'
         }
     ],

@@ -36,13 +36,13 @@
                     >Create an issue on GitHub</a
                     >.
                 </p>
-                <div>
+                <p>
                     What does the
                     <CertifiedBadge inline/>
                     badge mean? It means that the
                     nxtheme you download is updated automatically whenever there
                     are changes made to the layout or theme itself.
-                </div>
+                </p>
                 <p class="mt-4">
                     Need to restore your Themezer account?
                     <v-btn
@@ -54,15 +54,16 @@
                     </v-btn
                     >
                 </p>
+                <p>
+                    Themezer is in no way affiliated with Nintendo.
+                </p>
                 <hr class="mb-2"/>
-                <span class="pr-3"
-                >&copy; {{ new Date().getFullYear() }} Themezer</span
-                >
+                <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
                 <nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
-                <nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
-                <a href="https://status.themezer.net/" target="_blank"
-                >Status</a
-                >
+                <nuxt-link class="pr-3" to="/terms-of-service">Terms of Service</nuxt-link>
+                <nuxt-link class="pr-3" to="/privacy-policy">Privacy Policy</nuxt-link>
+                <nuxt-link class="pr-3" to="/cookie-policy">Cookie Policy</nuxt-link>
+                <a href="https://status.themezer.net/" target="_blank">Status</a>
             </v-card-text>
         </v-card>
         <v-dialog v-model="restoreDialog" class="mx-auto" max-width="800">

@@ -7,7 +7,13 @@ export default [
     {
         title: "Copyright",
         content:
-            "Content uploaded to Themezer must respect copyright. If you believe content on themezer infringes copyright and you are the copyright holder or are authorized to act on the copyright owner's behalf, (for now) contact Migush#4096 on Discord.",
+            "Content uploaded to Themezer must respect copyright. If you believe content on themezer infringes copyright and you are the copyright holder or are authorized to act on the copyright owner's behalf, contact one of our moderators:",
+        list: [
+            {
+                title: "Contact a moderator",
+                title_to: "/contact",
+            },
+        ],
     },
     {
         title: "Abuse",

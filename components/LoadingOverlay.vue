@@ -32,8 +32,10 @@
     </v-fade-transition>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
     name: 'LoadingOverlay',
     props: {
         loading: {
@@ -57,7 +59,7 @@ export default {
             default: true
         }
     }
-}
+})
 </script>
 
 <style lang="scss" scoped>

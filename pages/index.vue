@@ -13,7 +13,7 @@
                         contain
                         height="200"
                         src="/icon-256.png"
-                        style="filter: drop-shadow(1px 1px 0 #4a4a4a) drop-shadow(-1px 1px 0 #4a4a4a) drop-shadow(1px -1px 0 #4a4a4a) drop-shadow(-1px -1px 0 #4a4a4a);"
+                        style="filter: drop-shadow(1px 1px 0 #272727) drop-shadow(-1px 1px 0 #272727) drop-shadow(1px -1px 0 #272727) drop-shadow(-1px -1px 0 #272727);"
                         width="auto"
                     />
                     <h1 v-if="$auth.loggedIn" class="text-center">

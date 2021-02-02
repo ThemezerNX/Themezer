@@ -395,7 +395,7 @@
 
 <script>
 import Vue from 'vue'
-import rules from '@/assets/rules'
+import rules from '~/assets/lang/rules'
 import {creator, me, updateProfile} from '@/graphql/Creator.gql'
 import {rowPackList} from '@/graphql/Pack.gql'
 import {rowThemeList} from '@/graphql/Theme.gql'

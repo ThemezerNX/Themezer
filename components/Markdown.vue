@@ -2,17 +2,19 @@
     <div v-html="compiledMarkdown"></div>
 </template>
 
-<script>
-import marked from 'marked'
+<script lang="ts">
+import Vue from "vue";
 
-export default {
+const marked = require("marked");
+
+export default Vue.extend({
     props: {
-        source: {default: '', type: String}
+        source: {default: "", type: String},
     },
     computed: {
         compiledMarkdown() {
-            return marked(this.source, {breaks: true})
-        }
-    }
-}
+            return marked(this.source, {breaks: true});
+        },
+    },
+});
 </script>

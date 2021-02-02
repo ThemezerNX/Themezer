@@ -107,88 +107,90 @@
     </v-sheet>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
     data() {
         return {
             activeBackground: 0,
             backgrounds: [
                 {
-                    clear: true
+                    clear: true,
                 },
                 {
-                    name: 'Breath of the Wild Forest',
-                    url: 'Games/Breath_of_the_Wild_Forest.jpg'
+                    name: "Breath of the Wild Forest",
+                    url: "Games/Breath_of_the_Wild_Forest.jpg",
                 },
                 {
-                    name: 'Skyrim Mountains',
-                    url: 'Games/Skyrim_Mountains.jpg'
+                    name: "Skyrim Mountains",
+                    url: "Games/Skyrim_Mountains.jpg",
                 },
                 {
                     name: "Assassin's Creed Odyssey",
-                    url: 'Games/Assassins_Creed_Odyssey.jpg'
+                    url: "Games/Assassins_Creed_Odyssey.jpg",
                 },
                 {
-                    name: 'Far Cry 5',
-                    url: 'Games/Far_Cry_5.jpg'
+                    name: "Far Cry 5",
+                    url: "Games/Far_Cry_5.jpg",
                 },
                 {
-                    name: 'Breath of the Wild Art',
-                    url: 'Games/Zelda_BotW_Art.jpg'
+                    name: "Breath of the Wild Art",
+                    url: "Games/Zelda_BotW_Art.jpg",
                 },
                 {
-                    name: 'Animal Crossing New Horizons',
-                    url: 'Games/Animal_Crossing_New_Horizons.jpg'
+                    name: "Animal Crossing New Horizons",
+                    url: "Games/Animal_Crossing_New_Horizons.jpg",
                 },
                 {
-                    name: 'Sea',
-                    url: 'Nature/Sea.jpg'
+                    name: "Sea",
+                    url: "Nature/Sea.jpg",
                 },
                 {
-                    name: 'Spiderman Into the Spiderverse',
-                    url: 'Movies/Spiderman_Into_the_Spiderverse_-_2.jpg'
+                    name: "Spiderman Into the Spiderverse",
+                    url: "Movies/Spiderman_Into_the_Spiderverse_-_2.jpg",
                 },
                 {
-                    name: 'PewDiePie',
-                    url: 'PewDiePie.jpg'
+                    name: "PewDiePie",
+                    url: "PewDiePie.jpg",
                 },
                 {
-                    name: 'Darling in the Franxx',
-                    url: 'Movies/Darling_in_the_Franxx_-_1.jpg'
+                    name: "Darling in the Franxx",
+                    url: "Movies/Darling_in_the_Franxx_-_1.jpg",
                 },
                 {
-                    name: 'Nier Automata',
-                    url: 'Games/Nier_Automata_-_1.jpg'
+                    name: "Nier Automata",
+                    url: "Games/Nier_Automata_-_1.jpg",
                 },
                 {
-                    name: 'Persona 5 Ryuji',
-                    url: 'Games/Persona_5/Persona_5_Ryuji.jpg'
+                    name: "Persona 5 Ryuji",
+                    url: "Games/Persona_5/Persona_5_Ryuji.jpg",
                 },
                 {
-                    upload: true
-                }
-            ]
-        }
+                    upload: true,
+                },
+            ],
+        };
     },
     watch: {
-        activeBackground(selected) {
+        activeBackground(selected: any) {
             this.$store.commit(
-                'SET_BACKGROUND',
+                "SET_BACKGROUND",
                 this.backgrounds[selected].url
-                    ? encodeURI(this.backgrounds[selected].url)
-                    : null
-            )
-        }
+                    ? encodeURI(this.backgrounds[selected].url || "")
+                    : null,
+            );
+        },
     },
     methods: {
-        handleBackgroundUpload(input) {
+        handleBackgroundUpload(input: any) {
             if (input && input.target.files[0]) {
-                const imageUrl = URL.createObjectURL(input.target.files[0])
-                this.$store.commit('SET_BACKGROUND', imageUrl)
+                const imageUrl = URL.createObjectURL(input.target.files[0]);
+                this.$store.commit("SET_BACKGROUND", imageUrl);
             }
-        }
-    }
-}
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

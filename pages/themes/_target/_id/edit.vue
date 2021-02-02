@@ -224,7 +224,7 @@
 
 <script>
 import Vue from 'vue'
-import rules from '@/assets/rules'
+import rules from '~/assets/lang/rules'
 import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
 import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
 import allPacksDropdown from '@/components/mixins/allPacksDropdown'

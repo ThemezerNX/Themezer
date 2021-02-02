@@ -222,8 +222,8 @@
             </v-toolbar-items>
         </v-app-bar>
 
-        <img :src="require('~/assets/ink_splatters/550393.svg')" class="splatters-2"/>
-        <img :src="require('~/assets/ink_splatters/550391.svg')" class="splatters-1"/>
+        <img alt="" v-show="true" :src="require('~/assets/ink_splatter/550393.svg')" class="splatter splatter-2"/>
+        <img alt="" v-show="true" :src="require('~/assets/ink_splatter/550391.svg')" class="splatter splatter-1"/>
 
         <v-main>
             <nuxt/>
@@ -231,8 +231,7 @@
 
         <v-footer absolute app inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
-            <nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
-            <nuxt-link class="pr-3" to="/tos">Terms of Service</nuxt-link>
+            <nuxt-link class="pr-3" to="/about">About</nuxt-link>
             <a href="https://status.themezer.net/" target="_blank">Status</a>
         </v-footer>
         <v-dialog
@@ -390,7 +389,49 @@
                 </v-window>
             </v-card>
         </v-dialog>
+
         <Snackbar/>
+
+        <client-only>
+            <cookie-law>
+                <div slot-scope="props">
+                    <v-banner
+                        color="grey darken-4"
+                        elevation="0"
+                        rounded
+                        shaped
+                    >
+                        <v-icon
+                            slot="icon"
+                            color="warning"
+                            size="36"
+                        >
+                            mdi-cookie
+                        </v-icon>
+                        This website uses cookies to ensure you get the best experience.
+                        By continuing the use of this website you agree to our use of cookies.
+                        <template v-slot:actions="">
+                            <v-btn
+                                text
+                                color="primary"
+                                rounded
+                                to="/cookie-policy"
+                            >
+                                Cookie Policy
+                            </v-btn>
+                            <v-btn
+                                text
+                                color="primary"
+                                @click="props.accept"
+                                rounded
+                            >
+                                Dismiss
+                            </v-btn>
+                        </template>
+                    </v-banner>
+                </div>
+            </cookie-law>
+        </client-only>
     </v-app>
 </template>
 
@@ -400,7 +441,7 @@ import {randomPackIDs} from '@/graphql/Pack.gql'
 import {randomThemeIDs} from '@/graphql/Theme.gql'
 import {randomLayoutIDs} from '@/graphql/Layout.gql'
 import targets from '@/assets/targets'
-import tos from '@/assets/tos'
+import tos from '~/assets/lang/termsOfService'
 
 export default {
     data() {
@@ -470,6 +511,12 @@ export default {
                 },
                 {
                     icon: 'mdi-help-circle-outline',
+                    title: 'Installing Themes',
+                    href:
+                        'https://nh-server.github.io/switch-guide/extras/theming/#installing-a-theme'
+                },
+                {
+                    icon: 'mdi-help-circle-outline',
                     title: 'Creating Themes/Fonts',
                     href:
                         'https://nh-server.github.io/switch-guide/extras/theming/'
@@ -488,6 +535,11 @@ export default {
                     icon: 'mdi-information-outline',
                     title: 'About',
                     to: '/about'
+                },
+                {
+                    icon: 'mdi-timeline-clock-outline',
+                    title: 'Status',
+                    href: 'https://status.themezer.net/'
                 }
             ],
             randomMenuItems: [
@@ -867,26 +919,86 @@ html {
     }
 }
 
-.splatters-1 {
-    opacity: 0.9;
-    position: fixed;
-    min-height: 800px;
-    height: 120vh;
-    min-width: 100vw;
+.splatter {
+
     top: 0;
-    left: -20vw;
-    rotate: -70deg;
+    position: fixed;
+
+    &.splatter-1 {
+        opacity: 0;
+        animation: fadeIn 600ms, scaleIn 600ms, turnSplatter1 600ms;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 2100ms;
+
+        min-height: 800px;
+        height: 120vh;
+        min-width: 100vw;
+        left: -20vw;
+    }
+
+    &.splatter-2 {
+        opacity: 0;
+        animation: fadeIn 600ms, scaleIn 600ms, turnSplatter2 600ms;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 1600ms;
+
+        height: 120vh;
+        min-height: 800px;
+        min-width: 60vw;
+        right: -6vw;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 0.9;
+        }
+    }
+
+    @keyframes scaleIn {
+        0% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1.0);
+        }
+    }
+
+    @keyframes turnSplatter1 {
+        0% {
+            rotate: (-75deg);
+        }
+        100% {
+            rotate: (-70deg);
+        }
+    }
+
+    @keyframes turnSplatter2 {
+        0% {
+            rotate: (40deg);
+        }
+        100% {
+            rotate: (35deg);
+        }
+    }
+
 }
 
-.splatters-2 {
-    opacity: 0.9;
-    position: fixed;
-    height: 120vh;
-    min-height: 800px;
-    min-width: 60vw;
-    top: 0;
-    right: -6vw;
-    rotate: 35deg;
+// Cookie banner
+.Cookie > * {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.Cookie--base {
+    background: unset !important;
+    padding: unset !important;
 }
 
 </style>
