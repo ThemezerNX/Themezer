@@ -1,4 +1,5 @@
 # Themezer
+
 ![Deploy](https://github.com/ThemezerNX/Themezer/workflows/Deploy/badge.svg)
 
 > A customization site for Nintendo Switch Themes

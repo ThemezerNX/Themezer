@@ -1,15 +1,15 @@
 query createOverlayNXThemes($layout: Upload, $piece: Upload, $common: Upload) {
-	createOverlayNXThemes(layout: $layout, piece: $piece, common: $common) {
-		filename
-		data
-		mimetype
-	}
+    createOverlayNXThemes(layout: $layout, piece: $piece, common: $common) {
+        filename
+        data
+        mimetype
+    }
 }
 
 query createOverlay($blackImg: Upload!, $whiteImg: Upload!) {
-	createOverlay(blackImg: $blackImg, whiteImg: $whiteImg) {
+    createOverlay(blackImg: $blackImg, whiteImg: $whiteImg) {
         filename
-		data
-		mimetype
-	}
+        data
+        mimetype
+    }
 }

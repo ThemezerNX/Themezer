@@ -1,99 +1,99 @@
 query allCreators($target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
     layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
         creator {
-			id
-			display_name
-		}
+            id
+            display_name
+        }
     }
 }
 
 query layout($id: String!) {
-	layout(id: $id) {
-		id
-		uuid
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-			description
-			color
-			version
-		}
-		target
-		last_updated
-		baselayout
-		has_pieces
-		pieces {
-			name
-			values {
-				value
-				image
-				uuid
-				json
-			}
-		}
-		commonlayout
-		dl_count
-		like_count
-	}
+    layout(id: $id) {
+        id
+        uuid
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+            description
+            color
+            version
+        }
+        target
+        last_updated
+        baselayout
+        has_pieces
+        pieces {
+            name
+            values {
+                value
+                image
+                uuid
+                json
+            }
+        }
+        commonlayout
+        dl_count
+        like_count
+    }
 }
 
 query rowLayoutList($target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
-	layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
-		id
-		uuid
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-			color
-		}
-		target
-		last_updated
-	}
+    layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
+        id
+        uuid
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+            color
+        }
+        target
+        last_updated
+    }
 }
 
 
 query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!]) {
-	layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
-		id
-		uuid
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-			description
-			color
-			version
-		}
-		target
-		last_updated
-		dl_count
-		like_count
-	}
+    layoutList(target: $target, limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators) {
+        id
+        uuid
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+            description
+            color
+            version
+        }
+        target
+        last_updated
+        dl_count
+        like_count
+    }
 
-	pagination(hash: $hash) {
-		page
-		limit
-		page_count
-		item_count
-	}
+    pagination(hash: $hash) {
+        page
+        limit
+        page_count
+        item_count
+    }
 }
 
 query randomLayoutIDs($limit: Int) {
-	randomLayoutIDs(limit: $limit)
+    randomLayoutIDs(limit: $limit)
 }
 
 query downloadLayout($id: String!, $piece_uuids: [GUID!]) {
-	downloadLayout(id: $id, piece_uuids: $piece_uuids)
+    downloadLayout(id: $id, piece_uuids: $piece_uuids)
 }
 
 query downloadCommonLayout($id: String!) {
-	downloadCommonLayout(id: $id)
+    downloadCommonLayout(id: $id)
 }

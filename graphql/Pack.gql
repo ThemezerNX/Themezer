@@ -1,136 +1,136 @@
 query allCreators($nsfw: Boolean) {
     packList(nsfw: $nsfw) {
         creator {
-			id
-			display_name
-		}
+            id
+            display_name
+        }
     }
 }
 
 query allLayouts($nsfw: Boolean) {
     packList(nsfw: $nsfw) {
         themes {
-			id
-			layout {
-				id
-				details {
-					name
-				}
-			}
-		}
+            id
+            layout {
+                id
+                details {
+                    name
+                }
+            }
+        }
     }
 }
 
 query pack($id: String!) {
-	pack(id: $id) {
-		id
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-			description
-			version
-		}
-		last_updated
-		categories
-		dl_count
-		like_count
-		themes {
-			id
-			details {
-				name
-			}
-			layout {
-				id
-			}
-			categories
-			target
-			preview {
-				original
-				thumb
-			}
-		}
-	}
+    pack(id: $id) {
+        id
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+            description
+            version
+        }
+        last_updated
+        categories
+        dl_count
+        like_count
+        themes {
+            id
+            details {
+                name
+            }
+            layout {
+                id
+            }
+            categories
+            target
+            preview {
+                original
+                thumb
+            }
+        }
+    }
 }
 
 query rowPackList($limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
-	packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
-		id
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-		}
-		categories
-		last_updated
-		themes {
-			id
-			layout {
-				id
-			}
-			preview {
-				thumb
-			}
-		}
-	}
+    packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
+        id
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+        }
+        categories
+        last_updated
+        themes {
+            id
+            layout {
+                id
+            }
+            preview {
+                thumb
+            }
+        }
+    }
 }
 
 query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: String, $order: String, $creators: [String!], $layouts: [String!], $nsfw: Boolean) {
-	packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
-		id
-		creator {
-			id
-			display_name
-		}
-		details {
-			name
-			description
-			version
-		}
-		last_updated
-		categories
-		dl_count
-		like_count
-		themes {
-			id
-			layout {
-				id
-				details {
-					name
-				}
-			}
-			preview {
-				thumb
-			}
-		}
-	}
+    packList(limit: $limit, page: $page, query: $query, sort: $sort, order: $order, creators: $creators, layouts: $layouts, nsfw: $nsfw) {
+        id
+        creator {
+            id
+            display_name
+        }
+        details {
+            name
+            description
+            version
+        }
+        last_updated
+        categories
+        dl_count
+        like_count
+        themes {
+            id
+            layout {
+                id
+                details {
+                    name
+                }
+            }
+            preview {
+                thumb
+            }
+        }
+    }
 
-	pagination(hash: $hash) {
-		page
-		limit
-		page_count
-		item_count
-	}
+    pagination(hash: $hash) {
+        page
+        limit
+        page_count
+        item_count
+    }
 }
 
 query randomPackIDs($limit: Int) {
-	randomPackIDs(limit: $limit)
+    randomPackIDs(limit: $limit)
 }
 
 query downloadPack($id: String!) {
-	downloadPack(id: $id) {
-		filename
-		url
-		mimetype
-	}
+    downloadPack(id: $id) {
+        filename
+        url
+        mimetype
+    }
 }
 
 mutation deletePack($id: String!) {
-	deletePack(id: $id)
+    deletePack(id: $id)
 }
 
 mutation updatePack($id: String!, $name: String!, $description: String!, $version: String!) {

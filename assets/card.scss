@@ -1,46 +1,47 @@
 @import '~assets/variables.scss';
 
 .card {
-	height: 100%;
-	transform-origin: center top 0;
-	border-radius: 10px !important;
-	overflow: hidden;
-    background-color: #212121;
-    border-color: #212121;
+  height: 100%;
+  transform-origin: center top 0;
+  border-radius: 10px !important;
+  overflow: hidden;
+  background-color: #212121;
+  border-color: #212121;
 
-	.overlay-image {
-		transition: background-image 200ms;
-		background: #2d2d2d;
-	}
+  .overlay-image {
+    transition: background-image 200ms;
+    background: #2d2d2d;
+  }
 
-	@mixin dotting {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		max-width: fit-content;
-		padding: 0;
-		margin: 12px;
-	}
+  @mixin dotting {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-width: fit-content;
+    padding: 0;
+    margin: 12px;
+  }
 
-	.title {
-		@include dotting;
-		-webkit-line-clamp: 2;
-	}
+  .title {
+    @include dotting;
+    -webkit-line-clamp: 2;
+  }
 
-	.creator, .target {
-		@include dotting;
-		-webkit-line-clamp: 1;
-		margin-top: unset !important;
-	}
+  .creator, .target {
+    @include dotting;
+    -webkit-line-clamp: 1;
+    margin-top: unset !important;
+  }
 
-	.description {
-		@include dotting;
-		-webkit-line-clamp: 3;
-		max-width: fit-content;
-	}
+  .description {
+    @include dotting;
+    -webkit-line-clamp: 3;
+    max-width: fit-content;
+  }
 }
+
 .card.on-hover {
-	background: darken($themezer-primary, 15%) !important;
-	transform: translateY(-2px);
+  background: darken($themezer-primary, 15%) !important;
+  transform: translateY(-2px);
 }

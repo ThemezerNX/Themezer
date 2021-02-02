@@ -1,21 +1,37 @@
 {
-	"compilerOptions": {
-		"target": "es2020",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"lib": ["esnext", "esnext.asynciterable", "dom"],
-		"esModuleInterop": true,
-		"allowJs": false,
-		"sourceMap": true,
-		"strict": true,
-		"noEmit": true,
-		"experimentalDecorators": true,
-		"baseUrl": ".",
-		"paths": {
-			"~/*": ["./*"],
-			"@/*": ["./*"]
-		},
-		"types": ["@types/node", "@nuxt/types", "@nuxtjs/vuetify"]
-	},
-	"exclude": ["node_modules", ".nuxt", "dist"]
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": [
+            "esnext",
+            "esnext.asynciterable",
+            "dom"
+        ],
+        "esModuleInterop": true,
+        "allowJs": false,
+        "sourceMap": true,
+        "strict": true,
+        "noEmit": true,
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "~/*": [
+                "./*"
+            ],
+            "@/*": [
+                "./*"
+            ]
+        },
+        "types": [
+            "@types/node",
+            "@nuxt/types",
+            "@nuxtjs/vuetify"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        ".nuxt",
+        "dist"
+    ]
 }

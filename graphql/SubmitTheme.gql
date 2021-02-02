@@ -1,32 +1,32 @@
 mutation uploadSingleOrZip($file: Upload!) {
-	uploadSingleOrZip(file: $file) {
-		info {
-			ThemeName
-			Author
-			LayoutInfo
-		}
-		tmp
-		layout {
-			id
-			uuid
-			details {
-				name
-			}
-			has_commonlayout
-			target
-		}
-		used_pieces {
-			name
-			value {
-				value
-				uuid
-			}
-		}
-		target
-	}
+    uploadSingleOrZip(file: $file) {
+        info {
+            ThemeName
+            Author
+            LayoutInfo
+        }
+        tmp
+        layout {
+            id
+            uuid
+            details {
+                name
+            }
+            has_commonlayout
+            target
+        }
+        used_pieces {
+            name
+            value {
+                value
+                uuid
+            }
+        }
+        target
+    }
 }
 
 mutation submitThemes($files: [Upload!], $themes: [DetectedThemeInput!], $details: DetailsInput!, $type: String!) {
-	submitThemes(files: $files, themes: $themes, details: $details, type: $type)
+    submitThemes(files: $files, themes: $themes, details: $details, type: $type)
 }
 

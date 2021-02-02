@@ -1,24 +1,24 @@
 .screenshot_upload .v-input__control {
-    height: 100%;
+  height: 100%;
 }
 
 .screenshot_upload .v-input__slot {
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .screenshot_upload .v-text-field__slot label,
 .screenshot_upload .v-text-field__slot .v-file-input__text {
-    width: 100%;
-    max-width: unset;
-    text-align: center;
+  width: 100%;
+  max-width: unset;
+  text-align: center;
 }
 
 .screenshot_upload .v-text-field__slot .v-label {
-    display: contents;
-    position: unset;
+  display: contents;
+  position: unset;
 }
 
 .screenshot_upload .v-input__append-inner,
 .screenshot_upload .v-input__prepend-outer {
-    display: none;
+  display: none;
 }

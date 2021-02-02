@@ -1,59 +1,59 @@
 {
-	"iconsPath": "/",
-	"design": {
-		"ios": {
-			"pictureAspect": "backgroundAndMargin",
-			"backgroundColor": "#15171e",
-			"margin": "14%",
-			"assets": {
-				"ios6AndPriorIcons": false,
-				"ios7AndLaterIcons": true,
-				"precomposedIcons": false,
-				"declareOnlyDefaultIcon": true
-			}
-		},
-		"desktopBrowser": {
-			"design": "raw"
-		},
-		"windows": {
-			"pictureAspect": "whiteSilhouette",
-			"backgroundColor": "#b91d47",
-			"onConflict": "override",
-			"assets": {
-				"windows80Ie10Tile": false,
-				"windows10Ie11EdgeTiles": {
-					"small": false,
-					"medium": true,
-					"big": false,
-					"rectangle": false
-				}
-			}
-		},
-		"androidChrome": {
-			"pictureAspect": "shadow",
-			"themeColor": "#15171e",
-			"manifest": {
-				"name": "BFK",
-				"display": "standalone",
-				"orientation": "notSet",
-				"onConflict": "override",
-				"declared": true
-			},
-			"assets": {
-				"legacyIcon": false,
-				"lowResolutionIcons": false
-			}
-		},
-		"safariPinnedTab": {
-			"pictureAspect": "silhouette",
-			"themeColor": "#5bbad5"
-		}
-	},
-	"settings": {
-		"scalingAlgorithm": "Mitchell",
-		"errorOnImageTooSmall": false,
-		"readmeFile": false,
-		"htmlCodeFile": false,
-		"usePathAsIs": false
-	}
+    "iconsPath": "/",
+    "design": {
+        "ios": {
+            "pictureAspect": "backgroundAndMargin",
+            "backgroundColor": "#15171e",
+            "margin": "14%",
+            "assets": {
+                "ios6AndPriorIcons": false,
+                "ios7AndLaterIcons": true,
+                "precomposedIcons": false,
+                "declareOnlyDefaultIcon": true
+            }
+        },
+        "desktopBrowser": {
+            "design": "raw"
+        },
+        "windows": {
+            "pictureAspect": "whiteSilhouette",
+            "backgroundColor": "#b91d47",
+            "onConflict": "override",
+            "assets": {
+                "windows80Ie10Tile": false,
+                "windows10Ie11EdgeTiles": {
+                    "small": false,
+                    "medium": true,
+                    "big": false,
+                    "rectangle": false
+                }
+            }
+        },
+        "androidChrome": {
+            "pictureAspect": "shadow",
+            "themeColor": "#15171e",
+            "manifest": {
+                "name": "BFK",
+                "display": "standalone",
+                "orientation": "notSet",
+                "onConflict": "override",
+                "declared": true
+            },
+            "assets": {
+                "legacyIcon": false,
+                "lowResolutionIcons": false
+            }
+        },
+        "safariPinnedTab": {
+            "pictureAspect": "silhouette",
+            "themeColor": "#5bbad5"
+        }
+    },
+    "settings": {
+        "scalingAlgorithm": "Mitchell",
+        "errorOnImageTooSmall": false,
+        "readmeFile": false,
+        "htmlCodeFile": false,
+        "usePathAsIs": false
+    }
 }
