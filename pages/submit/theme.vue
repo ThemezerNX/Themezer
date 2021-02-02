@@ -5,60 +5,20 @@
                 Theme/Pack Submissions
             </h1>
             <div class="subtitle-1 box_text">
-                If Themezer doesn't recognize the layout, you should select it
-                in the dropdown. Make sure it is the exact same layout or else
-                you might lose some features! For more detailed instructions,
+                Via this form you can submit themes you have created.
+                If you're new to this, I urge you to
                 <v-btn
                     class="px-1"
                     color="primary"
                     rounded
                     style="height: 24px"
                     text
-                    @click="FAQDialog = true"
+                    @click="submitInfoDialog = true"
                 >read this.
                 </v-btn
                 >
-                <v-dialog v-model="FAQDialog" class="mx-auto" max-width="800">
-                    <v-card>
-                        <v-card-title
-                            class="title font-weight-regular justify-space-between"
-                        >
-                            <span>More info</span>
-                            <v-spacer></v-spacer>
-
-                            <v-btn icon rounded @click="FAQDialog = false">
-                                <v-icon>
-                                    mdi-close
-                                </v-icon>
-                            </v-btn>
-                        </v-card-title>
-
-                        <v-card-text>
-                            <h2 class="box_text mt-1">Screenshots</h2>
-                            <div class="subtitle-2 box_text font-weight-normal">
-                                Themezer requires a SCREENSHOT for every theme.
-                                Only the background image is NOT sufficient.
-                            </div>
-                        </v-card-text>
-
-                        <v-card-text>
-                            <h2 class="box_text mt-1">FAQ</h2>
-                            <template v-for="faq in FAQ">
-                                <h4
-                                    :key="faq.Q"
-                                    class="box_text font-italic mt-1"
-                                >
-                                    {{ faq.Q }}
-                                </h4>
-                                <div
-                                    :key="faq.A"
-                                    class="subtitle-2 box_text font-weight-light"
-                                >
-                                    {{ faq.A }}
-                                </div>
-                            </template>
-                        </v-card-text>
-                    </v-card>
+                <v-dialog v-model="submitInfoDialog" class="mx-auto" max-width="1000">
+                    <TextCard title="More Info" max-width="1000" :items="submitInfo"></TextCard>
                 </v-dialog>
             </div>
 
@@ -125,7 +85,104 @@
             <v-form ref="submitForm" v-model="submitValid">
                 <div v-if="detectedThemes">
                     <h2 class="box_text">
-                        2. Detected Data
+                        3. Pack Details
+                    </h2>
+                    <v-row class="ma-0">
+                        <v-col class="pa-2" cols="12">
+                            <v-radio-group
+                                v-model="selectedSubmitType"
+                                class="mt-0"
+                                mandatory
+                                row
+                            >
+                                <v-radio
+                                    v-for="type in submitTypes"
+                                    :key="type.id"
+                                    :disabled="
+										(type.id === 'pack' &&
+											detectedThemes.length === 1) ||
+											type.disabled
+									"
+                                    :label="type.label"
+                                    :value="type.id"
+                                    @change="clearSwitchSubmitType()"
+                                ></v-radio>
+                            </v-radio-group>
+                            <v-text-field
+                                v-if="selectedSubmitType === 'pack'"
+                                v-model="submitDetails.name"
+                                :rules="[
+									rules.required,
+									rules.name_length,
+									rules.utf8_only
+								]"
+                                counter="50"
+                                label="Pack Name*"
+                                maxlength="50"
+                                minlength="3"
+                                outlined
+                                prepend-icon="mdi-pencil-outline"
+                                rounded
+                                @change="forceUpdate++"
+                            ></v-text-field>
+                            <v-text-field
+                                v-if="selectedSubmitType === 'pack'"
+                                v-model="submitDetails.description"
+                                :rules="[
+									rules.required,
+									rules.description_length,
+									rules.utf8_only
+								]"
+                                counter="500"
+                                label="Pack Description*"
+                                maxlength="500"
+                                minlength="10"
+                                outlined
+                                prepend-icon="mdi-pencil-outline"
+                                rounded
+                                @change="forceUpdate++"
+                            ></v-text-field>
+                            <v-combobox
+                                v-if="detectedThemes.length > 1"
+                                v-model="packCategories"
+                                :items="
+									categories && categories.length > 0
+										? categories
+										: []
+								"
+                                :rules="[
+									rules.category_length,
+									rules.max_category_amount,
+									rules.utf8_only
+								]"
+                                allow-overflow
+                                chips
+                                deletable-chips
+                                label="Shared categories (this will replace the current set)"
+                                multiple
+                                outlined
+                                prepend-icon="mdi-shape-outline"
+                                rounded
+                                small-chips
+                            ></v-combobox>
+                            <v-text-field
+                                v-if="selectedSubmitType === 'pack'"
+                                v-model="submitDetails.version"
+                                :rules="[rules.required, rules.utf8_only]"
+                                counter="10"
+                                label="Pack version*"
+                                maxlength="10"
+                                outlined
+                                prepend-icon="mdi-update"
+                                rounded
+                                @change="forceUpdate++"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </div>
+                <div v-if="detectedThemes">
+                    <h2 class="box_text">
+                        3. Theme Details
                     </h2>
                     <div v-if="detectedThemes.length === 0">
                         Uhm something went wrong, please report this.
@@ -382,7 +439,7 @@
                                                     allow-overflow
                                                     chips
                                                     deletable-chips
-                                                    label="Categories* ([enter] for new category)"
+                                                    label="Categories* ([enter] to create)"
                                                     multiple
                                                     outlined
                                                     prepend-icon="mdi-shape-outline"
@@ -435,114 +492,19 @@
                             </template>
                         </v-col>
                     </v-row>
-                </div>
-                <div v-if="detectedThemes">
-                    <h2 class="box_text">
-                        3. Submission Details
-                    </h2>
-                    <v-row class="ma-0">
-                        <v-col class="pa-2" cols="12">
-                            <v-radio-group
-                                v-model="selectedSubmitType"
-                                class="mt-0"
-                                mandatory
-                                row
-                            >
-                                <v-radio
-                                    v-for="type in submitTypes"
-                                    :key="type.id"
-                                    :disabled="
-										(type.id === 'pack' &&
-											detectedThemes.length === 1) ||
-											type.disabled
-									"
-                                    :label="type.label"
-                                    :value="type.id"
-                                    @change="clearSwitchSubmitType()"
-                                ></v-radio>
-                            </v-radio-group>
-                            <v-text-field
-                                v-if="selectedSubmitType === 'pack'"
-                                v-model="submitDetails.name"
-                                :rules="[
-									rules.required,
-									rules.name_length,
-									rules.utf8_only
-								]"
-                                counter="50"
-                                label="Pack Name*"
-                                maxlength="50"
-                                minlength="3"
-                                outlined
-                                prepend-icon="mdi-pencil-outline"
-                                rounded
-                                @change="forceUpdate++"
-                            ></v-text-field>
-                            <v-text-field
-                                v-if="selectedSubmitType === 'pack'"
-                                v-model="submitDetails.description"
-                                :rules="[
-									rules.required,
-									rules.description_length,
-									rules.utf8_only
-								]"
-                                counter="500"
-                                label="Pack Description*"
-                                maxlength="500"
-                                minlength="10"
-                                outlined
-                                prepend-icon="mdi-pencil-outline"
-                                rounded
-                                @change="forceUpdate++"
-                            ></v-text-field>
-                            <v-combobox
-                                v-if="detectedThemes.length > 1"
-                                v-model="packCategories"
-                                :items="
-									categories && categories.length > 0
-										? categories
-										: []
-								"
-                                :rules="[
-									rules.category_length,
-									rules.max_category_amount,
-									rules.utf8_only
-								]"
-                                allow-overflow
-                                chips
-                                deletable-chips
-                                label="Shared categories (this will remove the current set)"
-                                multiple
-                                outlined
-                                prepend-icon="mdi-shape-outline"
-                                rounded
-                                small-chips
-                            ></v-combobox>
-                            <v-text-field
-                                v-if="selectedSubmitType === 'pack'"
-                                v-model="submitDetails.version"
-                                :rules="[rules.required, rules.utf8_only]"
-                                counter="10"
-                                label="Pack version*"
-                                maxlength="10"
-                                outlined
-                                prepend-icon="mdi-update"
-                                rounded
-                                @change="forceUpdate++"
-                            ></v-text-field>
-                            <v-btn
-                                :disabled="!submitValid"
-                                :loading="loading.submit"
-                                color="secondary"
-                                rounded
-                                type="submit"
-                                @click.prevent="submit()"
-                            >
-                                Submit
-                                <v-icon right>mdi-cube-send</v-icon>
-                            </v-btn>
-                        </v-col>
-                    </v-row>
+                    <v-flex class="d-flex justify-center my-3">
+                        <v-btn
+                            :disabled="!submitValid"
+                            :loading="loading.submit"
+                            color="secondary"
+                            rounded
+                            type="submit"
+                            @click.prevent="submit()"
+                        >
+                            Submit
+                            <v-icon right>mdi-cube-send</v-icon>
+                        </v-btn>
+                    </v-flex>
                 </div>
             </v-form>
             <v-dialog v-model="nsfwDialog" max-width="600" persistent>
@@ -590,8 +552,11 @@ import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import {submitThemes, uploadSingleOrZip} from '@/graphql/SubmitTheme.gql'
 import optionsString from '@/components/mixins/optionsString'
+import submitInfo from '~/assets/lang/submitInfo'
+import TextCard from "~/components/TextCard.vue";
 
 export default Vue.extend({
+    components: {TextCard},
     middleware: ['auth'],
     options: {
         auth: true
@@ -630,47 +595,10 @@ export default Vue.extend({
                     label: 'Separate Themes'
                 }
             ],
-            FAQ: [
-                {
-                    Q: 'I am not the original author of this theme/pack',
-                    A:
-                        'Unfortunately you may not submit it, because it will be linked to your account'
-                },
-                {
-                    Q: "I couldn't find the layout/I made the layout myself",
-                    A:
-                        'Consider uploading it to the Layouts GitHub repository or asking the original Creator to do so.'
-                },
-                {
-                    Q: 'I have modified another layout a bit',
-                    A:
-                        'Consider adding a customization option to the original in the Layouts GitHub repository.'
-                },
-                {
-                    Q: 'My layout differs a bit',
-                    A:
-                        'Try recreating your theme and see if it is fine after testing it on your Switch.'
-                },
-                {
-                    Q: 'It looks different',
-                    A:
-                        'Consider adding a customization option to the original in the Layouts GitHub repository.'
-                },
-                {
-                    Q: "I don't know how to 'GitHub'",
-                    A:
-                        'First read the instructions in the GitHub repository. If you are still unsure on how to contribute, ask someone else for help or Google it.'
-                },
-                {
-                    Q:
-                        "I am really sure don't want my theme to receive automatic updates",
-                    A:
-                        "Uhm... why not? It's frii. Anyway, feel free to submit it."
-                }
-            ],
+            submitInfo,
             nsfwDialog: false,
             nsfwDialogThemeNr: null,
-            FAQDialog: false,
+            submitInfoDialog: false,
             selectedType: null,
             uploadSingleOrZip: null,
             loading: {
