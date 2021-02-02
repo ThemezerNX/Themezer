@@ -1,1 +1,1 @@
-declare module 'object-hash'
+declare module "object-hash"

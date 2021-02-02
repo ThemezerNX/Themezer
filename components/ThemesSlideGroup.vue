@@ -84,30 +84,30 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '@/components/mixins/urlParser'
+import Vue from "vue";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
+        CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
     },
     mixins: [targetParser, urlParser],
     props: {
         items: {
             type: Array,
             required: true,
-            default: null
+            default: null,
         },
         showProps: {
             type: Array,
             required: false,
             default() {
-                return []
-            }
-        }
-    }
-})
+                return [];
+            },
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

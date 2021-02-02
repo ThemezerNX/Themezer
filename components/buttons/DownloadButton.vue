@@ -24,38 +24,38 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         tooltip: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         downloadFunction: {
             type: Function,
             required: false,
             default() {
                 return () => {
-                }
-            }
+                };
+            },
         },
         downloadHref: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         loading: {
             type: Boolean,
             required: false,
-            default: false
-        }
-    }
-})
+            default: false,
+        },
+    },
+});
 </script>

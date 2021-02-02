@@ -1,1 +1,1 @@
-declare module 'vuejs-paginate'
+declare module "vuejs-paginate"

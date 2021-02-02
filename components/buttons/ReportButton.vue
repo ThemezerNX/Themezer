@@ -107,26 +107,26 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {reportURL} from '@/graphql/Report.gql'
+import Vue from "vue";
+import {reportURL} from "@/graphql/Report.gql";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         type: {
             type: String,
             required: true,
-            default: null
+            default: null,
         },
         nsfw: {
             type: Boolean,
             required: false,
-            default: false
-        }
+            default: false,
+        },
     },
     data() {
         return {
@@ -134,8 +134,8 @@ export default Vue.extend({
             showLoginDialog: false,
             loading: false,
             hasReported: false,
-            reason: null
-        }
+            reason: null,
+        };
     },
     methods: {
         report() {
@@ -147,26 +147,26 @@ export default Vue.extend({
                         url: window.location.href,
                         type: this.type,
                         nsfw: this.nsfw,
-                        reason: this.reason
-                    }
+                        reason: this.reason,
+                    },
                 })
                 .then(() => {
-                    this.loading = false
-                    this.showDialog = false
+                    this.loading = false;
+                    this.showDialog = false;
                     this.hasReported = true
                     ;(this as any).$snackbar.message(
                         `${this.type.charAt(0).toUpperCase() +
-                        this.type.slice(1)} reported successfully!`
-                    )
+                        this.type.slice(1)} reported successfully!`,
+                    );
                 })
                 .catch((err: Error) => {
                     // eslint-disable-next-line no-console
                     console.error(err)
-                    ;(this as any).$snackbar.error(err)
-                })
-        }
-    }
-})
+                    ;(this as any).$snackbar.error(err);
+                });
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

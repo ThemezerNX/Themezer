@@ -29,7 +29,7 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'Contact'
+        const metaTitle = 'Terms Of Service'
 
         return {
             title: metaTitle,

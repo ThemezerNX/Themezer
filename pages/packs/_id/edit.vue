@@ -1,6 +1,6 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-        <LoadingOverlay :loading="!!$apollo.loading">
+        <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
             <v-sheet v-if="pack" class="pa-2 box_fill" no-gutters>
                 <h1 class="box_text">Edit Pack</h1>
                 <h2 class="box_text mt-0">

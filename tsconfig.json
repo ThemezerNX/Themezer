@@ -26,7 +26,8 @@
         "types": [
             "@types/node",
             "@nuxt/types",
-            "@nuxtjs/vuetify"
+            "@nuxtjs/vuetify",
+            "@nuxtjs/auth-next"
         ]
     },
     "exclude": [

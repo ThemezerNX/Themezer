@@ -15,17 +15,17 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         inline: {
             type: Boolean,
             required: false,
-            default: false
-        }
-    }
-})
+            default: false,
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

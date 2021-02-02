@@ -17,7 +17,7 @@
                 xl="10"
                 xs="12"
             >
-                <LoadingOverlay :loading="!!$apollo.loading">
+                <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
                             {{ itemList.pagination.item_count }}
@@ -31,11 +31,7 @@
                     </div>
 
                     <v-row
-                        v-if="
-							itemList &&
-								itemList.themeList &&
-								itemList.themeList.length > 0
-						"
+                        v-if="itemList && itemList.themeList && itemList.themeList.length > 0"
                     >
                         <v-col
                             v-for="theme in itemList.themeList"

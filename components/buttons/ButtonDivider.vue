@@ -25,22 +25,22 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         hideDividers: {
             type: Boolean,
             required: false,
-            default: false
+            default: false,
         },
         margin: {
             type: Boolean,
             required: false,
-            default: true
-        }
-    }
-})
+            default: true,
+        },
+    },
+});
 </script>
 
 <style lang="scss">

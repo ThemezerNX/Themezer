@@ -19,25 +19,25 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         to: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         loading: {
             type: Boolean,
             required: false,
-            default: false
-        }
-    }
-})
+            default: false,
+        },
+    },
+});
 </script>

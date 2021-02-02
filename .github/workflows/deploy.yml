@@ -1,25 +1,25 @@
 name: Deploy
 on:
-    push:
-        branches: ['master']
+  push:
+    branches: [ 'master' ]
 jobs:
-    Deploy:
-        runs-on: 'ubuntu-latest'
-        steps:
-            - name: Extract branch name
-              shell: bash
-              run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-              id: extract_branch
-            - name: Deploying...
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SSHHOST }}
-                  username: ${{ secrets.SSHUSERNAME }}
-                  password: ${{ secrets.SSHPASSWORD }}
-                  script: |
-                      cd /home/themezer/Themezer
-                      git reset --hard
-                      git pull
-                      yarn --production
-                      yarn run build
-                      pm2 reload /home/themezer/ecosystem.config.js --only Themezer
+  Deploy:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Deploying...
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSHHOST }}
+          username: ${{ secrets.SSHUSERNAME }}
+          password: ${{ secrets.SSHPASSWORD }}
+          script: |
+            cd /home/themezer/Themezer
+            git reset --hard
+            git pull
+            yarn --production
+            yarn run build
+            pm2 reload /home/themezer/ecosystem.config.js --only Themezer

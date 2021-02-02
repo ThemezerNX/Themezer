@@ -1,1 +1,1 @@
-declare module 'vue-linkify'
+declare module "vue-linkify"

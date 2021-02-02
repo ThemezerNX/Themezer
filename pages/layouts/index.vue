@@ -16,7 +16,7 @@ export default Vue.extend({
     },
     head() {
         const metaTitle = 'Layouts'
-        const metaDesc = 'All Layouts on Themezer'
+        const metaDesc = 'Discover unique layouts to style menus to your hearts content!'
         const metaImg = null
 
         return {

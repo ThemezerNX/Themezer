@@ -100,42 +100,42 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import urlParser from '@/components/mixins/urlParser'
-import targetParser from '@/components/mixins/targetParser'
+import Vue from "vue";
+import urlParser from "@/components/mixins/urlParser";
+import targetParser from "@/components/mixins/targetParser";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
+        CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
     },
     mixins: [urlParser, targetParser],
     props: {
         item: {
             type: Object,
             required: true,
-            default: null
+            default: null,
         },
         type: {
             type: String,
-            required: true
+            required: true,
         },
         showProps: {
             type: Array,
             required: false,
             default() {
-                return []
-            }
-        }
+                return [];
+            },
+        },
     },
     computed: {
         imgSrc(): String {
-            if (this.type === 'layouts')
-                return `${process.env.API_ENDPOINT}cdn/layouts/${this.item.uuid}/overlay.png`
-            else if (this.type === 'themes') return this.item.preview.thumb
-            else return ''
-        }
-    }
-})
+            if (this.type === "layouts")
+                return `${process.env.API_ENDPOINT}cdn/layouts/${this.item.uuid}/overlay.png`;
+            else if (this.type === "themes") return this.item.preview.thumb;
+            else return "";
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

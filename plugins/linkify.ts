@@ -1,4 +1,4 @@
-import Vue from 'vue'
-import linkify from 'vue-linkify'
+import Vue from "vue";
+import linkify from "vue-linkify";
 
-Vue.directive('linkified', linkify)
+Vue.directive("linkified", linkify);

@@ -20,22 +20,22 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         type: {
             type: String,
             required: true,
-            default: null
-        }
-    }
-})
+            default: null,
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

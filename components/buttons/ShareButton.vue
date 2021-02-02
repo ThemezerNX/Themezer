@@ -30,88 +30,88 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         tooltip: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         type: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         name: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         creator: {
             type: String,
             required: false,
-            default: undefined
-        }
+            default: undefined,
+        },
     },
     data() {
         return {
             copyLinkSuccess: false,
-            tooltipActive: false
-        }
+            tooltipActive: false,
+        };
     },
     methods: {
         async share() {
             const data = {
-                title: this.type ? `Themezer ${this.type}` : 'Themezer item',
+                title: this.type ? `Themezer ${this.type}` : "Themezer item",
                 text: this.name
-                    ? 'Check out ' +
-                    (this.type ? `this ${this.type} ` : '') +
+                    ? "Check out " +
+                    (this.type ? `this ${this.type} ` : "") +
                     `'${this.name}'` +
-                    (this.creator ? ` by ${this.creator}` : '') +
+                    (this.creator ? ` by ${this.creator}` : "") +
                     ` on Themezer!`
                     : undefined,
-                url: window.location.href
-            }
-            const navigator: any = window.navigator
+                url: window.location.href,
+            };
+            const navigator: any = window.navigator;
             if (navigator.share) {
                 try {
-                    await navigator.share(data)
+                    await navigator.share(data);
                 } catch (err) {
                     // eslint-disable-next-line no-console
-                    console.error(err)
-                    this.copyLink()
+                    console.error(err);
+                    this.copyLink();
                 }
             } else {
-                this.copyLink()
+                this.copyLink();
             }
         },
         copyLink() {
             navigator.clipboard
                 .writeText(window.location.href)
                 .then(() => {
-                    this.tooltipActive = false
-                    this.copyLinkSuccess = true
+                    this.tooltipActive = false;
+                    this.copyLinkSuccess = true;
                     setTimeout(() => {
-                        this.copyLinkSuccess = false
-                    }, 2000)
+                        this.copyLinkSuccess = false;
+                    }, 2000);
                 })
                 .catch((err) => {
                     // eslint-disable-next-line no-console
                     console.error(err)
                     ;(this as any).$snackbar.error(
-                        'Something went wrong, unable to copy'
-                    )
-                })
-        }
-    }
-})
+                        "Something went wrong, unable to copy",
+                    );
+                });
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

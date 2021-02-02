@@ -27,42 +27,42 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '@/components/mixins/urlParser'
+import Vue from "vue";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
 
 export default Vue.extend({
     components: {
-        ItemCard: () => import('@/components/ItemCard.vue')
+        ItemCard: () => import("@/components/ItemCard.vue"),
     },
     mixins: [targetParser, urlParser],
     props: {
         type: {
             type: String,
-            required: true
+            required: true,
         },
         moreUrl: {
             type: String,
             required: false,
-            default: null
+            default: null,
         },
         limit: {
             type: Number,
             required: false,
-            default: 12
+            default: 12,
         },
         items: {
             type: Array,
             required: true,
-            default: null
+            default: null,
         },
         showProps: {
             type: Array,
             required: false,
             default() {
-                return []
-            }
-        }
-    }
-})
+                return [];
+            },
+        },
+    },
+});
 </script>

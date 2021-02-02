@@ -1,7 +1,7 @@
 {
     "name": "themezer_website",
     "version": "1.0.0",
-    "description": "A site for Nintendo Switch Themes and Layouts",
+    "description": "A site for sharing themes, theme packs and layouts for your Nintendo Switch. Discover hundreds of themes based on games, movies, anime, art, nature and much more!",
     "author": "Migushthe2nd <Migushthe2nd@users.noreply.github.com>",
     "private": false,
     "license": "GPL-3.0",
@@ -18,7 +18,7 @@
         "@nuxt/typescript-build": "^0.6.0",
         "@nuxt/typescript-runtime": "^1.0.0",
         "@nuxtjs/apollo": "^4.0.0-rc19",
-        "@nuxtjs/auth-next": "^5.0.0-1595976864.509d9d6",
+        "@nuxtjs/auth-next": "5.0.0-1611574754.9020f2a",
         "@nuxtjs/axios": "^5.11.0",
         "@nuxtjs/dotenv": "^1.4.0",
         "@nuxtjs/gtm": "^2.3.0",
@@ -43,6 +43,7 @@
         "vue": "^2.6.12",
         "vue-cookie-law": "^1.13.3",
         "vue-linkify": "^1.0.1",
+        "vue-no-ssr": "^1.1.1",
         "vuejs-paginate": "^2.1.0"
     },
     "devDependencies": {
@@ -51,7 +52,6 @@
         "@nuxtjs/eslint-module": "^1.0.0",
         "babel-eslint": "^10.0.1",
         "dotenv": "^8.2.0",
-        "eslint": "^6.1.0",
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-nuxt": ">=0.4.2",
         "eslint-plugin-prettier": "^3.1.2",

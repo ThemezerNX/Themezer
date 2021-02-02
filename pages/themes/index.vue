@@ -16,7 +16,7 @@ export default Vue.extend({
     },
     head() {
         const metaTitle = 'Themes'
-        const metaDesc = 'All Themes on Themezer'
+        const metaDesc = 'Discover amazing themes and combine them to your liking!'
         const metaImg = null
 
         return {

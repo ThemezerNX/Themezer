@@ -9,7 +9,7 @@
                 />
             </v-col>
             <v-col ref="top" cols="12" md="9" sm="8" xl="10" xs="12">
-                <LoadingOverlay :loading="!!$apollo.loading">
+                <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
                             {{ itemList.pagination.item_count }}
@@ -130,7 +130,7 @@ export default Vue.extend({
                 } | Packs`
                 : `Packs`
 
-        const metaDesc = 'Packs on Themezer'
+        const metaDesc = 'Discover amazing theme packs to give every menu a similar look!'
 
         const metaImg = null
 

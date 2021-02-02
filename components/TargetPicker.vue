@@ -65,18 +65,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import targets from '@/assets/targets'
+import Vue from "vue";
+import targets from "@/assets/targets";
 
 export default Vue.extend({
     data() {
         return {
             targets: targets.find(
-                (type) => type.name === this.$parent.$data.type
-            )
-        }
-    }
-})
+                (type) => type.name === this.$parent.$data.type,
+            ),
+        };
+    },
+});
 </script>
 
 <style lang="scss" scoped>

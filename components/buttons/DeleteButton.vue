@@ -60,43 +60,43 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         icon: {
             type: String,
             required: false,
-            default: undefined
+            default: undefined,
         },
         type: {
             type: String,
-            required: true
+            required: true,
         },
         query: {
             type: Object,
-            required: true
+            required: true,
         },
         id: {
             type: String,
-            required: true
+            required: true,
         },
         goBack: {
             type: Boolean,
             required: false,
-            default: false
+            default: false,
         },
         returnUrl: {
             type: String,
             required: false,
-            default: '/'
-        }
+            default: "/",
+        },
     },
     data() {
         return {
             showDialog: false,
-            loading: false
-        }
+            loading: false,
+        };
     },
     methods: {
         del() {
@@ -105,32 +105,32 @@ export default Vue.extend({
                 .mutate({
                     mutation: this.query,
                     variables: {
-                        id: this.id
-                    }
+                        id: this.id,
+                    },
                 })
                 .then((res: any) => {
-                    this.loading = false
+                    this.loading = false;
                     this.showDialog = false
                     ;(this as any).$snackbar.message(
                         `${this.type.charAt(0).toUpperCase() +
-                        this.type.slice(1)} deleted successfully!`
-                    )
+                        this.type.slice(1)} deleted successfully!`,
+                    );
 
                     if (this.goBack && !res?.data?.deleteTheme) {
-                        this.$router.back()
+                        this.$router.back();
                     } else {
                         this.$router.push(
-                            res?.data?.deleteTheme || this.returnUrl
-                        )
+                            res?.data?.deleteTheme || this.returnUrl,
+                        );
                     }
                 })
                 .catch((err: any) => {
                     this.loading = false
-                    ;(this as any).$snackbar.error(err)
-                })
-        }
-    }
-})
+                    ;(this as any).$snackbar.error(err);
+                });
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>

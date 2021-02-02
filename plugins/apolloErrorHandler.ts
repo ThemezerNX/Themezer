@@ -1,3 +1,3 @@
 export default ({graphQLErrors}: any, {error}: any) => {
-    error(graphQLErrors[0])
+    error(graphQLErrors[0]);
 }

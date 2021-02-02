@@ -65,24 +65,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         id: {
             type: String,
-            required: true
+            required: true,
         },
         type: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
     data() {
         return {
             showTooltip: false,
-            show: false
-        }
-    }
-})
+            show: false,
+        };
+    },
+});
 </script>

@@ -202,48 +202,48 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     props: {
         unsupportedFilters: {
             type: Array,
             required: true,
-            default: null
-        }
+            default: null,
+        },
     },
     data() {
         return {
             sortOptions: [
                 {
-                    title: 'Downloads',
-                    id: 'downloads',
-                    icon: 'mdi-download-outline'
+                    title: "Downloads",
+                    id: "downloads",
+                    icon: "mdi-download-outline",
                 },
                 {
-                    title: 'Likes',
-                    id: 'likes',
-                    icon: 'mdi-heart'
+                    title: "Likes",
+                    id: "likes",
+                    icon: "mdi-heart",
                 },
                 {
-                    title: 'Updated',
-                    id: 'updated',
-                    icon: 'mdi-calendar-edit'
+                    title: "Updated",
+                    id: "updated",
+                    icon: "mdi-calendar-edit",
                 },
                 {
-                    title: 'Added',
-                    id: 'id',
-                    icon: 'mdi-calendar-clock'
-                }
+                    title: "Added",
+                    id: "id",
+                    icon: "mdi-calendar-clock",
+                },
             ],
             loading: {
                 allCreators: false,
-                allLayouts: false
+                allLayouts: false,
             },
             allCreators: null,
             allLayouts: null,
             // Search with
-            query: '',
+            query: "",
             typingQueryTimer: null,
             focussed: false,
             searchHover: false,
@@ -253,69 +253,69 @@ export default Vue.extend({
             typingWithLayoutsTimer: null,
             // Filters
             onlybyme: false,
-            nsfw: false
-        }
+            nsfw: false,
+        };
     },
     computed: {
         currentSort(): string {
             return this.$route.query.sort
                 ? (this.$route.query.sort as string)
-                : 'downloads'
+                : "downloads";
         },
         currentOrder(): string {
             return this.$route.query.order
                 ? (this.$route.query.order as string)
-                : 'desc'
+                : "desc";
         },
         nextSortOrder(): string | null {
-            if (this.currentOrder === 'asc') {
-                return 'desc'
+            if (this.currentOrder === "asc") {
+                return "desc";
             } else {
-                return 'asc'
+                return "asc";
             }
         },
         currentCreators(): Array<string> | undefined {
             return this.$route.query.creators
-                ? (this.$route.query.creators as string).split(',')
-                : undefined
+                ? (this.$route.query.creators as string).split(",")
+                : undefined;
         },
         currentLayouts(): Array<string> | undefined {
             return this.$route.query.layouts
-                ? (this.$route.query.layouts as string).split(',')
-                : undefined
-        }
+                ? (this.$route.query.layouts as string).split(",")
+                : undefined;
+        },
     },
     watch: {
         nsfw(n) {
-            this.$parent.$data.nsfw = n
+            this.$parent.$data.nsfw = n;
         },
         query(n) {
-            clearTimeout(this.$data.typingQueryTimer)
+            clearTimeout(this.$data.typingQueryTimer);
             this.$data.typingQueryTimer = setTimeout(() => {
-                const query = Object.assign({}, this.$route.query)
-                delete query.page
-                if (n === '') delete query.query
-                else query.query = n
+                const query = Object.assign({}, this.$route.query);
+                delete query.page;
+                if (n === "") delete query.query;
+                else query.query = n;
                 this.$router.push({
-                    query
-                })
-            }, 400)
+                    query,
+                });
+            }, 400);
         },
         withCreators(n, o) {
             if (
                 (this.$data.allCreators || this.$data.loading.allCreators) &&
                 n.length !== o.length
             ) {
-                clearTimeout(this.$data.typingWithCreatorsTimer)
+                clearTimeout(this.$data.typingWithCreatorsTimer);
                 this.$data.typingWithCreatorsTimer = setTimeout(() => {
-                    const query = Object.assign({}, this.$route.query)
-                    delete query.page
-                    if (n.length === 0) delete query.creators
-                    else query.creators = n.join(',')
+                    const query = Object.assign({}, this.$route.query);
+                    delete query.page;
+                    if (n.length === 0) delete query.creators;
+                    else query.creators = n.join(",");
                     this.$router.push({
-                        query
-                    })
-                }, 400)
+                        query,
+                    });
+                }, 400);
             }
         },
         withLayouts(n, o) {
@@ -323,38 +323,38 @@ export default Vue.extend({
                 (this.$data.allLayouts || this.$data.loading.allLayouts) &&
                 n.length !== o.length
             ) {
-                clearTimeout(this.$data.typingWithLayoutsTimer)
+                clearTimeout(this.$data.typingWithLayoutsTimer);
                 this.$data.typingWithLayoutsTimer = setTimeout(() => {
-                    const query = Object.assign({}, this.$route.query)
-                    delete query.page
-                    if (n.length === 0) delete query.layouts
-                    else query.layouts = n.join(',')
+                    const query = Object.assign({}, this.$route.query);
+                    delete query.page;
+                    if (n.length === 0) delete query.layouts;
+                    else query.layouts = n.join(",");
                     this.$router.push({
-                        query
-                    })
-                }, 400)
+                        query,
+                    });
+                }, 400);
             }
         },
         currentCreators(n) {
             if (!n) {
-                this.withCreators = []
+                this.withCreators = [];
             }
         },
         currentLayouts(n) {
             if (!n) {
-                this.withLayouts = []
+                this.withLayouts = [];
             }
-        }
+        },
     },
     mounted() {
-        this.$data.query = this.$route.query.query || ''
+        this.$data.query = this.$route.query.query || "";
         if ((this.$parent as any).currentCreators) {
-            this.$data.withCreators = (this.$parent as any).currentCreators
-            this.getParentAllCreators()
+            this.$data.withCreators = (this.$parent as any).currentCreators;
+            this.getParentAllCreators();
         }
         if ((this.$parent as any).currentLayouts) {
-            this.$data.withLayouts = (this.$parent as any).currentLayouts
-            this.getParentAllLayouts()
+            this.$data.withLayouts = (this.$parent as any).currentLayouts;
+            this.getParentAllLayouts();
         }
     },
     methods: {
@@ -365,49 +365,49 @@ export default Vue.extend({
                     .map((item) => {
                         return {
                             text: item.creator.display_name,
-                            value: item.creator.id
-                        }
+                            value: item.creator.id,
+                        };
                     })
                     .sort((a, b) =>
-                        a.text.toLowerCase().localeCompare(b.text.toLowerCase())
-                    )
-                this.$data.loading.allCreators = false
-            })
+                        a.text.toLowerCase().localeCompare(b.text.toLowerCase()),
+                    );
+                this.$data.loading.allCreators = false;
+            });
         },
         getParentAllLayouts() {
             this.$data.loading.allLayouts = true
             ;(this.$parent as any).getAllLayouts().then((res: Array<any>) => {
-                const all: Array<any> = []
-                if (this.$parent.$data.type === 'themes') {
+                const all: Array<any> = [];
+                if (this.$parent.$data.type === "themes") {
                     res.forEach((item) => {
                         if (item.layout) {
                             all.push({
                                 text: item.layout.details.name,
-                                value: item.layout.id
-                            })
+                                value: item.layout.id,
+                            });
                         }
-                    })
+                    });
                 } else {
                     res.forEach((pack) => {
                         pack.themes.forEach((theme: any) => {
                             if (theme.layout)
                                 all.push({
                                     text: theme.layout.details.name,
-                                    value: theme.layout.id
-                                })
-                        })
-                    })
+                                    value: theme.layout.id,
+                                });
+                        });
+                    });
                 }
 
                 this.$data.allLayouts = all.sort((a, b) =>
-                    a.text.toLowerCase().localeCompare(b.text.toLowerCase())
-                )
+                    a.text.toLowerCase().localeCompare(b.text.toLowerCase()),
+                );
 
-                this.$data.loading.allLayouts = false
-            })
-        }
-    }
-})
+                this.$data.loading.allLayouts = false;
+            });
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>
