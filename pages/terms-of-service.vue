@@ -7,19 +7,20 @@
 <script lang="ts">
 import Vue from "vue";
 import items from "~/assets/lang/termsOfService";
-import TextCard from "~/components/TextCard";
+import TextCard from "~/components/TextCard.vue";
 
+const title = "Terms of Service";
 export default Vue.extend({
     components: {TextCard},
     data() {
         return {
-            title: "Terms of Service",
+            title,
             subtitle: null,
             items,
         };
     },
     head() {
-        const metaTitle = this.title;
+        const metaTitle = title;
 
         return {
             title: metaTitle,

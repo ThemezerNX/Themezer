@@ -9,17 +9,18 @@ import Vue from "vue";
 import items from "~/assets/lang/privacyPolicy";
 import TextCard from "~/components/TextCard.vue";
 
+const title = "Privacy Policy";
 export default Vue.extend({
     components: {TextCard},
     data() {
         return {
-            title: "Privacy Policy",
+            title,
             subtitle: null,
             items,
         };
     },
     head() {
-        const metaTitle = this.title;
+        const metaTitle = title;
 
         return {
             title: metaTitle,

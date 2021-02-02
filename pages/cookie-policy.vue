@@ -7,19 +7,20 @@
 <script lang="ts">
 import Vue from "vue";
 import items from "~/assets/lang/cookiePolicy";
-import TextCard from "~/components/TextCard";
+import TextCard from "~/components/TextCard.vue";
 
+const title = "Cookie Policy";
 export default Vue.extend({
     components: {TextCard},
     data() {
         return {
-            title: "Cookie Policy",
+            title,
             subtitle: null,
             items,
         };
     },
     head() {
-        const metaTitle = this.title;
+        const metaTitle = title;
 
         return {
             title: metaTitle,
