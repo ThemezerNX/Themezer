@@ -117,6 +117,9 @@ export default {
             lang: 'en',
             theme_color: '#0ab379',
             background_color: '#121212',
+        },
+        icon: {
+            source: '~/static/icon-pwa.png',
         }
     },
 
