@@ -7,19 +7,11 @@
               src="https://res.cloudinary.com/rebelwalls/image/upload/b_black,c_fill,f_auto,fl_progressive,h_533,q_auto,w_800/v1479371023/article/R10961_image1"
             /> -->
             <v-layout column justify-center>
-                <v-container class="pt-0" fluid style="height: 100%;">
-                    <v-img
-                        class="d-block my-1"
-                        contain
-                        height="200"
-                        src="/icon-256.png"
-                        style="filter: drop-shadow(1px 1px 0 #272727) drop-shadow(-1px 1px 0 #272727) drop-shadow(1px -1px 0 #272727) drop-shadow(-1px -1px 0 #272727);"
-                        width="auto"
-                    />
-                    <h1 v-if="$auth.loggedIn" class="text-center">
+                <v-container fluid style="height: 100%;">
+                    <h1 v-if="$auth.loggedIn" class="text-center pt-4 pb-3">
                         Welcome back {{ $auth.user.username }}!
                     </h1>
-                    <h1 v-else class="text-center">
+                    <h1 v-else class="text-center pt-4 pb-3">
                         Welcome to Themezer!
                     </h1>
                     <v-row
