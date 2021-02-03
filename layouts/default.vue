@@ -166,7 +166,7 @@
                     <v-img
                         class="mr-4"
                         contain
-                        src="/icon-filled-64.png"
+                        src="/icon-64.png"
                         style="border-radius: 5px;"
                         width="32"
                     />
@@ -923,6 +923,7 @@ html {
 
     top: 0;
     position: fixed;
+    filter: blur(9px);
 
     &.splatter-1 {
         opacity: 0;
