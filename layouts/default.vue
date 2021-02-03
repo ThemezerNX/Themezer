@@ -745,7 +745,7 @@ html {
 }
 
 .row {
-    margin: 0 -12px;
+    margin: 0 -12px !important;
 }
 
 .page-enter,
