@@ -4,7 +4,7 @@
         "ios": {
             "pictureAspect": "backgroundAndMargin",
             "backgroundColor": "#15171e",
-            "margin": "14%",
+            "margin": "0%",
             "assets": {
                 "ios6AndPriorIcons": false,
                 "ios7AndLaterIcons": true,
@@ -33,7 +33,7 @@
             "pictureAspect": "shadow",
             "themeColor": "#15171e",
             "manifest": {
-                "name": "BFK",
+                "name": "Themezer",
                 "display": "standalone",
                 "orientation": "notSet",
                 "onConflict": "override",

@@ -39,7 +39,7 @@ export default {
                 hid: 'og:image',
                 name: 'og:image',
                 property: 'og:image',
-                content: '/icon-filled-128.png'
+                content: '/icon-128.png'
             }
         ]
     },
@@ -79,12 +79,6 @@ export default {
     modules: [
         '@nuxtjs/axios',
         '@nuxtjs/apollo',
-        [
-            'nuxt-rfg-icon',
-            {
-                masterPicture: 'static/icon-filled.png'
-            }
-        ],
         '@nuxtjs/pwa',
         '@nuxtjs/dotenv',
         '@nuxtjs/redirect-module',
@@ -122,7 +116,7 @@ export default {
             description: process.env.npm_package_description || '',
             lang: 'en',
             theme_color: '#0ab379',
-            background_color: '#121212'
+            background_color: '#121212',
         }
     },
 

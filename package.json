@@ -7,11 +7,9 @@
     "license": "GPL-3.0",
     "scripts": {
         "dev": "nuxt-ts",
-        "build": "rimraf static/icons && nuxt-ts build",
+        "build": "nuxt-ts build",
         "start": "nuxt-ts start",
-        "generate": "yarn run build --target static && nuxt export",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-        "lint-fix": "eslint --ext .js,.vue --ignore-path .gitignore --ignore-path .eslintignore . --fix"
+        "generate": "yarn run build --target static && nuxt export"
     },
     "dependencies": {
         "@mdi/font": "^5.3.45",
@@ -36,7 +34,6 @@
         "minisearch": "^2.3.1",
         "nested-object-assign": "^1.0.3",
         "nuxt": "^2.0.0",
-        "nuxt-rfg-icon": "^0.6.4",
         "object-hash": "^2.0.3",
         "remove-markdown": "^0.3.0",
         "rxjs": "^6.6.0",
