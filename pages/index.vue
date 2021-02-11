@@ -57,13 +57,13 @@
                     >
                         <v-col class="pt-0" cols="12">
                             <h2>
-                                Latest Layouts
+                                Updated Layouts
                             </h2>
                             <v-divider/>
                             <ItemGrid
                                 :items="layoutList"
                                 :show-props="['creator']"
-                                more-url="/layouts?sort=id&order=desc"
+                                more-url="/layouts?sort=updated&order=desc"
                                 type="layouts"
                             />
                         </v-col>
@@ -121,6 +121,7 @@ export default Vue.extend({
             variables() {
                 const vars = {
                     q: 'layoutList',
+                    sort: 'updated',
                     limit: 12
                 }
                 vars.hash = this.$hashString(vars)
