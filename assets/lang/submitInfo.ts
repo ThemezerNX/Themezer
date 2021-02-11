@@ -9,17 +9,17 @@ export default [
         list: [
             {
                 title: "Themes/Packs",
-                content: "By extracting an nxtheme, the contents can be modified easily, without the need to upload a new nxtheme file. After you change something on a theme's or pack's edit page (accessible after submitting), the theme is rebuilt with the changes.",
+                content: "By extracting an NXTheme, the contents can be modified easily, without the need to upload a new NXTheme file. After you change something on a theme's or pack's edit page (accessible after submitting), the theme is rebuilt with the changes.",
             },
             {
                 title: "Layouts",
-                content: "Another great thing is that Themezer can detect what layout is used in a theme. This way, if Nintendo updates the home menu with breaking changes, all themes can be updated at once when the layout they use is updates. People can still upload themes with a custom layout, but those themes won't have these benefits..",
+                content: "Another great thing is that Themezer can detect what layout is used in a theme. This way, if Nintendo updates the home menu with breaking changes, all themes can be updated at once when the layout they use is updated. People can still upload themes with a custom layout, but those themes won't have these benefits.",
             },
         ],
     },
     {
-        title: "Themezer does not detect the layout",
-        content: "If Themezer doesn't recognize the layout, you should select it in the available dropdown. Make sure it is the exact same layout or else you might lose some features! For example, if you've made a change to the position of a button, the change will be discarded if you select the 'default' version of the layout in the dropdown.",
+        title: "Themezer does not detect my theme's layout",
+        content: "If Themezer doesn't recognize the layout, you should select it in the available dropdown. Make sure it is the exact same layout or else you might lose some features! For example, if you've made a change to the position of a button, the change will be discarded if you select the original version of the layout you used in the dropdown.",
     },
     {
         title: "FAQ",
@@ -41,7 +41,7 @@ export default [
             },
             {
                 title:
-                    "I made a custom layout that I don't want to submit",
+                    "I made a custom layout that I don't want to submit to the Layouts repository",
                 content:
                     "Uhm... why not? Others can make use of it more easily and, most important of all, it's free! Anyway, feel free to submit it.",
             },
