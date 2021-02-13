@@ -435,23 +435,19 @@
             <script>
                 // The adsbygoogle scripts somehow set the min-height of '.v-application--wrap' to 0 !important,
                 // which causes the height to be incorrect when returning to a page without ads.
-                if (typeof wrapperElem === 'undefined') {
-                    let wrapperElem = document.querySelector('.v-application--wrap');
+                let wrapperElem = document.querySelector('.v-application--wrap');
 
-                    if (typeof observer === 'undefined') {
-                        let observer = new MutationObserver(function (mutations) {
-                            mutations.forEach(function (mutation) {
-                                if (mutation.type === "attributes") {
-                                    wrapperElem.style['min-height'] = '100vh'
-                                }
-                            });
-                        });
+                let wrapperObserver = new MutationObserver(function (mutations) {
+                    mutations.forEach(function (mutation) {
+                        if (mutation.type === "attributes") {
+                            wrapperElem.style['min-height'] = '100vh'
+                        }
+                    });
+                });
 
-                        observer.observe(wrapperElem, {
-                            attributes: true
-                        });
-                    }
-                }
+                wrapperObserver.observe(wrapperElem, {
+                    attributes: true
+                });
             </script>
         </client-only>
     </v-app>
