@@ -3,10 +3,10 @@
         <div v-if="creator && id === creator.id">
             <v-parallax
                 :src="
-					creator.banner_image
-						? `${API_ENDPOINT}cdn/creators/${creator.id}/banner/${creator.banner_image}`
-						: ''
-				"
+                  creator.banner_image
+                    ? `${API_ENDPOINT}cdn/creators/${creator.id}/banner/${creator.banner_image}`
+                    : ''
+                "
                 class="d-flex align-center justify-center parallax"
             >
                 <v-row
@@ -389,6 +389,10 @@
                     </v-card>
                 </v-form>
             </v-dialog>
+            <adsbygoogle
+                ad-slot="1885976282"
+                align="center"
+            />
         </div>
     </LoadingOverlay>
 </template>

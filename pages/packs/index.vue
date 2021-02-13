@@ -65,6 +65,10 @@
                         <span slot="breakViewContent"></span>
                     </paginate>
                 </LoadingOverlay>
+                <adsbygoogle
+                    ad-slot="1885976282"
+                    align="center"
+                />
             </v-col>
         </v-row>
     </v-container>

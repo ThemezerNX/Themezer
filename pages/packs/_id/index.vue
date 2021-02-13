@@ -160,6 +160,10 @@
                 </v-row>
             </v-sheet>
         </LoadingOverlay>
+        <adsbygoogle
+            ad-slot="9665228109"
+            align="center"
+        />
     </v-container>
 </template>
 
