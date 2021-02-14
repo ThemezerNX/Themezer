@@ -470,8 +470,7 @@ export default {
             error: null,
             items: [
                 {
-                    header: 'Download',
-                    icon: 'mdi-download',
+                    header: 'Browse:',
                     class: 'd-flex d-sm-none'
                 },
                 {
