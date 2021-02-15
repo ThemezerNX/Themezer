@@ -61,7 +61,6 @@
                         page-class="page-item"
                         page-link-class="button--pagination"
                         prev-text
-                        class="pb-3"
                     >
                         <span slot="breakViewContent"></span>
                     </paginate>
