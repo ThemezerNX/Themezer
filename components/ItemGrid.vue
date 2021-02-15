@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <LoadingOverlay :loading="loading" :margin="false" min-loader-height="200px">
         <v-row v-if="items && items.length > 0">
             <v-col
                 v-for="item in items"
@@ -15,7 +15,8 @@
                 <ItemCard :item="item" :show-props="showProps" :type="type"/>
             </v-col>
         </v-row>
-        <nuxt-link v-if="moreUrl && items.length === limit" :to="moreUrl">
+        <span v-else-if="!loading">There were no results</span>
+        <nuxt-link v-if="moreUrl && items && items.length === limit" :to="moreUrl">
             <div
                 class="flex-grow-1 text-right"
                 style="text-shadow: 0 0 4px black;"
@@ -23,7 +24,7 @@
                 More items
             </div>
         </nuxt-link>
-    </div>
+    </LoadingOverlay>
 </template>
 
 <script lang="ts">
@@ -34,12 +35,18 @@ import urlParser from "@/components/mixins/urlParser";
 export default Vue.extend({
     components: {
         ItemCard: () => import("@/components/ItemCard.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, urlParser],
     props: {
         type: {
             type: String,
             required: true,
+        },
+        loading: {
+            type: Boolean,
+            required: false,
+            default: true,
         },
         moreUrl: {
             type: String,
@@ -53,8 +60,10 @@ export default Vue.extend({
         },
         items: {
             type: Array,
-            required: true,
-            default: null,
+            required: false,
+            default() {
+                return [];
+            },
         },
         showProps: {
             type: Array,

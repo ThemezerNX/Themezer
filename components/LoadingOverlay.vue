@@ -1,12 +1,13 @@
 <template>
     <v-fade-transition>
-        <div style="position: relative;">
+        <div style="position: relative;" ref="divdiv"
+             :style="minLoaderHeight !== '' ? `min-height: ${minLoaderHeight}` : ''">
             <v-fade-transition>
                 <v-flex
                     v-show="loading"
                     :class="{
-						dim: dim
-					}"
+                        dim: dim
+                    }"
                     class="holder"
                 >
                     <v-progress-circular
@@ -19,11 +20,6 @@
                 </v-flex>
             </v-fade-transition>
             <div
-                :class="{
-					shadow: loading && shadow,
-					'ma-3': margin,
-					'mb-6': $vuetify.breakpoint.xs
-				}"
                 class="wrapper"
             >
                 <slot/>
@@ -36,30 +32,44 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    name: 'LoadingOverlay',
+    name: "LoadingOverlay",
     props: {
         loading: {
             type: Boolean,
             required: false,
-            default: true
+            default: true,
         },
         shadow: {
             type: Boolean,
             required: false,
-            default: true
+            default: true,
         },
         dim: {
             type: Boolean,
             required: false,
-            default: true
+            default: true,
         },
         margin: {
             type: Boolean,
             required: false,
-            default: true
-        }
-    }
-})
+            default: true,
+        },
+        minLoaderHeight: {
+            type: String,
+            required: false,
+            default: "100%",
+        },
+    },
+    watch: {
+        loading(nowLoading) {
+            if (!nowLoading) {
+                setTimeout(() => {
+                    // this.$refs.divdiv.style.height = "";
+                }, 200);
+            }
+        },
+    },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -67,7 +77,6 @@ export default Vue.extend({
 
 .holder {
     width: 100%;
-    min-height: 90vh;
     height: 100%;
     display: flex;
     justify-content: center;

@@ -1,6 +1,6 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-        <v-row>
+        <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
                 <h2 class="text-center">{{ targetName() }} Layouts</h2>
                 <Filters

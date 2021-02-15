@@ -1,6 +1,6 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-        <v-row>
+        <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
                 <h2 class="text-center">{{ targetName() }} Packs</h2>
                 <Filters
@@ -24,10 +24,10 @@
 
                     <v-row
                         v-if="
-							itemList &&
-								itemList.packList &&
-								itemList.packList.length > 0
-						"
+                          itemList &&
+                            itemList.packList &&
+                            itemList.packList.length > 0
+                        "
                     >
                         <v-col
                             v-for="pack in itemList.packList"
@@ -46,9 +46,7 @@
                         </v-col>
                     </v-row>
 
-                    <span v-else-if="!$apollo.loading"
-                    >There were no results</span
-                    >
+                    <span v-else-if="!$apollo.loading">There were no results</span>
                     <paginate
                         v-model="pageNumber"
                         :click-handler="paginationEvent"
