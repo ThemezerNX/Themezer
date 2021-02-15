@@ -61,11 +61,13 @@
                         page-class="page-item"
                         page-link-class="button--pagination"
                         prev-text
+                        class="pb-3"
                     >
                         <span slot="breakViewContent"></span>
                     </paginate>
                 </LoadingOverlay>
                 <adsbygoogle
+                    class="mt-3"
                     ad-slot="1885976282"
                     align="center"
                 />

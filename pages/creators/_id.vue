@@ -398,6 +398,7 @@
                 </v-form>
             </v-dialog>
             <adsbygoogle
+                class="mt-3"
                 ad-slot="1885976282"
                 align="center"
             />

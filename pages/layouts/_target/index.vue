@@ -67,6 +67,7 @@
                     </paginate>
                 </LoadingOverlay>
                 <adsbygoogle
+                    class="mt-3"
                     ad-slot="1885976282"
                     align="center"
                 />

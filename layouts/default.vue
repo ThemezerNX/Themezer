@@ -431,24 +431,6 @@
                     </v-banner>
                 </div>
             </cookie-law>
-
-            <script>
-                // The adsbygoogle scripts somehow set the min-height of '.v-application--wrap' to 0 !important,
-                // which causes the height to be incorrect when returning to a page without ads.
-                let wrapperElem = document.querySelector('.v-application--wrap');
-
-                let wrapperObserver = new MutationObserver(function (mutations) {
-                    mutations.forEach(function (mutation) {
-                        if (mutation.type === "attributes") {
-                            wrapperElem.style['min-height'] = '100vh'
-                        }
-                    });
-                });
-
-                wrapperObserver.observe(wrapperElem, {
-                    attributes: true
-                });
-            </script>
         </client-only>
     </v-app>
 </template>
@@ -641,6 +623,23 @@ export default {
                     this.loading.accept = false
                 })
         }
+
+        // The adsbygoogle scripts inject height styles
+        // which causes the height to be incorrect when returning to a page without ads.
+        // This observer removes the height on the main application window
+        const wrapper = document.querySelector('.v-application--wrap')
+        this.observer = new MutationObserver(() => {
+            wrapper.style.height = ''
+            wrapper.style.minHeight = ''
+        });
+
+        this.observer.observe(wrapper, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+    },
+    beforeDestroy() {
+        this.observer.disconnect();
     },
     methods: {
         randomPack() {
@@ -752,10 +751,6 @@ $border-radius: 10px;
 html {
     word-break: break-word !important;
     background: #272727;
-}
-
-.v-application--wrap {
-    min-height: 100vh !important;
 }
 
 .page-enter-active,
