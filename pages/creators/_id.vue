@@ -171,6 +171,7 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
+                            :loading="!!$apollo.queries.packList.loading"
                             :items="packList"
                             :limit="6"
                             :more-url="
@@ -191,6 +192,7 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
+                            :loading="!!$apollo.queries.themeList.loading"
                             :items="themeList"
                             :limit="6"
                             :more-url="
@@ -211,6 +213,7 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
+                            :loading="!!$apollo.queries.layoutList.loading"
                             :items="layoutList"
                             :limit="6"
                             :more-url="
