@@ -9,7 +9,7 @@
                 />
             </v-col>
             <v-col ref="top" cols="12" md="9" sm="8" xl="10" xs="12">
-                <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
+                <LoadingOverlay :loading="!!$apollo.loading" :margin="false" min-loader-height="auto">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
                             {{ itemList.pagination.item_count }}
