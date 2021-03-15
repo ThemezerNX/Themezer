@@ -37,7 +37,7 @@ export default [
             {
                 title: "I have made minor modification to another layout",
                 content:
-                    "Consider adding a customization option to the original in the Layouts GitHub repository (see the 'Layout' submit page in the menu).",
+                    "Consider adding a customization option to the original in the Layouts GitHub repository (see the 'Layout' submit page in the menu). If you don't want to, make sure to change the 'ID' of the layout json file. Else Themezer will force-select the original layout.",
             },
             {
                 title:
