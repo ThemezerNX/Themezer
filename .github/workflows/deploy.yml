@@ -16,6 +16,7 @@ jobs:
           host: ${{ secrets.SSHHOST }}
           username: ${{ secrets.SSHUSERNAME }}
           password: ${{ secrets.SSHPASSWORD }}
+          command_timeout: 60m
           script: |
             cd /home/themezer/Themezer
             git reset --hard
