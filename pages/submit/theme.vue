@@ -685,6 +685,8 @@ export default Vue.extend({
             if (
                 this.uploadedScreenshots.length === this.detectedThemes.length
             ) {
+                this.loading.submit = true;
+
                 const themeInput = this.detectedThemes.map((t) => {
                     return {
                         info: t.info,
