@@ -6,5 +6,5 @@ export default (context: any, inject: any) => {
     };
 
     inject("hashString", $hashString);
-    context.$snackbar = $hashString;
+    context.$hashString = $hashString;
 }
