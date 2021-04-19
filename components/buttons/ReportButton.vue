@@ -18,10 +18,10 @@
                         dark
                         rounded
                         @click="
-							$auth.loggedIn
-								? (showDialog = true)
-								: (showLoginDialog = true)
-						"
+                          $auth.loggedIn
+                            ? (showDialog = true)
+                            : (showLoginDialog = true)
+                        "
                     >
                         Report
                         <v-icon right>{{ icon || 'mdi-flag-variant' }}</v-icon>

@@ -61,22 +61,15 @@
 
                         <ButtonDivider>
                             <LikeButton
-                                v-if="$auth.loggedIn"
                                 :id="theme.id"
                                 :count="
-									theme.like_count > 0
-										? theme.like_count
-										: $auth.user.liked.themes
-												.map((t) => t.id)
-												.includes(theme.id)
-										? 1
-										: 0
-								"
+                                  theme.like_count > 0
+                                    ? theme.like_count
+                                    : ($auth.loggedIn && $auth.user.liked.themes.some((t) => t.id === theme.id) ? 1 : 0)
+                                "
                                 :value="
-									$auth.user.liked.themes
-										.map((t) => t.id)
-										.includes(theme.id)
-								"
+                                    $auth.loggedIn && $auth.user.liked.themes.some((t) => t.id === theme.id)
+                                "
                                 type="themes"
                             />
                             <ShareButton
@@ -218,7 +211,7 @@
                                 class="subtitle-1 font-weight-bold"
                             >
                                 {{
-                                    theme.pack.details.name + (theme.pack.categories.includes('NSFW') ? ' (NSFW!)' : '')
+                                    theme.pack.details.name + (theme.pack.categories.includes("NSFW") ? " (NSFW!)" : "")
                                 }}
                             </nuxt-link>
                         </div>
@@ -262,23 +255,23 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import shared from '@/layouts/details/SharedScript'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '@/components/mixins/urlParser'
-import {downloadTheme, theme} from '@/graphql/Theme.gql'
+import Vue from "vue";
+import shared from "@/layouts/details/SharedScript";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
+import {downloadTheme, theme} from "@/graphql/Theme.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import('@/components/sections/ThemeInstaller.vue'),
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
-        ReportButton: () => import('@/components/buttons/ReportButton.vue'),
-        LikeButton: () => import('@/components/buttons/LikeButton.vue'),
-        ShareButton: () => import('@/components/buttons/ShareButton.vue'),
-        EditButton: () => import('@/components/buttons/EditButton.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+            import("@/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser, urlParser],
     data() {
@@ -287,12 +280,12 @@ export default Vue.extend({
             isPageOwner: false,
             showPackInfo: false,
             packDialog: false,
-            loadingDownload: false
-        }
+            loadingDownload: false,
+        };
     },
     computed: {
         backgroundStyle() {
-            return ''
+            return "";
             // if (this.theme.details.color) {
             // 	return `background: ${this.theme.details.color};`
             // } else {
@@ -300,54 +293,54 @@ export default Vue.extend({
             // }
         },
         mayModerate() {
-            return this.isPageOwner || this.$auth.user?.isAdmin
-        }
+            return this.isPageOwner || this.$auth.user?.isAdmin;
+        },
     },
     apollo: {
         theme: {
             query: theme,
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.theme) {
                     this.isPageOwner =
                         this.$auth.loggedIn &&
-                        data.theme.creator.id === this.$auth.user.id
+                        data.theme.creator.id === this.$auth.user.id;
 
                     this.updateUrlString(
                         data.theme.id,
                         data.theme.details.name,
-                        this.fileNameToWebName(data.theme.target)
-                    )
+                        this.fileNameToWebName(data.theme.target),
+                    );
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     methods: {
         optionsString(usedPieces) {
-            const values = []
+            const values = [];
             if (usedPieces && usedPieces.length > 0) {
                 usedPieces.forEach((piece) => {
-                    if (piece.value.value === 'true') {
-                        values.push(piece.name)
+                    if (piece.value.value === "true") {
+                        values.push(piece.name);
                     } else {
-                        values.push(`${piece.name}: ${piece.value.value}`)
+                        values.push(`${piece.name}: ${piece.value.value}`);
                     }
-                })
+                });
             }
-            return values.join(', ')
+            return values.join(", ");
         },
         downloadTheme() {
-            this.loadingDownload = true
-            const usedPieces = []
+            this.loadingDownload = true;
+            const usedPieces = [];
 
             if (this.theme.pieces) {
                 for (let i = 0; i < this.theme.pieces.length; i++) {
-                    usedPieces.push(this.theme.pieces[i].value.uuid)
+                    usedPieces.push(this.theme.pieces[i].value.uuid);
                 }
             }
 
@@ -356,63 +349,63 @@ export default Vue.extend({
                     mutation: downloadTheme,
                     variables: {
                         id: this.theme.id,
-                        piece_uuids: usedPieces.length > 0 ? usedPieces : null
-                    }
+                        piece_uuids: usedPieces.length > 0 ? usedPieces : null,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingDownload = false
+                    this.loadingDownload = false;
 
                     this.downloadFileUrl(
                         data.downloadTheme.url,
                         undefined,
-                        data.downloadTheme.filename
-                    )
+                        data.downloadTheme.filename,
+                    );
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingDownload = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loadingDownload = false;
+                });
+        },
     },
     head() {
         if (this.theme) {
             const metaTitle = `${this.theme.details.name}${
-                this.theme.categories.includes('NSFW') ? ' (NSFW!)' : ''
-            } | ${this.targetName()} | Themes`
-            const metaDesc = this.theme.details.description
-            const metaImg = !this.theme.categories.includes('NSFW')
+                this.theme.categories.includes("NSFW") ? " (NSFW!)" : ""
+            } | ${this.targetName()} | Themes`;
+            const metaDesc = this.theme.details.description;
+            const metaImg = !this.theme.categories.includes("NSFW")
                 ? this.theme.preview.original
-                : null
+                : null;
 
             return {
                 title: metaTitle,
                 meta: [
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>

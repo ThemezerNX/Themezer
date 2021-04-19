@@ -64,7 +64,7 @@
                                 creator.display_name
                             }}{{
                                 !!creator.custom_username
-                                    ? ''
+                                    ? ""
                                     : `#${creator.discord_user.discriminator}`
                             }}
 
@@ -85,12 +85,12 @@
 											}"
                                             class="mt-n1"
                                         >
-                                            {{ roleIcon(role.split('|')[0]) }}
+                                            {{ roleIcon(role.split("|")[0]) }}
                                         </v-icon>
                                     </template>
                                     <span class="text-capitalize">{{
-                                            role.split('|')[
-                                            role.split('|').length - 1
+                                            role.split("|")[
+                                            role.split("|").length - 1
                                                 ]
                                         }}</span>
                                 </v-tooltip>
@@ -109,22 +109,15 @@
                                 <v-icon right>mdi-pencil</v-icon>
                             </v-btn>
                             <LikeButton
-                                v-if="$auth.loggedIn"
                                 :id="creator.id"
                                 :count="
-									creator.like_count > 0
-										? creator.like_count
-										: $auth.user.liked.creators
-												.map((c) => c.id)
-												.includes(creator.id)
-										? 1
-										: 0
-								"
+                                  creator.like_count > 0
+                                    ? creator.like_count
+                                    : ($auth.loggedIn && $auth.user.liked.creators.some((c) => c.id === creator.id) ? 1 : 0)
+                                "
                                 :value="
-									$auth.user.liked.creators
-										.map((c) => c.id)
-										.includes(creator.id)
-								"
+                                    $auth.loggedIn && $auth.user.liked.creators.some((c) => c.id === creator.id)
+                                "
                                 type="creators"
                             />
                             <ShareButton
@@ -410,24 +403,24 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import rules from '~/assets/lang/rules'
-import {creator, me, updateProfile} from '@/graphql/Creator.gql'
-import {rowPackList} from '@/graphql/Pack.gql'
-import {rowThemeList} from '@/graphql/Theme.gql'
-import {rowLayoutList} from '@/graphql/Layout.gql'
+import Vue from "vue";
+import rules from "~/assets/lang/rules";
+import {creator, me, updateProfile} from "@/graphql/Creator.gql";
+import {rowPackList} from "@/graphql/Pack.gql";
+import {rowThemeList} from "@/graphql/Theme.gql";
+import {rowLayoutList} from "@/graphql/Layout.gql";
 
-const removeMd = require('remove-markdown')
+const removeMd = require("remove-markdown");
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        ReportButton: () => import('@/components/buttons/ReportButton.vue'),
-        LikeButton: () => import('@/components/buttons/LikeButton.vue'),
-        ShareButton: () => import('@/components/buttons/ShareButton.vue'),
-        Markdown: () => import('@/components/Markdown.vue'),
-        ItemGrid: () => import('@/components/ItemGrid.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        Markdown: () => import("@/components/Markdown.vue"),
+        ItemGrid: () => import("@/components/ItemGrid.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     // async asyncData({ error, app, params }) {
     // 	const syncData = {
@@ -500,7 +493,7 @@ export default Vue.extend({
             editDialog: false,
             submitValid: false,
             loading: {
-                submit: false
+                submit: false,
             },
 
             changed: {
@@ -511,12 +504,12 @@ export default Vue.extend({
                 logoImage: null,
                 clearBannerImage: false,
                 clearLogoImage: false,
-                isBlocked: null
+                isBlocked: null,
             },
 
             avatar: null,
-            rules
-        }
+            rules,
+        };
     },
     computed: {
         changes() {
@@ -529,119 +522,119 @@ export default Vue.extend({
                 !this.changed.clearBannerImage &&
                 !this.changed.clearLogoImage &&
                 this.creator.is_blocked === this.changed.isBlocked
-            )
+            );
         },
         mayModerate() {
-            return this.isPageOwner || this.$auth.user?.isAdmin
-        }
+            return this.isPageOwner || this.$auth.user?.isAdmin;
+        },
     },
     apollo: {
         creator: {
             query() {
-                return this.$data.isPageOwner ? me : creator
+                return this.$data.isPageOwner ? me : creator;
             },
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             update(res) {
                 if (this.$data.isPageOwner) {
-                    return res?.me
+                    return res?.me;
                 } else {
-                    return res?.creator
+                    return res?.creator;
                 }
             },
-            prefetch: true
+            prefetch: true,
         },
         packList: {
             query: rowPackList,
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6
-                }
+                    limit: 6,
+                };
             },
-            prefetch: true
+            prefetch: true,
         },
         themeList: {
             query: rowThemeList,
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6
-                }
+                    limit: 6,
+                };
             },
-            prefetch: true
+            prefetch: true,
         },
         layoutList: {
             query: rowLayoutList,
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6
-                }
+                    limit: 6,
+                };
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     watch: {
         creator(creator) {
             if (creator) {
                 if (creator.old_ids && creator.old_ids.includes(this.id)) {
                     // Sort of redirect, needs proper HTML 301 (moved permanently)
-                    this.$router.push(`/creators/${creator.id}`)
+                    this.$router.push(`/creators/${creator.id}`);
                 } else {
                     this.$store.commit(
-                        'SET_PROFILE_COLOR',
-                        creator.profile_color
-                    )
+                        "SET_PROFILE_COLOR",
+                        creator.profile_color,
+                    );
 
-                    this.changed.profileColor = creator.profile_color
-                    this.changed.customUsername = creator.custom_username
-                    this.changed.bio = creator.bio
-                    this.changed.isBlocked = creator.is_blocked
+                    this.changed.profileColor = creator.profile_color;
+                    this.changed.customUsername = creator.custom_username;
+                    this.changed.bio = creator.bio;
+                    this.changed.isBlocked = creator.is_blocked;
 
                     if (creator.discord_user.avatar) {
-                        this.avatar = `avatars/${creator.id}/${creator.discord_user.avatar}`
+                        this.avatar = `avatars/${creator.id}/${creator.discord_user.avatar}`;
                     } else {
                         this.avatar = `embed/avatars/${parseInt(
-                            creator.discord_user.discriminator
-                        ) % 5}.png`
+                            creator.discord_user.discriminator,
+                        ) % 5}.png`;
                     }
                 }
             }
-        }
+        },
     },
     beforeRouteLeave(_to, _from, next) {
         if (this.changes) {
             const answer = window.confirm(
-                'Do you really want to leave? You have unsaved changes!'
-            )
+                "Do you really want to leave? You have unsaved changes!",
+            );
             if (answer) {
-                next()
+                next();
             } else {
-                next(false)
+                next(false);
             }
-        } else next()
+        } else next();
     },
     beforeDestroy() {
-        this.$store.commit('SET_PROFILE_COLOR', null)
+        this.$store.commit("SET_PROFILE_COLOR", null);
     },
     methods: {
         roleIcon(role) {
             switch (role) {
-                case 'system':
-                    return 'mdi-cogs'
-                case 'admin':
-                    return 'mdi-shield-check'
-                case 'verified':
-                    return 'mdi-check-decagram'
-                case 'dino':
-                    return 'mdi-google-downasaur'
+                case "system":
+                    return "mdi-cogs";
+                case "admin":
+                    return "mdi-shield-check";
+                case "verified":
+                    return "mdi-check-decagram";
+                case "dino":
+                    return "mdi-google-downasaur";
 
                 default:
-                    return null
+                    return null;
             }
         },
         discard() {
@@ -653,11 +646,11 @@ export default Vue.extend({
                 logoImage: null,
                 clearBannerImage: false,
                 clearLogoImage: false,
-                isBlocked: this.creator.is_blocked
-            }
+                isBlocked: this.creator.is_blocked,
+            };
         },
         submit() {
-            this.loading.submit = true
+            this.loading.submit = true;
 
             this.$apollo
                 .mutate({
@@ -671,88 +664,88 @@ export default Vue.extend({
                         logo_image: this.changed.logoImage,
                         clear_banner_image: this.changed.clearBannerImage,
                         clear_logo_image: this.changed.clearLogoImage,
-                        is_blocked: this.changed.isBlocked
-                    }
+                        is_blocked: this.changed.isBlocked,
+                    },
                 })
                 .then(({data}) => {
-                    this.loading.submit = false
+                    this.loading.submit = false;
                     if (data && data.updateProfile) {
-                        this.editDialog = false
-                        this.changed.bannerImage = null
-                        this.changed.logoImage = null
-                        this.changed.clearBannerImage = false
-                        this.changed.clearLogoImage = false
-                        this.$apollo.queries.creator.refetch()
+                        this.editDialog = false;
+                        this.changed.bannerImage = null;
+                        this.changed.logoImage = null;
+                        this.changed.clearBannerImage = false;
+                        this.changed.clearLogoImage = false;
+                        this.$apollo.queries.creator.refetch();
                         this.$snackbar.message(
-                            'Success! Changes might take some time to apply.'
-                        )
+                            "Success! Changes might take some time to apply.",
+                        );
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loading.submit = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loading.submit = false;
+                });
+        },
     },
     head() {
         if (this.creator) {
-            const metaTitle = `${this.creator.display_name} | Creators`
+            const metaTitle = `${this.creator.display_name} | Creators`;
             const metaDesc = this.creator.bio
                 ? removeMd(this.creator.bio)
-                : `${this.creator.display_name}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.display_name}.`
+                : `${this.creator.display_name}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.display_name}.`;
 
-            let avatar = null
+            let avatar = null;
             if (this.creator.discord_user.avatar) {
-                avatar = `avatars/${this.creator.id}/${this.creator.discord_user.avatar}`
+                avatar = `avatars/${this.creator.id}/${this.creator.discord_user.avatar}`;
             } else {
                 avatar = `embed/avatars/${parseInt(
-                    this.creator.discord_user.discriminator
-                ) % 5}.png`
+                    this.creator.discord_user.discriminator,
+                ) % 5}.png`;
             }
 
             const metaImg = this.creator.logo_image
                 ? `${process.env.API_ENDPOINT}cdn/creators/${this.creator.id}/logo/${this.creator.logo_image}`
-                : `https://cdn.discordapp.com/${avatar}?size=256`
+                : `https://cdn.discordapp.com/${avatar}?size=256`;
 
             return {
                 title: metaTitle,
                 meta: [
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
                     },
                     this.creator.profile_color
                         ? {
-                            hid: 'theme-color',
-                            name: 'theme-color',
-                            property: 'theme-color',
-                            content: this.creator.profile_color
+                            hid: "theme-color",
+                            name: "theme-color",
+                            property: "theme-color",
+                            content: this.creator.profile_color,
                         }
-                        : {}
-                ]
-            }
+                        : {},
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss" scoped>

@@ -74,22 +74,16 @@
 
                         <ButtonDivider>
                             <LikeButton
-                                v-if="$auth.loggedIn"
                                 :id="pack.id"
                                 :count="
-									pack.like_count > 0
-										? pack.like_count
-										: $auth.user.liked.packs
-												.map((p) => p.id)
-												.includes(pack.id)
-										? 1
-										: 0
-								"
+                                  pack.like_count > 0
+                                    ? pack.like_count
+                                    : ($auth.loggedIn && $auth.user.liked.packs.some((p) => p.id === pack.id) ? 1 : 0)
+                                "
                                 :value="
-									$auth.user.liked.packs
-										.map((p) => p.id)
-										.includes(pack.id)
-								"
+                                  $auth.loggedIn &&
+                                  $auth.user.liked.packs.some((p) => p.id === pack.id)
+                                "
                                 type="packs"
                             />
                             <ShareButton
@@ -169,36 +163,36 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import shared from '@/layouts/details/SharedScript'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '@/components/mixins/urlParser'
-import {downloadPack, pack} from '@/graphql/Pack.gql'
+import Vue from "vue";
+import shared from "@/layouts/details/SharedScript";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
+import {downloadPack, pack} from "@/graphql/Pack.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import('@/components/sections/ThemeInstaller.vue'),
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
-        ReportButton: () => import('@/components/buttons/ReportButton.vue'),
-        LikeButton: () => import('@/components/buttons/LikeButton.vue'),
-        ShareButton: () => import('@/components/buttons/ShareButton.vue'),
-        ThemesSlideGroup: () => import('@/components/ThemesSlideGroup.vue'),
-        EditButton: () => import('@/components/buttons/EditButton.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+            import("@/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        ThemesSlideGroup: () => import("@/components/ThemesSlideGroup.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser, urlParser],
     data() {
         return {
             isPageOwner: false,
             packDialog: false,
-            loadingDownload: false
-        }
+            loadingDownload: false,
+        };
     },
     computed: {
         backgroundStyle() {
-            return ''
+            return "";
             // if (this.pack.details.color) {
             // 	return `background: ${this.pack.details.color};`
             // } else {
@@ -206,110 +200,110 @@ export default Vue.extend({
             // }
         },
         categories() {
-            const c = []
+            const c = [];
             for (const i in this.pack.themes) {
                 if (this.pack.themes[i].categories)
                     c.concat(
                         this.pack.themes[i].categories.filter(
-                            (item) => !c.includes(item)
-                        )
-                    )
+                            (item) => !c.includes(item),
+                        ),
+                    );
             }
-            return c
+            return c;
         },
         mayModerate() {
-            return this.isPageOwner || this.$auth.user?.isAdmin
-        }
+            return this.isPageOwner || this.$auth.user?.isAdmin;
+        },
     },
     apollo: {
         pack: {
             query: pack,
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.pack) {
                     this.isPageOwner =
                         this.$auth.loggedIn &&
-                        data.pack.creator.id === this.$auth.user.id
+                        data.pack.creator.id === this.$auth.user.id;
 
-                    this.updateUrlString(data.pack.id, data.pack.details.name)
+                    this.updateUrlString(data.pack.id, data.pack.details.name);
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     methods: {
         downloadPack() {
-            this.loadingDownload = true
+            this.loadingDownload = true;
 
             this.$apollo
                 .mutate({
                     mutation: downloadPack,
                     variables: {
-                        id: this.pack.id
-                    }
+                        id: this.pack.id,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingDownload = false
+                    this.loadingDownload = false;
 
                     this.downloadFileUrl(
                         data.downloadPack.url,
                         undefined,
-                        data.downloadPack.filename
-                    )
+                        data.downloadPack.filename,
+                    );
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingDownload = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loadingDownload = false;
+                });
+        },
     },
     head() {
         if (this.pack) {
             const metaTitle = `${this.pack.details.name}${
-                this.pack.themes.some((t) => t.categories?.includes('NSFW'))
-                    ? ' (NSFW!)'
-                    : ''
-            } | Packs`
-            const metaDesc = this.pack.details.description
-            const metaImg = !this.pack.themes[0].categories.includes('NSFW')
+                this.pack.themes.some((t) => t.categories?.includes("NSFW"))
+                    ? " (NSFW!)"
+                    : ""
+            } | Packs`;
+            const metaDesc = this.pack.details.description;
+            const metaImg = !this.pack.themes[0].categories.includes("NSFW")
                 ? this.pack.themes[0].preview.original
-                : null
+                : null;
 
             return {
                 title: metaTitle,
                 meta: [
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss">

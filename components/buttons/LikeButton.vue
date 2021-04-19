@@ -8,6 +8,7 @@
                 class="button"
                 dark
                 rounded
+                :disabled="!$auth.loggedIn"
                 @click="like()"
             >
                 {{ newCount }}

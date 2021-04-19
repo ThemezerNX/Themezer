@@ -53,22 +53,15 @@
 
                         <ButtonDivider>
                             <LikeButton
-                                v-if="$auth.loggedIn"
                                 :id="layout.id"
                                 :count="
-									layout.like_count > 0
-										? layout.like_count
-										: $auth.user.liked.layouts
-												.map((l) => l.id)
-												.includes(layout.id)
-										? 1
-										: 0
-								"
+                                  layout.like_count > 0
+                                    ? layout.like_count
+                                    : ($auth.loggedIn && $auth.user.liked.layouts.some((l) => l.id === layout.id) ? 1 : 0)
+                                "
                                 :value="
-									$auth.user.liked.layouts
-										.map((l) => l.id)
-										.includes(layout.id)
-								"
+                                  $auth.loggedIn && $auth.user.liked.layouts.some((l) => l.id === layout.id)
+                                "
                                 type="layouts"
                             />
                             <ShareButton
@@ -299,21 +292,21 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import shared from '@/layouts/details/SharedScript'
-import {downloadCommonLayout, downloadLayout, layout} from '@/graphql/Layout.gql'
-import targetParser from '@/components/mixins/targetParser'
+import Vue from "vue";
+import shared from "@/layouts/details/SharedScript";
+import {downloadCommonLayout, downloadLayout, layout} from "@/graphql/Layout.gql";
+import targetParser from "@/components/mixins/targetParser";
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        OptionsButton: () => import('@/components/buttons/OptionsButton.vue'),
-        DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
-        LikeButton: () => import('@/components/buttons/LikeButton.vue'),
-        ShareButton: () => import('@/components/buttons/ShareButton.vue'),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        OptionsButton: () => import("@/components/buttons/OptionsButton.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
         BackgroundsSlideGroup: () =>
-            import('@/components/BackgroundsSlideGroup.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+            import("@/components/BackgroundsSlideGroup.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser],
     data() {
@@ -324,141 +317,141 @@ export default Vue.extend({
             showOverlayInfo: false,
             overlayDialog: false,
             loadingMerge: false,
-            loadingGetCommon: false
-        }
+            loadingGetCommon: false,
+        };
     },
     computed: {
         backgroundStyle() {
             if (this.$store.state.background) {
                 return (
-                    'background-image: url(' +
-                    (this.$store.state.background.startsWith('blob')
+                    "background-image: url(" +
+                    (this.$store.state.background.startsWith("blob")
                         ? this.$store.state.background
                         : require(`@/assets/backgrounds/${this.$store.state.background}`)) +
-                    ')'
-                )
-            } else if (this.$route.params.target === 'playerselect') {
-                return `background-image: url(/images/blurredhome.jpg);`
+                    ")"
+                );
+            } else if (this.$route.params.target === "playerselect") {
+                return `background-image: url(/images/blurredhome.jpg);`;
             } else if (this.layout.details.color) {
-                return `background: ${this.layout.details.color};`
+                return `background: ${this.layout.details.color};`;
             } else {
-                return `background: #2d2d2d;`
+                return `background: #2d2d2d;`;
             }
         },
         commonlayoutObject() {
             if (this.layout.commonlayout) {
-                return JSON.parse(this.layout.commonlayout)
-            } else return null
-        }
+                return JSON.parse(this.layout.commonlayout);
+            } else return null;
+        },
     },
     methods: {
         download() {
-            this.loadingMerge = true
+            this.loadingMerge = true;
             this.$apollo
                 .mutate({
                     mutation: downloadLayout,
                     variables: {
                         id: this.layout.id,
-                        piece_uuids: []
-                    }
+                        piece_uuids: [],
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingMerge = false
+                    this.loadingMerge = false;
 
                     this.downloadFile(
                         data.downloadLayout,
-                        'application/json',
-                        this.layout.details.name
-                    )
+                        "application/json",
+                        this.layout.details.name,
+                    );
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingMerge = false
-                })
+                    this.$snackbar.error(err);
+                    this.loadingMerge = false;
+                });
         },
         downloadCommon() {
-            this.loadingGetCommon = true
+            this.loadingGetCommon = true;
             this.$apollo
                 .mutate({
                     mutation: downloadCommonLayout,
                     variables: {
-                        id: this.layout.id
-                    }
+                        id: this.layout.id,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingGetCommon = false
+                    this.loadingGetCommon = false;
 
                     this.downloadFile(
                         data.downloadCommonLayout,
-                        'application/json',
-                        `${this.layout.details.name} - Common layout`
-                    )
+                        "application/json",
+                        `${this.layout.details.name} - Common layout`,
+                    );
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingGetCommon = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loadingGetCommon = false;
+                });
+        },
     },
     apollo: {
         layout: {
             query: layout,
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.layout) {
                     this.updateUrlString(
                         data.layout.id,
                         data.layout.details.name,
-                        this.fileNameToWebName(data.layout.target)
-                    )
+                        this.fileNameToWebName(data.layout.target),
+                    );
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     head() {
         if (this.layout) {
             const metaTitle = `${
                 this.layout.details.name
-            } | ${this.targetName()} | Layouts`
-            const metaDesc = this.layout.details.description
-            const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`
+            } | ${this.targetName()} | Layouts`;
+            const metaDesc = this.layout.details.description;
+            const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`;
 
             return {
                 title: metaTitle,
                 meta: [
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss" scoped>
