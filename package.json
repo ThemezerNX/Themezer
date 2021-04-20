@@ -7,7 +7,7 @@
     "license": "GPL-3.0",
     "scripts": {
         "dev": "nuxt-ts",
-        "build": "nuxt-ts build",
+        "build": "rimraf .nuxt && nuxt-ts build",
         "start": "nuxt-ts start",
         "generate": "yarn run build --target static && nuxt export"
     },
@@ -37,6 +37,7 @@
         "nuxt": "^2.0.0",
         "object-hash": "^2.0.3",
         "remove-markdown": "^0.3.0",
+        "rimraf": "^3.0.2",
         "rxjs": "^6.6.0",
         "vue": "^2.6.12",
         "vue-cookie-law": "^1.13.3",

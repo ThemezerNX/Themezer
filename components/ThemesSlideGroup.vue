@@ -34,7 +34,7 @@
                             class="mx-auto card transition-fast-in-fast-out"
                             router
                         >
-                            <div v-if="theme.layout" class="badges-wrapper">
+                            <div v-if="!!theme.layout" class="badges-wrapper">
                                 <CertifiedBadge/>
                             </div>
 

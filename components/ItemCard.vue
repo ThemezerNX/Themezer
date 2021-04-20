@@ -13,7 +13,7 @@
             class="ma-auto card transition-fast-in-fast-out"
             router
         >
-            <div v-if="item.layout" class="badges-wrapper">
+            <div v-if="!!item.layout" class="badges-wrapper">
                 <CertifiedBadge/>
             </div>
 
