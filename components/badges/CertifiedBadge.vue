@@ -35,7 +35,7 @@ export default Vue.extend({
     border-radius: 100px;
     position: absolute !important;
     right: 0;
-    top: 0;
+    bottom: 0;
 }
 </style>
 
