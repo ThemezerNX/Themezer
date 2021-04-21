@@ -79,19 +79,17 @@
                                             v-bind="attrs"
                                             v-on="on"
                                             :class="{
-												'mr-1':
-													i !==
-													creator.roles.length - 1
-											}"
+                                                'mr-1':
+                                                  i !==
+                                                  creator.roles.length - 1
+                                              }"
                                             class="mt-n1"
                                         >
                                             {{ roleIcon(role.split("|")[0]) }}
                                         </v-icon>
                                     </template>
                                     <span class="text-capitalize">{{
-                                            role.split("|")[
-                                            role.split("|").length - 1
-                                                ]
+                                            role.split("|")[role.split("|").length - 1]
                                         }}</span>
                                 </v-tooltip>
                             </template>
@@ -634,7 +632,7 @@ export default Vue.extend({
                     return "mdi-google-downasaur";
 
                 default:
-                    return null;
+                    return `mdi-${role}`;
             }
         },
         discard() {
