@@ -10,10 +10,10 @@
         >
             <div
                 :style="
-					$store.state.profileColor
-						? `background-color: ${$store.state.profileColor} !important;`
-						: ''
-				"
+                  $store.state.profileColor
+                    ? `background-color: ${$store.state.profileColor} !important;`
+                    : ''
+                "
                 class="background"
             />
             <v-list nav rounded>
@@ -151,23 +151,22 @@
         </v-navigation-drawer>
         <v-app-bar
             :style="
-				$store.state.profileColor
-					? `background-color: ${$store.state.profileColor} !important;`
-					: ''
-			"
+                $store.state.profileColor
+                  ? `background-color: ${$store.state.profileColor} !important;`
+                  : ''
+              "
             app
             class="navbar"
             clipped-left
             fixed
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
-            <NuxtLink class="title-link mx-6" to="/">
+            <NuxtLink class="title-link mx-4" to="/">
                 <v-toolbar-title class="d-flex title-text">
                     <v-img
-                        class="mr-4"
+                        class="mr-4 title-icon"
                         contain
                         src="/icon-64.png"
-                        style="border-radius: 5px;"
                         width="32"
                     />
                     {{ title }}
@@ -436,12 +435,12 @@
 </template>
 
 <script>
-import {updateAuth} from '@/graphql/Creator.gql'
-import {randomPackIDs} from '@/graphql/Pack.gql'
-import {randomThemeIDs} from '@/graphql/Theme.gql'
-import {randomLayoutIDs} from '@/graphql/Layout.gql'
-import targets from '@/assets/targets'
-import tos from '~/assets/lang/termsOfService'
+import {updateAuth} from "@/graphql/Creator.gql";
+import {randomPackIDs} from "@/graphql/Pack.gql";
+import {randomThemeIDs} from "@/graphql/Theme.gql";
+import {randomLayoutIDs} from "@/graphql/Layout.gql";
+import targets from "@/assets/targets";
+import tos from "~/assets/lang/termsOfService";
 
 export default {
     data() {
@@ -452,111 +451,111 @@ export default {
             error: null,
             items: [
                 {
-                    header: 'Browse:',
-                    class: 'd-flex d-sm-none'
+                    header: "Browse:",
+                    class: "d-flex d-sm-none",
                 },
                 {
                     divider: true,
                     inset: true,
-                    class: 'd-flex d-sm-none'
+                    class: "d-flex d-sm-none",
                 },
                 ...targets,
                 {
-                    header: 'Submit:',
+                    header: "Submit:",
                 },
                 {
                     divider: true,
-                    inset: true
+                    inset: true,
                 },
                 {
-                    icon: 'mdi-format-color-fill',
-                    title: 'Theme/Pack',
-                    to: '/submit/theme'
+                    icon: "mdi-format-color-fill",
+                    title: "Theme/Pack",
+                    to: "/submit/theme",
                 },
                 {
-                    icon: 'mdi-code-json',
-                    title: 'Layout',
-                    to: '/submit/layout'
+                    icon: "mdi-code-json",
+                    title: "Layout",
+                    to: "/submit/layout",
                 },
                 {
-                    header: 'Tools:',
-                },
-                {
-                    divider: true,
-                    inset: true
-                },
-                {
-                    icon: 'mdi-image-edit-outline',
-                    title: 'Overlay Creator',
-                    to: '/tools/overlaycreator'
-                },
-                {
-                    icon: 'mdi-web',
-                    title: 'Online Theme Creator',
-                    href: 'https://exelix11.github.io/SwitchThemeInjector/v2/'
-                },
-                {
-                    icon: 'mdi-application',
-                    title: 'Themezer NX App',
-                    href:
-                        'https://github.com/suchmememanyskill/themezer-nx/releases'
-                },
-                {
-                    header: 'Guides:',
+                    header: "Tools:",
                 },
                 {
                     divider: true,
-                    inset: true
+                    inset: true,
                 },
                 {
-                    icon: 'mdi-help-circle-outline',
-                    title: 'Installing Themes',
-                    href:
-                        'https://nh-server.github.io/switch-guide/extras/theming/#installing-a-theme'
+                    icon: "mdi-image-edit-outline",
+                    title: "Overlay Creator",
+                    to: "/tools/overlaycreator",
                 },
                 {
-                    icon: 'mdi-help-circle-outline',
-                    title: 'Creating Themes/Fonts',
-                    href:
-                        'https://nh-server.github.io/switch-guide/extras/theming/'
+                    icon: "mdi-web",
+                    title: "Online Theme Creator",
+                    href: "https://exelix11.github.io/SwitchThemeInjector/v2/",
                 },
                 {
-                    icon: 'mdi-help-circle-outline',
-                    title: 'Creating Layouts',
+                    icon: "mdi-application",
+                    title: "Themezer NX App",
                     href:
-                        'https://github.com/FuryBaguette/SwitchLayoutEditor/wiki'
+                        "https://github.com/suchmememanyskill/themezer-nx/releases",
+                },
+                {
+                    header: "Guides:",
                 },
                 {
                     divider: true,
-                    inset: true
+                    inset: true,
                 },
                 {
-                    icon: 'mdi-information-outline',
-                    title: 'About',
-                    to: '/about'
+                    icon: "mdi-help-circle-outline",
+                    title: "Installing Themes",
+                    href:
+                        "https://nh-server.github.io/switch-guide/extras/theming/#installing-a-theme",
                 },
                 {
-                    icon: 'mdi-timeline-clock-outline',
-                    title: 'Status',
-                    href: 'https://status.themezer.net/'
-                }
+                    icon: "mdi-help-circle-outline",
+                    title: "Creating Themes/Fonts",
+                    href:
+                        "https://nh-server.github.io/switch-guide/extras/theming/",
+                },
+                {
+                    icon: "mdi-help-circle-outline",
+                    title: "Creating Layouts",
+                    href:
+                        "https://github.com/FuryBaguette/SwitchLayoutEditor/wiki",
+                },
+                {
+                    divider: true,
+                    inset: true,
+                },
+                {
+                    icon: "mdi-information-outline",
+                    title: "About",
+                    to: "/about",
+                },
+                {
+                    icon: "mdi-timeline-clock-outline",
+                    title: "Status",
+                    href: "https://status.themezer.net/",
+                },
             ],
             randomMenuItems: [
                 {
-                    icon: 'mdi-package-variant-closed',
-                    title: 'Random Pack',
-                    function: this.randomPack
+                    icon: "mdi-package-variant-closed",
+                    title: "Random Pack",
+                    function: this.randomPack,
                 },
                 {
-                    icon: 'mdi-format-color-fill',
-                    title: 'Random Theme',
-                    function: this.randomTheme
+                    icon: "mdi-format-color-fill",
+                    title: "Random Theme",
+                    function: this.randomTheme,
                 },
                 {
-                    icon: 'mdi-code-json',
-                    title: 'Random Layout',
-                    function: this.randomLayout
-                }
+                    icon: "mdi-code-json",
+                    title: "Random Layout",
+                    function: this.randomLayout,
+                },
             ],
             acceptDialog: false,
             step: 0,
@@ -569,73 +568,73 @@ export default {
             countdownFinished: false,
             backupCountdownFinished: false,
             loading: {
-                accept: false
-            }
-        }
+                accept: false,
+            },
+        };
     },
     computed: {
         avatar() {
             if (this.$auth.loggedIn && this.$auth.user.avatar) {
-                return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`
+                return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`;
             } else if (this.$auth.loggedIn) {
                 return `embed/avatars/${parseInt(
-                    this.$auth.user.discriminator
-                ) % 5}.png`
-            } else return null
-        }
+                    this.$auth.user.discriminator,
+                ) % 5}.png`;
+            } else return null;
+        },
     },
     watch: {
         acceptDialog() {
             setTimeout(() => {
-                this.countdownFinished = true
-            }, 10000)
+                this.countdownFinished = true;
+            }, 10000);
         },
         step(n) {
             if (n === 1) {
                 setTimeout(() => {
-                    this.backupCountdownFinished = true
-                }, 10000)
+                    this.backupCountdownFinished = true;
+                }, 10000);
             }
-        }
+        },
     },
     mounted() {
         if (this.$auth.loggedIn) {
-            this.loading.accept = true
+            this.loading.accept = true;
             this.$apollo
                 .mutate({
-                    mutation: updateAuth
+                    mutation: updateAuth,
                 })
                 .then(({data}) => {
-                    this.loading.accept = false
+                    this.loading.accept = false;
                     if (data.updateAuth) {
                         if (data.updateAuth.has_accepted === true) {
-                            this.accepts = true
+                            this.accepts = true;
                         } else {
-                            this.accepts = false
-                            this.acceptDialog = true
-                            this.backupCode = data.updateAuth.backup_code
+                            this.accepts = false;
+                            this.acceptDialog = true;
+                            this.backupCode = data.updateAuth.backup_code;
                         }
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
+                    this.$snackbar.error(err);
 
-                    this.loading.accept = false
-                })
+                    this.loading.accept = false;
+                });
         }
 
         // The adsbygoogle scripts inject height styles
         // which causes the height to be incorrect when returning to a page without ads.
         // This observer removes the height on the main application window
-        const wrapper = document.querySelector('.v-application--wrap')
+        const wrapper = document.querySelector(".v-application--wrap");
         this.observer = new MutationObserver(() => {
-            wrapper.style.height = ''
-            wrapper.style.minHeight = ''
+            wrapper.style.height = "";
+            wrapper.style.minHeight = "";
         });
 
         this.observer.observe(wrapper, {
             attributes: true,
-            attributeFilter: ['style']
+            attributeFilter: ["style"],
         });
     },
     beforeDestroy() {
@@ -646,101 +645,101 @@ export default {
             this.$apollo
                 .query({
                     query: randomPackIDs,
-                    fetchPolicy: 'no-cache'
+                    fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
-                    this.$router.push(`/packs/${data.randomPackIDs[0]}`)
+                    this.$router.push(`/packs/${data.randomPackIDs[0]}`);
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                })
+                    this.$snackbar.error(err);
+                });
         },
         randomTheme() {
             this.$apollo
                 .query({
                     query: randomThemeIDs,
-                    fetchPolicy: 'no-cache'
+                    fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
-                    this.$router.push(`/themes/_/${data.randomThemeIDs[0]}`)
+                    this.$router.push(`/themes/_/${data.randomThemeIDs[0]}`);
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                })
+                    this.$snackbar.error(err);
+                });
         },
         randomLayout() {
             this.$apollo
                 .query({
                     query: randomLayoutIDs,
-                    fetchPolicy: 'no-cache'
+                    fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
-                    this.$router.push(`/layouts/_/${data.randomLayoutIDs[0]}`)
+                    this.$router.push(`/layouts/_/${data.randomLayoutIDs[0]}`);
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                })
+                    this.$snackbar.error(err);
+                });
         },
         logout() {
-            this.error = null
-            return this.$auth.logout('social').catch((e) => {
-                this.error = e.response.data
-            })
+            this.error = null;
+            return this.$auth.logout("social").catch((e) => {
+                this.error = e.response.data;
+            });
         },
         accept() {
-            this.loading.accept = true
+            this.loading.accept = true;
             this.$apollo
                 .mutate({
                     mutation: updateAuth,
                     variables: {
-                        accepts: true
-                    }
+                        accepts: true,
+                    },
                 })
                 .then(({data}) => {
-                    this.loading.accept = false
+                    this.loading.accept = false;
                     if (data.updateAuth) {
                         if (data.updateAuth.has_accepted === true) {
-                            this.accepts = true
-                            this.acceptDialog = false
-                            this.backupCode = null
+                            this.accepts = true;
+                            this.acceptDialog = false;
+                            this.backupCode = null;
                         }
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loading.accept = false
-                })
+                    this.$snackbar.error(err);
+                    this.loading.accept = false;
+                });
         },
         copyCode() {
             navigator.clipboard
                 .writeText(this.backupCode)
                 .then(() => {
-                    this.copyCodeSuccess = true
+                    this.copyCodeSuccess = true;
                     setTimeout(() => {
-                        this.copyCodeSuccess = false
-                    }, 2000)
+                        this.copyCodeSuccess = false;
+                    }, 2000);
                 })
                 .catch((e) => {
                     // eslint-disable-next-line no-console
-                    console.log('Something went wrong, unable to copy', e)
-                })
+                    console.log("Something went wrong, unable to copy", e);
+                });
         },
         copyId() {
             navigator.clipboard
                 .writeText(this.$auth.user.id)
                 .then(() => {
-                    this.copyIdSuccess = true
+                    this.copyIdSuccess = true;
                     setTimeout(() => {
-                        this.copyIdSuccess = false
-                    }, 2000)
+                        this.copyIdSuccess = false;
+                    }, 2000);
                 })
                 .catch((e) => {
                     // eslint-disable-next-line no-console
-                    console.log('Something went wrong, unable to copy', e)
-                })
-        }
-    }
-}
+                    console.log("Something went wrong, unable to copy", e);
+                });
+        },
+    },
+};
 </script>
 
 <style lang="scss">
@@ -930,8 +929,17 @@ html {
         text-decoration: none;
     }
 
+    .title-icon {
+        border-radius: 35%;
+        height: fit-content;
+        margin: auto;
+    }
+
     .title-text {
         color: white !important;
+        font-weight: 700;
+        font-family: Arial, serif;
+        font-size: 28px;
     }
 }
 
