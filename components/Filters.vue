@@ -1,7 +1,7 @@
 <template>
     <v-card
         :style="
-			`border: rgba(255, 255, 255, 0.12) solid 2px; border-radius: 10px;`
+			`border: rgba(255, 255, 255, 0.12) solid 1px; border-radius: 10px;`
 		"
         class="ma-auto"
         exact

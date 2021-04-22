@@ -1,11 +1,11 @@
 <template>
     <v-app dark>
         <v-navigation-drawer
-            v-if="true"
             v-model="drawer"
             app
             class="drawer"
             clipped
+            temporary
             fixed
         >
             <div
@@ -44,8 +44,8 @@
                             <img
                                 v-if="$auth.loggedIn"
                                 :src="
-									`https://cdn.discordapp.com/${avatar}?size=64`
-								"
+                                  `https://cdn.discordapp.com/${avatar}?size=64`
+                                "
                                 alt="avatar"
                             />
                             <v-icon v-else large>
