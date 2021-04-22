@@ -24,7 +24,7 @@
                             </h2>
                             <v-divider/>
                             <ItemGrid
-                                :loading="!!$apollo.queries.packList.loading"
+                                :loading="!packList || !!$apollo.queries.packList.loading"
                                 :items="packList"
                                 :show-props="['creator']"
                                 more-url="/packs?sort=id&order=desc"
@@ -42,7 +42,7 @@
                             </h2>
                             <v-divider/>
                             <ItemGrid
-                                :loading="!!$apollo.queries.themeList.loading"
+                                :loading="!themeList || !!$apollo.queries.themeList.loading"
                                 :items="themeList"
                                 :show-props="['creator']"
                                 more-url="/themes?sort=id&order=desc"
@@ -60,7 +60,7 @@
                             </h2>
                             <v-divider/>
                             <ItemGrid
-                                :loading="!!$apollo.queries.layoutList.loading"
+                                :loading="!layoutList || !!$apollo.queries.layoutList.loading"
                                 :items="layoutList"
                                 :show-props="['creator']"
                                 more-url="/layouts?sort=updated&order=desc"
@@ -101,7 +101,7 @@ export default Vue.extend({
 
                 return vars
             },
-            prefetch: true
+            prefetch: false
         },
         themeList: {
             query: rowThemeList,
@@ -114,7 +114,7 @@ export default Vue.extend({
 
                 return vars
             },
-            prefetch: true
+            prefetch: false
         },
         layoutList: {
             query: rowLayoutList,
@@ -128,7 +128,7 @@ export default Vue.extend({
 
                 return vars
             },
-            prefetch: true
+            prefetch: false
         }
     },
     head() {
