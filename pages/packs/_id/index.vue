@@ -310,7 +310,7 @@ export default Vue.extend({
 .overlay-image .theme-name {
     padding: 5px 10px;
     width: fit-content;
-    border-radius: 0 0 10px 0;
+    border-bottom-right-radius: 20px;
     background-color: rgba(0, 0, 0, 0.4);
 
     overflow: hidden;

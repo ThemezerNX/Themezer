@@ -12,7 +12,6 @@
                     >
                         <v-img
                             :src="theme.preview.original"
-                            :style="backgroundStyle"
                             aspect-ratio="1.7778"
                             class="overlay-image"
                             cover
@@ -41,8 +40,8 @@
                         <div
                             v-if="theme.details.description"
                             v-linkified:options="{
-								className: 'font-weight-medium'
-							}"
+                                className: 'font-weight-medium'
+                            }"
                             class="font-weight-thin subtitle-1"
                             v-html="theme.details.description"
                         />
@@ -97,9 +96,7 @@
                             {{ theme.details.version }}
                         </div>
                         <div class="font-weight-light body-2">
-							<span class="font-weight-medium"
-              >Last Updated:</span
-              >
+                            <span class="font-weight-medium">Last Updated:</span>
                             {{ niceDate(theme.last_updated) }}
                         </div>
                         <div class="font-weight-light body-2">
@@ -107,13 +104,13 @@
                             <nuxt-link
                                 v-if="theme.layout"
                                 :to="
-									`/layouts/${fileNameToWebName(
-										theme.layout.target
-									)}/${createUrlString(
-										theme.layout.id,
-										theme.layout.details.name
-									)}`
-								"
+                                  `/layouts/${fileNameToWebName(
+                                    theme.layout.target
+                                  )}/${createUrlString(
+                                    theme.layout.id,
+                                    theme.layout.details.name
+                                  )}`
+                                "
                                 class="font-weight-bold"
                             >
                                 {{ theme.layout.details.name }}
@@ -123,12 +120,12 @@
                                     class="font-weight-bold"
                                     href="#"
                                     @click="
-										downloadFileUrl(
-											`${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
-											'application/json',
-											`${theme.details.name} (custom layout).json`
-										)
-									"
+                                        downloadFileUrl(
+                                          `${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
+                                          'application/json',
+                                          `${theme.details.name} (custom layout).json`
+                                        )
+                                    "
                                 >
                                     Custom
                                 </a>
@@ -136,10 +133,10 @@
                         </div>
                         <div
                             v-if="
-								theme.layout &&
-									theme.pieces &&
-									theme.pieces.length > 0
-							"
+                                theme.layout &&
+                                  theme.pieces &&
+                                  theme.pieces.length > 0
+                              "
                             class="font-weight-light body-2"
                         >
                             <span class="font-weight-medium">Options: </span>
@@ -152,8 +149,8 @@
                             <span class="font-weight-medium">Background: </span>
                             <a
                                 :href="
-									`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`
-								"
+                                  `${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`
+                                "
                                 class="font-weight-bold"
                                 target="_blank"
                             >
@@ -203,11 +200,11 @@
                             </div>
                             <nuxt-link
                                 :to="
-									`/packs/${createUrlString(
-										theme.pack.id,
-										theme.pack.details.name
-									)}`
-								"
+                                  `/packs/${createUrlString(
+                                    theme.pack.id,
+                                    theme.pack.details.name
+                                  )}`
+                                "
                                 class="subtitle-1 font-weight-bold"
                             >
                                 {{
@@ -219,10 +216,9 @@
                 </v-row>
                 <v-dialog v-model="packDialog" max-width="400">
                     <v-card>
-                        <v-card-title class="headline"
-                        >What is a Pack?
-                        </v-card-title
-                        >
+                        <v-card-title class="headline">
+                            What is a Pack?
+                        </v-card-title>
 
                         <v-card-text>
                             Packs are zips with multiple themes created by the
@@ -284,14 +280,6 @@ export default Vue.extend({
         };
     },
     computed: {
-        backgroundStyle() {
-            return "";
-            // if (this.theme.details.color) {
-            // 	return `background: ${this.theme.details.color};`
-            // } else {
-            // 	return `background: #e2e2e2;`
-            // }
-        },
         mayModerate() {
             return this.isPageOwner || this.$auth.user?.isAdmin;
         },

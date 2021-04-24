@@ -20,7 +20,7 @@
                 </v-flex>
             </v-fade-transition>
             <div
-                class="wrapper"
+                class="wrapper transition-eases"
             >
                 <slot/>
             </div>
@@ -83,18 +83,14 @@ export default Vue.extend({
     align-items: center;
     position: absolute;
     z-index: 3;
-    border-radius: 10px;
+    border-radius: 20px;
 
     &.dim {
         background: rgba(0, 0, 0, 0.3);
     }
-
-    // border-radius: 10px;
 }
 
 .wrapper {
-    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-
     &.shadow {
         box-shadow: 0 0 10px 6px #232323 inset;
     }

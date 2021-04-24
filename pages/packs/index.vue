@@ -15,19 +15,15 @@
                             {{ itemList.pagination.item_count }}
                             {{
                                 itemList.pagination.item_count === 1
-                                    ? 'result'
-                                    : 'results'
+                                    ? "result"
+                                    : "results"
                             }}
                         </h3>
                         <v-divider/>
                     </div>
 
                     <v-row
-                        v-if="
-                          itemList &&
-                            itemList.packList &&
-                            itemList.packList.length > 0
-                        "
+                        v-if="itemList && itemList.packList &&itemList.packList.length > 0"
                     >
                         <v-col
                             v-for="pack in itemList.packList"
@@ -74,36 +70,36 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {allCreators, allLayouts, packList} from '@/graphql/Pack.gql'
-import targetParser from '@/components/mixins/targetParser'
-import filter from '@/components/mixins/filter'
+import Vue from "vue";
+import {allCreators, allLayouts, packList} from "@/graphql/Pack.gql";
+import targetParser from "@/components/mixins/targetParser";
+import filter from "@/components/mixins/filter";
 
 export default Vue.extend({
     components: {
-        Filters: () => import('@/components/Filters.vue'),
-        ItemCard: () => import('@/components/ItemCard.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        Filters: () => import("@/components/Filters.vue"),
+        ItemCard: () => import("@/components/ItemCard.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, filter],
     data() {
         return {
             cookieBanner: true,
-            type: 'packs',
-            list: 'packList',
+            type: "packs",
+            list: "packList",
             unsupportedFilters: [],
             allCreatorsQuery: allCreators,
             allLayoutsQuery: allLayouts,
-            nsfw: false
-        }
+            nsfw: false,
+        };
     },
     apollo: {
         itemList: {
             query: packList,
-            fetchPolicy: 'cache-and-network',
+            fetchPolicy: "cache-and-network",
             variables() {
                 const vars = {
-                    q: 'packList',
+                    q: "packList",
                     target: this.targetFile(),
                     limit: 16,
                     page: this.currentPage,
@@ -112,62 +108,62 @@ export default Vue.extend({
                     order: this.currentOrder,
                     creators: this.currentCreators,
                     layouts: this.currentLayouts,
-                    nsfw: this.nsfw
-                }
-                vars.hash = this.$hashString(vars)
-                return vars
+                    nsfw: this.nsfw,
+                };
+                vars.hash = this.$hashString(vars);
+                return vars;
             },
             update(data) {
-                return data
+                return data;
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     head() {
         // eslint-disable-next-line camelcase
-        const resultAmount = this.itemList?.pagination?.item_count
+        const resultAmount = this.itemList?.pagination?.item_count;
 
         const metaTitle =
             resultAmount !== undefined
                 ? `${resultAmount} ${
-                    resultAmount === 1 ? 'result' : 'results'
+                    resultAmount === 1 ? "result" : "results"
                 } | Packs`
-                : `Packs`
+                : `Packs`;
 
-        const metaDesc = 'Discover amazing theme packs to give every menu a similar look!'
+        const metaDesc = "Discover amazing theme packs to give every menu a similar look!";
 
-        const metaImg = null
+        const metaImg = null;
 
         return {
             title: metaTitle,
             meta: [
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>
 
 <style lang="scss">

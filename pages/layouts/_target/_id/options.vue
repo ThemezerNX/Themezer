@@ -62,7 +62,7 @@
                         <v-list
                             class="my-3"
                             flat
-                            style="background: rgba(255,255,255,0.12); border-radius: 10px;"
+                            style="background: rgba(255,255,255,0.12); border-radius: 20px;"
                             subheader
                         >
                             <v-subheader>Layout pieces</v-subheader>
@@ -473,6 +473,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .v-menu__content {
-    border-radius: 10px !important;
+    border-radius: 20px !important;
 }
 </style>

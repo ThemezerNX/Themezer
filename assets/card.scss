@@ -3,13 +3,13 @@
 .card {
   height: 100%;
   transform-origin: center top 0;
-  border-radius: 10px !important;
+  border-radius: 16px !important;
   overflow: hidden;
   background-color: #212121;
   border-color: #212121;
 
   .overlay-image {
-    transition: background-image 200ms;
+    transition: all .25s ease;
     background: #2d2d2d;
   }
 
@@ -43,5 +43,5 @@
 
 .card.on-hover {
   background: darken($themezer-primary, 15%) !important;
-  transform: translateY(-2px);
+  transform: translateY(5px);
 }

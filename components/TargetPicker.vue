@@ -34,21 +34,21 @@
                     <v-fade-transition>
                         <v-card
                             :class="{ 'on-hover': hover }"
-                            :elevation="hover ? 12 : 2"
+                            :elevation="hover ? 2 : 12"
                             :to="{
-								path: `${$parent.$data.type}/${target.target}`,
-								query: $route.query
-							}"
-                            class="card d-flex align-center transition-fast-in-fast-out"
+                                path: `${$parent.$data.type}/${target.target}`,
+                                query: $route.query
+                              }"
+                            class="card d-flex align-center transition-ease"
                             min-height="200"
                             min-width="200"
                         >
                             <img
                                 :src="
-									require(`@/assets/stock/360/${target.image}`)
-								"
+                                  require(`@/assets/stock/360/${target.image}`)
+                                "
                                 alt="menu screenshot"
-                                class="thumbnail transition-fast-in-fast-out"
+                                class="thumbnail transition-ease"
                             />
                             <div class="display-2 flex-grow-1 text-center">
                                 <v-icon size="60">{{ target.icon }}</v-icon>
@@ -81,7 +81,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .card {
-    border-radius: 10px !important;
+    border-radius: 20px !important;
     overflow: hidden;
     text-shadow: 0 0 5px #000000;
 
@@ -99,7 +99,7 @@ export default Vue.extend({
 
 .card.on-hover {
     // background: darken($themezer-primary, 15%) !important;
-    transform: translateY(-5px);
+    transform: translateY(10px);
 
     .thumbnail {
         opacity: 1;

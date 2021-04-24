@@ -205,7 +205,7 @@
 									"
                                     class="mx-auto"
                                     outlined
-                                    style="border-radius: 10px; background-color: rgba(255, 255, 255, 0.02);"
+                                    style="border-radius: 20px; background-color: rgba(255, 255, 255, 0.02);"
                                 >
                                     <v-list-item class="px-0" three-line>
                                         <v-list-item-content class="pa-0">
@@ -245,7 +245,7 @@
 																	rules.required
 																]"
                                                                 accept="image/jpeg"
-                                                                class="screenshot_upload transition-fast-in-fast-out v-card--reveal"
+                                                                class="screenshot_upload transition-ease v-card--reveal"
                                                                 color="black"
                                                                 filled
                                                                 full-width

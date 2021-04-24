@@ -18,7 +18,7 @@ a {
   }
 
   .button--pagination {
-    transition: 0.15s background-color ease-out;
+    transition: all .25s ease;
 
     display: inline-flex;
     justify-content: center;

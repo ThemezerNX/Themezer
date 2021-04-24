@@ -14,7 +14,7 @@
                     ? `background-color: ${$store.state.profileColor} !important;`
                     : ''
                 "
-                class="background"
+                class="background transition-ease"
             />
             <v-list nav rounded>
                 <v-list-item
@@ -228,7 +228,7 @@
             <nuxt/>
         </v-main>
 
-        <v-footer absolute app inset>
+        <v-footer class="footer" absolute app inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
             <nuxt-link class="pr-3" to="/about">About</nuxt-link>
             <a href="https://status.themezer.net/" target="_blank">Status</a>
@@ -745,7 +745,7 @@ export default {
 <style lang="scss">
 @import 'assets/variables.scss';
 
-$border-radius: 10px;
+$border-radius: 20px;
 
 html {
     word-break: break-word !important;
@@ -772,7 +772,12 @@ html {
     margin-bottom: 8px !important;
 }
 
+.v-list--rounded .v-list-item, .v-list--rounded .v-list-item::before, .v-list--rounded .v-list-item > .v-ripple__container {
+    border-radius: 20px !important;
+}
+
 .v-menu__content {
+    border-radius: $border-radius;
     .v-card {
         background-color: #424242 !important;
     }
@@ -789,8 +794,8 @@ html {
 }
 
 .v-slide-group__content {
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 8px;
+    padding-bottom: 25px;
 }
 
 .v-slide-group__wrapper {
@@ -851,6 +856,11 @@ html {
     width: 18px !important;
 }
 
+.v-card > *:last-child:not(.v-btn):not(.v-chip) {
+    border-bottom-left-radius: initial;
+    border-bottom-right-radius: initial;
+}
+
 @keyframes flow {
     from {
         background-position: bottom left;
@@ -863,8 +873,7 @@ html {
 .box {
     background-color: #1e1e1e;
     border-radius: $border-radius !important;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 12%) !important;
 
     &_fill {
         @extend .box;
@@ -887,6 +896,10 @@ html {
     }
 }
 
+.transition-ease {
+    transition: all .25s ease;
+}
+
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #1e1e1e;
@@ -903,8 +916,11 @@ html {
 </style>
 
 <style lang="scss" scoped>
+$border-radius: 20px;
+
 .drawer {
     user-select: none;
+    border-radius: 0 $border-radius $border-radius 0 !important;
 
     .background {
         position: absolute;
@@ -912,7 +928,7 @@ html {
         width: 100%;
         z-index: -5;
 
-        transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color;
+        transition: all .25s ease;
         transition-property: background-color;
         transition-duration: 0.2s;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1),
@@ -924,6 +940,7 @@ html {
 .navbar {
     user-select: none;
     background: transparent;
+    border-radius: 0 0 $border-radius $border-radius !important;
 
     .title-link {
         text-decoration: none;
@@ -943,8 +960,13 @@ html {
     }
 }
 
-.splatter {
+.footer {
+    user-select: none;
+    border-radius: $border-radius $border-radius 0 0 !important;
+    box-shadow: 0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%) !important;
+}
 
+.splatter {
     top: 0;
     position: fixed;
     filter: blur(9px);

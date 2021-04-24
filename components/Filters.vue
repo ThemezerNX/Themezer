@@ -1,9 +1,8 @@
 <template>
     <v-card
-        :style="
-			`border: rgba(255, 255, 255, 0.12) solid 1px; border-radius: 10px;`
-		"
+        style="border-radius: 20px;"
         class="ma-auto"
+        :elevation="12"
         exact
         router
     >
@@ -17,11 +16,11 @@
                 <v-spacer/>
                 <v-btn
                     :disabled="
-						Object.keys($route.query).length === 0 ||
-							(Object.keys($route.query).includes('page')
-								? Object.keys($route.query).length === 1
-								: !Object.keys($route.query).length)
-					"
+                        Object.keys($route.query).length === 0 ||
+                          (Object.keys($route.query).includes('page')
+                            ? Object.keys($route.query).length === 1
+                            : !Object.keys($route.query).length)
+                    "
                     class="px-1"
                     color="secondary"
                     rounded
@@ -49,11 +48,11 @@
             <v-expand-transition mode="out-in" name="card-animation">
                 <div
                     v-show="
-						focussed ||
-							searchHover ||
-							withCreators.length > 0 ||
-							withLayouts.length > 0
-					"
+                        focussed ||
+                          searchHover ||
+                          withCreators.length > 0 ||
+                          withLayouts.length > 0
+                    "
                     class="mx-2 search-in"
                     @mouseover="searchHover = true"
                 >
@@ -120,46 +119,44 @@
                     v-for="(option, i) in sortOptions"
                     :key="i"
                     :class="{
-						'nuxt-link-exact-active': currentSort === option.id,
-						asc: currentOrder === 'asc',
-						desc: currentOrder === 'desc'
-					}"
+                            'nuxt-link-exact-active': currentSort === option.id,
+                            asc: currentOrder === 'asc',
+                            desc: currentOrder === 'desc'
+                        }"
                     :to="{
-						query: {
-							page: undefined,
-							query: $parent.currentSearch,
-							sort: option.id,
-							order:
-								currentSort === option.id
-									? nextSortOrder
-									: 'desc',
-							creators:
-								withCreators.length > 0
-									? withCreators.join(',')
-									: undefined,
-							layouts:
-								withLayouts.length > 0
-									? withLayouts.join(',')
-									: undefined
-						}
-					}"
+                            query: {
+                              page: undefined,
+                              query: $parent.currentSearch,
+                              sort: option.id,
+                              order:
+                                currentSort === option.id
+                                  ? nextSortOrder
+                                  : 'desc',
+                              creators:
+                                withCreators.length > 0
+                                  ? withCreators.join(',')
+                                  : undefined,
+                              layouts:
+                                withLayouts.length > 0
+                                  ? withLayouts.join(',')
+                                  : undefined
+                            }
+                          }"
                     class="sort-item"
                 >
                     <v-icon
                         :color="
-							currentSort === option.id && currentOrder === 'asc'
-								? '#1e1e1e'
-								: 'white'
-						"
+                          currentSort === option.id && currentOrder === 'asc'
+                            ? '#1e1e1e'
+                            : 'white'
+                        "
                     >
                         {{ option.icon }}
                     </v-icon>
                     {{ option.title }}
                     <span v-show="currentSort === option.id" class="order">
 						<v-icon
-                :color="
-								currentOrder === 'asc' ? '#1e1e1e' : 'white'
-							"
+                :color="currentOrder === 'asc' ? '#1e1e1e' : 'white'"
             >
 							mdi-arrow-up
 						</v-icon>
@@ -180,10 +177,10 @@
                     hide-details
                     label="Made by me"
                     @change="
-						$event
-							? (withCreators = [$auth.user.id])
-							: (withCreators = [])
-					"
+                            $event
+                              ? (withCreators = [$auth.user.id])
+                              : (withCreators = [])
+                        "
                     @change.once="getParentAllCreators()"
                 ></v-checkbox>
             </v-card-actions>
@@ -414,11 +411,11 @@ export default Vue.extend({
 @import 'assets/variables.scss';
 
 .group:first-of-type {
-    padding-top: 16px;
+    padding-top: 8px;
 }
 
 .group:last-of-type {
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 .group > .title {
@@ -474,7 +471,7 @@ export default Vue.extend({
 
     .order {
         right: 0;
-        transition: transform 200ms ease;
+        transition: all .25s ease;
         position: absolute;
         margin-right: 6px;
     }

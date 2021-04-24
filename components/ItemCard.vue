@@ -2,15 +2,14 @@
     <v-hover v-if="item && item.details" v-slot:default="{ hover }">
         <v-card
             :class="{ 'on-hover': hover }"
-            :elevation="hover ? 12 : 2"
-            :style="`border: rgba(255, 255, 255, 0.12) solid 1px;`"
+            :elevation="hover ? 2 : 12"
             :to="
-				(type === 'packs'
-					? '/packs'
-					: `/${type}/${fileNameToWebName(item.target)}`) +
-					`/${createUrlString(item.id, item.details.name)}`
-			"
-            class="ma-auto card transition-fast-in-fast-out"
+                (type === 'packs'
+                  ? '/packs'
+                  : `/${type}/${fileNameToWebName(item.target)}`) +
+                  `/${createUrlString(item.id, item.details.name)}`
+            "
+            class="ma-auto card transition-ease"
             router
         >
             <div v-if="!!item.layout" class="badges-wrapper">
@@ -32,14 +31,14 @@
                     <v-img
                         :src="theme.preview.thumb"
                         :style="
-							type === 'layouts'
-								? `background-color: ${item.details.color};`
-								: ''
-						"
+                          type === 'layouts'
+                            ? `background-color: ${item.details.color};`
+                            : ''
+                        "
                         aspect-ratio="1.7778"
-                        class="overlay-image ma-2"
+                        class="overlay-image mb-2"
                         cover
-                        style="border-radius: 5px"
+                        style="border-radius: 16px"
                     />
                 </v-carousel-item>
             </v-carousel>
@@ -48,14 +47,14 @@
                 v-else
                 :src="imgSrc"
                 :style="
-					type === 'layouts'
-						? `background-color: ${item.details.color};`
-						: ''
-				"
+                  type === 'layouts'
+                    ? `background-color: ${item.details.color};`
+                    : ''
+                "
                 aspect-ratio="1.7778"
-                class="overlay-image ma-2"
+                class="overlay-image mb-2"
                 cover
-                style="border-radius: 5px"
+                style="border-radius: 16px"
             />
 
             <v-card-title

@@ -41,7 +41,7 @@
                                             v-show="hover"
                                             v-model="uploadedScreenshot"
                                             accept="image/jpeg"
-                                            class="screenshot_upload transition-fast-in-fast-out v-card--reveal"
+                                            class="screenshot_upload transition-ease v-card--reveal"
                                             color="black"
                                             filled
                                             full-width
@@ -476,6 +476,6 @@ export default Vue.extend({
 @import 'assets/screenshot-upload.scss';
 
 .v-menu__content {
-    border-radius: 10px !important;
+    border-radius: 20px !important;
 }
 </style>

@@ -9,29 +9,25 @@
                 <v-hover v-if="theme" v-slot:default="{ hover }">
                     <v-scale-transition>
                         <v-card
-                            :class="
-								`
-								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
-								${
-									i === items.length - 1
-										? 'me-0'
-										: $vuetify.breakpoint.smAndDown
-										? 'me-1'
-										: 'me-2'
-								}
-								${hover ? 'on-hover' : ''}
-							`
-							"
-                            :elevation="hover ? 12 : 2"
+                            :class="`
+                                ${$vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
+                                ${
+                                    $vuetify.breakpoint.smAndDown
+                                    ? 'me-1'
+                                    : 'me-2'
+                                }
+                                ${hover ? 'on-hover' : ''}
+                            `"
+                            :elevation="hover ? 2 : 10"
                             :to="
-								`/themes/${fileNameToWebName(
-									theme.target
-								)}/${createUrlString(
-									theme.id,
-									theme.details.name
-								)}`
-							"
-                            class="mx-auto card transition-fast-in-fast-out"
+                                `/themes/${fileNameToWebName(
+                                  theme.target
+                                )}/${createUrlString(
+                                  theme.id,
+                                  theme.details.name
+                                )}`
+                              "
+                            class="mx-auto card transition-ease"
                             router
                         >
                             <div v-if="!!theme.layout" class="badges-wrapper">
@@ -41,25 +37,24 @@
                             <v-img
                                 :src="theme.preview.thumb"
                                 :width="
-									$vuetify.breakpoint.smAndDown ? 200 : 300
-								"
+                                  $vuetify.breakpoint.smAndDown ? 200 : 300
+                                "
                                 aspect-ratio="1.7778"
-                                class="ma-2"
                                 cover
-                                style="border-radius: 5px"
+                                style="border-radius: 16px"
                             />
 
                             <v-card-title
                                 :class="
-									($vuetify.breakpoint.smAndDown
-										? 'body-2'
-										: 'subtitle-1') +
-										' ' +
-										(showProps.includes('creator') ||
-										showProps.includes('target')
-											? 'mb-0'
-											: 'my-1 mx-3')
-								"
+                                  ($vuetify.breakpoint.smAndDown
+                                    ? 'body-2'
+                                    : 'subtitle-1') +
+                                    ' ' +
+                                    (showProps.includes('creator') ||
+                                    showProps.includes('target')
+                                      ? 'mb-0'
+                                      : 'my-1 mx-3')
+                                "
                                 class="title"
                                 v-text="theme.details.name"
                             />

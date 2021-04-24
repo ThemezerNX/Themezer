@@ -17,7 +17,7 @@
 								"
                                 :style="backgroundStyle"
                                 aspect-ratio="1.7778"
-                                class="overlay-image transition-fast-in-fast-out"
+                                class="overlay-image transition-ease"
                                 cover
                             />
                         </v-fade-transition>

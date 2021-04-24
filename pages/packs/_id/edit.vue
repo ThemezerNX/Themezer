@@ -105,13 +105,13 @@
                         v-for="theme in pack.themes"
                         :key="theme.id"
                         :to="
-							`/themes/${fileNameToWebName(
-								theme.target
-							)}/${createUrlString(
-								theme.id,
-								theme.details.name
-							)}/edit`
-						"
+                          `/themes/${fileNameToWebName(
+                            theme.target
+                          )}/${createUrlString(
+                            theme.id,
+                            theme.details.name
+                          )}/edit`
+                        "
                     >
                         <v-list-item-avatar height="auto" tile width="140">
                             <v-img
@@ -316,6 +316,6 @@ export default Vue.extend({
 @import 'assets/screenshot-upload.scss';
 
 .v-menu__content {
-    border-radius: 10px !important;
+    border-radius: 20px !important;
 }
 </style>

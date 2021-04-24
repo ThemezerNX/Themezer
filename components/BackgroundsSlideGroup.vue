@@ -18,50 +18,46 @@
                 <v-hover v-if="background" v-slot:default="{ hover }">
                     <v-scale-transition>
                         <v-card
-                            :class="
-								`
-								${i === 0 ? 'ms-0' : $vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
-								${
-									i === backgrounds.length - 1
-										? 'me-0'
-										: $vuetify.breakpoint.smAndDown
-										? 'me-1'
-										: 'me-2'
-								}
-								${hover ? 'on-hover' : ''}
-							`
-							"
+                            :class="`
+                                ${$vuetify.breakpoint.smAndDown ? 'ms-1' : 'ms-2'}
+                                ${
+                                    $vuetify.breakpoint.smAndDown
+                                    ? 'me-1'
+                                    : 'me-2'
+                                }
+                                ${hover ? 'on-hover' : ''}
+                            `"
+                            :elevation="hover ? 2 : 10"
                             :width="
-								background.url
-									? null
-									: $vuetify.breakpoint.smAndDown
-									? 80
-									: 100
-							"
-                            class="ma-auto card transition-fast-in-fast-out"
+                                background.url
+                                  ? null
+                                  : $vuetify.breakpoint.smAndDown
+                                  ? 80
+                                  : 100
+                              "
+                            class="ma-auto card transition-ease"
                             @click="toggle"
                         >
                             <v-img
                                 v-if="background.url"
                                 :src="
-									require(`@/assets/backgrounds/${background.url}`)
-								"
+                                  require(`@/assets/backgrounds/${background.url}`)
+                                "
                                 :width="
-									$vuetify.breakpoint.smAndDown ? 200 : 300
-								"
+                                  $vuetify.breakpoint.smAndDown ? 200 : 300
+                                "
                                 aspect-ratio="1.7778"
-                                class="ma-2"
                                 contain
-                                style="border-radius: 5px"
+                                style="border-radius: 16px"
                             />
 
                             <v-card-title
                                 v-if="background.url"
                                 :class="
-									$vuetify.breakpoint.smAndDown
-										? 'body-2'
-										: 'subtitle-1'
-								"
+                                  $vuetify.breakpoint.smAndDown
+                                    ? 'body-2'
+                                    : 'subtitle-1'
+                                "
                                 class="my-1 mx-3 title"
                                 v-text="background.name"
                             />

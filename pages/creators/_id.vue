@@ -134,7 +134,7 @@
             >
                 <v-row align="center" justify="center">
                     <v-col class="pt-0" cols="12">
-                        <v-sheet v-if="creator.bio" class="markdown-wrapper">
+                        <v-sheet v-if="creator.bio" class="markdown-wrapper" elevation="12">
                             <Markdown :source="creator.bio" class="markdown"/>
                         </v-sheet>
 
@@ -775,8 +775,8 @@ export default Vue.extend({
 }
 
 .markdown-wrapper {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .markdown {
