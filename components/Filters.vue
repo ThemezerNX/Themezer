@@ -272,9 +272,15 @@ export default Vue.extend({
             }
         },
         currentCreators(): Array<string> | undefined {
-            return this.$route.query.creators
+            const creators = this.$route.query.creators
                 ? (this.$route.query.creators as string).split(",")
                 : undefined;
+
+            if (this.$auth.loggedIn && creators && creators.includes(this.$auth.user.id)) {
+                this.onlybyme = true;
+            }
+
+            return creators;
         },
         currentLayouts(): Array<string> | undefined {
             return this.$route.query.layouts
