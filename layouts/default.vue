@@ -969,7 +969,7 @@ $border-radius: 20px;
 .splatter {
     top: 0;
     position: fixed;
-    filter: blur(9px);
+    filter: blur(40px);
 
     &.splatter-1 {
         opacity: 0;
