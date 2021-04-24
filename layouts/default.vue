@@ -897,7 +897,7 @@ html {
 }
 
 .transition-ease {
-    transition: all .25s ease;
+    transition: all .25s ease !important;
 }
 
 ::-webkit-scrollbar-track {
