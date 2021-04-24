@@ -276,7 +276,7 @@ export default Vue.extend({
                 ? (this.$route.query.creators as string).split(",")
                 : undefined;
 
-            if (this.$auth.loggedIn && creators && creators.includes(this.$auth.user.id)) {
+            if (this.$auth.loggedIn && creators && creators.includes((this.$auth as any)?.user?.id)) {
                 this.onlybyme = true;
             }
 
