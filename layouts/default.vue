@@ -746,6 +746,7 @@ export default {
 @import 'assets/variables.scss';
 
 $border-radius: 20px;
+$transition-ease: all .25s ease !important;
 
 html {
     word-break: break-word !important;
@@ -774,6 +775,19 @@ html {
 
 .v-list--rounded .v-list-item, .v-list--rounded .v-list-item::before, .v-list--rounded .v-list-item > .v-ripple__container {
     border-radius: 20px !important;
+}
+
+.v-list-item {
+    transition: $transition-ease;
+}
+
+.v-list-item:hover {
+    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
+    transform: translateY(-3px) !important;
+}
+
+.v-list-item--active {
+    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
 }
 
 .v-menu__content {
@@ -897,7 +911,7 @@ html {
 }
 
 .transition-ease {
-    transition: all .25s ease !important;
+    transition: $transition-ease;
 }
 
 ::-webkit-scrollbar-track {

@@ -448,6 +448,8 @@ export default Vue.extend({
     transition: all 200ms ease;
 
     &:hover {
+        box-shadow: 0 6px 6px -3px rgb(0 0 0 / 20%), 0 10px 14px 1px rgb(0 0 0 / 14%), 0 4px 18px 3px rgb(0 0 0 / 12%) !important;
+        transform: translateY(-3px);
         border: 1px solid rgba(255, 255, 255, 0.12);
         color: rgba(255, 255, 255, 0.6);
         background-color: transparentize(rgba(255, 255, 255, 0.2), 0.9);

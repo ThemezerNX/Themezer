@@ -35,11 +35,17 @@ a {
     border-radius: 100px;
     margin: 0 5px;
 
+    box-shadow: 0 5px 12px -4px rgba(0, 0, 0, .2) !important;
+
     &.active {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
       background-color: darken($themezer-primary, 4);
     }
 
     &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
       background-color: darken($themezer-average, 2);
     }
   }
