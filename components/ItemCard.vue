@@ -20,14 +20,16 @@
                 v-if="type === 'packs'"
                 :cycle="hover"
                 :show-arrows="false"
-                class="mb-n2"
+                class="carousel mb-2 transition-ease"
+                :class="{ 'on-hover': hover}"
                 continuous
                 height="auto"
                 hide-delimiter-background
                 hide-delimiters
                 interval="2000"
+                style="border-radius: 16px "
             >
-                <v-carousel-item v-for="(theme, i) in item.themes" :key="i">
+                <v-carousel-item v-for="(theme, i) in item.themes" :key="i" >
                     <v-img
                         :src="theme.preview.thumb"
                         :style="
@@ -36,9 +38,8 @@
                             : ''
                         "
                         aspect-ratio="1.7778"
-                        class="overlay-image mb-2"
+                        class="overlay-image"
                         cover
-                        style="border-radius: 16px"
                     />
                 </v-carousel-item>
             </v-carousel>
@@ -51,19 +52,20 @@
                     ? `background-color: ${item.details.color};`
                     : ''
                 "
+                :class="{ 'img-hover': hover}"
                 aspect-ratio="1.7778"
                 class="overlay-image mb-2"
                 cover
-                style="border-radius: 16px"
+                style="border-radius: 16px; "
             />
 
             <v-card-title
                 :class="
-					showProps.includes('creator') ||
-					showProps.includes('target')
-						? 'mb-0'
-						: 'my-1 mx-3'
-				"
+                  showProps.includes('creator') ||
+                  showProps.includes('target')
+                    ? 'mb-0'
+                    : 'my-1 mx-3'
+                "
                 class="title subtitle-1"
                 v-text="item.details.name"
             />
@@ -73,7 +75,7 @@
                 class="creator"
             >
                 By {{ item.creator.display_name }}
-                {{ item.details.version ? `• v${item.details.version}` : '' }}
+                {{ item.details.version ? `• v${item.details.version}` : "" }}
             </v-card-subtitle>
 
             <v-card-subtitle
@@ -87,9 +89,9 @@
 
             <v-card-text
                 v-if="
-					item.details.description &&
-						showProps.includes('description')
-				"
+                  item.details.description &&
+                    showProps.includes('description')
+                "
                 class="description"
             >
                 <div v-linkified v-html="item.details.description"/>

@@ -45,3 +45,8 @@
   background: darken($themezer-primary, 15%) !important;
   transform: translateY(5px);
 }
+
+.carousel.on-hover, .img-hover {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .3);
+}
+

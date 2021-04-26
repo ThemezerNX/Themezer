@@ -46,6 +46,8 @@
                                 :width="
                                   $vuetify.breakpoint.smAndDown ? 200 : 300
                                 "
+                                class="transition-ease"
+                                :class="{ 'img-hover': hover}"
                                 aspect-ratio="1.7778"
                                 contain
                                 style="border-radius: 16px"

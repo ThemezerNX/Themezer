@@ -129,22 +129,22 @@
                                 prepend-icon="mdi-package-variant-closed"
                                 rounded
                                 @mouseover.once="
-									$apollo.queries.packList.skip = false
-								"
+                                  $apollo.queries.packList.skip = false
+                                "
                             ></v-autocomplete>
                             <v-combobox
                                 v-model="changed.categories"
                                 :items="
-									categories && categories.length > 0
-										? categories.filter((c) => c !== 'NSFW')
-										: []
-								"
+                                  categories && categories.length > 0
+                                    ? categories.filter((c) => c !== 'NSFW')
+                                    : []
+                                "
                                 :loading="!!$apollo.queries.categories.loading"
                                 :rules="[
-									rules.category_length,
-									rules.max_category_amount,
-									rules.utf8_only
-								]"
+                                  rules.category_length,
+                                  rules.max_category_amount,
+                                  rules.utf8_only
+                                ]"
                                 allow-overflow
                                 chips
                                 deletable-chips
