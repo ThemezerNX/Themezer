@@ -63,7 +63,7 @@
                 <nuxt-link class="pr-3" to="/terms-of-service">Terms of Service</nuxt-link>
                 <nuxt-link class="pr-3" to="/privacy-policy">Privacy Policy</nuxt-link>
                 <nuxt-link class="pr-3" to="/cookie-policy">Cookie Policy</nuxt-link>
-                <a href="https://status.themezer.net/" target="_blank">Status</a>
+                <a href="https://stats.uptimerobot.com/zx1G5uROYn" rel="noopener" target="_blank">Status</a>
             </v-card-text>
         </v-card>
         <v-dialog v-model="restoreDialog" class="mx-auto" max-width="800">

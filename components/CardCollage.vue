@@ -1,0 +1,192 @@
+<template>
+    <div v-resize="onResize" class="collage">
+        <div class="overlay-content" :style="marginTop">
+            <div>
+                <slot name="top"/>
+            </div>
+            <div>
+                <slot name="center"/>
+            </div>
+            <div>
+                <slot name="bottom"/>
+            </div>
+        </div>
+        <div class="collage-row-wrapper row-animation" :style="dynamicStyle">
+            <div class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+                <div
+                    class="collage-row collage-row-1"
+                    :style="row1"
+                ></div>
+            </div>
+            <div v-show="windowSize.y > 550" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+                <div
+                    class="collage-row collage-row-2"
+                    :style="row2"
+                ></div>
+            </div>
+            <div v-show="windowSize.y > 700" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+                <div
+                    class="collage-row collage-row-3"
+                    :style="row3"
+                ></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import Vue from "vue";
+
+export default Vue.extend({
+    data() {
+        return {
+            windowSize: {
+                x: 1920,
+                y: 1080,
+            },
+            row1: {
+                backgroundImage: `url(${require("@/assets/card_rows/row-1.png")})`,
+            },
+            row2: {
+                backgroundImage: `url(${require("@/assets/card_rows/row-2.png")})`,
+            },
+            row3: {
+                backgroundImage: `url(${require("@/assets/card_rows/row-3.png")})`,
+            },
+        };
+    },
+    mounted() {
+        this.onResize();
+    },
+    methods: {
+        onResize() {
+            this.windowSize = {x: window.innerWidth, y: window.innerHeight};
+        },
+    },
+    computed: {
+        marginTop() {
+            return {
+                marginTop:
+                    this.windowSize.y < 500
+                        ? "0px"
+                        : this.$vuetify.breakpoint.mdAndUp
+                        ? "-64px"
+                        : "-56px",
+            };
+        },
+        dynamicStyle() {
+            return {
+                height: this.height || "100%",
+            };
+        },
+        dynamicStyleInnerWrapper() {
+            return {
+                scale: 1920 / this.windowSize.x,
+            };
+        },
+    },
+    props: {
+        height: {
+            type: String,
+            required: false,
+            default: undefined,
+        },
+    },
+});
+</script>
+
+<style lang="scss" scoped>
+@import '~assets/variables.scss';
+
+* {
+    text-shadow: 0 2px 10px black;
+    user-select: none;
+}
+
+@keyframes fadeIn {
+    100% {
+        opacity: 0.85;
+    }
+}
+
+@keyframes move-right {
+    100% {
+        transform: translateX(50%);
+    }
+}
+
+@keyframes move-left {
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.collage {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: auto;
+}
+
+.overlay-content {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.overlay-content > div {
+    text-align: center;
+}
+
+.collage-row-wrapper {
+    filter: blur(10px);
+    overflow-x: hidden;
+}
+
+.collage-row-wrapper-inner {
+    transform-origin: top;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    //background: white;
+}
+
+.collage-row {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-size: 50%;
+    background-repeat: repeat-x;
+
+    /* Hey browser, use your GPU */
+    transform: translate3d(0, 0, 0);
+    //filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 15px 30px rgba(var($themezer-primary-rgb), 0.2));
+}
+
+.collage-row-1 {
+    margin-top: 2%;
+    animation: move-left 25s linear infinite, fadeIn 1000ms 2s ease-out 1 forwards;
+}
+
+.collage-row-2 {
+    margin-top: 15%;
+    margin-left: -100%;
+    animation: move-right 50s linear infinite, fadeIn 1000ms 2.5s ease-out 1 forwards;
+}
+
+.collage-row-3 {
+    margin-top: 28%;
+    animation: move-left 40s linear infinite, fadeIn 1000ms 3.0s ease-out 1 forwards;
+}
+</style>

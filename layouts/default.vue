@@ -150,17 +150,15 @@
             </v-list>
         </v-navigation-drawer>
         <v-app-bar
-            :style="
-                $store.state.profileColor
-                  ? `background-color: ${$store.state.profileColor} !important;`
-                  : ''
-              "
             app
             class="navbar"
             clipped-left
             fixed
+            :color="navbarColor"
+            :elevate-on-scroll="this.$route.path === '/'"
+            v-scroll="handleScroll"
         >
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
+            <v-app-bar-nav-icon aria-label="menu toggle" @click.stop="drawer = !drawer"/>
             <NuxtLink class="title-link mx-4" to="/">
                 <v-toolbar-title class="d-flex title-text">
                     <v-img
@@ -198,6 +196,7 @@
                             v-on="on"
                             :depressed="true"
                             style="background-color: transparent"
+                            aria-label="random result"
                         >
                             <v-icon>mdi-shuffle</v-icon>
                         </v-btn>
@@ -231,7 +230,7 @@
         <v-footer class="footer" absolute app inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
             <nuxt-link class="pr-3" to="/about">About</nuxt-link>
-            <a href="https://status.themezer.net/" target="_blank">Status</a>
+            <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">Status</a>
         </v-footer>
         <v-dialog
             v-if="$auth.loggedIn && $auth.user"
@@ -331,10 +330,10 @@
                                     ref="backupCode"
                                     v-model="backupCode"
                                     :append-icon="
-										showBackupCode
-											? 'mdi-eye-off'
-											: 'mdi-eye'
-									"
+                                        showBackupCode
+                                          ? 'mdi-eye-off'
+                                          : 'mdi-eye'
+                                    "
                                     :type="showBackupCode ? 'text' : 'password'"
                                     class="my-5"
                                     hide-details
@@ -343,8 +342,8 @@
                                     readonly
                                     rounded
                                     @click:append="
-										() => (showBackupCode = !showBackupCode)
-									"
+                                        () => (showBackupCode = !showBackupCode)
+                                      "
                                 ></v-text-field>
 
                                 <v-tooltip v-model="copyCodeSuccess" top>
@@ -449,6 +448,7 @@ export default {
             title: process.env.APP_TITLE,
             drawer: false,
             error: null,
+            transparentNavbar: true,
             items: [
                 {
                     header: "Browse:",
@@ -537,7 +537,7 @@ export default {
                 {
                     icon: "mdi-timeline-clock-outline",
                     title: "Status",
-                    href: "https://status.themezer.net/",
+                    href: "https://stats.uptimerobot.com/zx1G5uROYn",
                 },
             ],
             randomMenuItems: [
@@ -573,6 +573,13 @@ export default {
         };
     },
     computed: {
+        navbarColor() {
+            if (this.$route.path === "/" && this.transparentNavbar) {
+                return "transparent";
+            } else if (!!this.$store.state.profileColor) {
+                return this.$store.state.profileColor;
+            }
+        },
         avatar() {
             if (this.$auth.loggedIn && this.$auth.user.avatar) {
                 return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`;
@@ -641,6 +648,11 @@ export default {
         this.observer.disconnect();
     },
     methods: {
+        handleScroll(event) {
+            if (typeof window === "undefined") return;
+            const top = window.pageYOffset || event.target.scrollTop || 0;
+            this.transparentNavbar = top === 0;
+        },
         randomPack() {
             this.$apollo
                 .query({
@@ -792,6 +804,7 @@ html {
 
 .v-menu__content {
     border-radius: $border-radius;
+
     .v-card {
         background-color: #424242 !important;
     }
@@ -871,8 +884,8 @@ html {
 }
 
 .v-card > *:last-child:not(.v-btn):not(.v-chip) {
-    border-bottom-left-radius: initial;
-    border-bottom-right-radius: initial;
+    border-bottom-left-radius: initial !important;
+    border-bottom-right-radius: initial !important;
 }
 
 @keyframes flow {
@@ -996,9 +1009,10 @@ $border-radius: 20px;
         animation-delay: 2100ms;
 
         min-height: 800px;
-        height: 120vh;
+        height: 125vh;
         min-width: 100vw;
         left: -20vw;
+        top: -110px;
     }
 
     &.splatter-2 {
@@ -1011,10 +1025,11 @@ $border-radius: 20px;
         animation-fill-mode: forwards;
         animation-delay: 1600ms;
 
-        height: 120vh;
+        height: 125vh;
         min-height: 800px;
         min-width: 60vw;
         right: -6vw;
+        top: -110px;
     }
 
     @keyframes fadeIn {
