@@ -93,11 +93,14 @@ import Vue from "vue";
 import {rowPackList} from "@/graphql/Pack.gql";
 import {rowThemeList} from "@/graphql/Theme.gql";
 import {rowLayoutList} from "@/graphql/Layout.gql";
+import ItemGrid from '@/components/ItemGrid.vue';
+import CardCollage from '@/components/CardCollage.vue';
 
 export default Vue.extend({
     components: {
-        ItemGrid: () => import("@/components/ItemGrid.vue"),
-        CardCollage: () => import("@/components/CardCollage.vue"),
+        // Load these components normally to prevent jumpyness
+        ItemGrid: ItemGrid,
+        CardCollage: CardCollage,
     },
     data() {
         return {
@@ -184,6 +187,7 @@ export default Vue.extend({
     margin: auto;
     box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3) !important;
     border-radius: 35% !important;
+    min-height: 128px;
 }
 
 .collage-bottom-button {
