@@ -24,7 +24,7 @@
                     :style="row2"
                 ></div>
             </div>
-            <div v-show="windowSize.y > 700" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+            <div v-show="windowSize.y > 805" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
                 <div
                     class="collage-row collage-row-3"
                     :style="row3"
@@ -64,19 +64,22 @@ export default Vue.extend({
         },
     },
     computed: {
+        navbarHeight() {
+            return this.$vuetify.breakpoint.mdAndUp
+                ? "64px"
+                : "56px";
+        },
         marginTop() {
             return {
                 marginTop:
                     this.windowSize.y < 500
                         ? "0px"
-                        : this.$vuetify.breakpoint.mdAndUp
-                        ? "-64px"
-                        : "-56px",
+                        : `-${this.navbarHeight}`,
             };
         },
         dynamicStyle() {
             return {
-                height: this.height || "100%",
+                height: `calc(${this.heightPx} - ${this.navbarHeight})`,
             };
         },
         dynamicStyleInnerWrapper() {
@@ -86,7 +89,7 @@ export default Vue.extend({
         },
     },
     props: {
-        height: {
+        heightPx: {
             type: String,
             required: false,
             default: undefined,
@@ -145,18 +148,18 @@ export default Vue.extend({
 }
 
 .collage-row-wrapper {
-    filter: blur(10px);
-    overflow-x: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .collage-row-wrapper-inner {
+    margin-top: -32px;
     transform-origin: top;
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
     background: transparent;
-    //background: white;
 }
 
 .collage-row {
@@ -167,11 +170,6 @@ export default Vue.extend({
     height: 100%;
     background-size: 50%;
     background-repeat: repeat-x;
-
-    /* Hey browser, use your GPU */
-    transform: translate3d(0, 0, 0);
-    //filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.55));
-    filter: drop-shadow(0 15px 30px rgba(var($themezer-primary-rgb), 0.2));
 }
 
 .collage-row-1 {

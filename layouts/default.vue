@@ -220,8 +220,10 @@
             </v-toolbar-items>
         </v-app-bar>
 
-        <img alt="" v-show="true" :src="require('~/assets/ink_splatter/550393.svg')" class="splatter splatter-2"/>
-        <img alt="" v-show="true" :src="require('~/assets/ink_splatter/550391.svg')" class="splatter splatter-1"/>
+        <div class="splatter-wrapper">
+            <img alt="" :src="require('~/assets/ink_splatter/magenta-400.png')" class="splatter splatter-2"/>
+            <img alt="" :src="require('~/assets/ink_splatter/green-400.png')" class="splatter splatter-1"/>
+        </div>
 
         <v-main>
             <nuxt/>
@@ -994,42 +996,45 @@ $border-radius: 20px;
 }
 
 .splatter {
-    top: 0;
     position: fixed;
-    filter: blur(40px);
+    transform: scale(0.9);
 
     &.splatter-1 {
         opacity: 0;
-        transform: scale(0.9);
-        rotate: (-75deg);
+        rotate: (-73deg);
         animation: fadeIn 600ms, scaleIn 600ms, turnSplatter1 600ms;
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
         animation-fill-mode: forwards;
         animation-delay: 2100ms;
 
-        min-height: 800px;
-        height: 125vh;
-        min-width: 100vw;
-        left: -20vw;
-        top: -110px;
+        transform-origin: left;
+
+        min-height: 170vh;
+        height: auto;
+        min-width: 85vw;
+        width: auto;
+        left: 0;
+        top: 5%;
     }
 
     &.splatter-2 {
         opacity: 0;
-        transform: scale(0.9);
-        rotate: (40deg);
+        rotate: (36deg);
         animation: fadeIn 600ms, scaleIn 600ms, turnSplatter2 600ms;
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
         animation-fill-mode: forwards;
         animation-delay: 1600ms;
 
-        height: 125vh;
-        min-height: 800px;
-        min-width: 60vw;
+        transform-origin: right;
+
+        min-height: 130vh;
+        height: auto;
+        min-width: 75vw;
+        width: auto;
         right: -6vw;
-        top: -110px;
+        top: 10%;
     }
 
     @keyframes fadeIn {
@@ -1037,7 +1042,7 @@ $border-radius: 20px;
             opacity: 0;
         }
         100% {
-            opacity: 0.9;
+            opacity: 0.7;
         }
     }
 
@@ -1052,7 +1057,7 @@ $border-radius: 20px;
 
     @keyframes turnSplatter1 {
         0% {
-            rotate: (-75deg);
+            rotate: (-73deg);
         }
         100% {
             rotate: (-70deg);
@@ -1061,13 +1066,19 @@ $border-radius: 20px;
 
     @keyframes turnSplatter2 {
         0% {
-            rotate: (40deg);
+            rotate: (36deg);
         }
         100% {
             rotate: (35deg);
         }
     }
 
+}
+
+.splatter-wrapper {
+    top: 0;
+    left: 0;
+    position: fixed;
 }
 
 // Cookie banner

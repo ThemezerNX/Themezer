@@ -1,6 +1,6 @@
 <template>
     <v-container class="pa-0 content" fluid style="height: 100%;">
-        <card-collage :height="`calc(${collageViewWindowHeight}vh - 64px)`">
+        <card-collage :height-px="`${collageViewWindowHeight}vh`">
             <template #center>
                 <v-img
                     class="collage-title-image"
@@ -191,8 +191,6 @@ export default Vue.extend({
 }
 
 .collage-bottom-button {
-    margin-bottom: 10px;
-
     &:hover {
         box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3) !important;
         transform: translateY(-3px) !important;
