@@ -27,7 +27,7 @@
                 </v-btn>
             </template>
         </card-collage>
-        <v-layout ref="additions" :style="`margin-top: calc(-${collageViewWindowHeight/12}vh + 64px)`" justify-center>
+        <v-layout ref="additions" justify-center>
             <v-container fluid style="height: 100%;">
                 <v-row
                     align="center"
