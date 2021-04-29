@@ -222,8 +222,8 @@
 
                         <v-card-text>
                             Packs are zips with multiple themes created by the
-                            same user. It can contain multiple themes for a
-                            single menu.
+                            same user. It can contain any theme, even multiple
+                            for the same menu.
                         </v-card-text>
 
                         <v-card-actions>
@@ -232,6 +232,7 @@
                             <v-btn
                                 color="primary"
                                 rounded
+
                                 text
                                 @click="packDialog = false"
                             >
