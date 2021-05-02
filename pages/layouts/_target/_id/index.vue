@@ -13,8 +13,8 @@
                         <v-fade-transition>
                             <v-img
                                 :src="
-									`${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
-								"
+                                  `${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
+                                "
                                 :style="backgroundStyle"
                                 aspect-ratio="1.7778"
                                 class="overlay-image transition-ease"
@@ -45,8 +45,8 @@
                         <div
                             v-if="layout.details.description"
                             v-linkified:options="{
-								className: 'font-weight-medium'
-							}"
+                                className: 'font-weight-medium'
+                            }"
                             class="font-weight-thin subtitle-1"
                             v-html="layout.details.description"
                         />
@@ -83,15 +83,11 @@
                             {{ layout.details.version }}
                         </div>
                         <div class="font-weight-light body-2">
-							<span class="font-weight-medium"
-              >Last Updated:</span
-              >
+                            <span class="font-weight-medium">Last Updated:</span>
                             {{ niceDate(layout.last_updated) }}
                         </div>
                         <div class="font-weight-light body-2">
-							<span class="font-weight-medium"
-              >Target File:
-							</span>
+                            <span class="font-weight-medium">Target File:</span>
                             {{ layout.target }}.szs
                         </div>
                         <div
@@ -144,18 +140,14 @@
                                 v-if="commonlayoutObject.AuthorName"
                                 class="font-weight-light body-2"
                             >
-								<span class="font-weight-medium">
-									Author:
-								</span>
+                                <span class="font-weight-medium">Author:</span>
                                 {{ commonlayoutObject.AuthorName }}
                             </div>
                             <div
                                 v-if="commonlayoutObject.TargetName"
                                 class="font-weight-light body-2"
                             >
-								<span class="font-weight-medium"
-                >Target File:
-								</span>
+                                <span class="font-weight-medium">Target File:</span>
                                 {{ commonlayoutObject.TargetName }}
                             </div>
                             <ButtonDivider>
@@ -189,8 +181,8 @@
                         <ButtonDivider>
                             <DownloadButton
                                 :download-href="
-									`${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
-								"
+                                    `${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
+                                "
                                 tooltip="Download overlay"
                             />
                         </ButtonDivider>
@@ -199,10 +191,10 @@
                         </h3>
                         <nuxt-link
                             :to="
-								`/themes/${fileNameToWebName(
-									layout.target
-								)}?sort=updated&order=desc&layouts=${layout.id}`
-							"
+                                `/themes/${fileNameToWebName(
+                                  layout.target
+                                )}?sort=updated&order=desc&layouts=${layout.id}`
+                            "
                         >
                             <div style="text-shadow: 0 0 4px black;">
                                 All Themes made with this layout
@@ -213,18 +205,17 @@
                 <v-row class="ma-0">
                     <v-col
                         :class="
-							$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
-						"
+                          $vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
+                        "
                     >
                         <BackgroundsSlideGroup/>
                     </v-col>
                 </v-row>
                 <v-dialog v-model="commonlayoutDialog" max-width="400">
                     <v-card>
-                        <v-card-title class="headline"
-                        >What is the Common layout?
-                        </v-card-title
-                        >
+                        <v-card-title class="headline">
+                            What is the Common layout?
+                        </v-card-title>
 
                         <v-card-text>
                             The Common layout is the footer seen in and shared
@@ -255,10 +246,9 @@
                 </v-dialog>
                 <v-dialog v-model="overlayDialog" max-width="400">
                     <v-card>
-                        <v-card-title class="headline"
-                        >What is the Overlay png?
-                        </v-card-title
-                        >
+                        <v-card-title class="headline">
+                            What is the Overlay png?
+                        </v-card-title>
 
                         <v-card-text>
                             The Overlay png is the image used on this site to
