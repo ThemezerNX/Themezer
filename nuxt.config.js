@@ -83,8 +83,7 @@ export default {
         '@nuxtjs/dotenv',
         '@nuxtjs/redirect-module',
         ['cookie-universal-nuxt', {parseJSON: false}],
-        '@nuxtjs/auth-next',
-        '@nuxtjs/google-adsense'
+        '@nuxtjs/auth-next'
     ],
 
     redirect: [
@@ -101,12 +100,6 @@ export default {
 
     gtm: {
         id: process.env.GTM_TAG
-    },
-
-    'google-adsense': {
-        id: 'ca-pub-1512979134390817',
-        analyticsUacct: 'UA-129482530-5',
-        analyticsDomainName: 'themezer.net'
     },
 
     apollo: {

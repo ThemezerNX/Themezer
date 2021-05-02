@@ -391,11 +391,6 @@
                     </v-card>
                 </v-form>
             </v-dialog>
-            <adsbygoogle
-                class="mb-3"
-                ad-slot="1885976282"
-                align="center"
-            />
         </div>
     </LoadingOverlay>
 </template>

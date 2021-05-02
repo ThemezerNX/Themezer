@@ -631,20 +631,6 @@ export default {
                     this.loading.accept = false;
                 });
         }
-
-        // The adsbygoogle scripts inject height styles
-        // which causes the height to be incorrect when returning to a page without ads.
-        // This observer removes the height on the main application window
-        const wrapper = document.querySelector(".v-application--wrap");
-        this.observer = new MutationObserver(() => {
-            wrapper.style.height = "";
-            wrapper.style.minHeight = "";
-        });
-
-        this.observer.observe(wrapper, {
-            attributes: true,
-            attributeFilter: ["style"],
-        });
     },
     beforeDestroy() {
         this.observer.disconnect();

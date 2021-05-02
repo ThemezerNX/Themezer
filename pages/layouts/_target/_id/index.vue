@@ -273,11 +273,6 @@
                 </v-dialog>
             </v-sheet>
         </LoadingOverlay>
-        <adsbygoogle
-            class="mt-3"
-            ad-slot="9665228109"
-            align="center"
-        />
     </v-container>
 </template>
 
