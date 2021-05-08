@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :dim="false" :shadow="false">
             <div v-show="isCallback">
-                <v-alert color="info" style="z-index: 5;">
+                <v-alert color="info" style="z-index: 5;" rounded>
                     You are now logged in!
                 </v-alert>
             </div>
