@@ -382,7 +382,7 @@
 													"
                                                     allow-overflow
                                                     auto-select-first
-                                                    label="Manual layout selection"
+                                                    label="Manual layout selection (will clear custom JSON modifications)"
                                                     outlined
                                                     prepend-icon="mdi-code-json"
                                                     rounded
