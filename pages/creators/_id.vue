@@ -128,7 +128,7 @@
                 </v-row>
             </v-parallax>
             <v-container
-                class="pt-0 pl-0 pr-0"
+                class="pt-0 px-0"
                 :fluid="$vuetify.breakpoint.smAndDown"
                 style="height: 100%;"
             >
@@ -138,10 +138,7 @@
                             <Markdown :source="creator.bio" class="markdown"/>
                         </v-sheet>
 
-                        <span v-else
-                        >This creator hasn't written anything about themself
-							yet...</span
-                        >
+                        <p class="ma-2" v-else>This creator hasn't written anything about themselves yet...</p>
                     </v-col>
                 </v-row>
             </v-container>
