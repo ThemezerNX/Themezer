@@ -1,7 +1,7 @@
 <template>
     <div style="text-align: center">
         <h3 style="position: relative;">
-            Theme Installer
+            NXTheme Installer
             <v-tooltip v-model="showTooltip" top>
                 <template v-slot:activator="{ on }">
                     <v-btn
@@ -23,7 +23,7 @@
         <v-dialog v-model="show" max-width="400">
             <v-card>
                 <v-card-title class="headline"
-                >What is the Theme Installer?
+                >What is the NXTheme Installer?
                 </v-card-title
                 >
 
@@ -33,8 +33,9 @@
                         href="https://github.com/exelix11/SwitchThemeInjector/"
                         rel="noopener"
                         target="_blank"
-                    >Theme Installer</a
                     >
+                        NXTheme Installer
+                    </a>
                     is an homebrew app that runs on the switch itself and can be
                     used to install and manage themes. The IDs displayed on
                     Themezer can be used to install them directly. The ID
@@ -42,9 +43,17 @@
                         class="text-overline"
                         style="font-size: 0.9rem !important;"
                     >
-						({{ type === 'theme' ? 't' : 'p' }}{{ id }})</span
+						        ({{ type === "theme" ? "t" : "p" }}{{ id }})</span
                     >can be input on the 'Download themes' tab in the app. Be
                     sure to select Themezer as the provider.
+                    This ID can also be used in the search box of the
+                    <a
+                        href="https://github.com/suchmememanyskill/themezer-nx/"
+                        rel="noopener"
+                        target="_blank"
+                    >
+                        Themezer-NX homebrew app
+                    </a>.
                 </v-card-text>
 
                 <v-card-actions>
@@ -58,7 +67,7 @@
         </v-dialog>
         <div class="font-weight-light text-body-1 font-weight-medium">
 			<span class="text-overline" style="font-size: 1.2rem !important;">
-				{{ type === 'theme' ? 't' : 'p' }}{{ id }}
+				{{ type === "theme" ? "t" : "p" }}{{ id }}
 			</span>
         </div>
     </div>
