@@ -829,6 +829,10 @@ html {
     animation: flow 45s linear infinite;
 }
 
+.v-image__image--preload {
+    filter: unset !important;
+}
+
 .card .v-image__image--preload,
 .placeholder {
     background: url('/images/diagonal_joycon-180.png') #333;
