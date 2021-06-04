@@ -597,16 +597,9 @@ export default Vue.extend({
         },
     },
     beforeRouteLeave(_to, _from, next) {
-        if (this.changes) {
-            const answer = window.confirm(
-                "Do you really want to leave? You have unsaved changes!",
-            );
-            if (answer) {
-                next();
-            } else {
-                next(false);
-            }
-        } else next();
+        if (!this.changes || window.confirm("Do you really want to leave? You have unsaved changes!")) {
+            next();
+        }
     },
     beforeDestroy() {
         this.$store.commit("SET_PROFILE_COLOR", null);

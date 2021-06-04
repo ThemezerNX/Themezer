@@ -223,28 +223,28 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import rules from '~/assets/lang/rules'
-import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
-import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
-import allPacksDropdown from '@/components/mixins/allPacksDropdown'
-import targetParser from '@/components/mixins/targetParser'
-import {deleteTheme, theme, updateTheme} from '@/graphql/Theme.gql'
-import urlParser from '~/components/mixins/urlParser'
-import optionsString from '@/components/mixins/optionsString'
+import Vue from "vue";
+import rules from "~/assets/lang/rules";
+import allLayoutsDropdown from "@/components/mixins/allLayoutsDropdown";
+import allCategoriesDropdown from "@/components/mixins/allCategoriesDropdown";
+import allPacksDropdown from "@/components/mixins/allPacksDropdown";
+import targetParser from "@/components/mixins/targetParser";
+import {deleteTheme, theme, updateTheme} from "@/graphql/Theme.gql";
+import urlParser from "~/components/mixins/urlParser";
+import optionsString from "@/components/mixins/optionsString";
 
 export default Vue.extend({
     beforeRouteEnter(_to, from, next) {
         next((vm) => {
-            vm.fromRoute = from
-            if (vm.$auth.loggedIn) next()
-            else next('/')
-        })
+            vm.fromRoute = from;
+            if (vm.$auth.loggedIn) next();
+            else next("/");
+        });
     },
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DeleteButton: () => import("@/components/buttons/DeleteButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [
         urlParser,
@@ -252,14 +252,14 @@ export default Vue.extend({
         allLayoutsDropdown,
         allCategoriesDropdown,
         allPacksDropdown,
-        optionsString
+        optionsString,
     ],
     data() {
         return {
             fromRoute: null,
             isPageOwner: true,
             loading: {
-                submit: false
+                submit: false,
             },
             changed: null,
 
@@ -267,8 +267,8 @@ export default Vue.extend({
             submitValid: false,
             rules,
             uploadedScreenshot: null,
-            uploadedScreenshotUrl: null
-        }
+            uploadedScreenshotUrl: null,
+        };
     },
     computed: {
         changes() {
@@ -284,121 +284,114 @@ export default Vue.extend({
                     (this.theme.pieces?.length > 0
                         ? `|${this.theme.pieces
                             .map((p) => p.value.uuid)
-                            .join(',')}`
-                        : '') !==
+                            .join(",")}`
+                        : "") !==
                     this.changed.layout.id) ||
                 (!this.theme.layout?.id && this.changed.layout.id) ||
                 JSON.stringify(this.theme.categories) !==
                 JSON.stringify(this.changed.categories) ||
                 !!this.uploadedScreenshot
-            )
-        }
+            );
+        },
     },
     beforeRouteLeave(_to, _from, next) {
-        if (this.changes) {
-            const answer = window.confirm(
-                'Do you really want to leave? You have unsaved changes!'
-            )
-            if (answer) {
-                next()
-            } else {
-                next(false)
-            }
-        } else next()
+        if (!this.changes || window.confirm("Do you really want to leave? You have unsaved changes!")) {
+            next();
+        }
     },
     watch: {
         isPageOwner(n) {
             if (!n) {
-                this.$router.push('/')
+                this.$router.push("/");
             }
-        }
+        },
     },
     apollo: {
         theme: {
             query: theme,
-            fetchPolicy: 'cache-and-network',
+            fetchPolicy: "cache-and-network",
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.theme) {
                     this.isPageOwner =
                         this.$auth.loggedIn &&
                         (data.theme.creator.id === this.$auth.user.id ||
-                            this.$auth.user.isAdmin)
+                            this.$auth.user.isAdmin);
 
                     this.updateUrlString(
                         data.theme.id,
                         data.theme.details.name,
-                        this.fileNameToWebName(data.theme.target)
-                    )
+                        this.fileNameToWebName(data.theme.target),
+                    );
 
-                    this.currentThemeTarget = data.theme.target
+                    this.currentThemeTarget = data.theme.target;
                     if (data.theme.layout)
-                        this.$apollo.queries.layoutList.skip = false
+                        this.$apollo.queries.layoutList.skip = false;
                     if (data.theme.pack)
-                        this.$apollo.queries.packList.skip = false
+                        this.$apollo.queries.packList.skip = false;
 
-                    if (data.theme.categories?.includes('NSFW'))
-                        data.theme.nsfw = true
+                    if (data.theme.categories?.includes("NSFW"))
+                        data.theme.nsfw = true;
                     data.theme.categories = data.theme.categories.filter(
-                        (c) => c !== 'NSFW'
-                    )
+                        (c) => c !== "NSFW",
+                    );
 
-                    this.changed = JSON.parse(JSON.stringify(data.theme))
+                    this.changed = JSON.parse(JSON.stringify(data.theme));
                     if (!this.changed.pack) {
-                        this.changed.pack = {}
+                        this.changed.pack = {};
                     }
-                    if (!this.changed.layout) this.changed.layout = {}
+                    if (!this.changed.layout) this.changed.layout = {};
                     else {
-                        this.changed.layout.simple_id = this.changed.layout.id
+                        this.changed.layout.simple_id = this.changed.layout.id;
                         this.changed.layout.id =
                             this.changed.layout.id +
                             (this.changed.pieces?.length > 0
                                 ? `|${this.changed.pieces
                                     .map((p) => p.value.uuid)
-                                    .join(',')}`
-                                : '')
+                                    .join(",")}`
+                                : "");
                     }
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     methods: {
         onScreenshotChange(file) {
             if (file) {
-                this.uploadedScreenshotUrl = URL.createObjectURL(file)
+                this.uploadedScreenshotUrl = URL.createObjectURL(file);
             }
         },
         discard() {
-            if (this.theme.categories?.includes('NSFW')) this.theme.nsfw = true
+            if (this.theme.categories?.includes("NSFW")) this.theme.nsfw = true;
             this.theme.categories = this.theme.categories.filter(
-                (c) => c !== 'NSFW'
-            )
-            this.changed = JSON.parse(JSON.stringify(this.theme))
-            if (!this.changed.layout) this.changed.layout = {}
+                (c) => c !== "NSFW",
+            );
+            this.changed = JSON.parse(JSON.stringify(this.theme));
+            if (!this.changed.layout) this.changed.layout = {};
             else {
-                this.changed.layout.simple_id = this.changed.layout.id
+                this.changed.layout.simple_id = this.changed.layout.id;
                 this.changed.layout.id =
                     this.changed.layout.id +
                     (this.changed.pieces?.length > 0
                         ? `|${this.changed.pieces
                             .map((p) => p.value.uuid)
-                            .join(',')}`
-                        : '')
+                            .join(",")}`
+                        : "");
             }
             if (!this.changed.pack) {
-                this.changed.pack = {}
+                this.changed.pack = {};
             }
 
-            this.uploadedScreenshot = null
-            this.uploadedScreenshotUrl = null
+            this.uploadedScreenshot = null;
+            this.uploadedScreenshotUrl = null;
         },
         submit() {
-            this.loading.submit = true
+            this.loading.submit = true;
 
             this.$apollo
                 .mutate({
@@ -412,64 +405,64 @@ export default Vue.extend({
                         description: this.changed.details.description,
                         version: this.changed.details.version,
                         categories: this.changed.categories,
-                        nsfw: this.changed.nsfw
-                    }
+                        nsfw: this.changed.nsfw,
+                    },
                 })
                 .then(({data}) => {
-                    this.loading.submit = false
+                    this.loading.submit = false;
                     if (data && data.updateTheme) {
-                        this.uploadedScreenshot = null
-                        this.$apollo.queries.theme.refetch()
+                        this.uploadedScreenshot = null;
+                        this.$apollo.queries.theme.refetch();
                         this.$snackbar.message(
-                            'Success! Changes might take some time to apply.'
-                        )
+                            "Success! Changes might take some time to apply.",
+                        );
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loading.submit = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loading.submit = false;
+                });
+        },
     },
     head() {
         if (this.theme) {
             const metaTitle = `Edit | ${this.theme.details.name}${
-                this.theme.nsfw ? ' (NSFW!)' : ''
-            } | ${this.targetName()} | Themes`
-            const metaDesc = this.theme.details.description
-            const metaImg = !this.theme.nsfw ? this.theme.preview.original : null
+                this.theme.nsfw ? " (NSFW!)" : ""
+            } | ${this.targetName()} | Themes`;
+            const metaDesc = this.theme.details.description;
+            const metaImg = !this.theme.nsfw ? this.theme.preview.original : null;
 
             return {
                 title: metaTitle,
                 meta: [
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss">

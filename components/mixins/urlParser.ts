@@ -6,8 +6,7 @@ export default Vue.extend({
     computed: {
         id(): string | null {
             const array = this.$route.params.id.split("-");
-            const last = array[array.length - 1];
-            return last || null;
+            return array[array.length - 1] || null;
         },
     },
     methods: {

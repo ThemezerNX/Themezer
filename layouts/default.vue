@@ -661,7 +661,7 @@ export default {
                     fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
-                    this.$router.push(`/themes/_/${data.randomThemeIDs[0]}`);
+                    this.$router.push(`/themes/-/${data.randomThemeIDs[0]}`);
                 })
                 .catch((err) => {
                     this.$snackbar.error(err);
@@ -674,7 +674,7 @@ export default {
                     fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
-                    this.$router.push(`/layouts/_/${data.randomLayoutIDs[0]}`);
+                    this.$router.push(`/layouts/-/${data.randomLayoutIDs[0]}`);
                 })
                 .catch((err) => {
                     this.$snackbar.error(err);
