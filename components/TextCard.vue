@@ -1,5 +1,5 @@
 <template>
-    <v-card :max-width="maxWidth" style="border-radius: 20px;">
+    <v-card class="box" :max-width="maxWidth" style="border-radius: 20px;">
         <v-card-title class="headline">
             {{ title }}
         </v-card-title>

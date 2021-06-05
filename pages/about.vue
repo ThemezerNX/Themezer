@@ -1,6 +1,6 @@
 <template>
     <v-layout align-center column justify-center pa-3>
-        <v-card max-width="600" style="border-radius: 20px;">
+        <v-card class="box" max-width="600" style="border-radius: 20px;">
             <v-card-title class="headline">
                 About
             </v-card-title>
