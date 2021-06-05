@@ -453,6 +453,10 @@ export default {
             transparentNavbar: true,
             items: [
                 {
+                    divider: true,
+                    inset: false,
+                },
+                {
                     header: "Browse:",
                     class: "d-flex d-sm-none",
                 },
@@ -487,11 +491,6 @@ export default {
                     inset: true,
                 },
                 {
-                    icon: "mdi-image-edit-outline",
-                    title: "Overlay Creator",
-                    to: "/tools/overlaycreator",
-                },
-                {
                     icon: "mdi-web",
                     title: "Online Theme Creator",
                     href: "https://exelix11.github.io/SwitchThemeInjector/v2/",
@@ -501,6 +500,16 @@ export default {
                     title: "Themezer NX App",
                     href:
                         "https://github.com/suchmememanyskill/themezer-nx/releases",
+                },
+                {
+                    icon: "mdi-image-edit-outline",
+                    title: "Overlay Creator",
+                    to: "/tools/overlaycreator",
+                },
+                {
+                    icon: "mdi-application",
+                    title: "LayoutKit",
+                    href: "https://github.com/ThemezerNX/LayoutKit#readme",
                 },
                 {
                     header: "Guides:",
@@ -522,10 +531,10 @@ export default {
                         "https://nh-server.github.io/switch-guide/extras/theming/",
                 },
                 {
-                    icon: "mdi-help-circle-outline",
+                    icon: "mdi-book-open-variant",
                     title: "Creating Layouts",
                     href:
-                        "https://github.com/FuryBaguette/SwitchLayoutEditor/wiki",
+                        "https://themezernx.github.io/LayoutDocs/",
                 },
                 {
                     divider: true,
@@ -538,7 +547,7 @@ export default {
                 },
                 {
                     icon: "mdi-timeline-clock-outline",
-                    title: "Status",
+                    title: "Service Status",
                     href: "https://stats.uptimerobot.com/zx1G5uROYn",
                 },
             ],
