@@ -26,7 +26,7 @@ export default Vue.extend({
     },
     watch: {
         packCategories() {
-            ;(this as any).detectedThemes.forEach((t: any) => {
+            ;(this as any).detectedThemes?.forEach((t: any) => {
                 t.categories = (this as any).packCategories;
             });
         },

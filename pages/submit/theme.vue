@@ -99,10 +99,10 @@
                                     v-for="type in submitTypes"
                                     :key="type.id"
                                     :disabled="
-										(type.id === 'pack' &&
-											detectedThemes.length === 1) ||
-											type.disabled
-									"
+                                        (type.id === 'pack' &&
+                                          detectedThemes.length === 1) ||
+                                          type.disabled
+                                      "
                                     :label="type.label"
                                     :value="type.id"
                                     @change="clearSwitchSubmitType()"
@@ -112,10 +112,10 @@
                                 v-if="selectedSubmitType === 'pack'"
                                 v-model="submitDetails.name"
                                 :rules="[
-									rules.required,
-									rules.name_length,
-									rules.utf8_only
-								]"
+                                  rules.required,
+                                  rules.name_length,
+                                  rules.utf8_only
+                                ]"
                                 counter="50"
                                 label="Pack Name*"
                                 maxlength="50"
@@ -129,10 +129,10 @@
                                 v-if="selectedSubmitType === 'pack'"
                                 v-model="submitDetails.description"
                                 :rules="[
-									rules.required,
-									rules.description_length,
-									rules.utf8_only
-								]"
+                                  rules.required,
+                                  rules.description_length,
+                                  rules.utf8_only
+                                ]"
                                 counter="500"
                                 label="Pack Description*"
                                 maxlength="500"
@@ -146,15 +146,15 @@
                                 v-if="detectedThemes.length > 1"
                                 v-model="packCategories"
                                 :items="
-									categories && categories.length > 0
-										? categories
-										: []
-								"
+                                  categories && categories.length > 0
+                                            ? categories
+                                            : []
+                                "
                                 :rules="[
-									rules.category_length,
-									rules.max_category_amount,
-									rules.utf8_only
-								]"
+                                  rules.category_length,
+                                  rules.max_category_amount,
+                                  rules.utf8_only
+                                ]"
                                 allow-overflow
                                 chips
                                 deletable-chips
@@ -199,10 +199,10 @@
                                     v-if="theme"
                                     :key="theme.info.ThemeName"
                                     :class="
-										i === detectedThemes.length - 1
-											? ''
-											: 'mb-2'
-									"
+                                        i === detectedThemes.length - 1
+                                          ? ''
+                                          : 'mb-2'
+                                      "
                                     class="mx-auto"
                                     outlined
                                     style="border-radius: 20px; background-color: rgba(255, 255, 255, 0.02);"
@@ -221,10 +221,10 @@
                                                 >
                                                     <v-img
                                                         :src="
-															uploadedScreenshotsUrls[
-																i
-															] || ''
-														"
+                                                          uploadedScreenshotsUrls[
+                                                            i
+                                                          ] || ''
+                                                        "
                                                         aspect-ratio="1.7778"
                                                         class="placeholder display-3"
                                                         contain
@@ -232,18 +232,18 @@
                                                         <v-expand-transition>
                                                             <v-file-input
                                                                 v-show="
-																	!uploadedScreenshots[
-																		i
-																	] || hover
-																"
+                                                                  !uploadedScreenshots[
+                                                                    i
+                                                                  ] || hover
+                                                                "
                                                                 v-model="
-																	uploadedScreenshots[
-																		i
-																	]
-																"
+                                                                  uploadedScreenshots[
+                                                                    i
+                                                                  ]
+                                                                "
                                                                 :rules="[
-																	rules.required
-																]"
+                                                                  rules.required
+                                                                ]"
                                                                 accept="image/jpeg"
                                                                 class="screenshot_upload transition-ease v-card--reveal"
                                                                 color="black"
@@ -254,11 +254,11 @@
                                                                 label="SCREENSHOT* (jpg, 1280x720)"
                                                                 style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
                                                                 @change="
-																	onScreenshotChange(
-																		$event,
-																		i
-																	)
-																"
+                                                                  onScreenshotChange(
+                                                                    $event,
+                                                                    i
+                                                                  )
+                                                                "
                                                             />
                                                         </v-expand-transition>
                                                     </v-img>
@@ -291,16 +291,16 @@
                                                     Layout:
                                                     <nuxt-link
                                                         :to="
-															`/layouts/${fileNameToWebName(
-																theme.layout
-																	.target
-															)}/${createUrlString(
-																theme.layout.id,
-																theme.layout
-																	.details
-																	.name
-															)}`
-														"
+                                                          `/layouts/${fileNameToWebName(
+                                                            theme.layout
+                                                              .target
+                                                          )}/${createUrlString(
+                                                            theme.layout.id,
+                                                            theme.layout
+                                                              .details
+                                                              .name
+                                                          )}`
+                                                        "
                                                         exact
                                                         target="_blank"
                                                     >
@@ -311,11 +311,11 @@
                                                     </nuxt-link>
                                                     <div
                                                         v-if="
-															theme.used_pieces &&
-																theme
-																	.used_pieces
-																	.length > 0
-														"
+                                                          theme.used_pieces &&
+                                                            theme
+                                                              .used_pieces
+                                                              .length > 0
+                                                        "
                                                     >
                                                         Options:
                                                         {{
@@ -332,13 +332,13 @@
                                                     Layout:
                                                     <nuxt-link
                                                         :to="
-															`/layouts/${fileNameToWebName(
-																theme.target
-															)}/${createUrlString(
-																theme.layout_id,
-																''
-															)}`
-														"
+                                                          `/layouts/${fileNameToWebName(
+                                                            theme.target
+                                                          )}/${createUrlString(
+                                                            theme.layout_id,
+                                                            ''
+                                                          )}`
+                                                        "
                                                         exact
                                                         target="_blank"
                                                     >
@@ -358,10 +358,10 @@
                                                 </v-list-item-subtitle>
                                                 <v-list-item-subtitle
                                                     v-if="
-														theme.layout &&
-															theme.layout
-																.has_commonlayout
-													"
+                                                        theme.layout &&
+                                                          theme.layout
+                                                            .has_commonlayout
+                                                      "
                                                 >
                                                     Common layout: ✅
                                                 </v-list-item-subtitle>
@@ -370,16 +370,16 @@
                                                 <v-autocomplete
                                                     v-if="!theme.layout"
                                                     v-model="
-														detectedThemes[i]
-															.layout_id
-													"
+                                                        detectedThemes[i]
+                                                          .layout_id
+                                                      "
                                                     :items="
-														layouts[theme.target]
-													"
+                                                        layouts[theme.target]
+                                                      "
                                                     :loading="
-														!!$apollo.queries
-															.layoutList.loading
-													"
+                                                        !!$apollo.queries
+                                                          .layoutList.loading
+                                                      "
                                                     allow-overflow
                                                     auto-select-first
                                                     label="Manual layout selection (will clear custom JSON modifications)"
@@ -387,20 +387,20 @@
                                                     prepend-icon="mdi-code-json"
                                                     rounded
                                                     @mouseover="
-														currentThemeTarget =
-															theme.target
-													"
+                                                        currentThemeTarget =
+                                                          theme.target
+                                                      "
                                                 >
                                                 </v-autocomplete>
                                                 <v-text-field
                                                     v-model="
-														detectedThemes[i]
-															.description
-													"
+                                                        detectedThemes[i]
+                                                          .description
+                                                      "
                                                     :rules="[
-														rules.description_length,
-														rules.utf8_only
-													]"
+                                                        rules.description_length,
+                                                        rules.utf8_only
+                                                      ]"
                                                     counter="500"
                                                     label="Theme description"
                                                     maxlength="500"
@@ -412,30 +412,30 @@
                                                 ></v-text-field>
                                                 <v-combobox
                                                     v-model="
-														detectedThemes[i]
-															.categories
-													"
+                                                        detectedThemes[i]
+                                                          .categories
+                                                      "
                                                     :items="
-														categories &&
-														categories.length > 0
-															? categories.filter(
-																	(c) =>
-																		c !==
-																		'NSFW'
-															  )
-															: []
-													"
+                                                        categories &&
+                                                        categories.length > 0
+                                                          ? categories.filter(
+                                                              (c) =>
+                                                                c !==
+                                                                'NSFW'
+                                                            )
+                                                          : []
+                                                      "
                                                     :loading="
-														!!$apollo.queries
-															.categories.loading
-													"
+                                                        !!$apollo.queries
+                                                          .categories.loading
+                                                      "
                                                     :rules="[
-														rules.category_length,
-														rules.min_category_amount,
-														rules.max_category_amount,
-														rules.required,
-														rules.utf8_only
-													]"
+                                                        rules.category_length,
+                                                        rules.min_category_amount,
+                                                        rules.max_category_amount,
+                                                        rules.required,
+                                                        rules.utf8_only
+                                                      ]"
                                                     allow-overflow
                                                     chips
                                                     deletable-chips
@@ -448,17 +448,17 @@
                                                 ></v-combobox>
                                                 <v-text-field
                                                     v-if="
-														selectedSubmitType ===
-															'separate'
-													"
+                                                        selectedSubmitType ===
+                                                          'separate'
+                                                      "
                                                     v-model="
-														detectedThemes[i]
-															.version
-													"
+                                                        detectedThemes[i]
+                                                          .version
+                                                      "
                                                     :rules="[
-														rules.required,
-														rules.utf8_only
-													]"
+                                                        rules.required,
+                                                        rules.utf8_only
+                                                      ]"
                                                     counter="10"
                                                     label="Theme version*"
                                                     maxlength="10"
@@ -469,14 +469,14 @@
                                                 ></v-text-field>
                                                 <v-checkbox
                                                     v-model="
-														detectedThemes[i].nsfw
-													"
+                                                        detectedThemes[i].nsfw
+                                                      "
                                                     class="mt-0"
                                                     color="red"
                                                     label="NSFW"
                                                     @change="
-														nsfwConfirm($event, i)
-													"
+                                                        nsfwConfirm($event, i)
+                                                      "
                                                 />
                                             </v-col>
                                         </v-list-item-content>
@@ -519,9 +519,9 @@
                             rounded
                             text
                             @click="
-								nsfwDialog = false
-								detectedThemes[nsfwDialogThemeNr].nsfw = false
-							"
+                                nsfwDialog = false
+                                detectedThemes[nsfwDialogThemeNr].nsfw = false
+                              "
                         >
                             No, cancel
                         </v-btn>
@@ -630,6 +630,7 @@ export default Vue.extend({
             this.uploadedScreenshotsUrls = []
             this.selectedSubmitType = null
             this.submitValid = false
+            this.packCategories = []
             this.submitDetails = {
                 name: null,
                 description: null,

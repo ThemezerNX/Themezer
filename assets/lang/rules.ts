@@ -12,17 +12,17 @@ export default {
     },
     description_length: (value: string) =>
         !value ||
-        (value.length >= 10 && value.length <= 500) ||
-        "A description must be between 9 and 501 characters long",
+        (value.trim().length >= 10 && value.trim().length <= 500) ||
+        "A description must be between 10 and 500 characters long",
     name_length: (value: string) =>
         !value ||
-        (value.length >= 3 && value.length <= 50) ||
-        "A name must be between 2 and 51 characters long",
+        (value.trim().length >= 3 && value.trim().length <= 50) ||
+        "A name must be between 3 and 50 characters long",
     required: (value: any) => !!value || "Required",
     category_length: (values: Array<string>) =>
         !values ||
-        !values.some((v) => v.length <= 2) ||
-        "A category must be longer than 2 characters",
+        !values.some((v) => v.trim().length < 2) ||
+        "A category must be 2 or more characters",
     min_category_amount: (values: Array<string>) =>
         !values || values.length > 0 || "At least 1 category is required",
     max_category_amount: (values: Array<string>) =>

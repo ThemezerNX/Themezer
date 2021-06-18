@@ -76,9 +76,9 @@
                             <v-text-field
                                 v-model="changed.details.description"
                                 :rules="[
-									rules.description_length,
-									rules.utf8_only
-								]"
+                                  rules.description_length,
+                                  rules.utf8_only
+                                ]"
                                 counter="500"
                                 label="Theme Description"
                                 maxlength="500"
@@ -289,7 +289,6 @@ export default Vue.extend({
     },
     computed: {
         changes() {
-            console.log("detected changes", this.theme.nsfw, this.changed.nsfw);
             return (
                 this.theme.details.name !== this.changed.details.name ||
                 this.theme.details.description !== this.changed.details.description ||
