@@ -261,7 +261,24 @@ export default Vue.extend({
             loading: {
                 submit: false,
             },
-            changed: null,
+            // required to make props reactive
+            changed: {
+                details: {
+                    name: null,
+                    description: null,
+                    version: null,
+                },
+                nsfw: null,
+                pack: {
+                    id: null,
+                },
+                layout: {
+                    id: null,
+                    pieces: null,
+                },
+                pieces: null,
+                categories: null,
+            },
 
             deleteQuery: deleteTheme,
             submitValid: false,
@@ -272,10 +289,10 @@ export default Vue.extend({
     },
     computed: {
         changes() {
+            console.log("detected changes", this.theme.nsfw, this.changed.nsfw);
             return (
                 this.theme.details.name !== this.changed.details.name ||
-                this.theme.details.description !==
-                this.changed.details.description ||
+                this.theme.details.description !== this.changed.details.description ||
                 this.theme.details.version !== this.changed.details.version ||
                 this.theme.nsfw !== this.changed.nsfw ||
                 this.theme.pack?.id !== this.changed.pack.id ||
@@ -288,8 +305,7 @@ export default Vue.extend({
                         : "") !==
                     this.changed.layout.id) ||
                 (!this.theme.layout?.id && this.changed.layout.id) ||
-                JSON.stringify(this.theme.categories) !==
-                JSON.stringify(this.changed.categories) ||
+                JSON.stringify(this.theme.categories) !== JSON.stringify(this.changed.categories) ||
                 !!this.uploadedScreenshot
             );
         },
@@ -334,8 +350,7 @@ export default Vue.extend({
                     if (data.theme.pack)
                         this.$apollo.queries.packList.skip = false;
 
-                    if (data.theme.categories?.includes("NSFW"))
-                        data.theme.nsfw = true;
+                    data.theme.nsfw = !!data.theme.categories?.includes("NSFW");
                     data.theme.categories = data.theme.categories.filter(
                         (c) => c !== "NSFW",
                     );
@@ -356,6 +371,7 @@ export default Vue.extend({
                                 : "");
                     }
                 }
+                return data;
             },
             prefetch: true,
         },
