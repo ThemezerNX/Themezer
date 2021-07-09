@@ -3,36 +3,29 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
-    middleware: ['auth'],
+    middleware: ["auth"],
     data() {
         return {
-            error: null
-        }
+            prevRoute: null,
+        };
     },
-    computed: {
-        redirect() {
-            return (
-                this.$route.query.redirect &&
-                decodeURIComponent(this.$route.query.redirect)
-            )
-        },
-        isCallback() {
-            return Boolean(this.$route.query.callback)
-        }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.prevRoute = from;
+        });
     },
     mounted() {
-        this.login()
-    },
-    methods: {
-        login() {
-            this.error = null
-            return this.$auth.loginWith('social').catch((e) => {
-                this.error = e.response.data
-            })
+        if (this.prevRoute) {
+            this.$cookies.set("login_redirect", this.prevRoute.fullPath, {
+                maxAge: 86400,
+                httpOnly: false,
+            });
         }
-    }
-})
+
+        this.$auth.loginWith("social");
+    },
+});
 </script>

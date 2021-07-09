@@ -1,11 +1,9 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :dim="false" :shadow="false">
-            <div>
-                <v-alert color="info" style="z-index: 5;" rounded>
-                    You have been logged out!
-                </v-alert>
-            </div>
+            <v-alert color="info" style="z-index: 5;" rounded>
+                You have been logged out!
+            </v-alert>
         </LoadingOverlay>
     </v-container>
 </template>

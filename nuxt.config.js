@@ -143,21 +143,17 @@ export default {
         },
         redirect: {
             callback: "/logged-in",
-            logout: "/logged-out",
         },
+        rewriteRedirects: false,
+        watchLoggedIn: false,
         strategies: {
             social: {
                 scheme: "@/schemes/customScheme",
                 clientId: "722724539028734003",
+                useForms: true,
                 endpoints: {
-                    // logout: 'https://discord.com/api/oauth2/token/revoke', // needs official example: invalid_client
                     authorization: "https://discord.com/api/oauth2/authorize",
-                    token: {
-                        url: "https://discord.com/api/oauth2/token",
-                        headers: {
-                            "content-type": "application/x-www-form-urlencoded",
-                        },
-                    },
+                    token: "https://discord.com/api/oauth2/token",
                     userInfo: "https://discord.com/api/users/@me",
                 },
                 scope: ["identify"],

@@ -1,37 +1,32 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :dim="false" :shadow="false">
-            <div v-show="isCallback">
-                <v-alert color="info" style="z-index: 5;" rounded>
-                    You are now logged in!
-                </v-alert>
-            </div>
+            <v-alert color="info" style="z-index: 5;" rounded>
+                You are now logged in!
+            </v-alert>
         </LoadingOverlay>
     </v-container>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
-    },
-    middleware: ['auth'],
-    options: {
-        auth: true
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     computed: {
         isCallback() {
-            return Boolean(
-                this.$route.hash && this.$route.hash.includes('access_token')
-            )
+            return false;
         }
     },
-    created() {
-        if (!this.isCallback) {
-            this.$router.push('/')
-        }
-    }
-})
+    mounted() {
+        console.log(this.$cookies.get("login_redirect"))
+        const redirectUrl = this.$cookies.get("login_redirect") || "/";
+        this.$cookies.remove("login_redirect");
+        setTimeout(() => {
+            this.$router.push(redirectUrl);
+        }, 2000);
+    },
+});
 </script>

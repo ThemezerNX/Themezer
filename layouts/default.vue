@@ -23,7 +23,7 @@
                     link
                     router
                     two-line
-                    @click="$auth.loginWith('social')"
+                    to="/login"
                 >
                     <v-list-item-avatar>
                         <v-icon large>
@@ -449,7 +449,6 @@ export default {
             targets,
             title: process.env.APP_TITLE,
             drawer: false,
-            error: null,
             transparentNavbar: true,
             items: [
                 {
@@ -636,7 +635,6 @@ export default {
                 })
                 .catch((err) => {
                     this.$snackbar.error(err);
-
                     this.loading.accept = false;
                 });
         }
@@ -690,10 +688,13 @@ export default {
                 });
         },
         logout() {
-            this.error = null;
-            return this.$auth.logout("social").catch((e) => {
-                this.error = e.response.data;
-            });
+            return this.$auth.logout("social")
+                .then(() => {
+                    this.$router.push("/logged-out");
+                })
+                .catch((err) => {
+                    this.$snackbar.error(err);
+                });
         },
         accept() {
             this.loading.accept = true;

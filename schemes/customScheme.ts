@@ -46,11 +46,11 @@ export default class CustomScheme extends Oauth2Scheme {
     // 			method: 'post',
     // 			headers: {
     // 				'content-type': 'application/x-www-form-urlencoded',
-    // 				authorization: 'Basic GL5ySl3enoRBN4XyWknTq585fNl1yw'
+    // 				authorization: ''
     // 			},
     // 			url: this.options.endpoints.logout,
     // 			data: {
-    // 				token: 'Basic GL5ySl3enoRBN4XyWknTq585fNl1yw'
+    // 				token: ''
     // 			}
     // 		})
 

@@ -16,7 +16,7 @@
         "@nuxt/typescript-build": "^0.6.0",
         "@nuxt/typescript-runtime": "^1.0.0",
         "@nuxtjs/apollo": "^4.0.0-rc19",
-        "@nuxtjs/auth-next": "^5.0.0-1622918202.e815752",
+        "@nuxtjs/auth-next": "^5.0.0-1624817847.21691f1",
         "@nuxtjs/axios": "^5.11.0",
         "@nuxtjs/dotenv": "^1.4.0",
         "@nuxtjs/gtm": "^2.3.0",
