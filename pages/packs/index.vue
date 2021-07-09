@@ -126,12 +126,19 @@ export default Vue.extend({
                 : `Packs`;
 
         const metaDesc = "Discover amazing theme packs to give every menu a similar look!";
-
         const metaImg = null;
 
+        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {
+            htmlAttrs: {
+                ...i18nHead.htmlAttrs
+            },
+            link: [
+                ...i18nHead.link
+            ],
             title: metaTitle,
             meta: [
+                ...i18nHead.meta,
                 {
                     hid: "description",
                     name: "description",

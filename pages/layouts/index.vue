@@ -19,9 +19,17 @@ export default Vue.extend({
         const metaDesc = 'Discover unique layouts to style menus to your hearts content!'
         const metaImg = null
 
+        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {
+            htmlAttrs: {
+                ...i18nHead.htmlAttrs
+            },
+            link: [
+                ...i18nHead.link
+            ],
             title: metaTitle,
             meta: [
+                ...i18nHead.meta,
                 {
                     hid: 'description',
                     name: 'description',

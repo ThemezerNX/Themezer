@@ -433,9 +433,17 @@ export default Vue.extend({
             const metaDesc = this.layout.details.description
             const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`
 
+            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
             return {
+                htmlAttrs: {
+                    ...i18nHead.htmlAttrs
+                },
+                link: [
+                    ...i18nHead.link
+                ],
                 title: metaTitle,
                 meta: [
+                    ...i18nHead.meta,
                     {
                         hid: 'description',
                         name: 'description',

@@ -189,7 +189,7 @@
             </v-toolbar-items>
             <v-spacer/>
             <v-toolbar-items>
-                <v-menu bottom left offset-y>
+                <v-menu bottom offset-y>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
                             v-bind="attrs"
@@ -213,6 +213,42 @@
                             </v-list-item-action>
                             <v-list-item-content>
                                 <v-list-item-title v-text="item.title"/>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
+
+                <v-menu bottom left offset-y>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            v-bind="attrs"
+                            v-on="on"
+                            :depressed="true"
+                            style="background-color: transparent"
+                            aria-label="switch language"
+                        >
+                            <v-icon>mdi-translate</v-icon>
+                        </v-btn>
+                    </template>
+
+                    <v-list>
+                        <v-list-item
+                            v-for="locale in availableLocales"
+                            :key="locale.code"
+                            @click="$i18n.setLocale(locale.code)"
+                            :class="{ 'active-locale': $i18n.locale === locale.code }"
+                        >
+                            <v-list-item-content>
+                                <v-list-item-title v-text="locale.name"/>
+                            </v-list-item-content>
+                        </v-list-item>
+
+                        <v-list-item href="https://translate.themezer.net/" target="_blank" @click="$i18n.setLocale(locale.code)">
+                            <v-list-item-content>
+                                <v-list-item-title>
+                                    {{ $t("helpTranslate") }}
+                                    <v-icon right>mdi-open-in-new</v-icon>
+                                </v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>
@@ -247,7 +283,7 @@
                         <v-card-title
                             class="title font-weight-regular justify-space-between"
                         >
-                            <span>Welcome to Themezer!</span>
+                            <span>{{ $t("welcome") }}</span>
                         </v-card-title>
 
                         <v-card-text>
@@ -598,6 +634,9 @@ export default {
                     this.$auth.user.discriminator,
                 ) % 5}.png`;
             } else return null;
+        },
+        availableLocales() {
+            return this.$i18n.locales;
         },
     },
     watch: {
@@ -1090,6 +1129,10 @@ $border-radius: 20px;
 .Cookie--base {
     background: unset !important;
     padding: unset !important;
+}
+
+.active-locale {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 </style>

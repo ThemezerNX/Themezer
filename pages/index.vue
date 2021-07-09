@@ -38,7 +38,7 @@
                             Latest Packs
                         </h2>
                         <v-divider/>
-                        <ItemGrid
+                        <item-grid
                             :loading="!packList || !!$apollo.queries.packList.loading"
                             :items="packList"
                             :show-props="['creator']"
@@ -56,7 +56,7 @@
                             Latest Themes
                         </h2>
                         <v-divider/>
-                        <ItemGrid
+                        <item-grid
                             :loading="!themeList || !!$apollo.queries.themeList.loading"
                             :items="themeList"
                             :show-props="['creator']"
@@ -74,7 +74,7 @@
                             Updated Layouts
                         </h2>
                         <v-divider/>
-                        <ItemGrid
+                        <item-grid
                             :loading="!layoutList || !!$apollo.queries.layoutList.loading"
                             :items="layoutList"
                             :show-props="['creator']"
@@ -93,8 +93,8 @@ import Vue from "vue";
 import {rowPackList} from "@/graphql/Pack.gql";
 import {rowThemeList} from "@/graphql/Theme.gql";
 import {rowLayoutList} from "@/graphql/Layout.gql";
-import ItemGrid from '@/components/ItemGrid.vue';
-import CardCollage from '@/components/CardCollage.vue';
+import ItemGrid from "@/components/ItemGrid.vue";
+import CardCollage from "@/components/CardCollage.vue";
 
 export default Vue.extend({
     components: {
@@ -161,11 +161,19 @@ export default Vue.extend({
         },
     },
     head() {
-        const metaTitle = "Home";
+        const metaTitle = this.$t("home.pageTitle");
 
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
+            htmlAttrs: {
+                ...i18nHead.htmlAttrs,
+            },
+            link: [
+                ...i18nHead.link,
+            ],
             title: metaTitle,
             meta: [
+                ...i18nHead.meta,
                 {
                     hid: "og:title",
                     name: "og:title",

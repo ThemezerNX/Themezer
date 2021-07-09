@@ -690,9 +690,17 @@ export default Vue.extend({
                 ? `${process.env.API_ENDPOINT}cdn/creators/${this.creator.id}/logo/${this.creator.logo_image}`
                 : `https://cdn.discordapp.com/${avatar}?size=256`;
 
+            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
             return {
+                htmlAttrs: {
+                    ...i18nHead.htmlAttrs
+                },
+                link: [
+                    ...i18nHead.link
+                ],
                 title: metaTitle,
                 meta: [
+                    ...i18nHead.meta,
                     {
                         hid: "description",
                         name: "description",

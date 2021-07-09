@@ -361,9 +361,17 @@ export default Vue.extend({
                 ? this.theme.preview.original
                 : null;
 
+            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
             return {
+                htmlAttrs: {
+                    ...i18nHead.htmlAttrs
+                },
+                link: [
+                    ...i18nHead.link
+                ],
                 title: metaTitle,
                 meta: [
+                    ...i18nHead.meta,
                     {
                         hid: "description",
                         name: "description",

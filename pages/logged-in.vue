@@ -15,11 +15,6 @@ export default Vue.extend({
     components: {
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
-    computed: {
-        isCallback() {
-            return false;
-        }
-    },
     mounted() {
         console.log(this.$cookies.get("login_redirect"))
         const redirectUrl = this.$cookies.get("login_redirect") || "/";

@@ -320,9 +320,17 @@ export default Vue.extend({
             'Create a transparent overlay for your layout and customizations.'
         const metaImg = null
 
+        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {
+            htmlAttrs: {
+                ...i18nHead.htmlAttrs
+            },
+            link: [
+                ...i18nHead.link
+            ],
             title: metaTitle,
             meta: [
+                ...i18nHead.meta,
                 {
                     hid: 'description',
                     name: 'description',

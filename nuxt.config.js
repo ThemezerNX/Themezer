@@ -1,5 +1,18 @@
 require("dotenv").config();
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
+import path from "path";
+import fs from "fs";
+
+const locales = fs.readdirSync(path.resolve(__dirname, "langs")).map((file) => {
+    // isos: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+    const code = path.basename(file, ".json");
+    return {
+        code,
+        iso: code,
+        file,
+        name: JSON.parse(fs.readFileSync(path.resolve(__dirname, "langs", file))).lang,
+    };
+});
 
 export default {
     env: {
@@ -91,7 +104,21 @@ export default {
         "@nuxtjs/redirect-module",
         ["cookie-universal-nuxt", {parseJSON: false}],
         "@nuxtjs/auth-next",
+        "nuxt-i18n",
     ],
+
+    i18n: {
+        locales,
+        lazy: true,
+        langDir: "langs/",
+        seo: false, // instead declare head hooks in layouts
+        defaultLocale: "en",
+        defaultDirection: "auto",
+        strategy: "no_prefix",
+        vueI18n: {
+            fallbackLocale: "en",
+        },
+    },
 
     redirect: [
         {
