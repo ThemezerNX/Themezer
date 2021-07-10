@@ -539,7 +539,7 @@ export default {
                 {
                     icon: "mdi-image-edit-outline",
                     title: "Overlay Creator",
-                    to: "/tools/overlaycreator",
+                    to: "/tools/overlay-creator",
                 },
                 {
                     icon: "mdi-application",
