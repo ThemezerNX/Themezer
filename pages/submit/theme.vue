@@ -381,7 +381,7 @@
                                                             .has_commonlayout
                                                       "
                                                 >
-                                                    {{ $t("submitTheme.commonLayoutStatus", {key: "Common Layout", status: "✅"}) }}
+                                                    {{ $t("submitTheme.commonLayoutStatus", {key_: "Common Layout", status: "✅"}) }}
                                                 </v-list-item-subtitle>
                                             </v-col>
                                             <v-col class="pb-0">
@@ -457,7 +457,7 @@
                                                     allow-overflow
                                                     chips
                                                     deletable-chips
-                                                    :label="`${$t('fields.categories', {key: '↵'})}* (${$t('fields.categoriesHint')})`"
+                                                    :label="`${$t('fields.categories', {key_: '↵'})}* (${$t('fields.categoriesHint')})`"
                                                     multiple
                                                     outlined
                                                     prepend-icon="mdi-shape-outline"

@@ -41,7 +41,7 @@
                                 style="font-size: 0.9rem !important;"
                             >({{ type === "theme" ? "t" : "p" }}{{ id }})</span>
                         </template>
-                        <template v-slot:themezerNXHref>
+                        <template v-slot:themezerNX>
                             <a
                                 href="https://github.com/suchmememanyskill/themezer-nx/"
                                 rel="noopener"

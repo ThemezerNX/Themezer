@@ -148,7 +148,7 @@
                                 allow-overflow
                                 chips
                                 deletable-chips
-                                :label="`${$t('fields.categories', {key: '↵'})}* (${$t('fields.categoriesHint')})`"
+                                :label="`${$t('fields.categories', {key_: '↵'})}* (${$t('fields.categoriesHint')})`"
                                 multiple
                                 outlined
                                 prepend-icon="mdi-shape-outline"
