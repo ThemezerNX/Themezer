@@ -33,7 +33,7 @@
 
                     <v-list-item-content>
                         <v-list-item-title>
-Z                            {{ $t("login") }} / {{ $t("register") }}
+                            Z {{ $t("login") }} / {{ $t("register") }}
                         </v-list-item-title>
                     </v-list-item-content>
                     <v-icon>mdi-login</v-icon>
@@ -518,7 +518,7 @@ export default {
                 {
                     icon: "mdi-web",
                     title: this.$t("onlineThemeCreator"),
-                    href: "https://exelix11.github.io/SwitchThemeInjector/v2/",
+                    to: "/tools/theme-creator",
                 },
                 {
                     icon: "mdi-nintendo-switch",
@@ -792,6 +792,13 @@ html {
     background: #272727;
 }
 
+iframe {
+    border: unset;
+    border-radius: $border-radius !important;
+    width: 100%;
+    height: 100%;
+}
+
 .page-enter-active,
 .page-leave-active {
     transition-property: opacity;
@@ -813,7 +820,7 @@ html {
 }
 
 .v-list--rounded .v-list-item, .v-list--rounded .v-list-item::before, .v-list--rounded .v-list-item > .v-ripple__container {
-    border-radius: 20px !important;
+    border-radius: $border-radius !important;
 }
 
 .v-list-item {

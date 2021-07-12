@@ -88,11 +88,7 @@
                     >
                         <i18n path="submitTheme.webInjector">
                             <template v-slot:webInjectorHref>
-                                <a
-                                    href="https://exelix11.github.io/SwitchThemeInjector/v2/"
-                                    rel="noopener"
-                                    target="_blank"
-                                >{{ $t("onlineThemeCreator") }}</a>
+                                <nuxt-link to="/tools/theme-creator">{{ $t("onlineThemeCreator") }}</nuxt-link>
                             </template>
                         </i18n>
                     </div>

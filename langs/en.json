@@ -55,6 +55,7 @@
     "onlineThemeCreator": "Online Theme Creator",
     "themezerHBApp": "Themezer HB App",
     "overlayCreator": "Overlay Creator",
+    "themeCreator": "Theme Creator",
     "guideInstallThemes": "Installing Themes",
     "guideCreateThemes": "Creating Themes/Fonts",
     "guideCreateLayouts": "Creating Layouts",
@@ -328,6 +329,10 @@
         "title": "More information",
         "content": "If you are still looking for more information, contact us through one of the following means:",
         "contact": "Our contact page"
+    },
+    "themeCreators": {
+        "pageDescription": "On this page you can create an NXTheme overlay for your layout and customizations.",
+        "pageHint": "Note that this online version of the Theme Injector does not support every option (for example, custom icons are missing). For all features, download the {themeInjectorHref} Windows application."
     },
     "overlayCreators": {
         "pageDescription": "Create a transparent overlay for your layout and customizations.",
