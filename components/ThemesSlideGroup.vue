@@ -70,7 +70,7 @@
                                 v-if="showProps.includes('target')"
                                 class="target"
                             >
-                                {{ fileNameToNiceWebName(theme.target) }}
+                                {{ toNiceWebName(theme.target) }}
                             </v-card-subtitle>
                         </v-card>
                     </v-scale-transition>

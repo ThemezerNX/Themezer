@@ -72,26 +72,33 @@ export default Vue.extend({
                     return null;
             }
         },
-        fileNameToNiceWebName(s: string): string | null {
+        toNiceWebName(s: string): string | null {
             switch (s) {
+                case "homemenu":
                 case "ResidentMenu.szs":
                 case "ResidentMenu":
                     return this.$t("target.homemenu") as string;
+                case "lockscreen":
                 case "Entrance.szs":
                 case "Entrance":
                     return this.$t("target.lockscreen") as string;
+                case "userpage":
                 case "MyPage.szs":
                 case "MyPage":
                     return this.$t("target.userpage") as string;
+                case "allapps":
                 case "Flaunch.szs":
                 case "Flaunch":
                     return this.$t("target.allapps") as string;
+                case "settings":
                 case "Set.szs":
                 case "Set":
                     return this.$t("target.settings") as string;
+                case "news":
                 case "Notification.szs":
                 case "Notification":
                     return this.$t("target.news") as string;
+                case "playerselect":
                 case "Psl.szs":
                 case "Psl":
                     return this.$t("target.playerselect") as string;

@@ -373,7 +373,7 @@
                                                 <v-list-item-subtitle>
                                                     {{ $t("target.menu") }}
                                                     {{
-                                                        fileNameToNiceWebName(
+                                                        toNiceWebName(
                                                             theme.target
                                                         )
                                                     }}

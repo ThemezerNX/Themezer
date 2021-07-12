@@ -125,7 +125,7 @@
                                 v-text="theme.details.name"
                             ></v-list-item-title>
                             <v-list-item-subtitle>
-                                {{ $t("target.menu") }} {{fileNameToNiceWebName(theme.target) }}
+                                {{ $t("target.menu") }} {{ toNiceWebName(theme.target) }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>

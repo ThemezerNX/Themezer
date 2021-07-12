@@ -15,7 +15,7 @@
                 <h2
                     class="flex-grow-1 text-center display-1 font-weight-medium text-capitalize"
                 >
-                    {{ $parent.$data.type }}
+                    {{ $parent.$data.typeName }}
                 </h2>
             </v-col>
             <v-hover
@@ -53,7 +53,7 @@
                             <div class="display-2 flex-grow-1 text-center">
                                 <v-icon size="60">{{ target.icon }}</v-icon>
                                 <h6 style="position: relative;">
-                                    {{ target.title }}
+                                    {{ toNiceWebName(target.target) }}
                                 </h6>
                             </div>
                         </v-card>
@@ -67,6 +67,7 @@
 <script lang="ts">
 import Vue from "vue";
 import targets from "@/assets/targets";
+import targetParser from "~/components/mixins/targetParser";
 
 export default Vue.extend({
     data() {
@@ -76,6 +77,7 @@ export default Vue.extend({
             ),
         };
     },
+    mixins: [targetParser],
 });
 </script>
 
