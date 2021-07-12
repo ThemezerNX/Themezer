@@ -9,8 +9,8 @@ export default ({app}: { app: any }) => {
         uri: process.env.API_ENDPOINT,
         includeExtensions: true,
         fetch: (uri: any, options: any) => {
-            options.headers.Token = token;
-
+            options.headers['Token'] = token;
+            options.headers['Accept-Language'] = app.i18n.locale;
             return fetch(uri, options);
         },
     });
