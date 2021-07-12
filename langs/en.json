@@ -196,10 +196,9 @@
         "utf8Only": "Only UTF-8 characters are allowed",
         "characterLength": "'{field}' must be between {min} and {max} characters long",
         "characterLengthMin": "'{field}' must be {count} or more characters long",
-        "categoryMin": "At least {count} category is required",
+        "categoryMin": "At least one category is required",
         "categoryMax": "A maximum of {count} categories is allowed",
         "invalid": "Invalid {field}",
-        "noScriptTags": "Script tags are not allowed",
         "maxImageSize": "Image size should be less than {max}!",
         "notOwnCreatorId": "This is your current ID"
     },
