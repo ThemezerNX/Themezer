@@ -12,7 +12,7 @@
             @mouseover="searchHover = true"
         >
             <v-card-title class="title">
-                Search
+                {{ $t("filter.search") }}
                 <v-spacer/>
                 <v-btn
                     :disabled="
@@ -28,7 +28,7 @@
                     text
                     @click="$router.push($route.path)"
                 >
-                    Clear all
+                    {{ $t("filter.clear") }}
                 </v-btn>
             </v-card-title>
 
@@ -37,7 +37,7 @@
                     v-model="query"
                     dense
                     hide-details
-                    label="Search in everything"
+                    :label="$t('filter.search')"
                     outlined
                     rounded
                     single-line
@@ -56,9 +56,6 @@
                     class="mx-2 search-in"
                     @mouseover="searchHover = true"
                 >
-                    <v-card-subtitle class="pa-0 mx-2">
-                        With
-                    </v-card-subtitle>
                     <v-card-actions>
                         <v-autocomplete
                             v-model="withCreators"
@@ -71,7 +68,7 @@
                             deletable-chips
                             dense
                             hide-details
-                            label="Creators"
+                            :label="$tc('creator', 2)"
                             multiple
                             outlined
                             rounded
@@ -94,7 +91,7 @@
                             deletable-chips
                             dense
                             hide-details
-                            label="Layout name"
+                            :label="$tc('layout', 2)"
                             multiple
                             outlined
                             rounded
@@ -111,7 +108,7 @@
 
         <div class="group">
             <v-card-title class="title">
-                Sort by
+                {{ $t("filter.sortBy") }}
             </v-card-title>
 
             <v-card-actions class="link-group mx-2">
@@ -155,19 +152,19 @@
                     </v-icon>
                     {{ option.title }}
                     <span v-show="currentSort === option.id" class="order">
-						<v-icon
-                :color="currentOrder === 'asc' ? '#1e1e1e' : 'white'"
-            >
-							mdi-arrow-up
-						</v-icon>
-					</span>
+                        <v-icon
+                            :color="currentOrder === 'asc' ? '#1e1e1e' : 'white'"
+                        >
+                          mdi-arrow-up
+                        </v-icon>
+                    </span>
                 </nuxt-link>
             </v-card-actions>
         </div>
 
         <div class="group">
             <v-card-title class="title">
-                Filters
+                {{ $t("filter.filters") }}
             </v-card-title>
 
             <v-card-actions v-if="!unsupportedFilters.includes('my')">
@@ -175,7 +172,7 @@
                     v-model="onlybyme"
                     class="ma-0 mx-2"
                     hide-details
-                    label="Made by me"
+                    :label="$t('filter.madeByMe')"
                     @change="
                             $event
                               ? (withCreators = [$auth.user.id])
@@ -191,7 +188,7 @@
                     class="ma-0 mx-2"
                     color="red"
                     hide-details
-                    label="Show NSFW"
+                    :label="$t('filter.nsfw')"
                 ></v-checkbox>
             </v-card-actions>
         </div>
@@ -213,22 +210,22 @@ export default Vue.extend({
         return {
             sortOptions: [
                 {
-                    title: "Downloads",
+                    title: this.$t("filter.downloads"),
                     id: "downloads",
                     icon: "mdi-download-outline",
                 },
                 {
-                    title: "Likes",
+                    title: this.$t("filter.likes"),
                     id: "likes",
                     icon: "mdi-heart",
                 },
                 {
-                    title: "Updated",
+                    title: this.$t("filter.updated"),
                     id: "updated",
                     icon: "mdi-calendar-edit",
                 },
                 {
-                    title: "Added",
+                    title: this.$t("filter.id"),
                     id: "id",
                     icon: "mdi-calendar-clock",
                 },

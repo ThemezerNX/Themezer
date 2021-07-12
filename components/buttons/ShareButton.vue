@@ -17,15 +17,15 @@
                         <v-icon
                             :right="!!$slots.default"
                             style="margin-top: -3px; margin-left: 3px"
-                        >{{ icon || 'mdi-share' }}
-                        </v-icon
                         >
+                            {{ icon || "mdi-share" }}
+                        </v-icon>
                     </v-btn>
                 </template>
-                <span>{{ tooltip || 'Share' }}</span>
+                <span>{{ tooltip || "Share" }}</span>
             </v-tooltip>
         </template>
-        <span>Copied!</span>
+        <span>{{ $t("copySuccess") }}</span>
     </v-tooltip>
 </template>
 
@@ -46,13 +46,11 @@ export default Vue.extend({
         },
         type: {
             type: String,
-            required: false,
-            default: undefined,
+            required: true,
         },
         name: {
             type: String,
-            required: false,
-            default: undefined,
+            required: true,
         },
         creator: {
             type: String,
@@ -68,15 +66,19 @@ export default Vue.extend({
     },
     methods: {
         async share() {
+            const type = this.$tc(this.type);
             const data = {
-                title: this.type ? `Themezer ${this.type}` : "Themezer item",
-                text: this.name
-                    ? "Check out " +
-                    (this.type ? `this ${this.type} ` : "") +
-                    `'${this.name}'` +
-                    (this.creator ? ` by ${this.creator}` : "") +
-                    ` on Themezer!`
-                    : undefined,
+                title: this.type ? `Themezer ${type}` : `Themezer ${this.$tc("item.item")}`,
+                text: this.creator
+                    ? this.$t("item.shareText", {
+                        type: type.toLowerCase(),
+                        name: this.name,
+                        creator: this.creator,
+                    })
+                    : this.$t("item.shareText2", {
+                        type: type.toLowerCase(),
+                        name: this.name,
+                    }),
                 url: window.location.href,
             };
             const navigator: any = window.navigator;

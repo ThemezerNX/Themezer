@@ -15,8 +15,8 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'Layouts'
-        const metaDesc = 'Discover unique layouts to style menus to your hearts content!'
+        const metaTitle = this.$tc("layout", 2)
+        const metaDesc = this.$t("layouts.pageDescription")
         const metaImg = null
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })

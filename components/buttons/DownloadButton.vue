@@ -14,12 +14,12 @@
             >
                 <slot/>
                 <v-icon :right="!!$slots.default">{{
-                        icon || 'mdi-download'
+                        icon || "mdi-download"
                     }}
                 </v-icon>
             </v-btn>
         </template>
-        <span>{{ tooltip || 'Download' }}</span>
+        <span>{{ type ? $t("item.download", {type: $tc(type)}) : "Download" }}</span>
     </v-tooltip>
 </template>
 
@@ -33,7 +33,7 @@ export default Vue.extend({
             required: false,
             default: undefined,
         },
-        tooltip: {
+        type: {
             type: String,
             required: false,
             default: undefined,

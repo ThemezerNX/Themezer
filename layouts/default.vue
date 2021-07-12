@@ -33,7 +33,7 @@
 
                     <v-list-item-content>
                         <v-list-item-title>
-                            Login / register
+Z                            {{ $t("login") }} / {{ $t("register") }}
                         </v-list-item-title>
                     </v-list-item-content>
                     <v-icon>mdi-login</v-icon>
@@ -64,13 +64,13 @@
                         dense
                         router
                     >
-                        <v-list-item-title>My Profile</v-list-item-title>
+                        <v-list-item-title>{{ $t("myProfile") }}</v-list-item-title>
                         <v-list-item-icon>
                             <v-icon>mdi-account</v-icon>
                         </v-list-item-icon>
                     </v-list-item>
                     <v-list-item class="ml-11 pl-5" dense @click="logout()">
-                        <v-list-item-title>Logout</v-list-item-title>
+                        <v-list-item-title>{{ $t("logout") }}</v-list-item-title>
                         <v-list-item-icon>
                             <v-icon>mdi-logout</v-icon>
                         </v-list-item-icon>
@@ -182,9 +182,9 @@
                     <v-icon
                         :style="`margin-top: ${target.margin_top};`"
                         right
-                    >{{ target.icon }}
-                    </v-icon
                     >
+                        {{ target.icon }}
+                    </v-icon>
                 </v-btn>
             </v-toolbar-items>
             <v-spacer/>
@@ -243,7 +243,8 @@
                             </v-list-item-content>
                         </v-list-item>
 
-                        <v-list-item href="https://translate.themezer.net/" target="_blank" @click="$i18n.setLocale(locale.code)">
+                        <v-list-item href="https://translate.themezer.net/" target="_blank"
+                                     @click="$i18n.setLocale(locale.code)">
                             <v-list-item-content>
                                 <v-list-item-title>
                                     {{ $t("helpTranslate") }}
@@ -267,8 +268,8 @@
 
         <v-footer class="footer" absolute app inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
-            <nuxt-link class="pr-3" to="/about">About</nuxt-link>
-            <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">Status</a>
+            <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
+            <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
         </v-footer>
         <v-dialog
             v-if="$auth.loggedIn && $auth.user"
@@ -288,12 +289,11 @@
 
                         <v-card-text>
                             <p class="mb-4">
-                                Now you can finally upload your themes! But...
-                                there are a few rules here on Themezer:
+                                {{ $t("registerSuccessIntro") }}
                             </p>
 
                             <h1 class="mb-2">
-                                Terms of Service
+                                {{ $t("termsOfService") }}
                             </h1>
                             <div v-for="item in tos" :key="item.title">
                                 <h2>{{ item.title }}</h2>
@@ -310,7 +310,7 @@
                                     rounded
                                     @click.prevent="step++"
                                 >
-                                    Accept
+                                    {{ $t("accept") }}
                                     <v-icon right>mdi-arrow-right</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -320,22 +320,13 @@
                         <v-card-title
                             class="title font-weight-regular justify-space-between"
                         >
-                            <span>Backup Code</span>
+                            <span>{{ $t("backupCode") }}</span>
                         </v-card-title>
 
                         <v-card-text>
-                            In order to ensure you retain access to you Themezer
-                            account if anything happens to your Discord account,
-                            here is your creator ID and a backup code you can
-                            use in order to restore your account and connect a
-                            new Discord account. Be sure to store this backup
-                            code somewhere safe! The creator ID can also be
-                            found in the url of the creator page of your
-                            previous Themezer account. To restore your account,
-                            visit the about page.
+                            {{ $t("backupCodeExplanation") }}
                             <div>
-                                THIS IS THE ONLY TIME YOU CAN VIEW THIS BACKUP
-                                CODE!
+                                {{ $t("backupCodeViewOnceWarning") }}
                             </div>
                             <v-flex class="d-flex">
                                 <v-text-field
@@ -356,9 +347,9 @@
                                             class="align-self-center ml-2"
                                             rounded
                                             @click="copyId"
-                                        >copy
-                                        </v-btn
                                         >
+                                            {{ $t("copy") }}
+                                        </v-btn>
                                     </template>
                                     <span>Copied!</span>
                                 </v-tooltip>
@@ -391,9 +382,9 @@
                                             class="align-self-center ml-2"
                                             rounded
                                             @click="copyCode"
-                                        >copy
-                                        </v-btn
                                         >
+                                            {{ $t("copy") }}
+                                        </v-btn>
                                     </template>
                                     <span>Copied!</span>
                                 </v-tooltip>
@@ -405,7 +396,7 @@
                                     rounded
                                     @click.prevent="step--"
                                 >
-                                    Previous
+                                    {{ $t("previous") }}
                                     <v-icon right>mdi-arrow-left</v-icon>
                                 </v-btn>
                                 <v-spacer/>
@@ -416,7 +407,7 @@
                                     rounded
                                     @click.prevent="accept()"
                                 >
-                                    Finish
+                                    {{ $t("finish") }}
                                     <v-icon right>mdi-check</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -444,8 +435,7 @@
                         >
                             mdi-cookie
                         </v-icon>
-                        This website uses cookies to ensure you get the best experience.
-                        By continuing the use of this website you agree to our use of cookies.
+                        {{ $t("cookieBanner") }}
                         <template v-slot:actions="">
                             <v-btn
                                 text
@@ -453,7 +443,7 @@
                                 rounded
                                 to="/cookie-policy"
                             >
-                                Cookie Policy
+                                {{ $t("cookiePolicy") }}
                             </v-btn>
                             <v-btn
                                 text
@@ -461,7 +451,7 @@
                                 @click="props.accept"
                                 rounded
                             >
-                                Dismiss
+                                {{ $t("dismiss") }}
                             </v-btn>
                         </template>
                     </v-banner>
@@ -477,7 +467,7 @@ import {randomPackIDs} from "@/graphql/Pack.gql";
 import {randomThemeIDs} from "@/graphql/Theme.gql";
 import {randomLayoutIDs} from "@/graphql/Layout.gql";
 import targets from "@/assets/targets";
-import tos from "~/assets/lang/termsOfService";
+import tos from "~/components/mixins/termsOfService";
 
 export default {
     data() {
@@ -492,7 +482,7 @@ export default {
                     inset: false,
                 },
                 {
-                    header: "Browse:",
+                    header: this.$t("browse") + ":",
                     class: "d-flex d-sm-none",
                 },
                 {
@@ -502,7 +492,7 @@ export default {
                 },
                 ...targets,
                 {
-                    header: "Submit:",
+                    header: this.$t("upload") + ":",
                 },
                 {
                     divider: true,
@@ -510,16 +500,16 @@ export default {
                 },
                 {
                     icon: "mdi-format-color-fill",
-                    title: "Theme/Pack",
+                    title: this.$tc("theme") + "/" + this.$tc("pack"),
                     to: "/submit/theme",
                 },
                 {
                     icon: "mdi-code-json",
-                    title: "Layout",
+                    title: this.$tc("layout"),
                     to: "/submit/layout",
                 },
                 {
-                    header: "Tools:",
+                    header: this.$t("tools") + ":",
                 },
                 {
                     divider: true,
@@ -527,18 +517,18 @@ export default {
                 },
                 {
                     icon: "mdi-web",
-                    title: "Online Theme Creator",
+                    title: this.$t("onlineThemeCreator"),
                     href: "https://exelix11.github.io/SwitchThemeInjector/v2/",
                 },
                 {
-                    icon: "mdi-application",
-                    title: "Themezer NX App",
+                    icon: "mdi-nintendo-switch",
+                    title: this.$t("themezerHBApp"),
                     href:
                         "https://github.com/suchmememanyskill/themezer-nx/releases",
                 },
                 {
                     icon: "mdi-image-edit-outline",
-                    title: "Overlay Creator",
+                    title: this.$t("overlayCreator"),
                     to: "/tools/overlay-creator",
                 },
                 {
@@ -547,7 +537,7 @@ export default {
                     href: "https://github.com/ThemezerNX/LayoutKit#readme",
                 },
                 {
-                    header: "Guides:",
+                    header: this.$t("guides") + ":",
                 },
                 {
                     divider: true,
@@ -555,19 +545,19 @@ export default {
                 },
                 {
                     icon: "mdi-help-circle-outline",
-                    title: "Installing Themes",
+                    title: this.$t("guideInstallThemes"),
                     href:
                         "https://nh-server.github.io/switch-guide/extras/theming/#installing-a-theme",
                 },
                 {
                     icon: "mdi-help-circle-outline",
-                    title: "Creating Themes/Fonts",
+                    title: this.$t("guideCreateThemes"),
                     href:
                         "https://nh-server.github.io/switch-guide/extras/theming/",
                 },
                 {
                     icon: "mdi-book-open-variant",
-                    title: "Creating Layouts",
+                    title: this.$t("guideCreateLayouts"),
                     href:
                         "https://themezernx.github.io/LayoutDocs/",
                 },
@@ -577,29 +567,29 @@ export default {
                 },
                 {
                     icon: "mdi-information-outline",
-                    title: "About",
+                    title: this.$t("about"),
                     to: "/about",
                 },
                 {
                     icon: "mdi-timeline-clock-outline",
-                    title: "Service Status",
+                    title: this.$t("serviceStatus"),
                     href: "https://stats.uptimerobot.com/zx1G5uROYn",
                 },
             ],
             randomMenuItems: [
                 {
                     icon: "mdi-package-variant-closed",
-                    title: "Random Pack",
+                    title: this.$t("item.random", {type: this.$tc("pack")}),
                     function: this.randomPack,
                 },
                 {
                     icon: "mdi-format-color-fill",
-                    title: "Random Theme",
+                    title: this.$t("item.random", {type: this.$tc("theme")}),
                     function: this.randomTheme,
                 },
                 {
                     icon: "mdi-code-json",
-                    title: "Random Layout",
+                    title: this.$t("item.random", {type: this.$tc("layout")}),
                     function: this.randomLayout,
                 },
             ],
@@ -847,7 +837,7 @@ html {
     }
 }
 
-.v-card {
+.v-card, .v-dialog {
     border-radius: $border-radius !important;
 }
 

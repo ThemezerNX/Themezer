@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :loading="!!$apollo.queries.theme.loading" :margin="false">
             <v-sheet v-if="theme" class="pa-2 box_fill" no-gutters>
-                <h1 class="box_text">Edit Theme</h1>
+                <h1 class="box_text">{{ $t("item.editType", {type: $tc("theme")}) }}</h1>
                 <h2 class="box_text mt-0">
                     <nuxt-link
                         :to="
@@ -47,7 +47,7 @@
                                             full-width
                                             height="100%"
                                             hide-details
-                                            label="SCREENSHOT* (jpg, 1280x720)"
+                                            :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                             style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
                                             @change="
 												onScreenshotChange($event, i)
@@ -66,7 +66,7 @@
 									rules.utf8_only
 								]"
                                 counter="50"
-                                label="Theme Name*"
+                                :label="`${$t('fields.typeName', {type: $tc('theme')})}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -80,7 +80,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                label="Theme Description"
+                                :label="`${$t('fields.typeDescription', {type: $tc('theme')})}`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -102,7 +102,7 @@
                                 :loading="!!$apollo.queries.layoutList.loading"
                                 allow-overflow
                                 auto-select-first
-                                label="Layout"
+                                :label="$tc('layout')"
                                 outlined
                                 persistent-hint
                                 prepend-icon="mdi-code-json"
@@ -123,7 +123,7 @@
                                 allow-overflow
                                 auto-select-first
                                 clearable
-                                label="Pack"
+                                :label="$tc('pack')"
                                 outlined
                                 persistent-hint
                                 prepend-icon="mdi-package-variant-closed"
@@ -148,7 +148,7 @@
                                 allow-overflow
                                 chips
                                 deletable-chips
-                                label="Categories* ([enter] for new category)"
+                                :label="`${$t('fields.categories', {key: '↵'})}* (${$t('fields.categoriesHint')})`"
                                 multiple
                                 outlined
                                 prepend-icon="mdi-shape-outline"
@@ -162,7 +162,7 @@
                                 v-model="changed.details.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                label="Theme version*"
+                                :label="`${$t('fields.typeVersion', {type: $tc('theme')})}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"
@@ -182,10 +182,8 @@
                                     rounded
                                     @click.prevent="discard()"
                                 >
-                                    Discard
-                                    <v-icon right
-                                    >mdi-delete-sweep-outline
-                                    </v-icon>
+                                    {{ $t("discard") }}
+                                    <v-icon right>mdi-delete-sweep-outline</v-icon>
                                 </v-btn>
                                 <v-btn
                                     :disabled="!changes || !submitValid"
@@ -195,7 +193,7 @@
                                     type="submit"
                                     @click.prevent="submit()"
                                 >
-                                    Save
+                                    {{ $t("save") }}
                                     <v-icon right>mdi-cube-send</v-icon>
                                 </v-btn>
                             </ButtonDivider>
@@ -224,7 +222,7 @@
 
 <script>
 import Vue from "vue";
-import rules from "~/assets/lang/rules";
+import rules from '@/components/mixins/rules'
 import allLayoutsDropdown from "@/components/mixins/allLayoutsDropdown";
 import allCategoriesDropdown from "@/components/mixins/allCategoriesDropdown";
 import allPacksDropdown from "@/components/mixins/allPacksDropdown";
@@ -253,6 +251,7 @@ export default Vue.extend({
         allCategoriesDropdown,
         allPacksDropdown,
         optionsString,
+        rules,
     ],
     data() {
         return {
@@ -282,7 +281,6 @@ export default Vue.extend({
 
             deleteQuery: deleteTheme,
             submitValid: false,
-            rules,
             uploadedScreenshot: null,
             uploadedScreenshotUrl: null,
         };
@@ -310,9 +308,9 @@ export default Vue.extend({
         },
     },
     beforeRouteLeave(_to, _from, next) {
-        if (!this.changes || window.confirm("Do you really want to leave? You have unsaved changes!")) {
-            next();
-        }
+        next(vm =>
+            !this.changes || window.confirm(vm.$t("unsavedChanged")),
+        );
     },
     watch: {
         isPageOwner(n) {
@@ -429,7 +427,7 @@ export default Vue.extend({
                         this.uploadedScreenshot = null;
                         this.$apollo.queries.theme.refetch();
                         this.$snackbar.message(
-                            "Success! Changes might take some time to apply.",
+                            this.$t("saveSuccess"),
                         );
                     }
                 })
@@ -441,9 +439,9 @@ export default Vue.extend({
     },
     head() {
         if (this.theme) {
-            const metaTitle = `Edit | ${this.theme.details.name}${
+            const metaTitle = `${this.$t("item.edit")} | ${this.theme.details.name}${
                 this.theme.nsfw ? " (NSFW!)" : ""
-            } | ${this.targetName()} | Themes`;
+            } | ${this.targetName()} | ${this.$tc("theme", 2)}`;
             const metaDesc = this.theme.details.description;
             const metaImg = !this.theme.nsfw ? this.theme.preview.original : null;
 

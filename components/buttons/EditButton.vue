@@ -11,11 +11,11 @@
                 rounded
                 to="edit"
             >
-                Edit
-                <v-icon right>{{ icon || 'mdi-shield-edit' }}</v-icon>
+                {{ $t("item.edit") }}
+                <v-icon right>{{ icon || "mdi-shield-edit" }}</v-icon>
             </v-btn>
         </template>
-        <span>Edit this {{ type }}</span>
+        <span>{{ $t("item.editThis", {type: $tc(type)}) }}</span>
     </v-tooltip>
 </template>
 

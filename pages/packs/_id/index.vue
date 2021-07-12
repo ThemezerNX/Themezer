@@ -43,13 +43,16 @@
                             {{ pack.details.name }}
                         </h1>
                         <div class="subtitle-1">
-                            By
-                            <nuxt-link
-                                :to="`/creators/${pack.creator.id}`"
-                                class="font-weight-bold"
-                            >
-                                {{ pack.creator.display_name }}
-                            </nuxt-link>
+                            <i18n path="item.author">
+                                <template v-slot:creator>
+                                    <nuxt-link
+                                        :to="`/creators/${pack.creator.id}`"
+                                        class="font-weight-bold"
+                                    >
+                                        {{ pack.creator.display_name }}
+                                    </nuxt-link>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="pack.details.description"
@@ -95,39 +98,49 @@
                             <ReportButton
                                 v-if="!mayModerate"
                                 :nsfw="
-									pack.themes[0].categories.includes('NSFW')
-								"
+                                  pack.themes[0].categories.includes('NSFW')
+                                "
                                 type="pack"
                             />
                         </ButtonDivider>
 
                         <h3>
-                            Details
+                            {{ $t("item.details") }}
                         </h3>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">ID: </span>
-                            {{ pack.id }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.id">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ pack.id }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Version: </span>
-                            {{ pack.details.version }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.version">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ pack.details.version }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-							<span class="font-weight-medium"
-              >Last Updated:</span
-              >
-                            {{ niceDate(pack.last_updated) }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.lastUpdated">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ $d(new Date(pack.last_updated), "short") }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Downloads: </span>
-                            {{ pack.dl_count }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.dlCount">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ pack.dl_count }}</span>
+                                </template>
+                            </i18n>
                         </div>
 
                         <ButtonDivider>
                             <DownloadButton
                                 :download-function="downloadPack"
                                 :loading="loadingDownload"
-                                tooltip="Download pack"
+                                type="pack"
                             />
                         </ButtonDivider>
 
@@ -138,12 +151,10 @@
                 </v-row>
                 <v-row class="ma-0">
                     <v-col
-                        :class="
-							$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'
-						"
+                        :class="$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'"
                     >
                         <h2 class="px-2">
-                            Themes in this Pack
+                            {{ $t("packs.packContents") }}
                         </h2>
                         <v-divider/>
                         <ThemesSlideGroup
@@ -186,14 +197,6 @@ export default Vue.extend({
         };
     },
     computed: {
-        backgroundStyle() {
-            return "";
-            // if (this.pack.details.color) {
-            // 	return `background: ${this.pack.details.color};`
-            // } else {
-            // 	return `background: #e2e2e2;`
-            // }
-        },
         categories() {
             const c = [];
             for (const i in this.pack.themes) {
@@ -262,19 +265,19 @@ export default Vue.extend({
                 this.pack.themes.some((t) => t.categories?.includes("NSFW"))
                     ? " (NSFW!)"
                     : ""
-            } | Packs`;
+            } | ${this.$tc("pack", 2)}`;
             const metaDesc = this.pack.details.description;
             const metaImg = !this.pack.themes[0].categories.includes("NSFW")
                 ? this.pack.themes[0].preview.original
                 : null;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [

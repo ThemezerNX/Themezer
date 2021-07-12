@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :dim="false" :shadow="false">
             <v-alert color="info" style="z-index: 5;" rounded>
-                You have been logged out!
+                {{ $t("logoutSuccess") }}
             </v-alert>
         </LoadingOverlay>
     </v-container>

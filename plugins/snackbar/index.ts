@@ -34,9 +34,11 @@ export default (context: any, inject: any) => {
             // eslint-disable-next-line no-console
             console.error(error);
 
+            let message = error.message.replace("GraphQL error: ", "") || "Unknown Error";
+            if (message.includes("Failed to fetch")) message = context.app.i18n.t("apiOffline");
             context.store.commit(
                 "snackbar/SET_ERROR",
-                error.message.replace("GraphQL error: ", "") || "Unknown Error",
+                message,
             );
 
             clearTimeout(timer);

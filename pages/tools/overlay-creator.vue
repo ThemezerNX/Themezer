@@ -6,31 +6,22 @@
     >
         <v-sheet class="pa-2 box_fill" no-gutters>
             <h1 class="box_text">
-                Overlay Creator
+                {{ $tc("overlayCreator", 1) }}
             </h1>
             <div class="subtitle-1 box_text">
-                Create a transparent overlay for your layout and customizations.
-                You may use the tool here, or manually create an overlay if you
-                can. Either way, an overlay is required for layouts on this
-                website.
+                {{ $t("overlayCreators.pageUse") }}
             </div>
             <h2 class="box_text">
-                1. Upload Layout
+                {{ $t("overlayCreators.step1") }}
             </h2>
             <div class="subtitle-1 box_text">
-                Upload your layout here. You will get two NXThemes: one with a
-                black background and one with a white one (be sure to allow the
-                site to download multiple files). For each do the following:
-                install it on your Switch and take a screenshot. Set the system
-                theme to white(!) and have the cursor in the same position when
-                taking the screenshots. Transfer the screenshots to your PC
-                afterwards. Have you done that? Go to step 2.
+                {{ $t("overlayCreators.step1Description") }}
                 <a
                     href="https://github.com/ThemezerNX/Layouts#3-creating-overlays"
                     rel="noopener"
                     target="_blank"
                 >
-                    More detailed instructions
+                    {{ $t("overlayCreators.moreDetailedInstructions") }}
                 </a>
             </div>
             <v-row class="ma-0">
@@ -40,7 +31,7 @@
                         accept="application/json"
                         filled
                         hide-details
-                        label=".json layout"
+                        :label="`${$tc('layout')}*`"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -51,7 +42,7 @@
                         accept="application/json"
                         filled
                         hide-details
-                        label=".json piece file (optional)"
+                        :label="$tc('layoutOption')"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -62,7 +53,7 @@
                         accept="application/json"
                         filled
                         hide-details
-                        label=".json common layout (optional)"
+                        :label="$tc('commonLayout')"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -77,21 +68,17 @@
                         rounded
                         @click.prevent="uploadLayout()"
                     >
-                        Get
-                        <v-icon class="mt-1" right
-                        >mdi-format-color-fill
-                        </v-icon
-                        >
+                        {{ $t("createType", {type: $tc("nxtheme", 2)}) }}
+                        <v-icon class="mt-1" right>mdi-format-color-fill</v-icon>
                     </v-btn>
                 </ButtonDivider>
             </v-row>
 
             <h2 class="box_text">
-                2. Upload Screenshots
+                {{ $t("overlayCreators.step2") }}
             </h2>
             <div class="subtitle-1 box_text">
-                Here you will upload the two screenshots you took at step 1.
-                Upload them to their own field below.
+                {{ $t("overlayCreators.step2Description") }}
             </div>
             <v-row class="ma-0">
                 <v-col
@@ -104,7 +91,7 @@
                 >
                     <v-img
                         :src="screenshotWhiteUrl"
-                        alt="Screenshot with white background"
+                        :alt="$t('overlayCreators.screenshotWithBackground', {color: $t('white')})"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -121,7 +108,8 @@
                         accept="image/jpeg"
                         filled
                         hide-details
-                        label="Screenshot with white background"
+                        label="*"
+                        :label="`${$t('overlayCreators.screenshotWithBackground', {color: $t('white')})}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotWhiteChange"
@@ -138,7 +126,7 @@
                 >
                     <v-img
                         :src="screenshotBlackUrl"
-                        alt="Screenshot with black background"
+                        :alt="$t('overlayCreators.screenshotWithBackground', {color: $t('black')})"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -155,7 +143,7 @@
                         accept="image/jpeg"
                         filled
                         hide-details
-                        label="Screenshot with black background"
+                        :label="`${$t('overlayCreators.screenshotWithBackground', {color: $t('black')})}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotBlackChange"
@@ -171,7 +159,7 @@
                         rounded
                         @click.prevent="uploadScreenshots"
                     >
-                        Create overlay
+                        {{ $t("createType", {type: $tc("overlay")}) }}
                         <v-icon right>mdi-image-edit-outline</v-icon>
                     </v-btn>
                 </ButtonDivider>
@@ -180,15 +168,13 @@
             <v-row v-if="!!resultImage" class="ma-0">
                 <v-col class="pa-0" cols="12" xs="12">
                     <h2 class="box_text">
-                        3. Result
+                        {{ $t("overlayCreators.step3") }}
                     </h2>
                 </v-col>
                 <v-col class="pa-2" cols="12" sm="4" xs="12">
                     <v-img
-                        :src="
-							`data:${resultImage.mimetype};base64,${resultImage.data}`
-						"
-                        alt="Created overlay image"
+                        :src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
+                        :alt="$t('overlayCreators.generatedImage')"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -201,9 +187,9 @@
                     <ButtonDivider>
                         <DownloadButton
                             :download-function="download"
-                            tooltip="Download image"
+                            type="image"
                         >
-                            Save
+                            {{ $t("save") }}
                         </DownloadButton>
                     </ButtonDivider>
                 </v-col>
@@ -315,9 +301,8 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'Overlay Creator | Tools'
-        const metaDesc =
-            'Create a transparent overlay for your layout and customizations.'
+        const metaTitle = `${this.$tc("overlayCreator")} | ${this.$tc("tool", 2)}`
+        const metaDesc = this.$t("overlayCreators.pageDescription")
         const metaImg = null
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })

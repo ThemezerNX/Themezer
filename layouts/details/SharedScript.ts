@@ -29,30 +29,5 @@ export default Vue.extend({
                 this.landscape = true;
             }
         },
-        niceDate(unix: string) {
-            const monthNames = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-            ];
-
-            const DateTime = new Date(unix);
-            return (
-                monthNames[DateTime.getMonth()] +
-                " " +
-                DateTime.getDate() +
-                ", " +
-                DateTime.getFullYear()
-            );
-        },
     },
 });

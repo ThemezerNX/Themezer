@@ -10,7 +10,7 @@
                 <h1
                     class="flex-grow-1 text-center display-2 font-weight-medium"
                 >
-                    Choose A Menu
+                    {{ $t("target.choose") }}
                 </h1>
                 <h2
                     class="flex-grow-1 text-center display-1 font-weight-medium text-capitalize"

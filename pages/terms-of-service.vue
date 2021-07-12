@@ -1,26 +1,25 @@
 <template>
     <v-layout align-center column justify-center pa-3>
-        <TextCard :title="title" :subtitle="subtitle" :items="items"/>
+        <TextCard :title="title" :subtitle="subtitle" :items="termsOfService"/>
     </v-layout>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
-import items from "~/assets/lang/termsOfService";
+import termsOfService from "~/components/mixins/termsOfService";
 import TextCard from "~/components/TextCard.vue";
 
-const title = "Terms of Service";
 export default Vue.extend({
     components: {TextCard},
+    mixins: [termsOfService],
     data() {
         return {
-            title,
+            title: this.$t("termsOfService"),
             subtitle: null,
-            items,
         };
     },
     head() {
-        const metaTitle = title;
+        const metaTitle = this.title;
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

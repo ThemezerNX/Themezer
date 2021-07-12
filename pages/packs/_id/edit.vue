@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
             <v-sheet v-if="pack" class="pa-2 box_fill" no-gutters>
-                <h1 class="box_text">Edit Pack</h1>
+                <h1 class="box_text">{{ $t("item.editType", {type: $tc("pack")}) }}</h1>
                 <h2 class="box_text mt-0">
                     <nuxt-link
                         :to="
@@ -35,7 +35,7 @@
 									rules.utf8_only
 								]"
                                 counter="50"
-                                label="Pack Name*"
+                                :label="`${$t('fields.typeName', {type: $tc('pack')})}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -50,7 +50,7 @@
 									rules.utf8_only
 								]"
                                 counter="500"
-                                label="Pack Description*"
+                                :label="`${$t('fields.typeDescription', {type: $tc('pack')})}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -61,7 +61,7 @@
                                 v-model="changed.details.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                label="Pack version*"
+                                :label="`${$t('fields.typeVersion', {type: $tc('pack')})}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"
@@ -75,10 +75,8 @@
                                     rounded
                                     @click.prevent="discard()"
                                 >
-                                    Discard
-                                    <v-icon right
-                                    >mdi-delete-sweep-outline
-                                    </v-icon>
+                                    {{ $t("discard") }}
+                                    <v-icon right>mdi-delete-sweep-outline</v-icon>
                                 </v-btn>
                                 <v-btn
                                     :disabled="!submitValid || !changes"
@@ -88,7 +86,7 @@
                                     type="submit"
                                     @click.prevent="submit()"
                                 >
-                                    Save
+                                    {{ $t("save") }}
                                     <v-icon right>mdi-cube-send</v-icon>
                                 </v-btn>
                             </ButtonDivider>
@@ -96,9 +94,9 @@
                     </v-row>
                 </v-form>
 
-                <h3 class="box_text">Themes in this pack:</h3>
+                <h3 class="box_text">{{ $t("packs.packContents") }}</h3>
                 <h3 class="box_text subtitle-1 font-italic">
-                    Click any to edit
+                    {{ $t("packs.clickAnyToEdit") }}
                 </h3>
                 <v-list class="box_text" rounded>
                     <v-list-item
@@ -127,8 +125,7 @@
                                 v-text="theme.details.name"
                             ></v-list-item-title>
                             <v-list-item-subtitle>
-                                Target:
-                                {{ fileNameToNiceWebName(theme.target) }}
+                                {{ $t("target.menu") }} {{fileNameToNiceWebName(theme.target) }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
@@ -149,7 +146,7 @@
 
 <script>
 import Vue from 'vue'
-import rules from '~/assets/lang/rules'
+import rules from '@/components/mixins/rules'
 import targetParser from '@/components/mixins/targetParser'
 import {deletePack, pack, updatePack} from '@/graphql/Pack.gql'
 import urlParser from '~/components/mixins/urlParser'
@@ -166,7 +163,7 @@ export default Vue.extend({
         DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
         LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
     },
-    mixins: [urlParser, targetParser],
+    mixins: [urlParser, targetParser, rules],
     data() {
         return {
             isPageOwner: true,
@@ -177,7 +174,6 @@ export default Vue.extend({
 
             deleteQuery: deletePack,
             submitValid: false,
-            rules,
             uploadedScreenshot: null,
             uploadedScreenshotUrl: null
         }
@@ -188,9 +184,9 @@ export default Vue.extend({
         }
     },
     beforeRouteLeave(_to, _from, next) {
-        if (!this.changes || window.confirm("Do you really want to leave? You have unsaved changes!")) {
-            next();
-        }
+        next(vm =>
+            !this.changes || window.confirm(vm.$t("unsavedChanged")),
+        );
     },
     watch: {
         isPageOwner(n) {
@@ -248,7 +244,7 @@ export default Vue.extend({
                     if (data && data.updatePack) {
                         this.$apollo.queries.pack.refetch()
                         this.$snackbar.message(
-                            'Success! Changes might take some time to apply.'
+                            this.$t("saveSuccess"),
                         )
                     }
                 })
@@ -260,11 +256,11 @@ export default Vue.extend({
     },
     head() {
         if (this.pack) {
-            const metaTitle = `Edit | ${this.pack.details.name}${
+            const metaTitle = `${this.$t("item.edit")} | ${this.pack.details.name}${
                 this.pack.themes.some((t) => t.categories?.includes('NSFW'))
                     ? ' (NSFW!)'
                     : ''
-            } | Packs`
+            } | ${this.$tc("pack", 2)}`
             const metaDesc = this.pack.details.description
             const metaImg = !this.pack.themes.some((t) =>
                 t.categories?.includes('NSFW')

@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center">{{ targetName() }} Layouts</h2>
+                <h2 class="text-center">{{ $tc("targetLayout", 2, {menu: targetName()}) }}</h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -12,22 +12,17 @@
                 <LoadingOverlay :loading="!!$apollo.loading" :margin="false" min-loader-height="auto">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
-                            {{ itemList.pagination.item_count }}
-                            {{
-                                itemList.pagination.item_count === 1
-                                    ? 'result'
-                                    : 'results'
-                            }}
+                            {{ $tc("resultCount", itemList.pagination.item_count) }}
                         </h3>
                         <v-divider/>
                     </div>
 
                     <v-row
                         v-if="
-							itemList &&
-								itemList.layoutList &&
-								itemList.layoutList.length > 0
-						"
+                          itemList &&
+                            itemList.layoutList &&
+                            itemList.layoutList.length > 0
+                        "
                     >
                         <v-col
                             v-for="layout in itemList.layoutList"
@@ -46,9 +41,7 @@
                         </v-col>
                     </v-row>
 
-                    <span v-else-if="!$apollo.loading"
-                    >There were no results</span
-                    >
+                    <span v-else-if="!$apollo.loading">{{ $t("noResults") }}</span>
                     <paginate
                         v-model="pageNumber"
                         :click-handler="paginationEvent"
@@ -71,111 +64,108 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {allCreators, layoutList} from '@/graphql/Layout.gql'
-import targetParser from '@/components/mixins/targetParser'
-import filter from '@/components/mixins/filter'
-import allowedTargets from '@/components/mixins/allowedTargets'
+import Vue from "vue";
+import {allCreators, layoutList} from "@/graphql/Layout.gql";
+import targetParser from "@/components/mixins/targetParser";
+import filter from "@/components/mixins/filter";
+import allowedTargets from "@/components/mixins/allowedTargets";
 
 export default Vue.extend({
     components: {
-        Filters: () => import('@/components/Filters.vue'),
-        ItemCard: () => import('@/components/ItemCard.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        Filters: () => import("@/components/Filters.vue"),
+        ItemCard: () => import("@/components/ItemCard.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, filter],
     data() {
         return {
-            type: 'layouts',
-            list: 'layoutList',
-            unsupportedFilters: ['nsfw', 'withLayouts'],
-            allCreatorsQuery: allCreators
-        }
+            type: "layouts",
+            list: "layoutList",
+            unsupportedFilters: ["nsfw", "withLayouts"],
+            allCreatorsQuery: allCreators,
+        };
     },
     apollo: {
         itemList: {
             query: layoutList,
-            fetchPolicy: 'cache-and-network',
+            fetchPolicy: "cache-and-network",
             variables() {
                 const vars = {
-                    q: 'layoutList',
+                    q: "layoutList",
                     target: this.targetFile(),
                     limit: 16,
                     page: this.currentPage,
                     query: this.currentSearch,
                     sort: this.currentSort,
                     order: this.currentOrder,
-                    creators: this.currentCreators
-                }
-                vars.hash = this.$hashString(vars)
-                return vars
+                    creators: this.currentCreators,
+                };
+                vars.hash = this.$hashString(vars);
+                return vars;
             },
             update(data) {
-                return data
+                return data;
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     beforeRouteEnter(to, _from, next) {
         if (allowedTargets.includes(to.params.target)) {
-            next()
+            next();
         } else {
-            next('/')
+            next("/");
         }
     },
     head() {
         // eslint-disable-next-line camelcase
-        const resultAmount = this.itemList?.pagination?.item_count
+        const resultAmount = this.itemList?.pagination?.item_count;
 
         const metaTitle =
-            resultAmount !== undefined
-                ? `${resultAmount} ${
-                    resultAmount === 1 ? 'result' : 'results'
-                } | ${this.targetName()} | Layouts`
-                : `${this.targetName()} | Layouts`
+            (resultAmount !== undefined
+                ? `${this.$tc("resultCount", resultAmount)} | `
+                : "")
+            + `${this.targetName()} | ${this.$tc("layout", 2)}`;
+        const metaDesc = this.$t("layouts.targetPageDescription", {menu: this.targetName()});
+        const metaImg = null;
 
-        const metaDesc = 'Layouts on Themezer'
-
-        const metaImg = null
-
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>
 
 <style lang="scss">

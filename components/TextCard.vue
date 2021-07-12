@@ -30,6 +30,8 @@
 
             <hr class="mb-2"/>
         </v-card-text>
+
+        <slot name="footer" />
     </v-card>
 </template>
 

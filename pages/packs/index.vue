@@ -12,12 +12,7 @@
                 <LoadingOverlay :loading="!!$apollo.loading" :margin="false" min-loader-height="auto">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
-                            {{ itemList.pagination.item_count }}
-                            {{
-                                itemList.pagination.item_count === 1
-                                    ? "result"
-                                    : "results"
-                            }}
+                            {{ $tc("resultCount", itemList.pagination.item_count) }}
                         </h3>
                         <v-divider/>
                     </div>
@@ -42,7 +37,7 @@
                         </v-col>
                     </v-row>
 
-                    <span v-else-if="!$apollo.loading">There were no results</span>
+                    <span v-else-if="!$apollo.loading">{{ $t("noResults") }}</span>
                     <paginate
                         v-model="pageNumber"
                         :click-handler="paginationEvent"
@@ -119,22 +114,21 @@ export default Vue.extend({
         const resultAmount = this.itemList?.pagination?.item_count;
 
         const metaTitle =
-            resultAmount !== undefined
-                ? `${resultAmount} ${
-                    resultAmount === 1 ? "result" : "results"
-                } | Packs`
-                : `Packs`;
+            (resultAmount !== undefined
+                ? `${this.$tc("resultCount", resultAmount)} | `
+                : "")
+            + this.$tc("pack", 2);
 
-        const metaDesc = "Discover amazing theme packs to give every menu a similar look!";
+        const metaDesc = this.$t("packs.pageDescription");
         const metaImg = null;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [

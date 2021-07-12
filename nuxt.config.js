@@ -117,6 +117,18 @@ export default {
         strategy: "no_prefix",
         vueI18n: {
             fallbackLocale: "en",
+            dateTimeFormats: {
+                en: {
+                    short: {
+                        year: 'numeric', month: 'short', day: 'numeric'
+                    },
+                    long: {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        weekday: 'short', hour: 'numeric', minute: 'numeric',
+                        hour12: false
+                    }
+                },
+            },
         },
     },
 

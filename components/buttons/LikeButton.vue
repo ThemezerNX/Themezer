@@ -15,7 +15,7 @@
                 <v-icon right>{{ icon || 'mdi-heart' }}</v-icon>
             </v-btn>
         </template>
-        <span>{{ newValue ? 'Unlike this' : 'I like this!' }}</span>
+        <span>{{ newValue ? $t("item.unlike") : $t("item.like") }}</span>
     </v-tooltip>
 </template>
 

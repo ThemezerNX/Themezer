@@ -6,11 +6,11 @@
                 v-on="on"
                 :class="inline ? '' : 'badge'"
                 class="ma-1 pa-1"
-            >mdi-certificate-outline
-            </v-icon
             >
+                mdi-certificate-outline
+            </v-icon>
         </template>
-        <span>Automatically updated</span>
+        <span>{{ $t("badges.certifiedBadge") }}</span>
     </v-tooltip>
 </template>
 

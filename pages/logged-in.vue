@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :dim="false" :shadow="false">
             <v-alert color="info" style="z-index: 5;" rounded>
-                You are now logged in!
+                {{ $t("loginSuccess") }}
             </v-alert>
         </LoadingOverlay>
     </v-container>
@@ -16,7 +16,6 @@ export default Vue.extend({
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mounted() {
-        console.log(this.$cookies.get("login_redirect"))
         const redirectUrl = this.$cookies.get("login_redirect") || "/";
         this.$cookies.remove("login_redirect");
         setTimeout(() => {

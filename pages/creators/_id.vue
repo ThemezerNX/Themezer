@@ -88,9 +88,9 @@
                                             {{ roleIcon(role.split("|")[0]) }}
                                         </v-icon>
                                     </template>
-                                    <span class="text-capitalize">{{
-                                            role.split("|")[role.split("|").length - 1]
-                                        }}</span>
+                                    <span class="text-capitalize">
+                                        {{ roleName(role) }}
+                                    </span>
                                 </v-tooltip>
                             </template>
                         </h1>
@@ -103,7 +103,7 @@
                                 rounded
                                 @click="editDialog = true"
                             >
-                                Edit Profile
+                                {{ $t("item.editThis", {type: $t("creators.profile")}) }}
                                 <v-icon right>mdi-pencil</v-icon>
                             </v-btn>
                             <LikeButton
@@ -138,7 +138,7 @@
                             <Markdown :source="creator.bio" class="markdown"/>
                         </v-sheet>
 
-                        <p class="ma-2" v-else>This creator hasn't written anything about themselves yet...</p>
+                        <p class="ma-2" v-else>{{ $t("creators.noBiography") }}</p>
                     </v-col>
                 </v-row>
             </v-container>
@@ -155,7 +155,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            Latest Packs by this creator
+                            {{ $t("creators.latestByCreator", {type: $tc("pack", 6)}) }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -176,7 +176,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            Latest Themes by this creator
+                            {{ $t("creators.latestByCreator", {type: $tc("theme", 6)}) }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -197,7 +197,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            Latest Layouts by this creator
+                            {{ $t("creators.latestByCreator", {type: $tc("layout", 6)}) }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -219,7 +219,7 @@
                         <v-card-title
                             class="title font-weight-regular justify-space-between"
                         >
-                            <span>Edit Profile</span>
+                            <span>{{ $t("item.editType", {type: $t("creators.profile")}) }}</span>
                             <v-spacer></v-spacer>
 
                             <v-btn icon rounded @click="editDialog = false">
@@ -237,7 +237,7 @@
                                 v-model="changed.isBlocked"
                                 class="mt-0"
                                 color="red"
-                                label="Block user from submitting"
+                                :label="$t('creators.blockUser')"
                             />
                             <v-text-field
                                 v-model="changed.customUsername"
@@ -245,7 +245,7 @@
                                 :rules="[rules.utf8_only]"
                                 class="pt-1"
                                 counter="50"
-                                label="Custom display name"
+                                :label="$t('creators.customName')"
                                 maxlength="50"
                                 outlined
                                 prepend-icon="mdi-pencil"
@@ -259,11 +259,10 @@
                             <v-textarea
                                 v-model="changed.bio"
                                 :disabled="loading.submit"
-                                :rules="[rules.no_scripts]"
                                 auto-grow
                                 class="pt-1"
                                 counter="1000"
-                                label="Bio (supports Markdown and HTML)"
+                                :label="$t('creators.bio')"
                                 maxlength="1000"
                                 outlined
                                 prepend-icon="mdi-bio"
@@ -275,8 +274,7 @@
 								"
                             ></v-textarea>
                             <span class="caption grey--text text--darken-1">
-								Profile color will affect the navigation bar and
-								side menu
+								{{ $t("creators.profileColourNote") }}
 							</span>
                             <v-text-field
                                 v-model="changed.profileColor"
@@ -284,7 +282,7 @@
                                 :disabled="loading.submit"
                                 :rules="[rules.hex]"
                                 class="pt-2"
-                                label="Profile color"
+                                :label="$t('creators.profileColor')"
                                 maxlength="7"
                                 outlined
                                 prepend-icon="mdi-format-color-fill"
@@ -302,7 +300,7 @@
 								"
                                 :rules="[rules.banner_size]"
                                 accept="image/*"
-                                label="Banner (recommended: 1920x800)"
+                                :label="$t('creators.banner', {size: '1920×800'})"
                                 outlined
                                 prepend-icon="mdi-image-area"
                                 rounded
@@ -323,7 +321,7 @@
 										changed.clearBannerImage = true
 									"
                                 >
-                                    Remove current banner
+                                    {{ $t("creators.bannerClear") }}
                                     <v-icon right>mdi-delete-outline</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -334,7 +332,7 @@
 								"
                                 :rules="[rules.logo_size]"
                                 accept="image/*"
-                                label="Logo (replaces Discord avatar)"
+                                :label="$t('creators.logo')"
                                 outlined
                                 prepend-icon="mdi-image"
                                 rounded
@@ -355,7 +353,7 @@
 										changed.clearLogoImage = true
 									"
                                 >
-                                    Remove current logo
+                                    {{ $t("creators.logoClear") }}
                                     <v-icon right>mdi-delete-outline</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -366,7 +364,7 @@
                                     rounded
                                     @click.prevent="discard()"
                                 >
-                                    Discard
+                                    {{ $t("discard") }}
                                     <v-icon right
                                     >mdi-delete-sweep-outline
                                     </v-icon>
@@ -380,7 +378,7 @@
                                     type="submit"
                                     @click.prevent="submit()"
                                 >
-                                    Save
+                                    {{ $t("save") }}
                                     <v-icon right>mdi-cube-send</v-icon>
                                 </v-btn>
                             </v-flex>
@@ -394,7 +392,7 @@
 
 <script>
 import Vue from "vue";
-import rules from "~/assets/lang/rules";
+import rules from '@/components/mixins/rules'
 import {creator, me, updateProfile} from "@/graphql/Creator.gql";
 import {rowPackList} from "@/graphql/Pack.gql";
 import {rowThemeList} from "@/graphql/Theme.gql";
@@ -412,67 +410,7 @@ export default Vue.extend({
         ItemGrid: () => import("@/components/ItemGrid.vue"),
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
-    // async asyncData({ error, app, params }) {
-    // 	const syncData = {
-    // 		id: params.id,
-    // 		isPageOwner: app.$auth.loggedIn && params.id === app.$auth.user.id,
-    // 		changed: {
-    // 			profileColor: null,
-    // 			customUsername: null,
-    // 			bio: null,
-    // 			bannerImage: null,
-    // 			logoImage: null,
-    // 			clearBannerImage: false,
-    // 			clearLogoImage: false
-    // 		}
-    // 	}
-
-    // 	syncData.creator = await app.apolloProvider.clients.defaultClient
-    // 		.query({
-    // 			query: syncData.isPageOwner ? me : creator,
-    // 			variables: { id: params.id }
-    // 		})
-    // 		.then(({ data }) => {
-    // 			if (syncData.isPageOwner) {
-    // 				return data?.me
-    // 			} else {
-    // 				return data?.creator
-    // 			}
-    // 		})
-    // 		.catch((e) => {
-    // 			error(e)
-    // 		})
-
-    // 	if (syncData.creator) {
-    // 		if (
-    // 			syncData.creator.old_ids &&
-    // 			syncData.creator.old_ids.includes(syncData.id)
-    // 		) {
-    // 			// Sort of redirect, needs proper HTML 301 (moved permanently)
-    // 			app.$router.push(`/creators/${syncData.creator.id}`)
-    // 		} else {
-    // 			app.$store.commit(
-    // 				'SET_PROFILE_COLOR',
-    // 				syncData.creator.profile_color
-    // 			)
-
-    // 			syncData.changed.profileColor = syncData.creator.profile_color
-    // 			syncData.changed.customUsername =
-    // 				syncData.creator.custom_username
-    // 			syncData.changed.bio = syncData.creator.bio
-
-    // 			if (syncData.creator.discord_user.avatar) {
-    // 				syncData.avatar = `avatars/${syncData.creator.id}/${syncData.creator.discord_user.avatar}`
-    // 			} else {
-    // 				syncData.avatar = `embed/avatars/${parseInt(
-    // 					syncData.creator.discord_user.discriminator
-    // 				) % 5}.png`
-    // 			}
-    // 		}
-    // 	}
-
-    // 	return syncData
-    // },
+    mixins: [rules],
     data() {
         return {
             API_ENDPOINT: process.env.API_ENDPOINT,
@@ -498,7 +436,6 @@ export default Vue.extend({
             },
 
             avatar: null,
-            rules,
         };
     },
     computed: {
@@ -597,9 +534,9 @@ export default Vue.extend({
         },
     },
     beforeRouteLeave(_to, _from, next) {
-        if (!this.changes || window.confirm("Do you really want to leave? You have unsaved changes!")) {
-            next();
-        }
+        next(vm =>
+            !this.changes || window.confirm(vm.$t("unsavedChanged")),
+        );
     },
     beforeDestroy() {
         this.$store.commit("SET_PROFILE_COLOR", null);
@@ -618,6 +555,14 @@ export default Vue.extend({
 
                 default:
                     return `mdi-${role}`;
+            }
+        },
+        roleName(role) {
+            const roleName = role.split("|")[role.split("|").length - 1];
+            if (["system", "admin", "verified"].includes(roleName)) {
+                return this.$t("roles." + roleName);
+            } else {
+                return roleName;
             }
         },
         discard() {
@@ -660,7 +605,7 @@ export default Vue.extend({
                         this.changed.clearLogoImage = false;
                         this.$apollo.queries.creator.refetch();
                         this.$snackbar.message(
-                            "Success! Changes might take some time to apply.",
+                            this.$t("saveSuccess"),
                         );
                     }
                 })
@@ -672,10 +617,10 @@ export default Vue.extend({
     },
     head() {
         if (this.creator) {
-            const metaTitle = `${this.creator.display_name} | Creators`;
+            const metaTitle = `${this.creator.display_name} | ${this.$tc("creator", 2)}`;
             const metaDesc = this.creator.bio
                 ? removeMd(this.creator.bio)
-                : `${this.creator.display_name}'s page on Themezer. View Packs, Themes and Layouts created by ${this.creator.display_name}.`;
+                : this.$t("creators.pageDescription", {creator: this.creator.display_name});
 
             let avatar = null;
             if (this.creator.discord_user.avatar) {
@@ -690,13 +635,13 @@ export default Vue.extend({
                 ? `${process.env.API_ENDPOINT}cdn/creators/${this.creator.id}/logo/${this.creator.logo_image}`
                 : `https://cdn.discordapp.com/${avatar}?size=256`;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [

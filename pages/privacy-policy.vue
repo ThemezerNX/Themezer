@@ -1,26 +1,25 @@
 <template>
     <v-layout align-center column justify-center pa-3>
-        <TextCard :title="title" :subtitle="subtitle" :max-width="1000" :items="items"/>
+        <TextCard :title="title" :subtitle="subtitle" :max-width="1000" :items="privacyPolicy"/>
     </v-layout>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
-import items from "~/assets/lang/privacyPolicy";
+import privacyPolicy from "~/components/mixins/privacyPolicy";
 import TextCard from "~/components/TextCard.vue";
 
-const title = "Privacy Policy";
 export default Vue.extend({
     components: {TextCard},
+    mixins: [privacyPolicy],
     data() {
         return {
-            title,
+            title: this.$t("privacyPolicy"),
             subtitle: null,
-            items,
         };
     },
     head() {
-        const metaTitle = title;
+        const metaTitle = this.title;
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

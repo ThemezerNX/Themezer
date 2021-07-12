@@ -64,7 +64,7 @@
                                 v-if="showProps.includes('creator')"
                                 class="creator"
                             >
-                                By {{ theme.creator.display_name }}
+                                {{ $t("item.author", {creator: theme.creator.display_name}) }}
                             </v-card-subtitle>
                             <v-card-subtitle
                                 v-if="showProps.includes('target')"

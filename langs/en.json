@@ -1,0 +1,367 @@
+{
+    "lang": "English",
+    "welcome": "Welcome to Themezer!",
+    "welcomeBack": "Welcome back {user}!",
+    "themezerIntro": "Themezer is a site for sharing Nintendo Switch themes and layouts",
+    "cookieBanner": "This website uses cookies to ensure you get the best experience. By continuing the use of this website you agree to our use of cookies.",
+    "apiOffline": "The server seems to be offline. Please wait and try again in a bit. If this issue persists, please contact us.",
+    "error": {
+        "uhOh": "Uh oh!",
+        "goBack": "Go Back",
+        "pageNotFound": "404 Not Found",
+        "otherError": "An error occurred"
+    },
+    "roles": {
+        "system": "system",
+        "admin": "admin",
+        "verified": "verified"
+    },
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "logoutSuccess": "You have been logged out!",
+    "loginSuccess": "You are now logged in!",
+    "myProfile": "My Profile",
+    "browse": "Browse",
+    "upload": "Upload",
+    "tools": "Tools",
+    "guides": "Guides",
+    "about": "About",
+    "contact": "Contact",
+    "status": "Status",
+    "layoutSubmissions": "Layout Submissions",
+    "themePackSubmissions": "Theme/Pack Submissions",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "privacyPolicy": "Privacy Policy",
+    "serviceStatus": "Service Status",
+    "pack": "Pack | Packs",
+    "theme": "Theme | Themes",
+    "nxtheme": "NXTheme | NXThemes",
+    "zip": "ZIP | ZIPs",
+    "targetTheme": "{menu} Theme | {menu} Themes",
+    "layout": "Layout | Layouts",
+    "targetLayout": "{menu} Layout | {menu} Layouts",
+    "creator": "Creator | Creators",
+    "overlay": "Overlay | Overlays",
+    "overlayPng": "Overlay PNG | Overlay PNGs",
+    "image": "Image | Images",
+    "faq": "FAQ | FAQs",
+    "commonLayout": "Common Layout | Common Layouts",
+    "layoutOption": "Layout Option/Piece | Layout Options/Pieces",
+    "tool": "Tool | Tools",
+    "white": "white",
+    "black": "black",
+    "onlineThemeCreator": "Online Theme Creator",
+    "themezerHBApp": "Themezer HB App",
+    "overlayCreator": "Overlay Creator",
+    "guideInstallThemes": "Installing Themes",
+    "guideCreateThemes": "Creating Themes/Fonts",
+    "guideCreateLayouts": "Creating Layouts",
+    "registerSuccessIntro": "Now you can finally upload your themes! However, there are a few rules here on Themezer:",
+    "accept": "Accept",
+    "backupCode": "Backup Code",
+    "backupCodeExplanation": "In order to ensure you retain access to you Themezer account if anything happens to your Discord account, here is your creator ID and a backup code you can use in order to restore your account and connect a new Discord account. Be sure to store this backup code somewhere safe! The creator ID can also be found in the url of the creator page of your previous Themezer account. To restore your account, visit the about page.",
+    "backupCodeViewOnceWarning": "THIS IS THE ONLY TIME YOU CAN VIEW THIS BACKUP CODE!",
+    "createType": "Create {type}",
+    "copy": "Copy",
+    "copySuccess": "Copied!",
+    "permalink": "Permalink",
+    "dismiss": "Dismiss",
+    "previous": "Previous",
+    "finish": "Finish",
+    "cancel": "Cancel",
+    "discard": "Discard",
+    "noCancel": "No, cancel",
+    "yesContinue": "Yes, continue",
+    "readThis": "Read This",
+    "save": "Save",
+    "clickHere": "Click Here",
+    "loginRequired": "You have to be logged in first!",
+    "unsavedChanged": "Do you really want to leave? You have unsaved changes!",
+    "saveSuccess": "Success! Changes might take some time to apply.",
+    "close": "Close",
+    "customLayout": "Custom",
+    "resultCount": "{count} result | {count} results",
+    "noResults": "There were no results",
+    "moreItems": "More items",
+    "target": {
+        "menu": "Menu:",
+        "choose": "Choose a Menu",
+        "homemenu": "Home Menu",
+        "lockscreen": "Lockscreen",
+        "userpage": "User Page",
+        "allapps": "All Apps",
+        "settings": "Settings",
+        "news": "News",
+        "playerselect": "Player Select"
+    },
+    "badges": {
+        "certifiedBadge": "Automatically updated"
+    },
+    "item": {
+        "item": "item",
+        "author": "By {creator}",
+        "commonAuthor": "Author: {value}",
+        "details": "Details",
+        "id": "ID: {value}",
+        "version": "Version: {value}",
+        "lastUpdated": "Last Updated: {value}",
+        "dlCount": "Downloads: {value}",
+        "targetFile": "Target File: {value}",
+        "background": "Background: {value}",
+        "layout": "Layout: {value}",
+        "customizations": "Customizations: {value}",
+        "random": "Random {type}",
+        "download": "Download",
+        "downloadThis": "Download {type}",
+        "edit": "Edit",
+        "editThis": "Edit this {type}",
+        "editType": "Edit {type}",
+        "customize": "Customize",
+        "customizeThis": "Customize this {type}",
+        "delete": "Delete",
+        "deleteThis": "Delete this {type}",
+        "deleteConfirm": "You're super close to deleting this {type} forever. Are you absolutely sure?",
+        "deleteDescription": "All data related to this {type} will be removed from Themezer's servers.",
+        "deleteSuccess": "{type} deleted successfully!",
+        "report": "Report",
+        "reportThis": "Report this {type}",
+        "reportConfirm": "Do you want to report this {type}?",
+        "reportConfirm2": "Are you sure you want to report this {type}?",
+        "reportDescription": "If you think this {type} doesn't belong on Themezer because it shows inappropriate content or because of other reasons, please let us know why:",
+        "reportLoginRequired": "Log in to report inappropriate content",
+        "shareText": "Check out this {type} '{name}' by {creator} on Themezer!",
+        "shareText2": "Check out this {type} '{name}' on Themezer!",
+        "like": "I like this!",
+        "unlike": "Un-like this"
+    },
+    "whatIs": {
+        "this": "What is this?",
+        "pack": "What is a pack?",
+        "packDescription": "Packs are ZIPs with multiple themes created by the same user. It can contain any theme, even multiple for the same menu.",
+        "nxthemeInstaller": "What is the NXThemes Installer?",
+        "nxthemeInstallerDescription": "The {nxthemesInstallerHref} is an homebrew app that runs on the switch itself and can be used to install and manage themes. The IDs displayed on Themezer can be used to install themes and packs directly. The ID {id} can be input on the 'Download themes' tab in the app (make sure Themezer is set as provider). This ID can also be used in the search box of {themezerNXHref}.",
+        "commonLayout": "What is the common layout?",
+        "commonLayoutDescription": "The common layout is the footer seen in and shared across the Home Menu, All Apps, Settings and News. The stock version contains the currently active controller on the left, the divider line and the button actions on the right. Some layouts include a common layout to hide the line or make other minor modifications. Modifying the common layout for Player Select and User Page is unsupported by the Switch Theme Injector. It is always recommended to download and use this layout as well!",
+        "overlayPng": "What is the overlay png?",
+        "overlayPngDescription": "The overlay png is the image used on this site to preview layouts. You may also use this to create the 'screenshot' you need when uploading a theme to Themezer."
+    },
+    "filter": {
+        "clear": "Clear all",
+        "search": "Search",
+        "sortBy": "Sort by",
+        "filters": "Filters",
+        "downloads": "Downloads",
+        "likes": "Likes",
+        "updated": "Updated",
+        "Added": "id",
+        "madeByMe": "Made by me",
+        "nsfw": "Show NSFW"
+    },
+    "fields": {
+        "hex": "HEX",
+        "id": "ID",
+        "name": "name",
+        "typeName": "{type} name",
+        "description": "description",
+        "typeDescription": "{type} description",
+        "version": "version",
+        "typeVersion": "{type} version",
+        "typeFile": "{type} file",
+        "screenshot": "SCREENSHOT ({filetype}, {size})",
+        "category": "category",
+        "categories": "Categories",
+        "categoriesHint": "Press {key} for a new category",
+        "sharedCategories": "Shared categories (this will replace the current set)",
+        "manualLayout": "Manual layout selection (will clear any changes made to the JSON)"
+    },
+    "rules": {
+        "required": "Required",
+        "utf8Only": "Only UTF-8 characters are allowed",
+        "characterLength": "A {field} must be between {min} and {max} characters long",
+        "characterLengthMin": "A {field} must be {count} or more characters long",
+        "categoryMin": "At least {count} category is required",
+        "categoryMax": "A maximum of {count} categories is allowed",
+        "invalid": "Invalid {field}",
+        "noScriptTags": "Script tags are not allowed",
+        "maxImageSize": "Image size should be less than {max}!",
+        "notOwnCreatorId": "This is your current ID"
+    },
+    "home": {
+        "pageTitle": "Home",
+        "recentAdditions": "Recent Additions",
+        "newPacks": "Latest Packs",
+        "newThemes": "Latest Themes",
+        "updatedLayouts": "Updated Layouts"
+    },
+    "packs": {
+        "pageDescription": "Discover amazing theme packs to give menus a similar look!",
+        "packContents": "Themes in This Pack",
+        "clickAnyToEdit": "Click any to edit"
+    },
+    "themes": {
+        "pageDescription": "Themes on Themezer",
+        "targetPageDescription": "All themes for the {menu} on Themezer",
+        "pack": "This theme is part of the the following pack:"
+    },
+    "layouts": {
+        "pageDescription": "Discover unique layouts to style menus to your hearts content!",
+        "targetPageDescription": "All layouts for the {menu} on Themezer",
+        "tryBackgrounds": "Try These Backgrounds",
+        "themesContents": "All themes made with this layout",
+        "backgrounds": {
+            "botwForest": "Breath of the Wild Forest",
+            "skyrimMountains": "Skyrim Mountains",
+            "acod": "Assassin's Creed Odyssey",
+            "fc5": "Far Cry 5",
+            "botwArt": "Breath of the Wild Art",
+            "acnh": "Animal Crossing New Horizons",
+            "sea": "Sea",
+            "spiderman": "Spiderman Into the Spiderverse",
+            "pewdiepie": "PewDiePie",
+            "franxx": "Darling in the Franxx",
+            "nier": "Nier Automata",
+            "p5": "Persona 5 Ryuji"
+        }
+    },
+    "creators": {
+        "pageDescription": "{creator}'s page on Themezer. View Packs, Themes and Layouts created by {creator}.",
+        "profile": "Profile",
+        "noBiography": "This creator hasn't written anything about themselves yet...",
+        "latestByCreator": "Latest {type} by this creator",
+        "blockUser": "Block user from submitting",
+        "customName": "Custom display name",
+        "bio": "Bio (supports Markdown and HTML",
+        "profileColor": "Profile color",
+        "profileColorNote": "Profile color will affect the navigation bar and side menu",
+        "banner": "Banner (recommended: {size})",
+        "bannerClear": "Remove current banner",
+        "logo": "Logo (replaces Discord avatar)",
+        "logoClear": "Remove current logo"
+    },
+    "abouts": {
+        "sourceCode": "Source Code for the project can be found on the {githubHref}.",
+        "certifiedBadge": "What does the {certifiedBadge} badge mean? It means that the nxtheme you download is updated automatically whenever there are changes made to the layout or theme itself.",
+        "notAffiliated": "Themezer is in no way affiliated with Nintendo."
+    },
+    "contacts": {
+        "discord": "For contact please join the {discordHref}",
+        "issue": "Found a bug or have a suggestion? Create an issue on the {githubHref} or join the Discord server"
+    },
+    "restore": {
+        "prompt": "Need to restore your Themezer account?",
+        "title": "Restore Account",
+        "description": "Back when you created your Themezer account, you were informed of a backup code you could use if you ever lost access to your Discord account. You can use it here to regain access to your Themezer account. The Discord account you are currently logged in with will be linked to your previous Themezer data. If you have layouts on GitHub, make sure to update them with your new creator ID!",
+        "previousId": "Previous Creator ID",
+        "backupCode": "Backup Code",
+        "confirmRestore": "Restore",
+        "success": "Restored successfully!",
+        "error": "Creator ID or Backup Code invalid!"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "Ownership",
+            "content": "The uploader retains ownership of files uploaded to Themezer. Files will reside on Themezer's servers, under care of the user, and remain the uploader's responsibility."
+        },
+        "copyright": {
+            "title": "Copyright",
+            "content": "Content uploaded to Themezer must respect copyright. If you believe content on themezer infringes copyright and you are the copyright holder or are authorized to act on the copyright owner's behalf, contact one of our moderators:",
+            "contact": "Contact a moderator"
+        },
+        "abuse": {
+            "title": "Abuse",
+            "content": "Any attempt to exploit, spam or cause harm in any other way will result in immediate termination of your account. Bugs and issues should be reported via the Contact page or GitHub repository."
+        },
+        "nsfw": {
+            "title": "NSFW",
+            "content": "NSFW submissions must use the NSFW checkbox provided. Everything meant to invoke sexual arousal is considered NSFW. Real and animated nudity is allowed but no 'Sex Acts' (anything pornographic) should be shown or implied. No depictions of under 18's (real or animated). This includes 'Lolita' content where the character is visibly under the age of 18 no matter how old you state they are, as well as characters that are known to be under the age of 18."
+        },
+        "accountTermination": {
+            "title": "Account termination",
+            "content": "Themezer reserves every right to terminate a user's account if found necessary, even without an explanation."
+        }
+    },
+    "submitInfo": {
+        "screenshots": {
+            "title": "Screenshots",
+            "content": "You are REQUIRED to upload a SCREENSHOT for every theme. Only the background image is NOT sufficient."
+        },
+        "special": {
+            "title": "What's special about Themezer?",
+            "content": "Themezer extracts everything that is uploaded to the website. This has a few benefits:",
+            "themes": {
+                "content": "By extracting an NXTheme, the contents can be modified easily, without the need to upload a new NXTheme file. After you change something on a theme's or pack's edit page (accessible after submitting), the theme is rebuilt with the changes."
+            },
+            "layouts": {
+                "content": "Another great thing is that Themezer can detect what layout is used in a theme. This way, if Nintendo updates the home menu with breaking changes, all themes can be updated at once when the layout they use is updated. People can still upload themes with a custom layout, but those themes won't have these benefits."
+            }
+        },
+        "notDetect": {
+            "title": "Themezer does not detect my theme's layout",
+            "content": "If Themezer doesn't recognize the layout, you should select it in the available dropdown. Make sure it is the exact same layout or else you might lose some features! For example, if you've made a change to the position of a button, the change will be discarded if you select the original version of the layout you used in the dropdown."
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "I am not the original author of this theme/pack",
+                "content": "Unfortunately you may not submit it, because it will be linked to your account. Ask the original creator to upload it."
+            },
+            "notAvailable": {
+                "title": "The layout I use is not available on Themezer",
+                "content": "Consider uploading it to the Layouts GitHub repository (see the 'Layout' submit page in the menu)."
+            },
+            "modified": {
+                "title": "I have made minor modification to another layout",
+                "content": "Consider adding a customization option to the original in the Layouts GitHub repository (see the 'Layout' submit page in the menu). If you don't want to, make sure to change the 'ID' of the layout json to something like 'custom'. If you don't, Themezer will force-select the original layout."
+            },
+            "notSubmit": {
+                "title": "I made a custom layout that I don't want to submit to the Layouts repository",
+                "content": "Uhm... why not? Others can make use of it more easily and, most important, it's free! Anyway, feel free to submit it."
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "More information",
+        "content": "If you are still looking for more information, contact us through one of the following means:",
+        "contact": "Our contact page"
+    },
+    "overlayCreators": {
+        "pageDescription": "Create a transparent overlay for your layout and customizations.",
+        "pageUse": "Create a transparent overlay for your layout and customizations. You may use the tool here, or manually create an overlay if you can. Either way, an overlay is required for layouts on Themezer.",
+        "moreDetailedInstructions": "More detailed instructions (en)",
+        "step1": "1. Upload Layout",
+        "step1Description": "Upload your layout here. You will get two NXThemes: one with a black background and one with a white one (be sure to allow the site to download multiple files). For each do the following: install it on your Switch and take a screenshot. Set the system theme to white(!) and have the cursor in the same position when taking the screenshots. Transfer the screenshots to your PC afterwards. Have you done that? Go to step 2.",
+        "step2": "2. Upload Screenshots",
+        "step2Description": "Here you will upload the two screenshots you took at step 1. Upload them to their own field below.",
+        "screenshotWithBackground": "Screenshot with white background",
+        "step3": "3. Result",
+        "generatedImage": "Generated overlay png"
+    },
+    "submitLayout": {
+        "pageDescription": "You can submit layouts to the Themezer Layouts GitHub repository.",
+        "joinDiscord": "join our Discord",
+        "instructions": "You can submit layouts to the Themezer Layouts GitHub repository. See the {readmeHref} for instructions. If it's too technical, don't hesitate to {joinDiscord} and ask for help in {channel}. One of the moderators will happily do it for you!"
+    },
+    "submitTheme": {
+        "pageDescription": "You can submit themes here for listing on Themezer.",
+        "pageUse": "Via this page you can submit themes you have created.  If you're new to this, I urge you to {action}.",
+        "uploadTypes": {
+            "single": "A single NXTheme",
+            "zip": "A ZIP with NXThemes (pack/bulk, max {max})",
+            "files": "An image"
+        },
+        "separateType": "Separate {type}",
+        "authorDisclaimer": "this will be replaced with YOUR username",
+        "commonLayoutStatus": "Common Layout: {status}",
+        "manuallySelected": "Manually selected",
+        "nsfwConfirm": "This theme will be marked as NSFW, continue?",
+        "submitSuccess": "{type} submitted successfully!",
+        "step1": "1. Upload the theme/pack",
+        "packHint": "Make sure the NXThemes are in the root of the ZIP, not in a folder!",
+        "webInjector": "You can create NXThemes using the {webInjectorHref}. You may submit the created NXTheme(s) here.",
+        "step2": "2. Pack Details",
+        "step3": "3. Theme Details",
+        "screenshotHint": "You must upload a SCREENSHOT (NOT simply the background image). Do so by clicking the placeholder image."
+    },
+    "helpTranslate": "Help translate"
+}

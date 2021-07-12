@@ -74,8 +74,8 @@
                 v-if="showProps.includes('creator')"
                 class="creator"
             >
-                By {{ item.creator.display_name }}
-                {{ item.details.version ? `• v${item.details.version}` : "" }}
+                {{ $t("item.author", {creator: item.creator.display_name}) }}
+                {{ item.details.version ? `• ${item.details.version}` : "" }}
             </v-card-subtitle>
 
             <v-card-subtitle

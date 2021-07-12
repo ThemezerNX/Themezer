@@ -2,22 +2,23 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-sheet class="pa-2 box" no-gutters>
             <h1 class="box_text">
-                Layout Submissions
+                {{ $t("layoutSubmissions") }}
             </h1>
             <div class="subtitle-1 box_text">
-                You can submit layouts to the Themezer Layouts GitHub
-                repository. See the
-                <a
-                    href="https://github.com/ThemezerNX/Layouts#readme"
-                    rel="noopener"
-                    target="_blank"
-                >
-                    README.md</a
-                >
-                for instructions. If it's too technical for you, don't hesitate to
-                <a href="https://discord.gg/nnm8wyM" rel="noopener">
-                    join our Discord</a
-                > and ask for help in #submitting. One of the moderators will happily do it for you!
+                <i18n path="submitLayout.instructions">
+                    <template v-slot:readmeHref>
+                        <a
+                            href="https://github.com/ThemezerNX/Layouts#readme"
+                            rel="noopener"
+                            target="_blank"
+                        >README.md</a>
+                    </template>
+                    <template v-slot:joinDiscord>
+                        <a href="https://discord.gg/nnm8wyM" rel="noopener"
+                        >{{ $t("submitLayout.joinDiscord") }}</a>
+                    </template>
+                    <template v-slot:channel>#submitting</template>
+                </i18n>
             </div>
             <v-flex class="d-flex justify-center my-3">
                 <v-btn
@@ -29,7 +30,7 @@
                     router
                     target="_blank"
                 >
-                    Go to GitHub
+                    ThemezerNX GitHub
                     <v-icon right>mdi-github</v-icon>
                 </v-btn>
             </v-flex>
@@ -42,9 +43,8 @@ import Vue from 'vue'
 
 export default Vue.extend({
     head() {
-        const metaTitle = 'Layout | Submit'
-        const metaDesc =
-            'You can submit layouts to the Themezer Layouts GitHub repository.'
+        const metaTitle = `${this.$tc("layout")} | ${this.$t("upload")}`
+        const metaDesc = this.$t("submitLayout.pageDescription")
         const metaImg = null
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })

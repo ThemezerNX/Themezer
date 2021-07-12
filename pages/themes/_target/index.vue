@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center">{{ targetName() }} Themes</h2>
+                <h2 class="text-center">{{ $tc("targetTheme", 2, {menu: targetName()}) }}</h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -12,12 +12,7 @@
                 <LoadingOverlay :loading="!!$apollo.loading" :margin="false" min-loader-height="auto">
                     <div v-if="itemList && itemList.pagination">
                         <h3>
-                            {{ itemList.pagination.item_count }}
-                            {{
-                                itemList.pagination.item_count === 1
-                                    ? 'result'
-                                    : 'results'
-                            }}
+                            {{ $tc("resultCount", itemList.pagination.item_count) }}
                         </h3>
                         <v-divider/>
                     </div>
@@ -42,9 +37,7 @@
                         </v-col>
                     </v-row>
 
-                    <span v-else-if="!$apollo.loading"
-                    >There were no results</span
-                    >
+                    <span v-else-if="!$apollo.loading">{{ $t("noResults") }}</span>
                     <paginate
                         v-model="pageNumber"
                         :click-handler="paginationEvent"
@@ -128,15 +121,12 @@ export default Vue.extend({
         const resultAmount = this.itemList?.pagination?.item_count
 
         const metaTitle =
-            resultAmount !== undefined
-                ? `${resultAmount} ${
-                    resultAmount === 1 ? 'result' : 'results'
-                } | ${this.targetName()} | Themes`
-                : `${this.targetName()} | Themes`
-
-        const metaDesc = 'Themes on Themezer'
-
-        const metaImg = null
+            (resultAmount !== undefined
+                ? `${this.$tc("resultCount", resultAmount)} | `
+                : "")
+            + `${this.targetName()} | ${this.$tc("theme", 2)}`;
+        const metaDesc = this.$t("themes.targetPageDescription", {menu: this.targetName()});
+        const metaImg = null;
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

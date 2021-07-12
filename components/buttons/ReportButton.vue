@@ -24,7 +24,7 @@
                         "
                     >
                         Report
-                        <v-icon right>{{ icon || 'mdi-flag-variant' }}</v-icon>
+                        <v-icon right>{{ icon || "mdi-flag-variant" }}</v-icon>
                     </v-btn>
                     <v-dialog
                         v-model="showDialog"
@@ -32,16 +32,12 @@
                         max-width="600"
                     >
                         <v-card>
-                            <v-card-title class="headline"
-                            >Are you sure you want to report this
-                                {{ type }}?
-                            </v-card-title
-                            >
+                            <v-card-title class="headline">
+                                {{ $t("item.reportConfirm2", {type: $tc(type)}) }}
+                            </v-card-title>
 
                             <v-card-text>
-                                Do you believe this {{ type }} doesn't belong on
-                                Themezer because it shows inappropriate content?
-                                If so, please let us know why:
+                                {{ $t("item.reportDescription", {type: $tc(type)}) }}
                             </v-card-text>
 
                             <v-textarea
@@ -64,7 +60,7 @@
                                     text
                                     @click="report()"
                                 >
-                                    Yes, report
+                                    {{ $t("yesSubmit") }}
                                 </v-btn>
 
                                 <v-spacer></v-spacer>
@@ -76,19 +72,19 @@
                                     text
                                     @click="showDialog = false"
                                 >
-                                    No, cancel
+                                    {{ $t("noCancel") }}
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
                 </template>
-                <span>Report this {{ type }}</span>
+                <span>{{ $t("item.reportThis", {type: $tc(type)}) }}</span>
             </v-tooltip>
         </template>
         <v-card>
-            <v-card-title>Do you want to report this {{ type }}?</v-card-title>
+            <v-card-title>{{ $t("item.reportConfirm", {type: $tc(type)}) }}</v-card-title>
             <v-card-text>
-                Log in to report inappropriate content
+                {{ $t("item.reportLoginRequired") }}
             </v-card-text>
             <v-card-actions>
                 <v-btn
@@ -98,7 +94,7 @@
                     text
                     @click="$auth.loginWith('social')"
                 >
-                    Login
+                    {{ $t("login") }}
                 </v-btn>
                 <v-spacer></v-spacer>
             </v-card-actions>

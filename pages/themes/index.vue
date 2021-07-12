@@ -15,8 +15,8 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'Themes'
-        const metaDesc = 'Discover amazing themes and combine them to your liking!'
+        const metaTitle = this.$tc("theme", 2)
+        const metaDesc = this.$t("themes.pageDescription")
         const metaImg = null
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })

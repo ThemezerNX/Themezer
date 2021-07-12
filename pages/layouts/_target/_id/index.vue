@@ -34,13 +34,16 @@
                             {{ layout.details.name }}
                         </h1>
                         <div class="subtitle-1">
-                            By
-                            <nuxt-link
-                                :to="`/creators/${layout.creator.id}`"
-                                class="font-weight-bold"
-                            >
-                                {{ layout.creator.display_name }}
-                            </nuxt-link>
+                            <i18n path="item.author">
+                                <template v-slot:creator>
+                                    <nuxt-link
+                                        :to="`/creators/${layout.creator.id}`"
+                                        class="font-weight-bold"
+                                    >
+                                        {{ layout.creator.display_name }}
+                                    </nuxt-link>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="layout.details.description"
@@ -72,30 +75,45 @@
                         </ButtonDivider>
 
                         <h3>
-                            Details
+                            {{ $t("item.details") }}
                         </h3>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">ID: </span>
-                            {{ layout.id }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.id">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ layout.id }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Version: </span>
-                            {{ layout.details.version }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.version">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ layout.details.version }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Last Updated:</span>
-                            {{ niceDate(layout.last_updated) }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.lastUpdated">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ $d(new Date(layout.last_updated), "short") }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Target File:</span>
-                            {{ layout.target }}.szs
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.targetFile">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ layout.target }}.szs</span>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="!!layout.baselayout"
-                            class="font-weight-light body-2"
+                            class="body-2"
                         >
-                            <span class="font-weight-medium">Downloads: </span>
-                            {{ layout.dl_count }}
+                            <i18n path="item.dlCount">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ layout.dl_count }}</span>
+                                </template>
+                            </i18n>
                         </div>
 
                         <ButtonDivider>
@@ -103,18 +121,19 @@
                                 v-if="layout.has_pieces && !!layout.baselayout"
                                 :loading="loadingMerge"
                                 to="options"
+                                type="layout"
                             />
                             <DownloadButton
                                 v-if="!!layout.baselayout"
                                 :download-function="download"
                                 :loading="loadingMerge"
-                                tooltip="Download layout"
+                                type="layout"
                             />
                         </ButtonDivider>
 
                         <div v-if="commonlayoutObject">
                             <h3 style="position: relative;">
-                                Common layout
+                                {{ $tc("commonLayout") }}
                                 <v-tooltip v-model="showCommonInfo" top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
@@ -130,7 +149,7 @@
                                             ?
                                         </v-btn>
                                     </template>
-                                    <span>What is this?</span>
+                                    <span>{{ $t("whatIs.this") }}</span>
                                 </v-tooltip>
                             </h3>
                             <div class="font-weight-thin subtitle-1">
@@ -138,28 +157,34 @@
                             </div>
                             <div
                                 v-if="commonlayoutObject.AuthorName"
-                                class="font-weight-light body-2"
+                                class="font-weight-medium body-2"
                             >
-                                <span class="font-weight-medium">Author:</span>
-                                {{ commonlayoutObject.AuthorName }}
+                                <i18n path="item.commonAuthor">
+                                    <template v-slot:value>
+                                        <span class="font-weight-light">{{ commonlayoutObject.AuthorName }}</span>
+                                    </template>
+                                </i18n>
                             </div>
                             <div
                                 v-if="commonlayoutObject.TargetName"
-                                class="font-weight-light body-2"
+                                class="font-weight-medium body-2"
                             >
-                                <span class="font-weight-medium">Target File:</span>
-                                {{ commonlayoutObject.TargetName }}
+                                <i18n path="item.targetFile">
+                                    <template v-slot:value>
+                                        <span class="font-weight-light">{{ commonlayoutObject.TargetName }}</span>
+                                    </template>
+                                </i18n>
                             </div>
                             <ButtonDivider>
                                 <DownloadButton
                                     :download-function="downloadCommon"
                                     :loading="loadingGetCommon"
-                                    tooltip="Download common"
+                                    type="commonLayout"
                                 />
                             </ButtonDivider>
                         </div>
                         <h3 style="position: relative;">
-                            Overlay png
+                            {{ $tc("overlayPng") }}
                             <v-tooltip v-model="showOverlayInfo" top>
                                 <template v-slot:activator="{ on }">
                                     <v-btn
@@ -175,7 +200,7 @@
                                         ?
                                     </v-btn>
                                 </template>
-                                <span>What is this?</span>
+                                <span>{{ $t("whatIs.this") }}</span>
                             </v-tooltip>
                         </h3>
                         <ButtonDivider>
@@ -183,11 +208,11 @@
                                 :download-href="
                                     `${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
                                 "
-                                tooltip="Download overlay"
+                                type="overlay"
                             />
                         </ButtonDivider>
                         <h3>
-                            Themes
+                            {{ $tc("theme", 2) }}
                         </h3>
                         <nuxt-link
                             :to="
@@ -197,7 +222,7 @@
                             "
                         >
                             <div style="text-shadow: 0 0 4px black;">
-                                All Themes made with this layout
+                                {{ $t("layouts.themesContents") }}
                             </div>
                         </nuxt-link>
                     </v-col>
@@ -214,20 +239,11 @@
                 <v-dialog v-model="commonlayoutDialog" max-width="400">
                     <v-card>
                         <v-card-title class="headline">
-                            What is the Common layout?
+                            {{ $t("whatIs.commonLayout") }}
                         </v-card-title>
 
                         <v-card-text>
-                            The Common layout is the footer seen in and shared
-                            across the Home Menu, All Apps, Settings and News.
-                            The stock version contains the currently active
-                            controller on the left, the divider line and the
-                            button actions on the right. Some layouts include a
-                            Common layout to hide the line or make other minor
-                            modifications. Modifying the Common layout for
-                            Player Select and User Page is unsupported by the
-                            Switch Theme Injector. It is always recommended to
-                            download and use this layout as well!
+                            {{ $t("whatIs.commonLayoutDescription") }}
                         </v-card-text>
 
                         <v-card-actions>
@@ -239,7 +255,7 @@
                                 text
                                 @click="commonlayoutDialog = false"
                             >
-                                Close
+                                {{ $t("close") }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -247,14 +263,11 @@
                 <v-dialog v-model="overlayDialog" max-width="400">
                     <v-card>
                         <v-card-title class="headline">
-                            What is the Overlay png?
+                            {{ $t("whatIs.overlayPng") }}
                         </v-card-title>
 
                         <v-card-text>
-                            The Overlay png is the image used on this site to
-                            preview Layouts. You may also use this to create the
-                            'screenshot' you need when uploading a Theme to
-                            Themezer.
+                            {{ $t("whatIs.overlayPngDescription") }}
                         </v-card-text>
 
                         <v-card-actions>
@@ -266,7 +279,7 @@
                                 text
                                 @click="overlayDialog = false"
                             >
-                                Close
+                                {{ $t("close") }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -369,7 +382,7 @@ export default Vue.extend({
                     this.downloadFile(
                         data.downloadCommonLayout,
                         "application/json",
-                        `${this.layout.details.name} - Common layout`,
+                        `${this.layout.details.name} - common layout`,
                     );
                 })
                 .catch((err) => {
@@ -402,7 +415,7 @@ export default Vue.extend({
         if (this.layout) {
             const metaTitle = `${
                 this.layout.details.name
-            } | ${this.targetName()} | Layouts`;
+            } | ${this.targetName()} | ${this.$tc("layout", 2)}`;
             const metaDesc = this.layout.details.description;
             const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`;
 

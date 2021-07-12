@@ -10,11 +10,11 @@
                 color="primary"
                 rounded
             >
-                Options
-                <v-icon right>{{ icon || 'mdi-square-edit-outline' }}</v-icon>
+                {{ $t("item.customize") }}
+                <v-icon right>{{ icon || "mdi-square-edit-outline" }}</v-icon>
             </v-btn>
         </template>
-        <span>Customize layout</span>
+        <span>{{ $t("item.customizeThis", {type: $tc(type)}) }}</span>
     </v-tooltip>
 </template>
 
@@ -27,6 +27,10 @@ export default Vue.extend({
             type: String,
             required: false,
             default: undefined,
+        },
+        type: {
+            type: String,
+            required: true,
         },
         to: {
             type: String,

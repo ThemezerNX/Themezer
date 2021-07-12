@@ -1,26 +1,25 @@
 <template>
     <v-layout align-center column justify-center pa-3>
-        <TextCard :title="title" :subtitle="subtitle" :max-width="1000" :items="items"/>
+        <TextCard :title="title" :subtitle="subtitle" :max-width="1000" :items="cookiePolicy"/>
     </v-layout>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from "vue";
-import items from "~/assets/lang/cookiePolicy";
+import cookiePolicy from "~/components/mixins/cookiePolicy";
 import TextCard from "~/components/TextCard.vue";
 
-const title = "Cookie Policy";
 export default Vue.extend({
     components: {TextCard},
+    mixins: [cookiePolicy],
     data() {
         return {
-            title,
+            title: this.$t("cookiePolicy"),
             subtitle: null,
-            items,
         };
     },
     head() {
-        const metaTitle = title;
+        const metaTitle = this.title;
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

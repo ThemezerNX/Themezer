@@ -9,18 +9,18 @@
                     width="128"
                 />
                 <h1 v-if="$auth.loggedIn" class="text-center pt-4 pb-3">
-                    Welcome back {{ $auth.user.username }}!
+                    {{ $t("welcomeBack", {user: $auth.user.username}) }}
                 </h1>
                 <div v-else>
                     <h1 class="text-center pt-4 pb-3">
-                        Welcome to Themezer!
+                        {{ $t("welcome") }}
                     </h1>
-                    <p>Themezer is a site for sharing Nintendo Switch themes and layouts</p>
+                    <p>{{ $t("themezerIntro") }}</p>
                 </div>
             </template>
             <template #bottom>
                 <v-btn class="collage-bottom-button" rounded large color="transparent" @click="scrollDown()">
-                    <h3>Recent Additions</h3>
+                    <h3>{{ $t("home.recentAdditions") }}</h3>
                     <v-icon right dark>
                         mdi-arrow-down
                     </v-icon>
@@ -35,7 +35,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h2>
-                            Latest Packs
+                            {{ $t("home.newPacks") }}
                         </h2>
                         <v-divider/>
                         <item-grid
@@ -53,7 +53,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h2>
-                            Latest Themes
+                            {{ $t("home.newThemes") }}
                         </h2>
                         <v-divider/>
                         <item-grid
@@ -71,7 +71,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h2>
-                            Updated Layouts
+                            {{ $t("home.updatedLayouts") }}
                         </h2>
                         <v-divider/>
                         <item-grid

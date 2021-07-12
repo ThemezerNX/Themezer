@@ -5,13 +5,13 @@
             style="height: 100%;"
         >
             <h2>
-                Uh oh!
+                {{ $t("error.uhOh") }}
             </h2>
             <h1 class="mb-4">
                 {{ title }}
             </h1>
             <v-btn color="secondary" rounded @click="$router.go(-1)">
-                Go Back
+                {{ $t("error.goBack") }}
             </v-btn>
         </v-container>
     </v-app>
@@ -28,8 +28,8 @@ export default {
     },
     data() {
         return {
-            pageNotFound: '404 Not Found',
-            otherError: 'An error occurred'
+            pageNotFound: this.$t("error.pageNotFound"),
+            otherError: this.$t("error.otherError")
         }
     },
     computed: {

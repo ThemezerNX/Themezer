@@ -21,13 +21,16 @@
                     </nuxt-link>
                 </h2>
                 <div class="subtitle-1 box_text">
-                    By
-                    <nuxt-link
-                        :to="`/creators/${layout.creator.id}`"
-                        class="font-weight-bold"
-                    >
-                        {{ layout.creator.display_name }}
-                    </nuxt-link>
+                    <i18n path="item.author">
+                        <template v-slot:creator>
+                            <nuxt-link
+                                :to="`/creators/${layout.creator.id}`"
+                                class="font-weight-bold"
+                            >
+                                {{ layout.creator.display_name }}
+                            </nuxt-link>
+                        </template>
+                    </i18n>
                 </div>
 
                 <v-divider class="my-3 mx-2"/>
@@ -192,13 +195,13 @@
                             <DownloadButton
                                 :download-function="download"
                                 :loading="loadingMerge"
-                                tooltip="Download layout"
+                                type="layout"
                             />
                             <ShareButton
                                 :creator="layout.creator.display_name"
                                 :name="layout.details.name"
-                                tooltip="Permalink"
-                                type="customized layout"
+                                :tooltip="$t('permalink')"
+                                type="layout"
                             />
                         </ButtonDivider>
                     </v-col>

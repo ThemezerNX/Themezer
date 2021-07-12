@@ -15,13 +15,13 @@
                 <ItemCard :item="item" :show-props="showProps" :type="type"/>
             </v-col>
         </v-row>
-        <span v-else-if="!loading">There were no results</span>
+        <span v-else-if="!loading">{{ $t("noResults") }}</span>
         <nuxt-link v-if="moreUrl && items && items.length === limit" :to="moreUrl">
             <div
                 class="flex-grow-1 text-right"
                 style="text-shadow: 0 0 4px black;"
             >
-                More items
+                {{ $t("moreItems") }}
             </div>
         </nuxt-link>
     </LoadingOverlay>

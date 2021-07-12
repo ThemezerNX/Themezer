@@ -29,13 +29,16 @@
                             {{ theme.details.name }}
                         </h1>
                         <div class="subtitle-1">
-                            By
-                            <nuxt-link
-                                :to="`/creators/${theme.creator.id}`"
-                                class="font-weight-bold"
-                            >
-                                {{ theme.creator.display_name }}
-                            </nuxt-link>
+                            <i18n path="item.author">
+                                <template v-slot:creator>
+                                    <nuxt-link
+                                        :to="`/creators/${theme.creator.id}`"
+                                        class="font-weight-bold"
+                                    >
+                                        {{ theme.creator.display_name }}
+                                    </nuxt-link>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="theme.details.description"
@@ -85,25 +88,35 @@
                         </ButtonDivider>
 
                         <h3>
-                            Details
+                            {{ $t("item.details") }}
                         </h3>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">ID: </span>
-                            {{ theme.id }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.id">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ theme.id }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Version: </span>
-                            {{ theme.details.version }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.version">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ theme.details.version }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Last Updated:</span>
-                            {{ niceDate(theme.last_updated) }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.lastUpdated">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ $d(new Date(theme.last_updated), "short") }}</span>
+                                </template>
+                            </i18n>
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Layout: </span>
-                            <nuxt-link
-                                v-if="theme.layout"
-                                :to="
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.layout">
+                                <template v-slot:value>
+                                    <nuxt-link
+                                        v-if="theme.layout"
+                                        :to="
                                   `/layouts/${fileNameToWebName(
                                     theme.layout.target
                                   )}/${createUrlString(
@@ -111,25 +124,27 @@
                                     theme.layout.details.name
                                   )}`
                                 "
-                                class="font-weight-bold"
-                            >
-                                {{ theme.layout.details.name }}
-                            </nuxt-link>
-                            <template v-else>
-                                <a
-                                    class="font-weight-bold"
-                                    href="#"
-                                    @click="
+                                        class="font-weight-bold"
+                                    >
+                                        {{ theme.layout.details.name }}
+                                    </nuxt-link>
+                                    <template v-else>
+                                        <a
+                                            class="font-weight-bold"
+                                            href="#"
+                                            @click="
                                         downloadFileUrl(
                                           `${API_ENDPOINT}cdn/themes/${theme.id}/layout.json`,
                                           'application/json',
                                           `${theme.details.name} (custom layout).json`
                                         )
                                     "
-                                >
-                                    Custom
-                                </a>
-                            </template>
+                                        >
+                                            {{ $t("customLayout") }}
+                                        </a>
+                                    </template>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="
@@ -137,36 +152,43 @@
                                   theme.pieces &&
                                   theme.pieces.length > 0
                               "
-                            class="font-weight-light body-2"
+                            class="font-weight-medium body-2"
                         >
-                            <span class="font-weight-medium">Options: </span>
-                            {{ optionsString(theme.pieces) }}
+                            <i18n path="item.customizations">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ optionsString(theme.pieces) }}</span>
+                                </template>
+                            </i18n>
                         </div>
                         <div
                             v-if="theme.bg_type"
-                            class="font-weight-light body-2"
+                            class="font-weight-medium body-2"
                         >
-                            <span class="font-weight-medium">Background: </span>
-                            <a
-                                :href="
-                                  `${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`
-                                "
-                                class="font-weight-bold"
-                                target="_blank"
-                            >
-                                {{ theme.bg_type.toUpperCase() }}
-                            </a>
+                            <i18n path="item.background">
+                                <template v-slot:value>
+                                    <a :href="`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`"
+                                        class="font-weight-bold"
+                                        target="_blank"
+                                    >
+                                        {{ theme.bg_type.toUpperCase() }}
+                                    </a>
+                                </template>
+                            </i18n>
+
                         </div>
-                        <div class="font-weight-light body-2">
-                            <span class="font-weight-medium">Downloads: </span>
-                            {{ theme.dl_count }}
+                        <div class="font-weight-medium body-2">
+                            <i18n path="item.dlCount">
+                                <template v-slot:value>
+                                    <span class="font-weight-light">{{ theme.dl_count }}</span>
+                                </template>
+                            </i18n>
                         </div>
 
                         <ButtonDivider>
                             <DownloadButton
                                 :download-function="downloadTheme"
                                 :loading="loadingDownload"
-                                tooltip="Download theme"
+                                type="theme"
                             />
                         </ButtonDivider>
 
@@ -176,7 +198,7 @@
 
                         <div v-if="theme.pack">
                             <h3 style="position: relative;">
-                                Pack
+                                {{ $tc("pack") }}
                                 <v-tooltip v-model="showPackInfo" top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
@@ -192,11 +214,11 @@
                                             ?
                                         </v-btn>
                                     </template>
-                                    <span>What is this?</span>
+                                    <span>{{ $t("whatIs.this") }}</span>
                                 </v-tooltip>
                             </h3>
                             <div class="subtitle-1">
-                                This Theme is part of the the following Pack:
+                                {{ $t("themes.pack") }}
                             </div>
                             <nuxt-link
                                 :to="
@@ -217,13 +239,11 @@
                 <v-dialog v-model="packDialog" max-width="400">
                     <v-card>
                         <v-card-title class="headline">
-                            What is a Pack?
+                            {{ $t("whatIs.pack") }}
                         </v-card-title>
 
                         <v-card-text>
-                            Packs are zips with multiple themes created by the
-                            same user. It can contain any theme, even multiple
-                            for the same menu.
+                            {{ $t("whatIs.packDescription") }}
                         </v-card-text>
 
                         <v-card-actions>
@@ -236,7 +256,7 @@
                                 text
                                 @click="packDialog = false"
                             >
-                                Close
+                                {{ $t("close") }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -355,19 +375,19 @@ export default Vue.extend({
         if (this.theme) {
             const metaTitle = `${this.theme.details.name}${
                 this.theme.categories.includes("NSFW") ? " (NSFW!)" : ""
-            } | ${this.targetName()} | Themes`;
+            } | ${this.targetName()} | ${this.$tc("theme", 2)}`;
             const metaDesc = this.theme.details.description;
             const metaImg = !this.theme.categories.includes("NSFW")
                 ? this.theme.preview.original
                 : null;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [

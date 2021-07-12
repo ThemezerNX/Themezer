@@ -2,29 +2,32 @@
     <v-layout align-center column justify-center pa-3>
         <v-card class="box" max-width="600" style="border-radius: 20px;">
             <v-card-title class="headline">
-                Contact
+                {{ $t("contact") }}
             </v-card-title>
             <v-card-text>
                 <p>
-                    For contact, please join the
-                    <a
-                        href="https://discord.gg/nnm8wyM"
-                        rel="noopener"
-                        target="_blank"
-                        title="discord"
-                    >Discord server</a
-                    >.
+                    <i18n path="contacts.discord">
+                        <template v-slot:discordHref>
+                            <a
+                                href="https://discord.gg/nnm8wyM"
+                                rel="noopener"
+                                target="_blank"
+                                title="discord"
+                            >ThemezerNX Discord</a>
+                        </template>
+                    </i18n>
                 </p>
                 <p>
-                    Found a bug or have a suggestion?
-                    <a
-                        href="https://github.com/ThemezerNX/Themezer/issues"
-                        rel="noopener"
-                        target="_blank"
-                        title="contribute"
-                    >Create an issue on GitHub</a
-                    >
-                    or join the Discord server.
+                    <i18n path="contacts.issue">
+                        <template v-slot:githubHref>
+                            <a
+                                href="https://github.com/ThemezerNX/Themezer/issues"
+                                rel="noopener"
+                                target="_blank"
+                                title="contribute"
+                            >ThemezerNX GitHub</a>
+                        </template>
+                    </i18n>
                 </p>
                 <hr class="mb-2"/>
             </v-card-text>
@@ -37,7 +40,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
     head() {
-        const metaTitle = 'Contact'
+        const metaTitle = this.$t("contact")
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

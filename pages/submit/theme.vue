@@ -2,28 +2,43 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-sheet class="pa-2 box_fill" no-gutters>
             <h1 class="box_text">
-                Theme/Pack Submissions
+                {{ $t("themePackSubmissions") }}
             </h1>
             <div class="subtitle-1 box_text">
-                Via this form you can submit themes you have created.
-                If you're new to this, I urge you to
-                <v-btn
-                    class="px-1"
-                    color="primary"
-                    rounded
-                    style="height: 24px"
-                    text
-                    @click="submitInfoDialog = true"
-                >read this.
-                </v-btn
-                >
+                <i18n path="submitTheme.pageUse">
+                    <template v-slot:action>
+                        <v-btn
+                            class="px-1"
+                            color="primary"
+                            rounded
+                            style="height: 24px"
+                            text
+                            @click="submitInfoDialog = true"
+                        >{{ $t("readThis") }}</v-btn>
+                    </template>
+                </i18n>
                 <v-dialog v-model="submitInfoDialog" class="mx-auto" max-width="1000">
-                    <TextCard title="More Info" max-width="1000" :items="submitInfo"></TextCard>
+                    <TextCard title="More Info" max-width="1000" :items="submitInfo">
+                        <template #footer>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+
+                                <v-btn
+                                    color="primary"
+                                    rounded
+                                    text
+                                    @click="submitInfoDialog = false"
+                                >
+                                    {{ $t("close") }}
+                                </v-btn>
+                            </v-card-actions>
+                        </template>
+                    </TextCard>
                 </v-dialog>
             </div>
 
             <h2 class="box_text">
-                1. Upload the theme/pack
+                {{ $t("submitTheme.step1") }}
             </h2>
             <v-row class="ma-0">
                 <v-col class="pa-2" cols="12">
@@ -44,15 +59,14 @@
                         accept=".nxtheme"
                         filled
                         hide-details
-                        label="NXTheme file"
+                        :label="$t('fields.typeFile', {type: $tc('nxtheme')})"
                         prepend-icon="mdi-file-outline"
                         rounded
                         @change="onFileChange"
                     />
                     <div v-if="selectedType === 'zip'">
                         <div class="subtitle-1 box_text">
-                            Make sure the NXThemes are in the root of the zip,
-                            not in a folder!
+                            {{ $t("submitTheme.packHint") }}
                         </div>
                         <v-file-input
                             v-if="selectedType === 'zip'"
@@ -61,7 +75,7 @@
                             accept="application/zip"
                             filled
                             hide-details
-                            label="Zip file"
+                            :label="$t('fields.typeFile', {type: $tc('zip')})"
                             prepend-icon="mdi-folder-zip-outline"
                             rounded
                             @change="onFileChange"
@@ -72,20 +86,22 @@
                         v-if="selectedType === 'files'"
                         class="subtitle-1 box_text"
                     >
-                        You can create NXThemes using the
-                        <a
-                            href="https://exelix11.github.io/SwitchThemeInjector/v2/"
-                            rel="noopener"
-                            target="_blank"
-                        >WebInjector</a
-                        >. You may submit the created NXTheme(s) here.
+                        <i18n path="submitTheme.webInjector">
+                            <template v-slot:webInjectorHref>
+                                <a
+                                    href="https://exelix11.github.io/SwitchThemeInjector/v2/"
+                                    rel="noopener"
+                                    target="_blank"
+                                >{{ $t("onlineThemeCreator") }}</a>
+                            </template>
+                        </i18n>
                     </div>
                 </v-col>
             </v-row>
             <v-form ref="submitForm" v-model="submitValid">
                 <div v-if="detectedThemes">
                     <h2 class="box_text">
-                        3. Pack Details
+                        {{ $t("submitTheme.step2") }}
                     </h2>
                     <v-row class="ma-0">
                         <v-col class="pa-2" cols="12">
@@ -117,7 +133,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="50"
-                                label="Pack Name*"
+                                :label="`${$t('fields.typeName', {type: $tc('pack')})}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -134,7 +150,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                label="Pack Description*"
+                                :label="`${$t('fields.typeDescription', {type: $tc('pack')})}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -158,7 +174,7 @@
                                 allow-overflow
                                 chips
                                 deletable-chips
-                                label="Shared categories (this will replace the current set)"
+                                :label="$t('fields.sharedCategories')"
                                 multiple
                                 outlined
                                 prepend-icon="mdi-shape-outline"
@@ -170,7 +186,7 @@
                                 v-model="submitDetails.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                label="Pack version*"
+                                :label="`${$t('fields.typeVersion', {type: $tc('pack')})}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"
@@ -182,17 +198,15 @@
                 </div>
                 <div v-if="detectedThemes">
                     <h2 class="box_text">
-                        3. Theme Details
+                        {{ $t("submitTheme.step3") }}
                     </h2>
                     <div v-if="detectedThemes.length === 0">
-                        Uhm something went wrong, please report this.
+                        {{ $t("error.otherError") }}
                     </div>
                     <v-row v-else class="ma-0">
                         <v-col class="pa-2" cols="12">
                             <div class="subtitle-1 box_text">
-                                You must upload a SCREENSHOT (NOT simply the
-                                background image). Do so by clicking the
-                                placeholder image.
+                                {{ $t("submitTheme.screenshotHint") }}
                             </div>
                             <template v-for="(theme, i) in detectedThemes">
                                 <v-card
@@ -251,7 +265,7 @@
                                                                 full-width
                                                                 height="100%"
                                                                 hide-details
-                                                                label="SCREENSHOT* (jpg, 1280x720)"
+                                                                :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                                                 style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
                                                                 @change="
                                                                   onScreenshotChange(
@@ -279,36 +293,38 @@
                                                     v-if="theme.info.Author"
                                                     class="subtitle-1"
                                                 >
-                                                    By {{ theme.info.Author }}
+                                                    {{ $t("item.author", {creator: theme.info.Author}) }}
                                                     <i class="subtitle-2">
-                                                        (this will be replaced
-                                                        with YOUR username)
+                                                        ({{ $t("submitTheme.authorDisclaimer") }})
                                                     </i>
                                                 </div>
                                                 <v-list-item-subtitle
                                                     v-if="theme.layout"
                                                 >
-                                                    Layout:
-                                                    <nuxt-link
-                                                        :to="
-                                                          `/layouts/${fileNameToWebName(
-                                                            theme.layout
-                                                              .target
-                                                          )}/${createUrlString(
-                                                            theme.layout.id,
-                                                            theme.layout
-                                                              .details
-                                                              .name
-                                                          )}`
-                                                        "
-                                                        exact
-                                                        target="_blank"
-                                                    >
-                                                        {{
-                                                            theme.layout.details
-                                                                .name
-                                                        }}
-                                                    </nuxt-link>
+                                                    <i18n path="item.layout">
+                                                        <template v-slot:value>
+                                                            <nuxt-link
+                                                                :to="
+                                                                  `/layouts/${fileNameToWebName(
+                                                                    theme.layout
+                                                                      .target
+                                                                  )}/${createUrlString(
+                                                                    theme.layout.id,
+                                                                    theme.layout
+                                                                      .details
+                                                                      .name
+                                                                  )}`
+                                                                "
+                                                                exact
+                                                                target="_blank"
+                                                            >
+                                                                {{
+                                                                    theme.layout.details
+                                                                        .name
+                                                                }}
+                                                            </nuxt-link>
+                                                        </template>
+                                                    </i18n>
                                                     <div
                                                         v-if="
                                                           theme.used_pieces &&
@@ -317,21 +333,25 @@
                                                               .length > 0
                                                         "
                                                     >
-                                                        Options:
-                                                        {{
-                                                            optionsString(
-                                                                theme.used_pieces
-                                                            )
-                                                        }}
+                                                        <i18n path="item.customizations">
+                                                            <template v-slot:value>
+                                                                {{
+                                                                    optionsString(
+                                                                        theme.used_pieces
+                                                                    )
+                                                                }}
+                                                            </template>
+                                                        </i18n>
                                                     </div>
                                                 </v-list-item-subtitle>
                                                 <!--TODO: this ain't working-->
                                                 <v-list-item-subtitle
                                                     v-else-if="theme.layout_id"
                                                 >
-                                                    Layout:
-                                                    <nuxt-link
-                                                        :to="
+                                                    <i18n path="item.layout">
+                                                        <template v-slot:value>
+                                                            <nuxt-link
+                                                                :to="
                                                           `/layouts/${fileNameToWebName(
                                                             theme.target
                                                           )}/${createUrlString(
@@ -339,17 +359,19 @@
                                                             ''
                                                           )}`
                                                         "
-                                                        exact
-                                                        target="_blank"
-                                                    >
-                                                        Manually selected
-                                                    </nuxt-link>
+                                                                exact
+                                                                target="_blank"
+                                                            >
+                                                                {{ $t("submitTheme.manuallySelected") }}
+                                                            </nuxt-link>
+                                                        </template>
+                                                    </i18n>
                                                 </v-list-item-subtitle>
                                                 <v-list-item-subtitle v-else>
-                                                    Layout: custom
+                                                    {{ $t("item.layout", {value: $t("customLayout")}) }}
                                                 </v-list-item-subtitle>
                                                 <v-list-item-subtitle>
-                                                    Target:
+                                                    {{ $t("target.menu") }}
                                                     {{
                                                         fileNameToNiceWebName(
                                                             theme.target
@@ -363,7 +385,7 @@
                                                             .has_commonlayout
                                                       "
                                                 >
-                                                    Common layout: ✅
+                                                    {{ $t("submitTheme.commonLayoutStatus", {status: "✅"}) }}
                                                 </v-list-item-subtitle>
                                             </v-col>
                                             <v-col class="pb-0">
@@ -382,7 +404,7 @@
                                                       "
                                                     allow-overflow
                                                     auto-select-first
-                                                    label="Manual layout selection (will clear custom JSON modifications)"
+                                                    :label="$t('fields.manualLayout')"
                                                     outlined
                                                     prepend-icon="mdi-code-json"
                                                     rounded
@@ -402,7 +424,7 @@
                                                         rules.utf8_only
                                                       ]"
                                                     counter="500"
-                                                    label="Theme description"
+                                                    :label="`${$t('fields.typeDescription', {type: $tc('theme')})}`"
                                                     maxlength="500"
                                                     minlength="10"
                                                     outlined
@@ -439,7 +461,7 @@
                                                     allow-overflow
                                                     chips
                                                     deletable-chips
-                                                    label="Categories* ([enter] to create)"
+                                                    :label="`${$t('fields.categories', {key: '↵'})}* (${$t('fields.categoriesHint')})`"
                                                     multiple
                                                     outlined
                                                     prepend-icon="mdi-shape-outline"
@@ -460,7 +482,7 @@
                                                         rules.utf8_only
                                                       ]"
                                                     counter="10"
-                                                    label="Theme version*"
+                                                    :label="`${$t('fields.typeVersion', {type: $tc('theme')})}*`"
                                                     maxlength="10"
                                                     outlined
                                                     prepend-icon="mdi-update"
@@ -487,7 +509,7 @@
                                     :key="theme"
                                     class="subtitle-1 box_text font-italic"
                                 >
-                                    An error occurred
+                                    {{ $t("error.otherError") }}
                                 </div>
                             </template>
                         </v-col>
@@ -501,7 +523,7 @@
                             type="submit"
                             @click.prevent="submit()"
                         >
-                            Submit
+                            {{ $t("submit") }}
                             <v-icon right>mdi-cube-send</v-icon>
                         </v-btn>
                     </v-flex>
@@ -509,9 +531,7 @@
             </v-form>
             <v-dialog v-model="nsfwDialog" max-width="600" persistent>
                 <v-card>
-                    <v-card-title class="headline"
-                    >Theme will be marked as NSFW, continue?
-                    </v-card-title>
+                    <v-card-title class="headline">{{ $t("submitTheme.nsfwConfirm") }}</v-card-title>
 
                     <v-card-actions>
                         <v-btn
@@ -523,7 +543,7 @@
                                 detectedThemes[nsfwDialogThemeNr].nsfw = false
                               "
                         >
-                            No, cancel
+                            {{ $t("noCancel") }}
                         </v-btn>
 
                         <v-spacer/>
@@ -534,7 +554,7 @@
                             text
                             @click="nsfwDialog = false"
                         >
-                            Yes
+                            {{ $t("yesContinue") }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -545,14 +565,14 @@
 
 <script>
 import Vue from 'vue'
-import rules from '~/assets/lang/rules'
+import rules from '@/components/mixins/rules'
 import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
 import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import {submitThemes, uploadSingleOrZip} from '@/graphql/SubmitTheme.gql'
 import optionsString from '@/components/mixins/optionsString'
-import submitInfo from '~/assets/lang/submitInfo'
+import submitInfo from '~/components/mixins/submitInfo'
 import TextCard from "~/components/TextCard.vue";
 
 export default Vue.extend({
@@ -566,7 +586,9 @@ export default Vue.extend({
         urlParser,
         allLayoutsDropdown,
         allCategoriesDropdown,
-        optionsString
+        optionsString,
+        rules,
+        submitInfo
     ],
     data() {
         return {
@@ -574,28 +596,27 @@ export default Vue.extend({
             types: [
                 {
                     id: 'single',
-                    label: 'A single NXTheme'
+                    label: this.$t("submitTheme.uploadTypes.single")
                 },
                 {
                     id: 'zip',
-                    label: 'A zip with NXThemes (pack/bulk, max 25MB)'
+                    label: this.$t("submitTheme.uploadTypes.zip", {max: "25 MB"})
                 },
                 {
                     id: 'files',
-                    label: 'An image'
+                    label: this.$t("submitTheme.uploadTypes.files")
                 }
             ],
             submitTypes: [
                 {
                     id: 'pack',
-                    label: 'Pack'
+                    label: this.$tc("pack")
                 },
                 {
                     id: 'separate',
-                    label: 'Separate Themes'
+                    label: this.$t("submitTheme.separateType", {type: this.$tc("theme", 2)})
                 }
             ],
-            submitInfo,
             nsfwDialog: false,
             nsfwDialogThemeNr: null,
             submitInfoDialog: false,
@@ -610,7 +631,6 @@ export default Vue.extend({
             uploadedScreenshotsUrls: [],
             selectedSubmitType: null,
             submitValid: false,
-            rules,
             submitDetails: {
                 name: null,
                 description: null,
@@ -717,15 +737,15 @@ export default Vue.extend({
                         if (data.submitThemes === true) {
                             let message
                             if (this.selectedSubmitType === 'pack') {
-                                message = 'Pack submitted successfully!'
+                                message = this.$t("submitTheme.submitSuccess", {type: this.$tc("pack")})
                             } else {
-                                message = 'Themes submitted successfully!'
+                                message = this.$t("submitTheme.submitSuccess", {type: this.$tc("theme", 2)})
                             }
                             this.loading.submit = false
                             this.clearAll()
                             this.$snackbar.message(message)
                         } else {
-                            this.$snackbar.error(new Error('Unknown error'))
+                            this.$snackbar.error(this.$t("error.otherError"))
                         }
                     })
                     .catch((err) => {
@@ -736,9 +756,8 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'Theme | Submit'
-        const metaDesc =
-            'You can submit themes here for listing on this website.'
+        const metaTitle = `${this.$tc("theme")}/${this.$tc("pack")} | ${this.$t("upload")}`
+        const metaDesc = this.$t("submitTheme.pageDescription")
         const metaImg = null
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })

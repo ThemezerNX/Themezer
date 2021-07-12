@@ -10,7 +10,7 @@
                 rounded
                 @click="showDialog = true"
             >
-                Delete
+                {{ $t("item.delete") }}
                 <v-icon right>{{ icon || 'mdi-delete' }}</v-icon>
             </v-btn>
             <v-dialog
@@ -19,15 +19,12 @@
                 max-width="400"
             >
                 <v-card>
-                    <v-card-title class="headline"
-                    >You're super close to deleting this {{ type }} forever.
-                        Are you absolutely sure?
-                    </v-card-title
-                    >
+                    <v-card-title class="headline">
+                        {{ $t("item.deleteConfirm", {type: $tc(type)}) }}
+                    </v-card-title>
 
                     <v-card-text>
-                        All data related to this {{ type }} will be removed from
-                        the server.
+                        {{ $t("item.deleteDescription", {type: $tc(type)}) }}
                     </v-card-text>
 
                     <v-card-actions>
@@ -38,7 +35,7 @@
                             text
                             @click="del()"
                         >
-                            Delete
+                            {{ $t("item.delete") }}
                         </v-btn>
                         <v-spacer></v-spacer>
 
@@ -49,13 +46,13 @@
                             text
                             @click="showDialog = false"
                         >
-                            Cancel
+                            {{ $t("cancel") }}
                         </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
         </template>
-        <span>Delete this {{ type }}</span>
+        <span>{{ $t("item.deleteThis", {type: $tc(type)}) }}</span>
     </v-tooltip>
 </template>
 
@@ -112,8 +109,7 @@ export default Vue.extend({
                     this.loading = false;
                     this.showDialog = false
                     ;(this as any).$snackbar.message(
-                        `${this.type.charAt(0).toUpperCase() +
-                        this.type.slice(1)} deleted successfully!`,
+                        this.$t("item.deleteSuccess", {type: this.$tc(this.type)})
                     );
 
                     if (this.goBack && !res?.data?.deleteTheme) {

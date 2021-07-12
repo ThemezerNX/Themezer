@@ -2,68 +2,52 @@
     <v-layout align-center column justify-center pa-3>
         <v-card class="box" max-width="600" style="border-radius: 20px;">
             <v-card-title class="headline">
-                About
+                {{ $t("about") }}
             </v-card-title>
             <v-card-text>
                 <p>
-                    Themezer is a site for Nintendo Switch Themes and Layouts.
-                    Source Code for the project can be found on the
-                    <a
-                        href="https://github.com/ThemezerNX"
-                        rel="noopener"
-                        target="_blank"
-                        title="discord"
-                    >ThemezerNX GitHub</a
-                    >.
+                    {{ $t("themezerIntro") }}
                 </p>
                 <p>
-                    If you have any questions, please join the
-                    <a
-                        href="https://discord.gg/nnm8wyM"
-                        rel="noopener"
-                        target="_blank"
-                        title="discord"
-                    >Discord server</a
-                    >.
+                    <i18n path="abouts.sourceCode">
+                        <template v-slot:githubHref>
+                            <a
+                                href="https://github.com/ThemezerNX"
+                                rel="noopener"
+                                target="_blank"
+                                title="discord"
+                            >ThemezerNX GitHub</a>
+                        </template>
+                    </i18n>
                 </p>
                 <p>
-                    Found a bug or have a suggestion?
-                    <a
-                        href="https://github.com/ThemezerNX/Themezer/issues"
-                        rel="noopener"
-                        target="_blank"
-                        title="contribute"
-                    >Create an issue on GitHub</a
-                    >.
-                </p>
-                <p>
-                    What does the
-                    <CertifiedBadge inline/>
-                    badge mean? It means that the
-                    nxtheme you download is updated automatically whenever there
-                    are changes made to the layout or theme itself.
+                    <i18n path="abouts.certifiedBadge">
+                        <template v-slot:certifiedBadge>
+                            <CertifiedBadge inline/>
+                        </template>
+                    </i18n>
                 </p>
                 <p class="mt-4">
-                    Need to restore your Themezer account?
+                    {{ $t("restore.prompt") }}
                     <v-btn
                         color="primary"
                         rounded
                         text
                         @click="restoreDialog = true"
-                    >Click here
-                    </v-btn
                     >
+                        {{ $t("clickHere") }}
+                    </v-btn>
                 </p>
                 <p>
-                    Themezer is in no way affiliated with Nintendo.
+                    {{ $t("abouts.notAffiliated") }}
                 </p>
                 <hr class="mb-2"/>
                 <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
-                <nuxt-link class="pr-3" to="/contact">Contact</nuxt-link>
-                <nuxt-link class="pr-3" to="/terms-of-service">Terms of Service</nuxt-link>
-                <nuxt-link class="pr-3" to="/privacy-policy">Privacy Policy</nuxt-link>
-                <nuxt-link class="pr-3" to="/cookie-policy">Cookie Policy</nuxt-link>
-                <a href="https://stats.uptimerobot.com/zx1G5uROYn" rel="noopener" target="_blank">Status</a>
+                <nuxt-link class="pr-3" to="/contact">{{ $t("contact") }}</nuxt-link>
+                <nuxt-link class="pr-3" to="/terms-of-service">{{ $t("termsOfService") }}</nuxt-link>
+                <nuxt-link class="pr-3" to="/privacy-policy">{{ $t("privacyPolicy") }}</nuxt-link>
+                <nuxt-link class="pr-3" to="/cookie-policy">{{ $t("cookiePolicy") }}</nuxt-link>
+                <a href="https://stats.uptimerobot.com/zx1G5uROYn" rel="noopener" target="_blank">{{ $t("status") }}</a>
             </v-card-text>
         </v-card>
         <v-dialog v-model="restoreDialog" class="mx-auto" max-width="800">
@@ -71,7 +55,7 @@
                 <v-card-title
                     class="title font-weight-regular justify-space-between"
                 >
-                    <span>Restore Account</span>
+                    <span>{{ $t("restore.title") }}</span>
                     <v-spacer></v-spacer>
 
                     <v-btn icon rounded @click="restoreDialog = false">
@@ -82,20 +66,14 @@
                 </v-card-title>
 
                 <v-card-text>
-                    Back when you created your Themezer account, you were
-                    informed of a backup code you could use if you ever lost
-                    access to your Discord account. You can use it here to
-                    regain access to your Themezer account. The Discord account
-                    you are currently logged in with will be linked to your
-                    previous Themezer data. Make sure to update your layouts
-                    with your new creator ID afterwards!
+                    {{ $t("restore.description") }}
                     <v-form v-model="restoreValid">
                         <v-text-field
                             v-model="creatorId"
                             :disabled="!$auth.loggedIn"
                             :error-messages="
 								!$auth.loggedIn
-									? ['You have to be logged in first']
+									? [$t('loginRequired')]
 									: []
 							"
                             :rules="[
@@ -104,7 +82,7 @@
 								rules.notOwnCreatorId
 							]"
                             class="mt-5"
-                            label="Previous Creator ID"
+                            :label="$t('restore.previousId')"
                             outlined
                             prepend-icon="mdi-identifier"
                             rounded
@@ -117,12 +95,12 @@
                             :disabled="!$auth.loggedIn"
                             :error-messages="
 								!$auth.loggedIn
-									? ['You have to be logged in first']
+									? [$t('loginRequired')]
 									: []
 							"
                             :rules="[rules.required]"
                             :type="showBackupCode ? 'text' : 'password'"
-                            label="Backup Code"
+                            :label="$t('restore.backupCode')"
                             outlined
                             prepend-icon="mdi-key-variant"
                             rounded
@@ -139,7 +117,7 @@
                                 rounded
                                 @click.prevent="restore()"
                             >
-                                Restore
+                                {{ $t("restore.confirmRestore") }}
                                 <v-icon right>mdi-backup-restore</v-icon>
                             </v-btn>
                         </v-flex>
@@ -152,12 +130,14 @@
 
 <script>
 import Vue from 'vue'
+import rules from '@/components/mixins/rules'
 import {restoreAccount} from '@/graphql/Creator.gql'
 
 export default Vue.extend({
     components: {
         CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
     },
+    mixins: [rules],
     data() {
         return {
             restoreDialog: false,
@@ -165,16 +145,6 @@ export default Vue.extend({
             showBackupCode: false,
             creatorId: null,
             backupCode: null,
-            rules: {
-                required: (value) => !!value || 'Required',
-                creatorId: (value) =>
-                    !value || (!isNaN(value) ? true : 'Invalid ID'),
-                notOwnCreatorId: (value) =>
-                    !value ||
-                    (!(this.$auth.user.id === value)
-                        ? true
-                        : 'This is your current ID')
-            },
             loading: {
                 restore: false
             }
@@ -194,11 +164,9 @@ export default Vue.extend({
                 .then(({data}) => {
                     this.loading.restore = false
                     if (data.restoreAccount) {
-                        this.$snackbar.message('Restored successfully!')
+                        this.$snackbar.message(this.$t("restore.success"))
                     } else {
-                        this.$snackbar.error(
-                            new Error('Creator ID or Backup Code invalid!')
-                        )
+                        this.$snackbar.error(this.$t("restore.success"))
                     }
                 })
                 .catch((err) => {
@@ -208,7 +176,7 @@ export default Vue.extend({
         }
     },
     head() {
-        const metaTitle = 'About'
+        const metaTitle = this.$t("about")
 
         const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
         return {

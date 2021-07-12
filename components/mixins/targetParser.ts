@@ -5,19 +5,19 @@ export default Vue.extend({
         targetName(): string | null {
             switch (this.$route.params.target) {
                 case "homemenu":
-                    return "Home Menu";
+                    return this.$t("target.homemenu") as string;
                 case "lockscreen":
-                    return "Lockscreen";
+                    return this.$t("target.lockscreen") as string;
                 case "userpage":
-                    return "User Page";
+                    return this.$t("target.userpage") as string;
                 case "allapps":
-                    return "All Apps";
+                    return this.$t("target.allapps") as string;
                 case "settings":
-                    return "Settings";
+                    return this.$t("target.settings") as string;
                 case "news":
-                    return "News";
+                    return this.$t("target.news") as string;
                 case "playerselect":
-                    return "Player Select";
+                    return this.$t("target.playerselect") as string;
 
                 default:
                     return null;
@@ -76,25 +76,25 @@ export default Vue.extend({
             switch (s) {
                 case "ResidentMenu.szs":
                 case "ResidentMenu":
-                    return "Home Menu";
+                    return this.$t("target.homemenu") as string;
                 case "Entrance.szs":
                 case "Entrance":
-                    return "Lockscreen";
+                    return this.$t("target.lockscreen") as string;
                 case "MyPage.szs":
                 case "MyPage":
-                    return "User Page";
+                    return this.$t("target.userpage") as string;
                 case "Flaunch.szs":
                 case "Flaunch":
-                    return "All Apps";
+                    return this.$t("target.allapps") as string;
                 case "Set.szs":
                 case "Set":
-                    return "Settings";
+                    return this.$t("target.settings") as string;
                 case "Notification.szs":
                 case "Notification":
-                    return "News";
+                    return this.$t("target.news") as string;
                 case "Psl.szs":
                 case "Psl":
-                    return "Player Select";
+                    return this.$t("target.playerselect") as string;
 
                 default:
                     return null;
