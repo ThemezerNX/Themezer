@@ -67,17 +67,13 @@ export default Vue.extend({
     methods: {
         async share() {
             const type = this.$tc(this.type);
+            const translationKey = "item.share" + this.type.charAt(0).toUpperCase() + this.type.slice(1);
             const data = {
                 title: this.type ? `Themezer ${type}` : `Themezer ${this.$tc("item.item")}`,
-                text: this.creator
-                    ? this.$t("item.shareText", {
+                text: this.$t(translationKey, {
                         type: type.toLowerCase(),
                         name: this.name,
                         creator: this.creator,
-                    })
-                    : this.$t("item.shareText2", {
-                        type: type.toLowerCase(),
-                        name: this.name,
                     }),
                 url: window.location.href,
             };

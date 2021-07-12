@@ -2,6 +2,9 @@ import Vue from "vue";
 
 export default Vue.extend({
     methods: {
+        target(): string | null {
+            return this.$route.params.target;
+        },
         targetName(): string | null {
             switch (this.$route.params.target) {
                 case "homemenu":

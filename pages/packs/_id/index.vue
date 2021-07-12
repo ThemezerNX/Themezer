@@ -94,7 +94,7 @@
                                 :name="pack.details.name"
                                 type="pack"
                             />
-                            <EditButton v-if="mayModerate" type="pack"/>
+                            <EditButton v-if="mayModerate" :label="$t('item.editPack')"/>
                             <ReportButton
                                 v-if="!mayModerate"
                                 :nsfw="
@@ -140,7 +140,7 @@
                             <DownloadButton
                                 :download-function="downloadPack"
                                 :loading="loadingDownload"
-                                type="pack"
+                                :label="$t('item.downloadPack')"
                             />
                         </ButtonDivider>
 

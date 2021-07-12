@@ -28,7 +28,7 @@
 
                 <v-card-text>
                     <i18n path="whatIs.nxthemeInstallerDescription">
-                        <template v-slot:nxthemesInstallerHref>
+                        <template v-slot:nxthemesInstaller>
                             <a
                                 href="https://github.com/exelix11/SwitchThemeInjector/"
                                 rel="noopener"

@@ -121,13 +121,13 @@
                                 v-if="layout.has_pieces && !!layout.baselayout"
                                 :loading="loadingMerge"
                                 to="options"
-                                type="layout"
+                                :label="$t('item.customizeLayout')"
                             />
                             <DownloadButton
                                 v-if="!!layout.baselayout"
                                 :download-function="download"
                                 :loading="loadingMerge"
-                                type="layout"
+                                :label="$t('item.downloadLayout')"
                             />
                         </ButtonDivider>
 
@@ -179,7 +179,7 @@
                                 <DownloadButton
                                     :download-function="downloadCommon"
                                     :loading="loadingGetCommon"
-                                    type="commonLayout"
+                                    :label="$t('item.downloadCommonLayout')"
                                 />
                             </ButtonDivider>
                         </div>
@@ -208,7 +208,7 @@
                                 :download-href="
                                     `${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
                                 "
-                                type="overlay"
+                                :label="$t('item.downloadOverlay')"
                             />
                         </ButtonDivider>
                         <h3>

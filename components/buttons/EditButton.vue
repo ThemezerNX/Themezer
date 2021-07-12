@@ -15,7 +15,7 @@
                 <v-icon right>{{ icon || "mdi-shield-edit" }}</v-icon>
             </v-btn>
         </template>
-        <span>{{ $t("item.editThis", {type: $tc(type)}) }}</span>
+        <span>{{ label }}</span>
     </v-tooltip>
 </template>
 
@@ -29,7 +29,7 @@ export default Vue.extend({
             required: false,
             default: undefined,
         },
-        type: {
+        label: {
             type: String,
             required: true,
             default: null,

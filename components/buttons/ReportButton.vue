@@ -33,11 +33,11 @@
                     >
                         <v-card>
                             <v-card-title class="headline">
-                                {{ $t("item.reportConfirm2", {type: $tc(type)}) }}
+                                {{ $t("item.reportConfirm") }}
                             </v-card-title>
 
                             <v-card-text>
-                                {{ $t("item.reportDescription", {type: $tc(type)}) }}
+                                {{ $t("item.reportDescription") }}
                             </v-card-text>
 
                             <v-textarea
@@ -78,11 +78,11 @@
                         </v-card>
                     </v-dialog>
                 </template>
-                <span>{{ $t("item.reportThis", {type: $tc(type)}) }}</span>
+                <span>{{ $t(`item.reportThis${type.charAt(0).toUpperCase() + type.slice(1)}`) }}</span>
             </v-tooltip>
         </template>
         <v-card>
-            <v-card-title>{{ $t("item.reportConfirm", {type: $tc(type)}) }}</v-card-title>
+            <v-card-title>{{ $t(`item.reportThis${type.charAt(0).toUpperCase() + type.slice(1)}`) }}</v-card-title>
             <v-card-text>
                 {{ $t("item.reportLoginRequired") }}
             </v-card-text>

@@ -6,7 +6,7 @@
             </h1>
             <div class="subtitle-1 box_text">
                 <i18n path="submitLayout.instructions">
-                    <template v-slot:readmeHref>
+                    <template v-slot:readme>
                         <a
                             href="https://github.com/ThemezerNX/Layouts#readme"
                             rel="noopener"

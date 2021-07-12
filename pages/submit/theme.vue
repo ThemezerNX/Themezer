@@ -6,7 +6,7 @@
             </h1>
             <div class="subtitle-1 box_text">
                 <i18n path="submitTheme.pageUse">
-                    <template v-slot:action>
+                    <template v-slot:readThis>
                         <v-btn
                             class="px-1"
                             color="primary"
@@ -59,7 +59,7 @@
                         accept=".nxtheme"
                         filled
                         hide-details
-                        :label="$t('fields.typeFile', {type: $tc('nxtheme')})"
+                        :label="$t('fields.nxthemeFile')"
                         prepend-icon="mdi-file-outline"
                         rounded
                         @change="onFileChange"
@@ -75,7 +75,7 @@
                             accept="application/zip"
                             filled
                             hide-details
-                            :label="$t('fields.typeFile', {type: $tc('zip')})"
+                            :label="$t('fields.zipFile')"
                             prepend-icon="mdi-folder-zip-outline"
                             rounded
                             @change="onFileChange"
@@ -87,7 +87,7 @@
                         class="subtitle-1 box_text"
                     >
                         <i18n path="submitTheme.webInjector">
-                            <template v-slot:webInjectorHref>
+                            <template v-slot:onlineThemeCreator>
                                 <nuxt-link to="/tools/theme-creator">{{ $t("onlineThemeCreator") }}</nuxt-link>
                             </template>
                         </i18n>
@@ -129,7 +129,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="50"
-                                :label="`${$t('fields.typeName', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -146,7 +146,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                :label="`${$t('fields.typeDescription', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packDescription')}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -182,7 +182,7 @@
                                 v-model="submitDetails.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                :label="`${$t('fields.typeVersion', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packVersion')}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"
@@ -420,7 +420,7 @@
                                                         rules.utf8_only
                                                       ]"
                                                     counter="500"
-                                                    :label="`${$t('fields.typeDescription', {type: $tc('theme')})}`"
+                                                    :label="`${$t('fields.themeDescription')}*`"
                                                     maxlength="500"
                                                     minlength="10"
                                                     outlined
@@ -478,7 +478,7 @@
                                                         rules.utf8_only
                                                       ]"
                                                     counter="10"
-                                                    :label="`${$t('fields.typeVersion', {type: $tc('theme')})}*`"
+                                                    :label="`${$t('fields.themeVersion')}*`"
                                                     maxlength="10"
                                                     outlined
                                                     prepend-icon="mdi-update"
@@ -610,7 +610,7 @@ export default Vue.extend({
                 },
                 {
                     id: 'separate',
-                    label: this.$t("submitTheme.separateType", {type: this.$tc("theme", 2)})
+                    label: this.$t("submitTheme.separateThemes")
                 }
             ],
             nsfwDialog: false,
@@ -733,9 +733,9 @@ export default Vue.extend({
                         if (data.submitThemes === true) {
                             let message
                             if (this.selectedSubmitType === 'pack') {
-                                message = this.$t("submitTheme.submitSuccess", {type: this.$tc("pack")})
+                                message = this.$t("submitTheme.packSubmitSuccess")
                             } else {
-                                message = this.$t("submitTheme.submitSuccess", {type: this.$tc("theme", 2)})
+                                message = this.$t("submitTheme.themesSubmitSuccess")
                             }
                             this.loading.submit = false
                             this.clearAll()

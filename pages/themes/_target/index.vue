@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center">{{ $tc("targetTheme", 2, {menu: targetName()}) }}</h2>
+                <h2 class="text-center"><v-icon style="vertical-align: baseline;" left v-text="targetIcon(target())"></v-icon>{{ $tc("theme", 2) }}</h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -65,6 +65,7 @@ import {allCreators, allLayouts, themeList} from '@/graphql/Theme.gql'
 import targetParser from '@/components/mixins/targetParser'
 import filter from '@/components/mixins/filter'
 import allowedTargets from '@/components/mixins/allowedTargets'
+import {targetIcon} from "@/assets/targets";
 
 export default Vue.extend({
     beforeRouteEnter(to, _from, next) {
@@ -80,6 +81,9 @@ export default Vue.extend({
         LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
     },
     mixins: [targetParser, filter],
+    methods: {
+        targetIcon,
+    },
     data() {
         return {
             type: 'themes',

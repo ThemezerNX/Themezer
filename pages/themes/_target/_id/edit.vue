@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :loading="!!$apollo.queries.theme.loading" :margin="false">
             <v-sheet v-if="theme" class="pa-2 box_fill" no-gutters>
-                <h1 class="box_text">{{ $t("item.editType", {type: $tc("theme")}) }}</h1>
+                <h1 class="box_text">{{ $t("item.editTheme") }}</h1>
                 <h2 class="box_text mt-0">
                     <nuxt-link
                         :to="
@@ -66,7 +66,7 @@
 									rules.utf8_only
 								]"
                                 counter="50"
-                                :label="`${$t('fields.typeName', {type: $tc('theme')})}*`"
+                                :label="`${$t('fields.themeName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -80,7 +80,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                :label="`${$t('fields.typeDescription', {type: $tc('theme')})}`"
+                                :label="`${$t('fields.themeDescription')}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -162,7 +162,7 @@
                                 v-model="changed.details.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                :label="`${$t('fields.typeVersion', {type: $tc('theme')})}*`"
+                                :label="`${$t('fields.themeVersion')}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"

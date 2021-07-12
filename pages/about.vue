@@ -10,7 +10,7 @@
                 </p>
                 <p>
                     <i18n path="abouts.sourceCode">
-                        <template v-slot:githubHref>
+                        <template v-slot:themezerNxGithub>
                             <a
                                 href="https://github.com/ThemezerNX"
                                 rel="noopener"
@@ -22,7 +22,7 @@
                 </p>
                 <p>
                     <i18n path="abouts.certifiedBadge">
-                        <template v-slot:certifiedBadge>
+                        <template v-slot:image>
                             <CertifiedBadge inline/>
                         </template>
                     </i18n>

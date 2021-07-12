@@ -14,7 +14,7 @@
                 <v-icon right>{{ icon || "mdi-square-edit-outline" }}</v-icon>
             </v-btn>
         </template>
-        <span>{{ $t("item.customizeThis", {type: $tc(type)}) }}</span>
+        <span>{{ label }}</span>
     </v-tooltip>
 </template>
 
@@ -28,7 +28,7 @@ export default Vue.extend({
             required: false,
             default: undefined,
         },
-        type: {
+        label: {
             type: String,
             required: true,
         },

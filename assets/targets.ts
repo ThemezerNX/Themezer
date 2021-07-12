@@ -36,6 +36,8 @@ export const menus = [
     },
 ];
 
+export const targetIcon = (target: string) => menus.find((e) => e.target == target)?.icon;
+
 export default [
     {
         name: "packs",

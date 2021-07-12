@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
             <v-sheet v-if="pack" class="pa-2 box_fill" no-gutters>
-                <h1 class="box_text">{{ $t("item.editType", {type: $tc("pack")}) }}</h1>
+                <h1 class="box_text">{{ $t("item.editPack") }}</h1>
                 <h2 class="box_text mt-0">
                     <nuxt-link
                         :to="
@@ -35,7 +35,7 @@
 									rules.utf8_only
 								]"
                                 counter="50"
-                                :label="`${$t('fields.typeName', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -50,7 +50,7 @@
 									rules.utf8_only
 								]"
                                 counter="500"
-                                :label="`${$t('fields.typeDescription', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packDescription')}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -61,7 +61,7 @@
                                 v-model="changed.details.version"
                                 :rules="[rules.required, rules.utf8_only]"
                                 counter="10"
-                                :label="`${$t('fields.typeVersion', {type: $tc('pack')})}*`"
+                                :label="`${$t('fields.packVersion')}*`"
                                 maxlength="10"
                                 outlined
                                 prepend-icon="mdi-update"

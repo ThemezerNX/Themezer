@@ -7,7 +7,7 @@
             <v-card-text>
                 <p>
                     <i18n path="contacts.discord">
-                        <template v-slot:discordHref>
+                        <template v-slot:themezerNxDiscord>
                             <a
                                 href="https://discord.gg/nnm8wyM"
                                 rel="noopener"
@@ -19,7 +19,7 @@
                 </p>
                 <p>
                     <i18n path="contacts.issue">
-                        <template v-slot:githubHref>
+                        <template v-slot:themezerNxGithub>
                             <a
                                 href="https://github.com/ThemezerNX/Themezer/issues"
                                 rel="noopener"

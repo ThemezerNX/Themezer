@@ -243,8 +243,7 @@
                             </v-list-item-content>
                         </v-list-item>
 
-                        <v-list-item href="https://translate.themezer.net/" target="_blank"
-                                     @click="$i18n.setLocale(locale.code)">
+                        <v-list-item href="https://translate.themezer.net/" target="_blank">
                             <v-list-item-content>
                                 <v-list-item-title>
                                     {{ $t("helpTranslate") }}
@@ -579,17 +578,17 @@ export default {
             randomMenuItems: [
                 {
                     icon: "mdi-package-variant-closed",
-                    title: this.$t("item.random", {type: this.$tc("pack")}),
+                    title: this.$t("item.randomPack"),
                     function: this.randomPack,
                 },
                 {
                     icon: "mdi-format-color-fill",
-                    title: this.$t("item.random", {type: this.$tc("theme")}),
+                    title: this.$t("item.randomTheme"),
                     function: this.randomTheme,
                 },
                 {
                     icon: "mdi-code-json",
-                    title: this.$t("item.random", {type: this.$tc("layout")}),
+                    title: this.$t("item.randomLayout"),
                     function: this.randomLayout,
                 },
             ],

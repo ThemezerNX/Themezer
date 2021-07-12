@@ -103,7 +103,7 @@
                                 rounded
                                 @click="editDialog = true"
                             >
-                                {{ $t("item.editThis", {type: $t("creators.profile")}) }}
+                                {{ $t("item.editProfile") }}
                                 <v-icon right>mdi-pencil</v-icon>
                             </v-btn>
                             <LikeButton
@@ -155,7 +155,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            {{ $t("creators.latestByCreator", {type: $tc("pack", 6)}) }}
+                            {{ $t("creators.latestPacksByCreator") }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -176,7 +176,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            {{ $t("creators.latestByCreator", {type: $tc("theme", 6)}) }}
+                            {{ $t("creators.latestThemesByCreator") }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -197,7 +197,7 @@
                 >
                     <v-col class="pt-0" cols="12">
                         <h1>
-                            {{ $t("creators.latestByCreator", {type: $tc("layout", 6)}) }}
+                            {{ $t("creators.latestLayoutsByCreator") }}
                         </h1>
                         <v-divider/>
                         <ItemGrid
@@ -219,7 +219,7 @@
                         <v-card-title
                             class="title font-weight-regular justify-space-between"
                         >
-                            <span>{{ $t("item.editType", {type: $t("creators.profile")}) }}</span>
+                            <span>{{ $t("item.editProfile") }}</span>
                             <v-spacer></v-spacer>
 
                             <v-btn icon rounded @click="editDialog = false">

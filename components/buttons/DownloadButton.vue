@@ -19,7 +19,7 @@
                 </v-icon>
             </v-btn>
         </template>
-        <span>{{ type ? $t("item.download", {type: $tc(type)}) : "Download" }}</span>
+        <span>{{ label ? label : "Download" }}</span>
     </v-tooltip>
 </template>
 
@@ -33,7 +33,7 @@ export default Vue.extend({
             required: false,
             default: undefined,
         },
-        type: {
+        label: {
             type: String,
             required: false,
             default: undefined,

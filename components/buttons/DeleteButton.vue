@@ -20,11 +20,11 @@
             >
                 <v-card>
                     <v-card-title class="headline">
-                        {{ $t("item.deleteConfirm", {type: $tc(type)}) }}
+                        {{ $t("item.deleteConfirm") }}
                     </v-card-title>
 
                     <v-card-text>
-                        {{ $t("item.deleteDescription", {type: $tc(type)}) }}
+                        {{ $t("item.deleteDescription") }}
                     </v-card-text>
 
                     <v-card-actions>
@@ -52,7 +52,7 @@
                 </v-card>
             </v-dialog>
         </template>
-        <span>{{ $t("item.deleteThis", {type: $tc(type)}) }}</span>
+        <span>{{ $t(`item.delete${type.charAt(0).toUpperCase() + type.slice(1)}`) }}</span>
     </v-tooltip>
 </template>
 
@@ -109,7 +109,7 @@ export default Vue.extend({
                     this.loading = false;
                     this.showDialog = false
                     ;(this as any).$snackbar.message(
-                        this.$t("item.deleteSuccess", {type: this.$tc(this.type)})
+                        this.$t("item.deleteSuccess"),
                     );
 
                     if (this.goBack && !res?.data?.deleteTheme) {

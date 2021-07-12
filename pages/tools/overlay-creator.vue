@@ -68,7 +68,7 @@
                         rounded
                         @click.prevent="uploadLayout()"
                     >
-                        {{ $t("createType", {type: $tc("nxtheme", 2)}) }}
+                        {{ $t("createNxthemes") }}
                         <v-icon class="mt-1" right>mdi-format-color-fill</v-icon>
                     </v-btn>
                 </ButtonDivider>
@@ -159,7 +159,7 @@
                         rounded
                         @click.prevent="uploadScreenshots"
                     >
-                        {{ $t("createType", {type: $tc("overlay")}) }}
+                        {{ $t("createOverlay") }}
                         <v-icon right>mdi-image-edit-outline</v-icon>
                     </v-btn>
                 </ButtonDivider>
@@ -187,7 +187,7 @@
                     <ButtonDivider>
                         <DownloadButton
                             :download-function="download"
-                            type="image"
+                            :label="$t('item.downloadOverlay')"
                         >
                             {{ $t("save") }}
                         </DownloadButton>

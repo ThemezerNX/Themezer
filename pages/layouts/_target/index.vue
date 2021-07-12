@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center">{{ $tc("targetLayout", 2, {menu: targetName()}) }}</h2>
+                <h2 class="text-center"><v-icon style="vertical-align: baseline;" left v-text="targetIcon(target())"></v-icon>{{ $tc("layout", 2) }}</h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -69,6 +69,7 @@ import {allCreators, layoutList} from "@/graphql/Layout.gql";
 import targetParser from "@/components/mixins/targetParser";
 import filter from "@/components/mixins/filter";
 import allowedTargets from "@/components/mixins/allowedTargets";
+import {targetIcon} from "@/assets/targets";
 
 export default Vue.extend({
     components: {
@@ -84,6 +85,9 @@ export default Vue.extend({
             unsupportedFilters: ["nsfw", "withLayouts"],
             allCreatorsQuery: allCreators,
         };
+    },
+    methods: {
+        targetIcon,
     },
     apollo: {
         itemList: {

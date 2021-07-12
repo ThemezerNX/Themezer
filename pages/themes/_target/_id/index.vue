@@ -79,7 +79,7 @@
                                 :name="theme.details.name"
                                 type="theme"
                             />
-                            <EditButton v-if="mayModerate" type="theme"/>
+                            <EditButton v-if="mayModerate" :label="$t('item.editTheme')"/>
                             <ReportButton
                                 v-if="!mayModerate"
                                 :nsfw="theme.categories.includes('NSFW')"
@@ -188,7 +188,7 @@
                             <DownloadButton
                                 :download-function="downloadTheme"
                                 :loading="loadingDownload"
-                                type="theme"
+                                :label="$t('item.downloadTheme')"
                             />
                         </ButtonDivider>
 

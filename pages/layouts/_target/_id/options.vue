@@ -195,7 +195,7 @@
                             <DownloadButton
                                 :download-function="download"
                                 :loading="loadingMerge"
-                                type="layout"
+                                :label="$t('item.downloadLayout')"
                             />
                             <ShareButton
                                 :creator="layout.creator.display_name"
