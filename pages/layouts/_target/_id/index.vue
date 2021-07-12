@@ -243,7 +243,7 @@
                         </v-card-title>
 
                         <v-card-text>
-                            {{ $t("whatIs.commonLayoutDescription") }}
+                            {{ $t("whatIs.commonLayoutDescription", {playerSelect: $t("target.playerselect"), userPage: $t("target.userpage")}) }}
                         </v-card-text>
 
                         <v-card-actions>
