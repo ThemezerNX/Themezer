@@ -9,6 +9,10 @@ export default Vue.extend({
                     content: this.$t("submitInfo.screenshots.content"),
                 },
                 {
+                    title: this.$t("submitInfo.language.title"),
+                    content: this.$t("submitInfo.language.content"),
+                },
+                {
                     title: this.$t("submitInfo.special.title"),
                     content: this.$t("submitInfo.special.content"),
                     list: [

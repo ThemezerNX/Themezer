@@ -12,9 +12,9 @@
         "otherError": "An error occurred"
     },
     "roles": {
-        "system": "system",
-        "admin": "admin",
-        "verified": "verified"
+        "system": "System",
+        "admin": "Admin",
+        "verified": "Verified"
     },
     "login": "Login",
     "register": "Register",
@@ -286,6 +286,10 @@
         "screenshots": {
             "title": "Screenshots",
             "content": "You are REQUIRED to upload a SCREENSHOT for every theme. Only the background image is NOT sufficient."
+        },
+        "language": {
+            "title": "Language",
+            "content": "Please write the title, description and other details in English. This will make it easier for international users to understand what your submission is about."
         },
         "special": {
             "title": "What's special about Themezer?",
