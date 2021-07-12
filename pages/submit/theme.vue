@@ -381,7 +381,7 @@
                                                             .has_commonlayout
                                                       "
                                                 >
-                                                    {{ $t("submitTheme.commonLayoutStatus", {status: "✅"}) }}
+                                                    {{ $t("submitTheme.commonLayoutStatus", {key: "Common Layout", status: "✅"}) }}
                                                 </v-list-item-subtitle>
                                             </v-col>
                                             <v-col class="pb-0">

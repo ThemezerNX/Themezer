@@ -6,7 +6,7 @@
                 class="pa-2 box_fill"
                 no-gutters
             >
-                <h1 class="box_text">Customize Layout</h1>
+                <h1 class="box_text">{{ $t("item.customizeType", {type: $tc("layout")}) }}</h1>
                 <h2 class="box_text mt-0">
                     <nuxt-link
                         :to="
@@ -68,7 +68,7 @@
                             style="background: rgba(255,255,255,0.12); border-radius: 20px;"
                             subheader
                         >
-                            <v-subheader>Layout pieces</v-subheader>
+                            <v-subheader>{{ $tc("item.layoutOption", 2) }}</v-subheader>
                             <div
                                 v-for="(piece, i) in layout.pieces"
                                 :key="piece.name"
