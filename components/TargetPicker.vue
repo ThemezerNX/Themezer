@@ -101,7 +101,7 @@ export default Vue.extend({
 
 .card.on-hover {
     // background: darken($themezer-primary, 15%) !important;
-    transform: translateY(10px);
+    transform: translateY(-10px);
 
     .thumbnail {
         opacity: 1;
