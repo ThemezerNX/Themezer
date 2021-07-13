@@ -154,7 +154,7 @@
         "nxthemeInstaller": "What is the NXThemes Installer?",
         "nxthemeInstallerDescription": "The {nxthemesInstaller} is an homebrew app that runs on the switch itself and can be used to install and manage themes. The IDs displayed on Themezer can be used to install themes and packs directly. The ID {id} can be input on the 'Download themes' tab in the app (make sure Themezer is set as provider). This ID can also be used in the search box of {themezerNX}.",
         "commonLayout": "What is the common layout?",
-        "commonLayoutDescription": "The common layout is the footer seen in and shared across the Home Menu, All Apps, Settings and News. The stock version contains the currently active controller on the left, the divider line and the button actions on the right. Some layouts include a common layout to hide the line or make other minor modifications. Modifying the common layout for '{playerSelect}' and '{userPage}' is unsupported by the Switch Theme Injector. It is always recommended to download and use this layout as well!",
+        "commonLayoutDescription": "The common layout is the footer seen in and shared across the Home Menu, All Apps, Settings and News. The stock version contains the currently active controller on the left, the divider line, and the button actions on the right. Some layouts include a common layout to hide the line or make other minor modifications. Modifying the common layout for '{playerSelect}' and '{userPage}' is unsupported by the Switch Theme Injector. It is always recommended to download and use this layout as well!",
         "overlayPng": "What is the overlay png?",
         "overlayPngDescription": "The overlay png is the image used on this site to preview layouts. You may also use this to create the 'screenshot' you need when uploading a theme to Themezer."
     },
@@ -220,7 +220,7 @@
         "pack": "This theme is part of the the following pack:"
     },
     "layouts": {
-        "pageDescription": "Discover unique layouts to style menus to your hearts content!",
+        "pageDescription": "Discover unique layouts to style menus to your heart's content!",
         "targetPageDescription": "All '{menu}' layouts on Themezer",
         "tryBackgrounds": "Try These Backgrounds",
         "themesContents": "All themes made with this layout",
@@ -248,7 +248,7 @@
         "latestLayoutsByCreator": "Latest Layouts by this creator",
         "blockUser": "Block user from submitting",
         "customName": "Custom display name",
-        "bio": "Bio (supports Markdown and HTML",
+        "bio": "Bio (supports Markdown and HTML)",
         "profileColor": "Profile color",
         "profileColorNote": "Profile color will affect the navigation bar and side menu",
         "banner": "Banner (recommended: {size})",
@@ -257,8 +257,8 @@
         "logoClear": "Remove current logo"
     },
     "abouts": {
-        "sourceCode": "Source Code for the project can be found on the {themezerNxGithub}.",
-        "certifiedBadge": "What does the {image} badge mean? It means that the nxtheme you download is updated automatically whenever there are changes made to the layout or theme itself.",
+        "sourceCode": "Source code for the project can be found on the {themezerNxGithub}.",
+        "certifiedBadge": "What does the {image} badge mean? It means that the NXTheme you download is updated automatically whenever there are changes made to the layout or theme itself.",
         "notAffiliated": "Themezer is in no way affiliated with Nintendo."
     },
     "contacts": {
@@ -270,7 +270,6 @@
         "title": "Restore Account",
         "description": "Back when you created your Themezer account, you were informed of a backup code you could use if you ever lost access to your Discord account. You can use it here to regain access to your Themezer account. The Discord account you are currently logged in with will be linked to your previous Themezer data. If you have layouts on GitHub, make sure to update them with your new creator ID!",
         "previousId": "Previous Creator ID",
-        "backupCode": "Backup Code",
         "confirmRestore": "Restore",
         "success": "Restored successfully!",
         "error": "Creator ID or Backup Code invalid!"

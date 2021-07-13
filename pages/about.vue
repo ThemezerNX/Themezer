@@ -100,7 +100,7 @@
 							"
                             :rules="[rules.required]"
                             :type="showBackupCode ? 'text' : 'password'"
-                            :label="$t('restore.backupCode')"
+                            :label="$t('backupCode')"
                             outlined
                             prepend-icon="mdi-key-variant"
                             rounded
