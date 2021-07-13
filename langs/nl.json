@@ -1,0 +1,390 @@
+{
+    "createNxthemes": "Maak NXThemes",
+    "createOverlay": "Maak Overlay",
+    "item": {
+        "randomPack": "Willekeurig Pakket",
+        "randomTheme": "Willekeurig Thema",
+        "randomLayout": "Willekeurige Lay-out",
+        "downloadTheme": "Download Thema",
+        "downloadPack": "Download Pakket",
+        "downloadLayout": "Download Lay-out",
+        "downloadOverlay": "Download Overlay",
+        "downloadCommonLayout": "Download Algemene Lay-out",
+        "editTheme": "Thema Bewerken",
+        "editPack": "Pakket Bewerken",
+        "editProfile": "Profiel Bewerken",
+        "customizeLayout": "Lay-out Personaliseren",
+        "deleteTheme": "Verwijder dit Thema",
+        "deletePack": "Verwijder dit Pakket",
+        "reportThisTheme": "Rapporteer dit Thema",
+        "reportThisPack": "Rapporteer dit Pakket",
+        "reportThisCreator": "Rapporteer deze Maker",
+        "shareTheme": "Bekijk dit Thema '{name}' van {creator} op Themezer!",
+        "sharePack": "Bekijk dit Pakket '{name}' van {creator} op Themezer!",
+        "shareLayout": "Bekijk deze Lay-out '{name}' van {creator} op Themezer!",
+        "shareCreator": "Bekijk deze Maker '{creator}' op Themezer!",
+        "item": "item",
+        "author": "Door {creator}",
+        "commonAuthor": "Auteur: {value}",
+        "details": "Details",
+        "id": "ID: {value}",
+        "version": "Versie: {value}",
+        "lastUpdated": "Laatst Bijgewerkt: {value}",
+        "dlCount": "Downloads: {value}",
+        "targetFile": "Doelbestand: {value}",
+        "background": "Achtergrond: {value}",
+        "layout": "Lay-out: {value}",
+        "customizations": "Personalisaties: {value}",
+        "download": "Download",
+        "edit": "Bewerk",
+        "customize": "Personaliseren",
+        "delete": "Verwijderen",
+        "deleteConfirm": "Weet je het absoluut zeker?",
+        "deleteDescription": "Alle gegevens met betrekking tot dit item worden verwijderd van de servers van Themezer.",
+        "deleteSuccess": "Item succesvol verwijderd!",
+        "report": "Melden",
+        "reportConfirm": "Weet je zeker dat je dit wilt melden?",
+        "reportDescription": "Als je denkt dat deze pagina niet op Themezer thuishoort omdat deze ongepaste inhoud bevat of om andere redenen, laat ons dan weten waarom:",
+        "reportLoginRequired": "Log in om ongepaste inhoud te melden",
+        "like": "Ik hou hiervan!",
+        "unlike": "Ik vind dit niet leuk"
+    },
+    "filter": {
+        "id": "Toegevoegd",
+        "clear": "Wis alles",
+        "search": "Zoeken",
+        "sortBy": "Sorteer op",
+        "filters": "Filters",
+        "downloads": "Downloads",
+        "likes": "Likes",
+        "updated": "Bijgewerkt",
+        "madeByMe": "Door mij gemaakt",
+        "nsfw": "NSFW weergeven"
+    },
+    "fields": {
+        "themeName": "Thema naam",
+        "packName": "Pakket naam",
+        "themeDescription": "Themabeschrijving",
+        "packDescription": "Pakketbeschrijving",
+        "themeVersion": "Thema versie",
+        "packVersion": "Pakket versie",
+        "zipFile": "ZIP bestand",
+        "nxthemeFile": "NXTheme bestand",
+        "hex": "HEX",
+        "id": "ID",
+        "name": "naam",
+        "description": "beschrijving",
+        "version": "versie",
+        "screenshot": "SCHERMAFBEELDING ({filetype}, {size})",
+        "category": "categorie",
+        "categories": "Categorie\u00ebn",
+        "categoriesHint": "Druk op {key_} voor een nieuwe categorie",
+        "sharedCategories": "Gedeelde categorie\u00ebn (dit vervangt de huidige set)",
+        "manualLayout": "Handmatige lay-outselectie (wist alle wijzigingen die in de JSON zijn aangebracht)"
+    },
+    "creators": {
+        "latestPacksByCreator": "Nieuwste Pakketten van deze maker",
+        "latestThemesByCreator": "Nieuwste Thema's van deze maker",
+        "latestLayoutsByCreator": "Nieuwste Lay-outs van deze maker",
+        "pageDescription": "{creator}'s pagina op Themezer. Bekijk pakketten, thema's en lay-outs gemaakt door {creator}.",
+        "profile": "Profiel",
+        "noBiography": "Deze maker heeft nog niets over zichzelf geschreven...",
+        "blockUser": "Hou indieningen van deze gebruiker tegen",
+        "customName": "Aangepaste weergavenaam",
+        "bio": "Bio (ondersteunt Markdown en HTML)",
+        "profileColor": "Profielkleur",
+        "profileColorNote": "Profielkleur heeft invloed op de navigatiebalk en het zijmenu",
+        "banner": "Banner (aanbevolen: {size})",
+        "bannerClear": "Huidige banner verwijderen",
+        "logo": "Logo (vervangt Discord-avatar)",
+        "logoClear": "Huidig logo verwijderen"
+    },
+    "submitTheme": {
+        "separateThemes": "Afzonderlijke Thema's",
+        "packSubmitSuccess": "Pakket succesvol ingediend!",
+        "themesSubmitSuccess": "Thema's succesvol ingediend!",
+        "pageDescription": "Je kunt hier thema's indienen voor vermelding op Themezer.",
+        "pageUse": "Via deze pagina kunt je door jou gemaakte thema's indienen. Als dit nieuw voor je is, verzoek ik je om hiernaar te kijken: {readThis}.",
+        "uploadTypes": {
+            "single": "Een enkel NXTheme",
+            "zip": "Een ZIP met NXTheme's (pakket\/bulk, max {max})",
+            "files": "Een afbeelding"
+        },
+        "authorDisclaimer": "dit wordt vervangen met JOUW gebruikersnaam",
+        "commonLayoutStatus": "{key_}: {status}",
+        "manuallySelected": "Handmatig geselecteerd",
+        "nsfwConfirm": "Dit thema wordt gemarkeerd als NSFW, doorgaan?",
+        "step1": "1. Upload het thema\/pakket",
+        "packHint": "Zorg ervoor dat de NXThemes in de root van de ZIP staan, niet in een map!",
+        "webInjector": "Je kunt NXThemes maken met behulp van de {onlineThemeCreator}. Je kunt daarna de gemaakte NXTheme(s) hier indienen.",
+        "step2": "2. Pakketdetails",
+        "step3": "3. Themadetails",
+        "screenshotHint": "Je moet een SCREENSHOT uploaden (NIET alleen de achtergrondafbeelding). Doe dit door op de placeholder-afbeelding te klikken."
+    },
+    "overlayCreators": {
+        "screenshotWithWhiteBackground": "Screenshot met witte achtergrond",
+        "screenshotWithBlackBackground": "Screenshot met zwarte achtergrond",
+        "pageDescription": "Maak een transparante overlay voor je lay-out en aanpassingen.",
+        "pageUse": "Je kunt dit gereedschap hier gebruiken of, indien mogelijk, handmatig een overlay maken. Hoe dan ook, een overlay is vereist voor lay-outs op Themezer.",
+        "moreDetailedInstructions": "Gedetailleerde instructies (en)",
+        "step1": "1. Lay-out Uploaden",
+        "step1Description": "Upload hier je lay-out. Je krijgt twee NXThemes: \u00e9\u00e9n met een zwarte achtergrond en \u00e9\u00e9n met een witte (zorg ervoor dat de site meerdere bestanden kan downloaden). Doe voor elk het volgende: installeer het op je Switch en maak een screenshot. Stel het systeemthema in op wit (!) en zorg ervoor dat de cursor op dezelfde positie staat bij het maken van de screenshots. Breng de screenshots daarna over naar je pc. Heb je dat gedaan? Ga naar stap 2.",
+        "step2": "2. Schermafbeeldingen Uploaden",
+        "step2Description": "Hier upload je de twee screenshots die je bij stap 1 hebt gemaakt. Upload ze naar hun eigen veld hieronder.",
+        "step3": "3. Resultaat",
+        "generatedImage": "Gegenereerde overlay-png"
+    },
+    "lang": "Nederlands",
+    "welcome": "Welkom op Themezer!",
+    "welcomeBack": "Welkom terug {user}!",
+    "themezerIntro": "Themezer is een site voor het delen van Nintendo Switch-thema's en lay-out",
+    "cookieBanner": "Deze website maakt gebruik van cookies om je de beste ervaring te bieden. Door verder te gaan met het gebruik van deze website ga je akkoord met ons gebruik van cookies.",
+    "apiOffline": "De server lijkt offline te zijn. Probeer het over een tijdje opnieuw. Als dit probleem zich blijft voordoen, neem dan contact met ons op.",
+    "error": {
+        "uhOh": "Oh Oh!",
+        "goBack": "Ga Terug",
+        "pageNotFound": "404 Niet Gevonden",
+        "otherError": "Er is een fout opgetreden"
+    },
+    "roles": {
+        "system": "Systeem",
+        "admin": "Beheerder",
+        "verified": "Geverifieerd"
+    },
+    "login": "Log in",
+    "register": "Registreren",
+    "logout": "Uitloggen",
+    "logoutSuccess": "Je bent uitgelogd!",
+    "loginSuccess": "Je bent nu ingelogd!",
+    "myProfile": "Mijn profiel",
+    "browse": "Bladeren",
+    "upload": "Uploaden",
+    "tools": "Hulpmiddelen",
+    "guides": "Handleidingen",
+    "about": "Over",
+    "contact": "Contact",
+    "status": "Status",
+    "layoutSubmissions": "Layoutinzendingen",
+    "themePackSubmissions": "Thema-\/Pakketinzendingen",
+    "termsOfService": "Servicevoorwaarden",
+    "cookiePolicy": "Cookie Beleid",
+    "privacyPolicy": "Privacybeleid",
+    "serviceStatus": "Service Status",
+    "pack": "Pakket | Pakketten",
+    "theme": "Thema | Thema's",
+    "nxtheme": "NXTheme | NXThemes",
+    "zip": "ZIP | ZIP's",
+    "layout": "Lay-out| Lay-outs",
+    "creator": "Maker | Makers",
+    "overlay": "Overlay | Overlays",
+    "overlayPng": "Overlay PNG | Overlay PNGs",
+    "image": "Afbeelding | Afbeeldingen",
+    "faq": "FAQ | FAQs",
+    "commonLayout": "Algemene Lay-out | Algemene Lay-outs",
+    "layoutOption": "Lay-outoptie | Lay-outopties",
+    "tool": "Hulpmiddel | Hulpmiddelen",
+    "onlineThemeCreator": "Online Themamaker",
+    "themezerHBApp": "Themezer HB App",
+    "overlayCreator": "Overlay-maker",
+    "themeCreator": "Themamaker",
+    "guideInstallThemes": "Thema's Installeren",
+    "guideCreateThemes": "Thema's\/Lettertypen Maken",
+    "guideCreateLayouts": "Lay-outs Maken",
+    "registerSuccessIntro": "Nu kun je eindelijk je thema's uploaden! Er zijn echter een paar regels hier op Themezer:",
+    "accept": "Aanvaarden",
+    "backupCode": "Back-upcode",
+    "backupCodeExplanation": "Om ervoor te zorgen dat je toegang behoudt tot je Themezer-account als er iets met je Discord-account gebeurt, vind je hier je maker-ID en een back-upcode die je kunt gebruiken om je account te herstellen en een nieuw Discord-account te verbinden. Bewaar deze back-upcode op een veilige plek! De maker-ID is ook te vinden in de url van de makerpagina van je vorige Themezer-account. Ga naar de pagina 'over' om je account te herstellen.",
+    "backupCodeViewOnceWarning": "DIT IS DE ENIGE KEER DAT JE DEZE BACK-UPCODE KUNT BEKIJKEN!",
+    "copy": "Kopi\u00ebren",
+    "copySuccess": "Gekopieerd!",
+    "permalink": "Permalink",
+    "dismiss": "Negeren",
+    "previous": "Vorige",
+    "finish": "Voltooien",
+    "cancel": "Annuleren",
+    "discard": "Weggooien",
+    "noCancel": "Nee, annuleer",
+    "yesContinue": "Ja, ga verder",
+    "readThis": "Lees Dit",
+    "save": "Opslaan",
+    "clickHere": "Klik Hier",
+    "loginRequired": "Je moet eerst ingelogd zijn!",
+    "unsavedChanged": "Wil je echt weg? Je hebt nog-niet-opgeslagen wijzigingen!",
+    "saveSuccess": "Succes! Het kan even duren voordat wijzigingen zijn doorgevoerd.",
+    "close": "Sluiten",
+    "customLayout": "Aangepast",
+    "resultCount": "{count} resultaat | {count} resultaten",
+    "noResults": "Er waren geen resultaten",
+    "moreItems": "Meer Items",
+    "target": {
+        "menu": "Menu:",
+        "choose": "Kies een Menu",
+        "homemenu": "Startmenu",
+        "lockscreen": "Vergrendelscherm",
+        "userpage": "Gebruikerspagina",
+        "allapps": "Alle apps",
+        "settings": "Instellingen",
+        "news": "Nieuws",
+        "playerselect": "Speler Selecteren"
+    },
+    "badges": {
+        "certifiedBadge": "Automatisch bijgewerkt"
+    },
+    "whatIs": {
+        "this": "Wat is dit?",
+        "pack": "Wat is een Pakket?",
+        "packDescription": "Pakketten zijn ZIP's met meerdere thema's die door dezelfde gebruiker zijn gemaakt. Het kan elk thema bevatten, zelfs meerdere voor hetzelfde menu.",
+        "nxthemeInstaller": "Wat is de NXThemes Installer?",
+        "nxthemeInstallerDescription": "De {nxthemesInstaller} is een homebrew-app die op de switch zelf draait en kan worden gebruikt om thema's te installeren en te beheren. De ID's die op Themezer worden weergegeven, kunnen worden gebruikt om thema's en pakketten rechtstreeks te installeren. De ID {id} kan worden ingevoerd op het tabblad 'Download themes' in de app (zorg ervoor dat Themezer is ingesteld als provider). Deze ID kan ook worden gebruikt in het zoekvak van {themezerNX}.",
+        "commonLayout": "Wat is de algemene lay-out?",
+        "commonLayoutDescription": "De algemene indeling is de voettekst die wordt weergegeven in en gedeeld door het Startmenu, Alle Apps, Instellingen en Nieuws. De standaardversie bevat de momenteel actieve controller aan de linkerkant, de scheidingslijn en de knopacties aan de rechterkant. Sommige lay-outs bevatten een algemene lay-out om de lijn te verbergen of andere kleine wijzigingen aan te brengen. Het wijzigen van de algemene lay-out voor {playerSelect} en {userPage} wordt niet ondersteund door de Switch Theme Injector. Het wordt altijd aanbevolen om deze lay-out ook te downloaden en te gebruiken!",
+        "overlayPng": "Wat is de overlay png?",
+        "overlayPngDescription": "De overlay png is de afbeelding die op deze site wordt gebruikt om een voorbeeld van lay-outs te bekijken. Je kunt dit ook gebruiken om de 'screenshot' te maken die je nodig hebt bij het uploaden van een thema naar Themezer."
+    },
+    "rules": {
+        "required": "Verplicht",
+        "utf8Only": "Alleen UTF-8-tekens zijn toegestaan",
+        "characterLength": "'{field}' moet tussen de {min} en {max} tekens lang zijn",
+        "characterLengthMin": "'{field}' moet {count} of meer tekens lang zijn",
+        "categoryMin": "Er is minimaal \u00e9\u00e9n categorie vereist",
+        "categoryMax": "Er zijn maximaal {count} categorie\u00ebn toegestaan",
+        "invalid": "Ongeldige {field}",
+        "maxImageSize": "De afbeeldingsgrootte moet kleiner zijn dan {max}!",
+        "notOwnCreatorId": "Dit is je huidige ID"
+    },
+    "home": {
+        "pageTitle": "Start",
+        "recentAdditions": "Recente Toevoegingen",
+        "newPacks": "Nieuwste Pakketten",
+        "newThemes": "Nieuwste Thema's",
+        "updatedLayouts": "Bijgewerkte Lay-outs"
+    },
+    "packs": {
+        "pageDescription": "Ontdek geweldige themapakketten om menu's een vergelijkbaar uiterlijk te geven!",
+        "packContents": "Thema's in Dit Pakket",
+        "clickAnyToEdit": "Klik op een om te bewerken"
+    },
+    "themes": {
+        "pageDescription": "Thema's op Themezer",
+        "targetPageDescription": "Alle '{menu}' thema's op Themezer",
+        "pack": "Dit thema maakt deel uit van het volgende pakket:"
+    },
+    "layouts": {
+        "pageDescription": "Ontdek unieke lay-outs om menu's naar hartenlust te stylen!",
+        "targetPageDescription": "Alle '{menu}' lay-outs op Themezer",
+        "tryBackgrounds": "Probeer Deze Achtergronden",
+        "themesContents": "Alle thema's gemaakt met deze lay-out",
+        "backgrounds": {
+            "botwForest": "Breath of the Wild Bos",
+            "skyrimMountains": "Skyrim Bergen",
+            "acod": "Assassin's Creed Odyssey",
+            "fc5": "Far Cry 5",
+            "botwArt": "Breath of the Wild Kunst",
+            "acnh": "Animal Crossing New Horizons",
+            "sea": "Zee",
+            "spiderman": "Spiderman Into the Spiderverse",
+            "pewdiepie": "PewDiePie",
+            "franxx": "Darling in the Franxx",
+            "nier": "Nier Automata",
+            "p5": "Persona 5 Ryuji"
+        }
+    },
+    "abouts": {
+        "sourceCode": "De broncode voor het project is te vinden op de {themezerNxGithub}.",
+        "certifiedBadge": "Wat betekent de {image}-badge? Het betekent dat het NXTheme dat u downloadt automatisch wordt bijgewerkt wanneer er wijzigingen worden aangebracht in de lay-out of het thema zelf.",
+        "notAffiliated": "Themezer is op geen enkele manier gelieerd aan Nintendo."
+    },
+    "contacts": {
+        "discord": "Neem voor contact deel aan de {themezerNxDiscord}",
+        "issue": "Een bug gevonden of heb je een suggestie? Maak een issue aan op de {themezerNxGithub} of sluit je aan bij de Discord-server"
+    },
+    "restore": {
+        "prompt": "Wil je je Themezer-account herstellen?",
+        "title": "Account Herstellen",
+        "description": "Toen je je Themezer-account aanmaakte, werd je ge\u00efnformeerd over een back-upcode die je kon gebruiken als je ooit de toegang tot je Discord-account kwijtraakte. Je kunt die code hier gebruiken om weer toegang te krijgen tot je Themezer-account. Het Discord-account waarmee je momenteel bent ingelogd, wordt gekoppeld aan je eerdere Themezer-gegevens. Als je lay-outs op GitHub hebt, zorg er dan voor dat je ze bijwerkt met je nieuwe maker-ID!",
+        "previousId": "Vorige maker-ID",
+        "confirmRestore": "Herstellen",
+        "success": "Account succesvol hersteld!",
+        "error": "Maker-ID of Back-upcode ongeldig!"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "Eigendom",
+            "content": "De uploader behoudt het eigendom van bestanden die zijn ge\u00fcpload naar Themezer. Bestanden staan op de servers van Themezer, onder toezicht van de gebruiker, en blijven de verantwoordelijkheid van de uploader."
+        },
+        "copyright": {
+            "title": "Auteursrechten",
+            "content": "Inhoud ge\u00fcpload naar Themezer moet het auteursrecht respecteren. Als je van mening bent dat inhoud op Themezer inbreuk maakt op het auteursrecht en jij de houder van het auteursrecht bent of gemachtigd bent om namens de eigenaar van het auteursrecht the handelen, neem dan contact op met een van onze moderators:",
+            "contact": "Neem contact op met een moderator"
+        },
+        "abuse": {
+            "title": "Misbruik",
+            "content": "Poging tot misbruik, spam of het toebrengen van andere schade zal resulteren in onmiddellijke be\u00ebindiging van je account. Bugs en andere problemen moeten worden gemeld via de contactpagina of GitHub-repository."
+        },
+        "nsfw": {
+            "title": "NSFW",
+            "content": "NSFW-inzendingen moeten het voorziene NSFW-aanvinkvakje gebruiken. Alles wat bedoeld is om seksuele opwinding op te roepen, wordt als NSFW beschouwd. Echte en geanimeerde naaktheid is toegestaan, maar er mogen geen 'sekshandelingen' (iets pornografisch) worden getoond of ge\u00efmpliceerd. Geen afbeeldingen van onder de 18 jaar (echt of geanimeerd). Dit omvat 'Lolita'-content waarbij het personage zichtbaar jonger is dan 18 jaar, ongeacht hoe oud je aangeeft dat ze zijn, evenals personages waarvan bekend is dat ze jonger zijn dan 18 jaar."
+        },
+        "accountTermination": {
+            "title": "Accountbe\u00ebindiging",
+            "content": "Themezer behoudt zich het recht voor om het account van een gebruiker te be\u00ebindigen indien nodig, zelfs zonder uitleg."
+        }
+    },
+    "submitInfo": {
+        "screenshots": {
+            "title": "Schermafbeeldingen",
+            "content": "Je bent VERPLICHT om voor elk thema een SCREENSHOT te uploaden. Alleen de achtergrondafbeelding is NIET voldoende."
+        },
+        "language": {
+            "title": "Taal",
+            "content": "Schrijf de titel, beschrijving en andere details in het Engels. Dit maakt het voor internationale gebruikers gemakkelijker om te begrijpen waar je inzending over gaat."
+        },
+        "special": {
+            "title": "Wat is er zo speciaal aan Themezer?",
+            "content": "Themezer pakt alles wat naar de website wordt ge\u00fcpload uit. Dit heeft een aantal voordelen:",
+            "themes": {
+                "content": "Door een NXTheme uit te pakken, kan de inhoud eenvoudig worden gewijzigd, zonder dat een nieuw NXTheme-bestand hoeft te worden ge\u00fcpload. Nadat je iets hebt gewijzigd op de bewerkingspagina van een thema of pakket (toegankelijk na het indienen), wordt het NXTheme opnieuw opgebouwd met de wijzigingen."
+            },
+            "layouts": {
+                "content": "Een ander groot voordeel is dat Themezer kan detecteren welke lay-out in een thema wordt gebruikt. Op deze manier kunnen, als Nintendo het startmenu bijwerkt met belangrijke wijzigingen, alle thema's in \u00e9\u00e9n keer worden bijgewerkt wanneer de lay-out die ze gebruiken wordt bijgewerkt. Mensen kunnen nog steeds thema's uploaden met een aangepaste lay-out, maar die thema's hebben deze voordelen niet."
+            }
+        },
+        "notDetect": {
+            "title": "Themezer detecteert de lay-out van mijn thema niet",
+            "content": "Als Themezer de lay-out niet herkent, moet je deze selecteren in de beschikbare dropdown. Zorg ervoor dat het exact dezelfde lay-out is, anders verlies je misschien enkele functies! Als je bijvoorbeeld een wijziging hebt aangebracht in de positie van een knop, wordt de wijziging ongedaan gemaakt als je de oorspronkelijke versie van de lay-out die je hebt gebruikt in de dropdown selecteert."
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "Ik ben niet de oorspronkelijke auteur van dit thema\/pakket",
+                "content": "Je mag deze helaas niet indienen, omdat deze aan jouw account wordt gekoppeld. Vraag de oorspronkelijke maker om het te uploaden."
+            },
+            "notAvailable": {
+                "title": "De lay-out die ik gebruik is niet beschikbaar op Themezer",
+                "content": "Overweeg het te uploaden naar de Layouts GitHub-repository (zie de 'Layout'-uploadpagina in het menu)."
+            },
+            "modified": {
+                "title": "Ik heb een kleine wijziging aangebracht in een bestaande lay-out",
+                "content": "Overweeg een aanpassingsoptie toe te voegen aan het origineel in de Layouts GitHub-repository (zie de pagina 'Lay-out'-uploadpagina in het menu). Als je dat niet wil, zorg er dan voor dat je de 'ID' van de layout json wijzigt naar bijvoorbeeld 'custom'. Als je dat niet doet, zal Themezer de originele lay-out geforceerd selecteren."
+            },
+            "notSubmit": {
+                "title": "Ik heb een aangepaste lay-out gemaakt die ik niet wil indienen bij de Layouts GitHub-repository",
+                "content": "Euhm... waarom niet? Anderen kunnen er gemakkelijker gebruik van maken en, belangrijker nog, het is gratis! Hoe dan ook, dien het thema gerust in."
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "Meer informatie",
+        "content": "Als je nog steeds op zoek bent naar meer informatie, neem dan gerust contact met ons op via een van de volgende manieren:",
+        "contact": "Onze contactpagina"
+    },
+    "themeCreators": {
+        "pageDescription": "Op deze pagina kunt u een NXTheme-overlay maken voor uw lay-out en aanpassingen.",
+        "pageHint": "Merk op dat deze online versie van de Theme Injector niet elke optie ondersteunt (het aanpassen van de iconen ontbreekt bijvoorbeeld). Download voor de volledige functionaliteit de {switchThemeInjector} Windows-toepassing."
+    },
+    "submitLayout": {
+        "pageDescription": "Je kunt lay-outs indienen bij de Layouts GitHub repository van Themezer.",
+        "joinDiscord": "sluit je aan bij onze Discord",
+        "instructions": "Zie de {readme} voor instructies. Als het te technisch is, aarzel dan niet om {joinDiscord} te contacteren en om hulp te vragen in {channel}. Een van de moderators doet het graag voor je!"
+    },
+    "helpTranslate": "Help vertalen"
+}
