@@ -274,7 +274,7 @@
 								"
                             ></v-textarea>
                             <span class="caption grey--text text--darken-1">
-								{{ $t("creators.profileColourNote") }}
+								{{ $t("creators.profileColorNote") }}
 							</span>
                             <v-text-field
                                 v-model="changed.profileColor"

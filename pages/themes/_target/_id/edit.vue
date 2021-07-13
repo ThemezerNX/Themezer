@@ -80,7 +80,7 @@
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                :label="`${$t('fields.themeDescription')}*`"
+                                :label="$t('fields.themeDescription')"
                                 maxlength="500"
                                 minlength="10"
                                 outlined

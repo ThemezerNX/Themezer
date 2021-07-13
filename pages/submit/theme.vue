@@ -420,7 +420,7 @@
                                                         rules.utf8_only
                                                       ]"
                                                     counter="500"
-                                                    :label="`${$t('fields.themeDescription')}*`"
+                                                    :label="$t('fields.themeDescription')"
                                                     maxlength="500"
                                                     minlength="10"
                                                     outlined
@@ -589,30 +589,6 @@ export default Vue.extend({
     data() {
         return {
             forceUpdate: 0,
-            types: [
-                {
-                    id: 'single',
-                    label: this.$t("submitTheme.uploadTypes.single")
-                },
-                {
-                    id: 'zip',
-                    label: this.$t("submitTheme.uploadTypes.zip", {max: "25 MB"})
-                },
-                {
-                    id: 'files',
-                    label: this.$t("submitTheme.uploadTypes.files")
-                }
-            ],
-            submitTypes: [
-                {
-                    id: 'pack',
-                    label: this.$tc("pack")
-                },
-                {
-                    id: 'separate',
-                    label: this.$t("submitTheme.separateThemes")
-                }
-            ],
             nsfwDialog: false,
             nsfwDialogThemeNr: null,
             submitInfoDialog: false,
@@ -635,7 +611,36 @@ export default Vue.extend({
             }
         }
     },
-
+    computed: {
+        types() {
+            return [
+                {
+                    id: 'single',
+                    label: this.$t("submitTheme.uploadTypes.single")
+                },
+                {
+                    id: 'zip',
+                    label: this.$t("submitTheme.uploadTypes.zip", {max: "25 MB"})
+                },
+                {
+                    id: 'files',
+                    label: this.$t("submitTheme.uploadTypes.files")
+                },
+            ];
+        } ,
+        submitTypes() {
+            return [
+                {
+                    id: 'pack',
+                    label: this.$tc("pack")
+                },
+                {
+                    id: 'separate',
+                    label: this.$t("submitTheme.separateThemes")
+                },
+            ];
+        },
+    },
     methods: {
         clearAll() {
             this.uploadSingleOrZip = null

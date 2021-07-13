@@ -113,7 +113,11 @@ export default Vue.extend({
     data() {
         return {
             activeBackground: 0,
-            backgrounds: [
+        };
+    },
+    computed: {
+        backgrounds() {
+            return [
                 {
                     clear: true,
                 },
@@ -168,8 +172,8 @@ export default Vue.extend({
                 {
                     upload: true,
                 },
-            ],
-        };
+            ];
+        },
     },
     watch: {
         activeBackground(selected: any) {

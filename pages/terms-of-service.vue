@@ -14,9 +14,13 @@ export default Vue.extend({
     mixins: [termsOfService],
     data() {
         return {
-            title: this.$t("termsOfService"),
             subtitle: null,
         };
+    },
+    computed: {
+        title() {
+            return this.$t("termsOfService");
+        }
     },
     head() {
         const metaTitle = this.title;

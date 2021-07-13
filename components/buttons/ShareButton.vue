@@ -22,7 +22,7 @@
                         </v-icon>
                     </v-btn>
                 </template>
-                <span>{{ tooltip || "Share" }}</span>
+                <span>{{ tooltip || $t("item.share") }}</span>
             </v-tooltip>
         </template>
         <span>{{ $t("copySuccess") }}</span>

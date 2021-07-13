@@ -150,7 +150,7 @@
                     >
                         {{ option.icon }}
                     </v-icon>
-                    {{ option.title }}
+                    {{ $t(`filter.${option.id}`) }}
                     <span v-show="currentSort === option.id" class="order">
                         <v-icon
                             :color="currentOrder === 'asc' ? '#1e1e1e' : 'white'"
@@ -210,22 +210,18 @@ export default Vue.extend({
         return {
             sortOptions: [
                 {
-                    title: this.$t("filter.downloads"),
                     id: "downloads",
                     icon: "mdi-download-outline",
                 },
                 {
-                    title: this.$t("filter.likes"),
                     id: "likes",
                     icon: "mdi-heart",
                 },
                 {
-                    title: this.$t("filter.updated"),
                     id: "updated",
                     icon: "mdi-calendar-edit",
                 },
                 {
-                    title: this.$t("filter.id"),
                     id: "id",
                     icon: "mdi-calendar-clock",
                 },

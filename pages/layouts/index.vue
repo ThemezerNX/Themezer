@@ -12,7 +12,7 @@ export default Vue.extend({
     data() {
         return {
             type: "layouts",
-            typeName: this.$tc("layout", 2)
+            typeName: "layout",
         }
     },
     head() {

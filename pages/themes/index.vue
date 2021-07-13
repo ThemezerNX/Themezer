@@ -12,7 +12,7 @@ export default Vue.extend({
     data() {
         return {
             type: "themes",
-            typeName: this.$tc("theme", 2)
+            typeName: "theme",
         }
     },
     head() {

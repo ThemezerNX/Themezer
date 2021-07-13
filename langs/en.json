@@ -19,6 +19,7 @@
         "reportThisTheme": "Report this Theme",
         "reportThisPack": "Report this Pack",
         "reportThisCreator": "Report this Creator",
+        "share": "Share",
         "shareTheme": "Check out this Theme '{name}' by {creator} on Themezer!",
         "sharePack": "Check out this Pack '{name}' by {creator} on Themezer!",
         "shareLayout": "Check out this Layout '{name}' by {creator} on Themezer!",
@@ -225,7 +226,7 @@
         "allapps": "All Apps",
         "settings": "Settings",
         "news": "News",
-        "playerselect": "Player Select"
+        "playerselect": "Player Selection"
     },
     "badges": {
         "certifiedBadge": "Automatically updated"

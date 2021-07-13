@@ -178,7 +178,7 @@
                     :to="`/${target.name}`"
                     style="background-color: transparent"
                 >
-                    {{ target.title }}
+                    {{ $tc(target.type, 2) }}
                     <v-icon
                         :style="`margin-top: ${target.margin_top};`"
                         right
@@ -475,7 +475,24 @@ export default {
             title: process.env.APP_TITLE,
             drawer: false,
             transparentNavbar: true,
-            items: [
+            acceptDialog: false,
+            step: 0,
+            tos,
+            accepts: true,
+            backupCode: null,
+            showBackupCode: false,
+            copyIdSuccess: false,
+            copyCodeSuccess: false,
+            countdownFinished: false,
+            backupCountdownFinished: false,
+            loading: {
+                accept: false,
+            },
+        };
+    },
+    computed: {
+        items() {
+            return [
                 {
                     divider: true,
                     inset: false,
@@ -574,8 +591,10 @@ export default {
                     title: this.$t("serviceStatus"),
                     href: "https://stats.uptimerobot.com/zx1G5uROYn",
                 },
-            ],
-            randomMenuItems: [
+            ];
+        },
+        randomMenuItems() {
+            return [
                 {
                     icon: "mdi-package-variant-closed",
                     title: this.$t("item.randomPack"),
@@ -591,23 +610,8 @@ export default {
                     title: this.$t("item.randomLayout"),
                     function: this.randomLayout,
                 },
-            ],
-            acceptDialog: false,
-            step: 0,
-            tos,
-            accepts: true,
-            backupCode: null,
-            showBackupCode: false,
-            copyIdSuccess: false,
-            copyCodeSuccess: false,
-            countdownFinished: false,
-            backupCountdownFinished: false,
-            loading: {
-                accept: false,
-            },
-        };
-    },
-    computed: {
+            ];
+        },
         navbarColor() {
             if (this.$route.path === "/" && this.transparentNavbar) {
                 return "transparent";

@@ -15,7 +15,7 @@
                 <h2
                     class="flex-grow-1 text-center display-1 font-weight-medium"
                 >
-                    {{ $parent.$data.typeName }}
+                    {{ this.$tc($parent.$data.typeName, 2) }}
                 </h2>
             </v-col>
             <v-hover

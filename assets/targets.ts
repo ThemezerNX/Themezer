@@ -40,23 +40,23 @@ export const targetIcon = (target: string) => menus.find((e) => e.target == targ
 
 export default [
     {
+        type: "pack",
         name: "packs",
-        title: "Packs",
         icon: "mdi-package-variant-closed",
         class: "d-sm-none",
         to: "/packs",
     },
     {
+        type: "theme",
         name: "themes",
-        title: "Themes",
         icon: "mdi-format-color-fill",
         class: "d-sm-none",
         margin_top: "4px",
         menus: [...menus],
     },
     {
+        type: "layout",
         name: "layouts",
-        title: "Layouts",
         icon: "mdi-code-json",
         class: "d-sm-none",
         menus: [...menus],

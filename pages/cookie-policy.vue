@@ -14,9 +14,13 @@ export default Vue.extend({
     mixins: [cookiePolicy],
     data() {
         return {
-            title: this.$t("cookiePolicy"),
             subtitle: null,
         };
+    },
+    computed: {
+        title() {
+            return this.$t("cookiePolicy");
+        }
     },
     head() {
         const metaTitle = this.title;

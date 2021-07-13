@@ -19,6 +19,7 @@
         "reportThisTheme": "Rapporteer dit Thema",
         "reportThisPack": "Rapporteer dit Pakket",
         "reportThisCreator": "Rapporteer deze Maker",
+        "share": "Delen",
         "shareTheme": "Bekijk dit Thema '{name}' van {creator} op Themezer!",
         "sharePack": "Bekijk dit Pakket '{name}' van {creator} op Themezer!",
         "shareLayout": "Bekijk deze Lay-out '{name}' van {creator} op Themezer!",
@@ -225,7 +226,7 @@
         "allapps": "Alle apps",
         "settings": "Instellingen",
         "news": "Nieuws",
-        "playerselect": "Speler Selecteren"
+        "playerselect": "Spelersselectie"
     },
     "badges": {
         "certifiedBadge": "Automatisch bijgewerkt"

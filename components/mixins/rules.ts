@@ -1,9 +1,9 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    data() {
-        return {
-            rules: {
+    computed: {
+        rules() {
+            return {
                 required: (value: any) => !!value || this.$t("rules.required"),
                 utf8_only: (input: any) => {
                     if (!input) return true;
@@ -48,8 +48,8 @@ export default Vue.extend({
                     !value ||
                     (!(this.$auth.user?.id === value)
                         ? true
-                        : this.$t("rules.notOwnCreatorId"))
-            },
-        };
+                        : this.$t("rules.notOwnCreatorId")),
+            };
+        },
     },
 });

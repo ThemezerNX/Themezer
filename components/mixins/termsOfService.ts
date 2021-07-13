@@ -1,9 +1,9 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    data() {
-        return {
-            termsOfService: [
+    computed: {
+        termsOfService() {
+            return [
                 {
                     content: "Last modified: February 2, 2021",
                 },
@@ -43,7 +43,7 @@ export default Vue.extend({
                         },
                     ],
                 },
-            ],
-        };
+            ];
+        },
     },
 });
