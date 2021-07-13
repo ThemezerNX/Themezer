@@ -22,7 +22,7 @@
         </h3>
         <v-dialog v-model="show" max-width="400">
             <v-card>
-                <v-card-title class="headline">
+                <v-card-title class="headline text-capitalize">
                     {{ $t("whatIs.nxthemeInstaller") }}
                 </v-card-title>
 

@@ -1,6 +1,6 @@
 <template>
     <v-sheet class="mx-auto" style="background: unset;">
-        <h2 class="px-2">
+        <h2 class="px-2 text-capitalize">
             {{ $t("layouts.tryBackgrounds") }}
         </h2>
         <v-slide-group

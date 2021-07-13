@@ -32,7 +32,7 @@
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>
+                        <v-list-item-title class="text-capitalize text-wrap">
                             {{ $t("login") }} / {{ $t("register") }}
                         </v-list-item-title>
                     </v-list-item-content>
@@ -53,7 +53,7 @@
                             </v-icon>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title>
+                            <v-list-item-title class="text-wrap">
                                 {{ $auth.user.username }}
                             </v-list-item-title>
                         </v-list-item-content>
@@ -64,13 +64,13 @@
                         dense
                         router
                     >
-                        <v-list-item-title>{{ $t("myProfile") }}</v-list-item-title>
+                        <v-list-item-title class="text-capitalize text-wrap">{{ $t("myProfile") }}</v-list-item-title>
                         <v-list-item-icon>
                             <v-icon>mdi-account</v-icon>
                         </v-list-item-icon>
                     </v-list-item>
                     <v-list-item class="ml-11 pl-5" dense @click="logout()">
-                        <v-list-item-title>{{ $t("logout") }}</v-list-item-title>
+                        <v-list-item-title class="text-capitalize text-wrap">{{ $t("logout") }}</v-list-item-title>
                         <v-list-item-icon>
                             <v-icon>mdi-logout</v-icon>
                         </v-list-item-icon>
@@ -107,7 +107,7 @@
                                 <v-icon v-text="item.icon"/>
                             </v-list-item-action>
                             <v-list-item-content>
-                                <v-list-item-title v-text="item.title"/>
+                                <v-list-item-title class="text-capitalize text-wrap" v-text="item.title"/>
                             </v-list-item-content>
                         </template>
                         <template v-for="type in item.menus">
@@ -119,7 +119,7 @@
                                 router
                             >
                                 <v-list-item-title
-                                    class="text-capitalize"
+                                    class="text-capitalize text-wrap"
                                     v-text="type.title"
                                 />
                                 <v-list-item-icon v-if="type.icon">
@@ -143,7 +143,7 @@
                             <v-icon v-text="item.icon"/>
                         </v-list-item-action>
                         <v-list-item-content>
-                            <v-list-item-title v-text="item.title"/>
+                            <v-list-item-title class="text-capitalize text-wrap" v-text="item.title"/>
                         </v-list-item-content>
                     </v-list-item>
                 </template>
@@ -212,7 +212,7 @@
                                 <v-icon v-text="item.icon"/>
                             </v-list-item-action>
                             <v-list-item-content>
-                                <v-list-item-title v-text="item.title"/>
+                                <v-list-item-title class="text-capitalize text-wrap" v-text="item.title"/>
                             </v-list-item-content>
                         </v-list-item>
                     </v-list>

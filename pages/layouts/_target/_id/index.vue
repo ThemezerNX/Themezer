@@ -107,7 +107,7 @@
                         </div>
                         <div
                             v-if="!!layout.baselayout"
-                            class="body-2"
+                            class="font-weight-medium body-2"
                         >
                             <i18n path="item.dlCount">
                                 <template v-slot:value>
