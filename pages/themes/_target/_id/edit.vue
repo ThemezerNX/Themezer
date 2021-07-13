@@ -86,6 +86,11 @@
                                 outlined
                                 prepend-icon="mdi-pencil-outline"
                                 rounded
+                                @change="
+									changed.details.description === ''
+										? (changed.details.description = null)
+										: null
+								"
                             ></v-text-field>
                             <v-autocomplete
                                 v-model="changed.layout.simple_id"
@@ -133,7 +138,7 @@
                                 "
                             ></v-autocomplete>
                             <v-combobox
-                                v-model="changed.categories"
+                                v-model="changed.actualCategories"
                                 :items="
                                   categories && categories.length > 0
                                     ? categories.filter((c) => c !== 'NSFW')
@@ -262,21 +267,7 @@ export default Vue.extend({
             },
             // required to make props reactive
             changed: {
-                details: {
-                    name: null,
-                    description: null,
-                    version: null,
-                },
                 nsfw: null,
-                pack: {
-                    id: null,
-                },
-                layout: {
-                    id: null,
-                    pieces: null,
-                },
-                pieces: null,
-                categories: null,
             },
 
             deleteQuery: deleteTheme,
@@ -302,7 +293,7 @@ export default Vue.extend({
                         : "") !==
                     this.changed.layout.id) ||
                 (!this.theme.layout?.id && this.changed.layout.id) ||
-                JSON.stringify(this.theme.categories) !== JSON.stringify(this.changed.categories) ||
+                JSON.stringify(this.theme.actualCategories) !== JSON.stringify(this.changed.actualCategories) ||
                 !!this.uploadedScreenshot
             );
         },
@@ -348,7 +339,7 @@ export default Vue.extend({
                         this.$apollo.queries.packList.skip = false;
 
                     data.theme.nsfw = !!data.theme.categories?.includes("NSFW");
-                    data.theme.categories = data.theme.categories.filter(
+                    data.theme.actualCategories = data.theme.categories.filter(
                         (c) => c !== "NSFW",
                     );
 
@@ -381,7 +372,7 @@ export default Vue.extend({
         },
         discard() {
             if (this.theme.categories?.includes("NSFW")) this.theme.nsfw = true;
-            this.theme.categories = this.theme.categories.filter(
+            this.theme.actualCategories = this.theme.categories.filter(
                 (c) => c !== "NSFW",
             );
             this.changed = JSON.parse(JSON.stringify(this.theme));
@@ -417,7 +408,7 @@ export default Vue.extend({
                         pack_id: this.changed.pack.id,
                         description: this.changed.details.description,
                         version: this.changed.details.version,
-                        categories: this.changed.categories,
+                        categories: this.changed.actualCategories,
                         nsfw: this.changed.nsfw,
                     },
                 })

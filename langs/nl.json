@@ -19,11 +19,11 @@
         "reportThisTheme": "Rapporteer dit Thema",
         "reportThisPack": "Rapporteer dit Pakket",
         "reportThisCreator": "Rapporteer deze Maker",
-        "share": "Delen",
         "shareTheme": "Bekijk dit Thema '{name}' van {creator} op Themezer!",
         "sharePack": "Bekijk dit Pakket '{name}' van {creator} op Themezer!",
         "shareLayout": "Bekijk deze Lay-out '{name}' van {creator} op Themezer!",
         "shareCreator": "Bekijk deze Maker '{creator}' op Themezer!",
+        "share": "Delen",
         "item": "item",
         "author": "Door {creator}",
         "commonAuthor": "Auteur: {value}",
@@ -37,7 +37,7 @@
         "layout": "Lay-out: {value}",
         "customizations": "Personalisaties: {value}",
         "download": "Download",
-        "edit": "Bewerk",
+        "edit": "Bewerken",
         "customize": "Personaliseren",
         "delete": "Verwijderen",
         "deleteConfirm": "Weet je het absoluut zeker?",
@@ -76,7 +76,7 @@
         "name": "naam",
         "description": "beschrijving",
         "version": "versie",
-        "screenshot": "SCHERMAFBEELDING ({filetype}, {size})",
+        "screenshot": "SCREENSHOT ({filetype}, {size})",
         "category": "categorie",
         "categories": "Categorie\u00ebn",
         "categoriesHint": "Druk op {key_} voor een nieuwe categorie",
@@ -130,7 +130,7 @@
         "moreDetailedInstructions": "Gedetailleerde instructies (en)",
         "step1": "1. Lay-out Uploaden",
         "step1Description": "Upload hier je lay-out. Je krijgt twee NXThemes: \u00e9\u00e9n met een zwarte achtergrond en \u00e9\u00e9n met een witte (zorg ervoor dat de site meerdere bestanden kan downloaden). Doe voor elk het volgende: installeer het op je Switch en maak een screenshot. Stel het systeemthema in op wit (!) en zorg ervoor dat de cursor op dezelfde positie staat bij het maken van de screenshots. Breng de screenshots daarna over naar je pc. Heb je dat gedaan? Ga naar stap 2.",
-        "step2": "2. Schermafbeeldingen Uploaden",
+        "step2": "2. Screenshots Uploaden",
         "step2Description": "Hier upload je de twee screenshots die je bij stap 1 hebt gemaakt. Upload ze naar hun eigen veld hieronder.",
         "step3": "3. Resultaat",
         "generatedImage": "Gegenereerde overlay-png"
@@ -223,7 +223,7 @@
         "homemenu": "Startmenu",
         "lockscreen": "Vergrendelscherm",
         "userpage": "Gebruikerspagina",
-        "allapps": "Alle apps",
+        "allapps": "Alle Apps",
         "settings": "Instellingen",
         "news": "Nieuws",
         "playerselect": "Spelersselectie"
@@ -263,7 +263,7 @@
     "packs": {
         "pageDescription": "Ontdek geweldige themapakketten om menu's een vergelijkbaar uiterlijk te geven!",
         "packContents": "Thema's in Dit Pakket",
-        "clickAnyToEdit": "Klik op een om te bewerken"
+        "clickAnyToEdit": "Klik op een item om te bewerken"
     },
     "themes": {
         "pageDescription": "Thema's op Themezer",
@@ -333,7 +333,7 @@
     },
     "submitInfo": {
         "screenshots": {
-            "title": "Schermafbeeldingen",
+            "title": "Screenshots",
             "content": "Je bent VERPLICHT om voor elk thema een SCREENSHOT te uploaden. Alleen de achtergrondafbeelding is NIET voldoende."
         },
         "language": {
