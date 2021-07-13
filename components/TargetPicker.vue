@@ -13,7 +13,7 @@
                     {{ $t("target.choose") }}
                 </h1>
                 <h2
-                    class="flex-grow-1 text-center display-1 font-weight-medium text-capitalize"
+                    class="flex-grow-1 text-center display-1 font-weight-medium"
                 >
                     {{ $parent.$data.typeName }}
                 </h2>

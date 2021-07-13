@@ -57,7 +57,7 @@
                                       ? 'mb-0'
                                       : 'my-1 mx-3')
                                 "
-                                class="title text-capitalize"
+                                class="title"
                                 v-text="theme.details.name"
                             />
                             <v-card-subtitle
@@ -68,7 +68,7 @@
                             </v-card-subtitle>
                             <v-card-subtitle
                                 v-if="showProps.includes('target')"
-                                class="target text-capitalize"
+                                class="target"
                             >
                                 {{ toNiceWebName(theme.target) }}
                             </v-card-subtitle>
