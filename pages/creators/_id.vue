@@ -97,15 +97,24 @@
                     </v-col>
                     <v-col class="text-center" cols="12">
                         <ButtonDivider :hide-dividers="true">
-                            <v-btn
-                                v-if="mayModerate"
-                                color="secondary"
-                                rounded
-                                @click="editDialog = true"
-                            >
-                                {{ $t("item.editProfile") }}
-                                <v-icon right>mdi-pencil</v-icon>
-                            </v-btn>
+                            <v-tooltip top v-if="mayModerate">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                        v-bind="attrs"
+                                        v-on="on"
+                                        append
+                                        class="button"
+                                        color="blue darken-1"
+                                        dark
+                                        rounded
+                                        @click="editDialog = true"
+                                    >
+                                        {{ $t('item.edit') }}
+                                        <v-icon right>{{ "mdi-shield-edit" }}</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>{{ $t('item.editProfile') }}</span>
+                            </v-tooltip>
                             <LikeButton
                                 :id="creator.id"
                                 :count="
@@ -409,6 +418,7 @@ export default Vue.extend({
         Markdown: () => import("@/components/Markdown.vue"),
         ItemGrid: () => import("@/components/ItemGrid.vue"),
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
     },
     mixins: [rules],
     data() {
