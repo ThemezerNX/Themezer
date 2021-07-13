@@ -48,8 +48,6 @@
     "commonLayout": "Common Layout | Common Layouts",
     "layoutOption": "Layout Option | Layout Options",
     "tool": "Tool | Tools",
-    "white": "white",
-    "black": "black",
     "onlineThemeCreator": "Online Theme Creator",
     "themezerHBApp": "Themezer HB App",
     "overlayCreator": "Overlay Creator",
@@ -271,7 +269,7 @@
         "description": "Back when you created your Themezer account, you were informed of a backup code you could use if you ever lost access to your Discord account. You can use it here to regain access to your Themezer account. The Discord account you are currently logged in with will be linked to your previous Themezer data. If you have layouts on GitHub, make sure to update them with your new creator ID!",
         "previousId": "Previous Creator ID",
         "confirmRestore": "Restore",
-        "success": "Restored successfully!",
+        "success": "Account restored successfully!",
         "error": "Creator ID or Backup Code invalid!"
     },
     "termsOfServices": {
@@ -281,12 +279,12 @@
         },
         "copyright": {
             "title": "Copyright",
-            "content": "Content uploaded to Themezer must respect copyright. If you believe content on themezer infringes copyright and you are the copyright holder or are authorized to act on the copyright owner's behalf, contact one of our moderators:",
+            "content": "Content uploaded to Themezer must respect copyright. If you believe content on Themezer infringes copyright and you are the copyright holder or are authorized to act on the copyright owner's behalf, contact one of our moderators:",
             "contact": "Contact a moderator"
         },
         "abuse": {
             "title": "Abuse",
-            "content": "Any attempt to exploit, spam or cause harm in any other way will result in immediate termination of your account. Bugs and issues should be reported via the Contact page or GitHub repository."
+            "content": "Any attempt to exploit, spam or cause harm in any other way will result in immediate termination of your account. Bugs and other issues should be reported via the Contact page or GitHub repository."
         },
         "nsfw": {
             "title": "NSFW",
@@ -310,7 +308,7 @@
             "title": "What's special about Themezer?",
             "content": "Themezer extracts everything that is uploaded to the website. This has a few benefits:",
             "themes": {
-                "content": "By extracting an NXTheme, the contents can be modified easily, without the need to upload a new NXTheme file. After you change something on a theme's or pack's edit page (accessible after submitting), the theme is rebuilt with the changes."
+                "content": "By extracting an NXTheme, the contents can be modified easily, without the need to upload a new NXTheme file. After you change something on a theme's or pack's edit page (accessible after submitting), the NXTheme is rebuilt with the changes."
             },
             "layouts": {
                 "content": "Another great thing is that Themezer can detect what layout is used in a theme. This way, if Nintendo updates the home menu with breaking changes, all themes can be updated at once when the layout they use is updated. People can still upload themes with a custom layout, but those themes won't have these benefits."
@@ -334,8 +332,8 @@
                 "content": "Consider adding a customization option to the original in the Layouts GitHub repository (see the 'Layout' submit page in the menu). If you don't want to, make sure to change the 'ID' of the layout json to something like 'custom'. If you don't, Themezer will force-select the original layout."
             },
             "notSubmit": {
-                "title": "I made a custom layout that I don't want to submit to the Layouts repository",
-                "content": "Uhm... why not? Others can make use of it more easily and, most important, it's free! Anyway, feel free to submit it."
+                "title": "I made a custom layout that I don't want to submit to the Layouts GitHub-repository",
+                "content": "Uhm... why not? Others can make use of it more easily and, most important, it's free! Anyway, feel free to submit the theme."
             }
         }
     },
@@ -350,20 +348,21 @@
     },
     "overlayCreators": {
         "pageDescription": "Create a transparent overlay for your layout and customizations.",
-        "pageUse": "Create a transparent overlay for your layout and customizations. You may use the tool here, or manually create an overlay if you can. Either way, an overlay is required for layouts on Themezer.",
+        "pageUse": "You may use the tool here, or manually create an overlay if you can. Either way, an overlay is required for layouts on Themezer.",
         "moreDetailedInstructions": "More detailed instructions (en)",
         "step1": "1. Upload Layout",
         "step1Description": "Upload your layout here. You will get two NXThemes: one with a black background and one with a white one (be sure to allow the site to download multiple files). For each do the following: install it on your Switch and take a screenshot. Set the system theme to white(!) and have the cursor in the same position when taking the screenshots. Transfer the screenshots to your PC afterwards. Have you done that? Go to step 2.",
         "step2": "2. Upload Screenshots",
         "step2Description": "Here you will upload the two screenshots you took at step 1. Upload them to their own field below.",
-        "screenshotWithBackground": "Screenshot with white background",
+        "screenshotWithWhiteBackground": "Screenshot with white background",
+        "screenshotWithBlackBackground": "Screenshot with black background",
         "step3": "3. Result",
         "generatedImage": "Generated overlay png"
     },
     "submitLayout": {
         "pageDescription": "You can submit layouts to the Themezer Layouts GitHub repository.",
         "joinDiscord": "join our Discord",
-        "instructions": "You can submit layouts to the Themezer Layouts GitHub repository. See the {readme} for instructions. If it's too technical, don't hesitate to {joinDiscord} and ask for help in {channel}. One of the moderators will happily do it for you!"
+        "instructions": "See the {readme} for instructions. If it's too technical, don't hesitate to {joinDiscord} and ask for help in {channel}. One of the moderators will happily do it for you!"
     },
     "submitTheme": {
         "pageDescription": "You can submit themes here for listing on Themezer.",

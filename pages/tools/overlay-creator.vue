@@ -9,7 +9,7 @@
                 {{ $tc("overlayCreator", 1) }}
             </h1>
             <div class="subtitle-1 box_text">
-                {{ $t("overlayCreators.pageUse") }}
+                {{ $t("overlayCreators.pageDescription") }} {{ $t("overlayCreators.pageUse") }}
             </div>
             <h2 class="box_text">
                 {{ $t("overlayCreators.step1") }}
@@ -91,7 +91,7 @@
                 >
                     <v-img
                         :src="screenshotWhiteUrl"
-                        :alt="$t('overlayCreators.screenshotWithBackground', {color: $t('white')})"
+                        :alt="$t('overlayCreators.screenshotWithWhiteBackground')"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -109,7 +109,7 @@
                         filled
                         hide-details
                         label="*"
-                        :label="`${$t('overlayCreators.screenshotWithBackground', {color: $t('white')})}*`"
+                        :label="`${$t('overlayCreators.screenshotWithWhiteBackground')}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotWhiteChange"
@@ -126,7 +126,7 @@
                 >
                     <v-img
                         :src="screenshotBlackUrl"
-                        :alt="$t('overlayCreators.screenshotWithBackground', {color: $t('black')})"
+                        :alt="$t('overlayCreators.screenshotWithBlackBackground')"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -143,7 +143,7 @@
                         accept="image/jpeg"
                         filled
                         hide-details
-                        :label="`${$t('overlayCreators.screenshotWithBackground', {color: $t('black')})}*`"
+                        :label="`${$t('overlayCreators.screenshotWithBlackBackground')}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotBlackChange"
