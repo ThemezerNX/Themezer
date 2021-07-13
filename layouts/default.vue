@@ -33,7 +33,7 @@
 
                     <v-list-item-content>
                         <v-list-item-title>
-                            Z {{ $t("login") }} / {{ $t("register") }}
+                            {{ $t("login") }} / {{ $t("register") }}
                         </v-list-item-title>
                     </v-list-item-content>
                     <v-icon>mdi-login</v-icon>
