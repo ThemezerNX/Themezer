@@ -1,0 +1,391 @@
+{
+    "createNxthemes": "Cr\u00e9er des NXThemes",
+    "createOverlay": "Cr\u00e9er une Surcouche",
+    "item": {
+        "randomPack": "Pack Al\u00e9atoire",
+        "randomTheme": "Th\u00e8me Al\u00e9atoire",
+        "randomLayout": "Mise en page Al\u00e9atoire",
+        "downloadTheme": "T\u00e9l\u00e9charger le Th\u00e8me",
+        "downloadPack": "T\u00e9l\u00e9charger le Pack",
+        "downloadLayout": "T\u00e9l\u00e9charger la Mise en page",
+        "downloadOverlay": "T\u00e9l\u00e9charger la Surcouche",
+        "downloadCommonLayout": "T\u00e9l\u00e9charger la Mise en page Ordinaire",
+        "editTheme": "\u00c9diter le Th\u00e8me",
+        "editPack": "\u00c9diter le Pack",
+        "editProfile": "\u00c9diter le Profil",
+        "customizeLayout": "Personnaliser la Mise en page",
+        "deleteTheme": "Supprimer ce Th\u00e8me",
+        "deletePack": "Supprimer ce Pack",
+        "reportThisTheme": "Signaler ce Th\u00e8me",
+        "reportThisPack": "Signaler ce Pack",
+        "reportThisCreator": "Signaler ce Cr\u00e9ateur",
+        "shareTheme": "Consultez ce Th\u00e8me '{name}' par {creator} sur Themezer !",
+        "sharePack": "Consultez ce Pack '{name}' par {creator} sur Themezer !",
+        "shareLayout": "Consultez cette Mise en page '{name}' par {creator} sur Themezer !",
+        "shareCreator": "Consultez ce Cr\u00e9ateur '{creator}' sur Themezer !",
+        "share": "Partager",
+        "item": "\u00e9l\u00e9ment",
+        "author": "Par {creator}",
+        "commonAuthor": "Auteur : {value}",
+        "details": "D\u00e9tails",
+        "id": "ID : {value}",
+        "version": "Version : {value}",
+        "lastUpdated": "Derni\u00e8re mise \u00e0 jour : {value}",
+        "dlCount": "T\u00e9l\u00e9chargements : {value}",
+        "targetFile": "Fichier cible : {value}",
+        "background": "Fond d'\u00e9cran : {value}",
+        "layout": "Mise en page : {value}",
+        "customizations": "Personnalisations : {value}",
+        "download": "T\u00e9l\u00e9charger",
+        "edit": "\u00c9diter",
+        "customize": "Personnaliser",
+        "delete": "Supprimer",
+        "deleteConfirm": "\u00cates-vous absolument s\u00fbr ?",
+        "deleteDescription": "Toutes les donn\u00e9es relatives \u00e0 cet \u00e9l\u00e9ment seront supprim\u00e9es des serveurs de Themezer.",
+        "deleteSuccess": "\u00c9l\u00e9ment supprim\u00e9 avec succ\u00e8s !",
+        "report": "Signaler",
+        "reportConfirm": "\u00cates-vous s\u00fbr de vouloir signaler ceci ?",
+        "reportDescription": "Si vous pensez que cette page n'a pas sa place sur Themezer parce qu'elle pr\u00e9sente un contenu inappropri\u00e9 ou pour d'autres raisons, veuillez nous faire savoir pourquoi :",
+        "reportLoginRequired": "Connectez-vous pour signaler du contenu inappropri\u00e9",
+        "like": "J'aime \u00e7a !",
+        "unlike": "Je n'aime plus \u00e7a"
+    },
+    "filter": {
+        "id": "Ajout\u00e9",
+        "clear": "Tout effacer",
+        "search": "Rechercher",
+        "sortBy": "Trier par",
+        "filters": "Filtres",
+        "downloads": "T\u00e9l\u00e9chargements",
+        "likes": "Likes",
+        "updated": "Mis \u00e0 jour",
+        "madeByMe": "Fait par moi",
+        "nsfw": "Afficher l'NSFW"
+    },
+    "fields": {
+        "themeName": "Nom du th\u00e8me",
+        "packName": "Nom du pack",
+        "themeDescription": "Description du th\u00e8me",
+        "packDescription": "Description du pack",
+        "themeVersion": "Version du th\u00e8me",
+        "packVersion": "Version du pack",
+        "zipFile": "Fichier ZIP",
+        "nxthemeFile": "Fichier NXTheme",
+        "hex": "HEX",
+        "id": "ID",
+        "name": "nom",
+        "description": "description",
+        "version": "version",
+        "screenshot": "SCREENSHOT ({filetype}, {size})",
+        "category": "cat\u00e9gorie",
+        "categories": "Cat\u00e9gories",
+        "categoriesHint": "Appuyez sur {key_} pour ajouter une nouvelle cat\u00e9gorie",
+        "sharedCategories": "Cat\u00e9gories partag\u00e9es (cela remplacera l'ensemble actuel)",
+        "manualLayout": "S\u00e9lection manuelle de la mise en page (cela effacera toute modification apport\u00e9e au JSON)"
+    },
+    "creators": {
+        "latestPacksByCreator": "Derniers Packs par ce cr\u00e9ateur",
+        "latestThemesByCreator": "Derniers Th\u00e8mes par ce cr\u00e9ateur",
+        "latestLayoutsByCreator": "Derni\u00e8res Mises en page par ce cr\u00e9ateur",
+        "pageDescription": "La page de {creator} sur Themezer. Consultez les Packs, les Th\u00e8mes et les Mises en page cr\u00e9\u00e9s par {creator}.",
+        "profile": "Profil",
+        "noBiography": "Ce cr\u00e9ateur n'a encore rien \u00e9crit \u00e0 son sujet...",
+        "blockUser": "Bloquer l'envoi pour cet utilisateur",
+        "customName": "Nom d'affichage personnalis\u00e9",
+        "bio": "Bio (supporte Markdown et HTML)",
+        "profileColor": "Couleur du profil",
+        "profileColorNote": "La couleur du profil aura des r\u00e9percussions sur la barre de navigation et le menu lat\u00e9ral.",
+        "banner": "Banni\u00e8re (recommand\u00e9 : {size})",
+        "bannerClear": "Retirer la banni\u00e8re actuelle",
+        "logo": "Logo (remplace l'avatar de Discord)",
+        "logoClear": "Retirer le logo actuel"
+    },
+    "submitTheme": {
+        "separateThemes": "Th\u00e8mes S\u00e9par\u00e9s",
+        "packSubmitSuccess": "Pack transmis avec succ\u00e8s !",
+        "themesSubmitSuccess": "Th\u00e8me transmis avec succ\u00e8s !",
+        "pageDescription": "Vous pouvez envoyer des th\u00e8mes ici pour qu'ils soient r\u00e9pertori\u00e9s sur Themezer.",
+        "pageUse": "Cette page vous permet de soumettre les th\u00e8mes que vous avez cr\u00e9\u00e9s. Si vous \u00eates novice en la mati\u00e8re, je vous conseille vivement de {readThis}.",
+        "uploadTypes": {
+            "single": "Un seul NXTheme",
+            "zip": "Un ZIP avec des NXThemes (pack\/en vrac, max {max})",
+            "files": "Une image"
+        },
+        "authorDisclaimer": "ce sera remplac\u00e9 par VOTRE nom d'utilisateur",
+        "commonLayoutStatus": "{key_} : {status}",
+        "manuallySelected": "S\u00e9lectionn\u00e9 manuellement",
+        "nsfwConfirm": "Ce th\u00e8me sera marqu\u00e9 comme NSFW, voulez-vous continuer ?",
+        "step1": "1. Transf\u00e9rer le th\u00e8me\/pack",
+        "packHint": "Assurez-vous que les NXThemes se trouvent \u00e0 la racine du ZIP, et non dans un dossier !",
+        "webInjector": "Vous pouvez cr\u00e9er des NXThemes en utilisant le {onlineThemeCreator}. Vous pouvez soumettre le(s) NXTheme(s) cr\u00e9\u00e9(s) ici.",
+        "step2": "2. D\u00e9tails du Pack",
+        "step3": "3. D\u00e9tails du Th\u00e8me",
+        "screenshotHint": "Vous devez envoyer une capture d'\u00e9cran (\/!\\ pas simplement l'image de fond). Pour ce faire, cliquez sur l'image de r\u00e9f\u00e9rence."
+    },
+    "overlayCreators": {
+        "screenshotWithWhiteBackground": "Captures d'\u00e9cran avec fond blanc",
+        "screenshotWithBlackBackground": "Captures d'\u00e9cran avec fond noir",
+        "pageDescription": "Cr\u00e9ez une surcouche transparente pour votre mise en page et vos personnalisations.",
+        "pageUse": "Vous pouvez utiliser l'outil ci-dessous, ou cr\u00e9er manuellement une surcouche si vous le pouvez. Dans tous les cas, une surcouche est n\u00e9cessaire pour les mises en page sur Themezer.",
+        "moreDetailedInstructions": "Instructions plus d\u00e9taill\u00e9es (en)",
+        "step1": "1. Envoyer la mise en page",
+        "step1Description": "Envoyez votre mise en page ici. Vous obtiendrez deux NXThemes : un avec un fond noir et un avec un fond blanc (assurez-vous d'autoriser le site \u00e0 t\u00e9l\u00e9charger plusieurs fichiers). Pour chacun d'eux, faites ce qui suit : installez-les sur votre Switch et faites une capture d'\u00e9cran. R\u00e9glez le th\u00e8me du syst\u00e8me sur blanc (!) et placez le curseur dans la m\u00eame position lorsque vous faites les captures d'\u00e9cran. Transf\u00e9rez-les ensuite sur votre PC. Passez \u00e0 l'\u00e9tape 2 une fois ceci fait.",
+        "step2": "2. Envoyer des captures d'\u00e9cran",
+        "step2Description": "Vous allez pouvoir transf\u00e9rer ici les deux captures d'\u00e9cran que vous avez prises \u00e0 l'\u00e9tape 1. Transf\u00e9rez-les dans leur propre champ ci-dessous.",
+        "step3": "3. R\u00e9sultat",
+        "generatedImage": "Surcouche g\u00e9n\u00e9r\u00e9e en png"
+    },
+    "lang": "Fran\u00e7ais",
+    "welcome": "Bienvenue sur Themezer !",
+    "welcomeBack": "Content de te revoir {user} !",
+    "themezerIntro": "Themezer est un site pour partager des th\u00e8mes et des mises en page pour Nintendo Switch",
+    "cookieBanner": "Ce site web utilise les cookies pour vous garantir une exp\u00e9rience optimale. En poursuivant l'utilisation de ce site web, vous acceptez que nous utilisions des cookies.",
+    "apiOffline": "Le serveur semble \u00eatre hors-ligne. Merci de patienter et de r\u00e9essayer plus tard. Si le probl\u00e8me persiste, n'h\u00e9sitez pas \u00e0 nous contacter.",
+    "error": {
+        "uhOh": "Oh oh !",
+        "goBack": "Retourner en arri\u00e8re",
+        "pageNotFound": "404 Non trouv\u00e9e",
+        "otherError": "Une erreur est survenue"
+    },
+    "roles": {
+        "system": "Syst\u00e8me",
+        "admin": "Administrateur",
+        "verified": "V\u00e9rifi\u00e9"
+    },
+    "login": "Connection",
+    "register": "Inscription",
+    "logout": "D\u00e9connexion",
+    "logoutSuccess": "Vous avez \u00e9t\u00e9 d\u00e9connect\u00e9 !",
+    "loginSuccess": "Vous \u00eates maintenant connect\u00e9 !",
+    "myProfile": "Mon profil",
+    "browse": "Rechercher",
+    "upload": "Envoyer",
+    "tools": "Outils",
+    "guides": "Guides",
+    "about": "\u00c0 propos",
+    "contact": "Nous contacter",
+    "status": "Status",
+    "layoutSubmissions": "Envois de Mise en page",
+    "themePackSubmissions": "Envois de Th\u00e8me\/Pack",
+    "termsOfService": "Conditions d'Utilisation",
+    "cookiePolicy": "Politique des Cookies",
+    "privacyPolicy": "Politique de Confidentialit\u00e9",
+    "serviceStatus": "\u00c9tats du Service",
+    "pack": "Pack | Packs",
+    "theme": "Th\u00e8me | Th\u00e8mes",
+    "nxtheme": "NXTheme | NXThemes",
+    "zip": "ZIP | ZIPs",
+    "layout": "Mise en page | Mise en pages",
+    "creator": "Cr\u00e9ateur | Cr\u00e9ateurs",
+    "overlay": "Surcouche | Surcouches",
+    "overlayPng": "Surcouche PNG | Surcouches PNG",
+    "image": "Image | Images",
+    "faq": "FAQ | FAQs",
+    "commonLayout": "Mise en page Commune | Mises en page Communes",
+    "layoutOption": "Option de Mise en page | Options de Mise en page",
+    "tool": "Outil | Outils",
+    "onlineThemeCreator": "Cr\u00e9ateur de Th\u00e8me en Ligne",
+    "themezerHBApp": "Application HB Themezer",
+    "overlayCreator": "Cr\u00e9ateur de Surcouche",
+    "themeCreator": "Cr\u00e9ateur de Th\u00e8me",
+    "guideInstallThemes": "Installation de Th\u00e8mes",
+    "guideCreateThemes": "Cr\u00e9ation de Th\u00e8mes\/Polices",
+    "guideCreateLayouts": "Cr\u00e9ation de Mises en page",
+    "registerSuccessIntro": "Vous pouvez enfin envoyer vos th\u00e8mes ! Cependant, il y a quelques r\u00e8gles \u00e0 respecter sur Themezer :",
+    "accept": "Accepter",
+    "backupCode": "Code de R\u00e9cup\u00e9ration",
+    "backupCodeExplanation": "Afin de vous assurer que vous conservez l'acc\u00e8s \u00e0 votre compte Themezer si quelque chose arrive \u00e0 votre compte Discord, voici votre ID de cr\u00e9ateur et un code de r\u00e9cup\u00e9ration que vous pourrez utiliser afin de restaurer votre compte et de connecter un nouveau compte Discord. Assurez-vous de conserver ce code de r\u00e9cup\u00e9ration dans un endroit s\u00fbr ! L'ID du cr\u00e9ateur peut \u00e9galement \u00eatre trouv\u00e9 dans l'url de la page du cr\u00e9ateur de votre ancien compte Themezer. Pour restaurer votre compte, visitez la page '\u00c0 propos'.",
+    "backupCodeViewOnceWarning": "CE SERA LA SEULE FOIS QUE VOUS POURREZ VOIR CE CODE DE R\u00c9CUP\u00c9RATION !",
+    "copy": "Copier",
+    "copySuccess": "Copi\u00e9 !",
+    "permalink": "Lien permanent",
+    "dismiss": "Ignorer",
+    "previous": "Pr\u00e9c\u00e9dent",
+    "finish": "Terminer",
+    "cancel": "Annuler",
+    "discard": "Abandonner",
+    "noCancel": "Non, annuler",
+    "yesContinue": "Oui, continuer",
+    "readThis": "Lisez ceci",
+    "save": "Sauvegarder",
+    "clickHere": "Cliquez ici",
+    "loginRequired": "Vous devez d'abord \u00eatre connect\u00e9 !",
+    "unsavedChanged": "Voulez-vous vraiment quitter ? Vous n'avez pas sauvegard\u00e9 les modifications !",
+    "saveSuccess": "F\u00e9licitations ! Les modifications peuvent prendre un certain temps \u00e0 s'appliquer.",
+    "close": "Fermer",
+    "customLayout": "Personnaliser",
+    "resultCount": "{count} r\u00e9sultat | {count} r\u00e9sultats",
+    "noResults": "Aucun r\u00e9sultat trouv\u00e9",
+    "moreItems": "Plus d'\u00e9l\u00e9ments",
+    "target": {
+        "menu": "Menu :",
+        "choose": "S\u00e9lectionnez un Menu",
+        "homemenu": "Menu d'Accueil",
+        "lockscreen": "\u00c9cran de Verrouillage",
+        "userpage": "Page d'Utilisateur",
+        "allapps": "Toutes les Applications",
+        "settings": "Param\u00e8tres",
+        "news": "Actualit\u00e9s",
+        "playerselect": "S\u00e9lection de l'Utilisateur"
+    },
+    "badges": {
+        "certifiedBadge": "Mis \u00e0 jour automatiquement"
+    },
+    "whatIs": {
+        "this": "Qu'est-ce que c'est ?",
+        "pack": "Qu'est-ce qu'un pack ?",
+        "packDescription": "Les packs sont des ZIP contenant plusieurs th\u00e8mes cr\u00e9\u00e9s par le m\u00eame utilisateur. Il peut contenir n'importe quel th\u00e8me, m\u00eame plusieurs pour le m\u00eame menu.",
+        "nxthemeInstaller": "Qu'est-ce qu'NXThemes Installer ?",
+        "nxthemeInstallerDescription": "{nxthemesInstaller} est une application maison qui fonctionne sur la switch d'elle-m\u00eame et qui peut \u00eatre utilis\u00e9e pour installer et g\u00e9rer les th\u00e8mes. Les ID affich\u00e9s sur Themezer peuvent \u00eatre utilis\u00e9s pour installer des th\u00e8mes et des packs directement. L'ID {id} peut \u00eatre saisi dans l'onglet 'Download themes' de l'application (assurez-vous que Themezer est d\u00e9fini comme prestataire). Cet ID peut \u00e9galement \u00eatre utilis\u00e9 dans le champ de recherche de {themezerNX}.",
+        "commonLayout": "Quelle est la mise en page commune ?",
+        "commonLayoutDescription": "La mise en page commune est le pied de page que l'on voit et qui est partag\u00e9 avec le menu d'accueil, toutes les applications, les param\u00e8tres et les actualit\u00e9s. La version standard contient le contr\u00f4leur actuellement actif sur la gauche, la ligne de s\u00e9paration et les actions des boutons sur la droite. Certaines mises en page comprennent une mise en page commune permettant de masquer la ligne ou d'apporter d'autres modifications mineures. La modification de la disposition commune pour '{playerSelect}' et '{userPage}' n'est pas prise en charge par Switch Theme Injector. Il est toujours recommand\u00e9 de t\u00e9l\u00e9charger et d'utiliser \u00e9galement cette mise en page !",
+        "overlayPng": "Qu'est-ce qu'une surcouche png ?",
+        "overlayPngDescription": "Le png de surcouche est l'image utilis\u00e9e sur ce site pour pr\u00e9visualiser les mises en page. Vous pouvez \u00e9galement l'utiliser pour cr\u00e9er la \"capture d'\u00e9cran\" dont vous avez besoin lorsque vous envoyez un th\u00e8me sur Themezer."
+    },
+    "rules": {
+        "required": "Requis",
+        "utf8Only": "Seuls les caract\u00e8res UTF-8 sont autoris\u00e9s",
+        "characterLength": "Le champ '{field}' doit avoir une longueur comprise entre {min} et {max} caract\u00e8res.",
+        "characterLengthMin": "Le champ '{field}' doit comporter {count} caract\u00e8res ou plus.",
+        "categoryMin": "Au moins {count} cat\u00e9gorie(s) est requise",
+        "categoryMax": "Un maximum de {count} cat\u00e9gories est autoris\u00e9.",
+        "invalid": "{field} non valide",
+        "maxImageSize": "La taille de l'image doit \u00eatre inf\u00e9rieure \u00e0 {max} !",
+        "notOwnCreatorId": "Il s'agit de votre identifiant actuel"
+    },
+    "home": {
+        "pageTitle": "Accueil",
+        "recentAdditions": "Ajouts r\u00e9cents",
+        "newPacks": "Les derniers Packs",
+        "newThemes": "Les derniers Th\u00e8mes",
+        "updatedLayouts": "Les Mises en page Actualis\u00e9es"
+    },
+    "packs": {
+        "pageDescription": "D\u00e9couvrez des packs de th\u00e8mes incroyables pour donner aux menus un aspect similaire !",
+        "packContents": "Les Th\u00e8mes dans ce Pack",
+        "clickAnyToEdit": "Cliquez sur l'un des \u00e9l\u00e9ments pour le modifier"
+    },
+    "themes": {
+        "pageDescription": "Th\u00e8mes sur Themezer",
+        "targetPageDescription": "Tous les th\u00e8mes '{menu}' sur Themezer",
+        "pack": "Ce th\u00e8me fait partie du pack suivant :"
+    },
+    "layouts": {
+        "pageDescription": "D\u00e9couvrez des mises en page uniques pour cr\u00e9er des menus \u00e0 votre go\u00fbt !",
+        "targetPageDescription": "Toutes '{menu}' les mises en page sur Themezer",
+        "tryBackgrounds": "Essayez ces fonds d'\u00e9cran",
+        "themesContents": "Tous les th\u00e8mes r\u00e9alis\u00e9s avec cette mise en page",
+        "backgrounds": {
+            "botwForest": "For\u00eat de Breath of the Wild",
+            "skyrimMountains": "Montagnes de Skyrim",
+            "acod": "Assassin's Creed Odyssey",
+            "fc5": "Far Cry 5",
+            "botwArt": "Breath of the Wild Art",
+            "acnh": "Animal Crossing New Horizons",
+            "sea": "La mer",
+            "spiderman": "Spider-Man : New Generation",
+            "pewdiepie": "PewDiePie",
+            "franxx": "Darling in the Franxx",
+            "nier": "Nier Automata",
+            "p5": "Persona 5 Ryuji"
+        }
+    },
+    "abouts": {
+        "sourceCode": "Le code source du projet se trouve sur le site {themezerNxGithub}.",
+        "certifiedBadge": "Que signifie le badge {image} ? Cela signifie que le NXTheme que vous t\u00e9l\u00e9chargez est mis \u00e0 jour automatiquement lorsque des modifications sont apport\u00e9es \u00e0 la mise en page ou au th\u00e8me lui-m\u00eame.",
+        "notAffiliated": "Themezer n'est en aucun cas affili\u00e9 \u00e0 Nintendo."
+    },
+    "contacts": {
+        "discord": "Pour tout contact, veuillez rejoindre le {themezerNxDiscord}",
+        "issue": "Vous avez trouv\u00e9 un bug ou avez une suggestion ? Cr\u00e9ez un ticket sur {themezerNxGithub} ou rejoignez le serveur Discord."
+    },
+    "restore": {
+        "prompt": "Vous avez besoin de restaurer votre compte Themezer ?",
+        "title": "Restaurer le compte",
+        "description": "Lorsque vous avez cr\u00e9\u00e9 votre compte Themezer, vous avez \u00e9t\u00e9 inform\u00e9 de l'existence d'un code de r\u00e9cup\u00e9ration que vous pouviez utiliser si vous perdiez l'acc\u00e8s \u00e0 votre compte Discord. Vous pouvez l'utiliser ici pour r\u00e9cup\u00e9rer l'acc\u00e8s \u00e0 votre compte Themezer. Le compte Discord avec lequel vous \u00eates actuellement connect\u00e9 sera li\u00e9 \u00e0 vos anciennes donn\u00e9es Themezer. Si vous avez des mises en page sur GitHub, assurez-vous de les mettre \u00e0 jour avec votre nouvel identifiant de cr\u00e9ateur !",
+        "previousId": "Votre ancien identifiant de cr\u00e9ateur",
+        "confirmRestore": "Restaurer",
+        "success": "Compte restaur\u00e9 avec succ\u00e8s !",
+        "error": "L'identifiant du cr\u00e9ateur ou le code de r\u00e9cup\u00e9ration n'est pas valide !"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "Propri\u00e9t\u00e9",
+            "content": "Le cr\u00e9ateur conserve la propri\u00e9t\u00e9 des fichiers envoy\u00e9s sur Themezer. Les fichiers r\u00e9sideront sur les serveurs de Themezer, sous la responsabilit\u00e9 de chaque utilisateur, et resteront sous la responsabilit\u00e9 du cr\u00e9ateur."
+        },
+        "copyright": {
+            "title": "Droits d'auteur",
+            "content": "Le contenu d\u00e9pos\u00e9 sur Themezer doit respecter les droits d'auteur. Si vous pensez qu'un contenu sur Themezer enfreint les droits d'auteur et que vous \u00eates le d\u00e9tenteur du droit d'auteur ou que vous \u00eates autoris\u00e9 \u00e0 agir au nom du d\u00e9tenteur du droit d'auteur, contactez l'un de nos mod\u00e9rateurs :",
+            "contact": "Contacter un mod\u00e9rateur"
+        },
+        "abuse": {
+            "title": "Abus",
+            "content": "Toute tentative d'exploitation, de spam ou de nuisance de toute autre mani\u00e8re entra\u00eenera la r\u00e9siliation imm\u00e9diate de votre compte. Les bugs et autres probl\u00e8mes doivent \u00eatre signal\u00e9s via la page Contact ou le d\u00e9p\u00f4t GitHub."
+        },
+        "nsfw": {
+            "title": "NSFW",
+            "content": "Les contenus NSFW doivent utiliser la case NSFW pr\u00e9vue \u00e0 cet effet. Tout ce qui est destin\u00e9 \u00e0 provoquer une excitation sexuelle est consid\u00e9r\u00e9 comme NSFW. La nudit\u00e9 r\u00e9elle et anim\u00e9e est autoris\u00e9e mais aucun \"acte sexuel\" (tout ce qui est pornographique) ne doit \u00eatre montr\u00e9 ou sous-entendu. Aucune repr\u00e9sentation de personnes de moins de 18 ans (r\u00e9elle ou anim\u00e9e) est autoris\u00e9e. Cela inclut les contenus \"Lolita\" o\u00f9 le personnage a visiblement moins de 18 ans, quel que soit son \u00e2ge d\u00e9clar\u00e9, ainsi que les personnages dont on sait qu'ils ont moins de 18 ans."
+        },
+        "accountTermination": {
+            "title": "R\u00e9siliation du compte",
+            "content": "Themezer se r\u00e9serve le droit de r\u00e9silier le compte d'un utilisateur si cela s'av\u00e8re n\u00e9cessaire, m\u00eame sans explication."
+        }
+    },
+    "submitInfo": {
+        "screenshots": {
+            "title": "Captures d'\u00e9cran",
+            "content": "Vous \u00eates tenu de fournir une capture d'\u00e9cran pour CHAQUE th\u00e8me. Une image d'arri\u00e8re-plan n'est PAS suffisante."
+        },
+        "language": {
+            "title": "Langue",
+            "content": "Veuillez r\u00e9diger le titre, la description et les autres informations en anglais. Il sera ainsi plus facile pour les utilisateurs internationaux de comprendre de quoi parle votre pr\u00e9sentation."
+        },
+        "special": {
+            "title": "Quelle est la particularit\u00e9 de Themezer ?",
+            "content": "Themezer extrait tout ce qui est d\u00e9pos\u00e9 sur le site Web. Cela pr\u00e9sente quelques avantages :",
+            "themes": {
+                "content": "En extrayant un NXTheme, son contenu peut \u00eatre modifi\u00e9 facilement, sans qu'il soit n\u00e9cessaire de renvoyer un nouveau fichier. Apr\u00e8s avoir modifi\u00e9 quelque chose sur la page d'\u00e9dition d'un th\u00e8me ou d'un pack (accessible apr\u00e8s son envoi), le NXTheme est reconstruit avec les modifications."
+            },
+            "layouts": {
+                "content": "Un autre avantage est que Themezer peut d\u00e9tecter la mise en page utilis\u00e9e dans un th\u00e8me. Ainsi, si Nintendo met \u00e0 jour le menu d'accueil avec des modifications importantes, tous les th\u00e8mes peuvent \u00eatre mis \u00e0 jour en m\u00eame temps lorsque la mise en page qu'ils utilisent est mise \u00e0 jour. Les gens peuvent toujours envoyer des th\u00e8mes avec une mise en page personnalis\u00e9e, mais ces th\u00e8mes ne b\u00e9n\u00e9ficieront pas de ces avantages."
+            }
+        },
+        "notDetect": {
+            "title": "Themezer ne d\u00e9tecte pas la mise en page de mon th\u00e8me",
+            "content": "Si Themezer ne reconna\u00eet pas la mise en page, vous devez la s\u00e9lectionner dans la liste d\u00e9roulante disponible. Assurez-vous qu'il s'agit exactement de la m\u00eame mise en page, sinon vous risquez de perdre certaines fonctionnalit\u00e9s ! Par exemple, si vous avez modifi\u00e9 la position d'un bouton, la modification sera annul\u00e9e si vous s\u00e9lectionnez la version originale de la mise en page que vous avez utilis\u00e9e dans la liste d\u00e9roulante."
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "Je ne suis pas l'auteur original de ce th\u00e8me\/pack.",
+                "content": "Malheureusement, vous ne pouvez pas le publier, car il sera li\u00e9 \u00e0 votre compte. Demandez au cr\u00e9ateur original de le soumettre."
+            },
+            "notAvailable": {
+                "title": "La mise en page que j'utilise n'est pas disponible sur Themezer",
+                "content": "Pensez \u00e0 le d\u00e9poser dans le d\u00e9p\u00f4t GitHub Layouts (voir la page de d\u00e9p\u00f4t \"Layout\" sur le menu)."
+            },
+            "modified": {
+                "title": "J'ai apport\u00e9 des modifications mineures \u00e0 une autre mise en page.",
+                "content": "Envisagez d'ajouter une option de personnalisation \u00e0 l'original dans le d\u00e9p\u00f4t GitHub Layouts (voir la page de d\u00e9p\u00f4t \"Layout\" sur le menu). Si vous ne voulez pas le faire, assurez-vous de changer l'ID de la mise en page json en quelque chose comme \"custom\". Si vous ne le faites pas, Themezer forcera la s\u00e9lection de la disposition originale."
+            },
+            "notSubmit": {
+                "title": "J'ai cr\u00e9\u00e9 une mise en page personnalis\u00e9e que je ne veux pas envoyer sur le d\u00e9p\u00f4t Layouts du GitHub de Themezer.",
+                "content": "Euh... pourquoi pas ? D'autres peuvent l'utiliser plus facilement et, surtout, c'est gratuit ! Quoi qu'il en soit, n'h\u00e9sitez pas \u00e0 proposer le th\u00e8me."
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "Plus d'informations",
+        "content": "Si vous \u00eates toujours \u00e0 la recherche de plus d'informations, contactez-nous par l'un des moyens suivants :",
+        "contact": "Notre page de contact"
+    },
+    "themeCreators": {
+        "pageDescription": "Sur cette page vous pouvez cr\u00e9er un overlay NXTheme pour vos layouts et vos customisations.",
+        "pageHint": "Notez que cette version en ligne de l'injecteur de th\u00e8mes ne prend pas en charge toutes les options (par exemple, les ic\u00f4nes personnalis\u00e9es sont absentes). Pour avoir toutes les fonctionnalit\u00e9s, t\u00e9l\u00e9chargez l'application {switchThemeInjector} Windows."
+    },
+    "submitLayout": {
+        "pageDescription": "Vous pouvez soumettre des mises en page sur le d\u00e9p\u00f4t  Layouts de Themezer sur GitHub.",
+        "joinDiscord": "rejoindre notre Discord",
+        "instructions": "Consultez le {readme} pour obtenir des instructions. Si c'est trop technique, n'h\u00e9sitez pas \u00e0 {joinDiscord} et \u00e0 demander de l'aide dans {channel}. L'un des mod\u00e9rateurs se fera un plaisir de le faire pour vous !"
+    },
+    "helpTranslate": "Aidez-nous \u00e0 traduire"
+}
