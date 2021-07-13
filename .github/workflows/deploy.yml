@@ -23,5 +23,6 @@ jobs:
             git reset --hard
             git pull
             yarn
+            rm -rfd /home/themezer/Themezer/.nuxt
             yarn run build
             pm2 reload /home/themezer/ecosystem.config.js --only Themezer
