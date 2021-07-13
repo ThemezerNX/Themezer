@@ -221,7 +221,7 @@
     },
     "layouts": {
         "pageDescription": "Discover unique layouts to style menus to your hearts content!",
-        "targetPageDescription": "All layouts for '{menu}' on Themezer",
+        "targetPageDescription": "All '{menu}' layouts on Themezer",
         "tryBackgrounds": "Try These Backgrounds",
         "themesContents": "All themes made with this layout",
         "backgrounds": {
