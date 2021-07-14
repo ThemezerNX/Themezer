@@ -1,5 +1,5 @@
 <template>
-    <v-container class="pa-0 content" fluid style="height: 100%;">
+    <v-container ref="top" class="pa-0 content" fluid style="height: 100%;">
         <card-collage :height-px="`${collageViewWindowHeight}vh`">
             <template #center>
                 <v-img
@@ -19,7 +19,7 @@
                 </div>
             </template>
             <template #bottom>
-                <v-btn class="collage-bottom-button" rounded large color="transparent" @click="scrollDown()">
+                <v-btn class="collage-bottom-button" rounded large color="transparent" @click="scrollDown(false)">
                     <h3>{{ $t("home.recentAdditions") }}</h3>
                     <v-icon right dark>
                         mdi-arrow-down
@@ -102,20 +102,45 @@ export default Vue.extend({
         ItemGrid: ItemGrid,
         CardCollage: CardCollage,
     },
+    mounted() {
+        if (this.$route.hash && this.$route.hash.includes("#additions")) {
+            this.scrollDown(true);
+        }
+    },
     data() {
         return {
             error: null,
             collageViewWindowHeight: 100,
             scrollOptions: {
-                duration: 600,
+                duration: 500,
                 offset: 0,
                 easing: "easeInOutQuad",
             },
         };
     },
+    computed: {
+        hash() {
+            return this.$route.hash;
+        },
+    },
+    watch: {
+        hash(newHash) {
+            if (newHash.includes("#additions")) {
+                this.scrollDown(false);
+            } else {
+                this.scrollUp(false);
+            }
+        },
+    },
     methods: {
-        scrollDown() {
-            this.$vuetify.goTo(this.$refs.additions, this.scrollOptions);
+        scrollDown(instant) {
+            this.scroll(this.$refs.additions, instant);
+        },
+        scrollUp(instant) {
+            this.scroll(this.$refs.top, instant);
+        },
+        scroll(element, instant) {
+            this.$vuetify.goTo(element, instant ? {duration: 0} : this.scrollOptions);
         },
     },
     apollo: {

@@ -170,7 +170,18 @@
                     {{ title }}
                 </v-toolbar-title>
             </NuxtLink>
-            <v-toolbar-items class="d-none d-sm-flex">
+            <v-toolbar-items class="d-none d-md-flex">
+                <v-btn
+                    class="d-none d-lg-flex"
+                    :depressed="true"
+                    to="/#additions"
+                    style="background-color: transparent"
+                >
+                    {{ recentAdditionsButton.title }}
+                    <v-icon right>
+                        {{ recentAdditionsButton.icon }}
+                    </v-icon>
+                </v-btn>
                 <v-btn
                     v-for="target in targets"
                     :key="target.name"
@@ -491,12 +502,21 @@ export default {
         };
     },
     computed: {
+        recentAdditionsButton(){
+            return {
+                icon: "mdi-plus-circle-multiple-outline",
+                title: this.$t("home.recentAdditions"),
+                class: "d-lg-none",
+                to: "/#additions",
+            }
+        },
         items() {
             return [
                 {
                     divider: true,
                     inset: false,
                 },
+                this.recentAdditionsButton,
                 {
                     header: this.$t("browse") + ":",
                     class: "d-flex d-sm-none",
