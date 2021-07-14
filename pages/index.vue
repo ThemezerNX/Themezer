@@ -103,9 +103,11 @@ export default Vue.extend({
         CardCollage: CardCollage,
     },
     mounted() {
-        if (this.$route.hash && this.$route.hash.includes("#additions")) {
-            this.scrollDown(true);
-        }
+        this.$nextTick(() => {
+            if (this.$route.hash && this.$route.hash.includes("#additions")) {
+                this.scrollDown(true);
+            }
+        });
     },
     data() {
         return {
