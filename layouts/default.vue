@@ -107,7 +107,7 @@
                                 <v-icon v-text="item.icon"/>
                             </v-list-item-action>
                             <v-list-item-content>
-                                <v-list-item-title class="text-wrap" v-text="item.title"/>
+                                <v-list-item-title class="text-wrap" v-text="item.title || $tc(item.langKey, 2)"/>
                             </v-list-item-content>
                         </template>
                         <template v-for="type in item.menus">
@@ -120,7 +120,7 @@
                             >
                                 <v-list-item-title
                                     class="text-wrap"
-                                    v-text="type.title"
+                                    v-text="type.title || $t('target.' + type.langKey)"
                                 />
                                 <v-list-item-icon v-if="type.icon">
                                     <v-icon v-text="type.icon"/>
@@ -143,7 +143,7 @@
                             <v-icon v-text="item.icon"/>
                         </v-list-item-action>
                         <v-list-item-content>
-                            <v-list-item-title class="text-wrap" v-text="item.title"/>
+                            <v-list-item-title class="text-wrap" v-text="item.title || $tc(item.langKey, 2)"/>
                         </v-list-item-content>
                     </v-list-item>
                 </template>
@@ -178,7 +178,7 @@
                     :to="`/${target.name}`"
                     style="background-color: transparent"
                 >
-                    {{ $tc(target.type, 2) }}
+                    {{ $tc(target.langKey, 2) }}
                     <v-icon
                         :style="`margin-top: ${target.margin_top};`"
                         right
