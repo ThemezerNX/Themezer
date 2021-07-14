@@ -575,7 +575,7 @@ export default {
                     icon: "mdi-book-open-variant",
                     title: this.$t("guideCreateLayouts"),
                     href:
-                        "https://themezernx.github.io/LayoutDocs/",
+                        "https://layoutdocs.themezer.net/",
                 },
                 {
                     divider: true,
