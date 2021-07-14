@@ -85,7 +85,7 @@ export default Vue.extend({
         dynamicStyleInnerWrapper() {
             const newScale = 1920 / this.windowSize.x;
             return {
-                scale: newScale > 1 ? newScale : 1,
+                transform: `scale(${newScale > 1 ? newScale : 1})`,
             };
         },
     },
