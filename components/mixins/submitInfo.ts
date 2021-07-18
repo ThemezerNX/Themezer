@@ -1,9 +1,9 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    computed() {
-        return {
-            submitInfo: [
+    computed: {
+        submitInfo() {
+            return [
                 {
                     title: this.$t("submitInfo.screenshots.title"),
                     content: this.$t("submitInfo.screenshots.content"),
@@ -51,7 +51,7 @@ export default Vue.extend({
                         },
                     ],
                 },
-            ],
-        };
+            ];
+        },
     },
 });

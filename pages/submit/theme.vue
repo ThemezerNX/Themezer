@@ -562,13 +562,13 @@
 <script>
 import Vue from 'vue'
 import rules from '@/components/mixins/rules'
+import submitInfo from "~/components/mixins/submitInfo";
 import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
 import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
 import targetParser from '@/components/mixins/targetParser'
 import urlParser from '@/components/mixins/urlParser'
 import {submitThemes, uploadSingleOrZip} from '@/graphql/SubmitTheme.gql'
 import optionsString from '@/components/mixins/optionsString'
-import submitInfo from '~/components/mixins/submitInfo'
 import TextCard from "~/components/TextCard.vue";
 
 export default Vue.extend({
