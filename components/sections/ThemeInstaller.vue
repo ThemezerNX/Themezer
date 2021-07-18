@@ -1,7 +1,7 @@
 <template>
     <div style="text-align: center">
         <h3 style="position: relative;">
-            NXTheme Installer
+            NXThemes Installer
             <v-tooltip v-model="showTooltip" top>
                 <template v-slot:activator="{ on }">
                     <v-btn
@@ -33,7 +33,7 @@
                                 href="https://github.com/exelix11/SwitchThemeInjector/"
                                 rel="noopener"
                                 target="_blank"
-                            >NXTheme Installer</a>
+                            >NXThemes Installer</a>
                         </template>
                         <template v-slot:id>
                             <span
