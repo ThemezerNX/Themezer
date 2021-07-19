@@ -5,7 +5,7 @@
                 {{ $t("layoutSubmissions") }}
             </h1>
             <div class="subtitle-1 box_text">
-                {{ $t("this.pageDescription") }}
+                {{ $t("submitLayout.pageDescription") }}
                 <i18n path="submitLayout.instructions">
                     <template v-slot:readme>
                         <a
