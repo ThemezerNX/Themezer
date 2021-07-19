@@ -1,0 +1,391 @@
+{
+    "createNxthemes": "Utw\u00f3rz NXThemes",
+    "createOverlay": "Utw\u00f3rz Nak\u0142adk\u0119",
+    "item": {
+        "randomPack": "Losowa Paczka",
+        "randomTheme": "Losowy Motyw",
+        "randomLayout": "Losowy Uk\u0142ad",
+        "downloadTheme": "Pobierz Motyw",
+        "downloadPack": "Pobierz Paczk\u0119",
+        "downloadLayout": "Pobierz Uk\u0142ad",
+        "downloadOverlay": "Pobierz Nak\u0142adk\u0119",
+        "downloadCommonLayout": "Pobierz Uk\u0142ad Generalny",
+        "editTheme": "Edytuj Motyw",
+        "editPack": "Edytuj Paczk\u0119",
+        "editProfile": "Edytuj Profil",
+        "customizeLayout": "Dostosuj Uk\u0142ad",
+        "deleteTheme": "Usu\u0144 ten Motyw",
+        "deletePack": "Usu\u0144 t\u0119 Paczk\u0119",
+        "reportThisTheme": "Zg\u0142o\u015b ten Motyw",
+        "reportThisPack": "Zg\u0142o\u015b t\u0119 Paczk\u0119",
+        "reportThisCreator": "Zg\u0142o\u015b tego Tw\u00f3rc\u0119",
+        "shareTheme": "Sprawd\u017a Motyw '{name}' autorstwa {creator} na Themezer!",
+        "sharePack": "Sprawd\u017a Paczk\u0119 '{name}' autorstwa {creator} na Themezer!",
+        "shareLayout": "Sprawd\u017a Uk\u0142ad '{name}' autorstwa {creator} na Themezer!",
+        "shareCreator": "Sprawd\u017a Tw\u00f3rc\u0119 '{creator}' na Themezer!",
+        "share": "Udost\u0119pnij",
+        "item": "pozycja",
+        "author": "Austorstwa {creator}",
+        "commonAuthor": "Autor: {value}",
+        "details": "Szczeg\u00f3\u0142y",
+        "id": "ID: {value}",
+        "version": "Wersja: {value}",
+        "lastUpdated": "Ostatnio aktualizowane: {value}",
+        "dlCount": "Pobra\u0144: {value}",
+        "targetFile": "Plik docelowy: {value}",
+        "background": "T\u0142o: {value}",
+        "layout": "Uk\u0142ad: {value}",
+        "customizations": "Dostosowania: {value}",
+        "download": "Pobierz",
+        "edit": "Edytuj",
+        "customize": "Dostosuj",
+        "delete": "Usu\u0144",
+        "deleteConfirm": "Czy jeste\u015b ca\u0142kowicie pewien?",
+        "deleteDescription": "Wszystkie dane zwi\u0105zane z t\u0105 pozycj\u0105 zostan\u0105 usuni\u0119te z serwer\u00f3w Themezer.",
+        "deleteSuccess": "Pozycja usuni\u0119ta pomy\u015blnie!",
+        "report": "Zg\u0142o\u015b",
+        "reportConfirm": "Czy na pewno chcesz dokona\u0107 zg\u0142oszenia?",
+        "reportDescription": "Je\u015bli uwa\u017casz, \u017ce ta strona nie powinna znajdowa\u0107 si\u0119 na Themezer, poniewa\u017c zawiera nieodpowiednie tre\u015bci lub z innych powod\u00f3w, prosz\u0119 daj nam zna\u0107 dlaczego:",
+        "reportLoginRequired": "Zaloguj si\u0119, aby zg\u0142osi\u0107 nieodpowiednie tre\u015bci",
+        "like": "Lubi\u0119 to!",
+        "unlike": "Usu\u0144 polubienie"
+    },
+    "filter": {
+        "id": "Dodano",
+        "clear": "Wyczy\u015b\u0107 wszystko",
+        "search": "Szukaj",
+        "sortBy": "Sortuj poprzez",
+        "filters": "Filtry",
+        "downloads": "Pobra\u0144",
+        "likes": "Polubienia",
+        "updated": "Zaktualizowano",
+        "madeByMe": "Wykonane przeze mnie",
+        "nsfw": "Pokazuj tre\u015bci NSFW"
+    },
+    "fields": {
+        "themeName": "Nazwa Motywu",
+        "packName": "Nazwa Paczki",
+        "themeDescription": "Opis Motywu",
+        "packDescription": "Opis Paczki",
+        "themeVersion": "Wersja Motywu",
+        "packVersion": "Wersja Paczki",
+        "zipFile": "Plik ZIP",
+        "nxthemeFile": "plik NXTheme",
+        "hex": "HEX",
+        "id": "ID",
+        "name": "nazwa",
+        "description": "opis",
+        "version": "wersja",
+        "screenshot": "ZRZUT EKRANU ({filetype}, {size})",
+        "category": "kategoria",
+        "categories": "Kategorie",
+        "categoriesHint": "Naci\u015bnij {key_}, aby wybra\u0107 now\u0105 kategori\u0119",
+        "sharedCategories": "Kategorie wsp\u00f3lne (zast\u0105pi to obecny zestaw)",
+        "manualLayout": "R\u0119czny wyb\u00f3r uk\u0142adu (wyczy\u015bci wszystkie zmiany dokonane w JSON)"
+    },
+    "creators": {
+        "latestPacksByCreator": "Ostatnie Paczki tego tw\u00f3rcy",
+        "latestThemesByCreator": "Ostatnie Motywy tego tw\u00f3rcy",
+        "latestLayoutsByCreator": "Ostatnie Uk\u0142ady tego tw\u00f3rcy",
+        "pageDescription": "Strona tw\u00f3rcy {creator} na Themezer. Przegl\u0105daj paczki, motywy i uk\u0142ady stworzone przez {creator}.",
+        "profile": "Profil",
+        "noBiography": "Ten tw\u00f3rca nie napisa\u0142 jeszcze nic o sobie...",
+        "blockUser": "Zablokuj u\u017cytkownikowi mo\u017cliwo\u015b\u0107 wysy\u0142ania",
+        "customName": "Niestandardowa nazwa wy\u015bwietlana",
+        "bio": "Biogram (wspiera Markdown i HTML)",
+        "profileColor": "Kolor profilu",
+        "profileColorNote": "Kolor profilu b\u0119dzie mia\u0142 wp\u0142yw na pasek nawigacyjny i menu boczne",
+        "banner": "Banner (rekomendowany: {size})",
+        "bannerClear": "Usu\u0144 aktualny banner",
+        "logo": "Logo (zast\u0119puje awatar Discorda)",
+        "logoClear": "Usu\u0144 aktualne logo"
+    },
+    "submitTheme": {
+        "separateThemes": "Odr\u0119bne Motywy",
+        "packSubmitSuccess": "Paczka zosta\u0142a wys\u0142ana pomy\u015blnie!",
+        "themesSubmitSuccess": "Motywy zosta\u0142y wys\u0142ane pomy\u015blnie!",
+        "pageDescription": "Motywy do umieszczenia na Themezer mo\u017cesz przes\u0142a\u0107 tutaj.",
+        "pageUse": "Za po\u015brednictwem tej strony mo\u017cesz przes\u0142a\u0107 stworzone przez siebie motywy. Je\u015bli jeste\u015b w tym nowy, zach\u0119camy ci\u0119 do sprawdzenia tego poradnika {readThis}.",
+        "uploadTypes": {
+            "single": "Pojedynczy NXTheme",
+            "zip": "ZIP z plikami NXThemes (paczka\/samotny, maksymalnie {max})",
+            "files": "Zdj\u0119cie"
+        },
+        "authorDisclaimer": "zostanie to zast\u0105pione TWOJ\u0104 nazw\u0105 u\u017cytkownika",
+        "commonLayoutStatus": "{key_}: {status}",
+        "manuallySelected": "Wyb\u00f3r r\u0119czny",
+        "nsfwConfirm": "Ten temat b\u0119dzie oznaczony jako NSFW, kontynuowa\u0107?",
+        "step1": "1. Prze\u015blij paczk\u0119\/motyw",
+        "packHint": "Upewnij si\u0119, \u017ce NXThemes s\u0105 w g\u0142\u00f3wnym katalogu ZIP, a nie w podfolderze!",
+        "webInjector": "Mo\u017cesz tworzy\u0107 NXThemes u\u017cywaj\u0105c {onlineThemeCreator}. Utworzone NXTheme(y) mo\u017cesz przes\u0142a\u0107 tutaj.",
+        "step2": "2. Szczeg\u00f3\u0142y Paczki",
+        "step3": "3. Szczeg\u00f3\u0142y Motywu",
+        "screenshotHint": "Musisz przes\u0142a\u0107 ZRZUT EKRANU (NIE tylko obraz t\u0142a). Zr\u00f3b to klikaj\u0105c na zast\u0119pczy obrazek."
+    },
+    "overlayCreators": {
+        "screenshotWithWhiteBackground": "Zrzut ekranu na bia\u0142ym tle",
+        "screenshotWithBlackBackground": "Zrzut ekranu na czarnym tle",
+        "pageDescription": "Utw\u00f3rz prze\u017aroczyst\u0105 nak\u0142adk\u0119 dla  dla twojego uk\u0142adu.",
+        "pageUse": "Mo\u017cesz u\u017cy\u0107 narz\u0119dzia tutaj, lub r\u0119cznie stworzy\u0107 nak\u0142adk\u0119, je\u015bli potrafisz. W ka\u017cdym razie nak\u0142adka jest wymagana dla uk\u0142ad\u00f3w na Themezer.",
+        "moreDetailedInstructions": "Bardziej szczeg\u00f3\u0142owe instrukcje (en)",
+        "step1": "1. Prze\u015blij uk\u0142ad",
+        "step1Description": "Prze\u015blij sw\u00f3j uk\u0142ad tutaj. Otrzymasz dwa NXThemes: jeden z czarnym t\u0142em i jeden z bia\u0142ym (upewnij si\u0119, \u017ce zezwoli\u0142e\u015b stronie na pobieranie wielu plik\u00f3w). Dla ka\u017cdego z nich wykonaj nast\u0119puj\u0105ce czynno\u015bci: zainstaluj go na swoim Switchu i zr\u00f3b zrzut ekranu. Ustaw motyw systemowy na bia\u0142y(!) i trzymaj kursor w tej samej pozycji podczas robienia zrzut\u00f3w ekranu. Nast\u0119pnie prze\u015blij zrzuty ekranu na komputer. Ju\u017c to zrobi\u0142e\u015b? Przejd\u017a do kroku 2.",
+        "step2": "2. Prze\u015blij zrzuty ekranu",
+        "step2Description": "Tutaj prze\u015blesz dwa zrzuty ekranu, kt\u00f3re zrobi\u0142e\u015b w kroku 1. Przypisz je do odpowiedniego pola poni\u017cej.",
+        "step3": "3. Wynik",
+        "generatedImage": "Wygenerowana nak\u0142adka png"
+    },
+    "lang": "Polski",
+    "welcome": "Witamy w Theemezer!",
+    "welcomeBack": "Witamy ponownie, {user}!",
+    "themezerIntro": "Theemezer jest stron\u0105 umo\u017cliwiaj\u0105c\u0105 udost\u0119pnianie motyw\u00f3w dla konsoli Nintendo Switch.",
+    "cookieBanner": "Ta strona u\u017cywa plik\u00f3w cookie. Aby kontynuowa\u0107, zaakceptuj ciasteczka.",
+    "apiOffline": "Serwer wydaje si\u0119 by\u0107 offline. Spr\u00f3buj ponownie p\u00f3\u017aniej. Je\u015bli problem si\u0119 powt\u00f3rzy, skontaktuj si\u0119 z nami.",
+    "error": {
+        "uhOh": "Uh oh!",
+        "goBack": "Wr\u00f3\u0107",
+        "pageNotFound": "404 Nie znaleziono",
+        "otherError": "Wyst\u0105pi\u0142 b\u0142\u0105d"
+    },
+    "roles": {
+        "system": "System",
+        "admin": "Admin",
+        "verified": "Zweryfikowany"
+    },
+    "login": "Logowanie",
+    "register": "Rejestracja",
+    "logout": "Wyloguj",
+    "logoutSuccess": "Zosta\u0142e\u015b wylogowany!",
+    "loginSuccess": "Zalogowa\u0142e\u015b si\u0119!",
+    "myProfile": "M\u00f3j Profil",
+    "browse": "Przegl\u0105daj",
+    "upload": "Prze\u015blij",
+    "tools": "Narz\u0119dzia",
+    "guides": "Przewodniki",
+    "about": "O nas",
+    "contact": "Kontakt",
+    "status": "Status",
+    "layoutSubmissions": "Przesy\u0142anie wzoru",
+    "themePackSubmissions": "Zg\u0142oszenia Motywu\/Paczki",
+    "termsOfService": "Warunki serwisu",
+    "cookiePolicy": "Polityka ciasteczek",
+    "privacyPolicy": "Polityka Prywatno\u015bci",
+    "serviceStatus": "Status serwisu",
+    "pack": "Paczka | Paczki",
+    "theme": "Motyw | Motywy ",
+    "nxtheme": "Motyw | Motywy",
+    "zip": "ZIP | ZIPy",
+    "layout": "Uk\u0142ad | Uk\u0142ady",
+    "creator": "Tw\u00f3rca | Tw\u00f3rcy",
+    "overlay": "Nak\u0142adka | Nak\u0142adki",
+    "overlayPng": "PNG wzoru | PNG wzor\u00f3w",
+    "image": "Obraz | Obrazy",
+    "faq": "FAQ | FAQs",
+    "commonLayout": "Popularny Uk\u0142ad | Popularne Uk\u0142ady",
+    "layoutOption": "Opcja Uk\u0142adu | Opcje Uk\u0142adu",
+    "tool": "Narz\u0119dzie | Narz\u0119dzia",
+    "onlineThemeCreator": "Kreator Motyw\u00f3w Online",
+    "themezerHBApp": "Aplikacja Themezer HB",
+    "overlayCreator": "Tw\u00f3rca Nak\u0142adki",
+    "themeCreator": "Tw\u00f3rca Motywu",
+    "guideInstallThemes": "Instalowanie Motyw\u00f3w",
+    "guideCreateThemes": "Tworzenie Motyw\u00f3w\/Czcionek",
+    "guideCreateLayouts": "Tworzenie Uk\u0142ad\u00f3w",
+    "registerSuccessIntro": "Nareszcie mo\u017cesz przes\u0142a\u0107 swoje motywy!  Jednak\u017ce, na Themezer obowi\u0105zuje kilka zasad:",
+    "accept": "Akceptuj\u0119",
+    "backupCode": "Kod Zapasowy",
+    "backupCodeExplanation": "Aby zapewni\u0107 tobie dost\u0119p do konta Themezer, je\u015bli co\u015b stanie si\u0119 z twoim kontem Discord, poni\u017cej znajdziesz sw\u00f3j identyfikator tw\u00f3rcy i kod zapasowy, kt\u00f3rego mo\u017cesz u\u017cy\u0107, aby przywr\u00f3ci\u0107 swoje konto i po\u0142\u0105czy\u0107 je z nowym kontem Discord. Pami\u0119taj, aby zapisa\u0107 ten zapasowy kod w bezpiecznym miejscu! Identyfikator tw\u00f3rcy mo\u017cna r\u00f3wnie\u017c znale\u017a\u0107 w adresie url strony tw\u00f3rcy Themezer. Aby przywr\u00f3ci\u0107 swoje konto, odwied\u017a stron\u0119 'O nas'.",
+    "backupCodeViewOnceWarning": "TO JEDYNY RAZ, KIEDY WIDZISZ KOD ZAPASOWY!",
+    "copy": "Skopiuj",
+    "copySuccess": "Skopiowano!",
+    "permalink": "Permalink",
+    "dismiss": "Ignoruj",
+    "previous": "Poprzedni",
+    "finish": "Doko\u0144cz",
+    "cancel": "Anuluj",
+    "discard": "Odrzu\u0107",
+    "noCancel": "Nie, anuluj",
+    "yesContinue": "Tak, kontynuuj",
+    "readThis": "Przeczytaj To",
+    "save": "Zapisz",
+    "clickHere": "Kliknij Tutaj",
+    "loginRequired": "Najpierw musisz by\u0107 zalogowany!",
+    "unsavedChanged": "Czy naprawd\u0119 chcesz wyj\u015b\u0107? Masz niezapisane zmiany!",
+    "saveSuccess": "Sukces! Wprowadzenie zmian mo\u017ce zaj\u0105\u0107 troch\u0119 czasu.",
+    "close": "Zamknij",
+    "customLayout": "W\u0142asny",
+    "resultCount": "{count} wynik | {count} wynik\u00f3w",
+    "noResults": "Nie znaleziono wynik\u00f3w",
+    "moreItems": "Wi\u0119cej pozycji",
+    "target": {
+        "menu": "Menu:",
+        "choose": "Wybierz Menu",
+        "homemenu": "Ekran G\u0142\u00f3wny",
+        "lockscreen": "Ekran Blokady",
+        "userpage": "Karta U\u017cytkownika",
+        "allapps": "Wszystkie Aplikacje",
+        "settings": "Ustawienia",
+        "news": "Wiadomo\u015bci",
+        "playerselect": "Wyb\u00f3r Gracza"
+    },
+    "badges": {
+        "certifiedBadge": "Automatycznie zaktualizowano"
+    },
+    "whatIs": {
+        "this": "Co to jest?",
+        "pack": "Czym jest paczka?",
+        "packDescription": "Paczki to pliki ZIP zawieraj\u0105ce wiele motyw\u00f3w stworzonych przez tego samego u\u017cytkownika. Mo\u017ce zawiera\u0107 dowolny motyw, nawet kilka dla tego samego menu.",
+        "nxthemeInstaller": "Czym jest NXThemes Installer?",
+        "nxthemeInstallerDescription": "The {nxthemesInstaller} jest aplikacj\u0105 homebrew, kt\u00f3ra dzia\u0142a na samym Switchu i mo\u017ce by\u0107 u\u017cywana do instalowania i zarz\u0105dzania motywami. ID wy\u015bwietlane na Themezer mog\u0105 by\u0107 u\u017cyte do bezpo\u015bredniej instalacji motyw\u00f3w i pakiet\u00f3w. ID {id} mo\u017ce by\u0107 wprowadzone w zak\u0142adce \"Pobierz motywy\" w aplikacji (upewnij si\u0119, \u017ce Themezer jest ustawiony jako dostawca). ID mo\u017ce by\u0107 r\u00f3wnie\u017c u\u017cyte w polu wyszukiwania {themezerNX}.",
+        "commonLayout": "Czym jest Uk\u0142ad Generalny?",
+        "commonLayoutDescription": "Uk\u0142adem Generalnym jest dolna stopka widoczna w r\u00f3\u017cnych miejscach systemu. Wersja domy\u015blna zawiera  po lewej stronie aktualnie aktywny kontroler oraz akcje przycisk\u00f3w po prawej stronie. Niekt\u00f3re uk\u0142ady zawieraj\u0105 wsp\u00f3lny uk\u0142ad, kt\u00f3ry pozwala ukry\u0107 lini\u0119 oddzielaj\u0105c\u0105 lub wprowadzi\u0107 inne drobne modyfikacje. Modyfikowanie wsp\u00f3lnego uk\u0142adu dla '{playerSelect}' i '{userPage}' nie jest obs\u0142ugiwane przez Switch Theme Injector. Zawsze zalecane jest pobranie i u\u017cywanie r\u00f3wnie\u017c tego uk\u0142adu!",
+        "overlayPng": "Czym jest nak\u0142adka png?",
+        "overlayPngDescription": "Nak\u0142adka png jest obrazem u\u017cywanym na Themezer do prezentacji uk\u0142ad\u00f3w. Mo\u017cesz j\u0105 r\u00f3wnie\u017c u\u017cy\u0107 do stworzenia 'zrzutu ekranu', kt\u00f3ry jest wymagany podczas wgrywania motywu do Themezer."
+    },
+    "rules": {
+        "required": "Wymagane",
+        "utf8Only": "Dozwolone s\u0105 tylko znaki UTF-8",
+        "characterLength": "d\u0142ugo\u015b\u0107 \"{field}\" musi wynosi\u0107 od {min} do {max} znak\u00f3w",
+        "characterLengthMin": "'{field}' musi mie\u0107 {count} lub wi\u0119cej znak\u00f3w d\u0142ugo\u015bci",
+        "categoryMin": "Wymagana jest co najmniej jedna kategoria",
+        "categoryMax": "Dozwolone jest maksymalnie {count} kategorii",
+        "invalid": "Nieprawid\u0142owy {field}",
+        "maxImageSize": "Rozmiar obrazu powinien by\u0107 mniejszy ni\u017c {max}!",
+        "notOwnCreatorId": "To jest twoje aktualne ID"
+    },
+    "home": {
+        "pageTitle": "Ekran g\u0142\u00f3wny",
+        "recentAdditions": "Ostatnio Dodane",
+        "newPacks": "Ostatnie Paczki",
+        "newThemes": "Ostatnie Motywy",
+        "updatedLayouts": "Zaktualizowane Uk\u0142ady"
+    },
+    "packs": {
+        "pageDescription": "Odkryj niesamowite paczki tematyczne, aby nada\u0107 menu sp\u00f3jny wygl\u0105d!",
+        "packContents": "Motywy w tej Paczce",
+        "clickAnyToEdit": "Kliknij dowolny, aby edytowa\u0107"
+    },
+    "themes": {
+        "pageDescription": "Motywy na Themezer",
+        "targetPageDescription": "Wszystkie motywy '{menu}' na Themezer",
+        "pack": "Ten motyw jest cz\u0119\u015bci\u0105 paczki:"
+    },
+    "layouts": {
+        "pageDescription": "Odkryj unikalne uk\u0142ady, aby stylizowa\u0107 menu do woli!",
+        "targetPageDescription": "Wszystkie uk\u0142ady '{menu}' na Themezer",
+        "tryBackgrounds": "Wypr\u00f3buj te t\u0142a",
+        "themesContents": "Wszystkie motywy wykorzystuj\u0105ce ten uk\u0142ad",
+        "backgrounds": {
+            "botwForest": "Breath of the Wild Forest",
+            "skyrimMountains": "Skyrim Mountains",
+            "acod": "Assassin's Creed Odyssey",
+            "fc5": "Far Cry 5",
+            "botwArt": "Breath of the Wild Art",
+            "acnh": "Animal Crossing New Horizons",
+            "sea": "Sea",
+            "spiderman": "Spider-Man: Into the Spider-Verse",
+            "pewdiepie": "PewDiePie",
+            "franxx": "Darling in the Franxx",
+            "nier": "Nier Automata",
+            "p5": "Persona 5 Ryuji"
+        }
+    },
+    "abouts": {
+        "sourceCode": "Kod \u017ar\u00f3d\u0142owy projektu mo\u017cna znale\u017a\u0107 na stronie {themezerNxGithub}.",
+        "certifiedBadge": "Co oznacza plakietka {image}? Oznacza to, \u017ce pobrany przez Ciebie NXTheme jest automatycznie aktualizowany za ka\u017cdym razem, gdy wprowadzane s\u0105 zmiany w uk\u0142adzie lub samym motywie.",
+        "notAffiliated": "Themezer nie jest w \u017caden spos\u00f3b powi\u0105zany z Nintendo."
+    },
+    "contacts": {
+        "discord": "Aby si\u0119 skontaktowa\u0107 prosz\u0119 do\u0142\u0105czy\u0107 na {themezerNxDiscord}.",
+        "issue": "Znalaz\u0142e\u015b b\u0142\u0105d lub masz sugesti\u0119? Utw\u00f3rz zg\u0142oszenie na {themezerNxGithub} lub do\u0142\u0105cz do serwera Discord."
+    },
+    "restore": {
+        "prompt": "Chcesz odzyska\u0107 swoje konto Themezer?",
+        "title": "Przywr\u00f3\u0107 konto",
+        "description": "Kiedy tworzy\u0142e\u015b swoje konto na Themezer, zosta\u0142e\u015b poinformowany o zapasowym kodzie, kt\u00f3rego mo\u017cesz u\u017cy\u0107, je\u015bli kiedykolwiek stracisz dost\u0119p do swojego konta Discord. Mo\u017cesz go u\u017cy\u0107 tutaj, aby odzyska\u0107 dost\u0119p do swojego konta Themezer. Konto Discord, na kt\u00f3rym jeste\u015b obecnie zalogowany, zostanie po\u0142\u0105czone z poprzednimi danymi Themezer. Je\u015bli masz layouty na GitHub, upewnij si\u0119, \u017ce zaktualizowa\u0142e\u015b je swoim nowym identyfikatorem tw\u00f3rcy!",
+        "previousId": "Poprzedni identyfikator tw\u00f3rcy (ID)",
+        "confirmRestore": "Przywr\u00f3\u0107",
+        "success": "Konto zosta\u0142o przywr\u00f3cone pomy\u015blnie!",
+        "error": "Nieprawid\u0142owy identyfikator tw\u00f3rcy lub kod zapasowy!"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "W\u0142asno\u015b\u0107",
+            "content": "Przesy\u0142aj\u0105cy zachowuje prawo w\u0142asno\u015bci do plik\u00f3w przes\u0142anych do Themezer. Pliki przechowywane na serwerach Themezer, wci\u0105\u017c s\u0105 pod opiek\u0105 u\u017cytkownika i podlegaj\u0105 jego odpowiedzialno\u015bci."
+        },
+        "copyright": {
+            "title": "Prawo autorskie",
+            "content": "Tre\u015bci zamieszczane na Themezer musz\u0105 by\u0107 zgodne z prawami autorskimi. Je\u015bli uwa\u017casz, \u017ce tre\u015b\u0107 na Themezer narusza prawa autorskie i jeste\u015b w\u0142a\u015bcicielem praw autorskich lub jeste\u015b upowa\u017cniony do dzia\u0142ania w imieniu w\u0142a\u015bciciela praw autorskich, skontaktuj si\u0119 z jednym z naszych moderator\u00f3w:",
+            "contact": "Kontakt z moderatorem"
+        },
+        "abuse": {
+            "title": "Nadu\u017cycia",
+            "content": "Wszelkie pr\u00f3by wykorzystywania, spamowania lub wyrz\u0105dzania szk\u00f3d w jakikolwiek inny spos\u00f3b b\u0119d\u0105 skutkowa\u0142y natychmiastowym usuni\u0119ciem konta. B\u0142\u0119dy i inne problemy powinny by\u0107 zg\u0142aszane poprzez Stron\u0119 Kontaktow\u0105 lub repozytorium GitHub."
+        },
+        "nsfw": {
+            "title": "NSFW",
+            "content": "Zg\u0142oszenia NSFW musz\u0105 u\u017cywa\u0107 pola wyboru NSFW. Wszystko co ma na celu wywo\u0142anie podniecenia seksualnego jest uwa\u017cane za NSFW. Prawdziwa i animowana nago\u015b\u0107 jest dozwolona, ale \u017cadne \"Akty Seksualne\" (cokolwiek pornograficznego) nie powinny by\u0107 pokazywane lub sugerowane. Zakaz przedstawiania os\u00f3b poni\u017cej 18 roku \u017cycia (rzeczywistych lub animowanych). Obejmuje to tre\u015bci typu 'Lolita', gdzie posta\u0107 jest widocznie poni\u017cej 18 roku \u017cycia, bez wzgl\u0119du na to ile ma lat, jak r\u00f3wnie\u017c postacie, o kt\u00f3rych wiadomo, \u017ce s\u0105 poni\u017cej 18 roku \u017cycia."
+        },
+        "accountTermination": {
+            "title": "Zamkni\u0119cie konta",
+            "content": "Themezer zastrzega sobie prawo do usuni\u0119cia konta u\u017cytkownika, je\u015bli oka\u017ce si\u0119 to konieczne, nawet bez podania przyczyny."
+        }
+    },
+    "submitInfo": {
+        "screenshots": {
+            "title": "Zrzuty ekranu",
+            "content": "Jeste\u015b ZOBOWI\u0104ZANY, aby przes\u0142a\u0107 SCREENHOT dla ka\u017cdego motywu. Sam obraz t\u0142a NIE jest wystarczaj\u0105cy."
+        },
+        "language": {
+            "title": "J\u0119zyk",
+            "content": "Napisz tytu\u0142, opis i inne szczeg\u00f3\u0142y po angielsku. U\u0142atwi to zrozumienie innym tego, co dok\u0142adnie przesy\u0142asz."
+        },
+        "special": {
+            "title": "Co jest szczeg\u00f3lnego w Themezer?",
+            "content": "Themezer wypakowywuje wszystko, co jest przesy\u0142ane na stron\u0119. Ma to kilka zalet:",
+            "themes": {
+                "content": "Po rozpakowaniu motywu NXTheme mo\u017cna \u0142atwo zmieni\u0107 jego zawarto\u015b\u0107, bez konieczno\u015bci przesy\u0142ania nowego pliku NXTheme. Po zmianie czego\u015b na stronie edycji motywu lub pakietu (dost\u0119pnej po przes\u0142aniu), NXTheme jest ju\u017c przebudowany."
+            },
+            "layouts": {
+                "content": "Kolejn\u0105 \u015bwietn\u0105 rzecz\u0105 jest to, \u017ce Themezer mo\u017ce wykry\u0107, jaki uk\u0142ad jest u\u017cywany w motywie. W ten spos\u00f3b, je\u015bli Nintendo zaktualizuje menu g\u0142\u00f3wne wprowadzaj\u0105c zmiany, wszystkie motywy mog\u0105 zosta\u0107 zaktualizowane jednocze\u015bnie, gdy uk\u0142ad, kt\u00f3rego u\u017cywaj\u0105 zostanie poprawiony. U\u017cytkownicy nadal mog\u0105 przesy\u0142a\u0107 motywy z niestandardowym uk\u0142adem, ale te motywy nie b\u0119d\u0105 mia\u0142y tych funkcjonalno\u015bci."
+            }
+        },
+        "notDetect": {
+            "title": "Themezer nie wykry\u0142 uk\u0142adu motywu",
+            "content": "Je\u015bli Themezer nie rozpoznaje uk\u0142adu, powiniene\u015b wybra\u0107 go z dost\u0119pnej listy rozwijanej. Upewnij si\u0119, \u017ce jest to dok\u0142adnie ten sam uk\u0142ad, w przeciwnym razie mo\u017cesz straci\u0107 niekt\u00f3re funkcje! Na przyk\u0142ad, je\u015bli zmieni\u0142e\u015b po\u0142o\u017cenie przycisku, zmiana ta zostanie odrzucona, je\u015bli wybierzesz oryginaln\u0105 wersj\u0119 uk\u0142adu, kt\u00f3rego u\u017cy\u0142e\u015b w rozwijanej li\u015bcie."
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "Nie jestem oryginalnym autorem tego motywu\/paczki",
+                "content": "Niestety nie mo\u017cesz go przes\u0142a\u0107, poniewa\u017c b\u0119dzie on powi\u0105zany z Twoim kontem. Popro\u015b oryginalnego tw\u00f3rc\u0119 o przes\u0142anie go."
+            },
+            "notAvailable": {
+                "title": "Uk\u0142ad, kt\u00f3rego u\u017cywam nie jest dost\u0119pny na Themezer",
+                "content": "Rozwa\u017c przes\u0142anie go do repozytorium Layouts GitHub (zobacz stron\u0119 'Uk\u0142ad' w menu)."
+            },
+            "modified": {
+                "title": "Dokona\u0142em drobnych modyfikacji w innym uk\u0142adzie",
+                "content": "Rozwa\u017c dodanie mo\u017cliwo\u015bci dostosowania do orygina\u0142u w repozytorium Layouts na GitHub'ie (zobacz stron\u0119 przesy\u0142ania 'Uk\u0142ad' w menu). Je\u015bli nie chcesz, upewnij si\u0119, \u017ce zmieni\u0142e\u015b \"ID\" uk\u0142adu json na co\u015b takiego jak \"custom\". Je\u015bli tego nie zrobisz, Themezer b\u0119dzie wymusza\u0142 wyb\u00f3r oryginalnego uk\u0142adu."
+            },
+            "notSubmit": {
+                "title": "Stworzy\u0142em niestandardowy uk\u0142ad, kt\u00f3rego nie chc\u0119 umieszcza\u0107 w repozytorium Layouts na GitHub'ie",
+                "content": "Uhm... dlaczego nie? Inni mog\u0105 go \u0142atwiej wykorzysta\u0107 i, co najwa\u017cniejsze, to darmowe! Tak czy inaczej, zapraszamy do przesy\u0142ania motywu!"
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "Wi\u0119cej informacji",
+        "content": "Je\u015bli nadal szukasz wi\u0119cej informacji, skontaktuj si\u0119 z nami za pomoc\u0105 jednej z poni\u017cszych dr\u00f3g:",
+        "contact": "Nasza strona kontaktowa"
+    },
+    "themeCreators": {
+        "pageDescription": "Na tej stronie mo\u017cesz stworzy\u0107 Wz\u00f3r dla Motywu i go edytowa\u0107.",
+        "pageHint": "Webowa wersja Theme Injector nie wspiera wszystkich opcji (np. w\u0142asnych ikon). Wszystkie opcje dost\u0119pne s\u0105 w aplikacji na Windows {switchThemeInjector}."
+    },
+    "submitLayout": {
+        "pageDescription": "Mo\u017cesz przes\u0142a\u0107 uk\u0142ady do repozytorium Themezer Layouts na GitHub'ie.",
+        "joinDiscord": "do\u0142\u0105cz do naszego Discorda",
+        "instructions": "Instrukcje znajduj\u0105 si\u0119 w {readme}. Je\u015bli jest to zbyt techniczne, nie wahaj si\u0119 wpa\u015b\u0107 na {joinDiscord} i poprosi\u0107 o pomoc na kanale {channel}. Jeden z moderator\u00f3w z przyjemno\u015bci\u0105 zrobi to dla Ciebie!"
+    },
+    "helpTranslate": "Pom\u00f3\u017c przet\u0142umaczy\u0107"
+}
