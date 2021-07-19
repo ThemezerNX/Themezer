@@ -25,12 +25,12 @@
         "shareCreator": "Sprawd\u017a Tw\u00f3rc\u0119 '{creator}' na Themezer!",
         "share": "Udost\u0119pnij",
         "item": "pozycja",
-        "author": "Austorstwa {creator}",
+        "author": "Autorstwa {creator}",
         "commonAuthor": "Autor: {value}",
         "details": "Szczeg\u00f3\u0142y",
         "id": "ID: {value}",
         "version": "Wersja: {value}",
-        "lastUpdated": "Ostatnio aktualizowane: {value}",
+        "lastUpdated": "Ostatnio zaktualizowane: {value}",
         "dlCount": "Pobra\u0144: {value}",
         "targetFile": "Plik docelowy: {value}",
         "background": "T\u0142o: {value}",
@@ -56,7 +56,7 @@
         "search": "Szukaj",
         "sortBy": "Sortuj poprzez",
         "filters": "Filtry",
-        "downloads": "Pobra\u0144",
+        "downloads": "Ilo\u015b\u0107 pobra\u0144",
         "likes": "Polubienia",
         "updated": "Zaktualizowano",
         "madeByMe": "Wykonane przeze mnie",
@@ -70,7 +70,7 @@
         "themeVersion": "Wersja Motywu",
         "packVersion": "Wersja Paczki",
         "zipFile": "Plik ZIP",
-        "nxthemeFile": "plik NXTheme",
+        "nxthemeFile": "Plik NXTheme",
         "hex": "HEX",
         "id": "ID",
         "name": "nazwa",
@@ -80,8 +80,8 @@
         "category": "kategoria",
         "categories": "Kategorie",
         "categoriesHint": "Naci\u015bnij {key_}, aby wybra\u0107 now\u0105 kategori\u0119",
-        "sharedCategories": "Kategorie wsp\u00f3lne (zast\u0105pi to obecny zestaw)",
-        "manualLayout": "R\u0119czny wyb\u00f3r uk\u0142adu (wyczy\u015bci wszystkie zmiany dokonane w JSON)"
+        "sharedCategories": "Kategorie wsp\u00f3lne (obejmuj\u0105 ka\u017cdy motyw w paczce)",
+        "manualLayout": "Nadpisz nazw\u0119 uk\u0142adu (wyczy\u015bci wszystkie zmiany dokonane w JSON)"
     },
     "creators": {
         "latestPacksByCreator": "Ostatnie Paczki tego tw\u00f3rcy",
@@ -120,7 +120,7 @@
         "webInjector": "Mo\u017cesz tworzy\u0107 NXThemes u\u017cywaj\u0105c {onlineThemeCreator}. Utworzone NXTheme(y) mo\u017cesz przes\u0142a\u0107 tutaj.",
         "step2": "2. Szczeg\u00f3\u0142y Paczki",
         "step3": "3. Szczeg\u00f3\u0142y Motywu",
-        "screenshotHint": "Musisz przes\u0142a\u0107 ZRZUT EKRANU (NIE tylko obraz t\u0142a). Zr\u00f3b to klikaj\u0105c na zast\u0119pczy obrazek."
+        "screenshotHint": "Musisz przes\u0142a\u0107 ZRZUT EKRANU (NIE sam obraz t\u0142a). Zr\u00f3b to klikaj\u0105c na poni\u017csze pole."
     },
     "overlayCreators": {
         "screenshotWithWhiteBackground": "Zrzut ekranu na bia\u0142ym tle",
@@ -137,7 +137,7 @@
     },
     "lang": "Polski",
     "welcome": "Witamy w Theemezer!",
-    "welcomeBack": "Witamy ponownie, {user}!",
+    "welcomeBack": "Witaj ponownie, {user}!",
     "themezerIntro": "Theemezer jest stron\u0105 umo\u017cliwiaj\u0105c\u0105 udost\u0119pnianie motyw\u00f3w dla konsoli Nintendo Switch.",
     "cookieBanner": "Ta strona u\u017cywa plik\u00f3w cookie. Aby kontynuowa\u0107, zaakceptuj ciasteczka.",
     "apiOffline": "Serwer wydaje si\u0119 by\u0107 offline. Spr\u00f3buj ponownie p\u00f3\u017aniej. Je\u015bli problem si\u0119 powt\u00f3rzy, skontaktuj si\u0119 z nami.",
@@ -165,12 +165,12 @@
     "about": "O nas",
     "contact": "Kontakt",
     "status": "Status",
-    "layoutSubmissions": "Przesy\u0142anie wzoru",
-    "themePackSubmissions": "Zg\u0142oszenia Motywu\/Paczki",
+    "layoutSubmissions": "Przesy\u0142anie uk\u0142adu",
+    "themePackSubmissions": "Przesy\u0142anie Motywu\/Paczki",
     "termsOfService": "Warunki serwisu",
     "cookiePolicy": "Polityka ciasteczek",
     "privacyPolicy": "Polityka Prywatno\u015bci",
-    "serviceStatus": "Status serwisu",
+    "serviceStatus": "Dost\u0119pno\u015b\u0107 us\u0142ug",
     "pack": "Paczka | Paczki",
     "theme": "Motyw | Motywy ",
     "nxtheme": "Motyw | Motywy",
@@ -178,7 +178,7 @@
     "layout": "Uk\u0142ad | Uk\u0142ady",
     "creator": "Tw\u00f3rca | Tw\u00f3rcy",
     "overlay": "Nak\u0142adka | Nak\u0142adki",
-    "overlayPng": "PNG wzoru | PNG wzor\u00f3w",
+    "overlayPng": "Nak\u0142adka PNG | Nak\u0142adki PNG",
     "image": "Obraz | Obrazy",
     "faq": "FAQ | FAQs",
     "commonLayout": "Popularny Uk\u0142ad | Popularne Uk\u0142ady",
@@ -186,8 +186,8 @@
     "tool": "Narz\u0119dzie | Narz\u0119dzia",
     "onlineThemeCreator": "Kreator Motyw\u00f3w Online",
     "themezerHBApp": "Aplikacja Themezer HB",
-    "overlayCreator": "Tw\u00f3rca Nak\u0142adki",
-    "themeCreator": "Tw\u00f3rca Motywu",
+    "overlayCreator": "Kreator Nak\u0142adek",
+    "themeCreator": "Kreator Motyw\u00f3w",
     "guideInstallThemes": "Instalowanie Motyw\u00f3w",
     "guideCreateThemes": "Tworzenie Motyw\u00f3w\/Czcionek",
     "guideCreateLayouts": "Tworzenie Uk\u0142ad\u00f3w",
@@ -229,14 +229,14 @@
         "playerselect": "Wyb\u00f3r Gracza"
     },
     "badges": {
-        "certifiedBadge": "Automatycznie zaktualizowano"
+        "certifiedBadge": "Automatyczne aktualizacje"
     },
     "whatIs": {
         "this": "Co to jest?",
         "pack": "Czym jest paczka?",
         "packDescription": "Paczki to pliki ZIP zawieraj\u0105ce wiele motyw\u00f3w stworzonych przez tego samego u\u017cytkownika. Mo\u017ce zawiera\u0107 dowolny motyw, nawet kilka dla tego samego menu.",
         "nxthemeInstaller": "Czym jest NXThemes Installer?",
-        "nxthemeInstallerDescription": "The {nxthemesInstaller} jest aplikacj\u0105 homebrew, kt\u00f3ra dzia\u0142a na samym Switchu i mo\u017ce by\u0107 u\u017cywana do instalowania i zarz\u0105dzania motywami. ID wy\u015bwietlane na Themezer mog\u0105 by\u0107 u\u017cyte do bezpo\u015bredniej instalacji motyw\u00f3w i pakiet\u00f3w. ID {id} mo\u017ce by\u0107 wprowadzone w zak\u0142adce \"Pobierz motywy\" w aplikacji (upewnij si\u0119, \u017ce Themezer jest ustawiony jako dostawca). ID mo\u017ce by\u0107 r\u00f3wnie\u017c u\u017cyte w polu wyszukiwania {themezerNX}.",
+        "nxthemeInstallerDescription": "{nxthemesInstaller} jest aplikacj\u0105 homebrew, kt\u00f3ra dzia\u0142a na samym Switchu i mo\u017ce by\u0107 u\u017cywana do instalowania i zarz\u0105dzania motywami. ID wy\u015bwietlane na Themezer mog\u0105 by\u0107 u\u017cyte do bezpo\u015bredniej instalacji motyw\u00f3w i pakiet\u00f3w. ID {id} mo\u017ce by\u0107 wprowadzone w zak\u0142adce \"Pobierz motywy\" w aplikacji (upewnij si\u0119, \u017ce Themezer jest ustawiony jako dostawca). ID mo\u017ce by\u0107 r\u00f3wnie\u017c u\u017cyte w polu wyszukiwania {themezerNX}.",
         "commonLayout": "Czym jest Uk\u0142ad Generalny?",
         "commonLayoutDescription": "Uk\u0142adem Generalnym jest dolna stopka widoczna w r\u00f3\u017cnych miejscach systemu. Wersja domy\u015blna zawiera  po lewej stronie aktualnie aktywny kontroler oraz akcje przycisk\u00f3w po prawej stronie. Niekt\u00f3re uk\u0142ady zawieraj\u0105 wsp\u00f3lny uk\u0142ad, kt\u00f3ry pozwala ukry\u0107 lini\u0119 oddzielaj\u0105c\u0105 lub wprowadzi\u0107 inne drobne modyfikacje. Modyfikowanie wsp\u00f3lnego uk\u0142adu dla '{playerSelect}' i '{userPage}' nie jest obs\u0142ugiwane przez Switch Theme Injector. Zawsze zalecane jest pobranie i u\u017cywanie r\u00f3wnie\u017c tego uk\u0142adu!",
         "overlayPng": "Czym jest nak\u0142adka png?",
@@ -245,7 +245,7 @@
     "rules": {
         "required": "Wymagane",
         "utf8Only": "Dozwolone s\u0105 tylko znaki UTF-8",
-        "characterLength": "d\u0142ugo\u015b\u0107 \"{field}\" musi wynosi\u0107 od {min} do {max} znak\u00f3w",
+        "characterLength": "d\u0142ugo\u015b\u0107 pola \"{field}\" musi wynosi\u0107 od {min} do {max} znak\u00f3w",
         "characterLengthMin": "'{field}' musi mie\u0107 {count} lub wi\u0119cej znak\u00f3w d\u0142ugo\u015bci",
         "categoryMin": "Wymagana jest co najmniej jedna kategoria",
         "categoryMax": "Dozwolone jest maksymalnie {count} kategorii",
@@ -379,8 +379,8 @@
         "contact": "Nasza strona kontaktowa"
     },
     "themeCreators": {
-        "pageDescription": "Na tej stronie mo\u017cesz stworzy\u0107 Wz\u00f3r dla Motywu i go edytowa\u0107.",
-        "pageHint": "Webowa wersja Theme Injector nie wspiera wszystkich opcji (np. w\u0142asnych ikon). Wszystkie opcje dost\u0119pne s\u0105 w aplikacji na Windows {switchThemeInjector}."
+        "pageDescription": "Na tej stronie mo\u017cesz stworzy\u0107 w\u0142asn\u0105 nak\u0142adk\u0119 NXTheme.",
+        "pageHint": "Webowa wersja Theme Injector nie wspiera wszystkich opcji (np. w\u0142asnych ikon). Brakuj\u0105ce opcje znajdziesz w aplikacji {switchThemeInjector} na system Windows"
     },
     "submitLayout": {
         "pageDescription": "Mo\u017cesz przes\u0142a\u0107 uk\u0142ady do repozytorium Themezer Layouts na GitHub'ie.",
