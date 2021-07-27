@@ -1101,7 +1101,7 @@ $border-radius: 20px;
             opacity: 0;
         }
         100% {
-            opacity: 0.7;
+            opacity: 0.6;
         }
     }
 

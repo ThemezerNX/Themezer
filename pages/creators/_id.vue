@@ -142,7 +142,14 @@
                 style="height: 100%;"
             >
                 <v-row align="center" justify="center">
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <v-sheet v-if="creator.bio" class="markdown-wrapper" elevation="12">
                             <Markdown :source="creator.bio" class="markdown"/>
                         </v-sheet>
@@ -162,7 +169,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h1>
                             {{ $t("creators.latestPacksByCreator") }}
                         </h1>
@@ -170,7 +184,7 @@
                         <ItemGrid
                             :loading="!!$apollo.queries.packList.loading"
                             :items="packList"
-                            :limit="6"
+                            :limit="4"
                             :more-url="
 								`/packs?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -183,7 +197,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h1>
                             {{ $t("creators.latestThemesByCreator") }}
                         </h1>
@@ -191,7 +212,7 @@
                         <ItemGrid
                             :loading="!!$apollo.queries.themeList.loading"
                             :items="themeList"
-                            :limit="6"
+                            :limit="4"
                             :more-url="
 								`/themes?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -204,7 +225,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h1>
                             {{ $t("creators.latestLayoutsByCreator") }}
                         </h1>
@@ -212,7 +240,7 @@
                         <ItemGrid
                             :loading="!!$apollo.queries.layoutList.loading"
                             :items="layoutList"
-                            :limit="6"
+                            :limit="4"
                             :more-url="
 								`/layouts?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -489,7 +517,7 @@ export default Vue.extend({
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6,
+                    limit: 4,
                 };
             },
             prefetch: true,
@@ -499,7 +527,7 @@ export default Vue.extend({
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6,
+                    limit: 4,
                 };
             },
             prefetch: true,
@@ -509,7 +537,7 @@ export default Vue.extend({
             variables() {
                 return {
                     creators: [this.id],
-                    limit: 6,
+                    limit: 4,
                 };
             },
             prefetch: true,
