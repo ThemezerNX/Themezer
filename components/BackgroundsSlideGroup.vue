@@ -35,7 +35,7 @@
                                   ? 80
                                   : 100
                               "
-                            class="ma-auto card transition-ease"
+                            class="ma-auto card transition-ease pa-2 pb-0"
                             @click="toggle"
                         >
                             <v-img

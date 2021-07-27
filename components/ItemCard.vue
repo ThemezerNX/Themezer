@@ -64,15 +64,15 @@
                   showProps.includes('creator') ||
                   showProps.includes('target')
                     ? 'mb-0'
-                    : 'my-1 mx-3'
+                    : 'my-1'
                 "
-                class="title subtitle-1"
+                class="title mx-2 subtitle-1"
                 v-text="item.details.name"
             />
 
             <v-card-subtitle
                 v-if="showProps.includes('creator')"
-                class="creator"
+                class="creator mx-2"
             >
                 {{ $t("item.author", {creator: item.creator.display_name}) }}
                 {{ item.details.version ? `• ${item.details.version}` : "" }}
@@ -80,19 +80,19 @@
 
             <v-card-subtitle
                 v-if="showProps.includes('target') && item.target"
-                class="creator"
+                class="creator mx-2"
             >
                 {{ item.target }}
             </v-card-subtitle>
 
-            <v-divider v-if="item.details.description"/>
+            <v-divider v-if="item.details.description" class="mx-2"/>
 
             <v-card-text
                 v-if="
                   item.details.description &&
                     showProps.includes('description')
                 "
-                class="description"
+                class="description mx-2"
             >
                 <div v-linkified v-html="item.details.description"/>
             </v-card-text>

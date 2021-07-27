@@ -27,10 +27,10 @@
                                   theme.details.name
                                 )}`
                               "
-                            class="mx-auto card transition-ease"
+                            class="mx-auto card transition-ease pa-2 pb-0"
                             router
                         >
-                            <div v-if="!!theme.layout" class="badges-wrapper">
+                            <div v-if="!!theme.layout" class="badges-wrapper ma-2">
                                 <CertifiedBadge/>
                             </div>
 
@@ -55,20 +55,20 @@
                                     (showProps.includes('creator') ||
                                     showProps.includes('target')
                                       ? 'mb-0'
-                                      : 'my-1 mx-3')
+                                      : 'my-1')
                                 "
-                                class="title"
+                                class="title mx-2"
                                 v-text="theme.details.name"
                             />
                             <v-card-subtitle
                                 v-if="showProps.includes('creator')"
-                                class="creator"
+                                class="creator mx-2"
                             >
                                 {{ $t("item.author", {creator: theme.creator.display_name}) }}
                             </v-card-subtitle>
                             <v-card-subtitle
                                 v-if="showProps.includes('target')"
-                                class="target"
+                                class="target mx-2"
                             >
                                 {{ toNiceWebName(theme.target) }}
                             </v-card-subtitle>
