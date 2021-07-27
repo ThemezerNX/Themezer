@@ -815,6 +815,10 @@ html {
     background: #272727;
 }
 
+.v-application .rounded {
+    border-radius: $border-radius !important;
+}
+
 iframe {
     border: unset;
     border-radius: $border-radius !important;

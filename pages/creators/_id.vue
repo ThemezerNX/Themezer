@@ -8,10 +8,11 @@
                     : ''
                 "
                 class="d-flex align-center justify-center parallax"
+                style="margin-top: -20px;"
             >
                 <v-row
                     align="center"
-                    class="profile d-flex py-4"
+                    class="profile d-flex pt-6 pb-4"
                     justify="center"
                 >
                     <v-col class="text-center" cols="12">
@@ -141,7 +142,7 @@
                 :fluid="$vuetify.breakpoint.smAndDown"
                 style="height: 100%;"
             >
-                <v-row align="center" justify="center">
+                <v-row align="center" justify="center" class="ma-0">
                     <v-col class="pt-0"
                            cols="12"
                            xl="9"
