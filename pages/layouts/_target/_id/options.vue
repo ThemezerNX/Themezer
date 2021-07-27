@@ -68,7 +68,7 @@
                             style="background: rgba(255,255,255,0.12); border-radius: 20px;"
                             subheader
                         >
-                            <v-subheader>{{ $tc("item.layoutOption", 2) }}</v-subheader>
+                            <v-subheader>{{ $tc("layoutOption", 2) }}</v-subheader>
                             <div
                                 v-for="(piece, i) in layout.pieces"
                                 :key="piece.name"
