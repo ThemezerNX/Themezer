@@ -9,10 +9,10 @@
                   : `/${type}/${fileNameToWebName(item.target)}`) +
                   `/${createUrlString(item.id, item.details.name)}`
             "
-            class="ma-auto card transition-ease"
+            class="ma-auto card transition-ease pa-3 pb-0"
             router
         >
-            <div v-if="!!item.layout" class="badges-wrapper">
+            <div v-if="!!item.layout" class="badges-wrapper ma-2">
                 <CertifiedBadge/>
             </div>
 

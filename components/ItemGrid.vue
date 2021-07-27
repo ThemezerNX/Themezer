@@ -2,28 +2,31 @@
     <LoadingOverlay :loading="loading" :margin="false" min-loader-height="200px">
         <v-row v-if="items && items.length > 0">
             <v-col
-                v-for="item in items"
+                v-for="(item, i) in items"
                 :key="item.id"
-                class="pa-2"
+                class="pa-3"
                 cols="12"
                 lg="3"
                 md="4"
                 sm="6"
-                xl="2"
                 xs="12"
             >
-                <ItemCard :item="item" :show-props="showProps" :type="type"/>
+                <MoreCard
+                    v-if="
+                        i === items.length - 1 &&
+                        items.length === limit &&
+                        moreUrl
+                    "
+                    :to="moreUrl"
+                >
+                    <template #title>
+                        {{ $t("moreItems") }}
+                    </template>
+                </MoreCard>
+                <ItemCard v-else :item="item" :show-props="showProps" :type="type"/>
             </v-col>
         </v-row>
         <span v-else-if="!loading">{{ $t("noResults") }}</span>
-        <nuxt-link v-if="moreUrl && items && items.length === limit" :to="moreUrl">
-            <div
-                class="flex-grow-1 text-right"
-                style="text-shadow: 0 0 4px black;"
-            >
-                {{ $t("moreItems") }}
-            </div>
-        </nuxt-link>
     </LoadingOverlay>
 </template>
 
@@ -35,6 +38,7 @@ import urlParser from "@/components/mixins/urlParser";
 export default Vue.extend({
     components: {
         ItemCard: () => import("@/components/ItemCard.vue"),
+        MoreCard: () => import("@/components/MoreCard.vue"),
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, urlParser],
@@ -56,7 +60,7 @@ export default Vue.extend({
         limit: {
             type: Number,
             required: false,
-            default: 12,
+            default: 8,
         },
         items: {
             type: Array,

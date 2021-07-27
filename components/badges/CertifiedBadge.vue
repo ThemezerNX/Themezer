@@ -42,8 +42,8 @@ export default Vue.extend({
 <style lang="scss">
 .badges-wrapper {
     position: absolute;
-    width: 100%;
-    height: 100%;
     z-index: 2;
+    right: 0;
+    bottom: 0;
 }
 </style>

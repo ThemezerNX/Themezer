@@ -33,7 +33,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h2>
                             {{ $t("home.newPacks") }}
                         </h2>
@@ -51,7 +58,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h2>
                             {{ $t("home.newThemes") }}
                         </h2>
@@ -69,7 +83,14 @@
                     align="center"
                     justify="center"
                 >
-                    <v-col class="pt-0" cols="12">
+                    <v-col class="pt-0"
+                           cols="12"
+                           xl="9"
+                           lg="9"
+                           md="9"
+                           sm="12"
+                           xs="12"
+                    >
                         <h2>
                             {{ $t("home.updatedLayouts") }}
                         </h2>
@@ -151,7 +172,7 @@ export default Vue.extend({
             variables() {
                 const vars = {
                     q: "packList",
-                    limit: 12,
+                    limit: 8,
                 };
                 vars.hash = this.$hashString(vars);
 
@@ -164,7 +185,7 @@ export default Vue.extend({
             variables() {
                 const vars = {
                     q: "themeList",
-                    limit: 12,
+                    limit: 8,
                 };
                 vars.hash = this.$hashString(vars);
 
@@ -178,7 +199,7 @@ export default Vue.extend({
                 const vars = {
                     q: "layoutList",
                     sort: "updated",
-                    limit: 12,
+                    limit: 8,
                 };
                 vars.hash = this.$hashString(vars);
 
