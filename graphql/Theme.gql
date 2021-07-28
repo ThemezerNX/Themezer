@@ -31,7 +31,6 @@ query theme($id: String!) {
         details {
             name
             description
-            version
         }
         layout {
             id
@@ -109,7 +108,6 @@ query themeList($hash: String!, $target: String, $limit: Int, $page: Int, $query
         details {
             name
             description
-            version
         }
         target
         last_updated
@@ -145,6 +143,6 @@ mutation deleteTheme($id: String!) {
     deleteTheme(id: $id)
 }
 
-mutation updateTheme($id: String!, $file: Upload, $name: String!, $layout_id: String, $pack_id: String, $used_pieces: [UsedPieceInput!], $description: String, $version: String!, $categories: [String!], $nsfw: Boolean) {
-    updateTheme(id: $id, file: $file, name: $name, layout_id: $layout_id, pack_id: $pack_id, used_pieces: $used_pieces, description: $description, version: $version, categories: $categories, nsfw: $nsfw)
+mutation updateTheme($id: String!, $file: Upload, $name: String!, $layout_id: String, $pack_id: String, $used_pieces: [UsedPieceInput!], $description: String, $categories: [String!], $nsfw: Boolean) {
+    updateTheme(id: $id, file: $file, name: $name, layout_id: $layout_id, pack_id: $pack_id, used_pieces: $used_pieces, description: $description, categories: $categories, nsfw: $nsfw)
 }

@@ -75,7 +75,6 @@
                 class="creator mx-2"
             >
                 {{ $t("item.author", {creator: item.creator.display_name}) }}
-                {{ item.details.version ? `• ${item.details.version}` : "" }}
             </v-card-subtitle>
 
             <v-card-subtitle

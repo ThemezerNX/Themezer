@@ -19,7 +19,6 @@ query layout($id: String!) {
             name
             description
             color
-            version
         }
         target
         last_updated
@@ -70,7 +69,6 @@ query layoutList($hash: String!, $target: String, $limit: Int, $page: Int, $quer
             name
             description
             color
-            version
         }
         target
         last_updated

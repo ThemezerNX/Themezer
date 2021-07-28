@@ -57,16 +57,6 @@
                                 prepend-icon="mdi-pencil-outline"
                                 rounded
                             ></v-text-field>
-                            <v-text-field
-                                v-model="changed.details.version"
-                                :rules="[rules.required, rules.utf8_only]"
-                                counter="10"
-                                :label="`${$t('fields.packVersion')}*`"
-                                maxlength="10"
-                                outlined
-                                prepend-icon="mdi-update"
-                                rounded
-                            ></v-text-field>
 
                             <ButtonDivider :margin="false">
                                 <v-btn
@@ -235,8 +225,7 @@ export default Vue.extend({
                     variables: {
                         id: this.id,
                         name: this.changed.details.name,
-                        description: this.changed.details.description,
-                        version: this.changed.details.version
+                        description: this.changed.details.description
                     }
                 })
                 .then(({data}) => {

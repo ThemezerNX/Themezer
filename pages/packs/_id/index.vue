@@ -115,13 +115,6 @@
                             </i18n>
                         </div>
                         <div class="font-weight-medium body-2">
-                            <i18n path="item.version">
-                                <template v-slot:value>
-                                    <span class="font-weight-light">{{ pack.details.version }}</span>
-                                </template>
-                            </i18n>
-                        </div>
-                        <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
                                 <template v-slot:value>
                                     <span class="font-weight-light">{{ $d(new Date(pack.last_updated), "short") }}</span>

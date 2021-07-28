@@ -31,7 +31,6 @@ query pack($id: String!) {
         details {
             name
             description
-            version
         }
         last_updated
         categories
@@ -89,7 +88,6 @@ query packList($hash: String!, $limit: Int, $page: Int, $query: String, $sort: S
         details {
             name
             description
-            version
         }
         last_updated
         categories
@@ -133,6 +131,6 @@ mutation deletePack($id: String!) {
     deletePack(id: $id)
 }
 
-mutation updatePack($id: String!, $name: String!, $description: String!, $version: String!) {
-    updatePack(id: $id, name: $name, description: $description, version: $version)
+mutation updatePack($id: String!, $name: String!, $description: String!) {
+    updatePack(id: $id, name: $name, description: $description)
 }

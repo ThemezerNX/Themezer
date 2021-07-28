@@ -117,7 +117,6 @@
                                       "
                                     :label="type.label"
                                     :value="type.id"
-                                    @change="clearSwitchSubmitType()"
                                 ></v-radio>
                             </v-radio-group>
                             <v-text-field
@@ -177,18 +176,6 @@
                                 rounded
                                 small-chips
                             ></v-combobox>
-                            <v-text-field
-                                v-if="selectedSubmitType === 'pack'"
-                                v-model="submitDetails.version"
-                                :rules="[rules.required, rules.utf8_only]"
-                                counter="10"
-                                :label="`${$t('fields.packVersion')}*`"
-                                maxlength="10"
-                                outlined
-                                prepend-icon="mdi-update"
-                                rounded
-                                @change="forceUpdate++"
-                            ></v-text-field>
                         </v-col>
                     </v-row>
                 </div>
@@ -464,27 +451,6 @@
                                                     rounded
                                                     small-chips
                                                 ></v-combobox>
-                                                <v-text-field
-                                                    v-if="
-                                                        selectedSubmitType ===
-                                                          'separate'
-                                                      "
-                                                    v-model="
-                                                        detectedThemes[i]
-                                                          .version
-                                                      "
-                                                    :rules="[
-                                                        rules.required,
-                                                        rules.utf8_only
-                                                      ]"
-                                                    counter="10"
-                                                    :label="`${$t('fields.themeVersion')}*`"
-                                                    maxlength="10"
-                                                    outlined
-                                                    prepend-icon="mdi-update"
-                                                    rounded
-                                                    @change="forceUpdate++"
-                                                ></v-text-field>
                                                 <v-checkbox
                                                     v-model="
                                                         detectedThemes[i].nsfw
@@ -606,8 +572,7 @@ export default Vue.extend({
             submitDetails: {
                 name: null,
                 description: null,
-                color: null,
-                version: null
+                color: null
             }
         }
     },
@@ -655,19 +620,13 @@ export default Vue.extend({
             this.submitDetails = {
                 name: null,
                 description: null,
-                color: null,
-                version: null
+                color: null
             }
         },
         nsfwConfirm(value, i) {
             if (value) {
                 this.nsfwDialog = true
                 this.nsfwDialogThemeNr = i
-            }
-        },
-        clearSwitchSubmitType() {
-            for (const i in this.detectedThemes) {
-                this.detectedThemes[i].version = null
             }
         },
         onFileChange(file) {
@@ -718,7 +677,6 @@ export default Vue.extend({
                         target: t.target,
                         color: t.color,
                         description: t.description,
-                        version: t.version,
                         categories: t.categories,
                         nsfw: t.nsfw
                     }

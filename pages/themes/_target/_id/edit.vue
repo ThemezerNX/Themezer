@@ -163,16 +163,6 @@
 									$apollo.queries.categories.skip = false
 								"
                             ></v-combobox>
-                            <v-text-field
-                                v-model="changed.details.version"
-                                :rules="[rules.required, rules.utf8_only]"
-                                counter="10"
-                                :label="`${$t('fields.themeVersion')}*`"
-                                maxlength="10"
-                                outlined
-                                prepend-icon="mdi-update"
-                                rounded
-                            ></v-text-field>
                             <v-checkbox
                                 v-model="changed.nsfw"
                                 class="mt-0"
@@ -281,7 +271,6 @@ export default Vue.extend({
             return (
                 this.theme.details.name !== this.changed.details.name ||
                 this.theme.details.description !== this.changed.details.description ||
-                this.theme.details.version !== this.changed.details.version ||
                 this.theme.nsfw !== this.changed.nsfw ||
                 this.theme.pack?.id !== this.changed.pack.id ||
                 (this.theme.layout?.id &&
@@ -407,7 +396,6 @@ export default Vue.extend({
                         layout_id: this.changed.layout.id,
                         pack_id: this.changed.pack.id,
                         description: this.changed.details.description,
-                        version: this.changed.details.version,
                         categories: this.changed.actualCategories,
                         nsfw: this.changed.nsfw,
                     },
