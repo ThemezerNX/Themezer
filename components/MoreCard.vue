@@ -10,8 +10,11 @@
             <div class="display-2 flex-grow-1 text-center ma-4" v-if="!!$slots.title">
                 <v-icon size="60">mdi-arrow-right-bold-outline</v-icon>
                 <h6 style="position: relative;">
-                    <slot name="title" />
+                    <slot name="title"/>
                 </h6>
+                <span class="subtitle-1 mt-0">
+                    <slot name="subtitle"/>
+                </span>
             </div>
         </v-card>
     </v-hover>
@@ -28,8 +31,8 @@ export default Vue.extend({
         to: {
             type: String,
             default: null,
-            required: false
-        }
+            required: false,
+        },
     },
 });
 </script>

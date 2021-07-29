@@ -51,7 +51,11 @@
                             :show-props="['creator']"
                             more-url="/packs?sort=id&order=desc"
                             type="packs"
-                        />
+                        >
+                            <template #moreButtonSubtitle>
+                                {{ $t("home.newPacks") }}
+                            </template>
+                        </item-grid>
                     </v-col>
                 </v-row>
                 <v-row
@@ -76,7 +80,11 @@
                             :show-props="['creator']"
                             more-url="/themes?sort=id&order=desc"
                             type="themes"
-                        />
+                        >
+                            <template #moreButtonSubtitle>
+                                {{ $t("home.newThemes") }}
+                            </template>
+                        </item-grid>
                     </v-col>
                 </v-row>
                 <v-row
@@ -101,7 +109,11 @@
                             :show-props="['creator']"
                             more-url="/layouts?sort=updated&order=desc"
                             type="layouts"
-                        />
+                        >
+                            <template #moreButtonSubtitle>
+                                {{ $t("home.updatedLayouts") }}
+                            </template>
+                        </item-grid>
                     </v-col>
                 </v-row>
             </v-container>

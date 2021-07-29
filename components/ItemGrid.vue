@@ -22,6 +22,9 @@
                     <template #title>
                         {{ $t("moreItems") }}
                     </template>
+                    <template #subtitle>
+                        <slot name="moreButtonSubtitle"/>
+                    </template>
                 </MoreCard>
                 <ItemCard v-else :item="item" :show-props="showProps" :type="type"/>
             </v-col>
