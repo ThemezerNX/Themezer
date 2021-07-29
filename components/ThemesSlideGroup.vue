@@ -111,14 +111,12 @@ export default Vue.extend({
     watch: {
         active(i) {
             const activeTheme: any = this.items[i];
-            setTimeout(() => {
-                this.$router.push(`/themes/${(this as any).fileNameToWebName(
-                    activeTheme.target as string,
-                )}/${(this as any).createUrlString(
-                    activeTheme.id as string,
-                    activeTheme.details.name as string,
-                )}`);
-            }, 100);
+            this.$router.push(`/themes/${(this as any).fileNameToWebName(
+                activeTheme.target as string,
+            )}/${(this as any).createUrlString(
+                activeTheme.id as string,
+                activeTheme.details.name as string,
+            )}`);
         },
     },
 });
