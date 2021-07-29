@@ -1,11 +1,12 @@
 <template>
     <v-sheet v-if="items" class="mx-auto" style="background: unset;">
         <v-slide-group
+            v-model="active"
             :class="$vuetify.breakpoint.smAndDown ? 'smAndDown' : ''"
             center-active
             show-arrows="always"
         >
-            <v-slide-item v-for="(theme, i) in items" :key="i">
+            <v-slide-item v-for="(theme, i) in items" :key="i" v-slot:default="{ toggle }">
                 <v-hover v-if="theme" v-slot:default="{ hover }">
                     <v-scale-transition>
                         <v-card
@@ -19,14 +20,7 @@
                                 ${hover ? 'on-hover' : ''}
                             `"
                             :elevation="hover ? 2 : 10"
-                            :to="
-                                `/themes/${fileNameToWebName(
-                                  theme.target
-                                )}/${createUrlString(
-                                  theme.id,
-                                  theme.details.name
-                                )}`
-                              "
+                            @click="toggle"
                             class="mx-auto card transition-ease pa-2 pb-0"
                             router
                         >
@@ -102,6 +96,29 @@ export default Vue.extend({
             default() {
                 return [];
             },
+        },
+    },
+    computed: {
+        active: {
+            get(): number {
+                return this.$route.query && this.$route.query.focus ? Number(this.$route.query.focus) : 0;
+            },
+            set(i: number) {
+                this.$router.push({query: {...this.$route.query, focus: i > 0 ? String(i) : undefined}});
+            },
+        },
+    },
+    watch: {
+        active(i) {
+            const activeTheme: any = this.items[i];
+            setTimeout(() => {
+                this.$router.push(`/themes/${(this as any).fileNameToWebName(
+                    activeTheme.target as string,
+                )}/${(this as any).createUrlString(
+                    activeTheme.id as string,
+                    activeTheme.details.name as string,
+                )}`);
+            }, 100);
         },
     },
 });
