@@ -110,11 +110,6 @@
 import Vue from "vue";
 
 export default Vue.extend({
-    data() {
-        return {
-            activeBackground: 0,
-        };
-    },
     computed: {
         backgrounds() {
             return [
@@ -174,15 +169,20 @@ export default Vue.extend({
                 },
             ];
         },
-    },
-    watch: {
-        activeBackground(selected: any) {
-            this.$store.commit(
-                "SET_BACKGROUND",
-                this.backgrounds[selected].url
-                    ? encodeURI(this.backgrounds[selected].url || "")
-                    : null,
-            );
+        activeBackground: {
+            get() {
+                return this.$store.state.backgroundIndex;
+            },
+            set(index: number) {
+                this.$store.commit("SET_BACKGROUND",
+                    {
+                        index,
+                        url: this.backgrounds[index].url
+                            ? encodeURI(this.backgrounds[index].url || "")
+                            : null,
+                    },
+                );
+            },
         },
     },
     methods: {
