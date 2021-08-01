@@ -2,7 +2,7 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center">{{ targetName() }} Packs</h2>
+                <h2 class="text-center">{{ $tc("pack", 2) }}</h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
