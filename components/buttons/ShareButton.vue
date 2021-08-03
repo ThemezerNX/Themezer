@@ -64,30 +64,18 @@ export default Vue.extend({
             tooltipActive: false,
         };
     },
-    computed: {
-        url() {
-            const url = new URL(window.location.href);
-            const params = url.searchParams;
-
-            params.delete("focus");
-            return url.toString();
-        },
-    },
     methods: {
-        removeFocusQuery(string: string) {
-            return string;
-        },
         async share() {
             const type = this.$tc(this.type);
             const translationKey = "item.share" + this.type.charAt(0).toUpperCase() + this.type.slice(1);
             const data = {
                 title: this.type ? `Themezer ${type}` : `Themezer ${this.$tc("item.item")}`,
                 text: this.$t(translationKey, {
-                    type: type.toLowerCase(),
-                    name: this.name,
-                    creator: this.creator,
-                }),
-                url: this.url,
+                        type: type.toLowerCase(),
+                        name: this.name,
+                        creator: this.creator,
+                    }),
+                url: window.location.href,
             };
             const navigator: any = window.navigator;
             if (navigator.share) {
@@ -104,7 +92,7 @@ export default Vue.extend({
         },
         copyLink() {
             navigator.clipboard
-                .writeText(this.url)
+                .writeText(window.location.href)
                 .then(() => {
                     this.tooltipActive = false;
                     this.copyLinkSuccess = true;
