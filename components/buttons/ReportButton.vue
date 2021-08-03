@@ -60,7 +60,7 @@
                                     text
                                     @click="report()"
                                 >
-                                    {{ $t("yesSubmit") }}
+                                    {{ $t("yesContinue") }}
                                 </v-btn>
 
                                 <v-spacer></v-spacer>
