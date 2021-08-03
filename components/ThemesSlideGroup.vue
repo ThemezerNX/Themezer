@@ -20,6 +20,14 @@
                                 ${hover ? 'on-hover' : ''}
                             `"
                             :elevation="hover ? 2 : 10"
+                            :to="
+                                `/themes/${fileNameToWebName(
+                                  theme.target
+                                )}/${createUrlString(
+                                  theme.id,
+                                  theme.details.name
+                                )}`
+                              "
                             @click="toggle"
                             class="mx-auto card transition-ease pa-2 pb-0"
                             router
@@ -84,6 +92,19 @@ export default Vue.extend({
         CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
     },
     mixins: [targetParser, urlParser],
+    data() {
+        return {
+            active: 0,
+        };
+    },
+    watch: {
+        focusOnId(newValue) {
+            this.items.find((item: any, i) => {
+                if (item.id === newValue) this.active = i;
+                return;
+            });
+        },
+    },
     props: {
         items: {
             type: Array,
@@ -97,26 +118,10 @@ export default Vue.extend({
                 return [];
             },
         },
-    },
-    computed: {
-        active: {
-            get(): number {
-                return this.$route.query && this.$route.query.focus ? Number(this.$route.query.focus) : 0;
-            },
-            set(i: number) {
-                this.$router.push({query: {...this.$route.query, focus: i > 0 ? String(i) : undefined}});
-            },
-        },
-    },
-    watch: {
-        active(i) {
-            const activeTheme: any = this.items[i];
-            this.$router.push(`/themes/${(this as any).fileNameToWebName(
-                activeTheme.target as string,
-            )}/${(this as any).createUrlString(
-                activeTheme.id as string,
-                activeTheme.details.name as string,
-            )}`);
+        focusOnId: {
+            type: String,
+            required: false,
+            default: undefined,
         },
     },
 });

@@ -117,7 +117,9 @@
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
                                 <template v-slot:value>
-                                    <span class="font-weight-light">{{ $d(new Date(pack.last_updated), "short") }}</span>
+                                    <span class="font-weight-light">{{
+                                            $d(new Date(pack.last_updated), "short")
+                                        }}</span>
                                 </template>
                             </i18n>
                         </div>
@@ -153,6 +155,7 @@
                         <ThemesSlideGroup
                             :items="pack.themes"
                             :show-props="['target']"
+                            :focusOnId="focusOnId"
                         />
                     </v-col>
                 </v-row>
@@ -181,13 +184,24 @@ export default Vue.extend({
         EditButton: () => import("@/components/buttons/EditButton.vue"),
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
-    mixins: [shared, targetParser, urlParser],
     data() {
         return {
+            prevRoute: null,
             isPageOwner: false,
             packDialog: false,
             loadingDownload: false,
+            focusOnId: undefined,
         };
+    },
+    mixins: [shared, targetParser, urlParser],
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            vm.prevRoute = from ? from.path : undefined;
+        });
+    },
+    mounted() {
+        const lastTheme = /-(.+)/.exec(this.prevRoute);
+        this.focusOnId = lastTheme ? lastTheme[1] : undefined;
     },
     computed: {
         categories() {
