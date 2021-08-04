@@ -23,7 +23,7 @@
                             : (showLoginDialog = true)
                         "
                     >
-                        Report
+                        {{ $t("item.report") }}
                         <v-icon right>{{ icon || "mdi-flag-variant" }}</v-icon>
                     </v-btn>
                     <v-dialog
