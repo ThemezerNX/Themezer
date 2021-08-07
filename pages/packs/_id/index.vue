@@ -1,7 +1,7 @@
 <template>
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <LoadingOverlay :loading="!!$apollo.loading" :margin="false">
-            <v-sheet v-if="pack && pack.details" class="pa-2 box" no-gutters>
+            <v-sheet v-if="pack && pack.details" class="pa-2 pb-0 box" no-gutters>
                 <v-row class="ma-0">
                     <v-col
                         :sm="landscape ? 8 : 12"
@@ -146,16 +146,17 @@
                 </v-row>
                 <v-row class="ma-0">
                     <v-col
-                        :class="$vuetify.breakpoint.smAndDown ? 'px-0 py-2' : 'pa-2'"
+                        :class="$vuetify.breakpoint.smAndDown ? 'pa-0' : 'pa-2 pb-1'"
                     >
                         <h2 class="px-2">
                             {{ $t("packs.packContents") }}
                         </h2>
                         <v-divider/>
-                        <ThemesSlideGroup
+                        <ItemGrid
                             :items="pack.themes"
                             :show-props="['target']"
-                            :focusOnId="focusOnId"
+                            :loading="false"
+                            type="themes"
                         />
                     </v-col>
                 </v-row>
@@ -180,7 +181,7 @@ export default Vue.extend({
         ReportButton: () => import("@/components/buttons/ReportButton.vue"),
         LikeButton: () => import("@/components/buttons/LikeButton.vue"),
         ShareButton: () => import("@/components/buttons/ShareButton.vue"),
-        ThemesSlideGroup: () => import("@/components/ThemesSlideGroup.vue"),
+        ItemGrid: () => import("@/components/ItemGrid.vue"),
         EditButton: () => import("@/components/buttons/EditButton.vue"),
         LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
