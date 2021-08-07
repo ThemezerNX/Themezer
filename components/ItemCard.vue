@@ -26,7 +26,7 @@
                 height="auto"
                 hide-delimiter-background
                 hide-delimiters
-                interval="2000"
+                interval="1500"
                 style="border-radius: 16px "
             >
                 <v-carousel-item v-for="(theme, i) in item.themes" :key="i" >
