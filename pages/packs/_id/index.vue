@@ -140,8 +140,6 @@
                         </ButtonDivider>
 
                         <ThemeInstaller :id="pack.id" type="pack"/>
-
-                        <ButtonDivider/>
                     </v-col>
                 </v-row>
                 <v-row class="ma-0">
