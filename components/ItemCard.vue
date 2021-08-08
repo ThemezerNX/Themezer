@@ -81,7 +81,7 @@
                 v-if="showProps.includes('target') && item.target"
                 class="creator mx-2"
             >
-                {{ item.target }}
+                {{ toNiceWebName(item.target) }}
             </v-card-subtitle>
 
             <v-divider v-if="item.details.description" class="mx-2"/>
