@@ -165,7 +165,7 @@ export default Vue.extend({
                     url: "Games/Persona_5/Persona_5_Ryuji.jpg",
                 },
                 {
-                    upload: true,
+                    upload: false,
                 },
             ];
         },
