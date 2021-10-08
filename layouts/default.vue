@@ -277,7 +277,7 @@
         </v-main>
 
         <v-footer class="footer" absolute app inset>
-            <span class="pr-3">&copy; {{ new Date().getFullYear() }} Themezer</span>
+            <span class="pr-3">&copy; {{ new Date().getFullYear() }} ThemezerNX</span>
             <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
             <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
         </v-footer>
