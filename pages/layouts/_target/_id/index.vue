@@ -176,34 +176,6 @@
                                 />
                             </ButtonDivider>
                         </div>
-                        <h3 style="position: relative;">
-                            {{ $tc("overlayPng") }}
-                            <v-tooltip v-model="showOverlayInfo" top>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn
-                                        v-on="on"
-                                        class="ml-1 pa-0 grey lighten-1"
-                                        height="14"
-                                        icon
-                                        rounded
-                                        style="position: absolute; top: 0; color: black;"
-                                        width="14"
-                                        @click="overlayDialog = true"
-                                    >
-                                        ?
-                                    </v-btn>
-                                </template>
-                                <span>{{ $t("whatIs.this") }}</span>
-                            </v-tooltip>
-                        </h3>
-                        <ButtonDivider>
-                            <DownloadButton
-                                :download-href="
-                                    `${API_ENDPOINT}cdn/layouts/${layout.uuid}/overlay.png`
-                                "
-                                :label="$t('item.downloadOverlay')"
-                            />
-                        </ButtonDivider>
                         <h3>
                             {{ $tc("theme", 2) }}
                         </h3>
