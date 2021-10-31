@@ -29,10 +29,10 @@ export default Vue.extend({
                     !values.some((v) => v.trim().length < 2) ||
                     this.$t("rules.characterLengthMin", {field: this.$t("fields.category"), count: 2}),
                 min_category_amount: (values: Array<string>) =>
-                    !values || values.length > 0 || this.$t("categoryMin", {count: 1}),
+                    !values || values.length > 0 || this.$t("rules.categoryMin", {count: 1}),
                 max_category_amount: (values: Array<string>) =>
                     !values ||
-                    values.length <= 10 || this.$t("categoryMax", {count: 10}),
+                    values.length <= 10 || this.$t("rules.categoryMax", {count: 10}),
                 hex: (value: string) =>
                     !value ||
                     (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
