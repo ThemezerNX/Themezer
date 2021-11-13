@@ -375,7 +375,7 @@
         "contact": "Our contact page"
     },
     "themeCreators": {
-        "pageDescription": "On this page you can create an NXTheme overlay for your layout and customizations.",
+        "pageDescription": "On this page you can create NXThemes.",
         "pageHint": "Note that this online version of the Theme Injector does not support every option (for example, custom icons are missing). For all features, download the {switchThemeInjector} Windows application."
     },
     "submitLayout": {

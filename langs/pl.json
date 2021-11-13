@@ -29,7 +29,6 @@
         "commonAuthor": "Autor: {value}",
         "details": "Szczeg\u00f3\u0142y",
         "id": "ID: {value}",
-        "version": "Wersja: {value}",
         "lastUpdated": "Ostatnio zaktualizowane: {value}",
         "dlCount": "Pobra\u0144: {value}",
         "targetFile": "Plik docelowy: {value}",
@@ -67,15 +66,12 @@
         "packName": "Nazwa Paczki",
         "themeDescription": "Opis Motywu",
         "packDescription": "Opis Paczki",
-        "themeVersion": "Wersja Motywu",
-        "packVersion": "Wersja Paczki",
         "zipFile": "Plik ZIP",
         "nxthemeFile": "Plik NXTheme",
         "hex": "HEX",
         "id": "ID",
         "name": "nazwa",
         "description": "opis",
-        "version": "wersja",
         "screenshot": "ZRZUT EKRANU ({filetype}, {size})",
         "category": "kategoria",
         "categories": "Kategorie",
@@ -379,7 +375,7 @@
         "contact": "Nasza strona kontaktowa"
     },
     "themeCreators": {
-        "pageDescription": "Na tej stronie mo\u017cesz stworzy\u0107 w\u0142asn\u0105 nak\u0142adk\u0119 NXTheme.",
+        "pageDescription": "On this page you can create NXThemes.",
         "pageHint": "Webowa wersja Theme Injector nie wspiera wszystkich opcji (np. w\u0142asnych ikon). Brakuj\u0105ce opcje znajdziesz w aplikacji {switchThemeInjector} na system Windows"
     },
     "submitLayout": {

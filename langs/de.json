@@ -29,7 +29,6 @@
         "commonAuthor": "Autor: {value}",
         "details": "Einzelheiten",
         "id": "ID: {value}",
-        "version": "Version: {value}",
         "lastUpdated": "Zuletzt aktualisiert: {value}",
         "dlCount": "Downloads: {value}",
         "targetFile": "Zieldatei: {value}",
@@ -67,15 +66,12 @@
         "packName": "Set Name",
         "themeDescription": "Theme Beschreibung",
         "packDescription": "Set Beschreibung",
-        "themeVersion": "Theme Version",
-        "packVersion": "Set Version",
         "zipFile": "ZIP Datei",
         "nxthemeFile": "NXTheme Datei",
         "hex": "HEX",
         "id": "ID",
         "name": "Name",
         "description": "Beschreibung",
-        "version": "Version",
         "screenshot": "SCREENSHOT ({filetype}, {size})",
         "category": "Kategorie",
         "categories": "Kategorien",
@@ -379,7 +375,7 @@
         "contact": "Unsere Kontaktseite"
     },
     "themeCreators": {
-        "pageDescription": "Auf dieser Seite k\u00f6nnen Sie ein NXTheme-Overlay f\u00fcr Ihr Layout und Ihre Anpassungen erstellen.",
+        "pageDescription": "On this page you can create NXThemes.",
         "pageHint": "Beachten Sie, dass diese Online-Version des Theme Injector nicht alle Optionen unterst\u00fctzt (beispielsweise fehlen benutzerdefinierte Symbole). Laden Sie f\u00fcr alle Funktionen die Windows-Anwendung {switchThemeInjector} herunter."
     },
     "submitLayout": {

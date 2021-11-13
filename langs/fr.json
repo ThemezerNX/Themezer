@@ -29,7 +29,6 @@
         "commonAuthor": "Auteur : {value}",
         "details": "D\u00e9tails",
         "id": "ID : {value}",
-        "version": "Version : {value}",
         "lastUpdated": "Derni\u00e8re mise \u00e0 jour : {value}",
         "dlCount": "T\u00e9l\u00e9chargements : {value}",
         "targetFile": "Fichier cible : {value}",
@@ -67,15 +66,12 @@
         "packName": "Nom du pack",
         "themeDescription": "Description du th\u00e8me",
         "packDescription": "Description du pack",
-        "themeVersion": "Version du th\u00e8me",
-        "packVersion": "Version du pack",
         "zipFile": "Fichier ZIP",
         "nxthemeFile": "Fichier NXTheme",
         "hex": "HEX",
         "id": "ID",
         "name": "nom",
         "description": "description",
-        "version": "version",
         "screenshot": "SCREENSHOT ({filetype}, {size})",
         "category": "cat\u00e9gorie",
         "categories": "Cat\u00e9gories",
@@ -379,7 +375,7 @@
         "contact": "Notre page de contact"
     },
     "themeCreators": {
-        "pageDescription": "Sur cette page vous pouvez cr\u00e9er un overlay NXTheme pour vos layouts et vos customisations.",
+        "pageDescription": "On this page you can create NXThemes.",
         "pageHint": "Notez que cette version en ligne de l'injecteur de th\u00e8mes ne prend pas en charge toutes les options (par exemple, les ic\u00f4nes personnalis\u00e9es sont absentes). Pour avoir toutes les fonctionnalit\u00e9s, t\u00e9l\u00e9chargez l'application {switchThemeInjector} Windows."
     },
     "submitLayout": {

@@ -29,7 +29,6 @@
         "commonAuthor": "Auteur: {value}",
         "details": "Details",
         "id": "ID: {value}",
-        "version": "Versie: {value}",
         "lastUpdated": "Laatst Bijgewerkt: {value}",
         "dlCount": "Downloads: {value}",
         "targetFile": "Doelbestand: {value}",
@@ -67,15 +66,12 @@
         "packName": "Pakket naam",
         "themeDescription": "Themabeschrijving",
         "packDescription": "Pakketbeschrijving",
-        "themeVersion": "Thema versie",
-        "packVersion": "Pakket versie",
         "zipFile": "ZIP bestand",
         "nxthemeFile": "NXTheme bestand",
         "hex": "HEX",
         "id": "ID",
         "name": "naam",
         "description": "beschrijving",
-        "version": "versie",
         "screenshot": "SCREENSHOT ({filetype}, {size})",
         "category": "categorie",
         "categories": "Categorie\u00ebn",
@@ -292,7 +288,7 @@
     },
     "abouts": {
         "sourceCode": "De broncode voor het project is te vinden op de {themezerNxGithub}.",
-        "certifiedBadge": "Wat betekent de {image}-badge? Het betekent dat het NXTheme dat u downloadt automatisch wordt bijgewerkt wanneer er wijzigingen worden aangebracht in de lay-out of het thema zelf.",
+        "certifiedBadge": "Wat betekent de {image}-badge? Het betekent dat het NXTheme dat je downloadt automatisch wordt bijgewerkt wanneer er wijzigingen worden aangebracht in de lay-out of het thema zelf.",
         "notAffiliated": "Themezer is op geen enkele manier gelieerd aan Nintendo."
     },
     "contacts": {
@@ -379,7 +375,7 @@
         "contact": "Onze contactpagina"
     },
     "themeCreators": {
-        "pageDescription": "Op deze pagina kunt u een NXTheme-overlay maken voor uw lay-out en aanpassingen.",
+        "pageDescription": "Op deze pagina kun je NXThemes maken.",
         "pageHint": "Merk op dat deze online versie van de Theme Injector niet elke optie ondersteunt (het aanpassen van de iconen ontbreekt bijvoorbeeld). Download voor de volledige functionaliteit de {switchThemeInjector} Windows-toepassing."
     },
     "submitLayout": {
