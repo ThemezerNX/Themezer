@@ -2,16 +2,16 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-btn
-                v-bind="attrs"
-                v-on="on"
                 class="button"
                 color="red"
                 dark
                 rounded
+                v-bind="attrs"
                 @click="showDialog = true"
+                v-on="on"
             >
                 {{ $t("item.delete") }}
-                <v-icon right>{{ icon || 'mdi-delete' }}</v-icon>
+                <v-icon right>{{ icon || "mdi-delete" }}</v-icon>
             </v-btn>
             <v-dialog
                 v-model="showDialog"

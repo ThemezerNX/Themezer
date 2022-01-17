@@ -4,14 +4,14 @@
             <v-tooltip v-model="tooltipActive" top>
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                        v-bind="attrs"
-                        v-on="on"
                         class="button"
                         color="primary"
                         dark
                         fab
                         small
+                        v-bind="attrs"
                         @click="share()"
+                        v-on="on"
                     >
                         <slot/>
                         <v-icon
@@ -71,10 +71,10 @@ export default Vue.extend({
             const data = {
                 title: this.type ? `Themezer ${type}` : `Themezer ${this.$tc("item.item")}`,
                 text: this.$t(translationKey, {
-                        type: type.toLowerCase(),
-                        name: this.name,
-                        creator: this.creator,
-                    }),
+                    type: type.toLowerCase(),
+                    name: this.name,
+                    creator: this.creator,
+                }),
                 url: window.location.href,
             };
             const navigator: any = window.navigator;

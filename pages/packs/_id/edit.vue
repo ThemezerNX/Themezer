@@ -29,13 +29,13 @@
                         <v-col class="pa-2" cols="12">
                             <v-text-field
                                 v-model="changed.details.name"
+                                :label="`${$t('fields.packName')}*`"
                                 :rules="[
 									rules.required,
 									rules.name_length,
 									rules.utf8_only
 								]"
                                 counter="50"
-                                :label="`${$t('fields.packName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -44,13 +44,13 @@
                             ></v-text-field>
                             <v-text-field
                                 v-model="changed.details.description"
+                                :label="`${$t('fields.packDescription')}*`"
                                 :rules="[
 									rules.required,
 									rules.description_length,
 									rules.utf8_only
 								]"
                                 counter="500"
-                                :label="`${$t('fields.packDescription')}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -135,43 +135,43 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import rules from '@/components/mixins/rules'
-import targetParser from '@/components/mixins/targetParser'
-import {deletePack, pack, updatePack} from '@/graphql/Pack.gql'
-import urlParser from '~/components/mixins/urlParser'
+import Vue from "vue";
+import rules from "~/components/mixins/rules";
+import targetParser from "~/components/mixins/targetParser";
+import {deletePack, pack, updatePack} from "~/graphql/Pack.gql";
+import urlParser from "~/components/mixins/urlParser";
 
 export default Vue.extend({
     beforeRouteEnter(_to, _from, next) {
         next((vm) => {
-            if (vm.$auth.loggedIn) next()
-            else next('/')
-        })
+            if (vm.$auth.isAuthenticated) next();
+            else next("/");
+        });
     },
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DeleteButton: () => import('@/components/buttons/DeleteButton.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DeleteButton: () => import("~/components/buttons/DeleteButton.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [urlParser, targetParser, rules],
     data() {
         return {
             isPageOwner: true,
             loading: {
-                submit: false
+                submit: false,
             },
             changed: null,
 
             deleteQuery: deletePack,
             submitValid: false,
             uploadedScreenshot: null,
-            uploadedScreenshotUrl: null
-        }
+            uploadedScreenshotUrl: null,
+        };
     },
     computed: {
         changes() {
-            return JSON.stringify(this.pack) !== JSON.stringify(this.changed)
-        }
+            return JSON.stringify(this.pack) !== JSON.stringify(this.changed);
+        },
     },
     beforeRouteLeave(_to, _from, next) {
         next(vm =>
@@ -181,43 +181,43 @@ export default Vue.extend({
     watch: {
         isPageOwner(n) {
             if (!n) {
-                this.$router.push('/')
+                this.$router.push("/");
             }
-        }
+        },
     },
     apollo: {
         pack: {
             query: pack,
-            fetchPolicy: 'cache-and-network',
+            fetchPolicy: "cache-and-network",
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.pack) {
                     this.isPageOwner =
-                        this.$auth.loggedIn &&
+                        this.$auth.isAuthenticated &&
                         (data.pack.creator.id === this.$auth.user.id ||
-                            this.$auth.user.isAdmin)
+                            this.$auth.user.isAdmin);
 
                     this.updateUrlString(
                         data.pack.id,
                         data.pack.details.name,
-                        this.fileNameToWebName(data.pack.target)
-                    )
-                    this.changed = JSON.parse(JSON.stringify(data.pack))
+                        this.fileNameToWebName(data.pack.target),
+                    );
+                    this.changed = JSON.parse(JSON.stringify(data.pack));
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     methods: {
         discard() {
-            this.changed = JSON.parse(JSON.stringify(this.pack))
+            this.changed = JSON.parse(JSON.stringify(this.pack));
         },
         submit() {
-            this.loading.submit = true
+            this.loading.submit = true;
 
             this.$apollo
                 .mutate({
@@ -225,77 +225,77 @@ export default Vue.extend({
                     variables: {
                         id: this.id,
                         name: this.changed.details.name,
-                        description: this.changed.details.description
-                    }
+                        description: this.changed.details.description,
+                    },
                 })
                 .then(({data}) => {
-                    this.loading.submit = false
+                    this.loading.submit = false;
                     if (data && data.updatePack) {
-                        this.$apollo.queries.pack.refetch()
+                        this.$apollo.queries.pack.refetch();
                         this.$snackbar.message(
                             this.$t("saveSuccess"),
-                        )
+                        );
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loading.submit = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loading.submit = false;
+                });
+        },
     },
     head() {
         if (this.pack) {
             const metaTitle = `${this.$t("item.edit")} | ${this.pack.details.name}${
-                this.pack.themes.some((t) => t.categories?.includes('NSFW'))
-                    ? ' (NSFW!)'
-                    : ''
-            } | ${this.$tc("pack", 2)}`
-            const metaDesc = this.pack.details.description
+                this.pack.themes.some((t) => t.categories?.includes("NSFW"))
+                    ? " (NSFW!)"
+                    : ""
+            } | ${this.$tc("pack", 2)}`;
+            const metaDesc = this.pack.details.description;
             const metaImg = !this.pack.themes.some((t) =>
-                t.categories?.includes('NSFW')
+                t.categories?.includes("NSFW"),
             )
                 ? this.pack.themes[0].preview.original
-                : null
+                : null;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [
                     ...i18nHead.meta,
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss">

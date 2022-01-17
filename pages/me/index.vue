@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
-    middleware: ['auth'],
+    middleware: ["auth"],
     options: {
-        auth: true
+        auth: true,
     },
     beforeRouteEnter(_to, _from, next) {
         next((vm) => {
-            next(`/creators/${vm.$auth.user.id}`)
-        })
-    }
-})
+            next(`/creators/${vm.$auth.user.id}`);
+        });
+    },
+});
 </script>

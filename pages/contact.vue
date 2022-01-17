@@ -36,31 +36,31 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     head() {
-        const metaTitle = this.$t("contact")
+        const metaTitle = this.$t("contact");
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
+                },
+            ],
+        };
+    },
+});
 </script>

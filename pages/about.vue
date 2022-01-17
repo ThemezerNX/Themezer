@@ -70,19 +70,19 @@
                     <v-form v-model="restoreValid">
                         <v-text-field
                             v-model="creatorId"
-                            :disabled="!$auth.loggedIn"
+                            :disabled="!$auth.isAuthenticated"
                             :error-messages="
-								!$auth.loggedIn
+								!$auth.isAuthenticated
 									? [$t('loginRequired')]
 									: []
 							"
+                            :label="$t('restore.previousId')"
                             :rules="[
 								rules.required,
 								rules.creatorId,
 								rules.notOwnCreatorId
 							]"
                             class="mt-5"
-                            :label="$t('restore.previousId')"
                             outlined
                             prepend-icon="mdi-identifier"
                             rounded
@@ -92,15 +92,15 @@
                             :append-icon="
 								showBackupCode ? 'mdi-eye-off' : 'mdi-eye'
 							"
-                            :disabled="!$auth.loggedIn"
+                            :disabled="!$auth.isAuthenticated"
                             :error-messages="
-								!$auth.loggedIn
+								!$auth.isAuthenticated
 									? [$t('loginRequired')]
 									: []
 							"
+                            :label="$t('backupCode')"
                             :rules="[rules.required]"
                             :type="showBackupCode ? 'text' : 'password'"
-                            :label="$t('backupCode')"
                             outlined
                             prepend-icon="mdi-key-variant"
                             rounded
@@ -129,13 +129,13 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import rules from '@/components/mixins/rules'
-import {restoreAccount} from '@/graphql/Creator.gql'
+import Vue from "vue";
+import rules from "~/components/mixins/rules";
+import {restoreAccount} from "~/graphql/Creator.gql";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import('@/components/badges/CertifiedBadge.vue')
+        CertifiedBadge: () => import("~/components/badges/CertifiedBadge.vue"),
     },
     mixins: [rules],
     data() {
@@ -146,57 +146,57 @@ export default Vue.extend({
             creatorId: null,
             backupCode: null,
             loading: {
-                restore: false
-            }
-        }
+                restore: false,
+            },
+        };
     },
     methods: {
         restore() {
-            this.loading.restore = true
+            this.loading.restore = true;
             this.$apollo
                 .mutate({
                     mutation: restoreAccount,
                     variables: {
                         creator_id: this.creatorId,
-                        backup_code: this.backupCode
-                    }
+                        backup_code: this.backupCode,
+                    },
                 })
                 .then(({data}) => {
-                    this.loading.restore = false
+                    this.loading.restore = false;
                     if (data.restoreAccount) {
-                        this.$snackbar.message(this.$t("restore.success"))
+                        this.$snackbar.message(this.$t("restore.success"));
                     } else {
-                        this.$snackbar.error(this.$t("restore.success"))
+                        this.$snackbar.error(this.$t("restore.success"));
                     }
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loading.accept = false
-                })
-        }
+                    this.$snackbar.error(err);
+                    this.loading.accept = false;
+                });
+        },
     },
     head() {
-        const metaTitle = this.$t("about")
+        const metaTitle = this.$t("about");
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
+                },
+            ],
+        };
+    },
+});
 </script>

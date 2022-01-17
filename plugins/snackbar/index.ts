@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Snackbar from "./Snackbar.vue";
+import {Plugin} from "@nuxt/types";
 
-export default (context: any, inject: any) => {
+const plugin: Plugin = (context, inject) => {
     const storeModule = {
         namespaced: true,
         state: () => ({
@@ -21,35 +22,53 @@ export default (context: any, inject: any) => {
     context.store.registerModule("snackbar", storeModule);
 
     let timer: any;
-    const $snackbar = {
-        message(message: string) {
-            context.store.commit("snackbar/SET_MESSAGE", message);
-
+    const $snackbar: SnackbarPlugin = {
+        message(message: string, timeout = 8100) {
             clearTimeout(timer);
+            context.store.commit("snackbar/SET_MESSAGE", message);
             timer = setTimeout(() => {
                 context.store.commit("snackbar/SET_MESSAGE", null);
-            }, 8100);
+            }, timeout);
         },
-        error(error: Error) {
-            // eslint-disable-next-line no-console
+        error(error: Error, timeout = 8100) {
             console.error(error);
 
             let message = error.message.replace("GraphQL error: ", "") || "Unknown Error";
-            if (message.includes("Failed to fetch")) message = context.app.i18n.t("apiOffline");
-            context.store.commit(
-                "snackbar/SET_ERROR",
-                message,
-            );
+            if (message.includes("Failed to fetch")) {
+                message = context.app.i18n.t("apiOffline") as string;
+            }
 
             clearTimeout(timer);
+            context.store.commit("snackbar/SET_ERROR", message);
             timer = setTimeout(() => {
                 context.store.commit("snackbar/SET_ERROR", null);
-            }, 8100);
+            }, timeout);
         },
     };
 
     inject("snackbar", $snackbar);
-    context.$snackbar = $snackbar;
-
     Vue.component("Snackbar", Snackbar);
+};
+
+export default plugin;
+
+type SnackbarPlugin = {
+    message(message: string, timeout?: number): void;
+    error(error: Error, timeout?: number): void;
+};
+
+declare module "vue/types/vue" {
+    interface Vue {
+        $snackbar: SnackbarPlugin;
+    }
+}
+
+declare module "@nuxt/types" {
+    interface NuxtAppOptions {
+        $snackbar: SnackbarPlugin;
+    }
+
+    interface Context {
+        $snackbar: SnackbarPlugin;
+    }
 }

@@ -40,15 +40,15 @@
                         >
                             <v-img
                                 v-if="background.url"
+                                :class="{ 'img-hover': hover}"
                                 :src="
-                                  require(`@/assets/backgrounds/${background.url}`)
+                                  require(`~/assets/images/backgrounds/${background.url}`)
                                 "
                                 :width="
                                   $vuetify.breakpoint.smAndDown ? 200 : 300
                                 "
-                                class="transition-ease"
-                                :class="{ 'img-hover': hover}"
                                 aspect-ratio="1.7778"
+                                class="transition-ease"
                                 contain
                                 style="border-radius: 16px"
                             />

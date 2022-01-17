@@ -1,5 +1,5 @@
 import Vue from "vue";
-import {allLayouts} from "@/graphql/Filtering.gql";
+import {allLayouts} from "~/graphql/Filtering.gql";
 
 export default Vue.extend({
     data() {

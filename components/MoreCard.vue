@@ -7,7 +7,7 @@
             class="card d-flex align-center transition-ease"
             router
         >
-            <div class="display-2 flex-grow-1 text-center ma-4" v-if="!!$slots.title">
+            <div v-if="!!$slots.title" class="display-2 flex-grow-1 text-center ma-4">
                 <v-icon size="60">mdi-arrow-right-bold-outline</v-icon>
                 <h6 style="position: relative;">
                     <slot name="title"/>
@@ -25,7 +25,7 @@ import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
+        CertifiedBadge: () => import("~/components/badges/CertifiedBadge.vue"),
     },
     props: {
         to: {

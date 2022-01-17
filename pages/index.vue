@@ -3,12 +3,12 @@
         <card-collage :height-px="`${collageViewWindowHeight}vh`">
             <template #center>
                 <v-img
+                    :src="require('~/static/icon.png')"
                     class="collage-title-image"
                     contain
-                    :src="require('@/static/icon.png')"
                     width="128"
                 />
-                <h1 v-if="$auth.loggedIn" class="text-center pt-4 pb-3">
+                <h1 v-if="$auth.isAuthenticated" class="text-center pt-4 pb-3">
                     {{ $t("welcomeBack", {user: $auth.user.username}) }}
                 </h1>
                 <div v-else>
@@ -19,9 +19,9 @@
                 </div>
             </template>
             <template #bottom>
-                <v-btn class="collage-bottom-button" rounded large color="transparent" @click="scrollDown(false)">
+                <v-btn class="collage-bottom-button" color="transparent" large rounded @click="scrollDown(false)">
                     <h3>{{ $t("home.recentAdditions") }}</h3>
-                    <v-icon right dark>
+                    <v-icon dark right>
                         mdi-arrow-down
                     </v-icon>
                 </v-btn>
@@ -35,10 +35,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h2>
@@ -46,8 +46,8 @@
                         </h2>
                         <v-divider/>
                         <item-grid
-                            :loading="!packList || !!$apollo.queries.packList.loading"
                             :items="packList"
+                            :loading="!packList || !!$apollo.queries.packList.loading"
                             :show-props="['creator']"
                             more-url="/packs?sort=id&order=desc"
                             type="packs"
@@ -64,10 +64,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h2>
@@ -75,8 +75,8 @@
                         </h2>
                         <v-divider/>
                         <item-grid
-                            :loading="!themeList || !!$apollo.queries.themeList.loading"
                             :items="themeList"
+                            :loading="!themeList || !!$apollo.queries.themeList.loading"
                             :show-props="['creator']"
                             more-url="/themes?sort=id&order=desc"
                             type="themes"
@@ -93,10 +93,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h2>
@@ -104,8 +104,8 @@
                         </h2>
                         <v-divider/>
                         <item-grid
-                            :loading="!layoutList || !!$apollo.queries.layoutList.loading"
                             :items="layoutList"
+                            :loading="!layoutList || !!$apollo.queries.layoutList.loading"
                             :show-props="['creator']"
                             more-url="/layouts?sort=updated&order=desc"
                             type="layouts"
@@ -123,11 +123,11 @@
 
 <script>
 import Vue from "vue";
-import {rowPackList} from "@/graphql/Pack.gql";
-import {rowThemeList} from "@/graphql/Theme.gql";
-import {rowLayoutList} from "@/graphql/Layout.gql";
-import ItemGrid from "@/components/ItemGrid.vue";
-import CardCollage from "@/components/CardCollage.vue";
+import {rowPackList} from "~/graphql/Pack.gql";
+import {rowThemeList} from "~/graphql/Theme.gql";
+import {rowLayoutList} from "~/graphql/Layout.gql";
+import ItemGrid from "~/components/ItemGrid.vue";
+import CardCollage from "~/components/CardCollage.vue";
 
 export default Vue.extend({
     components: {

@@ -2,10 +2,10 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-icon
-                v-bind="attrs"
-                v-on="on"
                 :class="inline ? '' : 'badge'"
                 class="ma-1 pa-1"
+                v-bind="attrs"
+                v-on="on"
             >
                 mdi-certificate-outline
             </v-icon>

@@ -3,29 +3,29 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
-    middleware: ['auth'],
+    middleware: ["auth"],
     options: {
-        auth: false
+        auth: false,
     },
     data() {
         return {
-            error: null
-        }
+            error: null,
+        };
     },
     mounted() {
-        if (this.$auth.loggedIn) this.logout()
-        else this.$router.push('/')
+        if (this.$auth.isAuthenticated) this.logout();
+        else this.$router.push("/");
     },
     methods: {
         logout() {
-            this.error = null
-            return this.$auth.logout('social').catch((e) => {
-                this.error = e.response.data
-            })
-        }
-    }
-})
+            this.error = null;
+            return this.$auth.logout("social").catch((e) => {
+                this.error = e.response.data;
+            });
+        },
+    },
+});
 </script>

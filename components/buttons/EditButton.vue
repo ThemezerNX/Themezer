@@ -2,14 +2,14 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-btn
-                v-bind="attrs"
-                v-on="on"
                 append
                 class="button"
                 color="blue darken-1"
                 dark
                 rounded
                 to="edit"
+                v-bind="attrs"
+                v-on="on"
             >
                 {{ $t("item.edit") }}
                 <v-icon right>{{ icon || "mdi-shield-edit" }}</v-icon>

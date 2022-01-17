@@ -194,8 +194,8 @@
                         <ButtonDivider>
                             <DownloadButton
                                 :download-function="download"
-                                :loading="loadingMerge"
                                 :label="$t('item.downloadLayout')"
+                                :loading="loadingMerge"
                             />
                             <ShareButton
                                 :creator="layout.creator.display_name"
@@ -212,24 +212,24 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {downloadLayout, layout} from '@/graphql/Layout.gql'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '~/components/mixins/urlParser'
+import Vue from "vue";
+import {downloadLayout, layout} from "~/graphql/Layout.gql";
+import targetParser from "~/components/mixins/targetParser";
+import urlParser from "~/components/mixins/urlParser";
 
 export default Vue.extend({
     beforeRouteEnter(to, _from, next) {
         if (to.params.id) {
-            next()
+            next();
         } else {
-            next('/')
+            next("/");
         }
     },
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DownloadButton: () => import('@/components/buttons/DownloadButton.vue'),
-        ShareButton: () => import('@/components/buttons/ShareButton.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
+        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [urlParser, targetParser],
     data() {
@@ -239,71 +239,71 @@ export default Vue.extend({
             preview: null,
             loadingMerge: false,
             activePieces: [],
-            restoredActivePieces: false
-        }
+            restoredActivePieces: false,
+        };
     },
     computed: {
         backgroundStyle() {
             if (this.$store.state.background) {
                 return (
-                    'background-image: url(' +
-                    (this.$store.state.background.startsWith('blob')
+                    "background-image: url(" +
+                    (this.$store.state.background.startsWith("blob")
                         ? this.$store.state.background
-                        : require(`@/assets/backgrounds/${this.$store.state.background}`)) +
-                    ')'
-                )
-            } else if (this.$route.params.target === 'playerselect') {
-                return `background-image: url(/images/blurredhome.jpg);`
+                        : require(`~/assets/images/backgrounds/${this.$store.state.background}`)) +
+                    ")"
+                );
+            } else if (this.$route.params.target === "playerselect") {
+                return `background-image: url(/images/blurredhome.jpg);`;
             } else if (this.layout.details.color) {
-                return `background: ${this.layout.details.color};`
+                return `background: ${this.layout.details.color};`;
             } else {
-                return `background: #2d2d2d;`
+                return `background: #2d2d2d;`;
             }
         },
         activePiecesComputed() {
-            return this.activePieces
-        }
+            return this.activePieces;
+        },
     },
     watch: {
         activePiecesComputed(n) {
             this.$router
                 .replace({
-                    query: {pieces: n.length > 0 ? n.join() : undefined}
+                    query: {pieces: n.length > 0 ? n.join() : undefined},
                 }) // Don't throw 'redundant navigation'
                 .catch(() => {
-                })
-        }
+                });
+        },
     },
     apollo: {
         layout: {
             query: layout,
             variables() {
                 return {
-                    id: this.id
-                }
+                    id: this.id,
+                };
             },
             result({data}) {
                 if (data && data.layout) {
                     this.updateUrlString(
                         data.layout.id,
                         data.layout.details.name,
-                        this.fileNameToWebName(data.layout.target)
-                    )
+                        this.fileNameToWebName(data.layout.target),
+                    );
 
                     if (this.$route.query.pieces) {
                         this.activePieces = this.$route.query.pieces
                             .toLowerCase()
-                            .split(',')
+                            .split(",")
                             .filter((uuid) =>
                                 data.layout.pieces.some((p) =>
-                                    p.values.some((v) => v.uuid === uuid)
-                                )
-                            )
+                                    p.values.some((v) => v.uuid === uuid),
+                                ),
+                            );
 
                         if (this.activePieces.length > 0) {
                             this.activePieces.forEach((aP) => {
-                                let index
-                                let value
+                                let index;
+                                let value;
                                 for (
                                     let i = 0;
                                     i < data.layout.pieces.length;
@@ -311,170 +311,170 @@ export default Vue.extend({
                                 ) {
                                     data.layout.pieces[i].values.find((v) => {
                                         if (v.uuid === aP) {
-                                            index = i
+                                            index = i;
                                             if (
                                                 data.layout.pieces[i].values
                                                     .length > 1
                                             ) {
                                                 // Dropdown
-                                                value = v.value
+                                                value = v.value;
                                             } else {
                                                 // Checkbox
-                                                value = true
+                                                value = true;
                                             }
-                                            return true
+                                            return true;
                                         }
-                                    })
+                                    });
                                 }
 
                                 // noinspection JSUnusedAssignment
-                                this.$data.data[index] = value
-                            })
+                                this.$data.data[index] = value;
+                            });
                         }
                     }
-                    this.restoredActivePieces = true
+                    this.restoredActivePieces = true;
                 }
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     methods: {
         dropdownKeys(items) {
-            const values = items.map((item) => item.value)
-            values.unshift('Default')
-            return values
+            const values = items.map((item) => item.value);
+            values.unshift("Default");
+            return values;
         },
         setPreview(option, value, data) {
-            if (data && data !== 'Default') {
+            if (data && data !== "Default") {
                 if (value.image) {
                     this.preview = encodeURI(
-                        `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/pieces/${option.name}/${value.image}`
-                    )
+                        `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/pieces/${option.name}/${value.image}`,
+                    );
                 }
-            } else this.preview = null
+            } else this.preview = null;
         },
         valueChange(value, pieces) {
             if (value === true) {
                 // Checkbox
-                this.activePieces.push(pieces[0].uuid)
+                this.activePieces.push(pieces[0].uuid);
             } else if (value === false) {
                 // Unchecked checkbox
                 this.activePieces = this.activePieces.filter(
-                    (u) => u !== pieces[0].uuid
-                )
-            } else if (typeof value === 'string') {
+                    (u) => u !== pieces[0].uuid,
+                );
+            } else if (typeof value === "string") {
                 // Dropdown
-                const newPiece = pieces.find((v) => v.value === value)
+                const newPiece = pieces.find((v) => v.value === value);
                 const removePieces = pieces
                     .filter((v) => v.value !== value)
-                    .map((v) => v.uuid)
+                    .map((v) => v.uuid);
 
                 this.activePieces = this.activePieces.filter(
-                    (uuid) => !removePieces.includes(uuid)
-                )
+                    (uuid) => !removePieces.includes(uuid),
+                );
 
                 if (newPiece) {
                     // If not 'Default'
-                    this.activePieces.push(newPiece.uuid)
+                    this.activePieces.push(newPiece.uuid);
                 }
             }
         },
         combineLayouts() {
-            const usedPieces = []
+            const usedPieces = [];
 
             for (let i = 0; i < this.data.length; i++) {
                 if (this.data[i] === true) {
                     // Checkbox
-                    usedPieces.push(this.layout.pieces[i].values[0].uuid)
+                    usedPieces.push(this.layout.pieces[i].values[0].uuid);
                 } else if (
-                    typeof this.data[i] === 'string' &&
-                    this.data[i] !== 'Default'
+                    typeof this.data[i] === "string" &&
+                    this.data[i] !== "Default"
                 ) {
                     // Dropdown
                     const selected = this.layout.pieces[i].values.find(
-                        (v) => v.value === this.data[i]
-                    )
-                    usedPieces.push(selected.uuid)
+                        (v) => v.value === this.data[i],
+                    );
+                    usedPieces.push(selected.uuid);
                 }
             }
 
-            this.loadingMerge = true
+            this.loadingMerge = true;
             this.$apollo
                 .mutate({
                     mutation: downloadLayout,
                     variables: {
                         id: this.layout.id,
-                        piece_uuids: usedPieces
-                    }
+                        piece_uuids: usedPieces,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingMerge = false
+                    this.loadingMerge = false;
 
                     this.downloadFile(
                         data.downloadLayout,
-                        'application/json',
-                        this.layout.details.name
-                    )
+                        "application/json",
+                        this.layout.details.name,
+                    );
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingMerge = false
-                })
+                    this.$snackbar.error(err);
+                    this.loadingMerge = false;
+                });
         },
         download() {
             this.combineLayouts(
                 this.layout.baselayout,
-                this.layout.details.name
-            )
-        }
+                this.layout.details.name,
+            );
+        },
     },
     head() {
         if (this.layout) {
             const metaTitle = `${
                 this.layout.details.name
-            } | ${this.targetName()} | Layouts`
-            const metaDesc = this.layout.details.description
-            const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`
+            } | ${this.targetName()} | Layouts`;
+            const metaDesc = this.layout.details.description;
+            const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [
                     ...i18nHead.meta,
                     {
-                        hid: 'description',
-                        name: 'description',
-                        content: metaDesc
+                        hid: "description",
+                        name: "description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:title',
-                        name: 'og:title',
-                        property: 'og:title',
-                        content: metaTitle
+                        hid: "og:title",
+                        name: "og:title",
+                        property: "og:title",
+                        content: metaTitle,
                     },
                     {
-                        hid: 'og:description',
-                        name: 'og:description',
-                        property: 'og:description',
-                        content: metaDesc
+                        hid: "og:description",
+                        name: "og:description",
+                        property: "og:description",
+                        content: metaDesc,
                     },
                     {
-                        hid: 'og:image',
-                        name: 'og:image',
-                        property: 'og:image',
-                        content: metaImg
-                    }
-                ]
-            }
+                        hid: "og:image",
+                        name: "og:image",
+                        property: "og:image",
+                        content: metaImg,
+                    },
+                ],
+            };
         }
-    }
-})
+    },
+});
 </script>
 
 <style lang="scss">

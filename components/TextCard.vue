@@ -1,5 +1,5 @@
 <template>
-    <v-card class="box" :max-width="maxWidth" style="border-radius: 20px;">
+    <v-card :max-width="maxWidth" class="box" style="border-radius: 20px;">
         <v-card-title class="headline">
             {{ title }}
         </v-card-title>
@@ -13,7 +13,8 @@
                 </p>
                 <ul v-if="item.list">
                     <li v-for="list_item in item.list" :key="item.title">
-                        <a v-if="list_item.title_to && list_item.title_to.includes('http')" target="_blank" :href="list_item.title_to">
+                        <a v-if="list_item.title_to && list_item.title_to.includes('http')" :href="list_item.title_to"
+                           target="_blank">
                             <h3>{{ list_item.title }}</h3>
                         </a>
                         <nuxt-link v-else-if="list_item.title_to" :to="list_item.title_to">
@@ -31,7 +32,7 @@
             <hr class="mb-2"/>
         </v-card-text>
 
-        <slot name="footer" />
+        <slot name="footer"/>
     </v-card>
 </template>
 

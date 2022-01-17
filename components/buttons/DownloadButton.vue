@@ -2,15 +2,15 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-btn
-                v-bind="attrs"
-                v-on="on"
                 :href="downloadHref"
                 :loading="loading"
                 append
                 color="secondary"
                 rounded
                 target="_blank"
+                v-bind="attrs"
                 @click="downloadFunction()"
+                v-on="on"
             >
                 <slot/>
                 <v-icon :right="!!$slots.default">{{

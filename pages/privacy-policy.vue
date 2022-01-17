@@ -1,6 +1,6 @@
 <template>
     <v-layout align-center column justify-center pa-3>
-        <TextCard :title="title" :subtitle="subtitle" :max-width="1000" :items="privacyPolicy"/>
+        <TextCard :items="privacyPolicy" :max-width="1000" :subtitle="subtitle" :title="title"/>
     </v-layout>
 </template>
 
@@ -20,18 +20,18 @@ export default Vue.extend({
     computed: {
         title() {
             return this.$t("privacyPolicy");
-        }
+        },
     },
     head() {
         const metaTitle = this.title;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [

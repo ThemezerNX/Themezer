@@ -1,7 +1,7 @@
 <template>
     <v-fade-transition>
-        <div style="position: relative;" ref="divdiv"
-             :style="minLoaderHeight !== '' ? `min-height: ${minLoaderHeight}` : ''">
+        <div ref="divdiv" :style="minLoaderHeight !== '' ? `min-height: ${minLoaderHeight}` : ''"
+             style="position: relative;">
             <v-fade-transition>
                 <v-flex
                     v-show="loading"

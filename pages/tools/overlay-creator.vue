@@ -28,10 +28,10 @@
                 <v-col class="pa-2" cols="12">
                     <v-file-input
                         v-model="layoutJson"
+                        :label="`${$tc('layout')}*`"
                         accept="application/json"
                         filled
                         hide-details
-                        :label="`${$tc('layout')}*`"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -39,10 +39,10 @@
                 <v-col class="pa-2" cols="12">
                     <v-file-input
                         v-model="pieceJson"
+                        :label="$tc('layoutOption')"
                         accept="application/json"
                         filled
                         hide-details
-                        :label="$tc('layoutOption')"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -50,10 +50,10 @@
                 <v-col class="pa-2" cols="12">
                     <v-file-input
                         v-model="commonJson"
+                        :label="$tc('commonLayout')"
                         accept="application/json"
                         filled
                         hide-details
-                        :label="$tc('commonLayout')"
                         prepend-icon="mdi-code-json"
                         rounded
                     />
@@ -90,8 +90,8 @@
                     xs="12"
                 >
                     <v-img
-                        :src="screenshotWhiteUrl"
                         :alt="$t('overlayCreators.screenshotWithWhiteBackground')"
+                        :src="screenshotWhiteUrl"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -105,11 +105,11 @@
                 >
                     <v-file-input
                         v-model="whiteImg"
+                        :label="`${$t('overlayCreators.screenshotWithWhiteBackground')}*`"
                         accept="image/jpeg"
                         filled
                         hide-details
                         label="*"
-                        :label="`${$t('overlayCreators.screenshotWithWhiteBackground')}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotWhiteChange"
@@ -125,8 +125,8 @@
                     xs="12"
                 >
                     <v-img
-                        :src="screenshotBlackUrl"
                         :alt="$t('overlayCreators.screenshotWithBlackBackground')"
+                        :src="screenshotBlackUrl"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -140,10 +140,10 @@
                 >
                     <v-file-input
                         v-model="blackImg"
+                        :label="`${$t('overlayCreators.screenshotWithBlackBackground')}*`"
                         accept="image/jpeg"
                         filled
                         hide-details
-                        :label="`${$t('overlayCreators.screenshotWithBlackBackground')}*`"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotBlackChange"
@@ -173,8 +173,8 @@
                 </v-col>
                 <v-col class="pa-2" cols="12" sm="4" xs="12">
                     <v-img
-                        :src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
                         :alt="$t('overlayCreators.generatedImage')"
+                        :src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
                         aspect-ratio="1.7778"
                         class="placeholder"
                         contain
@@ -199,13 +199,13 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {createOverlay, createOverlayNXThemes} from '@/graphql/CreateOverlay.gql'
+import Vue from "vue";
+import {createOverlay, createOverlayNXThemes} from "~/graphql/CreateOverlay.gql";
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import('@/components/buttons/ButtonDivider.vue'),
-        DownloadButton: () => import('@/components/buttons/DownloadButton.vue')
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
     },
     data() {
         return {
@@ -218,14 +218,14 @@ export default Vue.extend({
             whiteImg: null,
             screenshotWhiteUrl: null,
             resultImage: null,
-            loadingUploadScreenshots: false
-        }
+            loadingUploadScreenshots: false,
+        };
     },
     methods: {
         uploadLayout() {
-            this.loadingUploadLayout = true
-            this.blackImg = null
-            this.whiteImg = null
+            this.loadingUploadLayout = true;
+            this.blackImg = null;
+            this.whiteImg = null;
 
             this.$apollo
                 .mutate({
@@ -233,114 +233,114 @@ export default Vue.extend({
                     variables: {
                         layout: this.layoutJson,
                         piece: this.pieceJson,
-                        common: this.commonJson
-                    }
+                        common: this.commonJson,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingUploadLayout = false
+                    this.loadingUploadLayout = false;
                     data.createOverlayNXThemes.forEach((file) => {
                         this.downloadFileB64(
                             file.data,
                             file.mimetype,
-                            file.filename
-                        )
-                    })
+                            file.filename,
+                        );
+                    });
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingUploadLayout = false
-                })
+                    this.$snackbar.error(err);
+                    this.loadingUploadLayout = false;
+                });
         },
         onScreenshotBlackChange(file) {
             if (file) {
-                this.resultImage = null
-                this.screenshotBlackUrl = URL.createObjectURL(file)
+                this.resultImage = null;
+                this.screenshotBlackUrl = URL.createObjectURL(file);
             }
         },
         onScreenshotWhiteChange(file) {
             if (file) {
-                this.resultImage = null
-                this.screenshotWhiteUrl = URL.createObjectURL(file)
+                this.resultImage = null;
+                this.screenshotWhiteUrl = URL.createObjectURL(file);
             }
         },
         uploadScreenshots() {
-            if (!(this.blackImg && this.whiteImg)) return
+            if (!(this.blackImg && this.whiteImg)) return;
 
-            this.resultImage = null
-            this.loadingUploadScreenshots = true
+            this.resultImage = null;
+            this.loadingUploadScreenshots = true;
             this.$apollo
                 .mutate({
                     mutation: createOverlay,
                     variables: {
                         blackImg: this.blackImg,
-                        whiteImg: this.whiteImg
-                    }
+                        whiteImg: this.whiteImg,
+                    },
                 })
                 .then(({data}) => {
-                    this.loadingUploadScreenshots = false
-                    this.resultImage = data.createOverlay
+                    this.loadingUploadScreenshots = false;
+                    this.resultImage = data.createOverlay;
 
-                    const self = this
+                    const self = this;
                     setTimeout(() => {
-                        const button = self.$refs.sheet
-                        const position = button.getBoundingClientRect().bottom
-                        window.scrollTo({top: position, behavior: 'smooth'})
-                    }, 200)
+                        const button = self.$refs.sheet;
+                        const position = button.getBoundingClientRect().bottom;
+                        window.scrollTo({top: position, behavior: "smooth"});
+                    }, 200);
                 })
                 .catch((err) => {
-                    this.$snackbar.error(err)
-                    this.loadingUploadScreenshots = false
-                })
+                    this.$snackbar.error(err);
+                    this.loadingUploadScreenshots = false;
+                });
         },
         download() {
             this.downloadFileB64(
                 this.resultImage.data,
-                'image/png',
-                this.resultImage.filename
-            )
-        }
+                "image/png",
+                this.resultImage.filename,
+            );
+        },
     },
     head() {
-        const metaTitle = `${this.$tc("overlayCreator")} | ${this.$tc("tool", 2)}`
-        const metaDesc = this.$t("overlayCreators.pageDescription")
-        const metaImg = null
+        const metaTitle = `${this.$tc("overlayCreator")} | ${this.$tc("tool", 2)}`;
+        const metaDesc = this.$t("overlayCreators.pageDescription");
+        const metaImg = null;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>

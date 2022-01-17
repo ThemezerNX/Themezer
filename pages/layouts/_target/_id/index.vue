@@ -60,10 +60,10 @@
                                 :count="
                                   layout.like_count > 0
                                     ? layout.like_count
-                                    : ($auth.loggedIn && $auth.user.liked.layouts.some((l) => l.id === layout.id) ? 1 : 0)
+                                    : ($auth.isAuthenticated && $auth.user.liked.layouts.some((l) => l.id === layout.id) ? 1 : 0)
                                 "
                                 :value="
-                                  $auth.loggedIn && $auth.user.liked.layouts.some((l) => l.id === layout.id)
+                                  $auth.isAuthenticated && $auth.user.liked.layouts.some((l) => l.id === layout.id)
                                 "
                                 type="layouts"
                             />
@@ -87,7 +87,9 @@
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
                                 <template v-slot:value>
-                                    <span class="font-weight-light">{{ $d(new Date(layout.last_updated), "short") }}</span>
+                                    <span class="font-weight-light">{{
+                                            $d(new Date(layout.last_updated), "short")
+                                        }}</span>
                                 </template>
                             </i18n>
                         </div>
@@ -112,15 +114,15 @@
                         <ButtonDivider>
                             <OptionsButton
                                 v-if="layout.has_pieces && !!layout.baselayout"
+                                :label="$t('item.customizeLayout')"
                                 :loading="loadingMerge"
                                 to="options"
-                                :label="$t('item.customizeLayout')"
                             />
                             <DownloadButton
                                 v-if="!!layout.baselayout"
                                 :download-function="download"
-                                :loading="loadingMerge"
                                 :label="$t('item.downloadLayout')"
+                                :loading="loadingMerge"
                             />
                         </ButtonDivider>
 
@@ -130,7 +132,6 @@
                                 <v-tooltip v-model="showCommonInfo" top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
-                                            v-on="on"
                                             class="ml-1 pa-0 grey lighten-1"
                                             height="14"
                                             icon
@@ -138,6 +139,7 @@
                                             style="position: absolute; top: 0; color: black;"
                                             width="14"
                                             @click="commonlayoutDialog = true"
+                                            v-on="on"
                                         >
                                             ?
                                         </v-btn>
@@ -171,8 +173,8 @@
                             <ButtonDivider>
                                 <DownloadButton
                                     :download-function="downloadCommon"
-                                    :loading="loadingGetCommon"
                                     :label="$t('item.downloadCommonLayout')"
+                                    :loading="loadingGetCommon"
                                 />
                             </ButtonDivider>
                         </div>
@@ -208,7 +210,12 @@
                         </v-card-title>
 
                         <v-card-text>
-                            {{ $t("whatIs.commonLayoutDescription", {playerSelect: $t("target.playerselect"), userPage: $t("target.userpage")}) }}
+                            {{
+                                $t("whatIs.commonLayoutDescription", {
+                                    playerSelect: $t("target.playerselect"),
+                                    userPage: $t("target.userpage"),
+                                })
+                            }}
                         </v-card-text>
 
                         <v-card-actions>
@@ -256,20 +263,20 @@
 
 <script>
 import Vue from "vue";
-import shared from "@/layouts/details/SharedScript";
-import {downloadCommonLayout, downloadLayout, layout} from "@/graphql/Layout.gql";
-import targetParser from "@/components/mixins/targetParser";
+import shared from "~/layouts/details/SharedScript";
+import {downloadCommonLayout, downloadLayout, layout} from "~/graphql/Layout.gql";
+import targetParser from "~/components/mixins/targetParser";
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
-        OptionsButton: () => import("@/components/buttons/OptionsButton.vue"),
-        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
-        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        OptionsButton: () => import("~/components/buttons/OptionsButton.vue"),
+        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
+        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
         BackgroundsSlideGroup: () =>
-            import("@/components/BackgroundsSlideGroup.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+            import("~/components/BackgroundsSlideGroup.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser],
     data() {
@@ -290,7 +297,7 @@ export default Vue.extend({
                     "background-image: url(" +
                     (this.$store.state.background.startsWith("blob")
                         ? this.$store.state.background
-                        : require(`@/assets/backgrounds/${this.$store.state.background}`)) +
+                        : require(`~/assets/images/backgrounds/${this.$store.state.background}`)) +
                     ")"
                 );
             } else if (this.$route.params.target === "playerselect") {
@@ -384,13 +391,13 @@ export default Vue.extend({
             const metaDesc = this.layout.details.description;
             const metaImg = `${process.env.API_ENDPOINT}cdn/layouts/${this.layout.uuid}/overlay.png`;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [

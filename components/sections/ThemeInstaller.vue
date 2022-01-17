@@ -5,7 +5,6 @@
             <v-tooltip v-model="showTooltip" top>
                 <template v-slot:activator="{ on }">
                     <v-btn
-                        v-on="on"
                         class="ml-1 pa-0 grey lighten-1"
                         height="14"
                         icon
@@ -13,6 +12,7 @@
                         style="position: absolute; top: 0; color: black;"
                         width="14"
                         @click="show = true"
+                        v-on="on"
                     >
                         ?
                     </v-btn>

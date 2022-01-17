@@ -19,33 +19,33 @@
 
 <script>
 export default {
-    layout: 'empty',
+    layout: "empty",
     props: {
         error: {
             type: Object,
-            default: null
-        }
+            default: null,
+        },
     },
     data() {
         return {
             pageNotFound: this.$t("error.pageNotFound"),
-            otherError: this.$t("error.otherError")
-        }
+            otherError: this.$t("error.otherError"),
+        };
     },
     computed: {
         title() {
             return (
-                this.error.message.replace('GraphQL error: ', '') ||
+                this.error.message.replace("GraphQL error: ", "") ||
                 (this.error.statusCode === 404
                     ? this.pageNotFound
                     : this.otherError)
-            )
-        }
+            );
+        },
     },
     head() {
         return {
-            title: this.title
-        }
-    }
-}
+            title: this.title,
+        };
+    },
+};
 </script>

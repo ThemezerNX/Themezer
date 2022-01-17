@@ -2,7 +2,10 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center"><v-icon style="vertical-align: baseline;" left v-text="targetIcon(target())"></v-icon>{{ $tc("layout", 2) }}</h2>
+                <h2 class="text-center">
+                    <v-icon left style="vertical-align: baseline;" v-text="targetIcon(target())"></v-icon>
+                    {{ $tc("layout", 2) }}
+                </h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -65,17 +68,17 @@
 
 <script>
 import Vue from "vue";
-import {allCreators, layoutList} from "@/graphql/Layout.gql";
-import targetParser from "@/components/mixins/targetParser";
-import filter from "@/components/mixins/filter";
-import allowedTargets from "@/components/mixins/allowedTargets";
-import {targetIcon} from "@/assets/targets";
+import {allCreators, layoutList} from "~/graphql/Layout.gql";
+import targetParser from "~/components/mixins/targetParser";
+import filter from "~/components/mixins/filter";
+import allowedTargets from "~/components/mixins/allowedTargets";
+import {targetIcon} from "~/assets/targets";
 
 export default Vue.extend({
     components: {
-        Filters: () => import("@/components/Filters.vue"),
-        ItemCard: () => import("@/components/ItemCard.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+        Filters: () => import("~/components/Filters.vue"),
+        ItemCard: () => import("~/components/ItemCard.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, filter],
     data() {

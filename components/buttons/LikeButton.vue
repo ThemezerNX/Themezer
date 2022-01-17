@@ -2,17 +2,17 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-btn
-                v-bind="attrs"
-                v-on="on"
                 :color="newValue ? 'red' : ''"
+                :disabled="!$auth.isAuthenticated"
                 class="button"
                 dark
                 rounded
-                :disabled="!$auth.loggedIn"
+                v-bind="attrs"
                 @click="like()"
+                v-on="on"
             >
                 {{ newCount }}
-                <v-icon right>{{ icon || 'mdi-heart' }}</v-icon>
+                <v-icon right>{{ icon || "mdi-heart" }}</v-icon>
             </v-btn>
         </template>
         <span>{{ newValue ? $t("item.unlike") : $t("item.like") }}</span>
@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {setLike} from "@/graphql/Like.gql";
+import {setLike} from "~/graphql/Like.gql";
 
 export default Vue.extend({
     props: {

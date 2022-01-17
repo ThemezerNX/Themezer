@@ -1,29 +1,33 @@
-require("dotenv").config();
-const ImageminPlugin = require("imagemin-webpack-plugin").default;
+import {config} from "dotenv";
+import {NuxtConfig} from "@nuxt/types";
 import path from "path";
 import fs from "fs";
 
-const locales = fs.readdirSync(path.resolve(__dirname, "langs")).map((file) => {
+config();
+
+const langsPath = path.resolve(__dirname, "langs");
+
+const locales = fs.readdirSync(langsPath).map((file) => {
     // isos: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     const code = path.basename(file, ".json");
     return {
         code,
         iso: code,
         file,
-        name: JSON.parse(fs.readFileSync(path.resolve(__dirname, "langs", file))).lang,
+        name: JSON.parse(fs.readFileSync(path.join(langsPath, file)).toString()).lang,
     };
 });
 
-export default {
+const nuxtConfig: NuxtConfig = {
     env: {
         APP_TITLE: "Themezer",
-        ENDPOINT: process.env.ENDPOINT,
-        API_ENDPOINT: process.env.API_ENDPOINT,
+        ENDPOINT: process.env.ENDPOINT || "http://localhost:4000",
+        API_ENDPOINT: process.env.API_ENDPOINT || "http://localhost:4100",
     },
 
     server: {
-        port: process.env.PORT,
-        host: process.env.HOST,
+        port: process.env.PORT || 4100,
+        host: process.env.HOST || "localhost",
     },
 
     head: {
@@ -77,24 +81,27 @@ export default {
     loading: {color: "#b40a86"},
 
     plugins: [
-        "@/plugins/linkify",
-        "@/plugins/snackbar",
-        "@/plugins/hashString",
+        "~/plugins/linkify",
+        "~/plugins/snackbar",
+        "~/plugins/objectHash",
+        "~/plugins/axiosErrorHandler",
         {
-            src: "@/plugins/pagination",
+            src: "~/plugins/downloader",
             mode: "client",
         },
         {
-            src: "@/plugins/downloadFile",
+            src: "~/plugins/cookieBanner",
             mode: "client",
         },
-        {
-            src: "@/plugins/cookieBanner",
-            mode: "client",
-        },
+        "~/plugins/auth",
     ],
 
-    buildModules: ["@nuxt/typescript-build", "@nuxtjs/vuetify", "@nuxtjs/gtm"],
+    buildModules: [
+        "@nuxt/typescript-build",
+        "@nuxtjs/vuetify",
+        "@nuxtjs/gtm",
+        "@nuxtjs/imagemin",
+    ],
 
     modules: [
         "@nuxtjs/axios",
@@ -103,15 +110,13 @@ export default {
         "@nuxtjs/dotenv",
         "@nuxtjs/redirect-module",
         ["cookie-universal-nuxt", {parseJSON: false}],
-        "@nuxtjs/auth-next",
-        "nuxt-i18n",
+        "@nuxtjs/i18n",
     ],
 
     i18n: {
         locales,
         lazy: true,
-        langDir: "langs/",
-        seo: false, // instead declare head hooks in layouts
+        langDir: langsPath,
         defaultLocale: "en",
         defaultDirection: "auto",
         strategy: "no_prefix",
@@ -120,13 +125,13 @@ export default {
             dateTimeFormats: {
                 en: {
                     short: {
-                        year: 'numeric', month: 'short', day: 'numeric'
+                        year: "numeric", month: "short", day: "numeric",
                     },
                     long: {
-                        year: 'numeric', month: 'short', day: 'numeric',
-                        weekday: 'short', hour: 'numeric', minute: 'numeric',
-                        hour12: false
-                    }
+                        year: "numeric", month: "short", day: "numeric",
+                        weekday: "short", hour: "numeric", minute: "numeric",
+                        hour12: false,
+                    },
                 },
             },
         },
@@ -135,7 +140,7 @@ export default {
     redirect: [
         {
             from: "(?!^/$|^/[?].*$)(.*/[?](.*)$|.*/$)",
-            to: (_from, req) => {
+            to: (_from: any, req: { _parsedUrl: { pathname: string, search?: string } }) => {
                 const base = req._parsedUrl.pathname.replace(/\/$/, "");
                 const search = req._parsedUrl.search;
                 return base + (search != null ? search : "");
@@ -150,9 +155,8 @@ export default {
 
     apollo: {
         clientConfigs: {
-            default: "~/plugins/apolloClient",
+            default: "~/apolloClient.config",
         },
-        errorHandler: "~/plugins/apolloErrorHandler",
     },
 
     pwa: {
@@ -160,7 +164,7 @@ export default {
             name: "Themezer",
             short_name: "Themezer",
             description: process.env.npm_package_description || "",
-            lang: "en",
+            lang: "en-US",
             theme_color: "#0ab379",
             background_color: "#121212",
         },
@@ -170,53 +174,15 @@ export default {
     },
 
     vuetify: {
-        optionsPath: "./vuetify.options.ts",
+        optionsPath: "./vuetify.options",
     },
-
-    auth: {
-        cookie: {
-            prefix: "auth.",
-            options: {
-                maxAge: 604800,
-            },
-        },
-        redirect: {
-            callback: "/logged-in",
-        },
-        rewriteRedirects: false,
-        watchLoggedIn: false,
-        strategies: {
-            social: {
-                scheme: "@/schemes/customScheme",
-                clientId: "722724539028734003",
-                useForms: true,
-                endpoints: {
-                    authorization: "https://discord.com/api/oauth2/authorize",
-                    token: "https://discord.com/api/oauth2/token",
-                    userInfo: "https://discord.com/api/users/@me",
-                },
-                scope: ["identify"],
-                token: {
-                    type: "Bearer",
-                    name: "Authorization",
-                    maxAge: 60 * 60 * 24 * 7, // 7 days
-                },
-                refreshToken: {
-                    property: "refresh_token",
-                    maxAge: 60 * 60 * 24 * 30,
-                },
-            },
-        },
-    },
-
-    components: false,
 
     router: {
         trailingSlash: false,
     },
 
     build: {
-        transpile: ["@nuxtjs/auth-next", "vuetify/lib"],
+        transpile: ["vuetify/lib"],
         extractCSS: process.env.NODE_ENV === "production",
         parallel: process.env.NODE_ENV !== "production",
         optimization: {
@@ -224,29 +190,8 @@ export default {
                 chunks: "all",
             },
         },
-        plugins: [
-            new ImageminPlugin({
-                disable: process.env.NODE_ENV !== "production",
-                pngquant: {
-                    quality: "80-100",
-                },
-            }),
-        ],
-        extend(config, {isDev, isClient, loaders: {vue}}) {
-            if (isDev) {
-                config.mode = "development";
-            } else if (isClient) {
-                vue.transformAssetUrls["v-img"] = "src";
-                config.optimization.splitChunks.maxSize = 200000;
-                config.optimization.splitChunks.cacheGroups = {
-                    styles: {
-                        name: "styles",
-                        test: /\.(css|vue)$/,
-                        chunks: "all",
-                        enforce: true,
-                    },
-                };
-            }
-        },
     },
+
 };
+
+export default nuxtConfig;

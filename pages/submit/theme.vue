@@ -14,11 +14,12 @@
                             style="height: 24px"
                             text
                             @click="submitInfoDialog = true"
-                        >{{ $t("readThis") }}</v-btn>
+                        >{{ $t("readThis") }}
+                        </v-btn>
                     </template>
                 </i18n>
                 <v-dialog v-model="submitInfoDialog" class="mx-auto" max-width="1000">
-                    <TextCard title="More Info" max-width="1000" :items="submitInfo">
+                    <TextCard :items="submitInfo" max-width="1000" title="More Info">
                         <template #footer>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -55,11 +56,11 @@
                     <v-file-input
                         v-if="selectedType === 'single'"
                         v-model="uploadSingleOrZip"
+                        :label="$t('fields.nxthemeFile')"
                         :loading="loading.uploadSingleOrZip"
                         accept=".nxtheme"
                         filled
                         hide-details
-                        :label="$t('fields.nxthemeFile')"
                         prepend-icon="mdi-file-outline"
                         rounded
                         @change="onFileChange"
@@ -71,11 +72,11 @@
                         <v-file-input
                             v-if="selectedType === 'zip'"
                             v-model="uploadSingleOrZip"
+                            :label="$t('fields.zipFile')"
                             :loading="loading.uploadSingleOrZip"
                             accept="application/zip"
                             filled
                             hide-details
-                            :label="$t('fields.zipFile')"
                             prepend-icon="mdi-folder-zip-outline"
                             rounded
                             @change="onFileChange"
@@ -122,13 +123,13 @@
                             <v-text-field
                                 v-if="selectedSubmitType === 'pack'"
                                 v-model="submitDetails.name"
+                                :label="`${$t('fields.packName')}*`"
                                 :rules="[
                                   rules.required,
                                   rules.name_length,
                                   rules.utf8_only
                                 ]"
                                 counter="50"
-                                :label="`${$t('fields.packName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -139,13 +140,13 @@
                             <v-text-field
                                 v-if="selectedSubmitType === 'pack'"
                                 v-model="submitDetails.description"
+                                :label="`${$t('fields.packDescription')}*`"
                                 :rules="[
                                   rules.required,
                                   rules.description_length,
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                :label="`${$t('fields.packDescription')}*`"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -161,6 +162,7 @@
                                             ? categories
                                             : []
                                 "
+                                :label="$t('fields.sharedCategories')"
                                 :rules="[
                                   rules.category_length,
                                   rules.max_category_amount,
@@ -169,7 +171,6 @@
                                 allow-overflow
                                 chips
                                 deletable-chips
-                                :label="$t('fields.sharedCategories')"
                                 multiple
                                 outlined
                                 prepend-icon="mdi-shape-outline"
@@ -238,6 +239,7 @@
                                                                     i
                                                                   ]
                                                                 "
+                                                                :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                                                 :rules="[
                                                                   rules.required
                                                                 ]"
@@ -248,7 +250,6 @@
                                                                 full-width
                                                                 height="100%"
                                                                 hide-details
-                                                                :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                                                 style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
                                                                 @change="
                                                                   onScreenshotChange(
@@ -320,7 +321,7 @@
                                                             <template v-slot:value>
                                                                 {{
                                                                     optionsString(
-                                                                        theme.used_pieces
+                                                                        theme.used_pieces,
                                                                     )
                                                                 }}
                                                             </template>
@@ -357,7 +358,7 @@
                                                     {{ $t("target.menu") }}
                                                     {{
                                                         toNiceWebName(
-                                                            theme.target
+                                                            theme.target,
                                                         )
                                                     }}
                                                 </v-list-item-subtitle>
@@ -368,7 +369,12 @@
                                                             .has_commonlayout
                                                       "
                                                 >
-                                                    {{ $t("submitTheme.commonLayoutStatus", {key_: "Common Layout", status: "✅"}) }}
+                                                    {{
+                                                        $t("submitTheme.commonLayoutStatus", {
+                                                            key_: "Common Layout",
+                                                            status: "✅",
+                                                        })
+                                                    }}
                                                 </v-list-item-subtitle>
                                             </v-col>
                                             <v-col class="pb-0">
@@ -381,13 +387,13 @@
                                                     :items="
                                                         layouts[theme.target]
                                                       "
+                                                    :label="$t('fields.manualLayout')"
                                                     :loading="
                                                         !!$apollo.queries
                                                           .layoutList.loading
                                                       "
                                                     allow-overflow
                                                     auto-select-first
-                                                    :label="$t('fields.manualLayout')"
                                                     outlined
                                                     prepend-icon="mdi-code-json"
                                                     rounded
@@ -402,12 +408,12 @@
                                                         detectedThemes[i]
                                                           .description
                                                       "
+                                                    :label="$t('fields.themeDescription')"
                                                     :rules="[
                                                         rules.description_length,
                                                         rules.utf8_only
                                                       ]"
                                                     counter="500"
-                                                    :label="$t('fields.themeDescription')"
                                                     maxlength="500"
                                                     minlength="10"
                                                     outlined
@@ -430,6 +436,7 @@
                                                             )
                                                           : []
                                                       "
+                                                    :label="`${$t('fields.categories')}* (${$t('fields.categoriesHint', {key_: '↵'})})`"
                                                     :loading="
                                                         !!$apollo.queries
                                                           .categories.loading
@@ -444,7 +451,6 @@
                                                     allow-overflow
                                                     chips
                                                     deletable-chips
-                                                    :label="`${$t('fields.categories')}* (${$t('fields.categoriesHint', {key_: '↵'})})`"
                                                     multiple
                                                     outlined
                                                     prepend-icon="mdi-shape-outline"
@@ -526,22 +532,22 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import rules from '@/components/mixins/rules'
+import Vue from "vue";
+import rules from "~/components/mixins/rules";
 import submitInfo from "~/components/mixins/submitInfo";
-import allLayoutsDropdown from '@/components/mixins/allLayoutsDropdown'
-import allCategoriesDropdown from '@/components/mixins/allCategoriesDropdown'
-import targetParser from '@/components/mixins/targetParser'
-import urlParser from '@/components/mixins/urlParser'
-import {submitThemes, uploadSingleOrZip} from '@/graphql/SubmitTheme.gql'
-import optionsString from '@/components/mixins/optionsString'
+import allLayoutsDropdown from "~/components/mixins/allLayoutsDropdown";
+import allCategoriesDropdown from "~/components/mixins/allCategoriesDropdown";
+import targetParser from "~/components/mixins/targetParser";
+import urlParser from "~/components/mixins/urlParser";
+import {submitThemes, uploadSingleOrZip} from "~/graphql/SubmitTheme.gql";
+import optionsString from "~/components/mixins/optionsString";
 import TextCard from "~/components/TextCard.vue";
 
 export default Vue.extend({
     components: {TextCard},
-    middleware: ['auth'],
+    middleware: ["auth"],
     options: {
-        auth: true
+        auth: true,
     },
     mixins: [
         targetParser,
@@ -550,7 +556,7 @@ export default Vue.extend({
         allCategoriesDropdown,
         optionsString,
         rules,
-        submitInfo
+        submitInfo,
     ],
     data() {
         return {
@@ -562,7 +568,7 @@ export default Vue.extend({
             uploadSingleOrZip: null,
             loading: {
                 uploadSingleOrZip: false,
-                submit: false
+                submit: false,
             },
             detectedThemes: null,
             uploadedScreenshots: [],
@@ -572,94 +578,94 @@ export default Vue.extend({
             submitDetails: {
                 name: null,
                 description: null,
-                color: null
-            }
-        }
+                color: null,
+            },
+        };
     },
     computed: {
         types() {
             return [
                 {
-                    id: 'single',
-                    label: this.$t("submitTheme.uploadTypes.single")
+                    id: "single",
+                    label: this.$t("submitTheme.uploadTypes.single"),
                 },
                 {
-                    id: 'zip',
-                    label: this.$t("submitTheme.uploadTypes.zip", {max: "25 MB"})
+                    id: "zip",
+                    label: this.$t("submitTheme.uploadTypes.zip", {max: "25 MB"}),
                 },
                 {
-                    id: 'files',
-                    label: this.$t("submitTheme.uploadTypes.files")
+                    id: "files",
+                    label: this.$t("submitTheme.uploadTypes.files"),
                 },
             ];
-        } ,
+        },
         submitTypes() {
             return [
                 {
-                    id: 'pack',
-                    label: this.$tc("pack")
+                    id: "pack",
+                    label: this.$tc("pack"),
                 },
                 {
-                    id: 'separate',
-                    label: this.$t("submitTheme.separateThemes")
+                    id: "separate",
+                    label: this.$t("submitTheme.separateThemes"),
                 },
             ];
         },
     },
     methods: {
         clearAll() {
-            this.uploadSingleOrZip = null
-            this.loading.uploadSingleOrZip = false
-            this.loading.submit = false
-            this.detectedThemes = null
-            this.uploadedScreenshots = []
-            this.uploadedScreenshotsUrls = []
-            this.selectedSubmitType = null
-            this.submitValid = false
-            this.packCategories = []
+            this.uploadSingleOrZip = null;
+            this.loading.uploadSingleOrZip = false;
+            this.loading.submit = false;
+            this.detectedThemes = null;
+            this.uploadedScreenshots = [];
+            this.uploadedScreenshotsUrls = [];
+            this.selectedSubmitType = null;
+            this.submitValid = false;
+            this.packCategories = [];
             this.submitDetails = {
                 name: null,
                 description: null,
-                color: null
-            }
+                color: null,
+            };
         },
         nsfwConfirm(value, i) {
             if (value) {
-                this.nsfwDialog = true
-                this.nsfwDialogThemeNr = i
+                this.nsfwDialog = true;
+                this.nsfwDialogThemeNr = i;
             }
         },
         onFileChange(file) {
             if (file) {
-                this.loading.uploadSingleOrZip = true
+                this.loading.uploadSingleOrZip = true;
 
                 this.$apollo
                     .mutate({
                         mutation: uploadSingleOrZip,
                         variables: {
-                            file
-                        }
+                            file,
+                        },
                     })
                     .then(({data}) => {
-                        this.loading.uploadSingleOrZip = false
+                        this.loading.uploadSingleOrZip = false;
 
-                        this.detectedThemes = data.uploadSingleOrZip
+                        this.detectedThemes = data.uploadSingleOrZip;
 
-                        this.$apollo.queries.categories.skip = false
-                        this.$apollo.queries.categories.refetch()
-                        this.$apollo.queries.layoutList.skip = false
+                        this.$apollo.queries.categories.skip = false;
+                        this.$apollo.queries.categories.refetch();
+                        this.$apollo.queries.layoutList.skip = false;
                     })
                     .catch((err) => {
-                        this.$snackbar.error(err)
-                        this.loading.uploadSingleOrZip = false
-                    })
+                        this.$snackbar.error(err);
+                        this.loading.uploadSingleOrZip = false;
+                    });
             }
         },
         onScreenshotChange(file, i) {
             if (file) {
-                this.uploadedScreenshotsUrls[i] = URL.createObjectURL(file)
+                this.uploadedScreenshotsUrls[i] = URL.createObjectURL(file);
 
-                this.forceUpdate++
+                this.forceUpdate++;
             }
         },
         submit() {
@@ -678,9 +684,9 @@ export default Vue.extend({
                         color: t.color,
                         description: t.description,
                         categories: t.categories,
-                        nsfw: t.nsfw
-                    }
-                })
+                        nsfw: t.nsfw,
+                    };
+                });
 
                 this.$apollo
                     .mutate({
@@ -689,74 +695,74 @@ export default Vue.extend({
                             files: this.uploadedScreenshots,
                             themes: themeInput,
                             details: this.submitDetails,
-                            type: this.selectedSubmitType
-                        }
+                            type: this.selectedSubmitType,
+                        },
                     })
                     .then(({data}) => {
                         if (data.submitThemes === true) {
-                            let message
-                            if (this.selectedSubmitType === 'pack') {
-                                message = this.$t("submitTheme.packSubmitSuccess")
+                            let message;
+                            if (this.selectedSubmitType === "pack") {
+                                message = this.$t("submitTheme.packSubmitSuccess");
                             } else {
-                                message = this.$t("submitTheme.themesSubmitSuccess")
+                                message = this.$t("submitTheme.themesSubmitSuccess");
                             }
-                            this.loading.submit = false
-                            this.clearAll()
-                            this.$snackbar.message(message)
+                            this.loading.submit = false;
+                            this.clearAll();
+                            this.$snackbar.message(message);
                         } else {
-                            this.$snackbar.error(this.$t("error.otherError"))
+                            this.$snackbar.error(this.$t("error.otherError"));
                         }
                     })
                     .catch((err) => {
-                        this.$snackbar.error(err)
-                        this.loading.submit = false
-                    })
+                        this.$snackbar.error(err);
+                        this.loading.submit = false;
+                    });
             }
-        }
+        },
     },
     head() {
-        const metaTitle = `${this.$tc("theme")}/${this.$tc("pack")} | ${this.$t("upload")}`
-        const metaDesc = this.$t("submitTheme.pageDescription")
-        const metaImg = null
+        const metaTitle = `${this.$tc("theme")}/${this.$tc("pack")} | ${this.$t("upload")}`;
+        const metaDesc = this.$t("submitTheme.pageDescription");
+        const metaImg = null;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>
 
 <style lang="scss">

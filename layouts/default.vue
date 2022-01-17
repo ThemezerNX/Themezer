@@ -5,8 +5,8 @@
             app
             class="drawer"
             clipped
-            temporary
             fixed
+            temporary
         >
             <div
                 :style="
@@ -18,12 +18,12 @@
             />
             <v-list nav rounded>
                 <v-list-item
-                    v-if="!$auth.loggedIn"
+                    v-if="!$auth.isAuthenticated"
                     class="my-2"
                     link
                     router
-                    two-line
                     to="/login"
+                    two-line
                 >
                     <v-list-item-avatar>
                         <v-icon large>
@@ -38,11 +38,11 @@
                     </v-list-item-content>
                     <v-icon>mdi-login</v-icon>
                 </v-list-item>
-                <v-list-group v-if="$auth.loggedIn" no-action>
+                <v-list-group v-if="$auth.isAuthenticated" no-action>
                     <template v-slot:activator>
                         <v-list-item-avatar>
                             <img
-                                v-if="$auth.loggedIn"
+                                v-if="$auth.isAuthenticated"
                                 :src="
                                   `https://cdn.discordapp.com/${avatar}?size=64`
                                 "
@@ -150,16 +150,16 @@
             </v-list>
         </v-navigation-drawer>
         <v-app-bar
+            v-scroll="handleScroll"
+            :color="navbarColor"
+            :elevate-on-scroll="this.$route.path === '/'"
             app
             class="navbar"
             clipped-left
             fixed
-            :color="navbarColor"
-            :elevate-on-scroll="this.$route.path === '/'"
-            v-scroll="handleScroll"
         >
             <v-app-bar-nav-icon aria-label="menu toggle" @click.stop="drawer = !drawer"/>
-            <NuxtLink class="title-link mx-4" to="/">
+            <NuxtLink class="title-link mx-4 text-decoration-none text--primary" to="/">
                 <v-toolbar-title class="d-flex title-text">
                     <v-img
                         class="mr-4 title-icon"
@@ -172,10 +172,10 @@
             </NuxtLink>
             <v-toolbar-items class="d-none d-md-flex">
                 <v-btn
-                    class="d-none d-lg-flex"
                     :depressed="true"
-                    to="/#additions"
+                    class="d-none d-lg-flex"
                     style="background-color: transparent"
+                    to="/#additions"
                 >
                     {{ recentAdditionsButton.title }}
                     <v-icon right>
@@ -203,11 +203,11 @@
                 <v-menu bottom offset-y>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
+                            :depressed="true"
+                            aria-label="random result"
+                            style="background-color: transparent"
                             v-bind="attrs"
                             v-on="on"
-                            :depressed="true"
-                            style="background-color: transparent"
-                            aria-label="random result"
                         >
                             <v-icon>mdi-shuffle</v-icon>
                         </v-btn>
@@ -232,11 +232,11 @@
                 <v-menu bottom left offset-y>
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
+                            :depressed="true"
+                            aria-label="switch language"
+                            style="background-color: transparent"
                             v-bind="attrs"
                             v-on="on"
-                            :depressed="true"
-                            style="background-color: transparent"
-                            aria-label="switch language"
                         >
                             <v-icon>mdi-translate</v-icon>
                         </v-btn>
@@ -246,8 +246,8 @@
                         <v-list-item
                             v-for="locale in availableLocales"
                             :key="locale.code"
-                            @click="$i18n.setLocale(locale.code)"
                             :class="{ 'active-locale': $i18n.locale === locale.code }"
+                            @click="$i18n.setLocale(locale.code)"
                         >
                             <v-list-item-content>
                                 <v-list-item-title v-text="locale.name"/>
@@ -268,21 +268,21 @@
         </v-app-bar>
 
         <div class="splatter-wrapper">
-            <img alt="" :src="require('~/assets/ink_splatter/magenta-400.png')" class="splatter splatter-2"/>
-            <img alt="" :src="require('~/assets/ink_splatter/green-400.png')" class="splatter splatter-1"/>
+            <img :src="require('~/assets/images/ink_splatter/magenta-400.png')" alt="" class="splatter splatter-2"/>
+            <img :src="require('~/assets/images/ink_splatter/green-400.png')" alt="" class="splatter splatter-1"/>
         </div>
 
         <v-main>
             <nuxt/>
         </v-main>
 
-        <v-footer class="footer" absolute app inset>
+        <v-footer absolute app class="footer" inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} ThemezerNX</span>
             <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
             <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
         </v-footer>
         <v-dialog
-            v-if="$auth.loggedIn && $auth.user"
+            v-if="$auth.isAuthenticated && $auth.user"
             v-model="acceptDialog"
             class="mx-auto"
             max-width="800"
@@ -353,9 +353,9 @@
                                 <v-tooltip v-model="copyIdSuccess" top>
                                     <template v-slot:activator="{ attrs }">
                                         <v-btn
-                                            v-bind="attrs"
                                             class="align-self-center ml-2"
                                             rounded
+                                            v-bind="attrs"
                                             @click="copyId"
                                         >
                                             {{ $t("copy") }}
@@ -388,9 +388,9 @@
                                 <v-tooltip v-model="copyCodeSuccess" top>
                                     <template v-slot:activator="{ attrs }">
                                         <v-btn
-                                            v-bind="attrs"
                                             class="align-self-center ml-2"
                                             rounded
+                                            v-bind="attrs"
                                             @click="copyCode"
                                         >
                                             {{ $t("copy") }}
@@ -448,18 +448,18 @@
                         {{ $t("cookieBanner") }}
                         <template v-slot:actions="">
                             <v-btn
-                                text
                                 color="primary"
                                 rounded
+                                text
                                 to="/cookie-policy"
                             >
                                 {{ $t("cookiePolicy") }}
                             </v-btn>
                             <v-btn
-                                text
                                 color="primary"
-                                @click="props.accept"
                                 rounded
+                                text
+                                @click="props.accept"
                             >
                                 {{ $t("dismiss") }}
                             </v-btn>
@@ -472,11 +472,11 @@
 </template>
 
 <script>
-import {updateAuth} from "@/graphql/Creator.gql";
-import {randomPackIDs} from "@/graphql/Pack.gql";
-import {randomThemeIDs} from "@/graphql/Theme.gql";
-import {randomLayoutIDs} from "@/graphql/Layout.gql";
-import targets from "@/assets/targets";
+import {updateAuth} from "~/graphql/Creator.gql";
+import {randomPackIDs} from "~/graphql/Pack.gql";
+import {randomThemeIDs} from "~/graphql/Theme.gql";
+import {randomLayoutIDs} from "~/graphql/Layout.gql";
+import targets from "~/assets/targets";
 import tos from "~/components/mixins/termsOfService";
 
 export default {
@@ -502,13 +502,13 @@ export default {
         };
     },
     computed: {
-        recentAdditionsButton(){
+        recentAdditionsButton() {
             return {
                 icon: "mdi-plus-circle-multiple-outline",
                 title: this.$t("home.recentAdditions"),
                 class: "d-lg-none",
                 to: "/#additions",
-            }
+            };
         },
         items() {
             return [
@@ -640,9 +640,9 @@ export default {
             }
         },
         avatar() {
-            if (this.$auth.loggedIn && this.$auth.user.avatar) {
+            if (this.$auth.isAuthenticated && this.$auth.user.avatar) {
                 return `avatars/${this.$auth.user.id}/${this.$auth.user.avatar}`;
-            } else if (this.$auth.loggedIn) {
+            } else if (this.$auth.isAuthenticated) {
                 return `embed/avatars/${parseInt(
                     this.$auth.user.discriminator,
                 ) % 5}.png`;
@@ -667,7 +667,7 @@ export default {
         },
     },
     mounted() {
-        if (this.$auth.loggedIn) {
+        if (this.$auth.isAuthenticated) {
             this.loading.accept = true;
             this.$apollo
                 .mutate({
@@ -1034,18 +1034,13 @@ $border-radius: 20px;
     background: transparent;
     border-radius: 0 0 $border-radius $border-radius !important;
 
-    .title-link {
-        text-decoration: none;
-    }
-
     .title-icon {
-        border-radius: 35%;
+        border-radius: $icon-border-radius;
         height: fit-content;
         margin: auto;
     }
 
     .title-text {
-        color: white !important;
         font-weight: 700;
         font-family: Arial, serif;
         font-size: 28px;

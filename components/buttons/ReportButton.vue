@@ -10,18 +10,18 @@
             <v-tooltip top>
                 <template v-slot:activator="{ on: tooltip }">
                     <v-btn
-                        v-bind="attrs"
-                        v-on="{ ...tooltip }"
                         :disabled="hasReported"
                         class="button"
                         color="red"
                         dark
                         rounded
+                        v-bind="attrs"
                         @click="
-                          $auth.loggedIn
+                          $auth.isAuthenticated
                             ? (showDialog = true)
                             : (showLoginDialog = true)
                         "
+                        v-on="{ ...tooltip }"
                     >
                         {{ $t("item.report") }}
                         <v-icon right>{{ icon || "mdi-flag-variant" }}</v-icon>
@@ -104,7 +104,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {reportURL} from "@/graphql/Report.gql";
+import {reportURL} from "~/graphql/Report.gql";
 
 export default Vue.extend({
     props: {

@@ -2,7 +2,10 @@
     <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
         <v-row class="fill-height">
             <v-col cols="12" md="3" sm="4" xl="2" xs="12">
-                <h2 class="text-center"><v-icon style="vertical-align: baseline;" left v-text="targetIcon(target())"></v-icon>{{ $tc("theme", 2) }}</h2>
+                <h2 class="text-center">
+                    <v-icon left style="vertical-align: baseline;" v-text="targetIcon(target())"></v-icon>
+                    {{ $tc("theme", 2) }}
+                </h2>
                 <Filters
                     ref="filter"
                     :unsupported-filters="unsupportedFilters"
@@ -60,25 +63,25 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import {allCreators, allLayouts, themeList} from '@/graphql/Theme.gql'
-import targetParser from '@/components/mixins/targetParser'
-import filter from '@/components/mixins/filter'
-import allowedTargets from '@/components/mixins/allowedTargets'
-import {targetIcon} from "@/assets/targets";
+import Vue from "vue";
+import {allCreators, allLayouts, themeList} from "~/graphql/Theme.gql";
+import targetParser from "~/components/mixins/targetParser";
+import filter from "~/components/mixins/filter";
+import allowedTargets from "~/components/mixins/allowedTargets";
+import {targetIcon} from "~/assets/targets";
 
 export default Vue.extend({
     beforeRouteEnter(to, _from, next) {
         if (allowedTargets.includes(to.params.target)) {
-            next()
+            next();
         } else {
-            next('/')
+            next("/");
         }
     },
     components: {
-        Filters: () => import('@/components/Filters.vue'),
-        ItemCard: () => import('@/components/ItemCard.vue'),
-        LoadingOverlay: () => import('@/components/LoadingOverlay.vue')
+        Filters: () => import("~/components/Filters.vue"),
+        ItemCard: () => import("~/components/ItemCard.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, filter],
     methods: {
@@ -86,21 +89,21 @@ export default Vue.extend({
     },
     data() {
         return {
-            type: 'themes',
-            list: 'themeList',
+            type: "themes",
+            list: "themeList",
             unsupportedFilters: [],
             allCreatorsQuery: allCreators,
             allLayoutsQuery: allLayouts,
-            nsfw: false
-        }
+            nsfw: false,
+        };
     },
     apollo: {
         itemList: {
             query: themeList,
-            fetchPolicy: 'cache-and-network',
+            fetchPolicy: "cache-and-network",
             variables() {
                 const vars = {
-                    q: 'themeList',
+                    q: "themeList",
                     target: this.targetFile(),
                     limit: 16,
                     page: this.currentPage,
@@ -109,20 +112,20 @@ export default Vue.extend({
                     order: this.currentOrder,
                     creators: this.currentCreators,
                     layouts: this.currentLayouts,
-                    nsfw: this.nsfw
-                }
-                vars.hash = this.$hashString(vars)
-                return vars
+                    nsfw: this.nsfw,
+                };
+                vars.hash = this.$hashString(vars);
+                return vars;
             },
             update(data) {
-                return data
+                return data;
             },
-            prefetch: true
-        }
+            prefetch: true,
+        },
     },
     head() {
         // eslint-disable-next-line camelcase
-        const resultAmount = this.itemList?.pagination?.item_count
+        const resultAmount = this.itemList?.pagination?.item_count;
 
         const metaTitle =
             (resultAmount !== undefined
@@ -132,44 +135,44 @@ export default Vue.extend({
         const metaDesc = this.$t("themes.targetPageDescription", {menu: this.targetName()});
         const metaImg = null;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>
 
 <style lang="scss">

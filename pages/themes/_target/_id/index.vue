@@ -67,10 +67,10 @@
                                 :count="
                                   theme.like_count > 0
                                     ? theme.like_count
-                                    : ($auth.loggedIn && $auth.user.liked.themes.some((t) => t.id === theme.id) ? 1 : 0)
+                                    : ($auth.isAuthenticated && $auth.user.liked.themes.some((t) => t.id === theme.id) ? 1 : 0)
                                 "
                                 :value="
-                                    $auth.loggedIn && $auth.user.liked.themes.some((t) => t.id === theme.id)
+                                    $auth.isAuthenticated && $auth.user.liked.themes.some((t) => t.id === theme.id)
                                 "
                                 type="themes"
                             />
@@ -100,7 +100,9 @@
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
                                 <template v-slot:value>
-                                    <span class="font-weight-light">{{ $d(new Date(theme.last_updated), "short") }}</span>
+                                    <span class="font-weight-light">{{
+                                            $d(new Date(theme.last_updated), "short")
+                                        }}</span>
                                 </template>
                             </i18n>
                         </div>
@@ -160,8 +162,8 @@
                             <i18n path="item.background">
                                 <template v-slot:value>
                                     <a :href="`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`"
-                                        class="font-weight-bold"
-                                        target="_blank"
+                                       class="font-weight-bold"
+                                       target="_blank"
                                     >
                                         {{ theme.bg_type.toUpperCase() }}
                                     </a>
@@ -180,8 +182,8 @@
                         <ButtonDivider>
                             <DownloadButton
                                 :download-function="downloadTheme"
-                                :loading="loadingDownload"
                                 :label="$t('item.downloadTheme')"
+                                :loading="loadingDownload"
                             />
                         </ButtonDivider>
 
@@ -195,7 +197,6 @@
                                 <v-tooltip v-model="showPackInfo" top>
                                     <template v-slot:activator="{ on }">
                                         <v-btn
-                                            v-on="on"
                                             class="ml-1 pa-0 grey lighten-1"
                                             height="14"
                                             icon
@@ -203,6 +204,7 @@
                                             style="position: absolute; top: 0; color: black;"
                                             width="14"
                                             @click="packDialog = true"
+                                            v-on="on"
                                         >
                                             ?
                                         </v-btn>
@@ -261,22 +263,22 @@
 
 <script>
 import Vue from "vue";
-import shared from "@/layouts/details/SharedScript";
-import targetParser from "@/components/mixins/targetParser";
-import urlParser from "@/components/mixins/urlParser";
-import {downloadTheme, theme} from "@/graphql/Theme.gql";
+import shared from "~/layouts/details/SharedScript";
+import targetParser from "~/components/mixins/targetParser";
+import urlParser from "~/components/mixins/urlParser";
+import {downloadTheme, theme} from "~/graphql/Theme.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import("@/components/sections/ThemeInstaller.vue"),
-        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
-        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
-        EditButton: () => import("@/components/buttons/EditButton.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+            import("~/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
+        EditButton: () => import("~/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser, urlParser],
     data() {
@@ -304,7 +306,7 @@ export default Vue.extend({
             result({data}) {
                 if (data && data.theme) {
                     this.isPageOwner =
-                        this.$auth.loggedIn &&
+                        this.$auth.isAuthenticated &&
                         data.theme.creator.id === this.$auth.user.id;
 
                     this.updateUrlString(

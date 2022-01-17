@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "sourceRoot": "./",
+        "importHelpers": true,
         "target": "es2020",
         "module": "esnext",
         "moduleResolution": "node",
@@ -19,21 +21,18 @@
             "~/*": [
                 "./*"
             ],
-            "@/*": [
-                "./*"
-            ]
         },
         "types": [
             "@types/node",
             "@nuxt/types",
+            "@nuxtjs/axios",
             "@nuxtjs/vuetify",
-            "@nuxtjs/auth-next",
-            "nuxt-i18n"
+            "vuetify",
+            "@nuxtjs/i18n"
         ]
     },
     "exclude": [
         "node_modules",
-        ".nuxt",
-        "dist"
+        ".nuxt"
     ]
 }

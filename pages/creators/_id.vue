@@ -77,14 +77,14 @@
                                 >
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-icon
-                                            v-bind="attrs"
-                                            v-on="on"
                                             :class="{
                                                 'mr-1':
                                                   i !==
                                                   creator.roles.length - 1
                                               }"
                                             class="mt-n1"
+                                            v-bind="attrs"
+                                            v-on="on"
                                         >
                                             {{ roleIcon(role.split("|")[0]) }}
                                         </v-icon>
@@ -98,33 +98,33 @@
                     </v-col>
                     <v-col class="text-center" cols="12">
                         <ButtonDivider :hide-dividers="true">
-                            <v-tooltip top v-if="mayModerate">
+                            <v-tooltip v-if="mayModerate" top>
                                 <template v-slot:activator="{ on, attrs }">
                                     <v-btn
-                                        v-bind="attrs"
-                                        v-on="on"
                                         append
                                         class="button"
                                         color="blue darken-1"
                                         dark
                                         rounded
+                                        v-bind="attrs"
                                         @click="editDialog = true"
+                                        v-on="on"
                                     >
-                                        {{ $t('item.edit') }}
+                                        {{ $t("item.edit") }}
                                         <v-icon right>{{ "mdi-shield-edit" }}</v-icon>
                                     </v-btn>
                                 </template>
-                                <span>{{ $t('item.editProfile') }}</span>
+                                <span>{{ $t("item.editProfile") }}</span>
                             </v-tooltip>
                             <LikeButton
                                 :id="creator.id"
                                 :count="
                                   creator.like_count > 0
                                     ? creator.like_count
-                                    : ($auth.loggedIn && $auth.user.liked.creators.some((c) => c.id === creator.id) ? 1 : 0)
+                                    : ($auth.isAuthenticated && $auth.user.liked.creators.some((c) => c.id === creator.id) ? 1 : 0)
                                 "
                                 :value="
-                                    $auth.loggedIn && $auth.user.liked.creators.some((c) => c.id === creator.id)
+                                    $auth.isAuthenticated && $auth.user.liked.creators.some((c) => c.id === creator.id)
                                 "
                                 type="creators"
                             />
@@ -138,31 +138,31 @@
                 </v-row>
             </v-parallax>
             <v-container
-                class="pt-0 px-0"
                 :fluid="$vuetify.breakpoint.smAndDown"
+                class="pt-0 px-0"
                 style="height: 100%;"
             >
-                <v-row align="center" justify="center" class="ma-0">
+                <v-row align="center" class="ma-0" justify="center">
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <v-sheet v-if="creator.bio" class="markdown-wrapper" elevation="12">
                             <Markdown :source="creator.bio" class="markdown"/>
                         </v-sheet>
 
-                        <p class="ma-2" v-else>{{ $t("creators.noBiography") }}</p>
+                        <p v-else class="ma-2">{{ $t("creators.noBiography") }}</p>
                     </v-col>
                 </v-row>
             </v-container>
 
             <v-container
-                class="pt-0"
                 :fluid="$vuetify.breakpoint.smAndDown"
+                class="pt-0"
                 style="height: 100%;"
             >
                 <v-row
@@ -172,10 +172,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h1>
@@ -183,9 +183,9 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
-                            :loading="!!$apollo.queries.packList.loading"
                             :items="packList"
                             :limit="4"
+                            :loading="!!$apollo.queries.packList.loading"
                             :more-url="
 								`/packs?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -200,10 +200,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h1>
@@ -211,9 +211,9 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
-                            :loading="!!$apollo.queries.themeList.loading"
                             :items="themeList"
                             :limit="4"
+                            :loading="!!$apollo.queries.themeList.loading"
                             :more-url="
 								`/themes?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -228,10 +228,10 @@
                 >
                     <v-col class="pt-0"
                            cols="12"
-                           xl="9"
                            lg="9"
                            md="9"
                            sm="12"
+                           xl="9"
                            xs="12"
                     >
                         <h1>
@@ -239,9 +239,9 @@
                         </h1>
                         <v-divider/>
                         <ItemGrid
-                            :loading="!!$apollo.queries.layoutList.loading"
                             :items="layoutList"
                             :limit="4"
+                            :loading="!!$apollo.queries.layoutList.loading"
                             :more-url="
 								`/layouts?sort=updated&order=desc&creators=${creator.id}`
 							"
@@ -273,17 +273,17 @@
 									!isPageOwner && $auth.user && $auth.user.isAdmin
 								"
                                 v-model="changed.isBlocked"
+                                :label="$t('creators.blockUser')"
                                 class="mt-0"
                                 color="red"
-                                :label="$t('creators.blockUser')"
                             />
                             <v-text-field
                                 v-model="changed.customUsername"
                                 :disabled="loading.submit"
+                                :label="$t('creators.customName')"
                                 :rules="[rules.utf8_only]"
                                 class="pt-1"
                                 counter="50"
-                                :label="$t('creators.customName')"
                                 maxlength="50"
                                 outlined
                                 prepend-icon="mdi-pencil"
@@ -297,10 +297,10 @@
                             <v-textarea
                                 v-model="changed.bio"
                                 :disabled="loading.submit"
+                                :label="$t('creators.bio')"
                                 auto-grow
                                 class="pt-1"
                                 counter="1000"
-                                :label="$t('creators.bio')"
                                 maxlength="1000"
                                 outlined
                                 prepend-icon="mdi-bio"
@@ -318,9 +318,9 @@
                                 v-model="changed.profileColor"
                                 :color="changed.profileColor"
                                 :disabled="loading.submit"
+                                :label="$t('creators.profileColor')"
                                 :rules="[rules.hex]"
                                 class="pt-2"
-                                :label="$t('creators.profileColor')"
                                 maxlength="7"
                                 outlined
                                 prepend-icon="mdi-format-color-fill"
@@ -336,9 +336,9 @@
                                 :disabled="
 									changed.clearBannerImage || loading.submit
 								"
+                                :label="$t('creators.banner', {size: '1920×800'})"
                                 :rules="[rules.banner_size]"
                                 accept="image/*"
-                                :label="$t('creators.banner', {size: '1920×800'})"
                                 outlined
                                 prepend-icon="mdi-image-area"
                                 rounded
@@ -368,9 +368,9 @@
                                 :disabled="
 									changed.clearLogoImage || loading.submit
 								"
+                                :label="$t('creators.logo')"
                                 :rules="[rules.logo_size]"
                                 accept="image/*"
-                                :label="$t('creators.logo')"
                                 outlined
                                 prepend-icon="mdi-image"
                                 rounded
@@ -430,24 +430,24 @@
 
 <script>
 import Vue from "vue";
-import rules from '@/components/mixins/rules'
-import {creator, me, updateProfile} from "@/graphql/Creator.gql";
-import {rowPackList} from "@/graphql/Pack.gql";
-import {rowThemeList} from "@/graphql/Theme.gql";
-import {rowLayoutList} from "@/graphql/Layout.gql";
+import rules from "~/components/mixins/rules";
+import {creator, me, updateProfile} from "~/graphql/Creator.gql";
+import {rowPackList} from "~/graphql/Pack.gql";
+import {rowThemeList} from "~/graphql/Theme.gql";
+import {rowLayoutList} from "~/graphql/Layout.gql";
 
 const removeMd = require("remove-markdown");
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
-        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
-        Markdown: () => import("@/components/Markdown.vue"),
-        ItemGrid: () => import("@/components/ItemGrid.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
-        EditButton: () => import("@/components/buttons/EditButton.vue"),
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
+        Markdown: () => import("~/components/Markdown.vue"),
+        ItemGrid: () => import("~/components/ItemGrid.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        EditButton: () => import("~/components/buttons/EditButton.vue"),
     },
     mixins: [rules],
     data() {
@@ -455,7 +455,7 @@ export default Vue.extend({
             API_ENDPOINT: process.env.API_ENDPOINT,
             id: this.$route.params.id,
             isPageOwner:
-                this.$auth.loggedIn &&
+                this.$auth.isAuthenticated &&
                 this.$route.params.id === this.$auth.user.id,
             editDialog: false,
             submitValid: false,

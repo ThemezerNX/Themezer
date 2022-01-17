@@ -40,6 +40,7 @@
                                         <v-file-input
                                             v-show="hover"
                                             v-model="uploadedScreenshot"
+                                            :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                             accept="image/jpeg"
                                             class="screenshot_upload transition-ease v-card--reveal"
                                             color="black"
@@ -47,7 +48,6 @@
                                             full-width
                                             height="100%"
                                             hide-details
-                                            :label="`${$t('fields.screenshot', {filetype: 'jpg', size: '1280×720'})}*`"
                                             style="cursor: pointer; height: 100%; background: rgba(0, 0, 0, 0.5);"
                                             @change="
 												onScreenshotChange($event, i)
@@ -60,13 +60,13 @@
                         <v-col class="pa-2" cols="12" sm="8" xs="12">
                             <v-text-field
                                 v-model="changed.details.name"
+                                :label="`${$t('fields.themeName')}*`"
                                 :rules="[
 									rules.required,
 									rules.name_length,
 									rules.utf8_only
 								]"
                                 counter="50"
-                                :label="`${$t('fields.themeName')}*`"
                                 maxlength="50"
                                 minlength="3"
                                 outlined
@@ -75,12 +75,12 @@
                             ></v-text-field>
                             <v-text-field
                                 v-model="changed.details.description"
+                                :label="$t('fields.themeDescription')"
                                 :rules="[
                                   rules.description_length,
                                   rules.utf8_only
                                 ]"
                                 counter="500"
-                                :label="$t('fields.themeDescription')"
                                 maxlength="500"
                                 minlength="10"
                                 outlined
@@ -104,10 +104,10 @@
 										: null
 								"
                                 :items="layouts[theme.target]"
+                                :label="$tc('layout')"
                                 :loading="!!$apollo.queries.layoutList.loading"
                                 allow-overflow
                                 auto-select-first
-                                :label="$tc('layout')"
                                 outlined
                                 persistent-hint
                                 prepend-icon="mdi-code-json"
@@ -124,11 +124,11 @@
                             <v-autocomplete
                                 v-model="changed.pack.id"
                                 :items="packList || []"
+                                :label="$tc('pack')"
                                 :loading="!!$apollo.queries.packList.loading"
                                 allow-overflow
                                 auto-select-first
                                 clearable
-                                :label="$tc('pack')"
                                 outlined
                                 persistent-hint
                                 prepend-icon="mdi-package-variant-closed"
@@ -144,6 +144,7 @@
                                     ? categories.filter((c) => c !== 'NSFW')
                                     : []
                                 "
+                                :label="`${$t('fields.categories')}* (${$t('fields.categoriesHint', {key_: '↵'})})`"
                                 :loading="!!$apollo.queries.categories.loading"
                                 :rules="[
                                   rules.category_length,
@@ -153,7 +154,6 @@
                                 allow-overflow
                                 chips
                                 deletable-chips
-                                :label="`${$t('fields.categories')}* (${$t('fields.categoriesHint', {key_: '↵'})})`"
                                 multiple
                                 outlined
                                 prepend-icon="mdi-shape-outline"
@@ -217,27 +217,27 @@
 
 <script>
 import Vue from "vue";
-import rules from '@/components/mixins/rules'
-import allLayoutsDropdown from "@/components/mixins/allLayoutsDropdown";
-import allCategoriesDropdown from "@/components/mixins/allCategoriesDropdown";
-import allPacksDropdown from "@/components/mixins/allPacksDropdown";
-import targetParser from "@/components/mixins/targetParser";
-import {deleteTheme, theme, updateTheme} from "@/graphql/Theme.gql";
+import rules from "~/components/mixins/rules";
+import allLayoutsDropdown from "~/components/mixins/allLayoutsDropdown";
+import allCategoriesDropdown from "~/components/mixins/allCategoriesDropdown";
+import allPacksDropdown from "~/components/mixins/allPacksDropdown";
+import targetParser from "~/components/mixins/targetParser";
+import {deleteTheme, theme, updateTheme} from "~/graphql/Theme.gql";
 import urlParser from "~/components/mixins/urlParser";
-import optionsString from "@/components/mixins/optionsString";
+import optionsString from "~/components/mixins/optionsString";
 
 export default Vue.extend({
     beforeRouteEnter(_to, from, next) {
         next((vm) => {
             vm.fromRoute = from;
-            if (vm.$auth.loggedIn) next();
+            if (vm.$auth.isAuthenticated) next();
             else next("/");
         });
     },
     components: {
-        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
-        DeleteButton: () => import("@/components/buttons/DeleteButton.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DeleteButton: () => import("~/components/buttons/DeleteButton.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     mixins: [
         urlParser,
@@ -311,7 +311,7 @@ export default Vue.extend({
             result({data}) {
                 if (data && data.theme) {
                     this.isPageOwner =
-                        this.$auth.loggedIn &&
+                        this.$auth.isAuthenticated &&
                         (data.theme.creator.id === this.$auth.user.id ||
                             this.$auth.user.isAdmin);
 
@@ -424,13 +424,13 @@ export default Vue.extend({
             const metaDesc = this.theme.details.description;
             const metaImg = !this.theme.nsfw ? this.theme.preview.original : null;
 
-            const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+            const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
             return {
                 htmlAttrs: {
-                    ...i18nHead.htmlAttrs
+                    ...i18nHead.htmlAttrs,
                 },
                 link: [
-                    ...i18nHead.link
+                    ...i18nHead.link,
                 ],
                 title: metaTitle,
                 meta: [

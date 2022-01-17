@@ -1,10 +1,10 @@
 <template>
     <v-card
-        style="border-radius: 20px;"
-        class="ma-auto"
         :elevation="12"
+        class="ma-auto"
         exact
         router
+        style="border-radius: 20px;"
     >
         <div
             class="group"
@@ -35,9 +35,9 @@
             <v-card-actions class="mx-2" @focus="focussed = true">
                 <v-text-field
                     v-model="query"
+                    :label="$t('filter.search')"
                     dense
                     hide-details
-                    :label="$t('filter.search')"
                     outlined
                     rounded
                     single-line
@@ -61,6 +61,7 @@
                             v-model="withCreators"
                             :disabled="onlybyme"
                             :items="allCreators || []"
+                            :label="$tc('creator', 2)"
                             :loading="loading.allCreators"
                             :menu-props="{ bottom: true, offsetY: true }"
                             auto-select-first
@@ -68,7 +69,6 @@
                             deletable-chips
                             dense
                             hide-details
-                            :label="$tc('creator', 2)"
                             multiple
                             outlined
                             rounded
@@ -84,6 +84,7 @@
                             v-if="!unsupportedFilters.includes('withLayouts')"
                             v-model="withLayouts"
                             :items="allLayouts || []"
+                            :label="$tc('layout', 2)"
                             :loading="loading.allLayouts"
                             :menu-props="{ bottom: true, offsetY: true }"
                             auto-select-first
@@ -91,7 +92,6 @@
                             deletable-chips
                             dense
                             hide-details
-                            :label="$tc('layout', 2)"
                             multiple
                             outlined
                             rounded
@@ -170,9 +170,9 @@
             <v-card-actions v-if="!unsupportedFilters.includes('my')">
                 <v-checkbox
                     v-model="onlybyme"
+                    :label="$t('filter.madeByMe')"
                     class="ma-0 mx-2"
                     hide-details
-                    :label="$t('filter.madeByMe')"
                     @change="
                             $event
                               ? (withCreators = [$auth.user.id])
@@ -185,10 +185,10 @@
             <v-card-actions v-if="!unsupportedFilters.includes('nsfw')">
                 <v-checkbox
                     v-model="nsfw"
+                    :label="$t('filter.nsfw')"
                     class="ma-0 mx-2"
                     color="red"
                     hide-details
-                    :label="$t('filter.nsfw')"
                 ></v-checkbox>
             </v-card-actions>
         </div>
@@ -269,7 +269,7 @@ export default Vue.extend({
                 ? (this.$route.query.creators as string).split(",")
                 : undefined;
 
-            if (this.$auth.loggedIn && creators && creators.includes((this.$auth as any)?.user?.id)) {
+            if (this.$auth.isAuthenticated && creators && creators.includes((this.$auth as any)?.user?.id)) {
                 this.onlybyme = true;
             }
 

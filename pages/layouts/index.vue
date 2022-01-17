@@ -3,59 +3,59 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        TargetPicker: () => import('@/components/TargetPicker.vue')
+        TargetPicker: () => import("~/components/TargetPicker.vue"),
     },
     data() {
         return {
             type: "layouts",
             typeName: "layout",
-        }
+        };
     },
     head() {
-        const metaTitle = this.$tc("layout", 2)
-        const metaDesc = this.$t("layouts.pageDescription")
-        const metaImg = null
+        const metaTitle = this.$tc("layout", 2);
+        const metaDesc = this.$t("layouts.pageDescription");
+        const metaImg = null;
 
-        const i18nHead = this.$nuxtI18nHead({ addSeoAttributes: true })
+        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
         return {
             htmlAttrs: {
-                ...i18nHead.htmlAttrs
+                ...i18nHead.htmlAttrs,
             },
             link: [
-                ...i18nHead.link
+                ...i18nHead.link,
             ],
             title: metaTitle,
             meta: [
                 ...i18nHead.meta,
                 {
-                    hid: 'description',
-                    name: 'description',
-                    content: metaDesc
+                    hid: "description",
+                    name: "description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:title',
-                    name: 'og:title',
-                    property: 'og:title',
-                    content: metaTitle
+                    hid: "og:title",
+                    name: "og:title",
+                    property: "og:title",
+                    content: metaTitle,
                 },
                 {
-                    hid: 'og:description',
-                    name: 'og:description',
-                    property: 'og:description',
-                    content: metaDesc
+                    hid: "og:description",
+                    name: "og:description",
+                    property: "og:description",
+                    content: metaDesc,
                 },
                 {
-                    hid: 'og:image',
-                    name: 'og:image',
-                    property: 'og:image',
-                    content: metaImg
-                }
-            ]
-        }
-    }
-})
+                    hid: "og:image",
+                    name: "og:image",
+                    property: "og:image",
+                    content: metaImg,
+                },
+            ],
+        };
+    },
+});
 </script>

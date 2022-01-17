@@ -1,6 +1,6 @@
 <template>
     <div v-resize="onResize" class="collage">
-        <div class="overlay-content" :style="marginTop">
+        <div :style="marginTop" class="overlay-content">
             <div>
                 <slot name="top"/>
             </div>
@@ -11,23 +11,23 @@
                 <slot name="bottom"/>
             </div>
         </div>
-        <div class="collage-row-wrapper row-animation" :style="dynamicStyle">
-            <div class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+        <div :style="dynamicStyle" class="collage-row-wrapper row-animation">
+            <div :style="dynamicStyleInnerWrapper" class="collage-row-wrapper-inner">
                 <div
-                    class="collage-row collage-row-1"
                     :style="row1"
+                    class="collage-row collage-row-1"
                 ></div>
             </div>
-            <div v-show="windowSize.y > 550" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+            <div v-show="windowSize.y > 550" :style="dynamicStyleInnerWrapper" class="collage-row-wrapper-inner">
                 <div
-                    class="collage-row collage-row-2"
                     :style="row2"
+                    class="collage-row collage-row-2"
                 ></div>
             </div>
-            <div v-show="windowSize.y > 805" class="collage-row-wrapper-inner" :style="dynamicStyleInnerWrapper">
+            <div v-show="windowSize.y > 805" :style="dynamicStyleInnerWrapper" class="collage-row-wrapper-inner">
                 <div
-                    class="collage-row collage-row-3"
                     :style="row3"
+                    class="collage-row collage-row-3"
                 ></div>
             </div>
         </div>
@@ -45,13 +45,13 @@ export default Vue.extend({
                 y: 1080,
             },
             row1: {
-                backgroundImage: `url(${require("@/assets/card_rows/row-1.png")})`,
+                backgroundImage: `url(${require("~/assets/images/card_rows/row-1.png")})`,
             },
             row2: {
-                backgroundImage: `url(${require("@/assets/card_rows/row-2.png")})`,
+                backgroundImage: `url(${require("~/assets/images/card_rows/row-2.png")})`,
             },
             row3: {
-                backgroundImage: `url(${require("@/assets/card_rows/row-3.png")})`,
+                backgroundImage: `url(${require("~/assets/images/card_rows/row-3.png")})`,
             },
         };
     },

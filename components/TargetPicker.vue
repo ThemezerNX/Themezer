@@ -45,7 +45,7 @@
                         >
                             <img
                                 :src="
-                                  require(`@/assets/stock/360/${target.image}`)
+                                  require(`~/assets/images/stock/360/${target.image}`)
                                 "
                                 alt="menu screenshot"
                                 class="thumbnail transition-ease"
@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import targets from "@/assets/targets";
+import targets from "~/assets/targets";
 import targetParser from "~/components/mixins/targetParser";
 
 export default Vue.extend({

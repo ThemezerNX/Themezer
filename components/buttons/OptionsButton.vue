@@ -2,13 +2,13 @@
     <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
             <v-btn
-                v-bind="attrs"
-                v-on="on"
                 :loading="loading"
                 :to="to"
                 append
                 color="primary"
                 rounded
+                v-bind="attrs"
+                v-on="on"
             >
                 {{ $t("item.customize") }}
                 <v-icon right>{{ icon || "mdi-square-edit-outline" }}</v-icon>

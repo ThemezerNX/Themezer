@@ -81,10 +81,10 @@
                                 :count="
                                   pack.like_count > 0
                                     ? pack.like_count
-                                    : ($auth.loggedIn && $auth.user.liked.packs.some((p) => p.id === pack.id) ? 1 : 0)
+                                    : ($auth.isAuthenticated && $auth.user.liked.packs.some((p) => p.id === pack.id) ? 1 : 0)
                                 "
                                 :value="
-                                  $auth.loggedIn &&
+                                  $auth.isAuthenticated &&
                                   $auth.user.liked.packs.some((p) => p.id === pack.id)
                                 "
                                 type="packs"
@@ -134,8 +134,8 @@
                         <ButtonDivider>
                             <DownloadButton
                                 :download-function="downloadPack"
-                                :loading="loadingDownload"
                                 :label="$t('item.downloadPack')"
+                                :loading="loadingDownload"
                             />
                         </ButtonDivider>
 
@@ -152,8 +152,8 @@
                         <v-divider/>
                         <ItemGrid
                             :items="pack.themes"
-                            :show-props="['target']"
                             :loading="false"
+                            :show-props="['target']"
                             type="themes"
                         />
                     </v-col>
@@ -165,23 +165,23 @@
 
 <script>
 import Vue from "vue";
-import shared from "@/layouts/details/SharedScript";
-import targetParser from "@/components/mixins/targetParser";
-import urlParser from "@/components/mixins/urlParser";
-import {downloadPack, pack} from "@/graphql/Pack.gql";
+import shared from "~/layouts/details/SharedScript";
+import targetParser from "~/components/mixins/targetParser";
+import urlParser from "~/components/mixins/urlParser";
+import {downloadPack, pack} from "~/graphql/Pack.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import("@/components/sections/ThemeInstaller.vue"),
-        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
-        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
-        ItemGrid: () => import("@/components/ItemGrid.vue"),
-        EditButton: () => import("@/components/buttons/EditButton.vue"),
-        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+            import("~/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
+        ItemGrid: () => import("~/components/ItemGrid.vue"),
+        EditButton: () => import("~/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
     },
     data() {
         return {
@@ -230,7 +230,7 @@ export default Vue.extend({
             result({data}) {
                 if (data && data.pack) {
                     this.isPageOwner =
-                        this.$auth.loggedIn &&
+                        this.$auth.isAuthenticated &&
                         data.pack.creator.id === this.$auth.user.id;
 
                     this.updateUrlString(data.pack.id, data.pack.details.name);
