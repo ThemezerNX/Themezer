@@ -174,7 +174,9 @@ const nuxtConfig: NuxtConfig = {
     },
 
     vuetify: {
-        optionsPath: "./vuetify.options",
+        optionsPath: "./vuetify.options.ts",
+        customVariables: ['~/assets/variables.scss'],
+        treeShake: true,
     },
 
     router: {

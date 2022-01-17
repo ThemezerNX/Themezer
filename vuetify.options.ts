@@ -1,7 +1,8 @@
-import colors from "vuetify/es5/util/colors";
 import "@mdi/font/css/materialdesignicons.css";
+import {Options} from "@nuxtjs/vuetify/dist/options";
 
-export default {
+const config: Options = {
+    // treeShake: true,
     icons: {
         iconfont: "mdi",
     },
@@ -18,13 +19,10 @@ export default {
             },
             dark: {
                 primary: "#0AB379",
-                accent: colors.grey.darken3,
                 secondary: "#B40A86",
-                info: colors.teal.lighten1,
-                warning: colors.amber.base,
-                error: colors.deepOrange.accent4,
-                success: colors.green.accent3,
             },
         },
     },
 };
+
+export default config;
