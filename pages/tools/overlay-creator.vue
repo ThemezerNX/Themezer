@@ -109,7 +109,6 @@
                         accept="image/jpeg"
                         filled
                         hide-details
-                        label="*"
                         prepend-icon="mdi-monitor-screenshot"
                         rounded
                         @change="onScreenshotWhiteChange"
