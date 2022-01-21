@@ -93,7 +93,11 @@ const nuxtConfig: NuxtConfig = {
             src: "~/plugins/cookieBanner",
             mode: "client",
         },
-        "~/plugins/auth",
+        "@/plugins/auth",
+        {
+            src: "@/plugins/persistedVuex",
+            mode: "client",
+        },
     ],
 
     buildModules: [
