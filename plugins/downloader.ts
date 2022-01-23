@@ -28,6 +28,12 @@ class Downloader {
     json(json: string, fileName: string) {
         Downloader.clickBlob(new Blob([JSON.stringify(json, null, 4)]), fileName);
     }
+
+    async base64(base64String: string, mimetype: string, fileName: string) {
+        const base64Url = `data:${mimetype};base64,${base64String}`;
+        Downloader.clickBlob(await (await fetch(base64Url)).blob(), fileName);
+    }
+
 }
 
 const plugin: Plugin = (context, inject) => {
