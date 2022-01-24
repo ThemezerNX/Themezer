@@ -1,44 +1,46 @@
 <template>
-    <v-layout align-center column justify-center pa-3>
-        <v-card class="box" max-width="600" style="border-radius: 20px;">
-            <v-card-title class="headline">
-                {{ $t("contact") }}
-            </v-card-title>
-            <v-card-text>
-                <p>
-                    <i18n path="contacts.discord">
-                        <template v-slot:themezerNxDiscord>
-                            <a
-                                href="https://discord.gg/nnm8wyM"
-                                rel="noopener"
-                                target="_blank"
-                                title="discord"
-                            >ThemezerNX Discord</a>
-                        </template>
-                    </i18n>
-                </p>
-                <p>
-                    <i18n path="contacts.issue">
-                        <template v-slot:themezerNxGithub>
-                            <a
-                                href="https://github.com/ThemezerNX/Themezer/issues"
-                                rel="noopener"
-                                target="_blank"
-                                title="contribute"
-                            >ThemezerNX GitHub</a>
-                        </template>
-                    </i18n>
-                </p>
-                <hr class="mb-2"/>
-            </v-card-text>
-        </v-card>
-    </v-layout>
+    <PageSheet max-width="600">
+        <template #title>
+            {{ $t("contact") }}
+        </template>
+        <template #content>
+            <p>
+                <i18n path="contacts.discord">
+                    <template #themezerNxDiscord>
+                        <OpenLink
+                            to="https://discord.gg/nnm8wyM"
+                            new-tab
+                            title="discord"
+                        >
+                            ThemezerNX Discord
+                        </OpenLink>
+                    </template>
+                </i18n>
+            </p>
+            <i18n path="contacts.issue">
+                <template #themezerNxGithub>
+                    <OpenLink
+                        to="https://github.com/ThemezerNX/Themezer/issues"
+                        new-tab
+                        title="contribute"
+                    >
+                        ThemezerNX GitHub
+                    </OpenLink>
+                </template>
+            </i18n>
+        </template>
+        <template #footer>
+            <CopyrightBar/>
+        </template>
+    </PageSheet>
 </template>
 
 <script>
 import Vue from "vue";
+import CopyrightBar from "@/components/sections/CopyrightBar";
 
 export default Vue.extend({
+    components: {CopyrightBar},
     head() {
         const metaTitle = this.$t("contact");
 

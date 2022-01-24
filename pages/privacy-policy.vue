@@ -1,27 +1,23 @@
 <template>
-    <v-layout align-center column justify-center pa-3>
-        <TextCard :items="privacyPolicy" :max-width="1000" :subtitle="subtitle" :title="title"/>
-    </v-layout>
+    <PageTextSheet :items="privacyPolicy">
+        <template #title>
+            {{ $t("privacyPolicy") }}
+        </template>
+        <template #footer>
+            <CopyrightBar/>
+        </template>
+    </PageTextSheet>
 </template>
 
 <script>
 import Vue from "vue";
-import privacyPolicy from "~/components/mixins/privacyPolicy";
-import TextCard from "~/components/TextCard.vue";
+import privacyPolicy from "@/components/mixins/privacyPolicy";
+import PageTextSheet from "@/components/page/TextSheet.vue";
+import CopyrightBar from "@/components/sections/CopyrightBar";
 
 export default Vue.extend({
-    components: {TextCard},
+    components: {CopyrightBar, PageTextSheet},
     mixins: [privacyPolicy],
-    data() {
-        return {
-            subtitle: null,
-        };
-    },
-    computed: {
-        title() {
-            return this.$t("privacyPolicy");
-        },
-    },
     head() {
         const metaTitle = this.title;
 

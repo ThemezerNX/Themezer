@@ -1,27 +1,23 @@
 <template>
-    <v-layout align-center column justify-center pa-3>
-        <TextCard :items="cookiePolicy" :max-width="1000" :subtitle="subtitle" :title="title"/>
-    </v-layout>
+    <PageTextSheet :items="cookiePolicy">
+        <template #title>
+            {{ $t("cookiePolicy") }}
+        </template>
+        <template #footer>
+            <CopyrightBar/>
+        </template>
+    </PageTextSheet>
 </template>
 
 <script>
 import Vue from "vue";
-import cookiePolicy from "~/components/mixins/cookiePolicy";
-import TextCard from "~/components/TextCard.vue";
+import cookiePolicy from "@/components/mixins/cookiePolicy";
+import PageTextSheet from "@/components/page/TextSheet.vue";
+import CopyrightBar from "@/components/sections/CopyrightBar";
 
 export default Vue.extend({
-    components: {TextCard},
+    components: {CopyrightBar, PageTextSheet},
     mixins: [cookiePolicy],
-    data() {
-        return {
-            subtitle: null,
-        };
-    },
-    computed: {
-        title() {
-            return this.$t("cookiePolicy");
-        },
-    },
     head() {
         const metaTitle = this.title;
 

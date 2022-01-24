@@ -1,27 +1,23 @@
 <template>
-    <v-layout align-center column justify-center pa-3>
-        <TextCard :items="termsOfService" :subtitle="subtitle" :title="title"/>
-    </v-layout>
+    <PageTextSheet :items="termsOfService">
+        <template #title>
+            {{ $t("termsOfService") }}
+        </template>
+        <template #footer>
+            <CopyrightBar/>
+        </template>
+    </PageTextSheet>
 </template>
 
 <script>
 import Vue from "vue";
-import termsOfService from "~/components/mixins/termsOfService";
-import TextCard from "~/components/TextCard.vue";
+import termsOfService from "@/components/mixins/termsOfService";
+import PageTextSheet from "@/components/page/TextSheet.vue";
+import CopyrightBar from "@/components/sections/CopyrightBar";
 
 export default Vue.extend({
-    components: {TextCard},
+    components: {CopyrightBar, PageTextSheet},
     mixins: [termsOfService],
-    data() {
-        return {
-            subtitle: null,
-        };
-    },
-    computed: {
-        title() {
-            return this.$t("termsOfService");
-        },
-    },
     head() {
         const metaTitle = this.title;
 

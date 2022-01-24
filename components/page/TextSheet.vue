@@ -1,18 +1,19 @@
 <template>
-    <v-card :max-width="maxWidth" class="box" style="border-radius: 20px;">
-        <v-card-title class="headline">
-            {{ title }}
-        </v-card-title>
-        <v-card-subtitle v-if="subtitle">
-        </v-card-subtitle>
-        <v-card-text>
-            <div v-for="item in items" :key="item.title">
+    <PageSheet max-width="800">
+        <template #title v-if="$slots.title">
+            <slot name="title"/>
+        </template>
+        <template #description v-if="$slots.description">
+            <slot name="description"/>
+        </template>
+        <template #content>
+            <div v-for="item in items">
                 <h2>{{ item.title }}</h2>
                 <p>
                     {{ item.content }}
                 </p>
                 <ul v-if="item.list">
-                    <li v-for="list_item in item.list" :key="item.title">
+                    <li v-for="list_item in item.list">
                         <a v-if="list_item.title_to && list_item.title_to.includes('http')" :href="list_item.title_to"
                            target="_blank">
                             <h3>{{ list_item.title }}</h3>
@@ -28,33 +29,21 @@
                     </li>
                 </ul>
             </div>
-
-            <hr class="mb-2"/>
-        </v-card-text>
-
-        <slot name="footer"/>
-    </v-card>
+        </template>
+        <template #footer v-if="$slots.footer">
+            <slot name="footer"/>
+        </template>
+    </PageSheet>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import PageSheet from "@/components/page/Sheet.vue";
 
 export default Vue.extend({
-    name: "TextCard",
+    name: "PageTextSheet",
+    components: {PageSheet},
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
-        subtitle: {
-            type: String,
-            required: false,
-        },
-        maxWidth: {
-            type: Number,
-            required: false,
-            default: 800,
-        },
         items: {
             type: Array,
             required: true,

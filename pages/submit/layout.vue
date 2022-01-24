@@ -1,42 +1,36 @@
 <template>
-    <v-container :fluid="$vuetify.breakpoint.smAndDown" style="height: 100%;">
-        <v-sheet class="pa-2 box" no-gutters>
-            <h1 class="box_text">
-                {{ $t("layoutSubmissions") }}
-            </h1>
-            <div class="subtitle-1 box_text">
-                {{ $t("submitLayout.pageDescription") }}
-                <i18n path="submitLayout.instructions">
-                    <template v-slot:readme>
-                        <a
-                            href="https://github.com/ThemezerNX/Layouts#readme"
-                            rel="noopener"
-                            target="_blank"
-                        >README.md</a>
-                    </template>
-                    <template v-slot:joinDiscord>
-                        <a href="https://discord.gg/nnm8wyM" rel="noopener"
-                        >{{ $t("submitLayout.joinDiscord") }}</a>
-                    </template>
-                    <template v-slot:channel>#submitting</template>
-                </i18n>
-            </div>
-            <v-flex class="d-flex justify-center my-3">
-                <v-btn
-                    class="mx-2"
-                    color="primary"
-                    href="https://github.com/ThemezerNX/Layouts"
-                    rel="noopener"
-                    rounded
-                    router
-                    target="_blank"
-                >
-                    ThemezerNX GitHub
-                    <v-icon right>mdi-github</v-icon>
-                </v-btn>
-            </v-flex>
-        </v-sheet>
-    </v-container>
+    <PageSheet>
+        <template #title>
+            {{ $t("layoutSubmissions") }}
+        </template>
+        <template #description>
+            {{ $t("submitLayout.pageDescription") }}
+            <i18n path="submitLayout.instructions">
+                <template #readme>
+                    <OpenLink to="https://github.com/ThemezerNX/Layouts#readme" new-tab>
+                        README.md
+                    </OpenLink>
+                </template>
+                <template #joinDiscord>
+                    <OpenLink to="https://discord.gg/nnm8wyM" new-tab>
+                        {{ $t("submitLayout.joinDiscord") }}
+                    </OpenLink>
+                </template>
+                <template #channel>#submitting</template>
+            </i18n>
+        </template>
+        <template #footer-centered>
+            <v-btn
+                class="mx-2"
+                color="primary"
+                href="https://github.com/ThemezerNX/Layouts"
+                target="_blank"
+            >
+                ThemezerNX GitHub
+                <v-icon right>mdi-github</v-icon>
+            </v-btn>
+        </template>
+    </PageSheet>
 </template>
 
 <script>

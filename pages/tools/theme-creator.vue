@@ -1,29 +1,25 @@
 <template>
-    <v-container
-        ref="sheet"
-        :fluid="$vuetify.breakpoint.smAndDown"
-        style="height: 100%;"
-    >
-        <v-sheet class="pa-2 box" no-gutters>
-            <h1 class="box_text">
-                {{ $tc("themeCreator", 1) }}
-            </h1>
-            <div class="subtitle-1 box_text">
-                {{ $t("themeCreators.pageDescription") }}
-                <i18n path="themeCreators.pageHint">
-                    <template #switchThemeInjector>
-                        <a
-                            href="https://github.com/exelix11/SwitchThemeInjector/releases/latest"
-                            rel="noopener"
-                            target="_blank"
-                            title="switch theme injector"
-                        >Switch Theme Injector</a>
-                    </template>
-                </i18n>
-            </div>
+    <PageSheet>
+        <template #title>
+            {{ $tc("themeCreator", 1) }}
+        </template>
+        <template #description>
+            {{ $t("themeCreators.pageDescription") }}
+            <i18n path="themeCreators.pageHint">
+                <template #switchThemeInjector>
+                    <a
+                        href="https://github.com/exelix11/SwitchThemeInjector/releases/latest"
+                        rel="noopener"
+                        target="_blank"
+                        title="switch theme injector"
+                    >Switch Theme Injector</a>
+                </template>
+            </i18n>
+        </template>
+        <template #content>
             <iframe src="https://exelix11.github.io/SwitchThemeInjector/v2/"/>
-        </v-sheet>
-    </v-container>
+        </template>
+    </PageSheet>
 </template>
 
 <script>
@@ -77,8 +73,7 @@ export default Vue.extend({
 
 <style>
 iframe {
-    border-bottom-left-radius: 20px !important;
-    border-bottom-right-radius: 20px !important;
     height: 70vh;
+    margin-bottom: -8px;
 }
 </style>
