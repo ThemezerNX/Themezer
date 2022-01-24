@@ -35,7 +35,7 @@ const plugin: Plugin = (context, inject) => {
 
             let message = error.message.replace("GraphQL error: ", "") || "Unknown Error";
             if (message.includes("Failed to fetch")) {
-                message = context.app.i18n.t("apiOffline") as string;
+                message = context.app.i18n.t("error.otherError") as string;
             }
 
             clearTimeout(timer);
@@ -52,7 +52,7 @@ const plugin: Plugin = (context, inject) => {
 
 export default plugin;
 
-type SnackbarPlugin = {
+export type SnackbarPlugin = {
     message(message: string, timeout?: number): void;
     error(error: Error, timeout?: number): void;
 };
