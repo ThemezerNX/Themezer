@@ -293,7 +293,7 @@
     },
     "contacts": {
         "discord": "For contact please join the {themezerNxDiscord}",
-        "issue": "Found a bug or have a suggestion? Create an issue on the {themezerNxGithub} or join the Discord server"
+        "issue": "Found a bug or have a suggestion? Create an issue on the {themezerNxGithub} or join the Discord server."
     },
     "restore": {
         "prompt": "Need to restore your Themezer account?",

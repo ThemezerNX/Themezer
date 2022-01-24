@@ -1,6 +1,6 @@
 <template>
     <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
             <v-btn
                 :color="newValue ? 'red' : ''"
                 :disabled="!$auth.isAuthenticated"
@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {setLike} from "~/graphql/Like.gql";
+import {setLike} from "@/graphql/Like.gql";
 
 export default Vue.extend({
     props: {

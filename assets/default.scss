@@ -1,0 +1,74 @@
+@import "~assets/variables";
+
+$transition-ease: all .25s ease !important;
+
+.logo-display {
+  margin: auto;
+  box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3);
+  border-radius: $image-border-radius;
+  min-height: 128px;
+}
+
+html {
+  word-break: break-word !important;
+  background: #272727;
+}
+
+iframe {
+  border: unset;
+  border-radius: $border-radius-root;
+  width: 100%;
+  height: 100%;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition-property: opacity;
+  transition-timing-function: linear;
+  transition-duration: 50ms;
+}
+
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+@keyframes flow {
+  from {
+    background-position: bottom left;
+  }
+  to {
+    background-position: top right;
+  }
+}
+
+.transition-ease {
+  transition: $transition-ease;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4e4e4e;
+}
+
+
+// vuetify overwrites
+
+// no outline if field is disabled
+.v-input--is-disabled.v-text-field--outlined fieldset {
+  border-style: unset !important;
+}
+
+// remove unnecessary padding
+.v-file-input.v-text-field--filled:not(.v-text-field--single-line) .v-file-input__text {
+  padding-top: 0 !important;
+}

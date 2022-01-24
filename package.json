@@ -37,7 +37,8 @@
         "vue-linkify": "^1.0.1",
         "vue-no-ssr": "^1.1.1",
         "vue-server-renderer": "^2.6.14",
-        "vue-template-compiler": "^2.6.14"
+        "vue-template-compiler": "^2.6.14",
+        "vuex-persistedstate": "^4.1.0"
     },
     "devDependencies": {
         "@apollo/client": "^3.5.7",

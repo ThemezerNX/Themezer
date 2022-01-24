@@ -3,7 +3,7 @@
 .card {
   height: 100%;
   transform-origin: center top 0;
-  border-radius: 16px !important;
+  border-radius: $border-radius-root;
   overflow: hidden;
   background-color: #212121;
   border-color: #212121;

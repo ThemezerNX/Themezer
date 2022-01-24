@@ -68,6 +68,12 @@ const nuxtConfig: NuxtConfig = {
         ],
     },
 
+    components: [
+        "@/components",
+        {path: "@/components/page/", prefix: "page"},
+        {path: "@/components/open/", prefix: "open"},
+    ],
+
     messages: {
         loading: "Loading...",
         error_404: "This page could not be found. Go back",
@@ -81,16 +87,16 @@ const nuxtConfig: NuxtConfig = {
     loading: {color: "#b40a86"},
 
     plugins: [
-        "~/plugins/linkify",
-        "~/plugins/snackbar",
-        "~/plugins/objectHash",
-        "~/plugins/axiosErrorHandler",
+        "@/plugins/linkify",
+        "@/plugins/snackbar",
+        "@/plugins/objectHash",
+        "@/plugins/axiosErrorHandler",
         {
-            src: "~/plugins/downloader",
+            src: "@/plugins/downloader",
             mode: "client",
         },
         {
-            src: "~/plugins/cookieBanner",
+            src: "@/plugins/cookieBanner",
             mode: "client",
         },
         "@/plugins/auth",
@@ -159,7 +165,7 @@ const nuxtConfig: NuxtConfig = {
 
     apollo: {
         clientConfigs: {
-            default: "~/apolloClient.config",
+            default: "@/apolloClient.config",
         },
     },
 
@@ -173,13 +179,13 @@ const nuxtConfig: NuxtConfig = {
             background_color: "#121212",
         },
         icon: {
-            source: "~/static/icon-pwa.png",
+            source: "@/static/icon-pwa.png",
         },
     },
 
     vuetify: {
         optionsPath: "./vuetify.options.ts",
-        customVariables: ['~/assets/variables.scss'],
+        customVariables: ["@/assets/variables.scss"],
         treeShake: true,
     },
 

@@ -4,7 +4,6 @@
         class="ma-auto"
         exact
         router
-        style="border-radius: 20px;"
     >
         <div
             class="group"

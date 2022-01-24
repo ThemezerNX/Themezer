@@ -22,7 +22,7 @@
                 </h2>
                 <div class="subtitle-1 box_text">
                     <i18n path="item.author">
-                        <template v-slot:creator>
+                        <template #creator>
                             <nuxt-link
                                 :to="`/creators/${layout.creator.id}`"
                                 class="font-weight-bold"
@@ -65,7 +65,7 @@
                         <v-list
                             class="my-3"
                             flat
-                            style="background: rgba(255,255,255,0.12); border-radius: 20px;"
+                            style="background: rgba(255,255,255,0.12);"
                             subheader
                         >
                             <v-subheader>{{ $tc("layoutOption", 2) }}</v-subheader>
@@ -213,9 +213,9 @@
 
 <script>
 import Vue from "vue";
-import {downloadLayout, layout} from "~/graphql/Layout.gql";
-import targetParser from "~/components/mixins/targetParser";
-import urlParser from "~/components/mixins/urlParser";
+import {downloadLayout, layout} from "@/graphql/Layout.gql";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
 
 export default Vue.extend({
     beforeRouteEnter(to, _from, next) {
@@ -226,10 +226,10 @@ export default Vue.extend({
         }
     },
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
-        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [urlParser, targetParser],
     data() {
@@ -249,7 +249,7 @@ export default Vue.extend({
                     "background-image: url(" +
                     (this.$store.state.background.startsWith("blob")
                         ? this.$store.state.background
-                        : require(`~/assets/images/backgrounds/${this.$store.state.background}`)) +
+                        : require(`@/assets/images/backgrounds/${this.$store.state.background}`)) +
                     ")"
                 );
             } else if (this.$route.params.target === "playerselect") {
@@ -476,9 +476,3 @@ export default Vue.extend({
     },
 });
 </script>
-
-<style lang="scss">
-.v-menu__content {
-    border-radius: 20px !important;
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <v-hover v-if="item && item.details" v-slot:default="{ hover }">
+    <v-hover v-if="item && item.details" #default="{ hover }">
         <v-card
             :class="{ 'on-hover': hover }"
             :elevation="hover ? 2 : 12"
@@ -101,12 +101,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import urlParser from "~/components/mixins/urlParser";
-import targetParser from "~/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
+import targetParser from "@/components/mixins/targetParser";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import("~/components/badges/CertifiedBadge.vue"),
+        CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
     },
     mixins: [urlParser, targetParser],
     props: {

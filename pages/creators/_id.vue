@@ -75,7 +75,7 @@
                                     :key="role"
                                     top
                                 >
-                                    <template v-slot:activator="{ on, attrs }">
+                                    <template #activator="{ on, attrs }">
                                         <v-icon
                                             :class="{
                                                 'mr-1':
@@ -99,7 +99,7 @@
                     <v-col class="text-center" cols="12">
                         <ButtonDivider :hide-dividers="true">
                             <v-tooltip v-if="mayModerate" top>
-                                <template v-slot:activator="{ on, attrs }">
+                                <template #activator="{ on, attrs }">
                                     <v-btn
                                         append
                                         class="button"
@@ -430,24 +430,24 @@
 
 <script>
 import Vue from "vue";
-import rules from "~/components/mixins/rules";
-import {creator, me, updateProfile} from "~/graphql/Creator.gql";
-import {rowPackList} from "~/graphql/Pack.gql";
-import {rowThemeList} from "~/graphql/Theme.gql";
-import {rowLayoutList} from "~/graphql/Layout.gql";
+import rules from "@/components/mixins/rules";
+import {creator, me, updateProfile} from "@/graphql/Creator.gql";
+import {rowPackList} from "@/graphql/Pack.gql";
+import {rowThemeList} from "@/graphql/Theme.gql";
+import {rowLayoutList} from "@/graphql/Layout.gql";
 
 const removeMd = require("remove-markdown");
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
-        Markdown: () => import("~/components/Markdown.vue"),
-        ItemGrid: () => import("~/components/ItemGrid.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
-        EditButton: () => import("~/components/buttons/EditButton.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        Markdown: () => import("@/components/Markdown.vue"),
+        ItemGrid: () => import("@/components/ItemGrid.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
     },
     mixins: [rules],
     data() {

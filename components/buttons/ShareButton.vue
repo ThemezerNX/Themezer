@@ -1,8 +1,8 @@
 <template>
     <v-tooltip v-model="copyLinkSuccess" top>
-        <template v-slot:activator="{}">
+        <template #activator="{}">
             <v-tooltip v-model="tooltipActive" top>
-                <template v-slot:activator="{ on, attrs }">
+                <template #activator="{ on, attrs }">
                     <v-btn
                         class="button"
                         color="primary"

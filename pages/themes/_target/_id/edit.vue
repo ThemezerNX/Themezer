@@ -26,7 +26,7 @@
                 >
                     <v-row class="ma-0">
                         <v-col class="pa-2" cols="12" sm="4" xs="12">
-                            <v-hover v-slot:default="{ hover }">
+                            <v-hover #default="{ hover }">
                                 <v-img
                                     :src="
 										uploadedScreenshotUrl ||
@@ -217,14 +217,14 @@
 
 <script>
 import Vue from "vue";
-import rules from "~/components/mixins/rules";
-import allLayoutsDropdown from "~/components/mixins/allLayoutsDropdown";
-import allCategoriesDropdown from "~/components/mixins/allCategoriesDropdown";
-import allPacksDropdown from "~/components/mixins/allPacksDropdown";
-import targetParser from "~/components/mixins/targetParser";
-import {deleteTheme, theme, updateTheme} from "~/graphql/Theme.gql";
-import urlParser from "~/components/mixins/urlParser";
-import optionsString from "~/components/mixins/optionsString";
+import rules from "@/components/mixins/rules";
+import allLayoutsDropdown from "@/components/mixins/allLayoutsDropdown";
+import allCategoriesDropdown from "@/components/mixins/allCategoriesDropdown";
+import allPacksDropdown from "@/components/mixins/allPacksDropdown";
+import targetParser from "@/components/mixins/targetParser";
+import {deleteTheme, theme, updateTheme} from "@/graphql/Theme.gql";
+import urlParser from "@/components/mixins/urlParser";
+import optionsString from "@/components/mixins/optionsString";
 
 export default Vue.extend({
     beforeRouteEnter(_to, from, next) {
@@ -235,9 +235,9 @@ export default Vue.extend({
         });
     },
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DeleteButton: () => import("~/components/buttons/DeleteButton.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DeleteButton: () => import("@/components/buttons/DeleteButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [
         urlParser,
@@ -467,8 +467,4 @@ export default Vue.extend({
 
 <style lang="scss">
 @import 'assets/screenshot-upload.scss';
-
-.v-menu__content {
-    border-radius: 20px !important;
-}
 </style>

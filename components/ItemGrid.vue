@@ -35,14 +35,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import targetParser from "~/components/mixins/targetParser";
-import urlParser from "~/components/mixins/urlParser";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
 
 export default Vue.extend({
     components: {
-        ItemCard: () => import("~/components/ItemCard.vue"),
-        MoreCard: () => import("~/components/MoreCard.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        ItemCard: () => import("@/components/ItemCard.vue"),
+        MoreCard: () => import("@/components/MoreCard.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, urlParser],
     props: {

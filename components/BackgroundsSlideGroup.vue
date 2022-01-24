@@ -13,9 +13,9 @@
             <v-slide-item
                 v-for="(background, i) in backgrounds"
                 :key="i"
-                v-slot:default="{ toggle }"
+                #default="{ toggle }"
             >
-                <v-hover v-if="background" v-slot:default="{ hover }">
+                <v-hover v-if="background" #default="{ hover }">
                     <v-scale-transition>
                         <v-card
                             :class="`
@@ -42,7 +42,7 @@
                                 v-if="background.url"
                                 :class="{ 'img-hover': hover}"
                                 :src="
-                                  require(`~/assets/images/backgrounds/${background.url}`)
+                                  require(`@/assets/images/backgrounds/${background.url}`)
                                 "
                                 :width="
                                   $vuetify.breakpoint.smAndDown ? 200 : 300

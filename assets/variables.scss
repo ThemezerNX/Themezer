@@ -3,5 +3,12 @@ $themezer-primary-rgb: 10, 10, 179, 121;
 $themezer-average: #5f5eff;
 $themezer-secondary: #b40a86;
 
-$border-radius: 20px;
-$icon-border-radius: 35%;
+$border-radius-root: 20px;
+$image-border-radius: 35%;
+$img-preload-filter: unset;
+
+// v-text-field
+$text-field-rounded-border-radius: $border-radius-root;
+$text-field-enclosed-details-padding: 0 calc(#{$border-radius-root} + 4px);
+$text-field-outlined-fieldset-padding: $border-radius-root;
+$text-field-filled-margin-top: 0;

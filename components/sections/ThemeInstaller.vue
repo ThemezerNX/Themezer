@@ -3,7 +3,7 @@
         <h3 style="position: relative;">
             NXThemes Installer
             <v-tooltip v-model="showTooltip" top>
-                <template v-slot:activator="{ on }">
+                <template #activator="{ on }">
                     <v-btn
                         class="ml-1 pa-0 grey lighten-1"
                         height="14"
@@ -28,20 +28,20 @@
 
                 <v-card-text>
                     <i18n path="whatIs.nxthemeInstallerDescription">
-                        <template v-slot:nxthemesInstaller>
+                        <template #nxthemesInstaller>
                             <a
                                 href="https://github.com/exelix11/SwitchThemeInjector/"
                                 rel="noopener"
                                 target="_blank"
                             >NXThemes Installer</a>
                         </template>
-                        <template v-slot:id>
+                        <template #id>
                             <span
                                 class="text-overline"
                                 style="font-size: 0.9rem !important;"
                             >({{ type === "theme" ? "t" : "p" }}{{ id }})</span>
                         </template>
-                        <template v-slot:themezerNX>
+                        <template #themezerNX>
                             <a
                                 href="https://github.com/suchmememanyskill/themezer-nx/"
                                 rel="noopener"

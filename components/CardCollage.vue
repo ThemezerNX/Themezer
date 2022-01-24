@@ -45,13 +45,13 @@ export default Vue.extend({
                 y: 1080,
             },
             row1: {
-                backgroundImage: `url(${require("~/assets/images/card_rows/row-1.png")})`,
+                backgroundImage: `url(${require("@/assets/images/card_rows/row-1.png")})`,
             },
             row2: {
-                backgroundImage: `url(${require("~/assets/images/card_rows/row-2.png")})`,
+                backgroundImage: `url(${require("@/assets/images/card_rows/row-2.png")})`,
             },
             row3: {
-                backgroundImage: `url(${require("~/assets/images/card_rows/row-3.png")})`,
+                backgroundImage: `url(${require("@/assets/images/card_rows/row-3.png")})`,
             },
         };
     },

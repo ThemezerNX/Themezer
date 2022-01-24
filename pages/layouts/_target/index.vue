@@ -68,17 +68,17 @@
 
 <script>
 import Vue from "vue";
-import {allCreators, layoutList} from "~/graphql/Layout.gql";
-import targetParser from "~/components/mixins/targetParser";
-import filter from "~/components/mixins/filter";
-import allowedTargets from "~/components/mixins/allowedTargets";
-import {targetIcon} from "~/assets/targets";
+import {allCreators, layoutList} from "@/graphql/Layout.gql";
+import targetParser from "@/components/mixins/targetParser";
+import filter from "@/components/mixins/filter";
+import allowedTargets from "@/components/mixins/allowedTargets";
+import {targetIcon} from "@/assets/targets";
 
 export default Vue.extend({
     components: {
-        Filters: () => import("~/components/Filters.vue"),
-        ItemCard: () => import("~/components/ItemCard.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        Filters: () => import("@/components/Filters.vue"),
+        ItemCard: () => import("@/components/ItemCard.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [targetParser, filter],
     data() {

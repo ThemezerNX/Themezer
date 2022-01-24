@@ -30,7 +30,7 @@
                         </h1>
                         <div class="subtitle-1">
                             <i18n path="item.author">
-                                <template v-slot:creator>
+                                <template #creator>
                                     <nuxt-link
                                         :to="`/creators/${theme.creator.id}`"
                                         class="font-weight-bold"
@@ -92,14 +92,14 @@
                         </h3>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.id">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ theme.id }}</span>
                                 </template>
                             </i18n>
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{
                                             $d(new Date(theme.last_updated), "short")
                                         }}</span>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.layout">
-                                <template v-slot:value>
+                                <template #value>
                                     <nuxt-link
                                         v-if="theme.layout"
                                         :to="
@@ -150,7 +150,7 @@
                             class="font-weight-medium body-2"
                         >
                             <i18n path="item.customizations">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ optionsString(theme.pieces) }}</span>
                                 </template>
                             </i18n>
@@ -160,7 +160,7 @@
                             class="font-weight-medium body-2"
                         >
                             <i18n path="item.background">
-                                <template v-slot:value>
+                                <template #value>
                                     <a :href="`${API_ENDPOINT}cdn/themes/${theme.id}/image.${theme.bg_type}`"
                                        class="font-weight-bold"
                                        target="_blank"
@@ -173,7 +173,7 @@
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.dlCount">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ theme.dl_count }}</span>
                                 </template>
                             </i18n>
@@ -195,7 +195,7 @@
                             <h3 style="position: relative;">
                                 {{ $tc("pack") }}
                                 <v-tooltip v-model="showPackInfo" top>
-                                    <template v-slot:activator="{ on }">
+                                    <template #activator="{ on }">
                                         <v-btn
                                             class="ml-1 pa-0 grey lighten-1"
                                             height="14"
@@ -263,22 +263,22 @@
 
 <script>
 import Vue from "vue";
-import shared from "~/layouts/details/SharedScript";
-import targetParser from "~/components/mixins/targetParser";
-import urlParser from "~/components/mixins/urlParser";
-import {downloadTheme, theme} from "~/graphql/Theme.gql";
+import shared from "@/layouts/details/SharedScript";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
+import {downloadTheme, theme} from "@/graphql/Theme.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import("~/components/sections/ThemeInstaller.vue"),
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
-        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
-        EditButton: () => import("~/components/buttons/EditButton.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+            import("@/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser, urlParser],
     data() {

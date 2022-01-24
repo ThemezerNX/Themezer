@@ -44,7 +44,7 @@
                         </h1>
                         <div class="subtitle-1">
                             <i18n path="item.author">
-                                <template v-slot:creator>
+                                <template #creator>
                                     <nuxt-link
                                         :to="`/creators/${pack.creator.id}`"
                                         class="font-weight-bold"
@@ -109,14 +109,14 @@
                         </h3>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.id">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ pack.id }}</span>
                                 </template>
                             </i18n>
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{
                                             $d(new Date(pack.last_updated), "short")
                                         }}</span>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.dlCount">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ pack.dl_count }}</span>
                                 </template>
                             </i18n>
@@ -165,23 +165,23 @@
 
 <script>
 import Vue from "vue";
-import shared from "~/layouts/details/SharedScript";
-import targetParser from "~/components/mixins/targetParser";
-import urlParser from "~/components/mixins/urlParser";
-import {downloadPack, pack} from "~/graphql/Pack.gql";
+import shared from "@/layouts/details/SharedScript";
+import targetParser from "@/components/mixins/targetParser";
+import urlParser from "@/components/mixins/urlParser";
+import {downloadPack, pack} from "@/graphql/Pack.gql";
 
 export default Vue.extend({
     components: {
         ThemeInstaller: () =>
-            import("~/components/sections/ThemeInstaller.vue"),
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
-        ReportButton: () => import("~/components/buttons/ReportButton.vue"),
-        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
-        ItemGrid: () => import("~/components/ItemGrid.vue"),
-        EditButton: () => import("~/components/buttons/EditButton.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+            import("@/components/sections/ThemeInstaller.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        ReportButton: () => import("@/components/buttons/ReportButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
+        ItemGrid: () => import("@/components/ItemGrid.vue"),
+        EditButton: () => import("@/components/buttons/EditButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     data() {
         return {

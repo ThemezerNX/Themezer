@@ -83,7 +83,7 @@ export default Vue.extend({
     align-items: center;
     position: absolute;
     z-index: 3;
-    border-radius: 20px;
+    border-radius: $border-radius-root;
 
     &.dim {
         background: rgba(0, 0, 0, 0.3);

@@ -39,7 +39,7 @@
                     <v-icon>mdi-login</v-icon>
                 </v-list-item>
                 <v-list-group v-if="$auth.isAuthenticated" no-action>
-                    <template v-slot:activator>
+                    <template #activator>
                         <v-list-item-avatar>
                             <img
                                 v-if="$auth.isAuthenticated"
@@ -102,7 +102,7 @@
                         :key="i"
                         :class="item.class"
                     >
-                        <template v-slot:activator>
+                        <template #activator>
                             <v-list-item-action>
                                 <v-icon v-text="item.icon"/>
                             </v-list-item-action>
@@ -154,9 +154,10 @@
             :color="navbarColor"
             :elevate-on-scroll="this.$route.path === '/'"
             app
-            class="navbar"
+            class="navbar rounded-b"
             clipped-left
             fixed
+            outlined
         >
             <v-app-bar-nav-icon aria-label="menu toggle" @click.stop="drawer = !drawer"/>
             <NuxtLink class="title-link mx-4 text-decoration-none text--primary" to="/">
@@ -201,7 +202,7 @@
             <v-spacer/>
             <v-toolbar-items>
                 <v-menu bottom offset-y>
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                         <v-btn
                             :depressed="true"
                             aria-label="random result"
@@ -230,7 +231,7 @@
                 </v-menu>
 
                 <v-menu bottom left offset-y>
-                    <template v-slot:activator="{ on, attrs }">
+                    <template #activator="{ on, attrs }">
                         <v-btn
                             :depressed="true"
                             aria-label="switch language"
@@ -268,15 +269,15 @@
         </v-app-bar>
 
         <div class="splatter-wrapper">
-            <img :src="require('~/assets/images/ink_splatter/magenta-400.png')" alt="" class="splatter splatter-2"/>
-            <img :src="require('~/assets/images/ink_splatter/green-400.png')" alt="" class="splatter splatter-1"/>
+            <img :src="require('@/assets/images/ink_splatter/magenta-400.png')" alt="" class="splatter splatter-2"/>
+            <img :src="require('@/assets/images/ink_splatter/green-400.png')" alt="" class="splatter splatter-1"/>
         </div>
 
         <v-main>
             <nuxt/>
         </v-main>
 
-        <v-footer absolute app class="footer" inset>
+        <v-footer absolute app class="footer text-caption" inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} ThemezerNX</span>
             <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
             <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
@@ -351,7 +352,7 @@
                                 ></v-text-field>
 
                                 <v-tooltip v-model="copyIdSuccess" top>
-                                    <template v-slot:activator="{ attrs }">
+                                    <template #activator="{ attrs }">
                                         <v-btn
                                             class="align-self-center ml-2"
                                             rounded
@@ -386,7 +387,7 @@
                                 ></v-text-field>
 
                                 <v-tooltip v-model="copyCodeSuccess" top>
-                                    <template v-slot:activator="{ attrs }">
+                                    <template #activator="{ attrs }">
                                         <v-btn
                                             class="align-self-center ml-2"
                                             rounded
@@ -446,7 +447,7 @@
                             mdi-cookie
                         </v-icon>
                         {{ $t("cookieBanner") }}
-                        <template v-slot:actions="">
+                        <template #actions="">
                             <v-btn
                                 color="primary"
                                 rounded
@@ -472,12 +473,12 @@
 </template>
 
 <script>
-import {updateAuth} from "~/graphql/Creator.gql";
-import {randomPackIDs} from "~/graphql/Pack.gql";
-import {randomThemeIDs} from "~/graphql/Theme.gql";
-import {randomLayoutIDs} from "~/graphql/Layout.gql";
-import targets from "~/assets/targets";
-import tos from "~/components/mixins/termsOfService";
+import {updateAuth} from "@/graphql/Creator.gql";
+import {randomPackIDs} from "@/graphql/Pack.gql";
+import {randomThemeIDs} from "@/graphql/Theme.gql";
+import {randomLayoutIDs} from "@/graphql/Layout.gql";
+import targets from "@/assets/targets";
+import tos from "@/components/mixins/termsOfService";
 
 export default {
     data() {
@@ -805,214 +806,15 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/variables.scss';
-
-$border-radius: 20px;
-$transition-ease: all .25s ease !important;
-
-html {
-    word-break: break-word !important;
-    background: #272727;
-}
-
-.v-application .rounded {
-    border-radius: $border-radius !important;
-}
-
-iframe {
-    border: unset;
-    border-radius: $border-radius !important;
-    width: 100%;
-    height: 100%;
-}
-
-.page-enter-active,
-.page-leave-active {
-    transition-property: opacity;
-    transition-timing-function: ease-out;
-    transition-duration: 50ms;
-}
-
-.row {
-    margin: 0 -12px !important;
-}
-
-.page-enter,
-.page-leave-to {
-    opacity: 0;
-}
-
-.v-list-group__header.v-list-item {
-    margin-bottom: 8px !important;
-}
-
-.v-list--rounded .v-list-item, .v-list--rounded .v-list-item::before, .v-list--rounded .v-list-item > .v-ripple__container {
-    border-radius: $border-radius !important;
-}
-
-.v-list-item {
-    transition: $transition-ease;
-}
-
-.v-list-item:hover {
-    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
-    transform: translateY(-3px) !important;
-}
-
-.v-list-item--active {
-    box-shadow: 0 5px 25px -4px rgba(0, 0, 0, .3) !important;
-}
-
-.v-menu__content {
-    border-radius: $border-radius;
-
-    .v-card {
-        background-color: #424242 !important;
-    }
-}
-
-.v-card, .v-dialog {
-    border-radius: $border-radius !important;
-}
-
-.v-card__subtitle,
-.v-card__text,
-.v-card__title {
-    word-break: break-word !important;
-}
-
-.v-slide-group__content {
-    padding-top: 8px;
-    padding-bottom: 25px;
-}
-
-.v-slide-group__wrapper {
-    touch-action: inherit !important;
-}
-
-.smAndDown .v-slide-group__prev,
-.smAndDown .v-slide-group__next {
-    min-width: unset;
-    max-width: fit-content;
-}
-
-.v-parallax__image-container {
-    background: url('/images/diagonal_joycon-180.png') #333;
-    background-repeat: repeat;
-    animation: flow 45s linear infinite;
-}
-
-.v-image__image--preload {
-    filter: unset !important;
-}
-
-.card .v-image__image--preload,
-.placeholder {
-    background: url('/images/diagonal_joycon-180.png') #333;
-    background-repeat: repeat;
-    animation: flow 8s linear infinite;
-}
-
-.placeholder {
-    border-radius: $border-radius;
-}
-
-.box_fill .v-image__image--preload,
-.box .v-image__image--preload {
-    background: url('/images/diagonal_joycon-180.png') #333;
-    background-repeat: repeat;
-    animation: flow 30s linear infinite;
-}
-
-.v-autocomplete__content.v-menu__content {
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-    border-radius: $border-radius !important;
-}
-
-.v-select.v-input--dense .v-input__append-inner {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: -15px;
-}
-
-.v-select.v-input--dense .v-chip {
-    margin: 4px 0 !important;
-}
-
-//For some reason this is missing in a build
-.v-btn__content .v-icon--left,
-.v-btn__content .v-icon--right {
-    font-size: 18px !important;
-    height: 18px !important;
-    width: 18px !important;
-}
-
-.v-card > *:last-child:not(.v-btn):not(.v-chip) {
-    border-bottom-left-radius: initial !important;
-    border-bottom-right-radius: initial !important;
-}
-
-@keyframes flow {
-    from {
-        background-position: bottom left;
-    }
-    to {
-        background-position: top right;
-    }
-}
-
-.box {
-    background-color: #1e1e1e;
-    border-radius: $border-radius !important;
-    box-shadow: 0 7px 8px -4px rgb(0 0 0 / 20%), 0px 12px 17px 2px rgb(0 0 0 / 14%), 0px 5px 22px 4px rgb(0 0 0 / 12%) !important;
-
-    &_fill {
-        @extend .box;
-        min-height: 100%;
-    }
-
-    .overlay-image {
-        background-size: contain;
-        background-position: center;
-        border-radius: $border-radius;
-    }
-
-    .box_text {
-        margin-left: 8px;
-        margin-right: 8px;
-    }
-
-    h2.box_text {
-        margin-top: 16px;
-    }
-}
-
-.transition-ease {
-    transition: $transition-ease;
-}
-
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #1e1e1e;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    background-color: #1e1e1e;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #4e4e4e;
-}
+@import "~assets/default";
 </style>
 
 <style lang="scss" scoped>
-$border-radius: 20px;
+//$border-radius: 20px;
 
 .drawer {
     user-select: none;
-    border-radius: 0 $border-radius $border-radius 0 !important;
+    //border-radius: 0 $border-radius $border-radius 0 !important;
 
     .background {
         position: absolute;
@@ -1032,10 +834,10 @@ $border-radius: 20px;
 .navbar {
     user-select: none;
     background: transparent;
-    border-radius: 0 0 $border-radius $border-radius !important;
+    //border-radius: 0 0 $border-radius $border-radius !important;
 
     .title-icon {
-        border-radius: $icon-border-radius;
+        //border-radius: $icon-border-radius;
         height: fit-content;
         margin: auto;
     }
@@ -1049,7 +851,7 @@ $border-radius: 20px;
 
 .footer {
     user-select: none;
-    border-radius: $border-radius $border-radius 0 0 !important;
+    //border-radius: $border-radius $border-radius 0 0 !important;
     box-shadow: 0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%) !important;
 }
 

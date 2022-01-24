@@ -35,7 +35,7 @@
                         </h1>
                         <div class="subtitle-1">
                             <i18n path="item.author">
-                                <template v-slot:creator>
+                                <template #creator>
                                     <nuxt-link
                                         :to="`/creators/${layout.creator.id}`"
                                         class="font-weight-bold"
@@ -79,14 +79,14 @@
                         </h3>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.id">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ layout.id }}</span>
                                 </template>
                             </i18n>
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.lastUpdated">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{
                                             $d(new Date(layout.last_updated), "short")
                                         }}</span>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="font-weight-medium body-2">
                             <i18n path="item.targetFile">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ layout.target }}.szs</span>
                                 </template>
                             </i18n>
@@ -105,7 +105,7 @@
                             class="font-weight-medium body-2"
                         >
                             <i18n path="item.dlCount">
-                                <template v-slot:value>
+                                <template #value>
                                     <span class="font-weight-light">{{ layout.dl_count }}</span>
                                 </template>
                             </i18n>
@@ -130,7 +130,7 @@
                             <h3 style="position: relative;">
                                 {{ $tc("commonLayout") }}
                                 <v-tooltip v-model="showCommonInfo" top>
-                                    <template v-slot:activator="{ on }">
+                                    <template #activator="{ on }">
                                         <v-btn
                                             class="ml-1 pa-0 grey lighten-1"
                                             height="14"
@@ -155,7 +155,7 @@
                                 class="font-weight-medium body-2"
                             >
                                 <i18n path="item.commonAuthor">
-                                    <template v-slot:value>
+                                    <template #value>
                                         <span class="font-weight-light">{{ commonlayoutObject.AuthorName }}</span>
                                     </template>
                                 </i18n>
@@ -165,7 +165,7 @@
                                 class="font-weight-medium body-2"
                             >
                                 <i18n path="item.targetFile">
-                                    <template v-slot:value>
+                                    <template #value>
                                         <span class="font-weight-light">{{ commonlayoutObject.TargetName }}</span>
                                     </template>
                                 </i18n>
@@ -263,20 +263,20 @@
 
 <script>
 import Vue from "vue";
-import shared from "~/layouts/details/SharedScript";
-import {downloadCommonLayout, downloadLayout, layout} from "~/graphql/Layout.gql";
-import targetParser from "~/components/mixins/targetParser";
+import shared from "@/layouts/details/SharedScript";
+import {downloadCommonLayout, downloadLayout, layout} from "@/graphql/Layout.gql";
+import targetParser from "@/components/mixins/targetParser";
 
 export default Vue.extend({
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        OptionsButton: () => import("~/components/buttons/OptionsButton.vue"),
-        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
-        LikeButton: () => import("~/components/buttons/LikeButton.vue"),
-        ShareButton: () => import("~/components/buttons/ShareButton.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        OptionsButton: () => import("@/components/buttons/OptionsButton.vue"),
+        DownloadButton: () => import("@/components/buttons/DownloadButton.vue"),
+        LikeButton: () => import("@/components/buttons/LikeButton.vue"),
+        ShareButton: () => import("@/components/buttons/ShareButton.vue"),
         BackgroundsSlideGroup: () =>
-            import("~/components/BackgroundsSlideGroup.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+            import("@/components/BackgroundsSlideGroup.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [shared, targetParser],
     data() {
@@ -297,7 +297,7 @@ export default Vue.extend({
                     "background-image: url(" +
                     (this.$store.state.background.startsWith("blob")
                         ? this.$store.state.background
-                        : require(`~/assets/images/backgrounds/${this.$store.state.background}`)) +
+                        : require(`@/assets/images/backgrounds/${this.$store.state.background}`)) +
                     ")"
                 );
             } else if (this.$route.params.target === "playerselect") {

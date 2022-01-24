@@ -6,9 +6,9 @@
         offset-y
         right
     >
-        <template v-slot:activator="{ attrs }">
+        <template #activator="{ attrs }">
             <v-tooltip top>
-                <template v-slot:activator="{ on: tooltip }">
+                <template #activator="{ on: tooltip }">
                     <v-btn
                         :disabled="hasReported"
                         class="button"
@@ -104,7 +104,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {reportURL} from "~/graphql/Report.gql";
+import {reportURL} from "@/graphql/Report.gql";
 
 export default Vue.extend({
     props: {

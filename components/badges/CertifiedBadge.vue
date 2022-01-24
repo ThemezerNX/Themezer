@@ -1,6 +1,6 @@
 <template>
     <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
             <v-icon
                 :class="inline ? '' : 'badge'"
                 class="ma-1 pa-1"

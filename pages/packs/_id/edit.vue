@@ -136,10 +136,10 @@
 
 <script>
 import Vue from "vue";
-import rules from "~/components/mixins/rules";
-import targetParser from "~/components/mixins/targetParser";
-import {deletePack, pack, updatePack} from "~/graphql/Pack.gql";
-import urlParser from "~/components/mixins/urlParser";
+import rules from "@/components/mixins/rules";
+import targetParser from "@/components/mixins/targetParser";
+import {deletePack, pack, updatePack} from "@/graphql/Pack.gql";
+import urlParser from "@/components/mixins/urlParser";
 
 export default Vue.extend({
     beforeRouteEnter(_to, _from, next) {
@@ -149,9 +149,9 @@ export default Vue.extend({
         });
     },
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DeleteButton: () => import("~/components/buttons/DeleteButton.vue"),
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        ButtonDivider: () => import("@/components/buttons/ButtonDivider.vue"),
+        DeleteButton: () => import("@/components/buttons/DeleteButton.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mixins: [urlParser, targetParser, rules],
     data() {
@@ -300,8 +300,4 @@ export default Vue.extend({
 
 <style lang="scss">
 @import 'assets/screenshot-upload.scss';
-
-.v-menu__content {
-    border-radius: 20px !important;
-}
 </style>

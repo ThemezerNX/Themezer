@@ -1,5 +1,5 @@
 import Vue from "vue";
-import {allPacks} from "~/graphql/Filtering.gql";
+import {allPacks} from "@/graphql/Filtering.gql";
 
 export default Vue.extend({
     // @ts-ignore

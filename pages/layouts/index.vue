@@ -7,7 +7,7 @@ import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        TargetPicker: () => import("~/components/TargetPicker.vue"),
+        TargetPicker: () => import("@/components/TargetPicker.vue"),
     },
     data() {
         return {

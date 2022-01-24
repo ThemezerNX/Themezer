@@ -18,7 +18,7 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
-            "~/*": [
+            "@/*": [
                 "./*"
             ],
         },

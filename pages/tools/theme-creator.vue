@@ -11,7 +11,7 @@
             <div class="subtitle-1 box_text">
                 {{ $t("themeCreators.pageDescription") }}
                 <i18n path="themeCreators.pageHint">
-                    <template v-slot:switchThemeInjector>
+                    <template #switchThemeInjector>
                         <a
                             href="https://github.com/exelix11/SwitchThemeInjector/releases/latest"
                             rel="noopener"

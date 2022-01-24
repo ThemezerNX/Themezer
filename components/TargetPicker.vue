@@ -21,7 +21,7 @@
             <v-hover
                 v-for="target in targets.menus"
                 :key="target.target"
-                v-slot:default="{ hover }"
+                #default="{ hover }"
             >
                 <v-col
                     class="mx-auto"
@@ -45,7 +45,7 @@
                         >
                             <img
                                 :src="
-                                  require(`~/assets/images/stock/360/${target.image}`)
+                                  require(`@/assets/images/stock/360/${target.image}`)
                                 "
                                 alt="menu screenshot"
                                 class="thumbnail transition-ease"
@@ -66,8 +66,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import targets from "~/assets/targets";
-import targetParser from "~/components/mixins/targetParser";
+import targets from "@/assets/targets";
+import targetParser from "@/components/mixins/targetParser";
 
 export default Vue.extend({
     data() {

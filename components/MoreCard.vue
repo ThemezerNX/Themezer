@@ -1,5 +1,5 @@
 <template>
-    <v-hover v-slot:default="{ hover }">
+    <v-hover #default="{ hover }">
         <v-card
             :class="{ 'on-hover': hover }"
             :elevation="hover ? 2 : 12"
@@ -25,7 +25,7 @@ import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        CertifiedBadge: () => import("~/components/badges/CertifiedBadge.vue"),
+        CertifiedBadge: () => import("@/components/badges/CertifiedBadge.vue"),
     },
     props: {
         to: {
