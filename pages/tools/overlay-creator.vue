@@ -1,210 +1,215 @@
 <template>
-    <v-container
-        ref="sheet"
-        :fluid="$vuetify.breakpoint.smAndDown"
-        style="height: 100%;"
-    >
-        <v-sheet class="pa-2 box_fill" no-gutters>
-            <h1 class="box_text">
-                {{ $tc("overlayCreator", 1) }}
-            </h1>
-            <div class="subtitle-1 box_text">
-                {{ $t("overlayCreators.pageDescription") }} {{ $t("overlayCreators.pageUse") }}
-            </div>
-            <h2 class="box_text">
+    <PageSheet>
+        <template #title>
+            {{ $tc("overlayCreator", 1) }}
+        </template>
+        <template #description>
+            {{ $t("overlayCreators.pageDescription") }} {{ $t("overlayCreators.pageUse") }}
+        </template>
+        <template #content>
+            <h2>
                 {{ $t("overlayCreators.step1") }}
             </h2>
-            <div class="subtitle-1 box_text">
+            <p class="subtitle-1">
                 {{ $t("overlayCreators.step1Description") }}
-                <a
-                    href="https://github.com/ThemezerNX/Layouts#3-creating-overlays"
-                    rel="noopener"
-                    target="_blank"
+                <br>
+                <OpenLink
+                    to="https://github.com/ThemezerNX/Layouts/wiki/Creating-Overlays"
                 >
                     {{ $t("overlayCreators.moreDetailedInstructions") }}
-                </a>
-            </div>
-            <v-row class="ma-0">
-                <v-col class="pa-2" cols="12">
-                    <v-file-input
-                        v-model="layoutJson"
-                        :label="`${$tc('layout')}*`"
-                        accept="application/json"
-                        filled
-                        hide-details
-                        prepend-icon="mdi-code-json"
-                        rounded
-                    />
-                </v-col>
-                <v-col class="pa-2" cols="12">
-                    <v-file-input
-                        v-model="pieceJson"
-                        :label="$tc('layoutOption')"
-                        accept="application/json"
-                        filled
-                        hide-details
-                        prepend-icon="mdi-code-json"
-                        rounded
-                    />
-                </v-col>
-                <v-col class="pa-2" cols="12">
-                    <v-file-input
-                        v-model="commonJson"
-                        :label="$tc('commonLayout')"
-                        accept="application/json"
-                        filled
-                        hide-details
-                        prepend-icon="mdi-code-json"
-                        rounded
-                    />
-                </v-col>
+                </OpenLink>
+            </p>
+            <v-col>
+                <v-row>
+                    <v-col class="pa-2" cols="12">
+                        <v-file-input
+                            v-model="layoutJson"
+                            :label="`${$tc('layout')}*`"
+                            accept="application/json"
+                            filled
+                            outlined
+                            prepend-icon="mdi-code-json"
+                            :rules="[rules.required]"
+                        />
+                    </v-col>
+                    <v-col class="pa-2" cols="12">
+                        <v-file-input
+                            v-model="pieceJson"
+                            :label="$tc('layoutOption')"
+                            :disabled="!layoutJson"
+                            accept="application/json"
+                            filled
+                            outlined
+                            hide-details
+                            prepend-icon="mdi-code-json"
+                        />
+                    </v-col>
+                    <v-col class="pa-2" cols="12">
+                        <v-file-input
+                            v-model="commonJson"
+                            :label="$tc('commonLayout')"
+                            accept="application/json"
+                            filled
+                            outlined
+                            hide-details
+                            prepend-icon="mdi-code-json"
+                        />
+                    </v-col>
 
-                <ButtonDivider>
-                    <v-btn
-                        :disabled="!layoutJson"
-                        :loading="loadingUploadLayout"
-                        append
-                        color="primary"
-                        rounded
-                        @click.prevent="uploadLayout()"
-                    >
-                        {{ $t("createNxthemes") }}
-                        <v-icon class="mt-1" right>mdi-format-color-fill</v-icon>
-                    </v-btn>
-                </ButtonDivider>
-            </v-row>
+                    <ButtonDivider>
+                        <v-btn
+                            :disabled="!layoutJson"
+                            :loading="loadingUploadLayout"
+                            append
+                            color="primary"
+                            @click.prevent="uploadLayout()"
+                        >
+                            {{ $t("createNxthemes") }}
+                            <v-icon class="mt-1" right>mdi-format-color-fill</v-icon>
+                        </v-btn>
+                    </ButtonDivider>
+                </v-row>
+            </v-col>
 
-            <h2 class="box_text">
+            <h2>
                 {{ $t("overlayCreators.step2") }}
             </h2>
-            <div class="subtitle-1 box_text">
+            <p class="subtitle-1">
                 {{ $t("overlayCreators.step2Description") }}
-            </div>
-            <v-row class="ma-0">
-                <v-col
-                    v-if="screenshotWhiteUrl"
-                    class="pa-2"
-                    cols="12"
-                    sm="2"
-                    style="position: relative;"
-                    xs="12"
-                >
-                    <v-img
-                        :alt="$t('overlayCreators.screenshotWithWhiteBackground')"
-                        :src="screenshotWhiteUrl"
-                        aspect-ratio="1.7778"
-                        class="placeholder"
-                        contain
-                    />
-                </v-col>
-                <v-col
-                    :sm="screenshotWhiteUrl ? 10 : 12"
-                    class="pa-2"
-                    cols="12"
-                    xs="12"
-                >
-                    <v-file-input
-                        v-model="whiteImg"
-                        :label="`${$t('overlayCreators.screenshotWithWhiteBackground')}*`"
-                        accept="image/jpeg"
-                        filled
-                        hide-details
-                        prepend-icon="mdi-monitor-screenshot"
-                        rounded
-                        @change="onScreenshotWhiteChange"
-                    />
-                </v-col>
-
-                <v-col
-                    v-if="screenshotBlackUrl"
-                    class="pa-2"
-                    cols="12"
-                    sm="2"
-                    style="position: relative;"
-                    xs="12"
-                >
-                    <v-img
-                        :alt="$t('overlayCreators.screenshotWithBlackBackground')"
-                        :src="screenshotBlackUrl"
-                        aspect-ratio="1.7778"
-                        class="placeholder"
-                        contain
-                    />
-                </v-col>
-                <v-col
-                    :sm="screenshotBlackUrl ? 10 : 12"
-                    class="pa-2"
-                    cols="12"
-                    xs="12"
-                >
-                    <v-file-input
-                        v-model="blackImg"
-                        :label="`${$t('overlayCreators.screenshotWithBlackBackground')}*`"
-                        accept="image/jpeg"
-                        filled
-                        hide-details
-                        prepend-icon="mdi-monitor-screenshot"
-                        rounded
-                        @change="onScreenshotBlackChange"
-                    />
-                </v-col>
-
-                <ButtonDivider>
-                    <v-btn
-                        :disabled="!(blackImg && whiteImg)"
-                        :loading="loadingUploadScreenshots"
-                        append
-                        color="primary"
-                        rounded
-                        @click.prevent="uploadScreenshots"
+            </p>
+            <v-col>
+                <v-row>
+                    <v-col
+                        v-if="screenshotWhiteUrl"
+                        class="pa-2"
+                        cols="12"
+                        sm="2"
+                        style="position: relative;"
+                        xs="12"
                     >
-                        {{ $t("createOverlay") }}
-                        <v-icon right>mdi-image-edit-outline</v-icon>
-                    </v-btn>
-                </ButtonDivider>
-            </v-row>
+                        <v-img
+                            :alt="$t('overlayCreators.screenshotWithWhiteBackground')"
+                            :src="screenshotWhiteUrl"
+                            aspect-ratio="1.7778"
+                            cover
+                        />
+                    </v-col>
+                    <v-col
+                        :sm="screenshotWhiteUrl ? 10 : 12"
+                        class="pa-2"
+                        cols="12"
+                        xs="12"
+                    >
+                        <v-file-input
+                            v-model="whiteImage"
+                            :label="`${$t('overlayCreators.screenshotWithWhiteBackground')}*`"
+                            accept="image/jpeg"
+                            filled
+                            outlined
+                            :rules="[rules.required]"
+                            prepend-icon="mdi-monitor-screenshot"
+                        />
+                    </v-col>
 
-            <v-row v-if="!!resultImage" class="ma-0">
-                <v-col class="pa-0" cols="12" xs="12">
-                    <h2 class="box_text">
-                        {{ $t("overlayCreators.step3") }}
-                    </h2>
-                </v-col>
-                <v-col class="pa-2" cols="12" sm="4" xs="12">
-                    <v-img
-                        :alt="$t('overlayCreators.generatedImage')"
-                        :src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
-                        aspect-ratio="1.7778"
-                        class="placeholder"
-                        contain
-                        style="background: rgba(255, 255, 255, 0.20);"
-                        @click="download"
-                    />
-                </v-col>
+                    <v-col
+                        v-if="screenshotBlackUrl"
+                        class="pa-2"
+                        cols="12"
+                        sm="2"
+                        style="position: relative;"
+                        xs="12"
+                    >
+                        <v-img
+                            :alt="$t('overlayCreators.screenshotWithBlackBackground')"
+                            :src="screenshotBlackUrl"
+                            aspect-ratio="1.7778"
+                            cover
+                        />
+                    </v-col>
+                    <v-col
+                        :sm="screenshotBlackUrl ? 10 : 12"
+                        class="pa-2"
+                        cols="12"
+                        xs="12"
+                    >
+                        <v-file-input
+                            v-model="blackImage"
+                            :label="`${$t('overlayCreators.screenshotWithBlackBackground')}*`"
+                            accept="image/jpeg"
+                            filled
+                            outlined
+                            :rules="[rules.required]"
+                            prepend-icon="mdi-monitor-screenshot"
+                        />
+                    </v-col>
 
-                <v-col class="pa-0" cols="12" xs="12">
                     <ButtonDivider>
-                        <DownloadButton
-                            :download-function="download"
-                            :label="$t('item.downloadOverlay')"
+                        <v-btn
+                            :disabled="!(blackImage && whiteImage)"
+                            :loading="loadingUploadScreenshots"
+                            append
+                            color="primary"
+                            @click.prevent="uploadScreenshots"
                         >
-                            {{ $t("save") }}
-                        </DownloadButton>
+                            {{ $t("createOverlay") }}
+                            <v-icon right>mdi-image-edit-outline</v-icon>
+                        </v-btn>
                     </ButtonDivider>
-                </v-col>
-            </v-row>
-        </v-sheet>
-    </v-container>
+                </v-row>
+            </v-col>
+
+            <v-col>
+                <v-row v-if="!!resultImage">
+                    <v-col class="pa-0" cols="12" xs="12">
+                        <h2 class="box_text">
+                            {{ $t("overlayCreators.step3") }}
+                        </h2>
+                    </v-col>
+                    <v-col class="pa-2" cols="12" sm="4" xs="12">
+                        <v-img
+                            :alt="$t('overlayCreators.generatedImage')"
+                            :src="`data:${resultImage.mimetype};base64,${resultImage.data}`"
+                            aspect-ratio="1.7778"
+                            cover
+                            style="background: rgba(255, 255, 255, 0.20);"
+                            @click="download"
+                        />
+                    </v-col>
+
+                    <v-col class="pa-0" cols="12" xs="12">
+                        <ButtonDivider>
+                            <DownloadButton
+                                :download-function="download"
+                                :label="$t('item.downloadOverlay')"
+                            >
+                                {{ $t("save") }}
+                            </DownloadButton>
+                        </ButtonDivider>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </template>
+        <template #footer-centered>
+
+        </template>
+    </PageSheet>
 </template>
 
 <script>
 import Vue from "vue";
-import {createOverlay, createOverlayNXThemes} from "~/graphql/CreateOverlay.gql";
+import PageSheet from "@/components/page/Sheet";
+import rules from "@/components/mixins/rules";
+import {CREATE_OVERLAY_THEMES_QUERY} from "@/graphql/overlay-creator/CreateOverlayThemes";
+import {CREATE_OVERLAY_QUERY} from "@/graphql/overlay-creator/CreateOverlay";
+import DownloadButton from "@/components/buttons/DownloadButton";
+import ButtonDivider from "@/components/buttons/ButtonDivider";
 
 export default Vue.extend({
+    mixins: [rules],
     components: {
-        ButtonDivider: () => import("~/components/buttons/ButtonDivider.vue"),
-        DownloadButton: () => import("~/components/buttons/DownloadButton.vue"),
+        ButtonDivider,
+        DownloadButton,
+        PageSheet,
     },
     data() {
         return {
@@ -212,36 +217,39 @@ export default Vue.extend({
             pieceJson: null,
             commonJson: null,
             loadingUploadLayout: false,
-            blackImg: null,
+            blackImage: null,
             screenshotBlackUrl: null,
-            whiteImg: null,
+            whiteImage: null,
             screenshotWhiteUrl: null,
             resultImage: null,
             loadingUploadScreenshots: false,
         };
     },
     methods: {
-        uploadLayout() {
+        async uploadLayout() {
             this.loadingUploadLayout = true;
-            this.blackImg = null;
-            this.whiteImg = null;
+            this.blackImage = null;
+            this.screenshotBlackUrl = null;
+            this.whiteImage = null;
+            this.screenshotWhiteUrl = null;
 
             this.$apollo
-                .mutate({
-                    mutation: createOverlayNXThemes,
+                .query({
+                    query: CREATE_OVERLAY_THEMES_QUERY,
                     variables: {
-                        layout: this.layoutJson,
-                        piece: this.pieceJson,
-                        common: this.commonJson,
+                        layoutJson: this.layoutJson ? await this.layoutJson.text() : undefined,
+                        pieceJson: this.pieceJson ? await this.pieceJson.text() : undefined,
+                        commonLayoutJson: this.commonJson ? await this.commonJson.text() : undefined,
                     },
+                    fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
                     this.loadingUploadLayout = false;
-                    data.createOverlayNXThemes.forEach((file) => {
-                        this.downloadFileB64(
+                    data.createOverlayThemes.forEach((file) => {
+                        this.$downloader.base64(
                             file.data,
                             file.mimetype,
-                            file.filename,
+                            file.fileName,
                         );
                     });
                 })
@@ -250,38 +258,24 @@ export default Vue.extend({
                     this.loadingUploadLayout = false;
                 });
         },
-        onScreenshotBlackChange(file) {
-            if (file) {
-                this.resultImage = null;
-                this.screenshotBlackUrl = URL.createObjectURL(file);
-            }
-        },
-        onScreenshotWhiteChange(file) {
-            if (file) {
-                this.resultImage = null;
-                this.screenshotWhiteUrl = URL.createObjectURL(file);
-            }
-        },
         uploadScreenshots() {
-            if (!(this.blackImg && this.whiteImg)) return;
-
             this.resultImage = null;
             this.loadingUploadScreenshots = true;
             this.$apollo
-                .mutate({
-                    mutation: createOverlay,
+                .query({
+                    query: CREATE_OVERLAY_QUERY,
                     variables: {
-                        blackImg: this.blackImg,
-                        whiteImg: this.whiteImg,
+                        blackImage: this.blackImage,
+                        whiteImage: this.whiteImage,
                     },
+                    fetchPolicy: "no-cache",
                 })
                 .then(({data}) => {
                     this.loadingUploadScreenshots = false;
                     this.resultImage = data.createOverlay;
 
-                    const self = this;
                     setTimeout(() => {
-                        const button = self.$refs.sheet;
+                        const button = this.$refs.sheet;
                         const position = button.getBoundingClientRect().bottom;
                         window.scrollTo({top: position, behavior: "smooth"});
                     }, 200);
@@ -292,11 +286,25 @@ export default Vue.extend({
                 });
         },
         download() {
-            this.downloadFileB64(
+            this.$downloader.base64(
                 this.resultImage.data,
                 "image/png",
-                this.resultImage.filename,
+                this.resultImage.fileName,
             );
+        },
+    },
+    watch: {
+        blackImage(val) {
+            this.resultImage = null;
+            if (val) {
+                this.screenshotBlackUrl = URL.createObjectURL(val);
+            }
+        },
+        whiteImage(val) {
+            this.resultImage = null;
+            if (val) {
+                this.screenshotWhiteUrl = URL.createObjectURL(val);
+            }
         },
     },
     head() {
