@@ -1,18 +1,14 @@
 <template>
-    <TargetPicker/>
+    <PageTargetPicker :type="type" />
 </template>
 
 <script>
 import Vue from "vue";
 
 export default Vue.extend({
-    components: {
-        TargetPicker: () => import("@/components/TargetPicker.vue"),
-    },
     data() {
         return {
             type: "layouts",
-            typeName: "layout",
         };
     },
     head() {
