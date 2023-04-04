@@ -1,6 +1,8 @@
 // Source: https://stackoverflow.com/a/60801428/12314121
+// the issue here is that this project uses @nuxtjs/apollo > vue-apollo,
+// while apollo-upload-client uses @apollo/client. These two packages are different.
+// Never use the use @apollo/client package directly!
 import {createUploadLink} from "apollo-upload-client";
-import {ApolloLink} from "@apollo/client/core";
 
 export default ({app}: { app: any }) => {
     const uploadLink = createUploadLink({
@@ -17,6 +19,6 @@ export default ({app}: { app: any }) => {
             addTypename: false,
         },
         defaultHttpLink: false,
-        link: ApolloLink.from([uploadLink]),
+        link: uploadLink,
     };
 }

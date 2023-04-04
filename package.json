@@ -1,7 +1,7 @@
 {
     "name": "themezer_website",
     "version": "1.0.0",
-    "description": "A site for sharing themes, theme packs and layouts for your Nintendo Switch. Discover hundreds of themes based on games, movies, anime, art, nature and much more!",
+    "description": "A site for sharing themes, theme packs and layouts for your Nintendo Switch. Discover thousands of themes based on games, movies, anime, art, nature and much more!",
     "author": "Migushthe2nd <Migushthe2nd@users.noreply.github.com>",
     "private": false,
     "scripts": {
@@ -10,6 +10,7 @@
         "start": "nuxt start --modern=client"
     },
     "dependencies": {
+        "@apollo/client": "^3.5.8",
         "@mdi/font": "^5.3.45",
         "@nuxtjs/apollo": "^4.0.0-rc19",
         "@nuxtjs/axios": "^5.13.6",
@@ -26,10 +27,12 @@
         "cookie-universal-nuxt": "^2.1.4",
         "core-js": "^2.6.5",
         "gm": "^1.23.1",
+        "graphql-tag": "^2.12.6",
         "marked": "^1.1.0",
         "minisearch": "^2.3.1",
         "nested-object-assign": "^1.0.3",
         "nuxt": "^2.0.0",
+        "nuxt-property-decorator": "^2.9.1",
         "object-hash": "^2.0.3",
         "remove-markdown": "^0.3.0",
         "rimraf": "^3.0.2",
@@ -42,7 +45,6 @@
         "vuex-persistedstate": "^4.1.0"
     },
     "devDependencies": {
-        "@apollo/client": "^3.5.7",
         "@babel/core": "^7.16.7",
         "@babel/plugin-transform-runtime": "^7.16.8",
         "@nuxt/types": "^2.15.8",

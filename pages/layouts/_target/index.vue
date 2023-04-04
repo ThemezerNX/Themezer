@@ -107,7 +107,7 @@ export default Vue.extend({
                     order: this.currentOrder,
                     creators: this.currentCreators,
                 };
-                vars.hash = this.$hashString(vars);
+                vars.hash = this.$objectHash(vars);
                 return vars;
             },
             update(data) {

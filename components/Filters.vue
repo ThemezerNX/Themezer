@@ -31,7 +31,7 @@
                 </v-btn>
             </v-card-title>
 
-            <v-card-actions class="mx-2" @focus="focussed = true">
+            <v-card-actions v-if="allowQuery" class="mx-2" @focus="focussed = true">
                 <v-text-field
                     v-model="query"
                     :label="$t('filter.search')"
@@ -57,6 +57,7 @@
                 >
                     <v-card-actions>
                         <v-autocomplete
+                            v-if="allowCreators"
                             v-model="withCreators"
                             :disabled="onlybyme"
                             :items="allCreators || []"
@@ -80,7 +81,7 @@
                     </v-card-actions>
                     <v-card-actions>
                         <v-autocomplete
-                            v-if="!unsupportedFilters.includes('withLayouts')"
+                            v-if="allowLayouts"
                             v-model="withLayouts"
                             :items="allLayouts || []"
                             :label="$tc('layout', 2)"
@@ -166,7 +167,7 @@
                 {{ $t("filter.filters") }}
             </v-card-title>
 
-            <v-card-actions v-if="!unsupportedFilters.includes('my')">
+            <v-card-actions v-if="allowOnlyByMe">
                 <v-checkbox
                     v-model="onlybyme"
                     :label="$t('filter.madeByMe')"
@@ -181,7 +182,7 @@
                 ></v-checkbox>
             </v-card-actions>
 
-            <v-card-actions v-if="!unsupportedFilters.includes('nsfw')">
+            <v-card-actions v-if="allowNSFW">
                 <v-checkbox
                     v-model="nsfw"
                     :label="$t('filter.nsfw')"
@@ -199,25 +200,40 @@ import Vue from "vue";
 
 export default Vue.extend({
     props: {
-        unsupportedFilters: {
-            type: Array,
-            required: true,
-            default: null,
+        allowQuery: {
+            type: Boolean,
+            default: true,
+        },
+        allowSortAndOrder: {
+            type: Boolean,
+            default: true,
+        },
+        allowCreators: {
+            type: Boolean,
+            default: true,
+        },
+        allowOnlyByMe: {
+            type: Boolean,
+            default: true,
+        },
+        allowLayouts: {
+            type: Boolean,
+            default: false,
+        },
+        allowNSFW: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
         return {
             sortOptions: [
                 {
-                    id: "downloads",
+                    id: "downloadCount",
                     icon: "mdi-download-outline",
                 },
                 {
-                    id: "likes",
-                    icon: "mdi-heart",
-                },
-                {
-                    id: "updated",
+                    id: "updatedTimestamp",
                     icon: "mdi-calendar-edit",
                 },
                 {
@@ -225,24 +241,24 @@ export default Vue.extend({
                     icon: "mdi-calendar-clock",
                 },
             ],
+            values: {
+                query: "",
+                withCreators: [],
+                withLayouts: [],
+                onlyByMe: false,
+                nsfw: false,
+            },
             loading: {
                 allCreators: false,
                 allLayouts: false,
             },
-            allCreators: null,
-            allLayouts: null,
-            // Search with
-            query: "",
+            allCreators: [],
+            allLayouts: [],
             typingQueryTimer: null,
             focussed: false,
             searchHover: false,
-            withCreators: [],
             typingWithCreatorsTimer: null,
-            withLayouts: [],
             typingWithLayoutsTimer: null,
-            // Filters
-            onlybyme: false,
-            nsfw: false,
         };
     },
     computed: {
@@ -263,27 +279,8 @@ export default Vue.extend({
                 return "asc";
             }
         },
-        currentCreators(): Array<string> | undefined {
-            const creators = this.$route.query.creators
-                ? (this.$route.query.creators as string).split(",")
-                : undefined;
-
-            if (this.$auth.isAuthenticated && creators && creators.includes((this.$auth as any)?.user?.id)) {
-                this.onlybyme = true;
-            }
-
-            return creators;
-        },
-        currentLayouts(): Array<string> | undefined {
-            return this.$route.query.layouts
-                ? (this.$route.query.layouts as string).split(",")
-                : undefined;
-        },
     },
     watch: {
-        nsfw(n) {
-            this.$parent.$data.nsfw = n;
-        },
         query(n) {
             clearTimeout(this.$data.typingQueryTimer);
             this.$data.typingQueryTimer = setTimeout(() => {
@@ -328,16 +325,6 @@ export default Vue.extend({
                         query,
                     });
                 }, 400);
-            }
-        },
-        currentCreators(n) {
-            if (!n) {
-                this.withCreators = [];
-            }
-        },
-        currentLayouts(n) {
-            if (!n) {
-                this.withLayouts = [];
             }
         },
     },

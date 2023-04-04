@@ -13,7 +13,7 @@ import Vue from "vue";
 
 export default Vue.extend({
     components: {
-        LoadingOverlay: () => import("~/components/LoadingOverlay.vue"),
+        LoadingOverlay: () => import("@/components/LoadingOverlay.vue"),
     },
     mounted() {
         const redirectUrl = this.$cookies.get("login_redirect") || "/";

@@ -91,6 +91,8 @@ const nuxtConfig: NuxtConfig = {
         "@/plugins/snackbar",
         "@/plugins/objectHash",
         "@/plugins/axiosErrorHandler",
+        "@/plugins/targetParser",
+        "@/plugins/createHead",
         {
             src: "@/plugins/downloader",
             mode: "client",

@@ -4,26 +4,23 @@
 
 <script>
 import Vue from "vue";
+import {LOGOUT_MUTATION} from "@/plugins/auth/graphql/logout";
 
 export default Vue.extend({
-    middleware: ["auth"],
-    options: {
-        auth: false,
-    },
-    data() {
-        return {
-            error: null,
-        };
-    },
     mounted() {
-        if (this.$auth.isAuthenticated) this.logout();
-        else this.$router.push("/");
+        this.logout();
+        if (this.$auth.isAuthenticated) {
+            this.logout();
+        } else {
+            this.$router.push("/");
+        }
     },
     methods: {
         logout() {
-            this.error = null;
-            return this.$auth.logout("social").catch((e) => {
-                this.error = e.response.data;
+            this.$auth.logout().then((success) => {
+                if (success) {
+                    this.$router.push("/");
+                }
             });
         },
     },

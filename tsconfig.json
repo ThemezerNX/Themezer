@@ -26,6 +26,8 @@
             "@types/node",
             "@nuxt/types",
             "@nuxtjs/axios",
+            "@nuxtjs/apollo",
+            "vue-apollo",
             "@nuxtjs/vuetify",
             "vuetify",
             "@nuxtjs/i18n"

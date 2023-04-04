@@ -1,7 +1,11 @@
 import {Commit, Module as VuexModule, Store} from "vuex";
 import {Context, Plugin} from "@nuxt/types";
-import {ME_QUERY} from "~/plugins/auth/graphql/me";
-import {ApolloClient} from "@apollo/client/core";
+import {ME_QUERY} from "@/plugins/auth/graphql/me";
+import {LOGIN_MUTATION} from "@/plugins/auth/graphql/login";
+import {LOGOUT_MUTATION} from "@/plugins/auth/graphql/logout";
+import {SnackbarPlugin} from "@/plugins/snackbar";
+import {REGISTER_MUTATION} from "@/plugins/auth/graphql/register";
+import {ApolloClient} from "apollo-client";
 
 type UserProfile = {
     bio: string;
@@ -46,10 +50,12 @@ type User = {
 
 class Auth {
     store: Store<any>;
+    snackbar: SnackbarPlugin;
     private apolloClient: ApolloClient<any>;
 
-    constructor(store: Store<any>, apolloClient: ApolloClient<any>) {
+    constructor(store: Store<any>, snackbar: SnackbarPlugin, apolloClient: ApolloClient<any>) {
         this.store = store;
+        this.snackbar = snackbar;
         this.apolloClient = apolloClient;
     }
 
@@ -61,16 +67,57 @@ class Auth {
         return this.store.state.auth.isAuthenticated;
     }
 
-    login(email: string, password: string) {
-        // this.apolloClient.mutate();
+    async login(email: string, password: string) {
+        return true;
+        try {
+            const res = await this.apolloClient.mutate({
+                mutation: LOGIN_MUTATION,
+                variables: {
+                    email,
+                    password,
+                },
+            });
+
+            this.setUser(res.data.login);
+            return true;
+        } catch (e) {
+            console.error(e);
+            this.clearUser();
+            throw e;
+        }
     }
 
-    logout() {
+    async logout() {
+        try {
+            const res = await this.apolloClient.mutate({
+                mutation: LOGOUT_MUTATION,
+            });
 
+            this.clearUser();
+            return true;
+        } catch (e) {
+            console.error(e);
+        }
     }
 
-    register(email: string, password: string) {
+    async register(email: string, username: string, password: string) {
+        try {
+            const res = await this.apolloClient.mutate({
+                mutation: REGISTER_MUTATION,
+                variables: {
+                    email,
+                    username,
+                    password,
+                },
+            });
 
+            this.setUser(res.data.register);
+            return true;
+        } catch (e) {
+            console.error(e);
+            this.clearUser();
+            throw e;
+        }
     }
 
     async fetchUser(apolloClient?: ApolloClient<any>, commit?: Commit) {
@@ -88,44 +135,42 @@ class Auth {
     private setUser(user: User, commit?: Commit) {
         const commitFunction = commit || this.store?.commit;
         commitFunction("SET_USER", user);
-        commitFunction("SET_AUTHENTICATED", true);
     }
 
     private clearUser() {
         this.store.commit("SET_USER", null);
-        this.store.commit("SET_AUTHENTICATED", false);
     }
 
 }
 
 // https://stackoverflow.com/questions/60940012/set-session-id-cookie-in-nuxt-auth
-const plugin: Plugin = ({store, $apollo, app}, inject) => {
-    const authClient = new Auth(store, app.apolloProvider.defaultClient);
-
-    const storeModule: VuexModule<any, any> = {
-        namespaced: true,
-        state: () => ({
-            user: null as User | null,
-            isAuthenticated: false,
-        }),
-        mutations: {
-            SET_USER(state: any, user: User) {
-                state.user = user;
+const plugin: Plugin = ({store, app, $snackbar}, inject) => {
+    console.log("Auth plugin");
+    if (app.apolloProvider?.defaultClient) {
+        const authClient = new Auth(store, $snackbar, app.apolloProvider.defaultClient);
+        const storeModule: VuexModule<any, any> = {
+            namespaced: true,
+            state: () => ({
+                user: null as User | null,
+                isAuthenticated: false,
+            }),
+            mutations: {
+                SET_USER(state: any, user: User) {
+                    state.user = user;
+                    state.isAuthenticated = !!user;
+                },
             },
-            SET_IS_AUTHENTICATED(state: any, isAuthenticated: boolean) {
-                state.isAuthenticated = isAuthenticated;
+            actions: {
+                async nuxtServerInit({commit}, context: Context) {
+                    await authClient.fetchUser(context.app.apolloProvider?.defaultClient, commit);
+                },
             },
-        },
-        actions: {
-            async nuxtServerInit({commit}, context: Context) {
-                await authClient.fetchUser(context.$apollo, commit);
-            },
-        },
-    };
+        };
 
-    store.registerModule("auth", storeModule);
+        store.registerModule("auth", storeModule);
 
-    inject("auth", authClient);
+        inject("auth", authClient);
+    }
 };
 
 export default plugin;

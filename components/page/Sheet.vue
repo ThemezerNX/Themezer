@@ -34,8 +34,10 @@
 </template>
 
 <script>
+import PageBlank from "@/components/page/Blank";
 export default {
     name: "PageSheet",
+    components: {PageBlank},
     props: {
         elevation: {
             type: [Number, String],

@@ -100,7 +100,7 @@ export default Vue.extend({
                     layouts: this.currentLayouts,
                     nsfw: this.nsfw,
                 };
-                vars.hash = this.$hashString(vars);
+                vars.hash = this.$objectHash(vars);
                 return vars;
             },
             update(data) {

@@ -2,10 +2,28 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.0.0", "@apollo/client@^3.5.7":
+"@apollo/client@^3.0.0":
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.5.7.tgz#38051c0a414ebf784319fa5131faa19df24fa9ec"
   integrity sha512-HSLqTGp3sp/PVIWYLLr5v3fjQSr6Fxg6Z5RQj5Q9ALyseIVudD8GZk1jHplaUblTFMBueXGw3Z6DXObuVAr3tw==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.0.0"
+    "@wry/context" "^0.6.0"
+    "@wry/equality" "^0.5.0"
+    "@wry/trie" "^0.3.0"
+    graphql-tag "^2.12.3"
+    hoist-non-react-statics "^3.3.2"
+    optimism "^0.16.1"
+    prop-types "^15.7.2"
+    symbol-observable "^4.0.0"
+    ts-invariant "^0.9.4"
+    tslib "^2.3.0"
+    zen-observable-ts "^1.2.0"
+
+"@apollo/client@^3.5.8":
+  version "3.5.8"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.5.8.tgz#7215b974c5988b6157530eb69369209210349fe0"
+  integrity sha512-MAm05+I1ullr64VLpZwon/ISnkMuNLf6vDqgo9wiMhHYBGT4yOAbAIseRdjCHZwfSx/7AUuBgaTNOssZPIr6FQ==
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@wry/context" "^0.6.0"
@@ -6700,7 +6718,7 @@ graphql-tag@2.12.4:
   dependencies:
     tslib "^2.1.0"
 
-graphql-tag@^2.10.1, graphql-tag@^2.11.0, graphql-tag@^2.12.3:
+graphql-tag@^2.10.1, graphql-tag@^2.11.0, graphql-tag@^2.12.3, graphql-tag@^2.12.6:
   version "2.12.6"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.6.tgz#d441a569c1d2537ef10ca3d1633b48725329b5f1"
   integrity sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==
@@ -8969,6 +8987,16 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
+
+nuxt-property-decorator@^2.9.1:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/nuxt-property-decorator/-/nuxt-property-decorator-2.9.1.tgz#60fd87b64d85519b091374c7ea4c0ce1979f6afa"
+  integrity sha512-dE2GrrGKZMhv0dHAr+Lmj+JOQfjIouINgF58QNRDFNOZXMJrXxKO5zGqvCRwmx3hxqqwht7TXHdz9w1AnvL2IA==
+  dependencies:
+    vue-class-component "^7.2.6"
+    vue-property-decorator "^9.0.0"
+    vuex-class "^0.3.2"
+    vuex-module-decorators "^1.0.1"
 
 nuxt@^2.0.0:
   version "2.15.8"
@@ -12512,6 +12540,11 @@ vue-apollo@^3.0.0-rc.2:
     serialize-javascript "^4.0.0"
     throttle-debounce "^2.1.0"
 
+vue-class-component@^7.2.6:
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
+  integrity sha512-+eaQXVrAm/LldalI272PpDe3+i4mPis0ORiMYxF6Ae4hyuCh15W8Idet7wPUEs4N4YptgFHGys4UrgNQOMyO6w==
+
 vue-cli-plugin-apollo@^0.21.0:
   version "0.21.3"
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-apollo/-/vue-cli-plugin-apollo-0.21.3.tgz#520d336db0e88b26fe854833a555e2e29fe26571"
@@ -12598,6 +12631,11 @@ vue-no-ssr@^1.1.1:
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.1.tgz#875f3be6fb0ae41568a837f3ac1a80eaa137b998"
   integrity sha512-ZMjqRpWabMPqPc7gIrG0Nw6vRf1+itwf0Itft7LbMXs2g3Zs/NFmevjZGN1x7K3Q95GmIjWbQZTVerxiBxI+0g==
 
+vue-property-decorator@^9.0.0:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-9.1.2.tgz#266a2eac61ba6527e2e68a6933cfb98fddab5457"
+  integrity sha512-xYA8MkZynPBGd/w5QFJ2d/NM0z/YeegMqYTphy7NJQXbZcuU6FC6AOdUAcy4SXP+YnkerC6AfH+ldg7PDk9ESQ==
+
 vue-router@^3.5.1:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.3.tgz#041048053e336829d05dafacf6a8fb669a2e7999"
@@ -12656,6 +12694,16 @@ vuetify@^2.6:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.2.tgz#1ed4d3c9e734d55202bd566b789cce0e0013279a"
   integrity sha512-nx3uZkO8MZNMshUEh1xKaQ1hQYepNwWFn3FVxKt+XBVf7ZFscd0GS/a3KZo4B3baXQmziCQAZKNIQF5IWeaIUw==
+
+vuex-class@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.3.2.tgz#c7e96a076c1682137d4d23a8dcfdc63f220e17a8"
+  integrity sha512-m0w7/FMsNcwJgunJeM+wcNaHzK2KX1K1rw2WUQf7Q16ndXHo7pflRyOV/E8795JO/7fstyjH3EgqBI4h4n4qXQ==
+
+vuex-module-decorators@^1.0.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vuex-module-decorators/-/vuex-module-decorators-1.2.0.tgz#efb9690ec8856041ce4e9762bc9b51dc264cd359"
+  integrity sha512-3lHp75qVgrNXUpFKs4J4eRnrxjY3BYUkHwR+ZKvvIycw/7tDwlL0RPuiYLwrHEUBTvJePSZaehZJ0BMTw1/ugQ==
 
 vuex-module-decorators@^2.0.0:
   version "2.0.0"

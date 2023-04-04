@@ -277,7 +277,7 @@
             <nuxt/>
         </v-main>
 
-        <v-footer absolute app class="footer text-caption" inset>
+        <v-footer absolute app class="footer text-caption rounded-t" outlined>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} ThemezerNX</span>
             <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
             <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>

@@ -3,7 +3,7 @@
         <card-collage :height-px="`${collageViewWindowHeight}vh`">
             <template #center>
                 <v-img
-                    :src="require('~/static/icon.png')"
+                    src="@/static/icon.png"
                     class="collage-title-image"
                     contain
                     width="128"
@@ -123,11 +123,11 @@
 
 <script>
 import Vue from "vue";
-import {rowPackList} from "~/graphql/Pack.gql";
-import {rowThemeList} from "~/graphql/Theme.gql";
-import {rowLayoutList} from "~/graphql/Layout.gql";
-import ItemGrid from "~/components/ItemGrid.vue";
-import CardCollage from "~/components/CardCollage.vue";
+import {rowPackList} from "@/graphql/Pack.gql";
+import {rowThemeList} from "@/graphql/Theme.gql";
+import {rowLayoutList} from "@/graphql/Layout.gql";
+import ItemGrid from "@/components/ItemGrid.vue";
+import CardCollage from "@/components/CardCollage.vue";
 
 export default Vue.extend({
     components: {
@@ -186,7 +186,7 @@ export default Vue.extend({
                     q: "packList",
                     limit: 8,
                 };
-                vars.hash = this.$hashString(vars);
+                vars.hash = this.$objectHash(vars);
 
                 return vars;
             },
@@ -199,7 +199,7 @@ export default Vue.extend({
                     q: "themeList",
                     limit: 8,
                 };
-                vars.hash = this.$hashString(vars);
+                vars.hash = this.$objectHash(vars);
 
                 return vars;
             },
@@ -213,7 +213,7 @@ export default Vue.extend({
                     sort: "updated",
                     limit: 8,
                 };
-                vars.hash = this.$hashString(vars);
+                vars.hash = this.$objectHash(vars);
 
                 return vars;
             },
@@ -247,21 +247,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/variables.scss";
+
 .container {
     z-index: 1;
 }
 
-.collage-title-image {
-    margin: auto;
-    box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3) !important;
-    border-radius: 35% !important;
-    min-height: 128px;
-}
-
 .collage-bottom-button {
     &:hover {
-        box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3) !important;
-        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 18px 5px rgba(0, 0, 0, .3);
+        transform: translateY(-3px);
     }
 }
 

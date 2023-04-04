@@ -216,6 +216,7 @@
     "target": {
         "menu": "Menu:",
         "choose": "Choose a Menu",
+        "common": "Home Menu Common",
         "homemenu": "Home Menu",
         "lockscreen": "Lockscreen",
         "userpage": "User Page",
@@ -383,5 +384,9 @@
         "joinDiscord": "join our Discord",
         "instructions": "See the {readme} for instructions. If it's too technical, don't hesitate to {joinDiscord} and ask for help in {channel}. One of the moderators will happily do it for you!"
     },
-    "helpTranslate": "Help translate"
+    "helpTranslate": "Help translate",
+    "auth": {
+        "username": "Username",
+        "password": "Password"
+    }
 }

@@ -12,46 +12,10 @@ export default Vue.extend({
         };
     },
     head() {
-        const metaTitle = this.$tc("theme", 2);
-        const metaDesc = this.$t("themes.pageDescription");
-        const metaImg = null;
-
-        const i18nHead = this.$nuxtI18nHead({addSeoAttributes: true});
-        return {
-            htmlAttrs: {
-                ...i18nHead.htmlAttrs,
-            },
-            link: [
-                ...i18nHead.link,
-            ],
-            title: metaTitle,
-            meta: [
-                ...i18nHead.meta,
-                {
-                    hid: "description",
-                    name: "description",
-                    content: metaDesc,
-                },
-                {
-                    hid: "og:title",
-                    name: "og:title",
-                    property: "og:title",
-                    content: metaTitle,
-                },
-                {
-                    hid: "og:description",
-                    name: "og:description",
-                    property: "og:description",
-                    content: metaDesc,
-                },
-                {
-                    hid: "og:image",
-                    name: "og:image",
-                    property: "og:image",
-                    content: metaImg,
-                },
-            ],
-        };
+        return this.$createHead(this.$nuxtI18nHead, {
+            title: this.$tc("theme", 2),
+            description: this.$tc("themes.pageDescription"),
+        });
     },
 });
 </script>

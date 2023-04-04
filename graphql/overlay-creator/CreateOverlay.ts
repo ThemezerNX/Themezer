@@ -1,4 +1,4 @@
-import {gql} from "@apollo/client/core";
+import gql from "graphql-tag";
 
 export const CREATE_OVERLAY_QUERY = gql`
     query createOverlay($blackImage: Upload!, $whiteImage: Upload!) {
