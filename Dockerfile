@@ -14,6 +14,7 @@ RUN yarn install
 
 COPY . .
 
+RUN yarn rebuild
 RUN yarn run build
 
 # Prune the dev dependencies
