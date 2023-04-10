@@ -7,6 +7,7 @@ ENV NODE_ENV=production
 
 ENV ENDPOINT=https://themezer.net/
 ENV API_ENDPOINT=https://api.themezer.net/
+ENV GTM_TAG=GTM-P85XNXF
 
 COPY package*.json ./
 COPY yarn*.lock ./
@@ -14,7 +15,6 @@ RUN yarn install
 
 COPY . .
 
-RUN yarn rebuild
 RUN yarn run build
 
 # Prune the dev dependencies
