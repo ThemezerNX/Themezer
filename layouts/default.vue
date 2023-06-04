@@ -305,11 +305,26 @@
                             <h1 class="mb-2">
                                 {{ $t("termsOfService") }}
                             </h1>
-                            <div v-for="item in tos" :key="item.title">
+                            <div v-for="item in termsOfService" :key="item.title">
                                 <h2>{{ item.title }}</h2>
                                 <p>
                                     {{ item.content }}
                                 </p>
+                                <ul v-if="item.list">
+                                    <li v-for="list_item in item.list" :key="item.title">
+                                        <a v-if="list_item.title_to && list_item.title_to.includes('http')" target="_blank" :href="list_item.title_to">
+                                            <h3>{{ list_item.title }}</h3>
+                                        </a>
+                                        <nuxt-link v-else-if="list_item.title_to" :to="list_item.title_to">
+                                            <h3>{{ list_item.title }}</h3>
+                                        </nuxt-link>
+                                        <h3 v-else>{{ list_item.title }}</h3>
+
+                                        <p>
+                                            {{ list_item.content }}
+                                        </p>
+                                    </li>
+                                </ul>
                             </div>
 
                             <v-flex class="d-flex">
@@ -476,10 +491,13 @@ import {updateAuth} from "@/graphql/Creator.gql";
 import {randomPackIDs} from "@/graphql/Pack.gql";
 import {randomThemeIDs} from "@/graphql/Theme.gql";
 import {randomLayoutIDs} from "@/graphql/Layout.gql";
+import TextCard from "~/components/TextCard.vue";
 import targets from "@/assets/targets";
-import tos from "~/components/mixins/termsOfService";
+import termsOfService from "~/components/mixins/termsOfService";
 
 export default {
+    components: {TextCard},
+    mixins: [termsOfService],
     data() {
         return {
             targets,
@@ -488,7 +506,6 @@ export default {
             transparentNavbar: true,
             acceptDialog: false,
             step: 0,
-            tos,
             accepts: true,
             backupCode: null,
             showBackupCode: false,
