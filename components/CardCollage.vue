@@ -151,7 +151,7 @@ export default Vue.extend({
 .collage-row-wrapper {
     position: relative;
     overflow: hidden;
-    transform: rotate(-10deg) scale(1.2);
+    transform: rotate(-10deg) scale(1.3);
     padding-top: 70px;
 }
 
