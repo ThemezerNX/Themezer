@@ -279,7 +279,8 @@
         <v-footer class="footer" absolute app inset>
             <span class="pr-3">&copy; {{ new Date().getFullYear() }} ThemezerNX</span>
             <nuxt-link class="pr-3" to="/about">{{ $t("about") }}</nuxt-link>
-            <a href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
+            <a class="pr-3" href="https://stats.uptimerobot.com/zx1G5uROYn" target="_blank">{{ $t("status") }}</a>
+            <a style="display: flex;" href="https://ko-fi.com/Q5Q47KAM3"><img height="24" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" /></a>
         </v-footer>
         <v-dialog
             v-if="$auth.loggedIn && $auth.user"
@@ -1071,6 +1072,7 @@ $border-radius: 20px;
 
 .footer {
     user-select: none;
+    justify-content: center;
     border-radius: $border-radius $border-radius 0 0 !important;
     box-shadow: 0px -2px 4px -1px rgb(0 0 0 / 20%), 0px -4px 5px 0px rgb(0 0 0 / 14%), 0px -1px 10px 0px rgb(0 0 0 / 12%) !important;
 }
