@@ -45,12 +45,12 @@
         "report": "Denunciar",
         "reportConfirm": "Tens a certeza de que queres denunciar isto?",
         "reportDescription": "Se achas que esta página não pertence ao Themezer por apresentar conteúdo não adequado ou por outras razões, diz-nos porquê:",
-        "reportLoginRequired": "Inicia sessão para denunciar conteúdo inadequado",
+        "reportLoginRequired": "Inicia sessão para denunciar conteúdo inadequado.",
         "like": "Gosto disto!",
         "unlike": "Não gostar disto"
     },
     "filter": {
-        "id": "Adicionado",
+        "id": "Adicionados",
         "clear": "Limpar tudo",
         "search": "Procurar",
         "sortBy": "Ordenar por",
@@ -125,7 +125,7 @@
         "pageUse": "Podes usar a ferramenta aqui ou criar manualmente uma sobreposição, se conseguires. Em todo o caso, é necessária uma sobreposição para os layouts no Themezer.",
         "moreDetailedInstructions": "Instruções mais detalhadas",
         "step1": "1. Carregar layout",
-        "step1Description": "Carrega o teu layout aqui. Receberás dois NXThemes: um com fundo preto e outro com fundo branco (assegura-te de que permites que o site transfira vários ficheiros). Para cada um deles, faz o seguinte: instala-o na tua Switch e tira uma captura de ecrã. Define o tema do sistema para branco(!) e mantém o cursor na mesma posição quando tirares as capturas de ecrã. Depois, transfere as capturas de ecrã para o teu PC. Já fizeste isso? Passa para o passo 2.",
+        "step1Description": "Carrega o teu layout aqui. Receberás dois NXThemes: um com fundo preto e outro com fundo branco (assegura-te de que permites que o site transfira vários ficheiros ao mesmo tempo). Para cada um deles, faz o seguinte: instala-o na tua Switch e tira uma captura de ecrã. Define o tema do sistema para branco(!) e mantém o cursor na mesma posição quando tirares as capturas de ecrã. Depois, transfere as capturas de ecrã para o teu PC. Já fizeste isso? Passa ao passo 2.",
         "step2": "2. Carregar capturas de ecrã",
         "step2Description": "Aqui é onde carregas as duas capturas de ecrã que tiraste no passo 1. Carrega-as para o seu próprio campo abaixo.",
         "step3": "3. Resultado",
@@ -202,7 +202,7 @@
     "discard": "Rejeitar",
     "noCancel": "Não, cancelar.",
     "yesContinue": "Sim, continuar.",
-    "readThis": "Lê isto",
+    "readThis": "Ler isto",
     "save": "Guardar",
     "clickHere": "Clica aqui",
     "loginRequired": "Tens de iniciar sessão primeiro!",
@@ -221,7 +221,7 @@
         "userpage": "Página de utilizador",
         "allapps": "Todas as aplicações",
         "settings": "Definições",
-        "news": "Notícias",
+        "news": "Novidades",
         "playerselect": "Seleção de jogador"
     },
     "badges": {
@@ -298,7 +298,7 @@
     "restore": {
         "prompt": "Precisas de restaurar a tua conta do Themezer?",
         "title": "Restaurar conta",
-        "description": "Quando criaste a tua conta do Themezer, foste informado sobre um código de segurança que poderias usar se alguma vez perdesses o acesso à tua conta do Discord. Podes usá-lo aqui para recuperar o acesso à tua conta do Themezer. A conta do Discord com sessão iniciada, será ligada aos teus dados prévios do Themezer. Se tiveres layouts no GitHub, certifica-te de que os atualizas com a tua nova ID de criador!",
+        "description": "Quando criaste a tua conta do Themezer, foste informado\/a sobre um código de segurança que poderias usar se alguma vez perdesses o acesso à tua conta do Discord. Podes usá-lo aqui para recuperar o acesso à tua conta do Themezer. A conta do Discord com sessão iniciada, será ligada aos teus dados prévios do Themezer. Se tiveres layouts no GitHub, assegura-te de que os atualizas com a tua nova ID de criador!",
         "previousId": "ID de criador anterior",
         "confirmRestore": "Restaurar",
         "success": "Conta restaurada com êxito!",
@@ -347,7 +347,7 @@
             }
         },
         "notDetect": {
-            "title": "O Themezer não deteta o layout do meu tema.",
+            "title": "O Themezer não deteta o layout do meu tema",
             "content": "Se o Themezer não reconhecer o layout, deverás selecioná-lo no menu pendente disponível. Assegura-te de que é exatamente o mesmo layout, caso contrário, poderás perder algumas funcionalidades! Por exemplo, se alteraste a posição dum botão, a alteração será rejeitada se selecionares a versão original do layout que usaste no menu pendente."
         },
         "faq": {
@@ -379,8 +379,8 @@
         "pageHint": "Tem em atenção que esta versão online do Injetor de Temas não suporta todas as opções (por exemplo, faltam os ícones personalizados). Para teres todas as funcionalidades, transfere a aplicação {switchThemeInjector} para o Windows."
     },
     "submitLayout": {
-        "pageDescription": "Podes enviar layouts para o repositório de layouts do GitHub do Themezer.",
-        "joinDiscord": "junta-te ao nosso Discord",
+        "pageDescription": "Podes submeter layouts no repositório de layouts do GitHub do Themezer.",
+        "joinDiscord": "juntar-te ao nosso Discord",
         "instructions": "Vê o {readme} para consultares as instruções. Se for demasiado técnico, não hesites em {joinDiscord} e pedir ajuda em {channel}. Um dos moderadores terá todo o gosto em ajudar-te!"
     },
     "helpTranslate": "Ajudar a traduzir"
