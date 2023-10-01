@@ -1,0 +1,387 @@
+{
+    "createNxthemes": "Criar NXThemes",
+    "createOverlay": "Criar sobreposição",
+    "item": {
+        "randomPack": "Pacote aleatório",
+        "randomTheme": "Tema aleatório",
+        "randomLayout": "Layout aleatório",
+        "downloadTheme": "Transferir tema",
+        "downloadPack": "Transferir pacote",
+        "downloadLayout": "Transferir layout",
+        "downloadOverlay": "Transferir sobreposição",
+        "downloadCommonLayout": "Transferir layout comum",
+        "editTheme": "Editar tema",
+        "editPack": "Editar pacote",
+        "editProfile": "Editar perfil",
+        "customizeLayout": "Personalizar layout",
+        "deleteTheme": "Apagar este tema",
+        "deletePack": "Apagar este pacote",
+        "reportThisTheme": "Denunciar este tema",
+        "reportThisPack": "Denunciar este pacote",
+        "reportThisCreator": "Denunciar este criador",
+        "shareTheme": "Dá uma espreitadela ao tema {name} de {creator} no Themezer!",
+        "sharePack": "Dá uma espreitadela ao pacote {name} de {creator} no Themezer!",
+        "shareLayout": "Dá uma espreitadela ao layout {name} de {creator} no Themezer!",
+        "shareCreator": "Dá uma espreitadela em {creator} no Themezer!",
+        "share": "Partilhar",
+        "item": "item",
+        "author": "Por {creator}",
+        "commonAuthor": "Autor: {value}",
+        "details": "Detalhes",
+        "id": "ID: {value}",
+        "lastUpdated": "Última atualização: {value}",
+        "dlCount": "Transferências: {value}",
+        "targetFile": "Ficheiro de destino: {value}",
+        "background": "Fundo: {value}",
+        "layout": "Layout: {value}",
+        "customizations": "Personalizações: {value}",
+        "download": "Transferir",
+        "edit": "Editar",
+        "customize": "Personalizar",
+        "delete": "Apagar",
+        "deleteConfirm": "Tens mesmo a certeza?",
+        "deleteDescription": "Todos os dados relacionados com este item serão removidos dos servidores do Themezer.",
+        "deleteSuccess": "Item apagado com sucesso!",
+        "report": "Denunciar",
+        "reportConfirm": "Tens a certeza de que queres denunciar isto?",
+        "reportDescription": "Se achas que esta página não pertence ao Themezer por apresentar conteúdo não adequado ou por outras razões, diz-nos porquê:",
+        "reportLoginRequired": "Inicia sessão para denunciar conteúdo inadequado",
+        "like": "Gosto disto!",
+        "unlike": "Não gostar disto"
+    },
+    "filter": {
+        "id": "Adicionado",
+        "clear": "Limpar tudo",
+        "search": "Procurar",
+        "sortBy": "Ordenar por",
+        "filters": "Filtros",
+        "downloads": "Transferências",
+        "likes": "Gostos",
+        "updated": "Atualizados",
+        "madeByMe": "Criado(s) por mim",
+        "nsfw": "Mostrar conteúdo adulto"
+    },
+    "fields": {
+        "themeName": "Nome do tema",
+        "packName": "Nome do pacote",
+        "themeDescription": "Descrição do tema",
+        "packDescription": "Descrição do pacote",
+        "zipFile": "Ficheiro ZIP",
+        "nxthemeFile": "Ficheiro NXTheme",
+        "hex": "НЕХ",
+        "id": "ID",
+        "name": "nome",
+        "description": "descrição",
+        "screenshot": "CAPTURA DE ECRÃ ({filetype}, {size})",
+        "category": "categoria",
+        "categories": "Categorias",
+        "categoriesHint": "Prime {key_} para uma nova categoria",
+        "sharedCategories": "Categorias partilhadas (isto substituirá o conjunto atual)",
+        "manualLayout": "Seleção manual de layout (anulará quaisquer alterações efetuadas ao JSON)"
+    },
+    "creators": {
+        "latestPacksByCreator": "Pacotes mais recentes deste criador",
+        "latestThemesByCreator": "Temas mais recentes deste criador",
+        "latestLayoutsByCreator": "Layouts mais recentes deste criador",
+        "pageDescription": "A página de {creator} no Themezer. Vê os pacotes, temas e layouts criados por si.",
+        "profile": "Perfil",
+        "noBiography": "Este criador ainda não escreveu nada sobre si próprio...",
+        "blockUser": "Bloquear o utilizador de submeter",
+        "customName": "Nome de apresentação personalizado",
+        "bio": "Biografia (suporta Markdown e HTML)",
+        "profileColor": "Cor do perfil",
+        "profileColorNote": "A cor do perfil afetará a barra de navegação e o menu lateral",
+        "banner": "Banner (recomendado: {size})",
+        "bannerClear": "Remover o banner atual",
+        "logo": "Logótipo (substitui o avatar do Discord)",
+        "logoClear": "Remover o logótipo atual"
+    },
+    "submitTheme": {
+        "separateThemes": "Temas individuais",
+        "packSubmitSuccess": "Pacote submetido com sucesso!",
+        "themesSubmitSuccess": "Os temas foram submetidos com sucesso!",
+        "pageDescription": "Podes submeter temas aqui de modo a serem listados no Themezer.",
+        "pageUse": "Através desta página, poderás submeter temas que tenhas criado. Se és novo\/a nisto, aconselho-te a {readThis}.",
+        "uploadTypes": {
+            "single": "Um único NXTheme",
+            "zip": "Um ZIP com NXThemes (pacote\/em conjunto, máximo: {max})",
+            "files": "Uma imagem"
+        },
+        "authorDisclaimer": "isto será substituído pelo TEU nome de utilizador",
+        "commonLayoutStatus": "{key_}: {status}",
+        "manuallySelected": "Selecionado manualmente",
+        "nsfwConfirm": "Este tema ficará marcado como \"conteúdo sensível\". Desejas continuar?",
+        "step1": "1. Carregar o tema\/pacote",
+        "packHint": "Certifica-te de que os NXThemes estão na raiz do ZIP e não numa pasta!",
+        "webInjector": "Poderás criar NXThemes utilizando o {onlineThemeCreator} e submetê-los aqui.",
+        "step2": "2. Detalhes do pacote",
+        "step3": "3. Detalhes do tema",
+        "screenshotHint": "Tens de carregar uma captura de ecrã (e NÃO APENAS a imagem de fundo). Faz isso clicando na imagem marcadora de posição."
+    },
+    "overlayCreators": {
+        "screenshotWithWhiteBackground": "Captura de ecrã com fundo branco",
+        "screenshotWithBlackBackground": "Captura de ecrã com fundo preto",
+        "pageDescription": "Cria uma sobreposição transparente para o teu layout e personalizações.",
+        "pageUse": "Podes usar a ferramenta aqui ou criar manualmente uma sobreposição, se conseguires. Em todo o caso, é necessária uma sobreposição para os layouts no Themezer.",
+        "moreDetailedInstructions": "Instruções mais detalhadas",
+        "step1": "1. Carregar layout",
+        "step1Description": "Carrega o teu layout aqui. Receberás dois NXThemes: um com fundo preto e outro com fundo branco (assegura-te de que permites que o site transfira vários ficheiros). Para cada um deles, faz o seguinte: instala-o na tua Switch e tira uma captura de ecrã. Define o tema do sistema para branco(!) e mantém o cursor na mesma posição quando tirares as capturas de ecrã. Depois, transfere as capturas de ecrã para o teu PC. Já fizeste isso? Passa para o passo 2.",
+        "step2": "2. Carregar capturas de ecrã",
+        "step2Description": "Aqui é onde carregas as duas capturas de ecrã que tiraste no passo 1. Carrega-as para o seu próprio campo abaixo.",
+        "step3": "3. Resultado",
+        "generatedImage": "PNG de sobreposição gerado"
+    },
+    "lang": "Português",
+    "welcome": "Bem-vindo(a) ao Themezer!",
+    "welcomeBack": "Bem-vindo\/a de volta {user}!",
+    "themezerIntro": "O Themezer é um site de partilha de temas e layouts para a Nintendo Switch.",
+    "cookieBanner": "Este website utiliza cookies para garantir que obténs a melhor experiência. Ao continuares a utilizar este website, concordas com a nossa utilização de cookies.",
+    "apiOffline": "O servidor parece estar offline. Aguarda e tenta novamente daqui a pouco. Se o problema persistir, contacta-nos.",
+    "error": {
+        "uhOh": "Ora bolas!",
+        "goBack": "Retroceder",
+        "pageNotFound": "404 Página Não Encontrada",
+        "otherError": "Ocorreu um erro"
+    },
+    "roles": {
+        "system": "Sistema",
+        "admin": "Administrador",
+        "verified": "Verificado"
+    },
+    "login": "Entrar",
+    "register": "Registar",
+    "logout": "Sair",
+    "logoutSuccess": "A tua sessão foi terminada!",
+    "loginSuccess": "Já tens sessão iniciada!",
+    "myProfile": "Meu perfil",
+    "browse": "Explorar",
+    "upload": "Carregar",
+    "tools": "Ferramentas",
+    "guides": "Guias",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "status": "Estado",
+    "layoutSubmissions": "Submissões de layouts",
+    "themePackSubmissions": "Temas\/pacote de submissões",
+    "termsOfService": "Termos de serviço",
+    "cookiePolicy": "Política de cookies",
+    "privacyPolicy": "Política de privacidade",
+    "serviceStatus": "Estado dos serviços",
+    "pack": "Pacote | Pacotes",
+    "theme": "Tema | Temas",
+    "nxtheme": "NXTheme | NXThemes",
+    "zip": "ZIP | ZIPs",
+    "layout": "Layout | Layouts",
+    "creator": "Criador | Criadores",
+    "overlay": "Sobreposição | Sobreposições",
+    "overlayPng": "PNG de sobreposição | PNGs de sobreposição",
+    "image": "Imagem | Imagens",
+    "faq": "Perguntas frequentes",
+    "commonLayout": "Layout comum | Layouts comuns",
+    "layoutOption": "Opção de layout | Opções de layout",
+    "tool": "Ferramenta | Ferramentas",
+    "onlineThemeCreator": "Criador de temas online",
+    "themezerHBApp": "Aplicação Themezer",
+    "overlayCreator": "Criador de sobreposições",
+    "themeCreator": "Criador de temas",
+    "guideInstallThemes": "Instalação de temas",
+    "guideCreateThemes": "Criação de temas\/fontes",
+    "guideCreateLayouts": "Criação de layouts",
+    "registerSuccessIntro": "Agora podes finalmente carregar os teus temas! No entanto, existem algumas regras aqui no Themezer:",
+    "accept": "Aceitar",
+    "backupCode": "Código de segurança",
+    "backupCodeExplanation": "Para garantir que manténs o acesso à tua conta Themezer e se algo acontecer à tua conta do Discord, eis a tua ID de criador e um código de segurança que podes usar para restaurar a tua conta e ligar uma nova conta do Discord. Não te esqueças de guardar este código de segurança num local seguro! A ID de criador também pode ser encontrada no URL da página de criador da tua conta Themezer anterior. Para restaurar a tua conta, visita a página \"Acerca de\".",
+    "backupCodeViewOnceWarning": "ESTA É A ÚNICA VEZ QUE PODES VER ESTE CÓDIGO DE SEGURANÇA!",
+    "copy": "Copiar",
+    "copySuccess": "Copiado!",
+    "permalink": "Link permanente",
+    "dismiss": "Ignorar",
+    "previous": "Antecedente",
+    "finish": "Terminar",
+    "cancel": "Cancelar",
+    "discard": "Rejeitar",
+    "noCancel": "Não, cancelar.",
+    "yesContinue": "Sim, continuar.",
+    "readThis": "Lê isto",
+    "save": "Guardar",
+    "clickHere": "Clica aqui",
+    "loginRequired": "Tens de iniciar sessão primeiro!",
+    "unsavedChanged": "Queres mesmo ir embora? Tens alterações que não foram guardadas!",
+    "saveSuccess": "Sucesso! As alterações poderão demorar algum tempo a ser aplicadas.",
+    "close": "Fechar",
+    "customLayout": "Personalizar",
+    "resultCount": "{count} resultado | {count} resultados",
+    "noResults": "Não há resultados",
+    "moreItems": "Mais itens",
+    "target": {
+        "menu": "Menu:",
+        "choose": "Escolhe um menu",
+        "homemenu": "Menu inicial",
+        "lockscreen": "Ecrã de bloqueio",
+        "userpage": "Página de utilizador",
+        "allapps": "Todas as aplicações",
+        "settings": "Definições",
+        "news": "Notícias",
+        "playerselect": "Seleção de jogador"
+    },
+    "badges": {
+        "certifiedBadge": "Atualizado automaticamente"
+    },
+    "whatIs": {
+        "this": "O que é isto?",
+        "pack": "O que é um pacote?",
+        "packDescription": "Os pacotes são ZIPs com vários temas criados pelo mesmo utilizador. Podem conter qualquer tema, mesmo vários para o mesmo menu.",
+        "nxthemeInstaller": "O que é o instalador de NXThemes?",
+        "nxthemeInstallerDescription": "O {nxthemesInstaller} é uma aplicação homebrew que corre na própria Switch e pode ser usada para instalar e gerir temas. As IDs apresentadas no Themezer podem ser usadas para instalar temas e pacotes diretamente. A ID {id} pode ser introduzida no separador \"Transferir temas\" da aplicação (assegura-te de que o Themezer está definido como fornecedor). Esta ID também pode ser utilizada na caixa de pesquisa do {themezerNX}.",
+        "commonLayout": "O que é o layout comum?",
+        "commonLayoutDescription": "O layout comum é o rodapé visto e partilhado entre o menu principal, todas as aplicações, definições e novidades. A versão padrão contém o comando atualmente ativo à esquerda, a linha divisória e as ações dos botões à direita. Alguns layouts incluem um layout comum para ocultar a linha ou fazer outras pequenas modificações. Modificar o layout comum para \"{playerSelect}\" e \"{userPage}\" não é suportado pelo Injetor de Temas da Switch. É sempre recomendável descarregar e usar este layout também!",
+        "overlayPng": "O que é a sobreposição de PNG?",
+        "overlayPngDescription": "O PNG de sobreposição é a imagem utilizada neste site para pré-visualizar layouts. Também podes usá-la para criar a captura de ecrã que precisas quando carregas um tema no Themezer."
+    },
+    "rules": {
+        "required": "Requisitos",
+        "utf8Only": "Só são permitidos caracteres do UTF-8",
+        "characterLength": "\"{field}\" deve ter entre {min} e {max} caracteres.",
+        "characterLengthMin": "\"{field}\" tem de ter {count} ou mais caracteres.",
+        "categoryMin": "É necessária pelo menos uma categoria.",
+        "categoryMax": "É permitido um máximo de {count} categorias.",
+        "invalid": "{field} inválido",
+        "maxImageSize": "O tamanho da imagem deve ser menor do que {max}!",
+        "notOwnCreatorId": "Esta é a tua ID atual"
+    },
+    "home": {
+        "pageTitle": "Início",
+        "recentAdditions": "Adições recentes",
+        "newPacks": "Pacotes mais recentes",
+        "newThemes": "Temas mais recentes",
+        "updatedLayouts": "Layouts atualizados"
+    },
+    "packs": {
+        "pageDescription": "Descobre fantásticos pacotes temáticos para dar aos menus um aspeto semelhante!",
+        "packContents": "Temas neste pacote",
+        "clickAnyToEdit": "Clica em qualquer um para editar"
+    },
+    "themes": {
+        "pageDescription": "Temas no Themezer",
+        "targetPageDescription": "Todos os temas \"{menu}\" no Themezer",
+        "pack": "Este tema faz parte do seguinte pacote:"
+    },
+    "layouts": {
+        "pageDescription": "Descobre layouts únicos para desenhares menus ao teu gosto!",
+        "targetPageDescription": "Todos os layouts \"{menu}\" no Themezer",
+        "tryBackgrounds": "Experimenta estes fundos",
+        "themesContents": "Todos os temas produzidos com este layout",
+        "backgrounds": {
+            "botwForest": "Bosque do Breath of the Wild",
+            "skyrimMountains": "Montanhas de Skyrim",
+            "acod": "Assassin's Creed Odyssey",
+            "fc5": "Far Cry 5",
+            "botwArt": "Arte do Breath of the Wild",
+            "acnh": "Animal Crossing New Horizons",
+            "sea": "Mar",
+            "spiderman": "Homem-Aranha: No Universo Aranha",
+            "pewdiepie": "PewDiePie",
+            "franxx": "Darling in the Franxx",
+            "nier": "Nier Automata",
+            "p5": "Ryuji do Persona 5"
+        }
+    },
+    "abouts": {
+        "sourceCode": "O código-fonte do projeto pode ser encontrado no {themezerNxGithub}.",
+        "certifiedBadge": "O que significa o crachá {image}? Significa que o NXTheme que transferes, é atualizado automaticamente sempre que são feitas alterações ao layout ou ao próprio tema.",
+        "notAffiliated": "O Themezer não está de forma alguma associada à Nintendo."
+    },
+    "contacts": {
+        "discord": "Para entrar em contacto, junta-te a {themezerNxDiscord}.",
+        "issue": "Encontraste um erro ou tens uma sugestão? Cria um tópico no {themezerNxGithub} ou junta-te ao servidor do Discord."
+    },
+    "restore": {
+        "prompt": "Precisas de restaurar a tua conta do Themezer?",
+        "title": "Restaurar conta",
+        "description": "Quando criaste a tua conta do Themezer, foste informado sobre um código de segurança que poderias usar se alguma vez perdesses o acesso à tua conta do Discord. Podes usá-lo aqui para recuperar o acesso à tua conta do Themezer. A conta do Discord com sessão iniciada, será ligada aos teus dados prévios do Themezer. Se tiveres layouts no GitHub, certifica-te de que os atualizas com a tua nova ID de criador!",
+        "previousId": "ID de criador anterior",
+        "confirmRestore": "Restaurar",
+        "success": "Conta restaurada com êxito!",
+        "error": "ID de criador ou código de segurança inválido!"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "Direito de propriedade",
+            "content": "Quem carrega, detém a propriedade dos ficheiros carregados no Themezer. Os ficheiros permanecerão nos servidores do Themezer, sob a responsabilidade do utilizador, e continuarão a ser da responsabilidade de quem carrega."
+        },
+        "copyright": {
+            "title": "Direitos de autor",
+            "content": "O conteúdo carregado no Themezer deve respeitar os direitos de autor. Se acreditas que o conteúdo do Themezer viola os direitos de autor e és o(a) detentor(a) dos direitos de autor ou estás autorizado(a) a agir em nome do detentor dos direitos de autor, contacta um dos nossos moderadores:",
+            "contact": "Contacta um moderador"
+        },
+        "abuse": {
+            "title": "Abuso",
+            "content": "Qualquer tentativa de abuso, envio de spam ou ofensa, resultará no término imediato da tua conta. As falhas e outros problemas deverão ser comunicados através da página de contacto ou do repositório GitHub."
+        },
+        "nsfw": {
+            "title": "Conteúdo sensível",
+            "content": "As submissões com conteúdo sensível devem utilizar a caixa de verificação fornecida. Tudo o que evoque a excitação sexual, é considerado conteúdo inapropriado. É permitida a nudez real e animada mas não devem ser mostrados nem insinuados atos sexuais (portanto, nada de pornografia). Não são permitidas representações de menores de 18 anos (reais ou animadas). Isto inclui conteúdo \"lolita\" em que a personagem é visivelmente menor de 18 anos, independentemente da idade que refiras, bem como personagens que se conhece serem menores de 18 anos."
+        },
+        "accountTermination": {
+            "title": "Encerramento da conta",
+            "content": "O Themezer reserva-se o direito de encerrar a conta dum utilizador se o considerar necessário, mesmo sem explicação."
+        }
+    },
+    "submitInfo": {
+        "screenshots": {
+            "title": "Capturas de ecrã",
+            "content": "É OBRIGATÓRIO carregar uma captura de ecrã para cada tema. Só a imagem de fundo NÃO é suficiente."
+        },
+        "language": {
+            "title": "Idioma",
+            "content": "Escreve o título, a descrição e outros pormenores em inglês. Desta forma, será mais fácil para os utilizadores internacionais compreenderem o tema da tua submissão."
+        },
+        "special": {
+            "title": "O que é que o Themezer tem de especial?",
+            "content": "O Themezer extrai tudo o que é carregado no sítio web. Isto tem algumas vantagens:",
+            "themes": {
+                "content": "Ao extrair um NXTheme, o conteúdo pode ser modificado facilmente sem a necessidade de carregar um novo ficheiro NXTheme. Após alterares algo na página de edição dum tema ou pacote (acessível após a submissão), o NXTheme será recriado com as alterações."
+            },
+            "layouts": {
+                "content": "Outra coisa fantástica é que o Themezer consegue detetar o layout utilizado num tema. Desta forma, se a Nintendo atualizar o menu inicial com alterações significativas, todos os temas poderão ser atualizados duma só vez quando o layout que utilizam for atualizado. As pessoas podem continuar a carregar temas com um layout personalizado mas esses temas não terão estas vantagens."
+            }
+        },
+        "notDetect": {
+            "title": "O Themezer não deteta o layout do meu tema.",
+            "content": "Se o Themezer não reconhecer o layout, deverás selecioná-lo no menu pendente disponível. Assegura-te de que é exatamente o mesmo layout, caso contrário, poderás perder algumas funcionalidades! Por exemplo, se alteraste a posição dum botão, a alteração será rejeitada se selecionares a versão original do layout que usaste no menu pendente."
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "Não sou o(a) autor(a) original deste tema\/pacote",
+                "content": "Infelizmente, não poderás enviá-lo porque ficará ligado à tua conta. Pede ao criador original para o carregar."
+            },
+            "notAvailable": {
+                "title": "O layout que utilizo não está disponível no Themezer",
+                "content": "Considera carregá-lo para o repositório de layouts do GitHub (consulta a página de envio \"Layout\" no menu)."
+            },
+            "modified": {
+                "title": "Fiz uma pequena modificação noutro layout",
+                "content": "Considera adicionar uma opção de personalização ao original no repositório de layouts do GitHub (consulta a página de envio \"Layout\" no menu). Se não o quiseres fazer, certifica-te de que alteras a ID do layout json para algo como \"personalizado\". Se não o fizeres, o Themezer irá forçar a seleção do layout original."
+            },
+            "notSubmit": {
+                "title": "Criei um layout personalizado que não quero enviar para o repositório de layouts do GitHub",
+                "content": "Mmm... porque não? As outras pessoas podem utilizá-lo mais facilmente e — o mais importante — é gratuito! Não hesites em enviar o tema."
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "Mais informações",
+        "content": "Se ainda estiveres à procura de mais informações, contacta-nos através de um dos seguintes meios:",
+        "contact": "A nossa página de contacto"
+    },
+    "themeCreators": {
+        "pageDescription": "Nesta página poderás criar NXThemes.",
+        "pageHint": "Tem em atenção que esta versão online do Injetor de Temas não suporta todas as opções (por exemplo, faltam os ícones personalizados). Para teres todas as funcionalidades, transfere a aplicação {switchThemeInjector} para o Windows."
+    },
+    "submitLayout": {
+        "pageDescription": "Podes enviar layouts para o repositório de layouts do GitHub do Themezer.",
+        "joinDiscord": "junta-te ao nosso Discord",
+        "instructions": "Vê o {readme} para consultares as instruções. Se for demasiado técnico, não hesites em {joinDiscord} e pedir ajuda em {channel}. Um dos moderadores terá todo o gosto em ajudar-te!"
+    },
+    "helpTranslate": "Ajudar a traduzir"
+}
