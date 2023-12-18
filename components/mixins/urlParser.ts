@@ -2,6 +2,10 @@ import Vue from "vue";
 
 const nameREGEX = /[^a-zA-Z0-9_.]+/gm;
 
+const escapeRegex = (string) => {
+    return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+};
+
 export default Vue.extend({
     computed: {
         id(): string | null {
@@ -15,13 +19,13 @@ export default Vue.extend({
         },
         updateUrlString(id: string, name: string, target?: string) {
             let newPath = this.$route.path.replace(
-                `/${this.$route.params.id}`,
+                new RegExp(`/${escapeRegex(this.$route.params.id)}`),
                 `/${this.createUrlString(id, name)}`,
             );
 
             if (target) {
                 newPath = newPath.replace(
-                    `/${this.$route.params.target}/`,
+                    new RegExp(`/${escapeRegex(this.$route.params.target)}/`),
                     `/${target}/`,
                 );
             }
