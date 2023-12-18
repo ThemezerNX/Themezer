@@ -2,8 +2,8 @@ import Vue from "vue";
 
 const nameREGEX = /[^a-zA-Z0-9_.]+/gm;
 
-const escapeRegex = (string) => {
-    return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
+const escapeRegex = (s: string) => {
+    return s.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
 export default Vue.extend({
