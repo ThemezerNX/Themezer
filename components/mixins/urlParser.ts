@@ -15,13 +15,13 @@ export default Vue.extend({
         },
         updateUrlString(id: string, name: string, target?: string) {
             let newPath = this.$route.path.replace(
-                new RegExp(`/${this.$route.params.id}`),
+                `/${this.$route.params.id}`,
                 `/${this.createUrlString(id, name)}`,
             );
 
             if (target) {
                 newPath = newPath.replace(
-                    new RegExp(`/${this.$route.params.target}/`),
+                    `/${this.$route.params.target}/`,
                     `/${target}/`,
                 );
             }
