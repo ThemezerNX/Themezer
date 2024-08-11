@@ -601,13 +601,13 @@ export default {
                     icon: "mdi-help-circle-outline",
                     title: this.$t("guideInstallThemes"),
                     href:
-                        "https://nh-server.github.io/switch-guide/extras/theming/#installing-a-theme",
+                        "https://switch.hacks.guide/homebrew/nxtheme-installer/#installing-a-theme",
                 },
                 {
                     icon: "mdi-help-circle-outline",
                     title: this.$t("guideCreateThemes"),
                     href:
-                        "https://nh-server.github.io/switch-guide/extras/theming/",
+                        "https://switch.hacks.guide/homebrew/nxtheme-installer/#making-a-theme",
                 },
                 {
                     icon: "mdi-book-open-variant",
