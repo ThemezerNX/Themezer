@@ -1,0 +1,391 @@
+{
+    "createNxthemes": "创建 NX主题",
+    "createOverlay": "创建覆盖层",
+    "item": {
+        "randomPack": "随机包",
+        "randomTheme": "随机主题",
+        "randomLayout": "随机布局",
+        "downloadTheme": "下载主题",
+        "downloadPack": "下载包",
+        "downloadLayout": "下载布局",
+        "downloadOverlay": "下载覆盖层",
+        "downloadCommonLayout": "下载常见布局",
+        "editTheme": "编辑主题",
+        "editPack": "编辑包",
+        "editProfile": "编辑个人资料",
+        "customizeLayout": "自定义布局",
+        "deleteTheme": "删除此主题",
+        "deletePack": "删除此包",
+        "reportThisTheme": "报告此主题",
+        "reportThisPack": "报告此包",
+        "reportThisCreator": "报告此创作者",
+        "shareTheme": "在 Themezer 上查看名为 '{name}' 的此主题！",
+        "sharePack": "在 Themezer 上查看名为 '{name}' 的此包！",
+        "shareLayout": "在 Themezer 上查看名为 '{name}' 的此布局！",
+        "shareCreator": "在 Themezer 上查看名为'{creator}'的此创作者！",
+        "share": "分享",
+        "item": "项目",
+        "author": "{creator}制作",
+        "commonAuthor": "作者：{value}",
+        "details": "详情",
+        "id": "ID：{value}",
+        "lastUpdated": "最后更新时间：{value}",
+        "dlCount": "下载次数：{value}",
+        "targetFile": "目标文件：{value}",
+        "background": "背景：{value}",
+        "layout": "布局：{value}",
+        "customizations": "自定义：{value}",
+        "download": "下载",
+        "edit": "编辑",
+        "customize": "定制",
+        "delete": "删除",
+        "deleteConfirm": "你确定要删除吗？",
+        "deleteDescription": "从 Themezer 的服务器上将与此项目相关的所有数据都将被删除。",
+        "deleteSuccess": "成功删除此项目！",
+        "report": "举报",
+        "reportConfirm": "你确定要举报这个页面？",
+        "reportDescription": "如果你认为该页面不适合在 Themezer 上展示，因为它显示了不适当的内容或其他原因，请告诉我们具体原因：",
+        "reportLoginRequired": "登录后举报不适当内容",
+        "like": "我喜欢这个！",
+        "unlike": "取消喜欢"
+    },
+    "filter": {
+        "id": "已添加",
+        "clear": "清除所有",
+        "search": "搜索",
+        "sortBy": "排序方式",
+        "filters": "筛选器",
+        "downloads": "下载次数",
+        "likes": "喜欢次数",
+        "updated": "更新时间",
+        "madeByMe": "由我制作",
+        "nsfw": "显示 NSFW"
+    },
+    "fields": {
+        "themeName": "主题名称",
+        "packName": "包名称",
+        "themeDescription": "主题描述",
+        "packDescription": "包描述",
+        "zipFile": "ZIP文件",
+        "nxthemeFile": "NX主题文件",
+        "hex": "HEX",
+        "id": "ID",
+        "name": "名字",
+        "description": "描述",
+        "screenshot": "屏幕截图（{filetype}，{size}）",
+        "category": "类别",
+        "categories": "类别",
+        "categoriesHint": "按 {key_} 新增类别",
+        "sharedCategories": "共享的类别（这将替换当前设置）",
+        "manualLayout": "手动布局选择（清除对JSON所做的任何更改）"
+    },
+    "creators": {
+        "latestPacksByCreator": "此创作者的最新包",
+        "latestThemesByCreator": "此创作者的最新主题",
+        "latestLayoutsByCreator": "此创作者的最新布局",
+        "pageDescription": "{creator}在Themezer上的个人页面。查看由{creator}创建的包、主题和布局。",
+        "profile": "个人资料",
+        "noBiography": "此创作者尚未撰写关于自己的任何内容...",
+        "blockUser": "禁止用户提交",
+        "customName": "自定义显示名称",
+        "bio": "简介（支持Markdown和HTML）",
+        "profileColor": "背景颜色",
+        "profileColorNote": "背景颜色将影响导航栏和侧边菜单",
+        "banner": "横幅图（推荐尺寸：{size}）",
+        "bannerClear": "移除当前的横幅图",
+        "logo": "Logo（替换Discord头像）",
+        "logoClear": "重置为默认 Logo"
+    },
+    "submitTheme": {
+        "separateThemes": "分离主题",
+        "packSubmitSuccess": "打包提交成功！",
+        "themesSubmitSuccess": "主题提交成功！",
+        "pageDescription": "您可以在 Themezer 上提交主题进行列表展示。",
+        "pageUse": "通过此页面，您可以提交您创建的主题。如果您是初次尝试，请阅读 {readThis}。",
+        "uploadTypes": {
+            "single": "单个 NXTheme",
+            "zip": "包含 NXThemes 的 ZIP（打包\/批量，最多 {max}）",
+            "files": "一张图片"
+        },
+        "authorDisclaimer": "这将被替换为您的用户名",
+        "commonLayoutStatus": "{key_}: {status}",
+        "manuallySelected": "手动选择",
+        "nsfwConfirm": "此主题将标记为 NSFW，继续吗？",
+        "step1": "1. 提交主题\/打包",
+        "packHint": "确保 ZIP 中的主题位于根目录下，而非某个文件夹中！",
+        "webInjector": "您可以使用 {onlineThemeCreator} 创建 NXThemes。您可以在这里提交创建的 NXTheme(s)。",
+        "step2": "2. 包信息详情",
+        "step3": "3. 主题详细信息",
+        "screenshotHint": "您必须上传一个包含白色背景的截图（而不仅仅是背景图片）。请通过点击占位符图片完成此操作。"
+    },
+    "overlayCreators": {
+        "screenshotWithWhiteBackground": "白色背景的截图",
+        "screenshotWithBlackBackground": "黑色背景的截图",
+        "pageDescription": "创建用于您的布局和自定义的透明覆盖层。",
+        "pageUse": "您可以在工具中使用它，或者手动创建一个覆盖层。无论哪种方式，对于 Themezer 上的布局都需要一个覆盖层。",
+        "moreDetailedInstructions": "详细说明（英语）",
+        "step1": "1. 提交布局",
+        "step1Description": "在这里上传您的布局。您会得到两个 NXThemes：一个是黑色背景，另一个是白色背景（请确保允许网站下载多个文件）。对于每个都进行以下操作：将其安装到您的 Switch 上并截取截图。将系统主题设置为白色(!)并在截取截图时保持光标在相同位置。完成后将截图转移到 PC 中。完成此步骤后，请转至步骤 2。",
+        "step2": "2. 提交截图",
+        "step2Description": "在这里上传您在步骤1中拍摄的两张截图。分别将其放入下方各自的字段内。",
+        "step3": "3. 结果",
+        "generatedImage": "生成的覆盖层 png"
+    },
+    "lang": "中文",
+   "welcome": "欢迎来到Themezer！",
+    "welcomeBack": "欢迎{user}回到Themezer！",
+    "themezerIntro": "Themezer是一个分享Nintendo Switch主题和布局的网站",
+    "cookieBanner": "本网站使用cookies以确保您获得最佳体验。继续使用本网站即表示您同意我们使用cookies。",
+    "apiOffline": "服务器似乎离线了。请稍等并尝试再次操作。如果此问题持续存在，请联系我们。",
+    "error": {
+        "uhOh": "不妙！",
+        "goBack": "返回上一页",
+        "pageNotFound": "404 页面未找到",
+        "otherError": "发生了一点错误"
+    },
+    "roles": {
+        "system": "系统",
+        "admin": "管理员",
+        "verified": "已验证"
+    },
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "logoutSuccess": "您已成功注销！",
+    "loginSuccess": "您现在已登录！",
+    "myProfile": "我的资料",
+    "browse": "浏览",
+    "upload": "上传",
+    "tools": "工具",
+    "guides": "指南",
+    "about": "关于",
+    "contact": "联系",
+    "status": "状态",
+    "layoutSubmissions": "布局提交",
+    "themePackSubmissions": "主题\/包提交",
+    "termsOfService": "服务条款",
+    "cookiePolicy": "饼干政策",
+    "privacyPolicy": "隐私政策",
+    "serviceStatus": "服务状况",
+    "pack": "包 | 包们",
+    "theme": "主题 | 主题们",
+    "nxtheme": "NXTheme | NXThemes",
+    "zip": "ZIP文件 | ZIPs文件",
+    "layout": "布局 | 布局们",
+    "creator": "创作者 | 创作者们",
+    "overlay": "覆盖层 | 覆盖层们",
+    "overlayPng": "覆盖层PNG文件 | 覆盖层PNG文件们",
+    "image": "图片 | 图片们",
+    "faq": "常见问题问答 | 常见问题问答们",
+    "commonLayout": "通用布局 | 通用布局们",
+    "layoutOption": "布局选项 | 布局选项们",
+    "tool": "工具 | 工具们",
+    "onlineThemeCreator": "在线主题创作者",
+    "themezerHBApp": "Themezer HB应用程序",
+    "overlayCreator": "覆盖层创造者",
+    "themeCreator": "主题创造者",
+    "guideInstallThemes": "安装主题",
+    "guideCreateThemes": "创建主题\/字体",
+    "guideCreateLayouts": "创建布局",
+    "registerSuccessIntro": "现在您终于可以上传您的主题了！然而，Themezer上有以下规定：",
+    "accept": "接受",
+    "backupCode": "备份码",
+    "backupCodeExplanation": "为了确保如果您的Discord帐户出现问题时您仍能保留对Themezer帐户的访问权，请查看以下创作者ID和备份码。您可以使用此备份码来恢复您的帐户并连接新的Discord帐户。请确保将此备份码安全地存储起来！创作者ID也可以在您之前Themezer帐户的创造者页面URL中找到。要恢复帐户，请访问'关于'页。",
+    "backupCodeViewOnceWarning": "这是唯一一次查看此备份码的机会！",
+    "copy": "复制",
+    "copySuccess": "复制成功！",
+    "permalink": "永久链接",
+    "dismiss": "忽略",
+    "previous": "上一页",
+    "finish": "完成",
+    "cancel": "取消",
+    "discard": "弃用",
+    "noCancel": "不，取消",
+    "yesContinue": "好，继续",
+    "readThis": "阅读此信息",
+    "save": "保存",
+    "clickHere": "点击这里",
+    "loginRequired": "您需要先登录！",
+    "unsavedChanged": "您真的要离开吗？您有未保存的更改！",
+    "saveSuccess": "成功！更改可能需要一些时间才能应用。",
+    "close": "关闭",
+    "customLayout": "自定义布局",
+    "resultCount": "{count}个结果 | {count}个结果",
+    "noResults": "没有找到任何结果",
+    "moreItems": "更多项目",
+    "target": {
+        "menu": "菜单:",
+        "choose": "选择一个菜单",
+        "homemenu": "主页",
+        "lockscreen": "锁定屏幕",
+        "userpage": "用户页面",
+        "allapps": "所有应用",
+        "settings": "设置",
+        "news": "新闻",
+        "playerselect": "玩家选择"
+    },
+    "badges": {
+        "certifiedBadge": "自动更新"
+    },
+    "whatIs": {
+        "this": "这是什么？",
+        "pack": "什么是包？",
+        "packDescription": "包是同一用户创建的多个主题的ZIP文件。它可以包含任何主题，甚至同一个菜单的多个。",
+        "nxthemeInstaller": "什么是NXThemes安装器？",
+        "nxthemeInstallerDescription": "{nxthemesInstaller}是一个在Switch上运行的自制软件应用，用于安装和管理主题。Themezer提供的ID可以用来直接在应用程序中安装主题和包。ID {id}可以在应用程序的“下载主题”标签页输入（确保将Themezer设置为提供源）。该ID也可以在{themezerNX}搜索框中使用。",
+        "commonLayout": "什么是通用布局？",
+        "commonLayoutDescription": "通用布局是主页、所有应用、设置和新闻中的底部视图。默认版本包含当前激活的控制器在左边，分隔线，在右边的操作按钮。一些布局还包括通用布局以隐藏线条或进行其他细微修改。对于'{playerSelect}'和'{userPage}'，更改通用布局不被Switch主题注入器支持。强烈建议下载并使用此布局！",
+        "overlayPng": "什么是覆盖PNG？",
+        "overlayPngDescription": "覆盖PNG是在Themezer网站上用于预览布局的图片。您也可以使用此图片创建上传到Themezer时所需的“截图”。"
+    },
+    "rules": {
+        "required": "必填项",
+        "utf8Only": "只允许UTF-8字符",
+        "characterLength": "'{field}'长度必须在{min}和{max}个字符之间",
+        "characterLengthMin": "'{field}'长度至少为{count}个字符",
+        "categoryMin": "至少需要一个类别",
+        "categoryMax": "最多允许{count}个类别",
+        "invalid": "无效的'{field}'",
+        "maxImageSize": "图片大小应小于{max}！",
+        "notOwnCreatorId": "这是您的当前ID"
+    },
+
+    "home": {
+        "pageTitle": "首页",
+        "recentAdditions": "最新添加",
+        "newPacks": "最新包",
+        "newThemes": "最新主题",
+        "updatedLayouts": "最新布局"
+    },
+    "packs": {
+        "pageDescription": "发现令人惊叹的主题包，以给予菜单类似的外观！",
+        "packContents": "此包中的主题",
+        "clickAnyToEdit": "点击任意一个进行编辑"
+    },
+    "themes": {
+        "pageDescription": "Themezer上的主题",
+        "targetPageDescription": "所有'{menu}'主题在Themezer上",
+        "pack": "此主题属于以下包:"
+    },
+    "layouts": {
+        "pageDescription": "发现独特的布局，尽情定制菜单风格！",
+        "targetPageDescription": "所有在Themezer上的'{menu}'布局",
+        "tryBackgrounds": "尝试这些背景",
+        "themesContents": "使用此布局制作的所有主题",
+        "backgrounds": {
+            "botwForest": "旷野之息",
+            "skyrimMountains": "老滚5",
+            "acod": "刺客信条：起源",
+            "fc5": "远哭5",
+            "botwArt": "旷野之息同人",
+            "acnh": "动物森友会",
+            "sea": "海洋",
+            "spiderman": "蜘蛛侠",
+            "pewdiepie": "PewDiePie",
+            "franxx": "国家》",
+            "nier": "尼尔",
+            "p5": "P5龙司"
+        }
+    }
+,
+    "abouts": {
+        "sourceCode": "项目源代码可以在 {themezerNxGithub} 上找到。",
+        "certifiedBadge": "{image} 图标是什么意思？这意味着你下载的 NXTheme 将会在布局或主题本身有更改时自动更新。",
+        "notAffiliated": "Themezer 与 Nintendo 没有任何关联。"
+    },
+    "contacts": {
+        "discord": "如需联系，请加入 Discord 社区 {themezerNxDiscord} 。",
+        "issue": "发现错误或有建议吗？在 {themezerNxGithub} 创建问题，或者加入 Discord 社区"
+    },
+    "restore": {
+        "prompt": "需要恢复你的 Themezer 账户吗？",
+        "title": "恢复账户",
+        "description": "当你创建 Themezer 账户时，你被告知可以使用备份代码来恢复对你的 Discord 账号的访问。你可以在这里使用它来重新获取你的 Themezer 账户的访问权限。你现在登录的 Discord 帐号将与之前的主题者数据关联起来。如果你在 GitHub 上有布局，请确保用你的新创造者 ID 更新它们！",
+        "previousId": "之前的创造者 ID",
+        "confirmRestore": "恢复",
+        "success": "账户已成功恢复!",
+        "error": "创造者ID或备份代码无效!"
+    },
+    "termsOfServices": {
+        "ownership": {
+            "title": "所有权",
+            "content": "上传至 Themezer 的文件的所有权仍归上传人所有。文件将保存在 Themezer 的服务器上由用户关注，并由上传人负责。"
+        },
+        "copyright": {
+            "title": "版权",
+            "content": "上传到 Themezer 的内容必须遵守版权规定。如果你认为 Themezer 上的内容侵犯了版权，且你为版权所有者或被授权代表版权所有者行动，请联系我们的管理员：",
+            "contact": "联系管理员"
+        },
+        "abuse": {
+            "title": "滥用",
+            "content": "任何试图利用、垃圾发送或以其他方式造成损害的行为将导致你的账户立即停用。应报告错误和其他问题通过联系页面或 GitHub 存储库。"
+        },
+        "nsfw": {
+            "title": "不适宜内容",
+            "content": "包含性暗示的提交必须使用提供的 NSFW 标记。任何旨在引起性兴奋的内容都被视为 NSFW（Not Safe For Work）。允许真实和动画裸体，但不应展示或暗示色情行为。禁止显示18岁以下的人物（无论是真人还是动画），包括‘萝莉’内容，无论你声明他们的年龄是多少，以及已知为18岁以下的角色。",
+        },
+        "accountTermination": {
+            "title": "账户终止",
+            "content": "Themezer 保留根据需要终止用户账户的权利。"
+        }
+    },
+
+   "submitInfo": {
+        "screenshots": {
+            "title": "屏幕截图",
+            "content": "您必须为每个主题上传一个屏幕截图。仅背景图像是不够的。"
+        },
+        "language": {
+            "title": "语言",
+            "content": "请用英文撰写标题、描述和其他细节，这样国际用户可以更容易地了解您的提交内容。"
+        },
+        "special": {
+            "title": "Themezer 的特色是什么？",
+            "content": "Themezer 提取网站上传的所有内容。这有几个好处：",
+            "themes": {
+                "content": "通过提取 NXTheme，可以轻松修改内容，而无需重新上传新的 NXTheme 文件。在提交后，您可以在主题或包的编辑页面（可访问）进行更改时重建 NXTheme 并添加这些更改。"
+            },
+            "layouts": {
+                "content": "另一个好处是 Themezer 可以检测主题使用的布局。这样，在使用该布局更新主页菜单时，如果 Nintendo 更新了布局，则可以一次对所有主题进行更新。人们仍然可以上传具有自定义布局的主题，但这些主题将不会获得这些优势。"
+            }
+        },
+        "notDetect": {
+            "title": "Themezer 无法识别我的主题布局",
+            "content": "如果 Themezer 未能识别布局，请在下拉菜单中选择它。确保它是完全相同的布局，否则可能会丢失一些功能！例如，如果您更改了按钮的位置，则在下拉菜单中选择原始使用的布局时所做的更改将被丢弃。"
+        },
+        "faq": {
+            "notAuthor": {
+                "title": "我并非该主题\/包的原创作者",
+                "content": "不幸的是，您可能无法提交，因为它会链接到您的帐户。请请求原作者上传它。"
+            },
+            "notAvailable": {
+                "title": "我使用的布局在 Themezer 中不可用",
+                "content": "考虑将它上传到 Layouts GitHub 存储库（见菜单中的“布局”提交页面）。"
+            },
+            "modified": {
+                "title": "我对另一个布局进行了微小的修改",
+                "content": "请考虑在 Layouts GitHub 存储库中为原始布局添加自定义选项（见菜单中的“布局”提交页面）。如果您不想这样做，请确保更改布局json的 'ID' 为类似 'custom' 的内容。否则，Themezer 将强制选择原始布局。"
+            },
+            "notSubmit": {
+                "title": "我制作了一个自定义布局，我不希望将其提交到 Layouts GitHub-repository",
+                "content": "呃...为什么不呢？其他人可以更轻松地使用它，并且最重要的是，它是免费的！无论如何，请自由地提交主题。"
+            }
+        }
+    },
+    "moreInfo": {
+        "title": "更多信息",
+        "content": "如果您仍在寻找更多信息，请通过以下方式与我们联系：",
+        "contact": "我们的联系页面"
+    },
+    "themeCreators": {
+        "pageDescription": "在此页面上，您可以创建 NXThemes。",
+        "pageHint": "请注意，此主题注入器的在线版本不支持任意选项（例如缺失自定义图标功能）。要获取全部功能，请下载 {switchThemeInjector} Windows 应用程序。"
+    },
+    "submitLayout": {
+        "pageDescription": "您可以通过 Themezer Layouts GitHub 存储库提交布局。",
+        "joinDiscord": "加入我们的 Discord",
+        "instructions": "查看 {readme} 了解操作指南。如果太复杂，请不要犹豫，通过 {joinDiscord} 请求帮助，并在 {channel} 中与某位管理员联系，他们很乐意为您完成此任务！"
+    },
+    "helpTranslate": "帮助翻译"
+
+}
