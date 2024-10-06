@@ -132,8 +132,8 @@
         "generatedImage": "生成的覆盖层 png"
     },
     "lang": "中文",
-   "welcome": "欢迎来到Themezer！",
-    "welcomeBack": "欢迎{user}回到Themezer！",
+    "welcome": "欢迎来到Themezer ",
+    "welcomeBack": "欢迎{user}回到Themezer ",
     "themezerIntro": "Themezer是一个分享Nintendo Switch主题和布局的网站",
     "cookieBanner": "本网站使用cookies以确保您获得最佳体验。继续使用本网站即表示您同意我们使用cookies。",
     "apiOffline": "服务器似乎离线了。请稍等并尝试再次操作。如果此问题持续存在，请联系我们。",
@@ -249,7 +249,6 @@
         "maxImageSize": "图片大小应小于{max}！",
         "notOwnCreatorId": "这是您的当前ID"
     },
-
     "home": {
         "pageTitle": "首页",
         "recentAdditions": "最新添加",
@@ -286,8 +285,7 @@
             "nier": "尼尔",
             "p5": "P5龙司"
         }
-    }
-,
+    },
     "abouts": {
         "sourceCode": "项目源代码可以在 {themezerNxGithub} 上找到。",
         "certifiedBadge": "{image} 图标是什么意思？这意味着你下载的 NXTheme 将会在布局或主题本身有更改时自动更新。",
@@ -322,7 +320,7 @@
         },
         "nsfw": {
             "title": "不适宜内容",
-            "content": "包含性暗示的提交必须使用提供的 NSFW 标记。任何旨在引起性兴奋的内容都被视为 NSFW（Not Safe For Work）。允许真实和动画裸体，但不应展示或暗示色情行为。禁止显示18岁以下的人物（无论是真人还是动画），包括‘萝莉’内容，无论你声明他们的年龄是多少，以及已知为18岁以下的角色。",
+            "content": "包含性暗示的提交必须使用提供的 NSFW 标记。任何旨在引起性兴奋的内容都被视为 NSFW（Not Safe For Work）。允许真实和动画裸体，但不应展示或暗示色情行为。禁止显示18岁以下的人物（无论是真人还是动画），包括‘萝莉’内容，无论你声明他们的年龄是多少，以及已知为18岁以下的角色。"
         },
         "accountTermination": {
             "title": "账户终止",
@@ -387,5 +385,4 @@
         "instructions": "查看 {readme} 了解操作指南。如果太复杂，请不要犹豫，通过 {joinDiscord} 请求帮助，并在 {channel} 中与某位管理员联系，他们很乐意为您完成此任务！"
     },
     "helpTranslate": "帮助翻译"
-
 }
